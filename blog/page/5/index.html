@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deliberate Software</title>
+  <meta name="author" content="Steve Shogren">
+
+  
+  <meta name="description" content="One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you. For every new company you &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://steveshogren.github.io/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Deliberate Software</a></h1>
+  
+    <h2>With deliberate practice come consistent results</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:steveshogren.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/new-job-todo-list/">How to Suck Less at Your New Job</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-19T00:00:00-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.</p>
+
+<p>For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.</p>
+
+<p>Notice I said differently, not better.</p>
+
+<p>All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way. I have seen new developers come onto a team and complain endlessly about something that is clearly a net benefit for them and the team. However, the team is so used to doing it their way that they cannot imagine changing.</p>
+
+<p>Allow me to share a personally painful example.</p>
+
+<p>Much to my regret, when I moved into .NET development coming from the scripting world, I complained non-stop about how annoying it was to have to assign a type to everything.</p>
+<blockquote>
+<p dir="ltr"><p>“I mean, in perl and php we got along great without it, so why on earth should anyone have to go through all this extra hassle?”</p></p>
+</blockquote>
+<p>I didn’t realize how strong typing enabled very powerful tooling, and to be perfectly honest, I probably didn’t care. However, I did realize that my complaints were falling on deaf ears. My co-workers, who had never even looked at a dynamically typed language before, didn’t care. Much worse, I was alienating myself from them, becoming<em> that guy</em>, the one who just complains all the time. I sucked.</p>
+
+<p>So, I decided on a new policy. Whenever something offended my sensibilities, seeming worse, wrong or just different, I would document it in a to-do list (I use <a href="http://orgmode.org/">org-mode</a> in emacs, because it’s mind-alteringly cool). I would stop complaining about it, stop making sidelong hints at it. I would just add it to the list. Apparently, I was pretty opinionated about how to make that team better, because that list grew monstrously large in just a few months.</p>
+
+<p>Next, I would review that list every week. Whenever I had downtime I would pick something small and try to implement whatever I needed to make that work, things like:  like installing a CI server, or figuring out how to unit test this crazy actionscript fla.</p>
+
+<p>If an issue was too large or I lacked the understanding to resolve all at once, I would do root cause analysis and brainstorm different ways to achieve the goal. Sometimes, I would take something off the list, either because it was too costly to justify its value, or because sometimes I realized I was grossly incorrect in my understanding of the issue.</p>
+
+<p>So, back to my example about static typing. After about a year, I realized there was no way I could reasonably argue it was worth a change. No one but me cared, no one was interested in<a href="http://deliberate-software.com/how-to-escape-from-programming_language/" target="_blank"> learning new languages to try to use for development</a>, and the cost to convert anyway would have been staggering (and conversion was likely impossible).</p>
+
+<p>Meanwhile, I learned that while static typing is a cost of doing business in some languages, statically-typed languages lead the modern pack for powerful refactoring tooling (at least ‘til Yegge’s team finishes their quest for the Holy Grail (the <a href="https://plus.google.com/110981030061712822816/posts/KaSKeg4vQtz">Grok Project</a>; search that post for grok. And I said modern tools, so no smalltalk flame!)). My arguments advocating a change basically fell into two categories:: “I like it better”, and, “you won’t miss those refactoring and intellisense tools much”. You can imagine my co-workers’ reaction to either category: *Sad trombone*. Good thing I was keeping them all to myself in my to-do list.</p>
+
+<p>This process, this simple change, powerfully changed my behavior and attitude. I am convinced that it helped me to mature, both socially and as a developer. No longer was I the whiny developer looking to his team lead to “kiss his boo-boos”, I was learning to weigh cost/benefits of both my short- and long-term goals for that team.</p>
+
+<p>I also discovered a serendipitous side-effect from my todo-list. After about a year and a half when all the pain points had grown calloused, I was able to look back over my list for outstanding reminders of points of our process, still needing refinement. It was a way for me to reconnect with my <a href="http://www.c2.com/cgi/wiki?BeginnersMind">beginners mind</a>, and it was very helpful.</p>
+
+<p>Since I started this process have I been able to participate in many discussions about an idea, article, or pain point another developer had mentioned where I have already thought through my position, because it is either something I have already noticed and have been working on a solution for, or I have been researching it, or I concluded (from my limited perspective) it wasn’t worth the effort.</p>
+
+<p>Not many people reflect this deeply or have their thoughts so organized on important subjects affecting their work. It would make a powerful impression were you to find yourself involved in a hallway discussion with your boss about training, and you could nonchalantly add:</p>
+<blockquote>
+<p dir="ltr"><p>“Oh, new hire training. Yes, I have been considering how we train new hires for a long time, and I have a few ideas here on what would help our particular needs.”</p></p>
+</blockquote>
+<p>Additionally, a few times something I had previously concluded wasn’t worth the effort due to internal political reasons suddenly has become possible, and I have been able to lead the group in that new endeavor, having spent effort considering and concluding how to best implement it.</p>
+
+<p>When you find yourself complaining about the pain of a new job, don’t be a whiner. Don’t try to bully the other developers into doing things according to your “obviously better” way. Write your pain points down and start planning how you can truly impact your team for the best.</p>
+<p> (see also: <a href="http://www.manager-tools.com/2009/08/delta-file">http://www.manager-tools.com/2009/08/delta-file</a>)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+<section class="about-me">
+  <h1>Steve Shogren</h1>
+  <div class="about-text">
+    <p>
+      Insights gathered while learning to deliberately craft software.
+    </p>
+  </div>
+  <span class="gravatar">
+    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
+  </span>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/intro-to-macros/">Intro to Macros</a>
+      </li>
+    
+      <li class="post">
+        <a href="/clojure-debugger/">Clojure&#8230; Debugger?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/how-to-escape-from-programming_language/">How to Escape From {{#PROGRAMMING_LANGUAGE}}</a>
+      </li>
+    
+      <li class="post">
+        <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ego-driven-development/">Ego Driven Development</a>
+      </li>
+    
+      <li class="post">
+        <a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Steve Shogren -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

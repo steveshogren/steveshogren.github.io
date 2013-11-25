@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a &hellip;">
+  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/put-it-in-the-wiki/">Put It in the Wiki</a></h1>
+      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
     
     
       <p class="meta">
@@ -87,86 +87,21 @@
   
 
 
-<time datetime="2011-04-14T00:00:00-04:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
+<time datetime="2013-05-27T00:00:00-04:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a meager wiki with sparse, outdated, or worse, useless information.</p> <p>I have always been a champion of the wiki, and while a wiki can easily grow out of sync with the business, if you find yourself answering the same questions week after week, you need to document that somewhere, and a text document checked into code control doesn&#039;t count! Why not? You can&#039;t easily search across hundreds of text documents to find something, and if you <i>are</i> that tedious, then you also have to remember to update it <i>before</i> you search, otherwise you get stale information. And if you have that kind of free time and spare memory, you and I need to have a talk.</p> <p>So, a wiki it is. It is always up to date, always on, accessable anywhere with internet. Brilliant. </p> <p>And, most importantly, when someone asks me a familiar question, I simply tell them to Put It In The Wiki, because next time the first thing out of my mouth is Did You Check the Wiki?<br /> </p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-12T00:00:00-04:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes&#8217; state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-11T00:00:00-04:00" pubdate data-updated="true">Apr 11<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
+  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
+<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
+<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
+<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
+<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
+<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
+<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
+<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
 </div>
   
   
@@ -175,6 +110,8 @@
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -219,6 +156,14 @@
     
       <li class="post">
         <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ego-driven-development/">Ego Driven Development</a>
+      </li>
+    
+      <li class="post">
+        <a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a>
       </li>
     
   </ul>
