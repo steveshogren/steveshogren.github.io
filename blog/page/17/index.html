@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any &hellip;">
+  <meta name="description" content="(They have thin skin)
+I have been
+reading <a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=sr_1_1?ie= &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +81,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/on-lisp-part-1/">On Lisp: Part 1</a></h1>
+      <h1 class="entry-title"><a href="/dont-mock-concrete-classes/">Don&#8217;t Mock Concrete Classes</a></h1>
     
     
       <p class="meta">
@@ -95,14 +97,177 @@
   
 
 
-<time datetime="2011-05-20T00:00:00-04:00" pubdate data-updated="true">May 20<span>th</span>, 2011</time>
+<time datetime="2011-05-24T00:00:00-04:00" pubdate data-updated="true">May 24<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.
+  <div class="entry-content"><p>(They have thin skin)</p>
+<p>I have been
+reading <a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1303935530&amp;sr=8-1"
+target="_blank">G.O.O.S.</a> and honestly, much of it has been just a
+reiteration. Until chapter 20, that is. I get to the section Don&#8217;t
+Mock Concrete Classes, and it clicks.
+</p>
+<p>
+ Mocking concrete classes used to be my bread and butter. Almost every
+ unit test I wrote for the last year had several mocked concrete
+ implementations, to pass in as dependencies of the system under test.
+</p>
+<p>
+What do I mean by that? Imagine a class that takes one dependency
+through the constructor like this:
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">Velocity</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span> <span class="p">(</span><span class="nx">PayoffCalc</span> <span class="nv">$PayoffCalc</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_PayoffCalc</span> <span class="o">=</span> <span class="nv">$PayoffCalc</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">toFloat</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_PayoffCalc</span><span class="o">-&gt;</span><span class="na">getPaymentPerDay</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_calculate</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+Would have a test driving it, looking like this:
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">test_velocity_validDailyPayment</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$expectedVelocity</span> <span class="o">=</span> <span class="mi">1392</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">//Mock PayoffCalc-&gt;getPaymentPerDay() to return 3</span>
+</span><span class='line'>  <span class="nv">$PayoffCalc</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;PayoffCalc&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$PayoffCalc</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+</span><span class='line'>             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">)</span>
+</span><span class='line'>             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$Velocity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Velocity</span><span class="p">(</span><span class="nv">$PayoffCalc</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expectedVelocity</span><span class="p">,</span> <span class="nv">$Velocity</span><span class="o">-&gt;</span><span class="na">toFloat</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</p>
+<p>
+For several months now, writing unit tests this way has become
+increasingly irritating to me, for several reasons. First off, notice
+how phpunit does a mock? With a string for the classname and the
+method to mock. Obviously, in small scale this duplication is
+manageable, but imagine for a second thousands of unit tests all
+mocking this way, and you will realize it gets out of hand fast. More
+than once in the last year I have set out to refactor a classname or
+method signature, to have dozens of failing unit tests, because they
+all mock the <em>string</em> of the old name.
+</p>
+<p>
+ Secondly, and more importantly, I find this to be brittle because you
+ are locking yourself into an implementation of the class you need
+ mocked. What if I wanted to move that getPaymentPerDay to a different
+ class? Or I changed that version of getPaymentPerDay to
+ getPaymentPerMonth? I would have to traipse through every one of
+ those brittle mocks and rewrite their duplicated, crystalline
+ structure.
+</p>
+<p>
+ Stupid.
+</p>
+<p>
+My inner frustration was so great as to cause me to start thinking up
+all sorts of mad ways to get around this issue. Store the code needed
+to build that mock as text on the class itself, to be parsed and
+executed on the fly? Check. Create massive hierarchical testing
+libraries to build the mocks? Check. And all these did was mask the
+real issue. <strong>I was mocking the concrete
+implementation.</strong>
+</p>
+<p>
+ So, what would mocking the interface be? Well, PayoffCalc actually
+ has two public methods: getPayoffDate() and getPaymentPerDay(). The
+ Velocity class only needs getPaymentPerDay(), but by mocking the
+ concrete class, we are forcing it to depend on
+ the <strong>whole</strong> (undefined) interface of PayoffCalc.
+ Velocity does not need getPayoffDate(), but it is in the interface we
+ give it (in the form of the concrete PayoffCalc).
+</p>
+<p>
+ Whoa. Sounds
+ like <a href="http://en.wikipedia.org/wiki/Interface_segregation_principle"
+ target="_blank">ISP</a>. Written about by Bob Martin. Fifteen years
+ ago. *Forehead smack*
+</p>
+<p>
+I make an interface for this concept of PaymentPerDayRetriever, for
+lack of a
+better <a href="http://martinfowler.com/bliki/RoleInterface.html"
+target="_blank">Role</a>.
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">interface</span> <span class="nx">PaymentPerDayRetriever</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">getPaymentPerDay</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+Then use the interface in the test:
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">test_velocity_validDailyPayment</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">$expectedVelocity</span> <span class="o">=</span> <span class="mi">1392</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">//Mock PayoffCalc-&gt;getPaymentPerDay() to return 3</span>
+</span><span class='line'>    <span class="nv">$PayoffCalc</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;PaymentPerDayRetriever&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$PayoffCalc</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+</span><span class='line'>        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">));</span>
+</span><span class='line'>       <span class="nv">$Velocity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Velocity</span><span class="p">(</span><span class="nv">$PayoffCalc</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expectedVelocity</span><span class="p">,</span> <span class="nv">$Velocity</span><span class="o">-&gt;</span><span class="na">toFloat</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+By mocking the interface, I have freed my Velocity class from knowing
+about the rest of the old PayoffCalc interface, and when I realize
+later that my PayoffCalc really is doing two totally separate things,
+I can just move the PaymentPerDayRetriever interface to
+getPaymentPerDay&#8217;s new home (probably on the PaymentRepository, not
+shown here).
+</p>
+<p>
+ While this example only used one method per interface, in reality, it
+ would have all the methods necessary to complete that aspect of the
+ class.
+</p>
+<p>
+Fascinating.
+</p>
 </div>
   
   
@@ -140,6 +305,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/501-developer/">The 5:01 Developer</a>
+      </li>
+    
+      <li class="post">
         <a href="/intro-to-macros/">Intro to Macros</a>
       </li>
     
@@ -161,10 +330,6 @@
     
       <li class="post">
         <a href="/ego-driven-development/">Ego Driven Development</a>
-      </li>
-    
-      <li class="post">
-        <a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a>
       </li>
     
   </ul>
