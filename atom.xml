@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2013-12-14T21:05:19-05:00</updated>
+  <updated>2014-01-29T08:16:24-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
+    <link href="http://steveshogren.github.io/streaks/"/>
+    <updated>2014-01-28T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/streaks</id>
+    <content type="html"><![CDATA[<p>
+  You know what will make you a phenomenally better developer?
+  Deliberate practice. How do you get such practice? By doing it every
+  single day. Random bursts of effort over the odd weekend will gain
+  you practically nothing comparatively, even if the time investment
+  is the same. Your mind needs repetition and consistent effort to
+  improve. So what do you want to get better at?  Pick your highest
+  value subject: vim, regex, functional programming, meta-programming,
+  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
+  practice it every single day. Easy as that.
+</p>
+<p>
+  When GitHub first came out with the &#8220;streak&#8221; feature on the front
+  page, I realized it was time to stop my binge coding on the
+  occasional weekend and start a system. Inspired by recent successes
+  working out every day, I decided to code every day for a year. 
+</p>
+<p>
+  I quickly realized that anything requiring detailed plans and
+  designs is harder to do. Working though a book, on the other hand,
+  is easy to start and stop. I started working through a book I had
+  tried to read before: Let Over Lambda.
+</p>
+<p>
+  Let Over Lambda is intense, filled with deeply complex concepts
+  written in Common Lisp, a language with which I was only passingly
+  familiar. But I managed to get through it without hardly any
+  difficulty. How did I do that?
+</p>
+<p>
+  I got a cheap netbook, and started to code on the train ride home.
+  Interestingly, without any internet, I was much less distracted, and
+  could just sit down and be in the zone within the minute (this from
+  the guy whom it takes 20+ minutes to get in the zone at work). With
+  only a limited span of ~25 minutes, I had no time to waste, and
+  without people to talk to my brain just falls into it. I can only
+  pinpoint a few times I could not get into the zone, and those were
+  extreme circumstances of exhaustion or illness.
+</p>
+<p>
+  In ten months, I have:
+  <ul>
+    <li>
+      worked through Let Over Lambda once and read it twice
+    </li>
+    <li>
+      worked twice through the PLAI programming languages book
+      (once in Scheme and once in F#)
+    </li>
+    <li>
+      read Clojure Programming, F# 3.0 Programming, and am currently
+      in Real World Haskell
+    </li>
+    <li>
+      completed the exercises up to chapter three of SICP
+    </li>
+    <li>
+      authored a small Clojure library for run time type checking
+      (don&#8217;t use mine, use Prismatic&#8217;s)
+    </li>
+    <li>
+      prepared and given a two hour talk about macros at a local meet-up
+    </li>
+  </ul>
+  Pretty incredible for only ~25 minutes a day! That is more
+  programming books than I had read in the previous 2 years. I have
+  improved mightily in such a short time, and it does not feel
+  stressful in the least. Now, when I get home, if I feel like
+  watching movies, cooking, or playing board games/Dark Souls all
+  night, no problem! I can relax knowing I have accomplished my goals
+  for the day. All in all, the last ten months have been incredible:
+  some of the most rewarding, relaxing, and fulfilling months of my
+  life.
+</p>
+<p>
+  Before you scoff and point out that not everyone can take the train
+  to work, consider this: get a portable computer, load up your
+  environment, tools, and some pdfs. The next morning, leave for work
+  ~25 minutes early. You will probably get in way sooner due to the
+  decreased traffic (now you have earned back that time). Sit quietly
+  in your car, and without the distractions of internet or other
+  people, knock out a little programming. Maybe start with SICP (the
+  best programming book I have ever read). See how much you can read
+  and do before work starts. Do that for a month, every day. I
+  guarantee you will learn something amazing.
+</p>
+  
+ 
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The 5:01 Developer]]></title>
@@ -764,6 +860,25 @@ While escaping from your stack requires effort, by following the steps you can a
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Hacking the Winter Blues]]></title>
+    <link href="http://steveshogren.github.io/hacking-the-winter-blues/"/>
+    <updated>2012-01-23T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/hacking-the-winter-blues</id>
+    <content type="html"><![CDATA[I moved to the Philadelphia region from east Texas about two years ago, and last month I realized that I get some serious blues around winter time. Since I have no desire to be controlled anything I can prevent, I decided to take the offensive!
+
+After reading several places (like <a href="http://paleohacks.com/questions/318/how-can-i-hack-my-sleep/334#334">paleohacks</a>) about how blue light inhibits melatonin production, I got a really bright <a href="http://www.amazon.com/NatureBright-SunTouch-Plus-Light-Therapy/dp/B000W8Y7FY/ref=sr_1_1?ie=UTF8&amp;qid=1327325517&amp;sr=8-1">LED &#8220;sun lamp&#8221;</a> and a pair of <a href="http://www.amazon.com/Uvex-S1933X-Eyewear-SCT-Orange-Anti-Fog/dp/B000USRG90/ref=sr_1_3?ie=UTF8&amp;qid=1327325546&amp;sr=8-3">orange sunglasses</a> to try and trick my body into releasing that sweet, sweet melatonin I was missing. I started wearing the glasses around 6:30 every night, and using the lamp for about 45 minutes first thing in the morning while I program or read. Back in October, my wife, my sister, and I started running every other day, training for a 5k obstacle course. Unfortunately, once the mid-December cold arrived, we stopped entirely, because running in the freezing cold is miserable. Since I know exercise makes me feel great, I started <a href="http://nerdfitness.com/blog/2011/07/21/meet-staci-your-new-powerlifting-super-hero/">lifting heavy</a> every other day with squats, bench presses, and dead-lifts.
+
+&nbsp;
+
+Between the bright sun lamp in the morning, the orange glasses for an hour or two before bed, our typical diet heavy on green veggies and legumes, and the heavy weight lifting, my mood, and, oddly, my mental faculties, have improved <strong>dramatically</strong> in just two weeks. I now sleep like a dead man, falling asleep in minutes, and waking up before my alarm almost every day. My mind feels shockingly clear and sharp. In the last few months, I have taken to programming or reading for an hour before work (which I will write more on later). The last two weeks, the tenacity and comprehension of my reading has ramped up considerably: I find myself much less often picking up a book to be entertained, and more often picking up books that stretch my cognitive abilities to the limits.
+
+&nbsp;
+
+Take <em>that</em>, winter.
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[New Year's Android Triumph]]></title>
     <link href="http://steveshogren.github.io/new-years-triumph/"/>
     <updated>2012-01-01T00:00:00-05:00</updated>
@@ -1150,95 +1265,6 @@ Fascinating.
     <updated>2011-05-20T00:00:00-04:00</updated>
     <id>http://steveshogren.github.io/on-lisp-part-1</id>
     <content type="html"><![CDATA[I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using Named Parameters]]></title>
-    <link href="http://steveshogren.github.io/using-named-parameters/"/>
-    <updated>2011-05-05T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/using-named-parameters</id>
-    <content type="html"><![CDATA[<p>
-  Up until recently, most of my programming was in php, which does not
-  support named parameters
-  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
-  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
-  so while switching to VB.NET and python, I have come to really
-  appreciate this handy feature.
-</p>
-<p>
- Named parameters is one of those handy little things that can make
-  your life a little easier. Say, in python, you have a function that
-  takes a boolean value. Normally, I would create a variable just to
-  hold that boolean value, then pass it in, to try to be easier for
-  the next guy to understand.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-  Who knows what window&#8217;s parameter is? What the heck is true anyway,
-  the window? <a href="http://www.jetbrains.com/pycharm/"
-  target="_blank">PyCharm</a> knows (and if you are using python
-  without it, I implore you to treat yourself to the demo) otherwise
-  you have to look up the function <em>like a barbarian</em> to see
-  what is going on. Sure, you can make it more clear with:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>Better then nothing, but still lame.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  Boom! Way easier to read, no extra variables hanging around making
-  trouble. Many times I have made function parameters, called them one
-  thing, then made a variable with a slightly different name to pass
-  in for legibility, but no more of that crap! Now, when I have the
-  inclination to make a variable just to clarify something, I just
-  name the parameter and pass in the value right there, like a
-  civilized gentleman should.
-
-</p>
-<p>
- Additionally, VB.NET has this too, with the slightly goofier
-  syntax of the &#8220;:=&#8221;
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  My cohort Daniel Miladinov pointed out that this is calling the
-  assignment operator directly, since calling it with just the equals
-  would perform
-  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
-</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Actionscript Unit Testing]]></title>
-    <link href="http://steveshogren.github.io/actionscript-unit-testing/"/>
-    <updated>2011-05-04T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/actionscript-unit-testing</id>
-    <content type="html"><![CDATA[I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
 ]]></content>
   </entry>
   

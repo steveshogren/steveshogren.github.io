@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am a lazy lazy man, and as such I do not like to waste time waiting for things or doing dumb stuff.One place this is evident is in the browser. I &hellip;">
+  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/neat-firefox-trick/">Neat Firefox Trick</a></h1>
+      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
     
     
       <p class="meta">
@@ -95,14 +95,83 @@
   
 
 
-<time datetime="2011-04-18T00:00:00-04:00" pubdate data-updated="true">Apr 18<span>th</span>, 2011</time>
+<time datetime="2011-05-05T00:00:00-04:00" pubdate data-updated="true">May 5<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I am a lazy lazy man, and as such I do not like to waste time waiting for things or doing dumb stuff.<p />One place this is evident is in the browser. I like to know the cool shortcuts and tricks to speed me along my way, and Firefox has tons. Here are some neat tricks I learned this weekend.<p /> From anywhere in Firefox, <strong>Ctrl-k</strong> will take you to the &#8220;search bar&#8221; and <strong>Ctrl-L</strong> to the &#8220;address bar&#8221;, that is cool, but it gets better.<p />When opening a new tab (<strong>Ctrl+t</strong>) it always defaults your cursor to the address bar. Now many people would just say, &#8220;hey steve, don&#8217;t be a jerk, and just hit <strong>Tab</strong> to move to the search bar, then search.&#8221; This works, but I search for stuff all the time, and like to cut down on keys even further. <p /> So, I wanted to make the address bar search google for me. To do this, go to about:config, and change the <strong>keyword.URL</strong> value to <a href="http://www.google.com/search?ie=UTF-8&amp;oe=UTF-8&amp;sourceid=navclient&amp;gfns=0&amp;q=">http://www.google.com/search?ie=UTF-8&amp;oe=UTF-8&amp;sourceid=navclient&amp;gfns=0&amp;q=</a> <p /> By default, if you type in &#8220;facebook&#8221;, Firefox will search google and redirect you to the &#8220;I&#8217;m Feeling Lucky&#8221; result, due to the gfns=1. The first result is <a href="http://facebook.com">facebook.com</a>, so that is where you go. But since much of what I type is real searching and not a url, I want to see the results! Changing your <strong>keyword.URL</strong> will still search google, but it will now take you to the results page, which saves me a few extra seconds each search. <p /> Now, in the rare case where I just want to go to Facebook.com, I pull another trick and just type &#8220;facebook&#8221; and then <strong>Ctrl-Enter</strong> which will pre-pend the &#8220;www.&#8221; and append the &#8220;.com&#8221;<p /> Wheew, in five to seven years, this might just have saved me the time I spent learning it.<p />Practicality: 2/10<br />Cool nerd learning: 9/10</p><p>EDIT - While this is cool, and I do have it working on my machines, I ended up muscle memorizing the longer but far more portable method of just <strong>Ctrl-t Tab</strong> or <strong>Ctrl-t Ctrl-k</strong>. I know this is not nearly as cool, but hey, if I can open and save a file in emacs, <em>I can do <span style="font-family:mceinline;">anything</span>.</em></p>
+  <div class="entry-content"><p>
+  Up until recently, most of my programming was in php, which does not
+  support named parameters
+  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
+  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
+  so while switching to VB.NET and python, I have come to really
+  appreciate this handy feature.
+</p>
+<p>
+ Named parameters is one of those handy little things that can make
+  your life a little easier. Say, in python, you have a function that
+  takes a boolean value. Normally, I would create a variable just to
+  hold that boolean value, then pass it in, to try to be easier for
+  the next guy to understand.
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+  Who knows what window&#8217;s parameter is? What the heck is true anyway,
+  the window? <a href="http://www.jetbrains.com/pycharm/"
+  target="_blank">PyCharm</a> knows (and if you are using python
+  without it, I implore you to treat yourself to the demo) otherwise
+  you have to look up the function <em>like a barbarian</em> to see
+  what is going on. Sure, you can make it more clear with:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Better then nothing, but still lame.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  Boom! Way easier to read, no extra variables hanging around making
+  trouble. Many times I have made function parameters, called them one
+  thing, then made a variable with a slightly different name to pass
+  in for legibility, but no more of that crap! Now, when I have the
+  inclination to make a variable just to clarify something, I just
+  name the parameter and pass in the value right there, like a
+  civilized gentleman should.
+
+</p>
+<p>
+ Additionally, VB.NET has this too, with the slightly goofier
+  syntax of the &#8220;:=&#8221;
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  My cohort Daniel Miladinov pointed out that this is calling the
+  assignment operator directly, since calling it with just the equals
+  would perform
+  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
+</p>
 </div>
   
   
@@ -140,6 +209,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/streaks/">Challenge - Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/501-developer/">The 5:01 Developer</a>
       </li>
     
@@ -163,10 +236,6 @@
         <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
       </li>
     
-      <li class="post">
-        <a href="/ego-driven-development/">Ego Driven Development</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -180,7 +249,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Steve Shogren -
+  Copyright &copy; 2014 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

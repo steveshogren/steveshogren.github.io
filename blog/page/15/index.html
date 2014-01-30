@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
+  <meta name="description" content="In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
+      <h1 class="entry-title"><a href="/testing-is-to-programming-what-math-is-to-eng/">Testing Is to Programming What Math Is to Engineering</a></h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2011-06-28T00:00:00-04:00" pubdate data-updated="true">Jun 28<span>th</span>, 2011</time>
+<time datetime="2011-09-26T00:00:00-04:00" pubdate data-updated="true">Sep 26<span>th</span>, 2011</time>
         
       </p>
     
@@ -103,61 +103,69 @@
 
 
   <div class="entry-content"><p>
-  At work last month, I was assigned to fix some bugs in an
-  asynchronous legacy code base. My supervisor gave me a month to see
-  what I could do, and to see if I could fix a few tricky bugs. The
-  code is divided into two sections, a client application and a web
-  server. Both the client application and the server have their own
-  persistence, and they communicate through a soap web service.
+  In ancient times, plenty of builders did their work without math,
+  and I would guess that a good portion of them likely did it faster
+  then their math-doing counterparts.
+</p>
+<p >
+  I am certain that when builders first started using math to prove
+  that buildings would stand up safely, they were mocked by their
+  math-less counterparts. I can hear them now, &#8220;Oh, Stephos, it takes
+  you 5 times longer to prove your building will stand up, real men
+  can just <em>see</em> that it will work&#8221;. Even in modern times, many
+  people build houses and small buildings that probably don&#8217;t even
+  need the math to really &#8220;prove&#8221; they work, but they perform the due
+  diligence anyway. On the other hand, some people today still build
+  houses, sheds, tree-houses, lofts, and fire pits without any
+  drawings or math at at all, and why should they? They are
+  responsible for the risk.
+</p>
+<p >
+  This is all fine, but, builders who shy away from math also don&#8217;t
+  build airliners, space shuttles, and skyscrapers. An aircraft
+  designer who doesn&#8217;t feel like using math to prove their aircraft
+  will fly is handed an &#8220;Experimental&#8221; sticker and gravely patted on
+  the back.
+</p>
+<p >
+  Today, programming is at the same place as both
+  ancient <strong>and</strong> modern engineering: many projects can
+  be done &#8220;by eye&#8221;, and some of the most experienced programmers are
+  able to build immense projects alone without any sort of automated
+  testing at all. When you go to a forum and ask for help, you are
+  just as likely to hear from a &#8220;space shuttle&#8221; programmer as you are
+  to hear from a &#8220;tin shack&#8221; programmer. The &#8220;space shuttle&#8221;
+  programmer would be horrified to hear of working without automated
+  testing and rigorous review practices, whereas the &#8220;tin shack&#8221;
+  programmer would be horrified to think of the time wasted to
+  even <em>learn the procedures</em> to automatically prove his code
+  works as it should. The &#8220;space shuttle&#8221; programmer might work on the
+  same internal financial project for months or years, finally
+  releasing with zero defects; the &#8220;tin shack&#8221; programmer might churn
+  out several quick web sites a day. Neither project
+  is <em>better</em> then the other, they both might be perfect for
+  what their business needs.
 </p>
 <p>
-  I wanted to try and write some sort of end-to-end tests around this,
-  but I could not figure out how to get around that web service. I
-  don&#039;t want my tests to rely on a server having to always be up,
-  so I initially was planning on writing tests from the client
-  database to the web service, where I would just stub some responses.
-  I got about an hour into that plan, before I realized I would then
-  have to do that same thing on the server, and that sort of testing
-  will not really tell me what the code <i>does</i>. I needed to cover
-  this whole process end-to-end.
+  I have heard several times from very good lone wolf programmers that
+  testing just slows them down, and in some ways, it does appear to be
+  a slowdown for them. Unfortunately, the cost to build even
+  medium-sized projects with several workers without automated testing
+  is only felt when it is too late, when the deadlines (and costs) are
+  spiraling out of control.
 </p>
 <p>
- I walked around for a bit, thinking. Then it hit me, both the server
- and client code are written in VB.NET, and, except for the web service, work
- just like plain old highly-coupled code. Hmmm.
+  The disciplined application of mathematics transformed and
+  solidified the field of engineering into a field far more vast and
+  capable of some of the most incredible constructions imaginable.
+  Would we have smart-phones, GPS, modern cars, and airliners if
+  engineering had just avoided mathematics? Just imagine what the
+  field of programming could grow into if we continue to learn and
+  grow our testing, designing, and writing of software.
 </p>
 <p>
- For the first pass, I wrote an interface to wrap the web service,
- then used dependency injection to inject a fake web service that (and
- here is the cool part) simply calls around the web service entirely
- to the server code directly and injects a different database
- connection string, so the server talks to a second database I have
- prepared.
-</p>
-<p>
- Just like that, I can run, all on my machine, 99 percent of the code
- in a single end-to-end test. I can even setup several client
- databases, and rotate them out, to &quot;swap&quot; between several
- clients in the middle of the tests.
-</p>
-<p>
- I added a few &quot;integration&quot; tests that do talk to a real
- published testing web service, just to make sure everything is still
- in place correctly.
-</p>
-<p>
-  Now, I said this was asynchronous, and it is, the executed
-  system-under-test kicks off a thread to talk to the web service, and
-  so to get it to test, I needed to wait for the thread to finish,
-  then do my assertions.
-</p>
-<p>
- I used a system where the spun off thread will set a boolean when it
- has finished running, to let the main thread know it has finished,
- and the main thread just keeps checking that boolean until it is
- true. While hackish, that is my current working solution, as no more
- then one thread is ever spun off at a time, I can just have my test
- wait for the thread to finish, then complete the required assertions.
+  I propose that automated testing is to programming what math was
+  to ancient engineering.
 </p>
 </div>
   
@@ -196,6 +204,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/streaks/">Challenge - Code Every Day</a>
+      </li>
+    
+      <li class="post">
         <a href="/501-developer/">The 5:01 Developer</a>
       </li>
     
@@ -219,10 +231,6 @@
         <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
       </li>
     
-      <li class="post">
-        <a href="/ego-driven-development/">Ego Driven Development</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -236,7 +244,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Steve Shogren -
+  Copyright &copy; 2014 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
