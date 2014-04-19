@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-01-29T08:16:24-05:00</updated>
+  <updated>2014-04-18T21:29:26-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy Evaluation]]></title>
+    <link href="http://steveshogren.github.io/Lazy-Lists/"/>
+    <updated>2014-03-06T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/Lazy-Lists</id>
+    <content type="html"><![CDATA[<p>
+  I just read an awesome way to define a lazy list. 
+</p>
+
+
+<p>
+  
+</p>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
@@ -34,8 +53,9 @@
 <p>
   When GitHub first came out with the "streak" feature on the front
   page, I realized it was time to stop my binge coding on the
-  occasional weekend and start a system. Inspired by recent successes
-  working out every day, I decided to code every day for a year. 
+  occasional weekend and start a system. Inspired by other recent
+  system-based successes (working out every day), I decided to code
+  every day for a year.
 </p>
 
 

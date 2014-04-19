@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-01-29T08:16:24-05:00</updated>
+  <updated>2014-04-18T21:29:26-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy Evaluation]]></title>
+    <link href="http://steveshogren.github.io/Lazy-Lists/"/>
+    <updated>2014-03-06T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/Lazy-Lists</id>
+    <content type="html"><![CDATA[<p>
+  I just read an awesome way to define a lazy list. 
+</p>
+<p>
+  
+</p>
+
+ 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dangerous Clojure Macros]]></title>
+    <link href="http://steveshogren.github.io/anaphoric-macros/"/>
+    <updated>2014-02-04T16:56:00-05:00</updated>
+    <id>http://steveshogren.github.io/anaphoric-macros</id>
+    <content type="html"><![CDATA[<p>Clojure allows you to write macros that mutate the world.</p>
+
+<p>So what?</p>
+
+<p>I&rsquo;ll walk you through it. What is the result of this expression?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'>    <span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>  <span class="nv">x</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result is 1, right? That was easy. How about this?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="nv">x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The let returns 12. What does x look like inside addTen? It is bound to 2.</p>
+
+<p>What does this return?
+Clojure macros by default are &ldquo;hygenic&rdquo;, which means they cannot mutate bindings.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span><span class='line'><span class="c1">;; =&gt; clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can&#39;t let qualified name: user/z,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clojure prevents you from accidentally shadowing a value by throwing such an exception.
+This means that it is hygenic by default, but it is possible to &ldquo;break out&rdquo; and make it unhygenic.
+Do force a value to shadow another, you simply have to give it the prefix ~&lsquo;
+Here is the same macro, only with z replaced by ~&#8217;z</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This returns 111.</p>
+
+<p>Here it is with the macro expanded:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the 111 makes more sense.
+Unhygenic macros let you shadow bindings.
+In this case, we shadowed [z 1] with [z 100].</p>
+
+<p>Why would you ever want to do this?
+Lets look at a real example.</p>
+
+<p>I find prefix notation to be frustrating when I am writing a lot of arithmetic.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">value</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
+I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">_&gt;</span> <span class="nv">value</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is much easier for my western eyes to read, it replaces the previous &ldquo;inside out&rdquo; style with a more natural left to right.
+To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
+Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">_</span> <span class="nv">value</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">)]</span>
+</span><span class='line'>  <span class="nv">_</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which, with unhygenic macros, is easy to do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">_&gt;</span> <span class="p">[</span><span class="nv">init</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">init</span>
+</span><span class='line'>         <span class="o">~@</span><span class="p">(</span><span class="nb">mapcat </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">x</span><span class="p">])</span>
+</span><span class='line'>                   <span class="nv">body</span><span class="p">)]</span>
+</span><span class='line'>     <span class="o">~</span><span class="ss">&#39;_</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
+For each element in the body, we bind its result to ~&lsquo;_.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
@@ -32,8 +197,9 @@
 <p>
   When GitHub first came out with the &#8220;streak&#8221; feature on the front
   page, I realized it was time to stop my binge coding on the
-  occasional weekend and start a system. Inspired by recent successes
-  working out every day, I decided to code every day for a year. 
+  occasional weekend and start a system. Inspired by other recent
+  system-based successes (working out every day), I decided to code
+  every day for a year.
 </p>
 <p>
   I quickly realized that anything requiring detailed plans and
@@ -860,25 +1026,6 @@ While escaping from your stack requires effort, by following the steps you can a
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hacking the Winter Blues]]></title>
-    <link href="http://steveshogren.github.io/hacking-the-winter-blues/"/>
-    <updated>2012-01-23T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/hacking-the-winter-blues</id>
-    <content type="html"><![CDATA[I moved to the Philadelphia region from east Texas about two years ago, and last month I realized that I get some serious blues around winter time. Since I have no desire to be controlled anything I can prevent, I decided to take the offensive!
-
-After reading several places (like <a href="http://paleohacks.com/questions/318/how-can-i-hack-my-sleep/334#334">paleohacks</a>) about how blue light inhibits melatonin production, I got a really bright <a href="http://www.amazon.com/NatureBright-SunTouch-Plus-Light-Therapy/dp/B000W8Y7FY/ref=sr_1_1?ie=UTF8&amp;qid=1327325517&amp;sr=8-1">LED &#8220;sun lamp&#8221;</a> and a pair of <a href="http://www.amazon.com/Uvex-S1933X-Eyewear-SCT-Orange-Anti-Fog/dp/B000USRG90/ref=sr_1_3?ie=UTF8&amp;qid=1327325546&amp;sr=8-3">orange sunglasses</a> to try and trick my body into releasing that sweet, sweet melatonin I was missing. I started wearing the glasses around 6:30 every night, and using the lamp for about 45 minutes first thing in the morning while I program or read. Back in October, my wife, my sister, and I started running every other day, training for a 5k obstacle course. Unfortunately, once the mid-December cold arrived, we stopped entirely, because running in the freezing cold is miserable. Since I know exercise makes me feel great, I started <a href="http://nerdfitness.com/blog/2011/07/21/meet-staci-your-new-powerlifting-super-hero/">lifting heavy</a> every other day with squats, bench presses, and dead-lifts.
-
-&nbsp;
-
-Between the bright sun lamp in the morning, the orange glasses for an hour or two before bed, our typical diet heavy on green veggies and legumes, and the heavy weight lifting, my mood, and, oddly, my mental faculties, have improved <strong>dramatically</strong> in just two weeks. I now sleep like a dead man, falling asleep in minutes, and waking up before my alarm almost every day. My mind feels shockingly clear and sharp. In the last few months, I have taken to programming or reading for an hour before work (which I will write more on later). The last two weeks, the tenacity and comprehension of my reading has ramped up considerably: I find myself much less often picking up a book to be entertained, and more often picking up books that stretch my cognitive abilities to the limits.
-
-&nbsp;
-
-Take <em>that</em>, winter.
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[New Year's Android Triumph]]></title>
     <link href="http://steveshogren.github.io/new-years-triumph/"/>
     <updated>2012-01-01T00:00:00-05:00</updated>
@@ -1256,15 +1403,6 @@ shown here).
 <p>
 Fascinating.
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[On Lisp: Part 1]]></title>
-    <link href="http://steveshogren.github.io/on-lisp-part-1/"/>
-    <updated>2011-05-20T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/on-lisp-part-1</id>
-    <content type="html"><![CDATA[I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.
 ]]></content>
   </entry>
   

@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Deliberate Software</title>
+  <title>Dangerous Clojure Macros - Deliberate Software</title>
   <meta name="author" content="Steve Shogren">
 
   
@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://steveshogren.github.io/blog/page/2">
+  <link rel="canonical" href="http://steveshogren.github.io/anaphoric-macros">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
@@ -75,15 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/anaphoric-macros/">Dangerous Clojure Macros</a></h1>
+      <h1 class="entry-title">Dangerous Clojure Macros</h1>
     
     
       <p class="meta">
@@ -106,7 +103,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Clojure allows you to write macros that mutate the world.</p>
+<div class="entry-content"><p>Clojure allows you to write macros that mutate the world.</p>
 
 <p>So what?</p>
 
@@ -248,22 +245,55 @@ Since Clojure allows rebinding a value inside a single let, we can have our macr
 <p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
 For each element in the body, we bind its result to ~&lsquo;_.</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2014-02-04T16:56:00-05:00" pubdate data-updated="true">Feb 4<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/">Newer &rarr;</a>
-    
-  </div>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://steveshogren.github.io/anaphoric-macros/" data-via="" data-counturl="http://steveshogren.github.io/anaphoric-macros/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/streaks/" title="Previous Post: Challenge - Code Every Day">&laquo; Challenge - Code Every Day</a>
+      
+      
+        <a class="basic-alignment right" href="/Lazy-Lists/" title="Next Post: Lazy Evaluation">Lazy Evaluation &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     
@@ -304,7 +334,7 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
       </li>
     
       <li class="post">
-        <a href="/clojure-debugger/">Clojure&#8230; Debugger?</a>
+        <a href="/clojure-debugger/">Clojure... Debugger?</a>
       </li>
     
       <li class="post">
@@ -320,6 +350,7 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
 
   
 </aside>
+
 
     </div>
   </div>

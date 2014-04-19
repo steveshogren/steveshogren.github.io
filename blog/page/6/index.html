@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of &hellip;">
+  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/how-to-escape-from-programming_language/">How to Escape From {{#PROGRAMMING_LANGUAGE}}</a></h1>
+      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
     
     
       <p class="meta">
@@ -95,60 +95,127 @@
   
 
 
-<time datetime="2013-03-10T00:00:00-05:00" pubdate data-updated="true">Mar 10<span>th</span>, 2013</time>
+<time datetime="2013-08-17T00:00:00-04:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of javascript libraries alone is increasing at a furious pace: Angular, Backbone, Node, Ember, Knockout, Knockback, Meteor, etc, etc, etc. Who has a chance at keeping up? While having so many options is also beneficial, it makes it more and more challenging for a single developer to stay relevant.
+  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
 <br />
 <br />
-You are a good programmer. No, you are a great programmer. But, you are stuck in one development stack. You want to diversify your knowledge, experience, and skill set, but your resume reads like a one-act play. Chances are, you didn&#8217;t deliberately choose to work in this stack. At the start of your career, the first job you landed was probably the best you could find. Several years have gone by, and you are beginning to realize that the development world is moving on.
+One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
 <br />
 <br />
-Maybe you have already tried, having gone to a few interviews. Nevertheless, you’re still as stuck as when you started, because many of the cool shops are still figuring out how to do good hiring in this new, fast-changing paradigm. They want developers who already have experience in their stack, but they haven&#8217;t realized that filtering for previous experience is only one heuristic for finding good talent. So, what are your options?
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
+</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
+</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
+</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
+</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
+</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
+</span></code></pre></td></tr></table></div></figure>
 <br />
 <br />
-Here is how to escape from your language. Like all the best advice, it is simple, yet profound. It consists of the following three steps:
+Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
 <br />
 <br />
-1. Pick a new stack.<br />
- 2. Learn it.<br />
- 3. Build a network.
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
+</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>      <span class="mi">1</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
+</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
+</span></code></pre></td></tr></table></div></figure>
 <br />
 <br />
-Picking a stack is not an easy thing to do, but I have good news for you: once you master these steps, you won&#8217;t ever be stuck again. No matter which one you pick, when the time comes, you will be able to quickly move way ahead of the pack. Don’t worry about trying to pick the one that will last your whole career, since, (and this may come as a shock to you) it probably won&#8217;t last you a decade! That&#8217;s why we should love software development, for the fast pace! If you want a job that never changes, go be a <del>librarian</del> <del>doctor</del> <del>lawyer</del> gardener.
+At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
 <br />
 <br />
-Which language should you pick? You have two big categories to choose from that I suggest:
-<ul>
-	<li dir="ltr">The popular</li>
-	<li dir="ltr">The exotic</li>
-</ul>
-<br />
-The popular languages have significantly more, and a greater variety of jobs. On the down side, you also have more competition from other developers, and most of them have been using that language since before they were born. To stand out here, you need something to differentiate yourself from the other candidates: a unique perspective, skill in another programming paradigm, an ability to quickly learn new things, rapidly change contexts, etc. Figure out what your unique contributions are, and communicate them clearly.
+At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
 <br />
 <br />
-Alternatively, on the exotic route, you pick an up-and-coming language, the new hotness, as it were. Because it is so new, there are much fewer jobs in this language, and less long-term stability. Consequently, there are also much fewer experienced developers. Savvy companies using this language will hire interested developers, despite them lacking any experience with it. (All your hard work in step two will really pay off here.)
+I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
 <br />
 <br />
-Having chosen a language, now it’s time to learn it! Fill your github with work in that language.
- Read some books on it. Look for ways to use it at your current job. If your situation allows, start a big side project in it. You don&#8217;t HAVE to open-source the code on github, but this certainly helps to publicize your learning. Companies seek prior job experience to avoid having to pay to train you; well then, beat them to the punch by already knowing it!
+Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
 <br />
 <br />
-To build your network, go to meetups and get involved in them. I cannot emphasize this enough.
- Stick out your hand and introduce yourself. Make connections with the people you meet. Learn about the tools people use at their work. You will begin to think like a developer in that stack as you’re exposed to new concepts. Soon enough, you will develop a sense of what companies are hiring and who would give you a recommendation at their company.
+I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
 <br />
 <br />
-Mind your attitude when interviewing. Resist the urge to cynically compare and contrast the old and new stacks. I have interviewed too many candidates who could not stop talking about how great their old language is, or how “these new hipster languages are just a fad”. While you are certainly always entitled to your opinion, (who knows, you may even be right!), carrying on like this in an interview setting never leaves a good impression.
+No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
 <br />
 <br />
-Perhaps you’re thinking that this is just too much effort. Just like everything in life, choosing not to move is also a valid move. I like to call it &#8220;riding into the sunset&#8221;. In this option, you never leave your language, ever. Though this may feel like the safer choice right now, it carries its own risks. If you hate maintenance projects, you need to learn to love them, because they are going to be your bread and butter. But, you will be competing for these projects with all the other sunsetters, and there are going to be a lot of them. From what I have heard, however, once you have reached the point where there are more maintenance jobs than there are remaining developers, you really do get to write your own ticket, but this can take decades. My great uncle did this, and he managed to stay employed in COBOL till he retired.
-<br />
-<br />
-While escaping from your stack requires effort, by following the steps you can achieve it in just a few hours a week. So, get out there and do it!
+The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
 </div>
   
   
@@ -186,6 +253,14 @@ While escaping from your stack requires effort, by following the steps you can a
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Lazy-Lists/">Lazy Evaluation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/anaphoric-macros/">Dangerous Clojure Macros</a>
+      </li>
+    
+      <li class="post">
         <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
@@ -203,14 +278,6 @@ While escaping from your stack requires effort, by following the steps you can a
     
       <li class="post">
         <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/how-to-escape-from-programming_language/">How to Escape From {{#PROGRAMMING_LANGUAGE}}</a>
-      </li>
-    
-      <li class="post">
-        <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
       </li>
     
   </ul>

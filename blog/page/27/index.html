@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed &hellip;">
+  <meta name="description" content="So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ fla. I followed &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://steveshogren.github.io/blog/page/23">
+  <link rel="canonical" href="http://steveshogren.github.io/blog/page/27">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
@@ -81,7 +79,7 @@ fla. I followed &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
+      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
     
     
       <p class="meta">
@@ -97,16 +95,14 @@ fla. I followed &hellip;">
   
 
 
-<time datetime="2011-05-04T00:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2011</time>
+<time datetime="2011-04-11T00:00:00-04:00" pubdate data-updated="true">Apr 11<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
+  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
 </div>
   
   
@@ -116,11 +112,9 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/24/">&larr; Older</a>
-    
     <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/22/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/26/">Newer &rarr;</a>
     
   </div>
 </div>
