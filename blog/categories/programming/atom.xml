@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-04-18T21:52:56-04:00</updated>
+  <updated>2014-04-18T22:39:53-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -71,8 +71,8 @@
 </p> <p>
   &ldquo;Guys, the whole thing, all 45k came back in 40 seconds.&rdquo;
 </p> <p> We scoff at him, good joke! Our profiling showed time chewed
-  up fairly evenly at <i>every level throughout the entire
-  process</i>, not just the initial query. So the process came back,
+  up fairly evenly at every level throughout the entire
+  process, not just the initial query. So the process came back,
   just empty, right? And who knows what Ancient Ones you disturbed by
   messing around with what the ORM generates, it will probably never
   work again. We run it again, 40 seconds, correct count of
