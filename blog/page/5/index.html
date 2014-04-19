@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your &hellip;">
+  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/intro-to-macros/">Intro to Macros</a></h1>
+      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
     
     
       <p class="meta">
@@ -95,16 +95,19 @@
   
 
 
-<time datetime="2013-08-19T00:00:00-04:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-17T00:00:00-04:00" pubdate data-updated="true">Aug 17<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>
-Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
-</p>
+  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
+<br />
+<br />
+One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
+<br />
+<br />
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -118,46 +121,25 @@ Macros are the most powerful way to manipulate the syntax of your language. Macr
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">doCalc</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">doAwesome</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">doCalc</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#before substitution...</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">test</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">doAwesome</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># when substituted...</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">test</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
+</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
+</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
+</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
+</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
+</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>
-Ignoring scoping, the function/call system allows for immense power in programing languages. The function lets you &#8220;expand&#8221; a simple call into a much larger block of code. The expanded code can be vastly large. In our example above, the (doCalc) function is small, but it reality it could be doing hundreds of lines of code, which also would have to be substituted in place. The difference is real functions do not work this way. Real functions have their values evaluated before getting passed in as parameters.
-</p>
-<p dir="ltr">Macros are similar to the substitution model, with one expressed difference: by default, macros operate on the text of the code itself, not the values. Think of how expansion works in the simple if statement.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="n">doOtherHugeCalc</span><span class="p">()</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Does the huge calc function execute each time? Not at all, you are guaranteed that only one will happen at any given run through that block of code.</p>
-<p dir="ltr">Let’s say you wanted to make a generic function that would abstract away that call, and let you return the values, maybe something like this:</p>
-
+<br />
+<br />
+Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
+<br />
+<br />
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -176,249 +158,64 @@ Ignoring scoping, the function/call system allows for immense power in programin
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">ifworkday</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">first</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">second</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">ifworkday</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">doOtherHugeCalc</span><span class="p">())</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
+</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>      <span class="mi">1</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">#when the values are “shown”</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">ifworkday</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">2</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">3</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">ifworkday</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># CALLED BOTH FUNCTIONS</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
+</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>
-But wait, now BOTH functions get called, you are doing exactly twice as many huge calcs as needed. Now, those familiar with javascript probably are already itching with the solution, &#8220;JUST WRAP THEM IN ANONYMOUS FUNCTIONS!!!&#8221;. I hear you, sure that works in this super simple example, but macros let you do this without that extra wordiness.  Macros defer evaluating parameters. Think of a macro as a function, but the biggest difference is parameters DON&#8217;T get called till you choose to call them.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#if it is a macro...</span>
-</span><span class='line'><span class="n">defmacro</span> <span class="n">ifworkday</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">first</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">second</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">ifworkday</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">doOtherHugeCalc</span><span class="p">())</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#when the values are “shown”</span>
-</span><span class='line'><span class="n">defmacro</span> <span class="n">ifworkday</span><span class="p">(</span><span class="s2">&quot;1+1&quot;</span><span class="p">,</span> <span class="s2">&quot;doOtherHugeCalc()&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;1+1&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;doOtherHugeCalc()&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Now, in this simple ruby example, I had to use strings and eval to approximate what happens with macros in other languages. Since this is unwieldy, let’s switch to clojure, where it is more natural.</p>
-I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="err">‘</span><span class="p">(</span><span class="nf">a</span> <span class="nv">b</span> <span class="nv">c</span> <span class="nv">d</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; (a b c d)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">This is a list of four symbols. Symbols are basically like an enum or a keyword that only equals itself. So it is possible to say:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">= </span><span class="err">‘</span><span class="nv">a</span> <span class="err">‘</span><span class="nv">a</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">but that’s pretty much it. If I tried to evaluate a symbol, it would complain that the symbol has no definition, since it is trying to treat it like a variable lookup.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; nothing gets evaluated inside the list at all..</span>
-</span><span class='line'><span class="err">‘</span><span class="p">(</span><span class="nf">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Now you are left with a list of symbols, unevaluated. The defmacro form, for each parameter, gives you such a list of unevaluated symbols.</p>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;;before compilation</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">ifWorkday</span> <span class="p">[</span><span class="nv">bigCalc1</span>, <span class="nv">bigCalc2</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span>
-</span><span class='line'>    <span class="o">~</span><span class="nv">bigCalc1</span>
-</span><span class='line'>    <span class="o">~</span><span class="nv">bigCalc2</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; the call</span>
-</span><span class='line'><span class="p">(</span><span class="nf">ifWorkday</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;;... after compilation...</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">ifWorkday</span> <span class="p">[(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>, <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">)]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">)))</span>
-</span><span class='line'><span class="c1">;; after compilation the call gets _transformed_ into:</span>
-</span><span class='line'><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc). I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.</p>
-<p dir="ltr">But that is a stupid example. Making your own if statements is the most basic uses of macros. But it demonstrates the point: macros generate code. This is profound, but hard to grasp for the first time. Macros expand code before compilation time, and therefore can be used to generate lots of code automatically.</p>
-
-<p>
-For extra credit, let’s take a bigger example in the same vein as our custom ifWorkday. I am making a game, and in it, I want an easy abstraction that gives me back one of several options with a custom percent chance. Ideally, something like
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">if25</span> <span class="p">(</span><span class="nf">doFirst</span><span class="p">)</span> <span class="p">(</span><span class="nf">doSecond</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-where the number corresponds to the percent chance that the next item will be executed and returned. In this example, (doFirst) will only happen 25% of the time and (doSecond) 75% of the time. This demonstrates a more interesting use of macros, the ability to generate other functions (or even other macros). Here is the code:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">make-percents</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nb">list </span><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">macro-name</span> <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;if&quot;</span> <span class="nv">num</span><span class="p">))]</span>
-</span><span class='line'>                    <span class="o">`</span><span class="p">(</span><span class="kd">defmacro </span><span class="o">~</span><span class="nv">macro-name</span> <span class="p">[</span><span class="nv">x#</span> <span class="nv">y#</span><span class="p">]</span>
-</span><span class='line'>                      <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="o">~~</span><span class="nv">num</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x#</span> <span class="o">~</span><span class="nv">y#</span><span class="p">))))</span>
-</span><span class='line'>                <span class="p">(</span><span class="nb">range </span><span class="mi">100</span><span class="p">))))</span>
-</span><span class='line'><span class="p">(</span><span class="nf">make-percents</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-This macro only needs to be called once, and what it does is generates this:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if0</span> <span class="p">[</span><span class="nv">x__2603__auto__</span> <span class="nv">y__2604__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">0</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2603__auto__</span> <span class="o">~</span><span class="nv">y__2604__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if1</span> <span class="p">[</span><span class="nv">x__2604__auto__</span> <span class="nv">y__2605__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">1</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2604__auto__</span> <span class="o">~</span><span class="nv">y__2605__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if2</span> <span class="p">[</span><span class="nv">x__2606__auto__</span> <span class="nv">y__2607__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">2</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2606__auto__</span> <span class="o">~</span><span class="nv">y__2607__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;;...</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if99</span> <span class="p">[</span><span class="nv">x__2609__auto__</span> <span class="nv">y__2601__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">99</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2609__auto__</span> <span class="o">~</span><span class="nv">y__2601__auto__</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">I hope the profundity of this hits you like a ton of bricks. With under 10 lines of macro code (and calling it) we auto-generated 100 macros! This 10 lines of code gets expanded to 100 more lines! Sure, this is a simple, almost silly example, but imagine what you could do with this sort of power. In a more complex example, you could be auto-generating vast amounts of code this way, code that you don’t have to write every time by hand. Don&#8217;t let the x__2506__auto__ parameter names scare you, I will explain that in a bit.</p>
-<p>
-Those generated macros should not be too hard to understand after the previous ifWorkday macro, and they can be called just like we expect. Let&#8217;s deconstruct (make-percents).
-</p>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">`</span><span class="p">(</span><span class="nb">list </span><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">The ~@ is like unquote from above, the only difference is instead of just unquoting a list to be evaluated, it extracts the values from the list and sticks them in place. I like to think of it as just removing the outer parens in the unquoted list.</p>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="err">‘</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span><span class="p">))]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nb">+ </span><span class="mi">8</span> <span class="o">~@</span><span class="nv">x</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; (clojure.core/+ 8 1 2 (3 4))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">The (list) function is just how we make a list of elements.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">list </span><span class="err">‘</span><span class="nv">a</span> <span class="err">‘</span><span class="nv">b</span> <span class="err">‘</span><span class="nv">c</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; (a b c)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-The (map) function has two arguments: the first, a function; the second, a list of elements to “map” over.
-</p>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span> <span class="p">(</span><span class="nf">...</span><span class="p">))</span>
-</span><span class='line'>       <span class="p">(</span><span class="nb">range </span><span class="mi">100</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">As you can see here, the ~@() tells us to unquote the whole form, re-enabling the evaluation, and therefore running the map call. The map then calls the anonymous function 100 times, with the num being the numbers 0..99. Inside the anon function we have a let binding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">macro-name</span> <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;if&quot;</span> <span class="nv">num</span><span class="p">))]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">This line is more simple, it makes a let that binds to the value macro-name a symbol that looks like ‘if1, ‘if2, .. depending on which iteration of the loop you are on.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">`</span><span class="p">(</span><span class="kd">defmacro </span><span class="o">~</span><span class="nv">macro-name</span> <span class="p">[</span><span class="nv">x#</span> <span class="nv">y#</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="o">~~</span><span class="nv">num</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x#</span> <span class="o">~</span><span class="nv">y#</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Here is the actual returned “template” of the macro. The # at the end of the parameter name ensures that it is unique, which is really really useful when you consider that the code returned from a macro replaces the call in place. To make sure you don’t accidentally double bind the same name, clojure will give you a warning like “cannot let unqualified name” if you try to let a value without including the # at the end inside a template, another really handy feature. What gets generated by x# looks something like x__2506__auto__ which is guaranteed to be unique. The reason you need this is in case there was another value bound to x inside your code, it could cause a conflict, and in certain circumstances, really break your code, so this prevents such conflicts. You should only need these when creating parameters or let bindings inside the template. All the values &#8220;outside&#8221; the template do not need to have the # appended to their names, since they will not actually be a part of the returned template.</p>
-<p dir="ltr">The only odd thing here is the double ~~num. Notice how many quote levels deep we are. It is possible to unquote to “step” back up a level in the template. By the time we get to the ~~num, the original function parameter of num was two “levels” higher, so to access it, we have to “step up” two levels. Let me highlight it in colors, to make it easier to see.</p>
-
-<img src="/images/macro.jpg" title="" >
-
-<p dir="ltr">See how by unquoting ~macro-name one level in line 3, and unquoting ~~num two levels on line 4, we bring them both back “up” to the “red” level where they were defined? Similarly, by unquoting ~x# and ~y# one level on line 4, we bring them back “up” to their “blue” definition level? This is an incredibly powerful tool that allows immense expansion of code in a tiny amount of space. If you think of the returned code form as a “template”, this quoting and unquoting lets you step in and out of evaluation with ease.</p>
-<p dir="ltr">In the end, when the (make-percents) macro is called, it produces 100 macros that are callable just like any other macro. To tell the whole story, I wrote this into my game, then decided I wanted a more sophisticated macro that could take any number of percentages, but this remained a good way to explain this specific pattern of looped macro generation.</p>
-<p dir="ltr">Hopefully, this article caused you to see how incredibly powerful macros can be, allowing effectively infinite auto-generation of code. The field of macros is still very under-explored, as most languages do not allow them at all, they remain a largely undiscovered, and yet incredibly powerful tool.</p>
-<p dir="ltr">For further reading, I highly recommend Let Over Lambda, the first 6 chapters of which are free <a href="http://letoverlambda.com/index.cl/toc">here</a>. Let Over Lambda is written with examples in Common Lisp, but the macro parts are very similar in Clojure, so is a valuable read.</p>
-&nbsp;
+<br />
+<br />
+At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
+<br />
+<br />
+At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
+<br />
+<br />
+I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
+<br />
+<br />
+Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
+<br />
+<br />
+I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
+<br />
+<br />
+No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
+<br />
+<br />
+The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
 </div>
   
   
@@ -460,10 +257,6 @@ The (map) function has two arguments: the first, a function; the second, a list 
       </li>
     
       <li class="post">
-        <a href="/anaphoric-macros/">Dangerous Clojure Macros</a>
-      </li>
-    
-      <li class="post">
         <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
@@ -481,6 +274,10 @@ The (map) function has two arguments: the first, a function; the second, a list 
     
       <li class="post">
         <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/how-to-escape-from-programming_language/">How to Escape From {{#PROGRAMMING_LANGUAGE}}</a>
       </li>
     
   </ul>
