@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-03T09:52:00-04:00</updated>
+  <updated>2014-05-03T09:54:25-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Pattern Matching - Make Compiler Work for You]]></title>
+    <title type="html"><![CDATA[Pattern Matching - Make the Compiler Work for You]]></title>
     <link href="http://steveshogren.github.io/function-pattern-matching/"/>
     <updated>2014-04-28T22:05:00-04:00</updated>
     <id>http://steveshogren.github.io/function-pattern-matching</id>
