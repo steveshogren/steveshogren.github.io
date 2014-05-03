@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-03T09:54:25-04:00</updated>
+  <updated>2014-05-03T10:26:06-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -258,10 +258,10 @@ clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
 function to F#. If your entire function is just a single pattern
 match, you can remove the <code>match/with</code> line and use the <code>function</code>
 keyword, and simply match against the parameters (which I reversed for
-clarity).</p>
+clarity, but do not need to be written).</p>
 
 <p>```fsharp
-let convert(lang, number) = function</p>
+let convert = function</p>
 
 <pre><code>| Language.English, 0 -&gt; "zero" 
 | Language.English, 1 -&gt; "one"
