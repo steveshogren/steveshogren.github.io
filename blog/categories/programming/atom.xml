@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-04-18T22:39:53-04:00</updated>
+  <updated>2014-05-03T09:52:00-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,278 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pattern Matching - Make Compiler Work for You]]></title>
+    <link href="http://steveshogren.github.io/function-pattern-matching/"/>
+    <updated>2014-04-28T22:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/function-pattern-matching</id>
+    <content type="html"><![CDATA[<p>Pattern matching is a simple tool that will make your code safer and
+easier to read.</p>
+
+<p>Consider the following code that converts an Int to a string.</p>
+
+<p>``` csharp
+public enum Language {</p>
+
+<pre><code>Spanish,
+English
+</code></pre>
+
+<p>}
+public static string convert(int number, Language lang) {</p>
+
+<pre><code>string ret = "";
+if (lang == Language.English) {
+    switch(number) {
+        case 0: ret = "zero"; break;
+        case 1: ret = "one"; break;
+        default: ret = "..."; break;
+    }
+} else if (lang == Language.Spanish) {
+    switch(number) {
+        case 0: ret = "zero"; break;
+        case 1: ret = "uno"; break;
+        default: ret = "~~~"; break;
+    }
+}
+return ret;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>What happens when we make this simple change?</p>
+
+<p>``` csharp
+public enum Language {</p>
+
+<pre><code>Spanish,
+English,
+German
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
+any indication that something is missing? Nope! Our code has a
+potential bug that is only exposed at run-time, and nothing will tell
+us that. We made it fail gracefully by ensuring our code always
+returns at least an empty string, but we have created a bug that can
+only really be caught by something external: either automated tests or
+manual checking.</p>
+
+<p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
+seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
+that it just makes things even worse.</p>
+
+<p>``` csharp</p>
+
+<pre><code>public interface ILanguage {
+    String convert(int num);
+}
+public class Spanish : ILanguage {
+    public String convert (int num) {
+        var ret = "";
+        switch (num) {
+            case 0: ret = "zero"; break;
+            case 1: ret = "uno"; break;
+            default: ret = "~~~"; break;
+        }
+        return ret;
+    }
+}
+public class English : ILanguage {
+    public String convert (int num) {
+        var ret = "";
+        switch (num) {
+            case 0: ret = "zero"; break;
+            case 1: ret = "one"; break;
+            default: ret = "..."; break;
+        }
+        return ret;
+    }
+}
+// somewhere else...
+public static string convert(int x, Language lang) {
+    return getLanguage(lang).convert(x);
+}
+public static ILanguage getLanguage(Language lang) {
+    switch (lang) {
+        case Language.English: return new English() ; break;
+        case Language.Spanish: return new Spanish() ; break;
+        default: throw new Exception();
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>We have turned 21 lines in one file into 36 in three files (not
+counting namespaces and imports). Does this new structure give us any
+additional safety when we add a new concrete implementation? How about
+when we add a new enum value? This code is even more likely to cause
+bugs than the first, because now we have an implicit coupling between
+the enum and the concrete class. We could get rid of the enum, and
+&ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
+concrete class to instantiate.</p>
+
+<p>Imagine if the compiler could warn us when either the enum or the
+class changed. Imagine if instead of having to hunt down the possible
+uses, we could just compile and fix the errors.</p>
+
+<p>Good news, we can!</p>
+
+<p>Check out this F# code. If you have never seen F# before, I know, it
+looks completely crazy! It <em>still</em> looks a little weird to me, but
+just try to read it. I think you will surprise yourself. This is a
+function called <code>convert</code>, and if you keep in mind that the types
+always come AFTER the value, the code makes a lot more sense. A
+parameter in C# would be <code>int number</code>; in F# it is written
+<code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
+you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
+second it is a lot more powerful!</p>
+
+<p>``` fsharp
+let convert(number:Int, lang:Language) :string =</p>
+
+<pre><code>match lang with
+    | Language.English -&gt; 
+        match number with
+           | 1 -&gt; "one" 
+           | 2 -&gt; "two" 
+           | _ -&gt; "..."
+</code></pre>
+
+<p>```</p>
+
+<p>We are using the same enum from the C# file, but it is missing
+something, right? Where are the Spanish and German parts? I try to
+compile this and what do I see?</p>
+
+<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
+matches on this expression. For example, the value 'enum&lt;Language&gt;
+(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
+
+<p>Spittake mushroom soup, the compiler just caught a potential bug for
+us! A C# run-time bug no less! Not only is this very powerful, but it
+is so simple. I can code the way I normally do, only now I get
+additional safety for free! And no unit or integration test would ever
+catch this class of errors.</p>
+
+<p>Heck, if you really want to keep your classes and interfaces in C#,
+you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
+
+<p>``` fsharp
+let convert(number, lang) =</p>
+
+<pre><code>match lang with
+    | Language.English -&gt; English().convert(number)
+</code></pre>
+
+<p>```</p>
+
+<p>This still calls the C# class above, and now the compiler gives us a
+warning when we add a new enum value!</p>
+
+<p>In this way, pattern matching is able to clearly remove edge cases. We
+converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
+<code>match</code>.</p>
+
+<p>BONUS ROUND!</p>
+
+<p>What we have already seen of pattern matching makes it a better
+<code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
+<code>match/with</code> statement allows for patterns matched to have a <code>when</code>
+clause which only matches when the condition is true:</p>
+
+<p>``` fsharp
+let convert(number, lang) =</p>
+
+<pre><code>match lang with
+    | Language.English -&gt; 
+        match number with 
+            | x when x &gt; 5 -&gt; "Large!"
+            | 0 -&gt; "zero"
+    | Language.Spanish -&gt; 
+        match number with 
+            | x when x &gt; 5 -&gt; "Grande!"
+            | 0 -&gt; "zero"
+</code></pre>
+
+<p>```</p>
+
+<p>Running the compiler again give us:</p>
+
+<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
+Warning FS0025: Incomplete pattern matches on this expression. For
+example, the value '1' may indicate a case not covered by the
+pattern(s). However, a pattern rule with a 'when' clause might
+successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>That&rsquo;s right, it checks numbers too.</p>
+
+<p>Lastly, it is possible to match on a combination of values, all at
+once. We can convert our more complex structure to something simpler
+using this trick, and the compiler is still intelligent enough to
+check for missing cases.</p>
+
+<p>``` fsharp
+let convert(number, lang) =</p>
+
+<pre><code>match lang, number with
+    | Language.English, 0 -&gt; "zero" 
+    | Language.English, 1 -&gt; "one"
+    | Language.English, x when x &gt; 1 -&gt; "Larger than one!"
+    | Language.English, _ -&gt; "dunno"
+    | Language.Spanish, 0 -&gt; "zero" 
+    | Language.Spanish, x when x &gt; 5 -&gt; "Grande!"
+</code></pre>
+
+<p>```</p>
+
+<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
+<code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
+default for any number in <code>Language.English</code> not already matched. The
+bug in the code here is the missing <code>Language.Spanish</code> with numbers
+1-5. What does the compiler say?</p>
+
+<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
+expression. For example, the value '(_,1)' may indicate a case not
+covered by the pattern(s). However, a pattern rule with a 'when'
+clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>Lastly, let&rsquo;s show the final result of converting our original
+function to F#. If your entire function is just a single pattern
+match, you can remove the <code>match/with</code> line and use the <code>function</code>
+keyword, and simply match against the parameters (which I reversed for
+clarity).</p>
+
+<p>```fsharp
+let convert(lang, number) = function</p>
+
+<pre><code>| Language.English, 0 -&gt; "zero" 
+| Language.English, 1 -&gt; "one"
+| Language.English, _ -&gt; "..."
+| Language.Spanish, 0 -&gt; "zero" 
+| Language.Spanish, 1 -&gt; "uno" 
+| Language.Spanish, _ -&gt; "~~~"
+</code></pre>
+
+<p>```</p>
+
+<p>Our original 17 line convert function, converted into a <em>safer</em> 7
+lines! I never had to specify what the types of lang, number and the
+return type are, because the compiler is able to figure that out from
+the code I wrote.</p>
+
+<p>If you are not convinced at this point that pattern matching is a big
+step forward in the safety and ease of development, I am not sure what
+else would convince you. More safety means less time spent tracking
+down bugs and more time adding on features!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learn to Database]]></title>

@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this &hellip;">
+  <meta name="description" content="I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,7 +79,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
+      <h1 class="entry-title"><a href="/put-it-in-the-wiki/">Put It in the Wiki</a></h1>
     
     
       <p class="meta">
@@ -95,14 +95,14 @@
   
 
 
-<time datetime="2011-04-12T00:00:00-04:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
+<time datetime="2011-04-14T00:00:00-04:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes&#8217; state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+  <div class="entry-content"><p>I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a meager wiki with sparse, outdated, or worse, useless information.</p> <p>I have always been a champion of the wiki, and while a wiki can easily grow out of sync with the business, if you find yourself answering the same questions week after week, you need to document that somewhere, and a text document checked into code control doesn&#039;t count! Why not? You can&#039;t easily search across hundreds of text documents to find something, and if you <i>are</i> that tedious, then you also have to remember to update it <i>before</i> you search, otherwise you get stale information. And if you have that kind of free time and spare memory, you and I need to have a talk.</p> <p>So, a wiki it is. It is always up to date, always on, accessable anywhere with internet. Brilliant. </p> <p>And, most importantly, when someone asks me a familiar question, I simply tell them to Put It In The Wiki, because next time the first thing out of my mouth is Did You Check the Wiki?<br /> </p>
 </div>
   
   
@@ -140,6 +140,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
         <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
@@ -161,10 +165,6 @@
     
       <li class="post">
         <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/how-to-escape-from-programming_language/">How to Escape From {{#PROGRAMMING_LANGUAGE}}</a>
       </li>
     
   </ul>
