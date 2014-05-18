@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-18T10:12:49-04:00</updated>
+  <updated>2014-05-18T10:13:57-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -220,7 +220,7 @@ didn&rsquo;t add it in the pattern match, the compiler would give us a
 warning!</p>
 
 <p>Between the options of traditional interfaces verses pattern matching,
-neither way is truely the best for every circumstance: each comes with
+neither way is truly the best for every circumstance: each comes with
 a trade-off. I liken the trade-offs to the &ldquo;grain of the
 data&rdquo;. Whichever way your system is likely to change the most, that is
 the way you want to optimize your type. The good news is: in F# you
