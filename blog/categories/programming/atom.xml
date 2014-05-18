@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-18T09:49:41-04:00</updated>
+  <updated>2014-05-18T10:12:49-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -61,7 +61,7 @@ var payments = repo.GetAll();
 
 <p>```</p>
 
-<p>In our example here, we have two concrete implementors of the
+<p>In our example here, we have two concrete implementers of the
 <code>IPaymentRepository</code>, each one with their own implementations. This is
 a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
 would put each of these classes in their own files.</p>
@@ -114,7 +114,7 @@ best tool for the job!</p>
 
 <p>As to safety, adding a new type is easy with interfaces, but the
 developer is left without assistance to find all places the concrete
-classes are instantiated and add the new type. Niether compiler will
+classes are instantiated and add the new type. Neither compiler will
 offer any warnings for a new interface subclass. For pattern matching
 polymorphism, the compiler will warn that there are missing cases
 every place a change needs to be made. While harder to add a new type
@@ -242,6 +242,8 @@ with high performance and interoperability with existing C# libraries.</p>
 
 <p>If you want additional reading on the topic of polymorphism, check out
 <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
+
+<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
 ]]></content>
   </entry>
   
