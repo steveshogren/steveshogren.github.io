@@ -9,15 +9,14 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed &hellip;">
+  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
   
   <link rel="canonical" href="http://steveshogren.github.io/blog/page/23">
@@ -81,7 +80,7 @@ fla. I followed &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
+      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
     
     
       <p class="meta">
@@ -97,16 +96,83 @@ fla. I followed &hellip;">
   
 
 
-<time datetime="2011-05-04T00:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2011</time>
+<time datetime="2011-05-05T00:00:00-04:00" pubdate data-updated="true">May 5<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
+  <div class="entry-content"><p>
+  Up until recently, most of my programming was in php, which does not
+  support named parameters
+  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
+  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
+  so while switching to VB.NET and python, I have come to really
+  appreciate this handy feature.
+</p>
+<p>
+ Named parameters is one of those handy little things that can make
+  your life a little easier. Say, in python, you have a function that
+  takes a boolean value. Normally, I would create a variable just to
+  hold that boolean value, then pass it in, to try to be easier for
+  the next guy to understand.
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+  Who knows what window&#8217;s parameter is? What the heck is true anyway,
+  the window? <a href="http://www.jetbrains.com/pycharm/"
+  target="_blank">PyCharm</a> knows (and if you are using python
+  without it, I implore you to treat yourself to the demo) otherwise
+  you have to look up the function <em>like a barbarian</em> to see
+  what is going on. Sure, you can make it more clear with:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Better then nothing, but still lame.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  Boom! Way easier to read, no extra variables hanging around making
+  trouble. Many times I have made function parameters, called them one
+  thing, then made a variable with a slightly different name to pass
+  in for legibility, but no more of that crap! Now, when I have the
+  inclination to make a variable just to clarify something, I just
+  name the parameter and pass in the value right there, like a
+  civilized gentleman should.
+
+</p>
+<p>
+ Additionally, VB.NET has this too, with the slightly goofier
+  syntax of the &#8220;:=&#8221;
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  My cohort Daniel Miladinov pointed out that this is calling the
+  assignment operator directly, since calling it with just the equals
+  would perform
+  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
+</p>
 </div>
   
   
@@ -144,6 +210,10 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
         <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
       </li>
     
@@ -165,10 +235,6 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     
       <li class="post">
         <a href="/clojure-debugger/">Clojure&#8230; Debugger?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
       </li>
     
   </ul>

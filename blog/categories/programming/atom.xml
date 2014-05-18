@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-03T10:26:06-04:00</updated>
+  <updated>2014-05-18T09:47:50-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,238 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inverted Polymorphism with Pattern Matching]]></title>
+    <link href="http://steveshogren.github.io/inversed-polymorphism/"/>
+    <updated>2014-04-28T22:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/inversed-polymorphism</id>
+    <content type="html"><![CDATA[<p>In my last post on the power of pattern matching, we saw how powerful
+the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
+give us warnings for missing cases, no matter what the type.</p>
+
+<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
+inversion of the usual OO way of polymorphism. Here is an example that
+is probably familiar to everyone: getting a database connection.</p>
+
+<p>``` csharp</p>
+
+<pre><code>public interface IPaymentRepository {
+    IEnumerable&lt;IPayment&gt; GetAll ();
+}
+// InMemory.cs
+public class InMemory : IPaymentRepository {
+    public IEnumerable&lt;IPayment&gt; GetAll (){
+        return Config.payments.Values;
+    }
+}
+// Postgres.cs
+public class Postgres : IPaymentRepository {
+    public IEnumerable&lt;IPayment&gt; GetAll (){
+        throw new NotImplementedException();
+    }
+}
+// RepositoryFactory.cs
+public class RepositoryFactory {
+    public static IPaymentRepository GetPaymentRepo () {
+        if (Config.configuration["useInMemory"] == "true") {
+            return new InMemory();
+        } else {
+            return new Postgres();
+        }
+    }
+}
+
+// somewhere in the code...
+var repo = RepositoryFactory.GetPaymentRepo();
+var payments = repo.GetAll();
+</code></pre>
+
+<p>```</p>
+
+<p>In our example here, we have two concrete implementors of the
+<code>IPaymentRepository</code>, each one with their own implementations. This is
+a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
+would put each of these classes in their own files.</p>
+
+<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
+and interfaces to use pattern matching.</p>
+
+<p>``` fsharp
+type PaymentRepository =
+   | InMemory
+   | Postgres</p>
+
+<p>let GetAll = function</p>
+
+<pre><code>| InMemory -&gt; Config.payments.Values;
+| Postgres -&gt; raise(NotImplementedException())
+</code></pre>
+
+<p>let GetPaymentRepo =</p>
+
+<pre><code>match Config.configuration.["useInMemory"] with
+    | "true" -&gt; InMemory
+    | _ -&gt; Postgres 
+</code></pre>
+
+<p>// somewhere in the code &hellip;
+let repo = Payments.GetPaymentRepo
+let payments = Payments.GetAll repo
+```</p>
+
+<p>Notice how we separated our behavior from our types? The
+<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
+are just empty types, much like an <code>Enum</code>. We are still able to get
+polymorphic behavior from them, using <code>match</code>.</p>
+
+<p>But why would we want to store our behavior separate from the type?</p>
+
+<p>By storing the behavior separate from the type, changes that effect a
+single behavior (adding a new function, changing a function&rsquo;s api,
+removing a function) are easier, because they are all grouped
+together. A change to the api of the <code>GetAll</code> function is harder in
+the traditional OO interface structure, requiring modifying several
+files.</p>
+
+<p>Similarly, a change requiring adding a new type is difficult in a
+pattern matching structure, as it will require finding every pattern
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!</p>
+
+<p>As to safety, adding a new type is easy with interfaces, but the
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Niether compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th> Adding a Type  </th>
+<th> Modifying Behavior </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong>OO Interfaces/Classes</strong>  </td>
+<td>  Easier / Less Safe  </td>
+<td> Harder / Safe </td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Pattern Matching Types</strong>  </td>
+<td>  Harder / Safe  </td>
+<td> Easier / Safe</td>
+</tr>
+</tbody>
+</table>
+
+
+<br />
+
+
+<p>I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.</p>
+
+<p>Consider the change where we want to add a new function to the
+<code>IPaymentRepository</code> interface and change the location of the in
+memory dictionary to be stored internally. In the interfaces and
+classes example, that requires editing <em>three separate files</em>.</p>
+
+<p>``` csharp</p>
+
+<pre><code>// IPaymentRepostory.cs
+public interface IPaymentRepository {
+    IEnumerable&lt;IPayment&gt; GetAll ();
+    void Add(IPayment payment);
+}
+// InMemory.cs
+public class InMemory : IPaymentRepository {
+    public Dictionary&lt;int, IPayment&gt; payments = new Dictionary&lt;int, IPayment&gt;();
+    public void Add(IPayment payment) {
+        payments.Add(payment.GetId(),payment);
+    }
+    public IEnumerable&lt;IPayment&gt; GetAll (){
+        return payments.Values;
+    }
+}
+// Postgres.cs
+public class Postgres : IPaymentRepository {
+    public void Add(IPayment payment) {
+        throw new NotImplementedException();
+    }
+    public IEnumerable&lt;IPayment&gt; GetAll (){
+        throw new NotImplementedException();
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Here is the change to add a new function in the pattern matching example:</p>
+
+<p>``` fsharp
+type PaymentRepository =
+   | InMemory of Dictionary&lt;int, IPayment>
+   | Postgres</p>
+
+<p>let Add db (payment:IPayment) =</p>
+
+<pre><code>match db with
+    | InMemory payments -&gt; payments.Add(payment.GetId(),payment);
+    | Postgres -&gt; raise(NotImplementedException())
+</code></pre>
+
+<p>let GetAll = function</p>
+
+<pre><code>    | InMemory payments -&gt; payments.Values;
+    | Postgres -&gt; raise(NotImplementedException())
+</code></pre>
+
+<p>```</p>
+
+<p>In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
+<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
+didn&rsquo;t add it in the pattern match, the compiler would give us a
+warning!</p>
+
+<p>Between the options of traditional interfaces verses pattern matching,
+neither way is truely the best for every circumstance: each comes with
+a trade-off. I liken the trade-offs to the &ldquo;grain of the
+data&rdquo;. Whichever way your system is likely to change the most, that is
+the way you want to optimize your type. The good news is: in F# you
+can have a mix of both, and it is relatively easy to convert back and
+forth depending on how your system is changing the most.</p>
+
+<p>Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.</p>
+
+<p>If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.</p>
+
+<p>If you want additional reading on the topic of polymorphism, check out
+<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pattern Matching - Make the Compiler Work for You]]></title>
@@ -649,320 +881,6 @@ down bugs and more time adding on features!</p>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intro To Macros]]></title>
-    <link href="http://steveshogren.github.io/intro-to-macros/"/>
-    <updated>2013-08-19T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/intro-to-macros</id>
-    <content type="html"><![CDATA[<p>
-Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
-</p>
-
-
-<p>``` ruby
-def doCalc ()
-   return 1 + 2
-end
-def doAwesome (x)
-   return doCalc() + x
-end</p>
-
-<h1>before substitution&hellip;</h1>
-
-<p>def test ()
-   return doAwesome(3)
-end</p>
-
-<h1>when substituted&hellip;</h1>
-
-<p>def test ()
-   return (1 + 2) + 3
-end
-```</p>
-
-<p>
-Ignoring scoping, the function/call system allows for immense power in programing languages. The function lets you "expand" a simple call into a much larger block of code. The expanded code can be vastly large. In our example above, the (doCalc) function is small, but it reality it could be doing hundreds of lines of code, which also would have to be substituted in place. The difference is real functions do not work this way. Real functions have their values evaluated before getting passed in as parameters.
-</p>
-
-
-<p dir="ltr">Macros are similar to the substitution model, with one expressed difference: by default, macros operate on the text of the code itself, not the values. Think of how expansion works in the simple if statement.</p>
-
-
-<p><code>ruby
-if workday(today()) do
-  x = 1 + 1
-else
-  x = doOtherHugeCalc()
-end
-</code></p>
-
-<p dir="ltr">Does the huge calc function execute each time? Not at all, you are guaranteed that only one will happen at any given run through that block of code.</p>
-
-
-<p dir="ltr">Let’s say you wanted to make a generic function that would abstract away that call, and let you return the values, maybe something like this:</p>
-
-
-<p>``` ruby
-def ifworkday(first, second)
-  if workday(today()) do</p>
-
-<pre><code>return first
-</code></pre>
-
-<p>  else</p>
-
-<pre><code>return second
-</code></pre>
-
-<p>  end
-end
-x = ifworkday(1 + 1, doOtherHugeCalc())</p>
-
-<h1>when the values are “shown”</h1>
-
-<p>def ifworkday(2, 3)
-  if workday(today()) do</p>
-
-<pre><code>return 2
-</code></pre>
-
-<p>  else</p>
-
-<pre><code>return 3
-</code></pre>
-
-<p>  end
-end
-x = ifworkday(2, 3) # CALLED BOTH FUNCTIONS
-```</p>
-
-<p>
-But wait, now BOTH functions get called, you are doing exactly twice as many huge calcs as needed. Now, those familiar with javascript probably are already itching with the solution, "JUST WRAP THEM IN ANONYMOUS FUNCTIONS!!!". I hear you, sure that works in this super simple example, but macros let you do this without that extra wordiness.  Macros defer evaluating parameters. Think of a macro as a function, but the biggest difference is parameters DON'T get called till you choose to call them.
-</p>
-
-
-<p>```</p>
-
-<h1>if it is a macro&hellip;</h1>
-
-<p>defmacro ifworkday(first, second)
-  if workday(today()) do</p>
-
-<pre><code>return first
-</code></pre>
-
-<p>  else</p>
-
-<pre><code>return second
-</code></pre>
-
-<p>  end
-end
-ifworkday(1+1, doOtherHugeCalc())</p>
-
-<h1>when the values are “shown”</h1>
-
-<p>defmacro ifworkday(&ldquo;1+1&rdquo;, &ldquo;doOtherHugeCalc()&rdquo;)
-  if workday(today()) do</p>
-
-<pre><code>return eval("1+1")
-</code></pre>
-
-<p>  else</p>
-
-<pre><code>return eval("doOtherHugeCalc()")
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<p dir="ltr">Now, in this simple ruby example, I had to use strings and eval to approximate what happens with macros in other languages. Since this is unwieldy, let’s switch to clojure, where it is more natural.</p>
-
-
-<p>I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.</p>
-
-<p><code>clojure
-‘(a b c d)
-;;=&gt; (a b c d)
-</code></p>
-
-<p dir="ltr">This is a list of four symbols. Symbols are basically like an enum or a keyword that only equals itself. So it is possible to say:</p>
-
-
-<p><code>clojure
-(= ‘a ‘a)
-;;=&gt; true
-</code></p>
-
-<p dir="ltr">but that’s pretty much it. If I tried to evaluate a symbol, it would complain that the symbol has no definition, since it is trying to treat it like a variable lookup.</p>
-
-
-<p><code>clojure
-;; nothing gets evaluated inside the list at all..
-‘(a b c)
-</code></p>
-
-<p dir="ltr">Now you are left with a list of symbols, unevaluated. The defmacro form, for each parameter, gives you such a list of unevaluated symbols.</p>
-
-
-<p><code>`` clojure
-;;before compilation
-(defmacro ifWorkday [bigCalc1, bigCalc2]
- </code>(if (workday (today))</p>
-
-<pre><code>~bigCalc1
-~bigCalc2))
-</code></pre>
-
-<p>;; the call
-(ifWorkday (+ 1 1) (otherBigCalc))</p>
-
-<p>;;&hellip; after compilation&hellip;
-(defmacro ifWorkday [(+ 1 1), (otherBigCalc)]
-  `(if (workday (today))</p>
-
-<pre><code>(+ 1 1)
-(otherBigCalc)))
-</code></pre>
-
-<p>;; after compilation the call gets <em>transformed</em> into:
-(if (workday (today)) (+ 1 1) (otherBigCalc))
-```</p>
-
-<p dir="ltr">The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc). I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.</p>
-
-
-<p dir="ltr">But that is a stupid example. Making your own if statements is the most basic uses of macros. But it demonstrates the point: macros generate code. This is profound, but hard to grasp for the first time. Macros expand code before compilation time, and therefore can be used to generate lots of code automatically.</p>
-
-
-
-
-<p>
-For extra credit, let’s take a bigger example in the same vein as our custom ifWorkday. I am making a game, and in it, I want an easy abstraction that gives me back one of several options with a custom percent chance. Ideally, something like
-</p>
-
-
-<p><code>clojure
-(if25 (doFirst) (doSecond))
-</code></p>
-
-<p>
-where the number corresponds to the percent chance that the next item will be executed and returned. In this example, (doFirst) will only happen 25% of the time and (doSecond) 75% of the time. This demonstrates a more interesting use of macros, the ability to generate other functions (or even other macros). Here is the code:
-</p>
-
-
-<p><code>`` clojure
-(defmacro make-percents []
- </code>(list ~@(map (fn [num]</p>
-
-<pre><code>              (let [macro-name (symbol (str "if" num))]    
-                `(defmacro ~macro-name [x# y#]               
-                  `(if (&gt; ~~num (rand-int 100)) ~x# ~y#))))  
-            (range 100))))
-</code></pre>
-
-<p>(make-percents)
-```</p>
-
-<p>
-This macro only needs to be called once, and what it does is generates this:
-</p>
-
-
-<p><code>clojure
-(defmacro if0 [x__2603__auto__ y__2604__auto__]
-  `(if (&gt; 0 (rand-int 100)) ~x__2603__auto__ ~y__2604__auto__))
-(defmacro if1 [x__2604__auto__ y__2605__auto__]
-  `(if (&gt; 1 (rand-int 100)) ~x__2604__auto__ ~y__2605__auto__))
-(defmacro if2 [x__2606__auto__ y__2607__auto__]
-  `(if (&gt; 2 (rand-int 100)) ~x__2606__auto__ ~y__2607__auto__))
-;;...
-(defmacro if99 [x__2609__auto__ y__2601__auto__]
-  `(if (&gt; 99 (rand-int 100)) ~x__2609__auto__ ~y__2601__auto__))
-</code></p>
-
-<p dir="ltr">I hope the profundity of this hits you like a ton of bricks. With under 10 lines of macro code (and calling it) we auto-generated 100 macros! This 10 lines of code gets expanded to 100 more lines! Sure, this is a simple, almost silly example, but imagine what you could do with this sort of power. In a more complex example, you could be auto-generating vast amounts of code this way, code that you don’t have to write every time by hand. Don't let the x__2506__auto__ parameter names scare you, I will explain that in a bit.</p>
-
-
-<p>
-Those generated macros should not be too hard to understand after the previous ifWorkday macro, and they can be called just like we expect. Let's deconstruct (make-percents).
-</p>
-
-
-<p><code>clojure
-`(list ~@(map (fn [num]  
-</code></p>
-
-<p dir="ltr">The ~@ is like unquote from above, the only difference is instead of just unquoting a list to be evaluated, it extracts the values from the list and sticks them in place. I like to think of it as just removing the outer parens in the unquoted list.</p>
-
-
-<p><code>clojure
-(let [x ‘(1 2 (3 4))]
-  `(+ 8 ~@x))
-;; =&gt; (clojure.core/+ 8 1 2 (3 4))
-</code></p>
-
-<p dir="ltr">The (list) function is just how we make a list of elements.</p>
-
-
-<p><code>clojure
-(list ‘a ‘b ‘c)
-;;=&gt; (a b c)
-</code></p>
-
-<p>
-The (map) function has two arguments: the first, a function; the second, a list of elements to “map” over.
-</p>
-
-
-<p>``` clojure
-~@(map (fn [num] (&hellip;))</p>
-
-<pre><code>   (range 100))
-</code></pre>
-
-<p>```</p>
-
-<p dir="ltr">As you can see here, the ~@() tells us to unquote the whole form, re-enabling the evaluation, and therefore running the map call. The map then calls the anonymous function 100 times, with the num being the numbers 0..99. Inside the anon function we have a let binding:</p>
-
-
-<p><code>clojure
-(let [macro-name (symbol (str "if" num))]
-</code></p>
-
-<p dir="ltr">This line is more simple, it makes a let that binds to the value macro-name a symbol that looks like ‘if1, ‘if2, .. depending on which iteration of the loop you are on.</p>
-
-
-<p><code>clojure
-`(defmacro ~macro-name [x# y#]                
-  `(if (&gt; ~~num (rand-int 100)) ~x# ~y#))))
-</code></p>
-
-<p dir="ltr">Here is the actual returned “template” of the macro. The # at the end of the parameter name ensures that it is unique, which is really really useful when you consider that the code returned from a macro replaces the call in place. To make sure you don’t accidentally double bind the same name, clojure will give you a warning like “cannot let unqualified name” if you try to let a value without including the # at the end inside a template, another really handy feature. What gets generated by x# looks something like x__2506__auto__ which is guaranteed to be unique. The reason you need this is in case there was another value bound to x inside your code, it could cause a conflict, and in certain circumstances, really break your code, so this prevents such conflicts. You should only need these when creating parameters or let bindings inside the template. All the values "outside" the template do not need to have the # appended to their names, since they will not actually be a part of the returned template.</p>
-
-
-<p dir="ltr">The only odd thing here is the double ~~num. Notice how many quote levels deep we are. It is possible to unquote to “step” back up a level in the template. By the time we get to the ~~num, the original function parameter of num was two “levels” higher, so to access it, we have to “step up” two levels. Let me highlight it in colors, to make it easier to see.</p>
-
-
-<p><img src="/images/macro.jpg" title="" ></p>
-
-<p dir="ltr">See how by unquoting ~macro-name one level in line 3, and unquoting ~~num two levels on line 4, we bring them both back “up” to the “red” level where they were defined? Similarly, by unquoting ~x# and ~y# one level on line 4, we bring them back “up” to their “blue” definition level? This is an incredibly powerful tool that allows immense expansion of code in a tiny amount of space. If you think of the returned code form as a “template”, this quoting and unquoting lets you step in and out of evaluation with ease.</p>
-
-
-<p dir="ltr">In the end, when the (make-percents) macro is called, it produces 100 macros that are callable just like any other macro. To tell the whole story, I wrote this into my game, then decided I wanted a more sophisticated macro that could take any number of percentages, but this remained a good way to explain this specific pattern of looped macro generation.</p>
-
-
-<p dir="ltr">Hopefully, this article caused you to see how incredibly powerful macros can be, allowing effectively infinite auto-generation of code. The field of macros is still very under-explored, as most languages do not allow them at all, they remain a largely undiscovered, and yet incredibly powerful tool.</p>
-
-
-<p dir="ltr">For further reading, I highly recommend Let Over Lambda, the first 6 chapters of which are free <a href="http://letoverlambda.com/index.cl/toc">here</a>. Let Over Lambda is written with examples in Common Lisp, but the macro parts are very similar in Clojure, so is a valuable read.</p>
-
-
-<p>&nbsp;</p>
 ]]></content>
   </entry>
   

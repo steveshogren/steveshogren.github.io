@@ -9,13 +9,14 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="You know what will make you a phenomenally better developer? Deliberate practice. How do you get such practice? By doing it every single day. Random &hellip;">
+  <meta name="description" content="&#8220;&#8230; and it has to return 45,000 records a minute, or we are all screwed.&#8221; Monday morning, we inherited a legacy codebase. Tuesday, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
   
   <link rel="canonical" href="http://steveshogren.github.io/blog/page/3">
@@ -79,7 +80,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/streaks/">Challenge - Code Every Day</a></h1>
+      <h1 class="entry-title"><a href="/Learn-To-Database/">Learn to Database</a></h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2014-01-28T00:00:00-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2014</time>
+<time datetime="2014-04-16T00:00:00-04:00" pubdate data-updated="true">Apr 16<span>th</span>, 2014</time>
         
       </p>
     
@@ -103,94 +104,75 @@
 
 
   <div class="entry-content"><p>
-  You know what will make you a phenomenally better developer?
-  Deliberate practice. How do you get such practice? By doing it every
-  single day. Random bursts of effort over the odd weekend will gain
-  you practically nothing comparatively, even if the time investment
-  is the same. Your mind needs repetition and consistent effort to
-  improve. So what do you want to get better at?  Pick your highest
-  value subject: vim, regex, functional programming, meta-programming,
-  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
-  practice it every single day. Easy as that.
+  &#8220;&#8230; and it has to return 45,000 records a minute, or we are all
+  screwed.&#8221;
+</p> <p> Monday morning, we inherited a legacy codebase. Tuesday, the
+  word came down on stone tablets. Forty-five thousand records a
+  minute, and no amount of political maneuvering or incremental gains
+  were going to do. Too many broken promises. The last team mass quit
+  over three months, leaving us the two most junior
+  developers. Someone high up promised big, and the buck stopped with
+  us.
+</p> <p> &#8220;Does anyone even know the throughput now?&#8221;
+</p> <p> We still don&#8217;t even have the dumb thing running on our
+  machines. Two weeks later we have it running and enough data to test
+  it. 2500 records a minute. When scaled to 45000 records it is still
+  going 30 minutes later, so it doesn&#8217;t even scale linearly. We are
+  screwed.
+</p> <p> Most of us are front-end developers who stepped forward when
+  everyone else stepped back. Databases are a distant memory,
+  something we maybe did a few jobs back. You &#8220;join&#8221; tables, right?
+  What we know of this process is it selects from 2-3 dozen databases
+  using an ORM while running through an engine that does some
+  supposedly massive calculations on the data, returning a message with
+  several hundred fields. It can&#8217;t be that hard to speed up.
+</p> <p> &#8220;We need a new architecture, with read-optimized databases
+  and queue-based messaging.&#8221;
+</p> <p> None of us have ever built such a system, but we have read
+  about it, and like the faithful we nod solemnly in agreement. Why
+  not? If the database is read-optimized, surely it will perform like
+  we need. But a few desist.
+</p> <p> Like paratroopers dropped into unknown territory without a
+  map, we start to canvas the code, looking for landmarks. We split
+  into two teams, one to try to speed up the current system, the other
+  to start on the new architecture. Two teams trying two different
+  approaches doubles our chances, right? Whiteboards around our desks
+  fill with maps, glossaries, and diagrams. My team starts to dissect
+  this mostly home-made ORM.
+</p> <p> &#8220;Why is this selecting from the same table twice?&#8221;
+</p> <p> The ORM generated query selects a list of id&#8217;s from table A,
+  then puts those id&#8217;s into a list as a filter for the same table:
+</p> <p>
+  SELECT * FROM A WHERE ID IN (SELECT ID FROM A WHERE &#8230;)
+</p> <p> We scratch our heads a bit, but hey, that can&#8217;t hurt
+  anything, surely the database figures that sort of stuff out? Isn&#8217;t
+  that what&#8230; indexes do? Our most database-savvy developer can&#8217;t
+  stop coming back to that query. He says it doesn&#8217;t smell
+  right. Finally, he takes out the &#8220;WHERE IN&#8221; filter, shims in the
+  query, and runs the process.
+</p> <p>
+  &#8220;Guys, the whole thing, all 45k came back in 40 seconds.&#8221;
+</p> <p> We scoff at him, good joke! Our profiling showed time chewed
+  up fairly evenly at every level throughout the entire
+  process, not just the initial query. So the process came back,
+  just empty, right? And who knows what Ancient Ones you disturbed by
+  messing around with what the ORM generates, it will probably never
+  work again. We run it again, 40 seconds, correct count of
+  records. Odd, freak coincidence. We run it with the old filter still
+  in place, it comes back 30+ minutes later, same exact data. Whoa,
+  wait, what?
+</p> <p> Turns out, this ORM uses SELECT-WHERE-IN for every entity
+  join. That first SELECT FROM A WHERE ID IN (SELECT ID FROM A WHERE
+  &#8230;) was used as the base criteria for every single lazy look-up of
+  every entity on A, which were legion. What looked like slowness
+  across the entire process was really ORM lazy loading at every
+  level, with that first SELECT-WHERE-IN as the final filter in a line
+  of nested SELECTS, some four levels deep. That initial bad query
+  gets run countless times, and when it is slow, the whole system is
+  slow.
+</p> <p> This is the story of how I learned an important lesson: if
+  you are going to database, LEARN TO DATABASE.
 </p>
-<p>
-  When GitHub first came out with the &#8220;streak&#8221; feature on the front
-  page, I realized it was time to stop my binge coding on the
-  occasional weekend and start a system. Inspired by other recent
-  system-based successes (working out every day), I decided to code
-  every day for a year.
-</p>
-<p>
-  I quickly realized that anything requiring detailed plans and
-  designs is harder to do. Working though a book, on the other hand,
-  is easy to start and stop. I started working through a book I had
-  tried to read before: Let Over Lambda.
-</p>
-<p>
-  Let Over Lambda is intense, filled with deeply complex concepts
-  written in Common Lisp, a language with which I was only passingly
-  familiar. But I managed to get through it without hardly any
-  difficulty. How did I do that?
-</p>
-<p>
-  I got a cheap netbook, and started to code on the train ride home.
-  Interestingly, without any internet, I was much less distracted, and
-  could just sit down and be in the zone within the minute (this from
-  the guy whom it takes 20+ minutes to get in the zone at work). With
-  only a limited span of ~25 minutes, I had no time to waste, and
-  without people to talk to my brain just falls into it. I can only
-  pinpoint a few times I could not get into the zone, and those were
-  extreme circumstances of exhaustion or illness.
-</p>
-<p>
-  In ten months, I have:
-  <ul>
-    <li>
-      worked through Let Over Lambda once and read it twice
-    </li>
-    <li>
-      worked twice through the PLAI programming languages book
-      (once in Scheme and once in F#)
-    </li>
-    <li>
-      read Clojure Programming, F# 3.0 Programming, and am currently
-      in Real World Haskell
-    </li>
-    <li>
-      completed the exercises up to chapter three of SICP
-    </li>
-    <li>
-      authored a small Clojure library for run time type checking
-      (don&#8217;t use mine, use Prismatic&#8217;s)
-    </li>
-    <li>
-      prepared and given a two hour talk about macros at a local meet-up
-    </li>
-  </ul>
-  Pretty incredible for only ~25 minutes a day! That is more
-  programming books than I had read in the previous 2 years. I have
-  improved mightily in such a short time, and it does not feel
-  stressful in the least. Now, when I get home, if I feel like
-  watching movies, cooking, or playing board games/Dark Souls all
-  night, no problem! I can relax knowing I have accomplished my goals
-  for the day. All in all, the last ten months have been incredible:
-  some of the most rewarding, relaxing, and fulfilling months of my
-  life.
-</p>
-<p>
-  Before you scoff and point out that not everyone can take the train
-  to work, consider this: get a portable computer, load up your
-  environment, tools, and some pdfs. The next morning, leave for work
-  ~25 minutes early. You will probably get in way sooner due to the
-  decreased traffic (now you have earned back that time). Sit quietly
-  in your car, and without the distractions of internet or other
-  people, knock out a little programming. Maybe start with SICP (the
-  best programming book I have ever read). See how much you can read
-  and do before work starts. Do that for a month, every day. I
-  guarantee you will learn something amazing.
-</p>
-  
- 
 </div>
   
   
@@ -228,6 +210,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
         <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
       </li>
     
@@ -249,10 +235,6 @@
     
       <li class="post">
         <a href="/clojure-debugger/">Clojure&#8230; Debugger?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a>
       </li>
     
   </ul>
