@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: clojure | Deliberate Software]]></title>
+  <title><![CDATA[Category: Clojure | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-05-18T10:13:57-04:00</updated>
+  <updated>2014-05-26T18:25:40-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
