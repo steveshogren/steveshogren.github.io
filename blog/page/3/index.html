@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="&#8220;&#8230; and it has to return 45,000 records a minute, or we are all screwed.&#8221; Monday morning, we inherited a legacy codebase. Tuesday, &hellip;">
+  <meta name="description" content="Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +84,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/Learn-To-Database/">Learn to Database</a></h1>
+      <h1 class="entry-title"><a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a></h1>
     
     
       <p class="meta">
@@ -92,76 +94,116 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  &#8220;&#8230; and it has to return 45,000 records a minute, or we are all
-  screwed.&#8221;
-</p> <p> Monday morning, we inherited a legacy codebase. Tuesday, the
-  word came down on stone tablets. Forty-five thousand records a
-  minute, and no amount of political maneuvering or incremental gains
-  were going to do. Too many broken promises. The last team mass quit
-  over three months, leaving us the two most junior
-  developers. Someone high up promised big, and the buck stopped with
-  us.
-</p> <p> &#8220;Does anyone even know the throughput now?&#8221;
-</p> <p> We still don&#8217;t even have the dumb thing running on our
-  machines. Two weeks later we have it running and enough data to test
-  it. 2500 records a minute. When scaled to 45000 records it is still
-  going 30 minutes later, so it doesn&#8217;t even scale linearly. We are
-  screwed.
-</p> <p> Most of us are front-end developers who stepped forward when
-  everyone else stepped back. Databases are a distant memory,
-  something we maybe did a few jobs back. You &#8220;join&#8221; tables, right?
-  What we know of this process is it selects from 2-3 dozen databases
-  using an ORM while running through an engine that does some
-  supposedly massive calculations on the data, returning a message with
-  several hundred fields. It can&#8217;t be that hard to speed up.
-</p> <p> &#8220;We need a new architecture, with read-optimized databases
-  and queue-based messaging.&#8221;
-</p> <p> None of us have ever built such a system, but we have read
-  about it, and like the faithful we nod solemnly in agreement. Why
-  not? If the database is read-optimized, surely it will perform like
-  we need. But a few desist.
-</p> <p> Like paratroopers dropped into unknown territory without a
-  map, we start to canvas the code, looking for landmarks. We split
-  into two teams, one to try to speed up the current system, the other
-  to start on the new architecture. Two teams trying two different
-  approaches doubles our chances, right? Whiteboards around our desks
-  fill with maps, glossaries, and diagrams. My team starts to dissect
-  this mostly home-made ORM.
-</p> <p> &#8220;Why is this selecting from the same table twice?&#8221;
-</p> <p> The ORM generated query selects a list of id&#8217;s from table A,
-  then puts those id&#8217;s into a list as a filter for the same table:
-</p> <p>
-  SELECT * FROM A WHERE ID IN (SELECT ID FROM A WHERE &#8230;)
-</p> <p> We scratch our heads a bit, but hey, that can&#8217;t hurt
-  anything, surely the database figures that sort of stuff out? Isn&#8217;t
-  that what&#8230; indexes do? Our most database-savvy developer can&#8217;t
-  stop coming back to that query. He says it doesn&#8217;t smell
-  right. Finally, he takes out the &#8220;WHERE IN&#8221; filter, shims in the
-  query, and runs the process.
-</p> <p>
-  &#8220;Guys, the whole thing, all 45k came back in 40 seconds.&#8221;
-</p> <p> We scoff at him, good joke! Our profiling showed time chewed
-  up fairly evenly at every level throughout the entire
-  process, not just the initial query. So the process came back,
-  just empty, right? And who knows what Ancient Ones you disturbed by
-  messing around with what the ORM generates, it will probably never
-  work again. We run it again, 40 seconds, correct count of
-  records. Odd, freak coincidence. We run it with the old filter still
-  in place, it comes back 30+ minutes later, same exact data. Whoa,
-  wait, what?
-</p> <p> Turns out, this ORM uses SELECT-WHERE-IN for every entity
-  join. That first SELECT FROM A WHERE ID IN (SELECT ID FROM A WHERE
-  &#8230;) was used as the base criteria for every single lazy look-up of
-  every entity on A, which were legion. What looked like slowness
-  across the entire process was really ORM lazy loading at every
-  level, with that first SELECT-WHERE-IN as the final filter in a line
-  of nested SELECTS, some four levels deep. That initial bad query
-  gets run countless times, and when it is slow, the whole system is
-  slow.
-</p> <p> This is the story of how I learned an important lesson: if
-  you are going to database, LEARN TO DATABASE.
-</p>
+  <div class="entry-content"><p>Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?</p>
+
+<p>You cannot have unit testing in Java/C# without dependency injection.</p>
+
+<p>If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
+use/reuse/refactor? Or do you do it because you have to? Can you think
+of a single time where DI made anything easier?</p>
+
+<p>The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.</p>
+
+<p>For example, how would we unit test a function that talks to the
+database in C# without a framework that requires mappings and global
+singletons? We would put an interface around the database connection,
+then pass it into the constructor through an optional parameter. Our
+test would then make another implementor of that interface, and pass
+it in when testing. This is par for the course in Java as well.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// DBConnection.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IDBConnection</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">DBConnection</span> <span class="p">:</span> <span class="n">IDBConnection</span><span class="p">{</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Configuration</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Helpers</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Repositories</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">IDBConnection</span> <span class="n">con</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">(</span><span class="n">IDBConnection</span> <span class="n">con</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">con</span> <span class="p">=</span> <span class="n">con</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">DBConnection</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">string</span> <span class="n">sql</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="n">con</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Tests grow in maintenance difficulty with the size of the function
+being tested. Often this leads to a design with many small
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
+that each only calls the next. This &ldquo;chain&rdquo; of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.</p>
+
+<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
+replacing a function for testing is easy! Every function does not need
+a twenty-line wrapper, instead we simply replace the function we want
+to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{</span> <span class="nx">getConnection</span><span class="p">().</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">);}</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">getConnection</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">();</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// &quot;Mock&quot; the getConnection function in a unit test</span>
+</span><span class='line'><span class="nx">getConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">Execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{}}};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+without constraining itself to &ldquo;what works for testing&rdquo;.</p>
 </div>
   
   
@@ -216,19 +258,19 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/next-book/">What Book Should I Read Next?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/known-issue-storage/">Where to Store Known Issues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
+      </li>
+    
+      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Learn-To-Database/">Learn to Database</a>
-      </li>
-    
-      <li class="post">
-        <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
   </ul>
@@ -239,22 +281,22 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">11</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">17</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

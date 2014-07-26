@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a &hellip;">
+  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/quality-is-future-speed/">Quality Is Future Speed</a></h1>
+      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,14 @@
   </header>
 
 
-  <div class="entry-content"><p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
+  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
+<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
+<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
+<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
+<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
+<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
+<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
+<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
 </div>
   
   
@@ -147,19 +154,19 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/next-book/">What Book Should I Read Next?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/known-issue-storage/">Where to Store Known Issues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
+      </li>
+    
+      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Learn-To-Database/">Learn to Database</a>
-      </li>
-    
-      <li class="post">
-        <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
   </ul>
@@ -170,22 +177,22 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">11</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">17</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

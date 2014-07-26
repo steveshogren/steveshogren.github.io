@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this &hellip;">
+  <meta name="description" content="So, working through the Land of Lisp book, getting the hang of it. Chapter Six, the author starts off by talking a little about the Common Lisp REPL &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
+      <h1 class="entry-title"><a href="/lisp-repl/">Lisp REPL</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,42 @@
   </header>
 
 
-  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes&#8217; state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+  <div class="entry-content"><p>
+  So, working through the Land of Lisp book, getting the hang of it.
+</p>
+<p>
+Chapter Six, the author starts off by talking a little about
+  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
+  of the &#8220;command line&#8221; for interacting with lisp. It is pretty cool,
+  you type in code, and it executes. And then he opens the hood a
+  little:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defun</span> <span class="nv">repl</span> <span class="p">()</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">eval </span><span class="p">(</span><span class="nf">read</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+WHAAAAAAAAAAAAAAA??!?!?!
+</p>
+<p>
+I just about spit my drink all over the monitor laughing. The
+function <strong>eval()</strong> evaluates whatever text is passed in
+as code, in this case, from the command line via the obviously
+named <strong>read</strong> and after executing
+it, <strong>print()</strong> prints the result, and it just does that
+forever till you quit.
+</p>
+<p>
+That means, you could make one of these for any language that can
+evaluate strings into code. I know python has one built-in. Php can
+evaluate code with eval, and a quick search shows a highly nifty (and
+robust from the looks of
+it) <a href="https://github.com/facebook/phpsh">REPL for php</a>
+complements of facebook. Sweet. Or, you can use php -a for the
+interactive mode.
+</p>
 </div>
   
   
@@ -147,19 +182,19 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/next-book/">What Book Should I Read Next?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/known-issue-storage/">Where to Store Known Issues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
+      </li>
+    
+      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Learn-To-Database/">Learn to Database</a>
-      </li>
-    
-      <li class="post">
-        <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
   </ul>
@@ -170,22 +205,22 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">11</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">17</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

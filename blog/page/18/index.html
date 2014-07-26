@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being &hellip;">
+  <meta name="description" content="I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/the-endless-debate/">The Endless Debate</a></h1>
+      <h1 class="entry-title"><a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#8220;best&#8221; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
+  <div class="entry-content"><p>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don&#8217;t, you have got to give it a shot at least once. You&#8217;ll never be the same. And no, I am not talking about <a href="http://projecteuler.net/">Project Euler</a>, although that has its place.</p><p>First, do a bit of research, and get your hands on the best book on the language you can find. Second, research the language, and pick a project to which it is well suited. For example, to learn Clojure, I decided to re-write an old php project from scratch that I was well familiar with. (This also gives me the neat data point of seeing how much smaller the project is in Clojure)&nbsp;Try not to be too ambitious here, you want something you could pull off in your current go-to language.</p><p>Start the project, and work under a dozen hours on it, bashing your way through the first pains of installing the language/framework (my least favorite part), and getting a basic proof of concept together. If it&#8217;s a web site, think &#8220;hello world&#8221; coming out of your database of choice. Tell all your friends what you are going to make, and when it is launching. Make sure the launch date is ambitious. Start to read the book splitting your time roughly 25/75 between reading and programming, using what you read to provide you with &#8220;ammunition&#8221; for your project. Do this in as short a loop as possible, so the reading and programming are never far apart.</p><p>Since you will be fighting through real problems, the reading is a hundred times more interesting. Almost every page you will have to stop yourself from shouting, &#8220;OF COURSE!&#8221; out loud at the book, because you have just discovered something that is an extremely real pain point to you. <span>You may find yourself laughing more than once in sheer delight</span> because you anticipated a part of the language correctly, and just found the syntax for it. If that is not happening, you probably need to adjust the ratio of programming to reading. You want to find that sweet spot of just barely learning what you need to succeed, and constantly being &#8220;saved&#8221; by reading that last tidbit last night. If even the simplest things take unpleasantly long, perhaps more reading. If the reading is dragging too much, try more programming. When you hit that sweet spot, the programming is an exhilarating rush, and the reading is actually fun. If none of these happen, perhaps you are learning a language that does not really teach you anything new, just a different syntax for the same thing you are used to doing, in which case, ask yourself why you are learning that language. There are plenty out there that will <a href="http://norvig.com/21-days.html">blow your mind</a>.</p><p>Don&#8217;t forget that deadline either, your friends and family are waiting, remember? Hustle is the name of the game here, and don&#8217;t worry, you&#8217;ll make tons of mistakes, and you&#8217;ll never forget a single one. Who cares? (No one will ever know but you!) If experience is learning from a lot of mistakes, you&#8217;ll be the most experienced person around!</p><p>When that deadline looms, don&#8217;t give up! Step up your game, slash the second-best features, and race for the finish. If you are way off your mark, you can consider pushing the date back, but still deliver something on your original date. Once you are done, unwind for a few months, take it easy, then repeat. After a couple of those iterations you will be seriously more experienced in a wide variety of languages, and you will find yourself much more confident in your language-that-pays.</p><p>Do this a couple of times and you&#8217;ll not only get better at that language, you&#8217;ll get better at all of them. You will start to see the underlying concepts that cause languages to be written the way they are. The language families will start to run together, and you will develop the intuition of what you need to do with just the trivial task of remembering (or looking up) the syntax. Your programming skill will move to a higher plane of abstraction, and you will think outside the specific language. The language just becomes an implementation detail, just words that tell the compiler or interpreter what you mean. Reading other people&#8217;s code will become significantly easier, and you will find learning a new language is almost faster reading the masters&#8217; code on github than with a book at all.</p><p><strong>TL;DR</strong> <span>Don&#8217;t let what little time you have discourage  you. A few minutes a day sneaking in one more function is better than a  few minutes a day moping in front of the TV wishing you had more time  for programming. </span>I understand not everyone can put in &#8220;this kind of time&#8221; (or energy) into side projects. Heck, plenty of times I cannot either. Sometimes, you only have a few hours a month on the good months. That&#8217;s fine. Take that date, stretch it out to the end of the year. Slip in that reading on the ride home, or at lunch. Make every moment you spend on it count.</p>
 </div>
   
   
@@ -147,19 +147,19 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/next-book/">What Book Should I Read Next?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/known-issue-storage/">Where to Store Known Issues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
+      </li>
+    
+      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Learn-To-Database/">Learn to Database</a>
-      </li>
-    
-      <li class="post">
-        <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
   </ul>
@@ -170,22 +170,22 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">11</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">17</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

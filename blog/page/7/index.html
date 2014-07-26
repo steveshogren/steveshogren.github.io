@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
+  <meta name="description" content="&#8220;&#8230; and it has to return 45,000 records a minute, or we are all screwed.&#8221; Monday morning, we inherited a legacy codebase. Tuesday, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
+      <h1 class="entry-title"><a href="/Learn-To-Database/">Learn to Database</a></h1>
     
     
       <p class="meta">
@@ -92,120 +92,76 @@
   </header>
 
 
-  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
-<br />
-<br />
-One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
-</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
-</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
-</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
-</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
-</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>      <span class="mi">1</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
-</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
-<br />
-<br />
-At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
-<br />
-<br />
-I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
-<br />
-<br />
-Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
-<br />
-<br />
-I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
-<br />
-<br />
-No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
-<br />
-<br />
-The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
+  <div class="entry-content"><p>
+  &#8220;&#8230; and it has to return 45,000 records a minute, or we are all
+  screwed.&#8221;
+</p> <p> Monday morning, we inherited a legacy codebase. Tuesday, the
+  word came down on stone tablets. Forty-five thousand records a
+  minute, and no amount of political maneuvering or incremental gains
+  were going to do. Too many broken promises. The last team mass quit
+  over three months, leaving us the two most junior
+  developers. Someone high up promised big, and the buck stopped with
+  us.
+</p> <p> &#8220;Does anyone even know the throughput now?&#8221;
+</p> <p> We still don&#8217;t even have the dumb thing running on our
+  machines. Two weeks later we have it running and enough data to test
+  it. 2500 records a minute. When scaled to 45000 records it is still
+  going 30 minutes later, so it doesn&#8217;t even scale linearly. We are
+  screwed.
+</p> <p> Most of us are front-end developers who stepped forward when
+  everyone else stepped back. Databases are a distant memory,
+  something we maybe did a few jobs back. You &#8220;join&#8221; tables, right?
+  What we know of this process is it selects from 2-3 dozen databases
+  using an ORM while running through an engine that does some
+  supposedly massive calculations on the data, returning a message with
+  several hundred fields. It can&#8217;t be that hard to speed up.
+</p> <p> &#8220;We need a new architecture, with read-optimized databases
+  and queue-based messaging.&#8221;
+</p> <p> None of us have ever built such a system, but we have read
+  about it, and like the faithful we nod solemnly in agreement. Why
+  not? If the database is read-optimized, surely it will perform like
+  we need. But a few desist.
+</p> <p> Like paratroopers dropped into unknown territory without a
+  map, we start to canvas the code, looking for landmarks. We split
+  into two teams, one to try to speed up the current system, the other
+  to start on the new architecture. Two teams trying two different
+  approaches doubles our chances, right? Whiteboards around our desks
+  fill with maps, glossaries, and diagrams. My team starts to dissect
+  this mostly home-made ORM.
+</p> <p> &#8220;Why is this selecting from the same table twice?&#8221;
+</p> <p> The ORM generated query selects a list of id&#8217;s from table A,
+  then puts those id&#8217;s into a list as a filter for the same table:
+</p> <p>
+  SELECT * FROM A WHERE ID IN (SELECT ID FROM A WHERE &#8230;)
+</p> <p> We scratch our heads a bit, but hey, that can&#8217;t hurt
+  anything, surely the database figures that sort of stuff out? Isn&#8217;t
+  that what&#8230; indexes do? Our most database-savvy developer can&#8217;t
+  stop coming back to that query. He says it doesn&#8217;t smell
+  right. Finally, he takes out the &#8220;WHERE IN&#8221; filter, shims in the
+  query, and runs the process.
+</p> <p>
+  &#8220;Guys, the whole thing, all 45k came back in 40 seconds.&#8221;
+</p> <p> We scoff at him, good joke! Our profiling showed time chewed
+  up fairly evenly at every level throughout the entire
+  process, not just the initial query. So the process came back,
+  just empty, right? And who knows what Ancient Ones you disturbed by
+  messing around with what the ORM generates, it will probably never
+  work again. We run it again, 40 seconds, correct count of
+  records. Odd, freak coincidence. We run it with the old filter still
+  in place, it comes back 30+ minutes later, same exact data. Whoa,
+  wait, what?
+</p> <p> Turns out, this ORM uses SELECT-WHERE-IN for every entity
+  join. That first SELECT FROM A WHERE ID IN (SELECT ID FROM A WHERE
+  &#8230;) was used as the base criteria for every single lazy look-up of
+  every entity on A, which were legion. What looked like slowness
+  across the entire process was really ORM lazy loading at every
+  level, with that first SELECT-WHERE-IN as the final filter in a line
+  of nested SELECTS, some four levels deep. That initial bad query
+  gets run countless times, and when it is slow, the whole system is
+  slow.
+</p> <p> This is the story of how I learned an important lesson: if
+  you are going to database, LEARN TO DATABASE.
+</p>
 </div>
   
   
@@ -260,19 +216,19 @@ The discovery of such tools is what is making learning clojure such a profoundly
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/next-book/">What Book Should I Read Next?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/known-issue-storage/">Where to Store Known Issues</a>
+      </li>
+    
+      <li class="post">
+        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
+      </li>
+    
+      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
-      </li>
-    
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
-      <li class="post">
-        <a href="/Learn-To-Database/">Learn to Database</a>
-      </li>
-    
-      <li class="post">
-        <a href="/streaks/">Challenge - Code Every Day</a>
       </li>
     
   </ul>
@@ -283,22 +239,22 @@ The discovery of such tools is what is making learning clojure such a profoundly
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">11</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">17</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     
