@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
+  <meta name="description" content="I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
+      <h1 class="entry-title"><a href="/on-developer-certifications/">On Developer Certifications</a></h1>
     
     
       <p class="meta">
@@ -92,14 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
-<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
-<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
-<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
-<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
-<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
-<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
-<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
+  <div class="entry-content"><p>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.<p /> Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months. Who would be on the committee? And what would they agree on to enforce? Regex? Recursion, OO, testability, and functional programming?&nbsp; Proof of understanding in the half-dozen <a href="http://norvig.com/21-days.html" target="_blank">&#8220;mind expanding&#8221;</a> languages? Not going to happen. Not while my Joomla-site maintaining friend and my Android 3D game authoring cohort are both lumped under the title &#8220;software developer&#8221;. The field is too vast, the content too broad, and the jobs too diverse. <p /> So, we are doomed to wallow. Or are we? What is the one thing we all have to do?<em> Get hired.</em><p />I used to be a big sissy about interviewing for jobs. Especially interviews full of the nit-picky details I can never remember, yeah, I <em>really</em> hate those. I would moan and groan about how the interviewer could only answer those questions because they had to look them up the other day. &#8220;MySQL index implementations, what am I, a DBA?!&#8221;, I would screech to anyone who would listen, &#8220;They must have misunderstood, I am a developer, when would I ever need to know that?!&#8221;<p /> But.<p />Interview prep gets me to cram stuff into my head I would otherwise skim or avoid if just sitting at home programming for fun. I get a great refresher on all the stuff I am fully able to do at work, but maybe I haven&#8217;t needed in a while. Like linked-lists. In four years of fairly diverse programming jobs, I have<strong> yet</strong> to need a linked list for anything, but man, when that day comes, I have linked-lists in a quick-draw holster. I used to say the same thing about trees, then last year, I had a problem that surely needed a tree, and hear you me, I had that data being in-order traversed before you could say: &#8220;tree&#8221;. Would I have even <em>remembered</em> <em>what trees are good for</em> without my semi-annual refresher?<p /> My wife is a commercial pilot, and every so often she is required to skim over all those little details about being a pilot, refreshing <em>everything</em>, double-checking her knowledge so she can keep her licenses, <em>even if she hasn&#8217;t needed a certain technique since the last test</em>. Huh. Sounds like me, every so often, cramming for an interview.<p />  We don&#8217;t need certifications for being a programmer. We already have the tools in hand, and just need to learn to use them better. <strong>Interviews are our certifications. </strong></p><p>This is a double-edged sword, because this means that, &#8220;what you sow, you will also reap&#8221;.  The responsibility to keep standards high falls on the interviewer. If  you interview a candidate for tricky puzzle questions, or in-depth  knowledge of C++ libraries, you will find someone who knows those  things, and possibly ONLY knows those things. I have seen developers hired who couldn&#8217;t handle VCS merging or shipping actual software, but were absolute <em>geniuses</em> when it came to programming language trivia and puzzle questions.</p><p>A few months ago, I read of a guy with no programming experience who did like 100 interviews in a few weeks, till he was a master interviewee. By the end, he was able to pick his choice of companies, and <strong>yet </strong><strong>he couldn&#8217;t ship software</strong>. He gamed a system <em>intended</em> to sort out good developers by asking questions that are ancillary to development, without actually having the candidate <em>prove any real ability</em>. And now that company has a developer who is great at gaming systems, but unskilled at development: I hope they have a good training program.</p><p>No offense intended to the man who did this, I <strong>really </strong>admire his tenacity and clever thinking, and I think he will do well regardless of the task. But it speaks volumes to the brokenness of the interview system for those companies that would hire a completely unskilled developer based on the correct answers to trivia questions about programming.</p><p>Parting question to consider for interviewers: if interviews are our certifications, what should a candidate be able to do to be &#8220;certified&#8221; to be able to do the job in question?</p>
 </div>
   
   
@@ -158,15 +151,15 @@
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -177,7 +170,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -187,12 +180,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

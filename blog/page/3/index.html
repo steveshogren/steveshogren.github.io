@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict unit testing. Why is that?
-What about &hellip;">
+  <meta name="description" content="Pattern matching is a simple tool that will make your code safer and
+easier to read. Consider the following code that converts an Int to a string. 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +83,7 @@ What about &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a></h1>
+      <h1 class="entry-title"><a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a></h1>
     
     
       <p class="meta">
@@ -94,32 +93,84 @@ What about &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict unit testing. Why is that?
-What about unit testing and DI are so linked?</p>
+  <div class="entry-content"><p>Pattern matching is a simple tool that will make your code safer and
+easier to read.</p>
 
-<p>You cannot have unit testing in Java/C# without dependency injection.</p>
+<p>Consider the following code that converts an Int to a string.</p>
 
-<p>If you have ever seen a codebase in Java/C# that has ten injected
-classes, right there, you have a codebase that does heavy unit
-testing. If you are deep into the unit testing culture, you will have
-been taught that it is a good design to use DI everywhere. Is it
-really? Do the contortions required to do DI make your code easier to
-use/reuse/refactor? Or do you do it because you have to? Can you think
-of a single time where DI made anything easier?</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">English</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>The TDD proponents realized that you cannot reasonably perform unit
-testing without DI in Java/C#, and so they have argued that a
-completely dependency injected codebase is a good design. In reality,
-DI for unit testing is a hack because Java/C# are so ill-suited to
-unit testing.</p>
 
-<p>For example, how would we unit test a function that talks to the
-database in C# without a framework that requires mappings and global
-singletons? We would put an interface around the database connection,
-then pass it into the constructor through an optional parameter. Our
-test would then make another implementor of that interface, and pass
-it in when testing. This is par for the course in Java as well.</p>
+<p>What happens when we make this simple change?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">English</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">German</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
+any indication that something is missing? Nope! Our code has a
+potential bug that is only exposed at run-time, and nothing will tell
+us that. We made it fail gracefully by ensuring our code always
+returns at least an empty string, but we have created a bug that can
+only really be caught by something external: either automated tests or
+manual checking.</p>
+
+<p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
+seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
+that it just makes things even worse.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -144,66 +195,248 @@ it in when testing. This is par for the course in Java as well.</p>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// DBConnection.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IDBConnection</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">DBConnection</span> <span class="p">:</span> <span class="n">IDBConnection</span><span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Configuration</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">Helpers</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">Repositories</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">IDBConnection</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">(</span><span class="n">IDBConnection</span> <span class="n">con</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">con</span> <span class="p">=</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">DBConnection</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">string</span> <span class="n">sql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="n">con</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Spanish</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
 </span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">English</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// somewhere else...</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">lang</span><span class="p">).</span><span class="n">convert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ILanguage</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">English</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Spanish</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">default</span><span class="p">:</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p></p>
 
-<p>Tests grow in maintenance difficulty with the size of the function
-being tested. Often this leads to a design with many small
-one-function classes. This is actually not a bad thing! Rather than
-having a single reason to change, these classes have a single reason
-to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
-that each only calls the next. This &ldquo;chain&rdquo; of classes together are
-cohesive, but instead of being a single class together, they are all
-split apart. Such a functional design would normally be fine, except
-every function needs a twenty line wrapper of namespaces, imports,
-interfaces, and constructors.</p>
+<p>We have turned 21 lines in one file into 36 in three files (not
+counting namespaces and imports). Does this new structure give us any
+additional safety when we add a new concrete implementation? How about
+when we add a new enum value? This code is even more likely to cause
+bugs than the first, because now we have an implicit coupling between
+the enum and the concrete class. We could get rid of the enum, and
+&ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
+concrete class to instantiate.</p>
 
-<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
-replacing a function for testing is easy! Every function does not need
-a twenty-line wrapper, instead we simply replace the function we want
-to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
+<p>Imagine if the compiler could warn us when either the enum or the
+class changed. Imagine if instead of having to hunt down the possible
+uses, we could just compile and fix the errors.</p>
+
+<p>Good news, we can!</p>
+
+<p>Check out this F# code. If you have never seen F# before, I know, it
+looks completely crazy! It <em>still</em> looks a little weird to me, but
+just try to read it. I think you will surprise yourself. This is a
+function called <code>convert</code>, and if you keep in mind that the types
+always come AFTER the value, the code makes a lot more sense. A
+parameter in C# would be <code>int number</code>; in F# it is written
+<code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
+you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
+second it is a lot more powerful!</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{</span> <span class="nx">getConnection</span><span class="p">().</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">);}</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">getConnection</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">();</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// &quot;Mock&quot; the getConnection function in a unit test</span>
-</span><span class='line'><span class="nx">getConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">Execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{}}};</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">:</span><span class="nc">Int</span><span class="o">,</span> <span class="n">lang</span><span class="o">:</span><span class="nc">Language</span><span class="o">)</span> <span class="o">:</span><span class="kt">string</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>               <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s2">&quot;one&quot;</span>
+</span><span class='line'>               <span class="o">|</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s2">&quot;two&quot;</span>
+</span><span class='line'>               <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;...&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
-dependencies. My design can take whatever shape best fits the problem,
-without constraining itself to &ldquo;what works for testing&rdquo;.</p>
+<p></p>
+
+<p>We are using the same enum from the C# file, but it is missing
+something, right? Where are the Spanish and German parts? I try to
+compile this and what do I see?</p>
+
+<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
+matches on this expression. For example, the value 'enum&lt;Language&gt;
+(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
+
+<p>Spittake mushroom soup, the compiler just caught a potential bug for
+us! A C# run-time bug no less! Not only is this very powerful, but it
+is so simple. I can code the way I normally do, only now I get
+additional safety for free! And no unit or integration test would ever
+catch this class of errors.</p>
+
+<p>Heck, if you really want to keep your classes and interfaces in C#,
+you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span> <span class="o">-&gt;</span> <span class="nc">English</span><span class="bp">()</span><span class="o">.</span><span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This still calls the C# class above, and now the compiler gives us a
+warning when we add a new enum value!</p>
+
+<p>In this way, pattern matching is able to clearly remove edge cases. We
+converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
+<code>match</code>.</p>
+
+<p>BONUS ROUND!</p>
+
+<p>What we have already seen of pattern matching makes it a better
+<code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
+<code>match/with</code> statement allows for patterns matched to have a <code>when</code>
+clause which only matches when the condition is true:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s2">&quot;Large!&quot;</span>
+</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s2">&quot;Grande!&quot;</span>
+</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Running the compiler again give us:</p>
+
+<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
+Warning FS0025: Incomplete pattern matches on this expression. For
+example, the value '1' may indicate a case not covered by the
+pattern(s). However, a pattern rule with a 'when' clause might
+successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>That&rsquo;s right, it checks numbers too.</p>
+
+<p>Lastly, it is possible to match on a combination of values, all at
+once. We can convert our more complex structure to something simpler
+using this trick, and the compiler is still intelligent enough to
+check for missing cases.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span><span class="o">,</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s2">&quot;one&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s2">&quot;Larger than one!&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;dunno&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s2">&quot;Grande!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
+<code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
+default for any number in <code>Language.English</code> not already matched. The
+bug in the code here is the missing <code>Language.Spanish</code> with numbers
+1-5. What does the compiler say?</p>
+
+<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
+expression. For example, the value '(_,1)' may indicate a case not
+covered by the pattern(s). However, a pattern rule with a 'when'
+clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>Lastly, let&rsquo;s show the final result of converting our original
+function to F#. If your entire function is just a single pattern
+match, you can remove the <code>match/with</code> line and use the <code>function</code>
+keyword, and simply match against the parameters (which I reversed for
+clarity, but do not need to be written).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="n">convert</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s2">&quot;one&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;...&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s2">&quot;zero&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s2">&quot;uno&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="nc">Spanish</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;~~~&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our original 17 line convert function, converted into a <em>safer</em> 7
+lines! I never had to specify what the types of lang, number and the
+return type are, because the compiler is able to figure that out from
+the code I wrote.</p>
+
+<p>If you are not convinced at this point that pattern matching is a big
+step forward in the safety and ease of development, I am not sure what
+else would convince you. More safety means less time spent tracking
+down bugs and more time adding on features!</p>
 </div>
   
   
@@ -262,15 +495,15 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -281,7 +514,7 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -291,12 +524,12 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a &hellip;">
+  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/quality-is-future-speed/">Quality Is Future Speed</a></h1>
+      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,63 @@
   </header>
 
 
-  <div class="entry-content"><p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
+  <div class="entry-content"><p>
+  At work last month, I was assigned to fix some bugs in an
+  asynchronous legacy code base. My supervisor gave me a month to see
+  what I could do, and to see if I could fix a few tricky bugs. The
+  code is divided into two sections, a client application and a web
+  server. Both the client application and the server have their own
+  persistence, and they communicate through a soap web service.
+</p>
+<p>
+  I wanted to try and write some sort of end-to-end tests around this,
+  but I could not figure out how to get around that web service. I
+  don&#039;t want my tests to rely on a server having to always be up,
+  so I initially was planning on writing tests from the client
+  database to the web service, where I would just stub some responses.
+  I got about an hour into that plan, before I realized I would then
+  have to do that same thing on the server, and that sort of testing
+  will not really tell me what the code <i>does</i>. I needed to cover
+  this whole process end-to-end.
+</p>
+<p>
+ I walked around for a bit, thinking. Then it hit me, both the server
+ and client code are written in VB.NET, and, except for the web service, work
+ just like plain old highly-coupled code. Hmmm.
+</p>
+<p>
+ For the first pass, I wrote an interface to wrap the web service,
+ then used dependency injection to inject a fake web service that (and
+ here is the cool part) simply calls around the web service entirely
+ to the server code directly and injects a different database
+ connection string, so the server talks to a second database I have
+ prepared.
+</p>
+<p>
+ Just like that, I can run, all on my machine, 99 percent of the code
+ in a single end-to-end test. I can even setup several client
+ databases, and rotate them out, to &quot;swap&quot; between several
+ clients in the middle of the tests.
+</p>
+<p>
+ I added a few &quot;integration&quot; tests that do talk to a real
+ published testing web service, just to make sure everything is still
+ in place correctly.
+</p>
+<p>
+  Now, I said this was asynchronous, and it is, the executed
+  system-under-test kicks off a thread to talk to the web service, and
+  so to get it to test, I needed to wait for the thread to finish,
+  then do my assertions.
+</p>
+<p>
+ I used a system where the spun off thread will set a boolean when it
+ has finished running, to let the main thread know it has finished,
+ and the main thread just keeps checking that boolean until it is
+ true. While hackish, that is my current working solution, as no more
+ then one thread is ever spun off at a time, I can just have my test
+ wait for the thread to finish, then complete the required assertions.
+</p>
 </div>
   
   
@@ -151,15 +207,15 @@
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -170,7 +226,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -180,12 +236,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

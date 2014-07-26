@@ -9,11 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Clojure allows you to write macros that mutate the world. So what? I&rsquo;ll walk you through it. What is the result of this expression? 1
-2
-3
-4
-( &hellip;">
+  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/anaphoric-macros/">Dangerous Clojure Macros</a></h1>
+      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
     
     
       <p class="meta">
@@ -96,147 +92,14 @@
   </header>
 
 
-  <div class="entry-content"><p>Clojure allows you to write macros that mutate the world.</p>
-
-<p>So what?</p>
-
-<p>I&rsquo;ll walk you through it. What is the result of this expression?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'>    <span class="nv">x</span><span class="p">)</span>
-</span><span class='line'>  <span class="nv">x</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The result is 1, right? That was easy. How about this?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="nv">x</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The let returns 12. What does x look like inside addTen? It is bound to 2.</p>
-
-<p>What does this return?
-Clojure macros by default are &ldquo;hygenic&rdquo;, which means they cannot mutate bindings.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span><span class='line'><span class="c1">;; =&gt; clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can&#39;t let qualified name: user/z,</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Clojure prevents you from accidentally shadowing a value by throwing such an exception.
-This means that it is hygenic by default, but it is possible to &ldquo;break out&rdquo; and make it unhygenic.
-Do force a value to shadow another, you simply have to give it the prefix ~&lsquo;
-Here is the same macro, only with z replaced by ~&#8217;z</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This returns 111.</p>
-
-<p>Here it is with the macro expanded:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the 111 makes more sense.
-Unhygenic macros let you shadow bindings.
-In this case, we shadowed [z 1] with [z 100].</p>
-
-<p>Why would you ever want to do this?
-Lets look at a real example.</p>
-
-<p>I find prefix notation to be frustrating when I am writing a lot of arithmetic.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">value</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
-I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">_&gt;</span> <span class="nv">value</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is much easier for my western eyes to read, it replaces the previous &ldquo;inside out&rdquo; style with a more natural left to right.
-To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
-Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">_</span> <span class="nv">value</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">)]</span>
-</span><span class='line'>  <span class="nv">_</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which, with unhygenic macros, is easy to do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">_&gt;</span> <span class="p">[</span><span class="nv">init</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">init</span>
-</span><span class='line'>         <span class="o">~@</span><span class="p">(</span><span class="nb">mapcat </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">x</span><span class="p">])</span>
-</span><span class='line'>                   <span class="nv">body</span><span class="p">)]</span>
-</span><span class='line'>     <span class="o">~</span><span class="ss">&#39;_</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
-For each element in the body, we bind its result to ~&lsquo;_.</p>
+  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
+<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
+<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
+<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
+<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
+<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
+<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
+<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
 </div>
   
   
@@ -295,15 +158,15 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -314,7 +177,7 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -324,12 +187,12 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

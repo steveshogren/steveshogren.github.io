@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="So, working through the Land of Lisp book, getting the hang of it. Chapter Six, the author starts off by talking a little about the Common Lisp REPL &hellip;">
+  <meta name="description" content="I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/lisp-repl/">Lisp REPL</a></h1>
+      <h1 class="entry-title"><a href="/put-it-in-the-wiki/">Put It in the Wiki</a></h1>
     
     
       <p class="meta">
@@ -92,42 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  So, working through the Land of Lisp book, getting the hang of it.
-</p>
-<p>
-Chapter Six, the author starts off by talking a little about
-  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
-  of the &#8220;command line&#8221; for interacting with lisp. It is pretty cool,
-  you type in code, and it executes. And then he opens the hood a
-  little:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defun</span> <span class="nv">repl</span> <span class="p">()</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">eval </span><span class="p">(</span><span class="nf">read</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-WHAAAAAAAAAAAAAAA??!?!?!
-</p>
-<p>
-I just about spit my drink all over the monitor laughing. The
-function <strong>eval()</strong> evaluates whatever text is passed in
-as code, in this case, from the command line via the obviously
-named <strong>read</strong> and after executing
-it, <strong>print()</strong> prints the result, and it just does that
-forever till you quit.
-</p>
-<p>
-That means, you could make one of these for any language that can
-evaluate strings into code. I know python has one built-in. Php can
-evaluate code with eval, and a quick search shows a highly nifty (and
-robust from the looks of
-it) <a href="https://github.com/facebook/phpsh">REPL for php</a>
-complements of facebook. Sweet. Or, you can use php -a for the
-interactive mode.
-</p>
+  <div class="entry-content"><p>I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a meager wiki with sparse, outdated, or worse, useless information.</p> <p>I have always been a champion of the wiki, and while a wiki can easily grow out of sync with the business, if you find yourself answering the same questions week after week, you need to document that somewhere, and a text document checked into code control doesn&#039;t count! Why not? You can&#039;t easily search across hundreds of text documents to find something, and if you <i>are</i> that tedious, then you also have to remember to update it <i>before</i> you search, otherwise you get stale information. And if you have that kind of free time and spare memory, you and I need to have a talk.</p> <p>So, a wiki it is. It is always up to date, always on, accessable anywhere with internet. Brilliant. </p> <p>And, most importantly, when someone asks me a familiar question, I simply tell them to Put It In The Wiki, because next time the first thing out of my mouth is Did You Check the Wiki?<br /> </p>
 </div>
   
   
@@ -186,15 +151,15 @@ interactive mode.
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -205,7 +170,7 @@ interactive mode.
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -215,12 +180,12 @@ interactive mode.
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

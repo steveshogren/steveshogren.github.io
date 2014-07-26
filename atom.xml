@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-07-26T14:31:34-04:00</updated>
+  <updated>2014-07-26T14:32:53-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -208,133 +208,6 @@ effort to really master the craft is easy to spot and hard to
 fake. Most people want to work with those who think like them, and you
 cannot think like a master engineer only knowing one tool, so get
 started now, and have fun!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Where to Store Known Issues]]></title>
-    <link href="http://steveshogren.github.io/known-issue-storage/"/>
-    <updated>2014-06-14T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/known-issue-storage</id>
-    <content type="html"><![CDATA[<p>Unit tests are the best place to store known issues.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Good Design, Java, or Unit Testing. Pick two.]]></title>
-    <link href="http://steveshogren.github.io/di-is-a-hack/"/>
-    <updated>2014-05-06T12:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/di-is-a-hack</id>
-    <content type="html"><![CDATA[<p>Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict unit testing. Why is that?
-What about unit testing and DI are so linked?</p>
-
-<p>You cannot have unit testing in Java/C# without dependency injection.</p>
-
-<p>If you have ever seen a codebase in Java/C# that has ten injected
-classes, right there, you have a codebase that does heavy unit
-testing. If you are deep into the unit testing culture, you will have
-been taught that it is a good design to use DI everywhere. Is it
-really? Do the contortions required to do DI make your code easier to
-use/reuse/refactor? Or do you do it because you have to? Can you think
-of a single time where DI made anything easier?</p>
-
-<p>The TDD proponents realized that you cannot reasonably perform unit
-testing without DI in Java/C#, and so they have argued that a
-completely dependency injected codebase is a good design. In reality,
-DI for unit testing is a hack because Java/C# are so ill-suited to
-unit testing.</p>
-
-<p>For example, how would we unit test a function that talks to the
-database in C# without a framework that requires mappings and global
-singletons? We would put an interface around the database connection,
-then pass it into the constructor through an optional parameter. Our
-test would then make another implementor of that interface, and pass
-it in when testing. This is par for the course in Java as well.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// DBConnection.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IDBConnection</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">DBConnection</span> <span class="p">:</span> <span class="n">IDBConnection</span><span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Configuration</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">Helpers</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">Repositories</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">IDBConnection</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">(</span><span class="n">IDBConnection</span> <span class="n">con</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">con</span> <span class="p">=</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">DBConnection</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">string</span> <span class="n">sql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="n">con</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Tests grow in maintenance difficulty with the size of the function
-being tested. Often this leads to a design with many small
-one-function classes. This is actually not a bad thing! Rather than
-having a single reason to change, these classes have a single reason
-to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
-that each only calls the next. This &ldquo;chain&rdquo; of classes together are
-cohesive, but instead of being a single class together, they are all
-split apart. Such a functional design would normally be fine, except
-every function needs a twenty line wrapper of namespaces, imports,
-interfaces, and constructors.</p>
-
-<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
-replacing a function for testing is easy! Every function does not need
-a twenty-line wrapper, instead we simply replace the function we want
-to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{</span> <span class="nx">getConnection</span><span class="p">().</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">);}</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">getConnection</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">();</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// &quot;Mock&quot; the getConnection function in a unit test</span>
-</span><span class='line'><span class="nx">getConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">Execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{}}};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
-dependencies. My design can take whatever shape best fits the problem,
-without constraining itself to &ldquo;what works for testing&rdquo;.</p>
 ]]></content>
   </entry>
   
@@ -991,25 +864,6 @@ down bugs and more time adding on features!</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Typing Saves You Time]]></title>
-    <link href="http://steveshogren.github.io/typing-saves-you-time/"/>
-    <updated>2014-04-18T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/typing-saves-you-time</id>
-    <content type="html"><![CDATA[<p>I used to hate type systems. As a junior programmer, I did most of my
-work in Perl and PHP, so working in C#/Java always felt so
-overwrought. In Java especially, one has to write out the type of the
-varible almost every time you use it, which explodes the amount of
-busywork the developer must do.</p>
-
-<p>Unit tests are a poor man&rsquo;s type system.</p>
-
-<p>There, I said it. You know why I think this? Becuase I just took (am
-taking?) over a legacy codebase. You know what makes that way easier?
-Typing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Learn to Database]]></title>
     <link href="http://steveshogren.github.io/Learn-To-Database/"/>
     <updated>2014-04-16T00:00:00-04:00</updated>
@@ -1084,171 +938,6 @@ Typing.</p>
 </p> <p> This is the story of how I learned an important lesson: if
   you are going to database, LEARN TO DATABASE.
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Lazy Evaluation]]></title>
-    <link href="http://steveshogren.github.io/Lazy-Lists/"/>
-    <updated>2014-03-06T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/Lazy-Lists</id>
-    <content type="html"><![CDATA[<p>
-  I just read an awesome way to define a lazy list. 
-</p>
-<p>
-  
-</p>
-
- 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Dangerous Clojure Macros]]></title>
-    <link href="http://steveshogren.github.io/anaphoric-macros/"/>
-    <updated>2014-02-04T16:56:00-05:00</updated>
-    <id>http://steveshogren.github.io/anaphoric-macros</id>
-    <content type="html"><![CDATA[<p>Clojure allows you to write macros that mutate the world.</p>
-
-<p>So what?</p>
-
-<p>I&rsquo;ll walk you through it. What is the result of this expression?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'>    <span class="nv">x</span><span class="p">)</span>
-</span><span class='line'>  <span class="nv">x</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The result is 1, right? That was easy. How about this?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="nv">x</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The let returns 12. What does x look like inside addTen? It is bound to 2.</p>
-
-<p>What does this return?
-Clojure macros by default are &ldquo;hygenic&rdquo;, which means they cannot mutate bindings.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span><span class='line'><span class="c1">;; =&gt; clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can&#39;t let qualified name: user/z,</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Clojure prevents you from accidentally shadowing a value by throwing such an exception.
-This means that it is hygenic by default, but it is possible to &ldquo;break out&rdquo; and make it unhygenic.
-Do force a value to shadow another, you simply have to give it the prefix ~&lsquo;
-Here is the same macro, only with z replaced by ~&#8217;z</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This returns 111.</p>
-
-<p>Here it is with the macro expanded:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the 111 makes more sense.
-Unhygenic macros let you shadow bindings.
-In this case, we shadowed [z 1] with [z 100].</p>
-
-<p>Why would you ever want to do this?
-Lets look at a real example.</p>
-
-<p>I find prefix notation to be frustrating when I am writing a lot of arithmetic.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">value</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
-I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">_&gt;</span> <span class="nv">value</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is much easier for my western eyes to read, it replaces the previous &ldquo;inside out&rdquo; style with a more natural left to right.
-To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
-Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">_</span> <span class="nv">value</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">)]</span>
-</span><span class='line'>  <span class="nv">_</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which, with unhygenic macros, is easy to do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">_&gt;</span> <span class="p">[</span><span class="nv">init</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">init</span>
-</span><span class='line'>         <span class="o">~@</span><span class="p">(</span><span class="nb">mapcat </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">x</span><span class="p">])</span>
-</span><span class='line'>                   <span class="nv">body</span><span class="p">)]</span>
-</span><span class='line'>     <span class="o">~</span><span class="ss">&#39;_</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
-For each element in the body, we bind its result to ~&lsquo;_.</p>
 ]]></content>
   </entry>
   
@@ -2096,6 +1785,171 @@ While escaping from your stack requires effort, by following the steps you can a
     <updated>2012-02-23T00:00:00-05:00</updated>
     <id>http://steveshogren.github.io/quality-is-future-speed</id>
     <content type="html"><![CDATA[<p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[New Year's Android Triumph]]></title>
+    <link href="http://steveshogren.github.io/new-years-triumph/"/>
+    <updated>2012-01-01T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/new-years-triumph</id>
+    <content type="html"><![CDATA[<p>December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.<p />The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours. I basically had a &#8220;buggy beta&#8221; by Wednesday morning, and all the problems remaining were ones I didn&#8217;t know how to solve or hide, and while all the graphics where there, I could barely stand to look at them. I felt like I was spinning my wheels with no progress. My friend Dan tried to talk me down, pointing out with some clarity that there was no gun to my head, and I was doing this for myself, so I could stop any time. Amusingly enough, that was exactly what I needed to hear. I was doing this for myself, to better myself, to learn more discipline. I wanted to stretch my abilities to the limits. So, I pushed through. I found a book that showed me how to fix my problems, and I didn&#8217;t stop until every bug I could find was fixed, and everything my poor family pointed out (I made them each play it like a dozen different times) was smoothed.<p />  And last night, after about a hundred hours of total work this month, I slid under the wire with roughly two hours to spare. The game is not in the market YET, because at the end of it all, I concluded I would rather spend the few dozen more hours to convert it to OpenGL ES, and add in a few neat things I was unable to do using the Android canvas, but for a v1, I am immensely proud of the whole experience.<p />I can say, unequivocally; WHEW. <p />This challenge was a fantastic learning experience, and I had several great reminders of what my dad always told me growing up: <strong>just work smarter, son, not harder</strong>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why I Can't Get Focused (It's a double entendre)]]></title>
+    <link href="http://steveshogren.github.io/why-i-cant-get-focused-its-a-double-entendre/"/>
+    <updated>2011-12-14T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/why-i-cant-get-focused-its-a-double-entendre</id>
+    <content type="html"><![CDATA[<p>I can&#8217;t get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts out so I can get back to work.<p />I got a call from a recruiter the other day trying to get me to come interview at this job. Right now I am working in VB.NET and Actionscript. Until this job, I was always working in open-source languages: Perl, PHP, and some Java. This is my first real divergence from that pattern, and of course it is in two languages that are, to say the least, not very popular with the open source crowd. This gets me wondering, &#8220;what if when I decide to move on, all the fun jobs look down their noses at me for working in unpopular languages?&#8221;.<p /> To be fair, I still program quite a bit outside work in my favorite languages, and that is all well and good.<p />For some reason though, that recruiter really got under my skin. I keep asking myself questions like, &#8220;is spending time right now making a Java game for the Android a good choice long term?&#8221; or, &#8220;should I spend any more time learning Python with Django, or just get more invested in Javascript and node.js?&#8221;.<p /> These are not questions I want to be asking myself. <p />So, I sit down to think about it and get it out of my system. What kind of programmer do I want to be in 5 years? I know without a moment&#8217;s hesitation. <p /> <strong>I want to be the kind of programmer who is not tied to any one language or platform, but is instantly effective and rapidly excellent in </strong><strong><em>every</em> language and platform. </strong><p />Right now, I am learning Common Lisp. Why? To learn better functional programming. Why do I play with Javascript? To be better at client-side web programming. PHP/Python? Server-side web programming. *.NET? Compiled, versioned programming. Android games? For fun! Why do I all this? Because the programmer I want to be is not constrained to his language/platform<em> at all</em>. The programmer I want to be programs at a level <em>over the language</em>.&nbsp;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Testing is to programming what math is to engineering]]></title>
+    <link href="http://steveshogren.github.io/testing-is-to-programming-what-math-is-to-eng/"/>
+    <updated>2011-09-26T00:00:00-04:00</updated>
+    <id>http://steveshogren.github.io/testing-is-to-programming-what-math-is-to-eng</id>
+    <content type="html"><![CDATA[<p>
+  In ancient times, plenty of builders did their work without math,
+  and I would guess that a good portion of them likely did it faster
+  then their math-doing counterparts.
+</p>
+<p >
+  I am certain that when builders first started using math to prove
+  that buildings would stand up safely, they were mocked by their
+  math-less counterparts. I can hear them now, &#8220;Oh, Stephos, it takes
+  you 5 times longer to prove your building will stand up, real men
+  can just <em>see</em> that it will work&#8221;. Even in modern times, many
+  people build houses and small buildings that probably don&#8217;t even
+  need the math to really &#8220;prove&#8221; they work, but they perform the due
+  diligence anyway. On the other hand, some people today still build
+  houses, sheds, tree-houses, lofts, and fire pits without any
+  drawings or math at at all, and why should they? They are
+  responsible for the risk.
+</p>
+<p >
+  This is all fine, but, builders who shy away from math also don&#8217;t
+  build airliners, space shuttles, and skyscrapers. An aircraft
+  designer who doesn&#8217;t feel like using math to prove their aircraft
+  will fly is handed an &#8220;Experimental&#8221; sticker and gravely patted on
+  the back.
+</p>
+<p >
+  Today, programming is at the same place as both
+  ancient <strong>and</strong> modern engineering: many projects can
+  be done &#8220;by eye&#8221;, and some of the most experienced programmers are
+  able to build immense projects alone without any sort of automated
+  testing at all. When you go to a forum and ask for help, you are
+  just as likely to hear from a &#8220;space shuttle&#8221; programmer as you are
+  to hear from a &#8220;tin shack&#8221; programmer. The &#8220;space shuttle&#8221;
+  programmer would be horrified to hear of working without automated
+  testing and rigorous review practices, whereas the &#8220;tin shack&#8221;
+  programmer would be horrified to think of the time wasted to
+  even <em>learn the procedures</em> to automatically prove his code
+  works as it should. The &#8220;space shuttle&#8221; programmer might work on the
+  same internal financial project for months or years, finally
+  releasing with zero defects; the &#8220;tin shack&#8221; programmer might churn
+  out several quick web sites a day. Neither project
+  is <em>better</em> then the other, they both might be perfect for
+  what their business needs.
+</p>
+<p>
+  I have heard several times from very good lone wolf programmers that
+  testing just slows them down, and in some ways, it does appear to be
+  a slowdown for them. Unfortunately, the cost to build even
+  medium-sized projects with several workers without automated testing
+  is only felt when it is too late, when the deadlines (and costs) are
+  spiraling out of control.
+</p>
+<p>
+  The disciplined application of mathematics transformed and
+  solidified the field of engineering into a field far more vast and
+  capable of some of the most incredible constructions imaginable.
+  Would we have smart-phones, GPS, modern cars, and airliners if
+  engineering had just avoided mathematics? Just imagine what the
+  field of programming could grow into if we continue to learn and
+  grow our testing, designing, and writing of software.
+</p>
+<p>
+  I propose that automated testing is to programming what math was
+  to ancient engineering.
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Endless Debate]]></title>
+    <link href="http://steveshogren.github.io/the-endless-debate/"/>
+    <updated>2011-07-22T00:00:00-04:00</updated>
+    <id>http://steveshogren.github.io/the-endless-debate</id>
+    <content type="html"><![CDATA[<p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#8220;best&#8221; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[End-to-End Web Service Testing]]></title>
+    <link href="http://steveshogren.github.io/end-to-end-web-service-testing/"/>
+    <updated>2011-06-28T00:00:00-04:00</updated>
+    <id>http://steveshogren.github.io/end-to-end-web-service-testing</id>
+    <content type="html"><![CDATA[<p>
+  At work last month, I was assigned to fix some bugs in an
+  asynchronous legacy code base. My supervisor gave me a month to see
+  what I could do, and to see if I could fix a few tricky bugs. The
+  code is divided into two sections, a client application and a web
+  server. Both the client application and the server have their own
+  persistence, and they communicate through a soap web service.
+</p>
+<p>
+  I wanted to try and write some sort of end-to-end tests around this,
+  but I could not figure out how to get around that web service. I
+  don&#039;t want my tests to rely on a server having to always be up,
+  so I initially was planning on writing tests from the client
+  database to the web service, where I would just stub some responses.
+  I got about an hour into that plan, before I realized I would then
+  have to do that same thing on the server, and that sort of testing
+  will not really tell me what the code <i>does</i>. I needed to cover
+  this whole process end-to-end.
+</p>
+<p>
+ I walked around for a bit, thinking. Then it hit me, both the server
+ and client code are written in VB.NET, and, except for the web service, work
+ just like plain old highly-coupled code. Hmmm.
+</p>
+<p>
+ For the first pass, I wrote an interface to wrap the web service,
+ then used dependency injection to inject a fake web service that (and
+ here is the cool part) simply calls around the web service entirely
+ to the server code directly and injects a different database
+ connection string, so the server talks to a second database I have
+ prepared.
+</p>
+<p>
+ Just like that, I can run, all on my machine, 99 percent of the code
+ in a single end-to-end test. I can even setup several client
+ databases, and rotate them out, to &quot;swap&quot; between several
+ clients in the middle of the tests.
+</p>
+<p>
+ I added a few &quot;integration&quot; tests that do talk to a real
+ published testing web service, just to make sure everything is still
+ in place correctly.
+</p>
+<p>
+  Now, I said this was asynchronous, and it is, the executed
+  system-under-test kicks off a thread to talk to the web service, and
+  so to get it to test, I needed to wait for the thread to finish,
+  then do my assertions.
+</p>
+<p>
+ I used a system where the spun off thread will set a boolean when it
+ has finished running, to let the main thread know it has finished,
+ and the main thread just keeps checking that boolean until it is
+ true. While hackish, that is my current working solution, as no more
+ then one thread is ever spun off at a time, I can just have my test
+ wait for the thread to finish, then complete the required assertions.
+</p>
 ]]></content>
   </entry>
   

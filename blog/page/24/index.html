@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math &hellip;">
+  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/testing-is-to-programming-what-math-is-to-eng/">Testing Is to Programming What Math Is to Engineering</a></h1>
+      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
     
     
       <p class="meta">
@@ -93,69 +93,74 @@
 
 
   <div class="entry-content"><p>
-  In ancient times, plenty of builders did their work without math,
-  and I would guess that a good portion of them likely did it faster
-  then their math-doing counterparts.
-</p>
-<p >
-  I am certain that when builders first started using math to prove
-  that buildings would stand up safely, they were mocked by their
-  math-less counterparts. I can hear them now, &#8220;Oh, Stephos, it takes
-  you 5 times longer to prove your building will stand up, real men
-  can just <em>see</em> that it will work&#8221;. Even in modern times, many
-  people build houses and small buildings that probably don&#8217;t even
-  need the math to really &#8220;prove&#8221; they work, but they perform the due
-  diligence anyway. On the other hand, some people today still build
-  houses, sheds, tree-houses, lofts, and fire pits without any
-  drawings or math at at all, and why should they? They are
-  responsible for the risk.
-</p>
-<p >
-  This is all fine, but, builders who shy away from math also don&#8217;t
-  build airliners, space shuttles, and skyscrapers. An aircraft
-  designer who doesn&#8217;t feel like using math to prove their aircraft
-  will fly is handed an &#8220;Experimental&#8221; sticker and gravely patted on
-  the back.
-</p>
-<p >
-  Today, programming is at the same place as both
-  ancient <strong>and</strong> modern engineering: many projects can
-  be done &#8220;by eye&#8221;, and some of the most experienced programmers are
-  able to build immense projects alone without any sort of automated
-  testing at all. When you go to a forum and ask for help, you are
-  just as likely to hear from a &#8220;space shuttle&#8221; programmer as you are
-  to hear from a &#8220;tin shack&#8221; programmer. The &#8220;space shuttle&#8221;
-  programmer would be horrified to hear of working without automated
-  testing and rigorous review practices, whereas the &#8220;tin shack&#8221;
-  programmer would be horrified to think of the time wasted to
-  even <em>learn the procedures</em> to automatically prove his code
-  works as it should. The &#8220;space shuttle&#8221; programmer might work on the
-  same internal financial project for months or years, finally
-  releasing with zero defects; the &#8220;tin shack&#8221; programmer might churn
-  out several quick web sites a day. Neither project
-  is <em>better</em> then the other, they both might be perfect for
-  what their business needs.
+  Up until recently, most of my programming was in php, which does not
+  support named parameters
+  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
+  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
+  so while switching to VB.NET and python, I have come to really
+  appreciate this handy feature.
 </p>
 <p>
-  I have heard several times from very good lone wolf programmers that
-  testing just slows them down, and in some ways, it does appear to be
-  a slowdown for them. Unfortunately, the cost to build even
-  medium-sized projects with several workers without automated testing
-  is only felt when it is too late, when the deadlines (and costs) are
-  spiraling out of control.
+ Named parameters is one of those handy little things that can make
+  your life a little easier. Say, in python, you have a function that
+  takes a boolean value. Normally, I would create a variable just to
+  hold that boolean value, then pass it in, to try to be easier for
+  the next guy to understand.
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+  Who knows what window&#8217;s parameter is? What the heck is true anyway,
+  the window? <a href="http://www.jetbrains.com/pycharm/"
+  target="_blank">PyCharm</a> knows (and if you are using python
+  without it, I implore you to treat yourself to the demo) otherwise
+  you have to look up the function <em>like a barbarian</em> to see
+  what is going on. Sure, you can make it more clear with:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Better then nothing, but still lame.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  Boom! Way easier to read, no extra variables hanging around making
+  trouble. Many times I have made function parameters, called them one
+  thing, then made a variable with a slightly different name to pass
+  in for legibility, but no more of that crap! Now, when I have the
+  inclination to make a variable just to clarify something, I just
+  name the parameter and pass in the value right there, like a
+  civilized gentleman should.
+
 </p>
 <p>
-  The disciplined application of mathematics transformed and
-  solidified the field of engineering into a field far more vast and
-  capable of some of the most incredible constructions imaginable.
-  Would we have smart-phones, GPS, modern cars, and airliners if
-  engineering had just avoided mathematics? Just imagine what the
-  field of programming could grow into if we continue to learn and
-  grow our testing, designing, and writing of software.
+ Additionally, VB.NET has this too, with the slightly goofier
+  syntax of the &#8220;:=&#8221;
 </p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 <p>
-  I propose that automated testing is to programming what math was
-  to ancient engineering.
+  My cohort Daniel Miladinov pointed out that this is calling the
+  assignment operator directly, since calling it with just the equals
+  would perform
+  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
 </p>
 </div>
   
@@ -215,15 +220,15 @@
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -234,7 +239,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -244,12 +249,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

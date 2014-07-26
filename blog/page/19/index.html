@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for &hellip;">
+  <meta name="description" content="The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/on-developer-certifications/">On Developer Certifications</a></h1>
+      <h1 class="entry-title"><a href="/the-endless-debate/">The Endless Debate</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.<p /> Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months. Who would be on the committee? And what would they agree on to enforce? Regex? Recursion, OO, testability, and functional programming?&nbsp; Proof of understanding in the half-dozen <a href="http://norvig.com/21-days.html" target="_blank">&#8220;mind expanding&#8221;</a> languages? Not going to happen. Not while my Joomla-site maintaining friend and my Android 3D game authoring cohort are both lumped under the title &#8220;software developer&#8221;. The field is too vast, the content too broad, and the jobs too diverse. <p /> So, we are doomed to wallow. Or are we? What is the one thing we all have to do?<em> Get hired.</em><p />I used to be a big sissy about interviewing for jobs. Especially interviews full of the nit-picky details I can never remember, yeah, I <em>really</em> hate those. I would moan and groan about how the interviewer could only answer those questions because they had to look them up the other day. &#8220;MySQL index implementations, what am I, a DBA?!&#8221;, I would screech to anyone who would listen, &#8220;They must have misunderstood, I am a developer, when would I ever need to know that?!&#8221;<p /> But.<p />Interview prep gets me to cram stuff into my head I would otherwise skim or avoid if just sitting at home programming for fun. I get a great refresher on all the stuff I am fully able to do at work, but maybe I haven&#8217;t needed in a while. Like linked-lists. In four years of fairly diverse programming jobs, I have<strong> yet</strong> to need a linked list for anything, but man, when that day comes, I have linked-lists in a quick-draw holster. I used to say the same thing about trees, then last year, I had a problem that surely needed a tree, and hear you me, I had that data being in-order traversed before you could say: &#8220;tree&#8221;. Would I have even <em>remembered</em> <em>what trees are good for</em> without my semi-annual refresher?<p /> My wife is a commercial pilot, and every so often she is required to skim over all those little details about being a pilot, refreshing <em>everything</em>, double-checking her knowledge so she can keep her licenses, <em>even if she hasn&#8217;t needed a certain technique since the last test</em>. Huh. Sounds like me, every so often, cramming for an interview.<p />  We don&#8217;t need certifications for being a programmer. We already have the tools in hand, and just need to learn to use them better. <strong>Interviews are our certifications. </strong></p><p>This is a double-edged sword, because this means that, &#8220;what you sow, you will also reap&#8221;.  The responsibility to keep standards high falls on the interviewer. If  you interview a candidate for tricky puzzle questions, or in-depth  knowledge of C++ libraries, you will find someone who knows those  things, and possibly ONLY knows those things. I have seen developers hired who couldn&#8217;t handle VCS merging or shipping actual software, but were absolute <em>geniuses</em> when it came to programming language trivia and puzzle questions.</p><p>A few months ago, I read of a guy with no programming experience who did like 100 interviews in a few weeks, till he was a master interviewee. By the end, he was able to pick his choice of companies, and <strong>yet </strong><strong>he couldn&#8217;t ship software</strong>. He gamed a system <em>intended</em> to sort out good developers by asking questions that are ancillary to development, without actually having the candidate <em>prove any real ability</em>. And now that company has a developer who is great at gaming systems, but unskilled at development: I hope they have a good training program.</p><p>No offense intended to the man who did this, I <strong>really </strong>admire his tenacity and clever thinking, and I think he will do well regardless of the task. But it speaks volumes to the brokenness of the interview system for those companies that would hire a completely unskilled developer based on the correct answers to trivia questions about programming.</p><p>Parting question to consider for interviewers: if interviews are our certifications, what should a candidate be able to do to be &#8220;certified&#8221; to be able to do the job in question?</p>
+  <div class="entry-content"><p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#8220;best&#8221; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
 </div>
   
   
@@ -151,15 +151,15 @@
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -170,7 +170,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -180,12 +180,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

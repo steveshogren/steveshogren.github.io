@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
+  <meta name="description" content="I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
+      <h1 class="entry-title"><a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a></h1>
     
     
       <p class="meta">
@@ -92,120 +92,7 @@
   </header>
 
 
-  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
-<br />
-<br />
-One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
-</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
-</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
-</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
-</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
-</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>      <span class="mi">1</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
-</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
-<br />
-<br />
-At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
-<br />
-<br />
-I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
-<br />
-<br />
-Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
-<br />
-<br />
-I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
-<br />
-<br />
-No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
-<br />
-<br />
-The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
+  <div class="entry-content"><p>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don&#8217;t, you have got to give it a shot at least once. You&#8217;ll never be the same. And no, I am not talking about <a href="http://projecteuler.net/">Project Euler</a>, although that has its place.</p><p>First, do a bit of research, and get your hands on the best book on the language you can find. Second, research the language, and pick a project to which it is well suited. For example, to learn Clojure, I decided to re-write an old php project from scratch that I was well familiar with. (This also gives me the neat data point of seeing how much smaller the project is in Clojure)&nbsp;Try not to be too ambitious here, you want something you could pull off in your current go-to language.</p><p>Start the project, and work under a dozen hours on it, bashing your way through the first pains of installing the language/framework (my least favorite part), and getting a basic proof of concept together. If it&#8217;s a web site, think &#8220;hello world&#8221; coming out of your database of choice. Tell all your friends what you are going to make, and when it is launching. Make sure the launch date is ambitious. Start to read the book splitting your time roughly 25/75 between reading and programming, using what you read to provide you with &#8220;ammunition&#8221; for your project. Do this in as short a loop as possible, so the reading and programming are never far apart.</p><p>Since you will be fighting through real problems, the reading is a hundred times more interesting. Almost every page you will have to stop yourself from shouting, &#8220;OF COURSE!&#8221; out loud at the book, because you have just discovered something that is an extremely real pain point to you. <span>You may find yourself laughing more than once in sheer delight</span> because you anticipated a part of the language correctly, and just found the syntax for it. If that is not happening, you probably need to adjust the ratio of programming to reading. You want to find that sweet spot of just barely learning what you need to succeed, and constantly being &#8220;saved&#8221; by reading that last tidbit last night. If even the simplest things take unpleasantly long, perhaps more reading. If the reading is dragging too much, try more programming. When you hit that sweet spot, the programming is an exhilarating rush, and the reading is actually fun. If none of these happen, perhaps you are learning a language that does not really teach you anything new, just a different syntax for the same thing you are used to doing, in which case, ask yourself why you are learning that language. There are plenty out there that will <a href="http://norvig.com/21-days.html">blow your mind</a>.</p><p>Don&#8217;t forget that deadline either, your friends and family are waiting, remember? Hustle is the name of the game here, and don&#8217;t worry, you&#8217;ll make tons of mistakes, and you&#8217;ll never forget a single one. Who cares? (No one will ever know but you!) If experience is learning from a lot of mistakes, you&#8217;ll be the most experienced person around!</p><p>When that deadline looms, don&#8217;t give up! Step up your game, slash the second-best features, and race for the finish. If you are way off your mark, you can consider pushing the date back, but still deliver something on your original date. Once you are done, unwind for a few months, take it easy, then repeat. After a couple of those iterations you will be seriously more experienced in a wide variety of languages, and you will find yourself much more confident in your language-that-pays.</p><p>Do this a couple of times and you&#8217;ll not only get better at that language, you&#8217;ll get better at all of them. You will start to see the underlying concepts that cause languages to be written the way they are. The language families will start to run together, and you will develop the intuition of what you need to do with just the trivial task of remembering (or looking up) the syntax. Your programming skill will move to a higher plane of abstraction, and you will think outside the specific language. The language just becomes an implementation detail, just words that tell the compiler or interpreter what you mean. Reading other people&#8217;s code will become significantly easier, and you will find learning a new language is almost faster reading the masters&#8217; code on github than with a book at all.</p><p><strong>TL;DR</strong> <span>Don&#8217;t let what little time you have discourage  you. A few minutes a day sneaking in one more function is better than a  few minutes a day moping in front of the TV wishing you had more time  for programming. </span>I understand not everyone can put in &#8220;this kind of time&#8221; (or energy) into side projects. Heck, plenty of times I cannot either. Sometimes, you only have a few hours a month on the good months. That&#8217;s fine. Take that date, stretch it out to the end of the year. Slip in that reading on the ride home, or at lunch. Make every moment you spend on it count.</p>
 </div>
   
   
@@ -264,15 +151,15 @@ The discovery of such tools is what is making learning clojure such a profoundly
       </li>
     
       <li class="post">
-        <a href="/known-issue-storage/">Where to Store Known Issues</a>
-      </li>
-    
-      <li class="post">
-        <a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a>
-      </li>
-    
-      <li class="post">
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Learn-To-Database/">Learn to Database</a>
       </li>
     
   </ul>
@@ -283,7 +170,7 @@ The discovery of such tools is what is making learning clojure such a profoundly
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">12</span></a>
     </li>
     
     
@@ -293,12 +180,12 @@ The discovery of such tools is what is making learning clojure such a profoundly
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     
