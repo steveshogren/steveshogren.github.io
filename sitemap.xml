@@ -117,8 +117,12 @@
         <lastmod>2014-07-26T14:22:52-04:00</lastmod>
     </url>
     <url>
+        <loc>http://steveshogren.github.io/skill-continuum/</loc>
+        <lastmod>2014-12-02T07:49:33-05:00</lastmod>
+    </url>
+    <url>
         <loc>http://steveshogren.github.io/blog/archives/</loc>
-        <lastmod>2014-07-26T14:22:52-04:00</lastmod>
+        <lastmod>2014-12-02T07:49:33-05:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/robots.txt</loc>
@@ -126,6 +130,6 @@
     </url>
     <url>
         <loc>http://steveshogren.github.io/</loc>
-        <lastmod>2014-07-26T14:22:52-04:00</lastmod>
+        <lastmod>2014-12-02T07:49:33-05:00</lastmod>
     </url>
 </urlset>
