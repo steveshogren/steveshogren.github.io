@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-12-02T07:53:44-05:00</updated>
+  <updated>2014-12-02T07:58:52-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Software Skills Continuum]]></title>
     <link href="http://steveshogren.github.io/skill-continuum/"/>
-    <updated>2014-07-26T11:46:00-04:00</updated>
+    <updated>2014-12-02T07:26:00-05:00</updated>
     <id>http://steveshogren.github.io/skill-continuum</id>
     <content type="html"><![CDATA[<pre><code>    Learning Vim is a waste of time; I can prove it! - Anonymous
 </code></pre>
