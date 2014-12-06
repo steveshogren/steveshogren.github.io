@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2014-12-06T14:47:24-05:00</updated>
+  <updated>2014-12-06T15:04:10-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -18,7 +18,7 @@
     <link href="http://steveshogren.github.io/christmas-f-number-polymorphism/"/>
     <updated>2014-12-06T13:37:00-05:00</updated>
     <id>http://steveshogren.github.io/christmas-f-number-polymorphism</id>
-    <content type="html"><![CDATA[<p>One of my favorite things of F# is how it lets you choose how you want
+    <content type="html"><![CDATA[<p>One of my favorite things about F# is how it lets you choose how you want
 to align your data.</p>
 
 <p>In the previous posts highlighting on
