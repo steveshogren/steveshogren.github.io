@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
+  <meta name="description" content="The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
+      <h1 class="entry-title"><a href="/the-endless-debate/">The Endless Debate</a></h1>
     
     
       <p class="meta">
@@ -92,63 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  At work last month, I was assigned to fix some bugs in an
-  asynchronous legacy code base. My supervisor gave me a month to see
-  what I could do, and to see if I could fix a few tricky bugs. The
-  code is divided into two sections, a client application and a web
-  server. Both the client application and the server have their own
-  persistence, and they communicate through a soap web service.
-</p>
-<p>
-  I wanted to try and write some sort of end-to-end tests around this,
-  but I could not figure out how to get around that web service. I
-  don&#039;t want my tests to rely on a server having to always be up,
-  so I initially was planning on writing tests from the client
-  database to the web service, where I would just stub some responses.
-  I got about an hour into that plan, before I realized I would then
-  have to do that same thing on the server, and that sort of testing
-  will not really tell me what the code <i>does</i>. I needed to cover
-  this whole process end-to-end.
-</p>
-<p>
- I walked around for a bit, thinking. Then it hit me, both the server
- and client code are written in VB.NET, and, except for the web service, work
- just like plain old highly-coupled code. Hmmm.
-</p>
-<p>
- For the first pass, I wrote an interface to wrap the web service,
- then used dependency injection to inject a fake web service that (and
- here is the cool part) simply calls around the web service entirely
- to the server code directly and injects a different database
- connection string, so the server talks to a second database I have
- prepared.
-</p>
-<p>
- Just like that, I can run, all on my machine, 99 percent of the code
- in a single end-to-end test. I can even setup several client
- databases, and rotate them out, to &quot;swap&quot; between several
- clients in the middle of the tests.
-</p>
-<p>
- I added a few &quot;integration&quot; tests that do talk to a real
- published testing web service, just to make sure everything is still
- in place correctly.
-</p>
-<p>
-  Now, I said this was asynchronous, and it is, the executed
-  system-under-test kicks off a thread to talk to the web service, and
-  so to get it to test, I needed to wait for the thread to finish,
-  then do my assertions.
-</p>
-<p>
- I used a system where the spun off thread will set a boolean when it
- has finished running, to let the main thread know it has finished,
- and the main thread just keeps checking that boolean until it is
- true. While hackish, that is my current working solution, as no more
- then one thread is ever spun off at a time, I can just have my test
- wait for the thread to finish, then complete the required assertions.
-</p>
+  <div class="entry-content"><p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#8220;best&#8221; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
 </div>
   
   
@@ -203,6 +147,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
+      </li>
+    
+      <li class="post">
         <a href="/skill-continuum/">Software Skills Continuum</a>
       </li>
     
@@ -214,10 +162,6 @@
         <a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a>
       </li>
     
-      <li class="post">
-        <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -226,7 +170,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">13</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">14</span></a>
     </li>
     
     

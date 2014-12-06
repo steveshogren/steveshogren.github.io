@@ -121,8 +121,12 @@
         <lastmod>2014-12-02T07:58:06-05:00</lastmod>
     </url>
     <url>
+        <loc>http://steveshogren.github.io/emacs-project-tip/</loc>
+        <lastmod>2014-12-06T11:21:13-05:00</lastmod>
+    </url>
+    <url>
         <loc>http://steveshogren.github.io/blog/archives/</loc>
-        <lastmod>2014-12-02T07:58:06-05:00</lastmod>
+        <lastmod>2014-12-06T11:21:13-05:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/robots.txt</loc>
@@ -130,6 +134,6 @@
     </url>
     <url>
         <loc>http://steveshogren.github.io/</loc>
-        <lastmod>2014-12-02T07:58:06-05:00</lastmod>
+        <lastmod>2014-12-06T11:21:13-05:00</lastmod>
     </url>
 </urlset>
