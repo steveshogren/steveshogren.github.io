@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important &hellip;">
+  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
+      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
     
     
       <p class="meta">
@@ -92,7 +92,63 @@
   </header>
 
 
-  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
+  <div class="entry-content"><p>
+  At work last month, I was assigned to fix some bugs in an
+  asynchronous legacy code base. My supervisor gave me a month to see
+  what I could do, and to see if I could fix a few tricky bugs. The
+  code is divided into two sections, a client application and a web
+  server. Both the client application and the server have their own
+  persistence, and they communicate through a soap web service.
+</p>
+<p>
+  I wanted to try and write some sort of end-to-end tests around this,
+  but I could not figure out how to get around that web service. I
+  don&#039;t want my tests to rely on a server having to always be up,
+  so I initially was planning on writing tests from the client
+  database to the web service, where I would just stub some responses.
+  I got about an hour into that plan, before I realized I would then
+  have to do that same thing on the server, and that sort of testing
+  will not really tell me what the code <i>does</i>. I needed to cover
+  this whole process end-to-end.
+</p>
+<p>
+ I walked around for a bit, thinking. Then it hit me, both the server
+ and client code are written in VB.NET, and, except for the web service, work
+ just like plain old highly-coupled code. Hmmm.
+</p>
+<p>
+ For the first pass, I wrote an interface to wrap the web service,
+ then used dependency injection to inject a fake web service that (and
+ here is the cool part) simply calls around the web service entirely
+ to the server code directly and injects a different database
+ connection string, so the server talks to a second database I have
+ prepared.
+</p>
+<p>
+ Just like that, I can run, all on my machine, 99 percent of the code
+ in a single end-to-end test. I can even setup several client
+ databases, and rotate them out, to &quot;swap&quot; between several
+ clients in the middle of the tests.
+</p>
+<p>
+ I added a few &quot;integration&quot; tests that do talk to a real
+ published testing web service, just to make sure everything is still
+ in place correctly.
+</p>
+<p>
+  Now, I said this was asynchronous, and it is, the executed
+  system-under-test kicks off a thread to talk to the web service, and
+  so to get it to test, I needed to wait for the thread to finish,
+  then do my assertions.
+</p>
+<p>
+ I used a system where the spun off thread will set a boolean when it
+ has finished running, to let the main thread know it has finished,
+ and the main thread just keeps checking that boolean until it is
+ true. While hackish, that is my current working solution, as no more
+ then one thread is ever spun off at a time, I can just have my test
+ wait for the thread to finish, then complete the required assertions.
+</p>
 </div>
   
   
@@ -101,6 +157,8 @@
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/33/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -145,19 +203,19 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
+      </li>
+    
+      <li class="post">
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+      </li>
+    
+      <li class="post">
         <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
         <a href="/emacs-project-tip/">Emacs Project Tip</a>
-      </li>
-    
-      <li class="post">
-        <a href="/skill-continuum/">Software Skills Continuum</a>
-      </li>
-    
-      <li class="post">
-        <a href="/next-book/">What Book Should I Read Next?</a>
       </li>
     
   </ul>
@@ -168,7 +226,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
     </li>
     
     
@@ -178,12 +236,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     
@@ -209,7 +267,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Steve Shogren -
+  Copyright &copy; 2015 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
