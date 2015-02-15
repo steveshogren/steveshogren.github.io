@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-02-15T08:57:50-05:00</updated>
+  <updated>2015-02-15T08:59:25-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>Clojure is a delightful language, and here are six uncommonly
 discussed reasons why.</p>
 
-<h2>1 &ndash; Unit Testing</h2>
+<h2>1 &ndash; Dead Simple Unit Test Mocking</h2>
 
 <p>Clojure is the easiest language to unit test I have ever
 seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
@@ -57,7 +57,7 @@ with-redefs, so no need to re-bind it or anything after the test.</p>
 <h2>2 &ndash; Amazing Editing</h2>
 
 <p>Many arguments have been made over those contentious
-parenthesis. While the most powerful use of s-expressions is to easily
+parentheses. While the most powerful use of s-expressions is to easily
 allow macros, for the day to day, s-expressions have a very important
 use: amazing editing!</p>
 
