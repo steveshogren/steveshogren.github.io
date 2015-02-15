@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-02-15T09:21:46-05:00</updated>
+  <updated>2015-02-15T09:31:05-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -52,7 +52,7 @@ namespace with a new definition.</p>
 <p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
 the scope of <code>with-redefs</code>. Couldn&rsquo;t be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
-with-redefs, so no need to re-bind it or anything after the test.</p>
+with-redefs, so no need to unbind it after the test.</p>
 
 <h2>2 &ndash; Amazing Editing</h2>
 
@@ -98,7 +98,7 @@ application.</p>
 <p>One of the best claims about &ldquo;traditional&rdquo; Java OO is
 polymorphism. The ability to make an interface with concrete classes
 gives the powerful ability to replace behavior dynamically. The
-trouble is, the polymorphic dynamic dispatch is single dispatch &ndash; the
+trouble is, Java&rsquo;s polymorphic dynamic dispatch is single dispatch &ndash; the
 decision of which method to call is limited to a single thing: the
 type of the callee. If this was the only type of dynamic dispatch you
 ever knew of, it might be hard for you to consciously realize it was
