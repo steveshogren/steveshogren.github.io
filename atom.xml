@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-02-15T08:52:53-05:00</updated>
+  <updated>2015-02-15T08:57:50-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -26,7 +26,7 @@ discussed reasons why.</p>
 <p>Clojure is the easiest language to unit test I have ever
 seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
 replacement of the function definition. No extraneous interfaces, no
-dependency injection, no mocking framework.  The built in function <code>with-redefs</code>
+dependency injection, no mocking framework.  The built-in function <code>with-redefs</code>
 will replace any function in any library or
 namespace with a new definition.</p>
 
