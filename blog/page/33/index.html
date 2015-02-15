@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="So, working through the Land of Lisp book, getting the hang of it. Chapter Six, the author starts off by talking a little about the Common Lisp REPL &hellip;">
+  <meta name="description" content="So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +82,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/lisp-repl/">Lisp REPL</a></h1>
+      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
     
     
       <p class="meta">
@@ -92,42 +92,7 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  So, working through the Land of Lisp book, getting the hang of it.
-</p>
-<p>
-Chapter Six, the author starts off by talking a little about
-  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
-  of the &#8220;command line&#8221; for interacting with lisp. It is pretty cool,
-  you type in code, and it executes. And then he opens the hood a
-  little:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defun</span> <span class="nv">repl</span> <span class="p">()</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">eval </span><span class="p">(</span><span class="nf">read</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-WHAAAAAAAAAAAAAAA??!?!?!
-</p>
-<p>
-I just about spit my drink all over the monitor laughing. The
-function <strong>eval()</strong> evaluates whatever text is passed in
-as code, in this case, from the command line via the obviously
-named <strong>read</strong> and after executing
-it, <strong>print()</strong> prints the result, and it just does that
-forever till you quit.
-</p>
-<p>
-That means, you could make one of these for any language that can
-evaluate strings into code. I know python has one built-in. Php can
-evaluate code with eval, and a quick search shows a highly nifty (and
-robust from the looks of
-it) <a href="https://github.com/facebook/phpsh">REPL for php</a>
-complements of facebook. Sweet. Or, you can use php -a for the
-interactive mode.
-</p>
+  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
 </div>
   
   
@@ -136,8 +101,6 @@ interactive mode.
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/blog/page/34/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -186,15 +149,15 @@ interactive mode.
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
-      </li>
-    
-      <li class="post">
         <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
         <a href="/emacs-project-tip/">Emacs Project Tip</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skill-continuum/">Software Skills Continuum</a>
       </li>
     
   </ul>
@@ -205,7 +168,7 @@ interactive mode.
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
@@ -215,12 +178,12 @@ interactive mode.
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

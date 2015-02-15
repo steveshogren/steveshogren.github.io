@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict unit testing. Why is that?
-What about &hellip;">
+  <meta name="description" content="You know what will make you a phenomenally better developer? Deliberate practice. How do you get such practice? By doing it every single day. Random &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +82,7 @@ What about &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/di-is-a-hack/">Good Design, Java, or Unit Testing. Pick Two.</a></h1>
+      <h1 class="entry-title"><a href="/streaks/">Challenge - Code Every Day</a></h1>
     
     
       <p class="meta">
@@ -94,116 +92,95 @@ What about &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Every codebase I have seen or heard of that uses dependency injection
-for all dependencies also performs strict unit testing. Why is that?
-What about unit testing and DI are so linked?</p>
-
-<p>You cannot have unit testing in Java/C# without dependency injection.</p>
-
-<p>If you have ever seen a codebase in Java/C# that has ten injected
-classes, right there, you have a codebase that does heavy unit
-testing. If you are deep into the unit testing culture, you will have
-been taught that it is a good design to use DI everywhere. Is it
-really? Do the contortions required to do DI make your code easier to
-use/reuse/refactor? Or do you do it because you have to? Can you think
-of a single time where DI made anything easier?</p>
-
-<p>The TDD proponents realized that you cannot reasonably perform unit
-testing without DI in Java/C#, and so they have argued that a
-completely dependency injected codebase is a good design. In reality,
-DI for unit testing is a hack because Java/C# are so ill-suited to
-unit testing.</p>
-
-<p>For example, how would we unit test a function that talks to the
-database in C# without a framework that requires mappings and global
-singletons? We would put an interface around the database connection,
-then pass it into the constructor through an optional parameter. Our
-test would then make another implementor of that interface, and pass
-it in when testing. This is par for the course in Java as well.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// DBConnection.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IDBConnection</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">DBConnection</span> <span class="p">:</span> <span class="n">IDBConnection</span><span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Configuration</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">Helpers</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">Repositories</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">IDBConnection</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">(</span><span class="n">IDBConnection</span> <span class="n">con</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">con</span> <span class="p">=</span> <span class="n">con</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">DBConnection</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">string</span> <span class="n">sql</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="n">con</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Tests grow in maintenance difficulty with the size of the function
-being tested. Often this leads to a design with many small
-one-function classes. This is actually not a bad thing! Rather than
-having a single reason to change, these classes have a single reason
-to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
-that each only calls the next. This &ldquo;chain&rdquo; of classes together are
-cohesive, but instead of being a single class together, they are all
-split apart. Such a functional design would normally be fine, except
-every function needs a twenty line wrapper of namespaces, imports,
-interfaces, and constructors.</p>
-
-<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
-replacing a function for testing is easy! Every function does not need
-a twenty-line wrapper, instead we simply replace the function we want
-to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{</span> <span class="nx">getConnection</span><span class="p">().</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">);}</span>
-</span><span class='line'><span class="kd">function</span> <span class="nx">getConnection</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">();</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// &quot;Mock&quot; the getConnection function in a unit test</span>
-</span><span class='line'><span class="nx">getConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">Execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{}}};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
-dependencies. My design can take whatever shape best fits the problem,
-without constraining itself to &ldquo;what works for testing&rdquo;.</p>
+  <div class="entry-content"><p>
+  You know what will make you a phenomenally better developer?
+  Deliberate practice. How do you get such practice? By doing it every
+  single day. Random bursts of effort over the odd weekend will gain
+  you practically nothing comparatively, even if the time investment
+  is the same. Your mind needs repetition and consistent effort to
+  improve. So what do you want to get better at?  Pick your highest
+  value subject: vim, regex, functional programming, meta-programming,
+  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
+  practice it every single day. Easy as that.
+</p>
+<p>
+  When GitHub first came out with the &#8220;streak&#8221; feature on the front
+  page, I realized it was time to stop my binge coding on the
+  occasional weekend and start a system. Inspired by other recent
+  system-based successes (working out every day), I decided to code
+  every day for a year.
+</p>
+<p>
+  I quickly realized that anything requiring detailed plans and
+  designs is harder to do. Working though a book, on the other hand,
+  is easy to start and stop. I started working through a book I had
+  tried to read before: Let Over Lambda.
+</p>
+<p>
+  Let Over Lambda is intense, filled with deeply complex concepts
+  written in Common Lisp, a language with which I was only passingly
+  familiar. But I managed to get through it without hardly any
+  difficulty. How did I do that?
+</p>
+<p>
+  I got a cheap netbook, and started to code on the train ride home.
+  Interestingly, without any internet, I was much less distracted, and
+  could just sit down and be in the zone within the minute (this from
+  the guy whom it takes 20+ minutes to get in the zone at work). With
+  only a limited span of ~25 minutes, I had no time to waste, and
+  without people to talk to my brain just falls into it. I can only
+  pinpoint a few times I could not get into the zone, and those were
+  extreme circumstances of exhaustion or illness.
+</p>
+<p>
+  In ten months, I have:
+  <ul>
+    <li>
+      worked through Let Over Lambda once and read it twice
+    </li>
+    <li>
+      worked twice through the PLAI programming languages book
+      (once in Scheme and once in F#)
+    </li>
+    <li>
+      read Clojure Programming, F# 3.0 Programming, and am currently
+      in Real World Haskell
+    </li>
+    <li>
+      completed the exercises up to chapter three of SICP
+    </li>
+    <li>
+      authored a small Clojure library for run time type checking
+      (don&#8217;t use mine, use Prismatic&#8217;s)
+    </li>
+    <li>
+      prepared and given a two hour talk about macros at a local meet-up
+    </li>
+  </ul>
+  Pretty incredible for only ~25 minutes a day! That is more
+  programming books than I had read in the previous 2 years. I have
+  improved mightily in such a short time, and it does not feel
+  stressful in the least. Now, when I get home, if I feel like
+  watching movies, cooking, or playing board games/Dark Souls all
+  night, no problem! I can relax knowing I have accomplished my goals
+  for the day. All in all, the last ten months have been incredible:
+  some of the most rewarding, relaxing, and fulfilling months of my
+  life.
+</p>
+<p>
+  Before you scoff and point out that not everyone can take the train
+  to work, consider this: get a portable computer, load up your
+  environment, tools, and some pdfs. The next morning, leave for work
+  ~25 minutes early. You will probably get in way sooner due to the
+  decreased traffic (now you have earned back that time). Sit quietly
+  in your car, and without the distractions of internet or other
+  people, knock out a little programming. Maybe start with SICP (the
+  best programming book I have ever read). See how much you can read
+  and do before work starts. Do that for a month, every day. I
+  guarantee you will learn something amazing.
+</p>
+  
+ 
 </div>
   
   
@@ -262,15 +239,15 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
-      </li>
-    
-      <li class="post">
         <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
         <a href="/emacs-project-tip/">Emacs Project Tip</a>
+      </li>
+    
+      <li class="post">
+        <a href="/skill-continuum/">Software Skills Continuum</a>
       </li>
     
   </ul>
@@ -281,7 +258,7 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
     </li>
     
     
@@ -291,12 +268,12 @@ without constraining itself to &ldquo;what works for testing&rdquo;.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     
