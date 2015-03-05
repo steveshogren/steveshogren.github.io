@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technical Skills | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-04T21:13:14-05:00</updated>
+  <updated>2015-03-04T21:29:23-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -62,9 +62,10 @@ level of safety.
 
 <p>Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
+<div style="overflow-x:scroll">
 <table>
 <tr>
-<th>Safety Check (* indicates enforced)</th>
+<th>Safety Check</th>
 <th></th>
 <th ng-repeat="lang in languages">
  {{ lang.name }} 
@@ -77,7 +78,8 @@ level of safety.
  {{ lang }} 
 </td>
 </tr>
-</table></p>
+</table>
+</div></p>
 
 <p>I want to see your language represented here! I&rsquo;ll happily take
 pull requests so long as they are in the same data structure found
