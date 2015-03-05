@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
-the match statement is in F#. Using match allows the compiler to
-give us &hellip;">
+  <meta name="description" content="I think I have figured out why everyone hates everyone else&rsquo;s code. Humans do not have the mental capacity to write good software. &ldquo;But &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,12 +24,15 @@ give us &hellip;">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  -->
+  <script src="/javascripts/libs/jquery.min.js"></script> 
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="/javascripts/libs/angular.js"></script>
 
   <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -84,7 +85,7 @@ give us &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a></h1>
+      <h1 class="entry-title"><a href="/software-is-too-hard/">Software Is Too Hard</a></h1>
     
     
       <p class="meta">
@@ -94,298 +95,36 @@ give us &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
-the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
-give us warnings for missing cases, no matter what the type.</p>
+  <div class="entry-content"><p>I think I have figured out why everyone hates everyone else&rsquo;s code.</p>
 
-<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
-inversion of the usual OO way of polymorphism. Here is an example that
-is probably familiar to everyone: getting a database connection.</p>
+<h3>Humans do not have the mental capacity to write good software.</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code...</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>&ldquo;But wait, Steve, I am awesome at what I do! I know all the patterns,
+follow all the trends, and read all the blogs. Don&rsquo;t lump me in with
+the slackers, the architecture astronauts, the language enthusiasts!&rdquo;</p>
 
+<p>I promise you I can find other equally good developers who will hate
+your code.</p>
 
-<p>In our example here, we have two concrete implementers of the
-<code>IPaymentRepository</code>, each one with their own implementations. This is
-a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
-would put each of these classes in their own files.</p>
+<p>As an industry, we all muddle along, and most of the time, we can
+produce more value than we consume. I personally know I have been
+profitable to my employers for a while now. This is a good thing, to
+be profitable.</p>
 
-<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
-and interfaces to use pattern matching.</p>
+<p>We don&rsquo;t have be good at software to be profitable.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="nc">InMemory</span>
-</span><span class='line'>   <span class="o">|</span> <span class="nc">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nc">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nc">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="nc">Values</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nc">GetPaymentRepo</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s2">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="s2">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="nc">InMemory</span>
-</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code ...</span>
-</span><span class='line'><span class="k">let</span> <span class="n">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="nc">GetPaymentRepo</span>
-</span><span class='line'><span class="k">let</span> <span class="n">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="nc">GetAll</span> <span class="n">repo</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Don&rsquo;t take it the wrong way, we get a lot done. We solve so many
+problems, and manage to produce so much good. No offense intended,
+but, let&rsquo;s be honest, how many of us are confident in everything we
+have written? Did it scale, was it easy to hand-off, was it tested,
+was it secure, did it come out in time? Chances are, no, it didn&rsquo;t.</p>
 
-
-<p>Notice how we separated our behavior from our types? The
-<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
-are just empty types, much like an <code>Enum</code>. We are still able to get
-polymorphic behavior from them, using <code>match</code>.</p>
-
-<p>But why would we want to store our behavior separate from the type?</p>
-
-<p>By storing the behavior separate from the type, changes that effect a
-single behavior (adding a new function, changing a function&rsquo;s api,
-removing a function) are easier, because they are all grouped
-together. A change to the api of the <code>GetAll</code> function is harder in
-the traditional OO interface structure, requiring modifying several
-files.</p>
-
-<p>Similarly, a change requiring adding a new type is difficult in a
-pattern matching structure, as it will require finding every pattern
-match and adding in the additional case. Thankfully, the F# compiler
-checks both pattern matches and interfaces for us, letting us use the
-best tool for the job!</p>
-
-<p>As to safety, adding a new type is easy with interfaces, but the
-developer is left without assistance to find all places the concrete
-classes are instantiated and add the new type. Neither compiler will
-offer any warnings for a new interface subclass. For pattern matching
-polymorphism, the compiler will warn that there are missing cases
-every place a change needs to be made. While harder to add a new type
-with pattern matching, it is safer.</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th> Adding a Type  </th>
-<th> Modifying Behavior </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td><strong>OO Interfaces/Classes</strong>  </td>
-<td>  Easier / Less Safe  </td>
-<td> Harder / Safe </td>
-</tr>
-<tr>
-<td></td>
-<td><strong>Pattern Matching Types</strong>  </td>
-<td>  Harder / Safe  </td>
-<td> Easier / Safe</td>
-</tr>
-</tbody>
-</table>
-
-
-<br />
-
-
-<p>I almost always find myself modifying the functions of an
-interface more than I find myself adding new types. For that typical
-use case, pattern matching is probably the better choice.</p>
-
-<p>Consider the change where we want to add a new function to the
-<code>IPaymentRepository</code> interface and change the location of the in
-memory dictionary to be stored internally. In the interfaces and
-classes example, that requires editing <em>three separate files</em>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is the change to add a new function in the pattern matching example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="nc">InMemory</span> <span class="k">of</span> <span class="nc">Dictionary</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">,</span> <span class="nc">IPayment</span><span class="o">&gt;</span>
-</span><span class='line'>   <span class="o">|</span> <span class="nc">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nc">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="nc">IPayment</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nc">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="nc">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="nc">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nc">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nc">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="nc">Values</span><span class="o">;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you were concerned that these F# types do not have any state,
-they actually can have fields just like regular classes. Notice the
-<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
-field! The new field does not need to be named until used in a pattern
-match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
-<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
-didn&rsquo;t add it in the pattern match, the compiler would give us a
-warning!</p>
-
-<p>Between the options of traditional interfaces verses pattern matching,
-neither way is truly the best for every circumstance: each comes with
-a trade-off. I liken the trade-offs to the &ldquo;grain of the
-data&rdquo;. Whichever way your system is likely to change the most, that is
-the way you want to optimize your type. The good news is: in F# you
-can have a mix of both, and it is relatively easy to convert back and
-forth depending on how your system is changing the most.</p>
-
-<p>Personally, I find F# pattern matching to be significantly easier to
-read. The same code in C# requires twice the lines in three separate
-files, which adds a complexity burden for no reason. The F# code is
-safer, smaller, and easier to modify than the C# equivalent.</p>
-
-<p>If you write code in C# or VB.NET right now, you could add in a
-project in F# today. All three languages are callable from the other
-two, so you could start by breaking out a small library that uses
-these feature immediately. F# modules and classes are callable from C#
-just like any other DLL library. In my mind, this is what sets F#
-apart from other languages: it is more powerful and safe than C#, but
-with high performance and interoperability with existing C# libraries.</p>
-
-<p>If you want additional reading on the topic of polymorphism, check out
-<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
-
-<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
+<p>So, programming is too hard for humans. Now what? I think we need to
+start simplifying the craft. Accepting our limitations is the first
+step to working around them. The developer who doesn&rsquo;t trust their own
+abilites to build &ldquo;good software&rdquo; will take even greater care. The
+humble developer keeps up with good practices, keeps refining their
+understanding of what makes code &ldquo;good&rdquo; and keeps</p>
 </div>
   
   
@@ -440,19 +179,19 @@ with high performance and interoperability with existing C# libraries.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
+      </li>
+    
+      <li class="post">
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
       </li>
     
       <li class="post">
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+      </li>
+    
+      <li class="post">
         <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
-      </li>
-    
-      <li class="post">
-        <a href="/emacs-project-tip/">Emacs Project Tip</a>
-      </li>
-    
-      <li class="post">
-        <a href="/skill-continuum/">Software Skills Continuum</a>
       </li>
     
   </ul>
@@ -463,22 +202,22 @@ with high performance and interoperability with existing C# libraries.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">15</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">19</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     
@@ -507,6 +246,9 @@ with high performance and interoperability with existing C# libraries.</p>
   Copyright &copy; 2015 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
+
+<script src="/javascripts/sliders.js" type="text/javascript"></script>
+<script src="/javascripts/sliders.js" type="text/javascript"></script>
 
 </footer>
   

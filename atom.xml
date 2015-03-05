@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-02-15T09:31:05-05:00</updated>
+  <updated>2015-03-04T20:51:32-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Programming Language Safety Algorithm]]></title>
+    <link href="http://steveshogren.github.io/programming-language-safety-algorithm/"/>
+    <updated>2015-02-17T14:13:00-05:00</updated>
+    <id>http://steveshogren.github.io/programming-language-safety-algorithm</id>
+    <content type="html"><![CDATA[<p>I think the time has come for a standard programming language scoring
+algorithm that allows us to discuss the relative merits and, more
+importantly, associated costs of various languages and idioms.</p>
+
+<p>Rather than focus on what is <em>possible</em> with a language, I will
+instead suggest we focus on what is typically idiomatic. For example,
+if it is possible to achieve a level of safety in a language but by
+doing something uncommon, that should not be counted.</p>
+
+<pre><code>This is not about "whose language is better".
+</code></pre>
+
+<p>To score a language, simply figure out how many characters it costs to
+&ldquo;prevent&rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is compiler enforced, like F#&rsquo;s
+Option or C#&rsquo;s parameter type enforcement, that is given a -30 to make
+up for the lack of unit tests and code exercising needed to run that
+&ldquo;path&rdquo;. Do not count import lines either, as the importing the module
+will have a negligible effect on the code size and complexity.</p>
+
+<p>If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 for a &ldquo;every change run and debug to
+fix&rdquo; cost.</p>
+
+<pre><code>A lower score is "safer", needing less code to achieve the same
+level of safety.
+</code></pre>
+
+<p>For example:</p>
+
+<p><div ng-app="TableApp">
+<div ng-controller="TableCtrl"></p>
+
+<p>Language Enforced Bonus:
+ {{ enforcedScore }}
+<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
+
+<p>Language Inability Penalty:
+ {{ inabilityPenalty }}
+<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
+
+<p>Show Weights <input type="checkbox" ng-model="showWeights" />
+<p class="lead">
+<table>
+<tr>
+<th>Safety Check (* indicates enforced)</th>
+<th></th>
+<th ng-repeat="lang in languages">
+ {{ lang.name }}
+</th>
+</tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
+<tr><td>Totals</td>
+<td></td>
+<td ng-repeat="lang in langTotals">
+ {{ lang }}
+</td>
+</tr>
+</table></p>
+
+<p>If you want to see what code was used to come up with those numbers,
+and want to put in your own examples, feel free to play with the
+samples below.</p>
+
+<p><h2>Select Language:
+<select ng-options="lang.name for lang in languages" ng-model="selectedLang"></select>
+</h2>
+<h2> {{ selectedLang.name }} </h2>
+<div ng-repeat="check in langChecks">
+<h3> {{ check.name }} </h3>
+<p>
+ {{ check.fn(selectedLang).desc }}
+ {{ score(check.fn(selectedLang)) }}</p>
+
+<p><div>Code: <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" /><div>
+</p>
+</div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Six Unusual Reasons Why Clojure Is a Delight]]></title>
@@ -311,6 +397,26 @@ these features keep me coming back for more!</p>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Opimizing for Crappy Interviews]]></title>
+    <link href="http://steveshogren.github.io/optimizing-for-crappy-interviews/"/>
+    <updated>2014-12-27T13:41:00-05:00</updated>
+    <id>http://steveshogren.github.io/optimizing-for-crappy-interviews</id>
+    <content type="html"><![CDATA[<p>Have you noticed that there are so many different styles of
+interviews?</p>
+
+<p>Recently on /r/programming, there have been a rash of people
+complaining that interviews are terrible. My favorite was the
+commenter who claimed to make the typical FizzBuzz test a tiny bit
+harder by asking for a new word on prime numbers, and no using a
+library call! When others pointed out how hard that is, he was like
+&ldquo;aren&rsquo;t primes just not evenly divisible by 2 or 3?&rdquo;</p>
+
+<p>I saw that comment, and I knew I had a perfect example for the state
+of interviewing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Christmas F# Polymorphism]]></title>
     <link href="http://steveshogren.github.io/christmas-f-number-polymorphism/"/>
     <updated>2014-12-06T13:37:00-05:00</updated>
@@ -573,6 +679,44 @@ the -map function.</p>
 quickly be reminded of your current project.</p>
 
 <p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Software is Too Hard]]></title>
+    <link href="http://steveshogren.github.io/software-is-too-hard/"/>
+    <updated>2014-12-02T16:47:00-05:00</updated>
+    <id>http://steveshogren.github.io/software-is-too-hard</id>
+    <content type="html"><![CDATA[<p>I think I have figured out why everyone hates everyone else&rsquo;s code.</p>
+
+<h3>Humans do not have the mental capacity to write good software.</h3>
+
+<p>&ldquo;But wait, Steve, I am awesome at what I do! I know all the patterns,
+follow all the trends, and read all the blogs. Don&rsquo;t lump me in with
+the slackers, the architecture astronauts, the language enthusiasts!&rdquo;</p>
+
+<p>I promise you I can find other equally good developers who will hate
+your code.</p>
+
+<p>As an industry, we all muddle along, and most of the time, we can
+produce more value than we consume. I personally know I have been
+profitable to my employers for a while now. This is a good thing, to
+be profitable.</p>
+
+<p>We don&rsquo;t have be good at software to be profitable.</p>
+
+<p>Don&rsquo;t take it the wrong way, we get a lot done. We solve so many
+problems, and manage to produce so much good. No offense intended,
+but, let&rsquo;s be honest, how many of us are confident in everything we
+have written? Did it scale, was it easy to hand-off, was it tested,
+was it secure, did it come out in time? Chances are, no, it didn&rsquo;t.</p>
+
+<p>So, programming is too hard for humans. Now what? I think we need to
+start simplifying the craft. Accepting our limitations is the first
+step to working around them. The developer who doesn&rsquo;t trust their own
+abilites to build &ldquo;good software&rdquo; will take even greater care. The
+humble developer keeps up with good practices, keeps refining their
+understanding of what makes code &ldquo;good&rdquo; and keeps</p>
 ]]></content>
   </entry>
   
@@ -1009,6 +1153,133 @@ effort to really master the craft is easy to spot and hard to
 fake. Most people want to work with those who think like them, and you
 cannot think like a master engineer only knowing one tool, so get
 started now, and have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Where to Store Known Issues]]></title>
+    <link href="http://steveshogren.github.io/known-issue-storage/"/>
+    <updated>2014-06-14T22:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/known-issue-storage</id>
+    <content type="html"><![CDATA[<p>Unit tests are the best place to store known issues.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Good Design, Java, or Unit Testing. Pick two.]]></title>
+    <link href="http://steveshogren.github.io/di-is-a-hack/"/>
+    <updated>2014-05-06T12:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/di-is-a-hack</id>
+    <content type="html"><![CDATA[<p>Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?</p>
+
+<p>You cannot have unit testing in Java/C# without dependency injection.</p>
+
+<p>If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
+use/reuse/refactor? Or do you do it because you have to? Can you think
+of a single time where DI made anything easier?</p>
+
+<p>The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.</p>
+
+<p>For example, how would we unit test a function that talks to the
+database in C# without a framework that requires mappings and global
+singletons? We would put an interface around the database connection,
+then pass it into the constructor through an optional parameter. Our
+test would then make another implementor of that interface, and pass
+it in when testing. This is par for the course in Java as well.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// DBConnection.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IDBConnection</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">DBConnection</span> <span class="p">:</span> <span class="n">IDBConnection</span><span class="p">{</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Configuration</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Helpers</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Repositories</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">IDBConnection</span> <span class="n">con</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">(</span><span class="n">IDBConnection</span> <span class="n">con</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">con</span> <span class="p">=</span> <span class="n">con</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">RepositoryFactory</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">DBConnection</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Insert</span><span class="p">(</span><span class="kt">string</span> <span class="n">sql</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="n">con</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Tests grow in maintenance difficulty with the size of the function
+being tested. Often this leads to a design with many small
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
+that each only calls the next. This &ldquo;chain&rdquo; of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.</p>
+
+<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
+replacing a function for testing is easy! Every function does not need
+a twenty-line wrapper, instead we simply replace the function we want
+to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{</span> <span class="nx">getConnection</span><span class="p">().</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">sql</span><span class="p">);}</span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">getConnection</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">new</span> <span class="nx">DatabaseConnection</span><span class="p">();</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// &quot;Mock&quot; the getConnection function in a unit test</span>
+</span><span class='line'><span class="nx">getConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span> <span class="nx">Execute</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sql</span><span class="p">)</span> <span class="p">{}}};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+without constraining itself to &ldquo;what works for testing&rdquo;.</p>
 ]]></content>
   </entry>
   
@@ -1665,6 +1936,25 @@ down bugs and more time adding on features!</p>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Typing Saves You Time]]></title>
+    <link href="http://steveshogren.github.io/typing-saves-you-time/"/>
+    <updated>2014-04-18T22:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/typing-saves-you-time</id>
+    <content type="html"><![CDATA[<p>I used to hate type systems. As a junior programmer, I did most of my
+work in Perl and PHP, so working in C#/Java always felt so
+overwrought. In Java especially, one has to write out the type of the
+varible almost every time you use it, which explodes the amount of
+busywork the developer must do.</p>
+
+<p>Unit tests are a poor man&rsquo;s type system.</p>
+
+<p>There, I said it. You know why I think this? Becuase I just took (am
+taking?) over a legacy codebase. You know what makes that way easier?
+Typing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Learn to Database]]></title>
     <link href="http://steveshogren.github.io/Learn-To-Database/"/>
     <updated>2014-04-16T00:00:00-04:00</updated>
@@ -1739,6 +2029,171 @@ down bugs and more time adding on features!</p>
 </p> <p> This is the story of how I learned an important lesson: if
   you are going to database, LEARN TO DATABASE.
 </p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy Evaluation]]></title>
+    <link href="http://steveshogren.github.io/Lazy-Lists/"/>
+    <updated>2014-03-06T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/Lazy-Lists</id>
+    <content type="html"><![CDATA[<p>
+  I just read an awesome way to define a lazy list. 
+</p>
+<p>
+  
+</p>
+
+ 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dangerous Clojure Macros]]></title>
+    <link href="http://steveshogren.github.io/anaphoric-macros/"/>
+    <updated>2014-02-04T16:56:00-05:00</updated>
+    <id>http://steveshogren.github.io/anaphoric-macros</id>
+    <content type="html"><![CDATA[<p>Clojure allows you to write macros that mutate the world.</p>
+
+<p>So what?</p>
+
+<p>I&rsquo;ll walk you through it. What is the result of this expression?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'>    <span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>  <span class="nv">x</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result is 1, right? That was easy. How about this?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="nv">x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The let returns 12. What does x look like inside addTen? It is bound to 2.</p>
+
+<p>What does this return?
+Clojure macros by default are &ldquo;hygenic&rdquo;, which means they cannot mutate bindings.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span><span class='line'><span class="c1">;; =&gt; clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can&#39;t let qualified name: user/z,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clojure prevents you from accidentally shadowing a value by throwing such an exception.
+This means that it is hygenic by default, but it is possible to &ldquo;break out&rdquo; and make it unhygenic.
+Do force a value to shadow another, you simply have to give it the prefix ~&lsquo;
+Here is the same macro, only with z replaced by ~&#8217;z</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This returns 111.</p>
+
+<p>Here it is with the macro expanded:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the 111 makes more sense.
+Unhygenic macros let you shadow bindings.
+In this case, we shadowed [z 1] with [z 100].</p>
+
+<p>Why would you ever want to do this?
+Lets look at a real example.</p>
+
+<p>I find prefix notation to be frustrating when I am writing a lot of arithmetic.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">value</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
+I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">_&gt;</span> <span class="nv">value</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is much easier for my western eyes to read, it replaces the previous &ldquo;inside out&rdquo; style with a more natural left to right.
+To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
+Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">_</span> <span class="nv">value</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span>
+</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">)]</span>
+</span><span class='line'>  <span class="nv">_</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which, with unhygenic macros, is easy to do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">_&gt;</span> <span class="p">[</span><span class="nv">init</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">init</span>
+</span><span class='line'>         <span class="o">~@</span><span class="p">(</span><span class="nb">mapcat </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">x</span><span class="p">])</span>
+</span><span class='line'>                   <span class="nv">body</span><span class="p">)]</span>
+</span><span class='line'>     <span class="o">~</span><span class="ss">&#39;_</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
+For each element in the body, we bind its result to ~&lsquo;_.</p>
 ]]></content>
   </entry>
   
@@ -2431,170 +2886,6 @@ No, of course this doesn&#8217;t do everything a full debugger does, but at leas
 <br />
 <br />
 The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sorry, But Refactorings Are Not Free (Technical Debt Interest)]]></title>
-    <link href="http://steveshogren.github.io/refactoring-not-free/"/>
-    <updated>2013-05-27T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/refactoring-not-free</id>
-    <content type="html"><![CDATA[<p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
-<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
-<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
-<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
-<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
-<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
-<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
-<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Escape from {{#PROGRAMMING_LANGUAGE}}]]></title>
-    <link href="http://steveshogren.github.io/how-to-escape-from-programming_language/"/>
-    <updated>2013-03-10T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/how-to-escape-from-programming_language</id>
-    <content type="html"><![CDATA[As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of javascript libraries alone is increasing at a furious pace: Angular, Backbone, Node, Ember, Knockout, Knockback, Meteor, etc, etc, etc. Who has a chance at keeping up? While having so many options is also beneficial, it makes it more and more challenging for a single developer to stay relevant.
-<br />
-<br />
-You are a good programmer. No, you are a great programmer. But, you are stuck in one development stack. You want to diversify your knowledge, experience, and skill set, but your resume reads like a one-act play. Chances are, you didn&#8217;t deliberately choose to work in this stack. At the start of your career, the first job you landed was probably the best you could find. Several years have gone by, and you are beginning to realize that the development world is moving on.
-<br />
-<br />
-Maybe you have already tried, having gone to a few interviews. Nevertheless, you’re still as stuck as when you started, because many of the cool shops are still figuring out how to do good hiring in this new, fast-changing paradigm. They want developers who already have experience in their stack, but they haven&#8217;t realized that filtering for previous experience is only one heuristic for finding good talent. So, what are your options?
-<br />
-<br />
-Here is how to escape from your language. Like all the best advice, it is simple, yet profound. It consists of the following three steps:
-<br />
-<br />
-1. Pick a new stack.<br />
- 2. Learn it.<br />
- 3. Build a network.
-<br />
-<br />
-Picking a stack is not an easy thing to do, but I have good news for you: once you master these steps, you won&#8217;t ever be stuck again. No matter which one you pick, when the time comes, you will be able to quickly move way ahead of the pack. Don’t worry about trying to pick the one that will last your whole career, since, (and this may come as a shock to you) it probably won&#8217;t last you a decade! That&#8217;s why we should love software development, for the fast pace! If you want a job that never changes, go be a <del>librarian</del> <del>doctor</del> <del>lawyer</del> gardener.
-<br />
-<br />
-Which language should you pick? You have two big categories to choose from that I suggest:
-<ul>
-	<li dir="ltr">The popular</li>
-	<li dir="ltr">The exotic</li>
-</ul>
-<br />
-The popular languages have significantly more, and a greater variety of jobs. On the down side, you also have more competition from other developers, and most of them have been using that language since before they were born. To stand out here, you need something to differentiate yourself from the other candidates: a unique perspective, skill in another programming paradigm, an ability to quickly learn new things, rapidly change contexts, etc. Figure out what your unique contributions are, and communicate them clearly.
-<br />
-<br />
-Alternatively, on the exotic route, you pick an up-and-coming language, the new hotness, as it were. Because it is so new, there are much fewer jobs in this language, and less long-term stability. Consequently, there are also much fewer experienced developers. Savvy companies using this language will hire interested developers, despite them lacking any experience with it. (All your hard work in step two will really pay off here.)
-<br />
-<br />
-Having chosen a language, now it’s time to learn it! Fill your github with work in that language.
- Read some books on it. Look for ways to use it at your current job. If your situation allows, start a big side project in it. You don&#8217;t HAVE to open-source the code on github, but this certainly helps to publicize your learning. Companies seek prior job experience to avoid having to pay to train you; well then, beat them to the punch by already knowing it!
-<br />
-<br />
-To build your network, go to meetups and get involved in them. I cannot emphasize this enough.
- Stick out your hand and introduce yourself. Make connections with the people you meet. Learn about the tools people use at their work. You will begin to think like a developer in that stack as you’re exposed to new concepts. Soon enough, you will develop a sense of what companies are hiring and who would give you a recommendation at their company.
-<br />
-<br />
-Mind your attitude when interviewing. Resist the urge to cynically compare and contrast the old and new stacks. I have interviewed too many candidates who could not stop talking about how great their old language is, or how “these new hipster languages are just a fad”. While you are certainly always entitled to your opinion, (who knows, you may even be right!), carrying on like this in an interview setting never leaves a good impression.
-<br />
-<br />
-Perhaps you’re thinking that this is just too much effort. Just like everything in life, choosing not to move is also a valid move. I like to call it &#8220;riding into the sunset&#8221;. In this option, you never leave your language, ever. Though this may feel like the safer choice right now, it carries its own risks. If you hate maintenance projects, you need to learn to love them, because they are going to be your bread and butter. But, you will be competing for these projects with all the other sunsetters, and there are going to be a lot of them. From what I have heard, however, once you have reached the point where there are more maintenance jobs than there are remaining developers, you really do get to write your own ticket, but this can take decades. My great uncle did this, and he managed to stay employed in COBOL till he retired.
-<br />
-<br />
-While escaping from your stack requires effort, by following the steps you can achieve it in just a few hours a week. So, get out there and do it!
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Suck Less at Your New Job]]></title>
-    <link href="http://steveshogren.github.io/new-job-todo-list/"/>
-    <updated>2013-01-19T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/new-job-todo-list</id>
-    <content type="html"><![CDATA[<p>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.</p>
-
-<p>For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.</p>
-
-<p>Notice I said differently, not better.</p>
-
-<p>All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way. I have seen new developers come onto a team and complain endlessly about something that is clearly a net benefit for them and the team. However, the team is so used to doing it their way that they cannot imagine changing.</p>
-
-<p>Allow me to share a personally painful example.</p>
-
-<p>Much to my regret, when I moved into .NET development coming from the scripting world, I complained non-stop about how annoying it was to have to assign a type to everything.</p>
-<blockquote>
-<p dir="ltr"><p>“I mean, in perl and php we got along great without it, so why on earth should anyone have to go through all this extra hassle?”</p></p>
-</blockquote>
-<p>I didn’t realize how strong typing enabled very powerful tooling, and to be perfectly honest, I probably didn’t care. However, I did realize that my complaints were falling on deaf ears. My co-workers, who had never even looked at a dynamically typed language before, didn’t care. Much worse, I was alienating myself from them, becoming<em> that guy</em>, the one who just complains all the time. I sucked.</p>
-
-<p>So, I decided on a new policy. Whenever something offended my sensibilities, seeming worse, wrong or just different, I would document it in a to-do list (I use <a href="http://orgmode.org/">org-mode</a> in emacs, because it’s mind-alteringly cool). I would stop complaining about it, stop making sidelong hints at it. I would just add it to the list. Apparently, I was pretty opinionated about how to make that team better, because that list grew monstrously large in just a few months.</p>
-
-<p>Next, I would review that list every week. Whenever I had downtime I would pick something small and try to implement whatever I needed to make that work, things like:  like installing a CI server, or figuring out how to unit test this crazy actionscript fla.</p>
-
-<p>If an issue was too large or I lacked the understanding to resolve all at once, I would do root cause analysis and brainstorm different ways to achieve the goal. Sometimes, I would take something off the list, either because it was too costly to justify its value, or because sometimes I realized I was grossly incorrect in my understanding of the issue.</p>
-
-<p>So, back to my example about static typing. After about a year, I realized there was no way I could reasonably argue it was worth a change. No one but me cared, no one was interested in<a href="http://deliberate-software.com/how-to-escape-from-programming_language/" target="_blank"> learning new languages to try to use for development</a>, and the cost to convert anyway would have been staggering (and conversion was likely impossible).</p>
-
-<p>Meanwhile, I learned that while static typing is a cost of doing business in some languages, statically-typed languages lead the modern pack for powerful refactoring tooling (at least ‘til Yegge’s team finishes their quest for the Holy Grail (the <a href="https://plus.google.com/110981030061712822816/posts/KaSKeg4vQtz">Grok Project</a>; search that post for grok. And I said modern tools, so no smalltalk flame!)). My arguments advocating a change basically fell into two categories:: “I like it better”, and, “you won’t miss those refactoring and intellisense tools much”. You can imagine my co-workers’ reaction to either category: *Sad trombone*. Good thing I was keeping them all to myself in my to-do list.</p>
-
-<p>This process, this simple change, powerfully changed my behavior and attitude. I am convinced that it helped me to mature, both socially and as a developer. No longer was I the whiny developer looking to his team lead to “kiss his boo-boos”, I was learning to weigh cost/benefits of both my short- and long-term goals for that team.</p>
-
-<p>I also discovered a serendipitous side-effect from my todo-list. After about a year and a half when all the pain points had grown calloused, I was able to look back over my list for outstanding reminders of points of our process, still needing refinement. It was a way for me to reconnect with my <a href="http://www.c2.com/cgi/wiki?BeginnersMind">beginners mind</a>, and it was very helpful.</p>
-
-<p>Since I started this process have I been able to participate in many discussions about an idea, article, or pain point another developer had mentioned where I have already thought through my position, because it is either something I have already noticed and have been working on a solution for, or I have been researching it, or I concluded (from my limited perspective) it wasn’t worth the effort.</p>
-
-<p>Not many people reflect this deeply or have their thoughts so organized on important subjects affecting their work. It would make a powerful impression were you to find yourself involved in a hallway discussion with your boss about training, and you could nonchalantly add:</p>
-<blockquote>
-<p dir="ltr"><p>“Oh, new hire training. Yes, I have been considering how we train new hires for a long time, and I have a few ideas here on what would help our particular needs.”</p></p>
-</blockquote>
-<p>Additionally, a few times something I had previously concluded wasn’t worth the effort due to internal political reasons suddenly has become possible, and I have been able to lead the group in that new endeavor, having spent effort considering and concluding how to best implement it.</p>
-
-<p>When you find yourself complaining about the pain of a new job, don’t be a whiner. Don’t try to bully the other developers into doing things according to your “obviously better” way. Write your pain points down and start planning how you can truly impact your team for the best.</p>
-<p> (see also: <a href="http://www.manager-tools.com/2009/08/delta-file">http://www.manager-tools.com/2009/08/delta-file</a>)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ego Driven Development]]></title>
-    <link href="http://steveshogren.github.io/ego-driven-development/"/>
-    <updated>2012-10-01T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/ego-driven-development</id>
-    <content type="html"><![CDATA[<p><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.</span><p /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">EDD plagues many organizations; here just some of the symptoms you might encounter:</span><p /> </p><ul style="margin-top:0;margin-bottom:0;"><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">&#8220;Not Invented Here&#8221; syndrome:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Expressed most commonly in a desire for everything needed to be developed in house. E.g.: &ldquo;Need a CMS? Let&rsquo;s make our own from scratch!&rdquo; Perhaps, you work at a place where all your teammates do is constantly bring you bad ideas. Are they really all terrible? &nbsp;Or are only your ideas good enough for the organization? Not Invented Here can also apply to your own head, not just the organization.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Little to no test coverage of domain logic:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> There are plenty of great developers who do not need automated tests to remember all the little quirks of their systems when working alone, and that works fine until you bring on a second developer. Domain logic tests are about increasing communication and speed</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;"> for the team</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">, and they are part of being a good citizen of a team.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No dedicated UI person for external user interfaces or no actual user testing:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Either the developers or the manager think they are good enough to design excellent and understandable user interfaces or do not realize the importance of this. Think of a &#8220;Steve Jobs&#8221;-type manager who imagines himself to be a prodigy of design and usability, or the developer who &#8220;doesn&#8217;t think design is all that hard&#8221;. Real users trying out your software for a few minutes will tell you more than you would believe.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No dedicated QA for externally-facing software:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Someone who is experienced at breaking software should have a crack at it </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;">before </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">it goes to users. Developers (including me) are too enamored with their own work to really take the time to break it, so someone with a sense of pride in finding problems needs to be given the task.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">&#8220;</span><a href="http://en.wikipedia.org/wiki/Ivory_Tower"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Ivory Tower</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">&#8221; or &#8221;</span><a href="http://www.joelonsoftware.com/articles/fog0000000018.html"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Architecture Astronaut</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">&#8221; team leads: </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">The team member that is focused on &#8220;perfection&#8221; of the design or code to the detriment of the business. This is not an easy distinction to make, and no one becomes this without a heart full of good intentions. &#8220;If only the test coverage could be higher&#8221; (when it is already high) or &#8220;we can make our own programming language to solve this so much more elegantly&#8221;. Like I said, a fine line that takes many years of experience and deep familiarity with the business and the domain to discern.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Broad skill level spectrum (that stays static):</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> A huge gap in skill level between the best and worst team members. Most often happens when a bunch of new hires come on board, and were not skilled enough for the task or were not trained properly. The original team members decide the new members are &#8220;not worth the effort&#8221; and neglect to train them in the hopes they will be fired. Months, or even years later, the &#8220;new members&#8221; are still struggling along, berated by the &#8220;elites&#8221;.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No pair programming:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Very few activities will raise the water level for all the team members like pairing. It trains new developers quickly, as well as allows the older developers to see the pain points of a system through a new set of eyes.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Micro-management in some areas, no management in others: </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">When</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">leads and managers put too much effort and management into some areas, to the neglect of other areas. Some tickets will be crammed with detail down to the database column names, others will be one-liners covering a month of work. Typically, this is a top-down effect, starting at upper management and trickling down to the lowest levels. Whatever the &#8220;eye of Sauron&#8221; is focused on is what the whole chain of command suddenly turns its laser focus towards, while the rest of the projects/tickets are abandoned by all but the developer assigned to the ticket.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Agile &ldquo;Lite&rdquo;:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Everyone pretty much has heard that agile is a fast development methodology. What often happens is that management either does not learn enough about it to implement correctly, or does not like the &#8220;chaotic&#8221; nature of true agile, and so attempts to adopt the &#8220;best parts&#8221;. Typically this means splitting work into &#8220;sprints&#8221; and having a &#8220;stand-up&#8221;, while developers all just work off of tickets assigned and estimated by their leads. Often this happens because the person who makes the call on whether or not to implement agile falsely believes themselves (and the team) to be &#8220;good enough to not need it&#8221;.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Low</span><a href="http://www.joelonsoftware.com/articles/fog0000000043.html"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> </span><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Joel Test</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> score:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> The Joel Test remains a great indicator of institutional ego. A team that scores low on the Joel Test does so because someone along the way decided that, &#8220;nah, we don&#8217;t need that here, we are special&#8221;, and almost certainly they are not. I have yet to hear of a team with a legitimate reason for a low Joel Test score.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><strong>*Edit* Low pay: </strong>Ah, yes, the shops that pay their developers significantly lower than the average in that location, language, and experience. This one is hard, because it really is almost always up to just one person, and the developer usually only gets to vote with their feet: by either staying or going. If you are that person, you had best consider what you are missing out on by remaining in a positon where you are underpaid.<br /></span></li></ul><p><br /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Ego driven development is unfortunately self-reinforcing. Much of it is caused by individual pride, and usually it is driven by someone towards the top of the chain of command. While it can be a </span><a href="http://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle#Vicious_circle_2"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">vicious cycle</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> trickling down, it is possible to break out of the loop by fighting back against EDD with humility and an attitude of just doing what&#8217;s best for the team. I have seen managers take tremendous crap from above, and never let a bit of it touch those below them. Those managers were heroes we all fought to impress, because we knew how hard they worked to make our teams better. I have seen experienced developers swallow their pride, and do the boring, tedious, hard, and less fun work for the betterment of the whole, in the process grew into someone much more productive.</span><p /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">EDD is possible to defeat. Treat everyone with respect, and praise what steps they do take in the right direction. Set aside your ego, and when you get micro-managed and treated with disdain from those above you, do what it takes to make sure that doesn&#8217;t trickle down to those below you and at your level. Pick a few things on this list that you know you are not doing well, and tackle the root cause. Swallow your pride, and do your part to be excellent, and your work will thrive. </span></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learn That New Programming Language The Startup Way: For Intermediate Devs]]></title>
-    <link href="http://steveshogren.github.io/learn-that-new-programming-language-the-start/"/>
-    <updated>2012-08-07T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/learn-that-new-programming-language-the-start</id>
-    <content type="html"><![CDATA[<p>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don&#8217;t, you have got to give it a shot at least once. You&#8217;ll never be the same. And no, I am not talking about <a href="http://projecteuler.net/">Project Euler</a>, although that has its place.</p><p>First, do a bit of research, and get your hands on the best book on the language you can find. Second, research the language, and pick a project to which it is well suited. For example, to learn Clojure, I decided to re-write an old php project from scratch that I was well familiar with. (This also gives me the neat data point of seeing how much smaller the project is in Clojure)&nbsp;Try not to be too ambitious here, you want something you could pull off in your current go-to language.</p><p>Start the project, and work under a dozen hours on it, bashing your way through the first pains of installing the language/framework (my least favorite part), and getting a basic proof of concept together. If it&#8217;s a web site, think &#8220;hello world&#8221; coming out of your database of choice. Tell all your friends what you are going to make, and when it is launching. Make sure the launch date is ambitious. Start to read the book splitting your time roughly 25/75 between reading and programming, using what you read to provide you with &#8220;ammunition&#8221; for your project. Do this in as short a loop as possible, so the reading and programming are never far apart.</p><p>Since you will be fighting through real problems, the reading is a hundred times more interesting. Almost every page you will have to stop yourself from shouting, &#8220;OF COURSE!&#8221; out loud at the book, because you have just discovered something that is an extremely real pain point to you. <span>You may find yourself laughing more than once in sheer delight</span> because you anticipated a part of the language correctly, and just found the syntax for it. If that is not happening, you probably need to adjust the ratio of programming to reading. You want to find that sweet spot of just barely learning what you need to succeed, and constantly being &#8220;saved&#8221; by reading that last tidbit last night. If even the simplest things take unpleasantly long, perhaps more reading. If the reading is dragging too much, try more programming. When you hit that sweet spot, the programming is an exhilarating rush, and the reading is actually fun. If none of these happen, perhaps you are learning a language that does not really teach you anything new, just a different syntax for the same thing you are used to doing, in which case, ask yourself why you are learning that language. There are plenty out there that will <a href="http://norvig.com/21-days.html">blow your mind</a>.</p><p>Don&#8217;t forget that deadline either, your friends and family are waiting, remember? Hustle is the name of the game here, and don&#8217;t worry, you&#8217;ll make tons of mistakes, and you&#8217;ll never forget a single one. Who cares? (No one will ever know but you!) If experience is learning from a lot of mistakes, you&#8217;ll be the most experienced person around!</p><p>When that deadline looms, don&#8217;t give up! Step up your game, slash the second-best features, and race for the finish. If you are way off your mark, you can consider pushing the date back, but still deliver something on your original date. Once you are done, unwind for a few months, take it easy, then repeat. After a couple of those iterations you will be seriously more experienced in a wide variety of languages, and you will find yourself much more confident in your language-that-pays.</p><p>Do this a couple of times and you&#8217;ll not only get better at that language, you&#8217;ll get better at all of them. You will start to see the underlying concepts that cause languages to be written the way they are. The language families will start to run together, and you will develop the intuition of what you need to do with just the trivial task of remembering (or looking up) the syntax. Your programming skill will move to a higher plane of abstraction, and you will think outside the specific language. The language just becomes an implementation detail, just words that tell the compiler or interpreter what you mean. Reading other people&#8217;s code will become significantly easier, and you will find learning a new language is almost faster reading the masters&#8217; code on github than with a book at all.</p><p><strong>TL;DR</strong> <span>Don&#8217;t let what little time you have discourage  you. A few minutes a day sneaking in one more function is better than a  few minutes a day moping in front of the TV wishing you had more time  for programming. </span>I understand not everyone can put in &#8220;this kind of time&#8221; (or energy) into side projects. Heck, plenty of times I cannot either. Sometimes, you only have a few hours a month on the good months. That&#8217;s fine. Take that date, stretch it out to the end of the year. Slip in that reading on the ride home, or at lunch. Make every moment you spend on it count.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[On Developer Certifications]]></title>
-    <link href="http://steveshogren.github.io/on-developer-certifications/"/>
-    <updated>2012-02-28T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/on-developer-certifications</id>
-    <content type="html"><![CDATA[<p>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.<p /> Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months. Who would be on the committee? And what would they agree on to enforce? Regex? Recursion, OO, testability, and functional programming?&nbsp; Proof of understanding in the half-dozen <a href="http://norvig.com/21-days.html" target="_blank">&#8220;mind expanding&#8221;</a> languages? Not going to happen. Not while my Joomla-site maintaining friend and my Android 3D game authoring cohort are both lumped under the title &#8220;software developer&#8221;. The field is too vast, the content too broad, and the jobs too diverse. <p /> So, we are doomed to wallow. Or are we? What is the one thing we all have to do?<em> Get hired.</em><p />I used to be a big sissy about interviewing for jobs. Especially interviews full of the nit-picky details I can never remember, yeah, I <em>really</em> hate those. I would moan and groan about how the interviewer could only answer those questions because they had to look them up the other day. &#8220;MySQL index implementations, what am I, a DBA?!&#8221;, I would screech to anyone who would listen, &#8220;They must have misunderstood, I am a developer, when would I ever need to know that?!&#8221;<p /> But.<p />Interview prep gets me to cram stuff into my head I would otherwise skim or avoid if just sitting at home programming for fun. I get a great refresher on all the stuff I am fully able to do at work, but maybe I haven&#8217;t needed in a while. Like linked-lists. In four years of fairly diverse programming jobs, I have<strong> yet</strong> to need a linked list for anything, but man, when that day comes, I have linked-lists in a quick-draw holster. I used to say the same thing about trees, then last year, I had a problem that surely needed a tree, and hear you me, I had that data being in-order traversed before you could say: &#8220;tree&#8221;. Would I have even <em>remembered</em> <em>what trees are good for</em> without my semi-annual refresher?<p /> My wife is a commercial pilot, and every so often she is required to skim over all those little details about being a pilot, refreshing <em>everything</em>, double-checking her knowledge so she can keep her licenses, <em>even if she hasn&#8217;t needed a certain technique since the last test</em>. Huh. Sounds like me, every so often, cramming for an interview.<p />  We don&#8217;t need certifications for being a programmer. We already have the tools in hand, and just need to learn to use them better. <strong>Interviews are our certifications. </strong></p><p>This is a double-edged sword, because this means that, &#8220;what you sow, you will also reap&#8221;.  The responsibility to keep standards high falls on the interviewer. If  you interview a candidate for tricky puzzle questions, or in-depth  knowledge of C++ libraries, you will find someone who knows those  things, and possibly ONLY knows those things. I have seen developers hired who couldn&#8217;t handle VCS merging or shipping actual software, but were absolute <em>geniuses</em> when it came to programming language trivia and puzzle questions.</p><p>A few months ago, I read of a guy with no programming experience who did like 100 interviews in a few weeks, till he was a master interviewee. By the end, he was able to pick his choice of companies, and <strong>yet </strong><strong>he couldn&#8217;t ship software</strong>. He gamed a system <em>intended</em> to sort out good developers by asking questions that are ancillary to development, without actually having the candidate <em>prove any real ability</em>. And now that company has a developer who is great at gaming systems, but unskilled at development: I hope they have a good training program.</p><p>No offense intended to the man who did this, I <strong>really </strong>admire his tenacity and clever thinking, and I think he will do well regardless of the task. But it speaks volumes to the brokenness of the interview system for those companies that would hire a completely unskilled developer based on the correct answers to trivia questions about programming.</p><p>Parting question to consider for interviewers: if interviews are our certifications, what should a candidate be able to do to be &#8220;certified&#8221; to be able to do the job in question?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quality Is Future Speed]]></title>
-    <link href="http://steveshogren.github.io/quality-is-future-speed/"/>
-    <updated>2012-02-23T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/quality-is-future-speed</id>
-    <content type="html"><![CDATA[<p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[New Year's Android Triumph]]></title>
-    <link href="http://steveshogren.github.io/new-years-triumph/"/>
-    <updated>2012-01-01T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/new-years-triumph</id>
-    <content type="html"><![CDATA[<p>December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.<p />The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours. I basically had a &#8220;buggy beta&#8221; by Wednesday morning, and all the problems remaining were ones I didn&#8217;t know how to solve or hide, and while all the graphics where there, I could barely stand to look at them. I felt like I was spinning my wheels with no progress. My friend Dan tried to talk me down, pointing out with some clarity that there was no gun to my head, and I was doing this for myself, so I could stop any time. Amusingly enough, that was exactly what I needed to hear. I was doing this for myself, to better myself, to learn more discipline. I wanted to stretch my abilities to the limits. So, I pushed through. I found a book that showed me how to fix my problems, and I didn&#8217;t stop until every bug I could find was fixed, and everything my poor family pointed out (I made them each play it like a dozen different times) was smoothed.<p />  And last night, after about a hundred hours of total work this month, I slid under the wire with roughly two hours to spare. The game is not in the market YET, because at the end of it all, I concluded I would rather spend the few dozen more hours to convert it to OpenGL ES, and add in a few neat things I was unable to do using the Android canvas, but for a v1, I am immensely proud of the whole experience.<p />I can say, unequivocally; WHEW. <p />This challenge was a fantastic learning experience, and I had several great reminders of what my dad always told me growing up: <strong>just work smarter, son, not harder</strong>.</p>
 ]]></content>
   </entry>
   
