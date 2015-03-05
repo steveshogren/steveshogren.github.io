@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you. For every new company you &hellip;">
+  <meta name="description" content="In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/new-job-todo-list/">How to Suck Less at Your New Job</a></h1>
+      <h1 class="entry-title"><a href="/testing-is-to-programming-what-math-is-to-eng/">Testing Is to Programming What Math Is to Engineering</a></h1>
     
     
       <p class="meta">
@@ -95,46 +95,71 @@
   </header>
 
 
-  <div class="entry-content"><p>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.</p>
-
-<p>For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.</p>
-
-<p>Notice I said differently, not better.</p>
-
-<p>All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way. I have seen new developers come onto a team and complain endlessly about something that is clearly a net benefit for them and the team. However, the team is so used to doing it their way that they cannot imagine changing.</p>
-
-<p>Allow me to share a personally painful example.</p>
-
-<p>Much to my regret, when I moved into .NET development coming from the scripting world, I complained non-stop about how annoying it was to have to assign a type to everything.</p>
-<blockquote>
-<p dir="ltr"><p>“I mean, in perl and php we got along great without it, so why on earth should anyone have to go through all this extra hassle?”</p></p>
-</blockquote>
-<p>I didn’t realize how strong typing enabled very powerful tooling, and to be perfectly honest, I probably didn’t care. However, I did realize that my complaints were falling on deaf ears. My co-workers, who had never even looked at a dynamically typed language before, didn’t care. Much worse, I was alienating myself from them, becoming<em> that guy</em>, the one who just complains all the time. I sucked.</p>
-
-<p>So, I decided on a new policy. Whenever something offended my sensibilities, seeming worse, wrong or just different, I would document it in a to-do list (I use <a href="http://orgmode.org/">org-mode</a> in emacs, because it’s mind-alteringly cool). I would stop complaining about it, stop making sidelong hints at it. I would just add it to the list. Apparently, I was pretty opinionated about how to make that team better, because that list grew monstrously large in just a few months.</p>
-
-<p>Next, I would review that list every week. Whenever I had downtime I would pick something small and try to implement whatever I needed to make that work, things like:  like installing a CI server, or figuring out how to unit test this crazy actionscript fla.</p>
-
-<p>If an issue was too large or I lacked the understanding to resolve all at once, I would do root cause analysis and brainstorm different ways to achieve the goal. Sometimes, I would take something off the list, either because it was too costly to justify its value, or because sometimes I realized I was grossly incorrect in my understanding of the issue.</p>
-
-<p>So, back to my example about static typing. After about a year, I realized there was no way I could reasonably argue it was worth a change. No one but me cared, no one was interested in<a href="http://deliberate-software.com/how-to-escape-from-programming_language/" target="_blank"> learning new languages to try to use for development</a>, and the cost to convert anyway would have been staggering (and conversion was likely impossible).</p>
-
-<p>Meanwhile, I learned that while static typing is a cost of doing business in some languages, statically-typed languages lead the modern pack for powerful refactoring tooling (at least ‘til Yegge’s team finishes their quest for the Holy Grail (the <a href="https://plus.google.com/110981030061712822816/posts/KaSKeg4vQtz">Grok Project</a>; search that post for grok. And I said modern tools, so no smalltalk flame!)). My arguments advocating a change basically fell into two categories:: “I like it better”, and, “you won’t miss those refactoring and intellisense tools much”. You can imagine my co-workers’ reaction to either category: *Sad trombone*. Good thing I was keeping them all to myself in my to-do list.</p>
-
-<p>This process, this simple change, powerfully changed my behavior and attitude. I am convinced that it helped me to mature, both socially and as a developer. No longer was I the whiny developer looking to his team lead to “kiss his boo-boos”, I was learning to weigh cost/benefits of both my short- and long-term goals for that team.</p>
-
-<p>I also discovered a serendipitous side-effect from my todo-list. After about a year and a half when all the pain points had grown calloused, I was able to look back over my list for outstanding reminders of points of our process, still needing refinement. It was a way for me to reconnect with my <a href="http://www.c2.com/cgi/wiki?BeginnersMind">beginners mind</a>, and it was very helpful.</p>
-
-<p>Since I started this process have I been able to participate in many discussions about an idea, article, or pain point another developer had mentioned where I have already thought through my position, because it is either something I have already noticed and have been working on a solution for, or I have been researching it, or I concluded (from my limited perspective) it wasn’t worth the effort.</p>
-
-<p>Not many people reflect this deeply or have their thoughts so organized on important subjects affecting their work. It would make a powerful impression were you to find yourself involved in a hallway discussion with your boss about training, and you could nonchalantly add:</p>
-<blockquote>
-<p dir="ltr"><p>“Oh, new hire training. Yes, I have been considering how we train new hires for a long time, and I have a few ideas here on what would help our particular needs.”</p></p>
-</blockquote>
-<p>Additionally, a few times something I had previously concluded wasn’t worth the effort due to internal political reasons suddenly has become possible, and I have been able to lead the group in that new endeavor, having spent effort considering and concluding how to best implement it.</p>
-
-<p>When you find yourself complaining about the pain of a new job, don’t be a whiner. Don’t try to bully the other developers into doing things according to your “obviously better” way. Write your pain points down and start planning how you can truly impact your team for the best.</p>
-<p> (see also: <a href="http://www.manager-tools.com/2009/08/delta-file">http://www.manager-tools.com/2009/08/delta-file</a>)</p>
+  <div class="entry-content"><p>
+  In ancient times, plenty of builders did their work without math,
+  and I would guess that a good portion of them likely did it faster
+  then their math-doing counterparts.
+</p>
+<p >
+  I am certain that when builders first started using math to prove
+  that buildings would stand up safely, they were mocked by their
+  math-less counterparts. I can hear them now, &#8220;Oh, Stephos, it takes
+  you 5 times longer to prove your building will stand up, real men
+  can just <em>see</em> that it will work&#8221;. Even in modern times, many
+  people build houses and small buildings that probably don&#8217;t even
+  need the math to really &#8220;prove&#8221; they work, but they perform the due
+  diligence anyway. On the other hand, some people today still build
+  houses, sheds, tree-houses, lofts, and fire pits without any
+  drawings or math at at all, and why should they? They are
+  responsible for the risk.
+</p>
+<p >
+  This is all fine, but, builders who shy away from math also don&#8217;t
+  build airliners, space shuttles, and skyscrapers. An aircraft
+  designer who doesn&#8217;t feel like using math to prove their aircraft
+  will fly is handed an &#8220;Experimental&#8221; sticker and gravely patted on
+  the back.
+</p>
+<p >
+  Today, programming is at the same place as both
+  ancient <strong>and</strong> modern engineering: many projects can
+  be done &#8220;by eye&#8221;, and some of the most experienced programmers are
+  able to build immense projects alone without any sort of automated
+  testing at all. When you go to a forum and ask for help, you are
+  just as likely to hear from a &#8220;space shuttle&#8221; programmer as you are
+  to hear from a &#8220;tin shack&#8221; programmer. The &#8220;space shuttle&#8221;
+  programmer would be horrified to hear of working without automated
+  testing and rigorous review practices, whereas the &#8220;tin shack&#8221;
+  programmer would be horrified to think of the time wasted to
+  even <em>learn the procedures</em> to automatically prove his code
+  works as it should. The &#8220;space shuttle&#8221; programmer might work on the
+  same internal financial project for months or years, finally
+  releasing with zero defects; the &#8220;tin shack&#8221; programmer might churn
+  out several quick web sites a day. Neither project
+  is <em>better</em> then the other, they both might be perfect for
+  what their business needs.
+</p>
+<p>
+  I have heard several times from very good lone wolf programmers that
+  testing just slows them down, and in some ways, it does appear to be
+  a slowdown for them. Unfortunately, the cost to build even
+  medium-sized projects with several workers without automated testing
+  is only felt when it is too late, when the deadlines (and costs) are
+  spiraling out of control.
+</p>
+<p>
+  The disciplined application of mathematics transformed and
+  solidified the field of engineering into a field far more vast and
+  capable of some of the most incredible constructions imaginable.
+  Would we have smart-phones, GPS, modern cars, and airliners if
+  engineering had just avoided mathematics? Just imagine what the
+  field of programming could grow into if we continue to learn and
+  grow our testing, designing, and writing of software.
+</p>
+<p>
+  I propose that automated testing is to programming what math was
+  to ancient engineering.
+</p>
 </div>
   
   
@@ -197,11 +222,11 @@
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
       </li>
     
   </ul>
@@ -212,7 +237,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
     </li>
     
     
@@ -222,12 +247,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

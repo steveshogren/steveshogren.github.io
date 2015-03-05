@@ -1,10 +1,3 @@
-$('#lang').on('change', function(){
-    $("#lang option").each(function() {
-        $('#' + $(this).val()).hide();
-    });
-    $('#' + $(this).val()).show();
-});
-
 var tableApp = angular.module('TableApp', []);
 
 tableApp.directive('scoreRow', function(){
@@ -29,12 +22,22 @@ tableApp.directive('scoreRow', function(){
             languageFn: '&',
             name: '='
         },
-        template: '<tr> <td>{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
+        template: '<tr ng-class-even="evens"> <td>{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
     };
 });
 
 tableApp.controller('TableCtrl', function ($scope) {
+    $scope.$watch('inabilityPenalty', function(n, old){
+        if(n !== old){
+            $scope.updateTotals();
+        }
+    });
     $scope.$watch('enforcedScore', function(n, old){
+        if(n !== old){
+            $scope.updateTotals();
+        }
+    });
+    $scope.$watchCollection('languages', function(n, old){
         if(n !== old){
             $scope.updateTotals();
         }
@@ -46,6 +49,7 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.langtotals = [];
 
     $scope.cleanCode = function(c){
+        if (!c) { return "";}
         var t = c.replace(/<![a-zA-Z-]+!>/g, "");
         return t.replace(/\s/g, "");
     };
@@ -54,7 +58,7 @@ tableApp.controller('TableCtrl', function ($scope) {
         if (!t.weight) { t.weight = 100;}
         var count = 0;
         var delta = 0;
-        if (typeof t.rawCode === "undefined" && !t.rawCode) {
+        if ((typeof t.rawCode === "undefined" && !t.rawCode) || t.rawCode == "") {
             if (t.enforced === "yes") {
                 delta = -$scope.enforcedScore;
             } else if (t.enforced === "no"){
@@ -93,7 +97,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             $scope.langTotals.push(t);
         });};
 
-    $scope.languages = [
+    $scope.allLanguages = [
         {
             missingEnum: {
                 enforced: "no",
@@ -336,11 +340,17 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             nullField: {
                 enforced: "no",
-                desc: "Javascript the common pattern is to check if something is there with an OR statement.",
+                desc: "Javascript the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
                 rawCode: "if (l !== null) {<!consequent!>} else {<!alternative!>}"
             }
         }
     ];
+
+    $scope.languages = 
+     [$scope.allLanguages[0],
+     $scope.allLanguages[1],
+     $scope.allLanguages[2],
+     $scope.allLanguages[3]];
 
     $scope.updateTotals();
     $scope.selectedLang = $scope.languages[0];

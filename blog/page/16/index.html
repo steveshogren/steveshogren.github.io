@@ -9,11 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Clojure allows you to write macros that mutate the world. So what? I&rsquo;ll walk you through it. What is the result of this expression? 1
-2
-3
-4
-( &hellip;">
+  <meta name="description" content="One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you. For every new company you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/anaphoric-macros/">Dangerous Clojure Macros</a></h1>
+      <h1 class="entry-title"><a href="/new-job-todo-list/">How to Suck Less at Your New Job</a></h1>
     
     
       <p class="meta">
@@ -99,147 +95,46 @@
   </header>
 
 
-  <div class="entry-content"><p>Clojure allows you to write macros that mutate the world.</p>
+  <div class="entry-content"><p>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.</p>
 
-<p>So what?</p>
+<p>For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.</p>
 
-<p>I&rsquo;ll walk you through it. What is the result of this expression?</p>
+<p>Notice I said differently, not better.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'>    <span class="nv">x</span><span class="p">)</span>
-</span><span class='line'>  <span class="nv">x</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way. I have seen new developers come onto a team and complain endlessly about something that is clearly a net benefit for them and the team. However, the team is so used to doing it their way that they cannot imagine changing.</p>
 
+<p>Allow me to share a personally painful example.</p>
 
-<p>The result is 1, right? That was easy. How about this?</p>
+<p>Much to my regret, when I moved into .NET development coming from the scripting world, I complained non-stop about how annoying it was to have to assign a type to everything.</p>
+<blockquote>
+<p dir="ltr"><p>“I mean, in perl and php we got along great without it, so why on earth should anyone have to go through all this extra hassle?”</p></p>
+</blockquote>
+<p>I didn’t realize how strong typing enabled very powerful tooling, and to be perfectly honest, I probably didn’t care. However, I did realize that my complaints were falling on deaf ears. My co-workers, who had never even looked at a dynamically typed language before, didn’t care. Much worse, I was alienating myself from them, becoming<em> that guy</em>, the one who just complains all the time. I sucked.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="nv">x</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>So, I decided on a new policy. Whenever something offended my sensibilities, seeming worse, wrong or just different, I would document it in a to-do list (I use <a href="http://orgmode.org/">org-mode</a> in emacs, because it’s mind-alteringly cool). I would stop complaining about it, stop making sidelong hints at it. I would just add it to the list. Apparently, I was pretty opinionated about how to make that team better, because that list grew monstrously large in just a few months.</p>
 
+<p>Next, I would review that list every week. Whenever I had downtime I would pick something small and try to implement whatever I needed to make that work, things like:  like installing a CI server, or figuring out how to unit test this crazy actionscript fla.</p>
 
-<p>The let returns 12. What does x look like inside addTen? It is bound to 2.</p>
+<p>If an issue was too large or I lacked the understanding to resolve all at once, I would do root cause analysis and brainstorm different ways to achieve the goal. Sometimes, I would take something off the list, either because it was too costly to justify its value, or because sometimes I realized I was grossly incorrect in my understanding of the issue.</p>
 
-<p>What does this return?
-Clojure macros by default are &ldquo;hygenic&rdquo;, which means they cannot mutate bindings.</p>
+<p>So, back to my example about static typing. After about a year, I realized there was no way I could reasonably argue it was worth a change. No one but me cared, no one was interested in<a href="http://deliberate-software.com/how-to-escape-from-programming_language/" target="_blank"> learning new languages to try to use for development</a>, and the cost to convert anyway would have been staggering (and conversion was likely impossible).</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span><span class='line'><span class="c1">;; =&gt; clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can&#39;t let qualified name: user/z,</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Meanwhile, I learned that while static typing is a cost of doing business in some languages, statically-typed languages lead the modern pack for powerful refactoring tooling (at least ‘til Yegge’s team finishes their quest for the Holy Grail (the <a href="https://plus.google.com/110981030061712822816/posts/KaSKeg4vQtz">Grok Project</a>; search that post for grok. And I said modern tools, so no smalltalk flame!)). My arguments advocating a change basically fell into two categories:: “I like it better”, and, “you won’t miss those refactoring and intellisense tools much”. You can imagine my co-workers’ reaction to either category: *Sad trombone*. Good thing I was keeping them all to myself in my to-do list.</p>
 
+<p>This process, this simple change, powerfully changed my behavior and attitude. I am convinced that it helped me to mature, both socially and as a developer. No longer was I the whiny developer looking to his team lead to “kiss his boo-boos”, I was learning to weigh cost/benefits of both my short- and long-term goals for that team.</p>
 
-<p>Clojure prevents you from accidentally shadowing a value by throwing such an exception.
-This means that it is hygenic by default, but it is possible to &ldquo;break out&rdquo; and make it unhygenic.
-Do force a value to shadow another, you simply have to give it the prefix ~&lsquo;
-Here is the same macro, only with z replaced by ~&#8217;z</p>
+<p>I also discovered a serendipitous side-effect from my todo-list. After about a year and a half when all the pain points had grown calloused, I was able to look back over my list for outstanding reminders of points of our process, still needing refinement. It was a way for me to reconnect with my <a href="http://www.c2.com/cgi/wiki?BeginnersMind">beginners mind</a>, and it was very helpful.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">addTen</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="o">~</span><span class="nv">x</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">addTen</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Since I started this process have I been able to participate in many discussions about an idea, article, or pain point another developer had mentioned where I have already thought through my position, because it is either something I have already noticed and have been working on a solution for, or I have been researching it, or I concluded (from my limited perspective) it wasn’t worth the effort.</p>
 
+<p>Not many people reflect this deeply or have their thoughts so organized on important subjects affecting their work. It would make a powerful impression were you to find yourself involved in a hallway discussion with your boss about training, and you could nonchalantly add:</p>
+<blockquote>
+<p dir="ltr"><p>“Oh, new hire training. Yes, I have been considering how we train new hires for a long time, and I have a few ideas here on what would help our particular needs.”</p></p>
+</blockquote>
+<p>Additionally, a few times something I had previously concluded wasn’t worth the effort due to internal political reasons suddenly has become possible, and I have been able to lead the group in that new endeavor, having spent effort considering and concluding how to best implement it.</p>
 
-<p>This returns 111.</p>
-
-<p>Here it is with the macro expanded:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">z</span> <span class="mi">100</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">+ </span><span class="mi">10</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">z</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the 111 makes more sense.
-Unhygenic macros let you shadow bindings.
-In this case, we shadowed [z 1] with [z 100].</p>
-
-<p>Why would you ever want to do this?
-Lets look at a real example.</p>
-
-<p>I find prefix notation to be frustrating when I am writing a lot of arithmetic.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">- </span><span class="mi">1</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">value</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
-I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">_&gt;</span> <span class="nv">value</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is much easier for my western eyes to read, it replaces the previous &ldquo;inside out&rdquo; style with a more natural left to right.
-To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
-Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">_</span> <span class="nv">value</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">2</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="nv">_</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">_</span> <span class="p">(</span><span class="nb">- </span><span class="nv">_</span> <span class="mi">1</span><span class="p">)]</span>
-</span><span class='line'>  <span class="nv">_</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which, with unhygenic macros, is easy to do:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">_&gt;</span> <span class="p">[</span><span class="nv">init</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">init</span>
-</span><span class='line'>         <span class="o">~@</span><span class="p">(</span><span class="nb">mapcat </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="o">`</span><span class="p">[</span><span class="o">~</span><span class="ss">&#39;_</span> <span class="o">~</span><span class="nv">x</span><span class="p">])</span>
-</span><span class='line'>                   <span class="nv">body</span><span class="p">)]</span>
-</span><span class='line'>     <span class="o">~</span><span class="ss">&#39;_</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This takes the initial value as init, and the &ldquo;rest&rdquo; as the body.
-For each element in the body, we bind its result to ~&lsquo;_.</p>
+<p>When you find yourself complaining about the pain of a new job, don’t be a whiner. Don’t try to bully the other developers into doing things according to your “obviously better” way. Write your pain points down and start planning how you can truly impact your team for the best.</p>
+<p> (see also: <a href="http://www.manager-tools.com/2009/08/delta-file">http://www.manager-tools.com/2009/08/delta-file</a>)</p>
 </div>
   
   
@@ -302,11 +197,11 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
       </li>
     
   </ul>
@@ -317,7 +212,7 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
     </li>
     
     
@@ -327,12 +222,12 @@ For each element in the body, we bind its result to ~&lsquo;_.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

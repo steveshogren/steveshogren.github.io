@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-04T21:29:23-05:00</updated>
+  <updated>2015-03-05T10:07:06-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -41,7 +41,8 @@ will have a negligible effect on the code size and complexity.</p>
 
 <p>If there is a safety feature that is not possible to achieve
 programmatically, we will add +30 for a &ldquo;every change run and debug to
-fix&rdquo; cost.</p>
+fix&rdquo; cost, such as C# not having a way to prevent stack overflow
+exceptions caused by recursion.</p>
 
 <pre><code>A lower score is "safer", needing less code to achieve the same
 level of safety.
@@ -63,18 +64,27 @@ level of safety.
 <p>Show Weights <input type="checkbox" ng-model="showWeights" />
 <p class="lead">
 <div style="overflow-x:scroll">
-<table>
+<table class="langtable">
 <tr>
 <th>Safety Check</th>
 <th></th>
-<th ng-repeat="lang in languages">
- {{ lang.name }} 
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="lang.name for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
 <tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
-<tr><td>Totals</td>
+<tr class="totals"><td>Totals</td>
 <td></td>
-<td ng-repeat="lang in langTotals">
+<td ng-repeat="lang in langTotals track by $index">
  {{ lang }} 
 </td>
 </tr>
@@ -87,10 +97,13 @@ here: <a href="https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1ed
 
 <p>If you want to see what code was used to come up with those numbers,
 and want to put in your own examples, feel free to play with the
-samples below:</p>
+samples below. Code surrounded with &lt;! !> is ignored from the tally,
+since it would vary heavily based on the language and desired
+result. Variable and type names are kept at single characters, which
+are counted.</p>
 
 <p><h2>Select Language:
-<select ng-options="lang.name for lang in languages" ng-model="selectedLang"></select>
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
 <h2> {{ selectedLang.name }} </h2>
 <div ng-repeat="check in langChecks">
@@ -100,7 +113,10 @@ samples below:</p>
  {{ score(check.fn(selectedLang)) }} </p>
 
 <p><div>
-Code: <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
+Code:
+<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(check.fn(selectedLang).rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
 </div>
 </p>
 </div></p>
