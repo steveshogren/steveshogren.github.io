@@ -338,7 +338,7 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No real idiomatic way to check."
             },
             name: "JavaScript",
-            softname: "JavaScript",
+            softname: "Browser Lang",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
