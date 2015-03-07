@@ -9,9 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I think the time has come for a standard programming language scoring
-algorithm that allows us to discuss the relative merits and, more
-importantly, &hellip;">
+  <meta name="description" content="I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,37 +97,79 @@ importantly, &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I think the time has come for a standard programming language scoring
-algorithm that allows us to discuss the relative merits and, more
-importantly, associated costs of various languages and idioms.</p>
+  <div class="entry-content"><p>I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &ldquo;has strong-static
+types&rdquo;.</p>
+
+<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.</p>
+
+<p>I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.</p>
+
+<p>By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
+is to build such good abstractions.</p>
+
+<pre><code>This model is not about language "power".
+</code></pre>
+
+<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
+&ldquo;abstract-ability&rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
+level.</p>
 
 <p>Rather than focus on what is <em>possible</em> with a language, I will
-instead suggest we focus on what is typically idiomatic. For example,
-if it is possible to achieve a level of safety in a language but by
-doing something uncommon, that should not be counted.</p>
-
-<pre><code>This is not about "whose language is better".
-</code></pre>
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.</p>
 
 <p>To score a language, simply figure out how many characters it costs to
 &ldquo;prevent&rdquo; a certain type of error, and add that to the
 total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is compiler enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 to make
-up for the lack of unit tests and code exercising needed to run that
-&ldquo;path&rdquo;. Do not count import lines either, as the importing the module
-will have a negligible effect on the code size and complexity.</p>
+punctuation does. If a specific check is language enforced, like F#&rsquo;s
+Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.</p>
 
 <p>If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 for a &ldquo;every change run and debug to
-fix&rdquo; cost, such as C# not having a way to prevent stack overflow
-exceptions caused by recursion.</p>
+programmatically, we will add +30 (by default) for a &ldquo;every change run
+and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.</p>
 
-<pre><code>A lower score is "safer", needing less code to achieve the same
-level of safety.
+<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
 </code></pre>
 
-<p>For example:</p>
+<p>Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.</p>
 
 <p><div ng-app="TableApp">
 <div ng-controller="TableCtrl"></p>
@@ -148,16 +190,16 @@ level of safety.
 <th>Safety Check</th>
 <th></th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[0]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[1]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[2]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
 </th>
 <th>
-<select ng-options="lang.name for lang in allLanguages" ng-model="languages[3]"></select>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
 <tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
@@ -167,37 +209,53 @@ level of safety.
  {{ lang }}
 </td>
 </tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ percentageTotals(lang) }}%
+</td>
+</tr>
 </table>
 </div></p>
 
-<p>I want to see your language represented here! I&rsquo;ll happily take
-pull requests so long as they are in the same data structure found
-here: <a href="https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158">language data structure</a></p>
+<p>I want to see your language represented here! I&rsquo;ll happily take pull
+requests for new languages so long as they are in the same data
+structure found here: <a href="https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158">language data structure</a></p>
 
-<p>If you want to see what code was used to come up with those numbers,
-and want to put in your own examples, feel free to play with the
-samples below. Code surrounded with &lt;! !> is ignored from the tally,
-since it would vary heavily based on the language and desired
-result. Variable and type names are kept at single characters, which
-are counted.</p>
+<p>I would love to see every major language represented, including major
+language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &ldquo;Scala &ndash; The Better Java&rdquo;
+and &ldquo;Scala &ndash; The JVM Haskell&rdquo; have vastly different idioms with
+apparently very separate communities.</p>
+
+<p><h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
+
+<p><div ng-show="showRealName"> Feel free to put in your own examples by
+playing with the samples below. Code surrounded with &lt;! !> is ignored
+from the tally, since it would vary heavily based on the language and
+desired result. Variable and type names are kept at single characters,
+which are counted. Feel free to add in your own language below, and
+use the copy feature to extract the data structure to use in a pull
+request.</p>
 
 <p><h2>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </h2>
-<h2> {{ selectedLang.name }} </h2>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+<h2><input ng-model="selectedLang.name"></input></h2>
 <div ng-repeat="check in langChecks">
-<h3> {{ check.name }} </h3>
+<h3> {{ check.name }} :  {{ score(check.fn(selectedLang)) }}  </h3>
 <p>
- {{ check.fn(selectedLang).desc }}
- {{ score(check.fn(selectedLang)) }}</p>
-
-<p><div>
-Code:
+<textarea class="widetextarea" rows="5" ng-model="check.fn(selectedLang).desc"></textarea>
+<div>
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="check.fn(selectedLang).enforced"></select>
 <div class="tablecode">1234567890123456789012345678901234567890</div>
 <div class="tablecode" >  {{ cleanCode(check.fn(selectedLang).rawCode) }}  </div>
 <input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
 </div>
 </p>
+</div>
 </div></p>
 
 <p>Hope this is a helpful way to think about language safety!</p>

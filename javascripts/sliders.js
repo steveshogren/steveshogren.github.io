@@ -22,7 +22,7 @@ tableApp.directive('scoreRow', function(){
             languageFn: '&',
             name: '='
         },
-        template: '<tr ng-class-even="evens"> <td>{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
+        template: '<tr ng-class-even="evens"> <td class="tdname">{{name}}</td><td><span ng-show="$parent.showWeights">{{weight}}%  <input ng-model="weight" type="range" min="0" step="10" max="100" /></span></td> <td ng-repeat="lang in languages track by $index" ng-class="{enforcedscore:languageFn()(lang).enforced===\'yes\'}">  {{ score(languageFn()(lang), weight) }}  </td> </tr>'
     };
 });
 
@@ -46,7 +46,20 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.enforcedScore = 30;
     $scope.inabilityPenalty = 30;
     $scope.showWeights = false;
-    $scope.langtotals = [];
+    $scope.langTotals = [];
+
+    $scope.showRealName = false;
+    $scope.getName = function(lang){
+        if($scope.showRealName){return lang.name;}
+        return lang.softname;
+    };
+    
+    $scope.percentageTotals = function(total){
+        var min = Math.min.apply(null, $scope.langTotals),
+            max = Math.max.apply(null, $scope.langTotals) - min,
+            shiftedTotal = total - min;
+        return Math.ceil(100-((100*(shiftedTotal))/max));
+    };
 
     $scope.cleanCode = function(c){
         if (!c) { return "";}
@@ -58,35 +71,35 @@ tableApp.controller('TableCtrl', function ($scope) {
         if (!t.weight) { t.weight = 100;}
         var count = 0;
         var delta = 0;
-        if ((typeof t.rawCode === "undefined" && !t.rawCode) || t.rawCode == "") {
-            if (t.enforced === "yes") {
-                delta = -$scope.enforcedScore;
-            } else if (t.enforced === "no"){
-                delta = $scope.inabilityPenalty;
-            } else if (t.enforced === "warn"){
-                delta = 0;
-            }
+        if (t.enforced === "yes") {
+            delta = -$scope.enforcedScore;
+        } else if (t.enforced === "no"){
+            delta = $scope.inabilityPenalty;
+        } else if (t.enforced === "warn"){
+            delta = 0;
+        }
+        if ((typeof t.rawCode === "undefined" && !t.rawCode) || t.rawCode === "") {
+            count = 0;
         } else {
-            delta = t.enforced === "yes" ? -$scope.enforcedScore : 0;
             count = $scope.cleanCode(t.rawCode).length;
         }
         return Math.ceil((t.weight / 100) * (count + delta));
     };
 
 
-    $scope.langChecks = [{name:"Null Reference Method/Field Invocation", fn:function(l){return l.nullField;}},
+    $scope.langChecks = [{name:"Test for Null Variable Reference", fn:function(l){return l.nullField;}},
                          {name:"Null List Iteration", fn:function(l){return l.nullList;}},
                          {name:"Putting wrong type into variable", fn:function(l){return l.wrongVaribleType;}},
                          {name:"Missing List Element ", fn:function(l){return l.missingListElem;}},
                          {name:"Incorrect Type Casting", fn:function(l){return l.wrongCast;}},
                          {name:"Passing Wrong Type to Method", fn:function(l){return l.wrongTypeToMethod;}},
-                         {name:"Calling Missing Method/Field/Function/Variable/Constant", fn:function(l){return l.missingMethodOrField;}},
-                         {name:"Missing Enum Dispatch Implementation", fn:function(l){return l.missingEnum;}},
-                         {name:"Unexpected Variable Mutation ", fn:function(l){return l.variableMutation;}},
+                         {name:"Calling or Setting Misspelled Method, Field, Function, Variable", fn:function(l){return l.missingMethodOrField;}},
+                         {name:"Missing Enum Value In Switch/Case or If/Else", fn:function(l){return l.missingEnum;}},
+                         {name:"Unexpected Variable Mutation", fn:function(l){return l.variableMutation;}},
                          {name:"Deadlock prevention", fn:function(l){return l.deadLocks;}},
                          {name:"Memory Deallocation", fn:function(l){return l.memoryDeallocation;}},
                          {name:"Stack Overflow Exceptions Caused by Recursion", fn:function(l){return l.recursionStackOverflow;}},
-                         {name:"Ensure Code Executes When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
+                         {name:"Guaranteed Code Evaluation When Passed To a Function", fn:function(l){return l.consistentCodeExecution;}}];
 
     $scope.updateTotals = function(){
         $scope.langTotals = [];
@@ -96,6 +109,18 @@ tableApp.controller('TableCtrl', function ($scope) {
             },0);
             $scope.langTotals.push(t);
         });};
+    $scope.copyToClipboard = function(text){
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", JSON.stringify(text));
+    };
+    $scope.enforcedTypes = ["yes", "no", "warn"];
+    $scope.enforcedNice = function(e){
+        if (e==="warn") {
+            return "Unenforced: No extra penalty";
+        } else if(e==="yes") {
+            return "Enforced: Add bonus";
+        } 
+        return "Impossible: Add penalty";
+    };
 
     $scope.allLanguages = [
         {
@@ -105,16 +130,16 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             recursionStackOverflow: {
                 enforced: "no",
-                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm."
+                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. Source: http://stackoverflow.com/a/18582585/496112"
             },
             nullList: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "Same check as for a null field.",
                 rawCode: "if (l != null) {<!consequent!>} else {<!alternative!>}"
             },
             deadLocks: {
                 enforced: "no",
-                desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
+                desc: "As far as I know, there is way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
                 enforced: "yes",
@@ -125,13 +150,14 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             name: "C#",
+            softname: "Popular VM Lang",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
             },
             missingListElem: {
-                enforced: "no",
-                desc: "",
+                enforced: "warn",
+                desc: "Source: http://www.dotnetperls.com/indexoutofrangeexception",
                 rawCode: "if (l.Count() > i) {<!consequent!>} else {<!alternative!>}"
             },
             wrongTypeToMethod: {
@@ -139,8 +165,8 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             variableMutation: {
-                enforced: "no",
-                desc: "For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly.",
+                enforced: "warn",
+                desc: "For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? To prevent this, in C#, we would idiomatically make a new class and make the field readonly. Source: https://msdn.microsoft.com/en-us/library/acdd6hb7.aspx",
                 rawCode: "public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}"
             },
             markupName: "csharp",
@@ -150,32 +176,32 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             comment: "//",
             wrongCast: {
-                enforced: "no",
-                desc: "",
+                enforced: "warn",
+                desc: "Source: http://stackoverflow.com/a/13405826/496112",
                 rawCode: "var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}"
             },
             nullField: {
-                enforced: "no",
-                desc: "It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them 'too much', so we will count the traditional 'if-else' for the most idiomatic way of checking if the field is null before using it.",
+                enforced: "warn",
+                desc: "It is possible to use the ternary operator as well, but a quick StackOverflow search shows a lot of comments cautioning against using them 'too much', so we will count the traditional 'if-else' for the most idiomatic way of checking if the field is null before using it. Sourced from: http://stackoverflow.com/a/4660186/496112 and http://stackoverflow.com/a/3312825/496112 ",
                 rawCode: "if (l != null) {<!consequent!>} else {<!alternative!>}"
             }
         },
         {
             missingEnum: {
                 enforced: "warn",
-                desc: "The compiler offers this as a warning with no extra code (but it is not enforced)."
+                desc: "The compiler offers this as a warning with no extra code (but it is not enforced). Source: http://fsharpforfunandprofit.com/posts/match-expression/"
             },
             recursionStackOverflow: {
                 enforced: "yes",
-                desc: "F# recursive functions calls are converted into loop constructs by the compiler automatically."
+                desc: "F# recursive function calls are converted into loop constructs by the compiler automatically. Source: http://blogs.msdn.com/b/fsharpteam/archive/2011/07/08/tail-calls-in-fsharp.aspx"
             },
             nullList: {
                 enforced: "yes",
-                desc: "In F#, the idiomatic list cannot be made null by the compiler, so there is no check."
+                desc: "In F#, the idiomatic list cannot be made null by the compiler, so there is no check. Source: https://msdn.microsoft.com/en-us/library/dd233197(v=vs.110).aspx"
             },
             deadLocks: {
                 enforced: "no",
-                desc: "As far as I know, there is provide any way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
+                desc: "As far as I know, there is no way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
                 enforced: "yes",
@@ -186,12 +212,13 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "Compiler Enforced."
             },
             name: "F#",
+            softname: "ML VM Lang",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
             },
             missingListElem: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "",
                 rawCode: "if l.Count() > i then <!consequent!> else <!alternative!>"
             },
@@ -201,7 +228,7 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             variableMutation: {
                 enforced: "warn",
-                desc: "In F# we idiomatically would use whatever fit the need most: an existing class, a let bound primitive, a tuple, etc rather than make a whole class just for the immutability. F# class fields and values are immutable by default, so nothing extra."
+                desc: "In F# we idiomatically would use whatever fit the need most: an existing class, a let bound primitive, a tuple, etc rather than make a whole class just for the immutability. F# class fields and values are immutable by default, so nothing extra. Source: http://fsharpforfunandprofit.com/posts/correctness-immutability/ "
             },
             markupName: "fsharp",
             memoryDeallocation: {
@@ -211,12 +238,12 @@ tableApp.controller('TableCtrl', function ($scope) {
             comment: "//",
             wrongCast: {
                 enforced: "yes",
-                desc: "",
+                desc: "Source: http://stackoverflow.com/a/2362114/496112",
                 rawCode: "match o with | :? T as m -> <!consequent!> | _ -> <!alternative!>"
             },
             nullField: {
                 enforced: "yes",
-                desc: "In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function 'sequential application' written: (<*>) automatically tests for Some or None, and applies the consequent only if the value is Some, otherwise returning a default alternative of None.",
+                desc: "In F#, it is idiomatic to use Option instead of null (most classes cannot be made null without special effort). The FSharpx library function 'sequential application' written: (<*>) automatically tests for Some or None, and applies the consequent only if the value is Some, otherwise returning a default alternative of None. Source: http://tomasp.net/blog/applicative-functors.aspx/",
                 rawCode: "<!consequent!> <*> l"
             }
         },
@@ -226,8 +253,8 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No way to idiomatically check."
             },
             recursionStackOverflow: {
-                enforced: "no",
-                desc: "Clojure provides a syntax for tail-call opimization, called loop/recur.",
+                enforced: "warn",
+                desc: "Clojure provides an optional syntax for tail-call optimization, called loop/recur.",
                 rawCode: "(loop [<!params!>] (recur <!args!>))"
             },
             nullList: {
@@ -240,26 +267,27 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             missingMethodOrField: {
                 enforced: "yes",
-                desc: "Clojure, the language checks for this before runtime."
+                desc: "Clojure checks for this before runtime."
             },
             wrongVaribleType: {
-                enforced: "no",
-                desc: "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime error.",
+                enforced: "warn",
+                desc: "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime check.",
                 rawCode: "(instance? c x)"
             },
             name: "Clojure",
+            softname: "Lisp VM Lang",
             consistentCodeExecution: {
                 enforced: "no",
                 desc: "Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent."
             },
             missingListElem: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "Clojure's 'get' also gets values out of lists by index.",
                 rawCode: "(get i <!list!> <!default-value!>)"
             },
             wrongTypeToMethod: {
                 enforced: "warn",
-                desc: "In Clojure, parameters can be annotated with a type, which is checked at runtime: "
+                desc: "In Clojure, parameters can be annotated with a type or typeshape using a typeshaping library like Schema, which is checked at runtime."
             },
             variableMutation: {
                 enforced: "yes",
@@ -272,12 +300,12 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             comment: ";;",
             wrongCast: {
-                enforced: "no",
-                desc: "Requires a try/catch block around the primitive cast function.",
-                rawCode: "(try (<!T!> o) (catch Exception e <!alternative!>))"
+                enforced: "warn",
+                desc: "Requires a try/catch block around the primitive cast function, for example (double ...)",
+                rawCode: "(try (T o) (catch Exception e <!alternative!>))"
             },
             nullField: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use 'get' which checks for nil by default.",
                 rawCode: "(get l <!lookup-keyword!> <!default-if-missing!>)"
             }
@@ -289,19 +317,19 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             recursionStackOverflow: {
                 enforced: "no",
-                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm."
+                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. Source: http://stackoverflow.com/questions/9497625/javascript-recursion-maximum-call-stack-size-exceeded "
             },
             nullList: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "Same check as for a null field.",
                 rawCode: "if (l !== null) {<!consequent!>} else {<!alternative!>}"
             },
             deadLocks: {
-                enforced: "yes",
-                desc: "Javascript is single threaded, and uses a queue for asynchronous execution responses like from calls to Ajax methods. As such, deadlocks are not possible by design. Javascript therefore is restricted in its abilities, but this is about categorizing safety only."
+                enforced: "warn",
+                desc: "Javascript is single threaded, and uses a queue for asynchronous execution responses like from calls to Ajax methods. As such, deadlocks are not possible by design. Javascript therefore is restricted in its abilities, but this is about categorizing safety only. Source: http://stackoverflow.com/a/17969359/496112"
             },
             missingMethodOrField: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "It is common to use the OR statement to get a field OR something else if it isn't there or empty.",
                 rawCode: "t.f || <alternative>"
             },
@@ -310,12 +338,13 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No real idiomatic way to check."
             },
             name: "JavaScript",
+            softname: "JavaScript",
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
             },
             missingListElem: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "",
                 rawCode: "if (l.length > i) {<!consequent!>} else {<!alternative!>}"
             },
@@ -324,8 +353,8 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No real idiomatic way to check."
             },
             variableMutation: {
-                enforced: "no",
-                desc: "The Immutabile.js library offers a simple set of tools for adding in immutability, under the Immutabile namespace.",
+                enforced: "warn",
+                desc: "The Immutable.js library offers a simple set of tools for adding in immutability, under the Immutable namespace. Source: https://github.com/facebook/immutable-js",
                 rawCode: "Immutable.Map(<!object!>)"
             },
             markupName: "javascript",
@@ -339,8 +368,8 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "No real idiomatic way to check."
             },
             nullField: {
-                enforced: "no",
-                desc: "Javascript the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
+                enforced: "warn",
+                desc: "In Javascript, the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
                 rawCode: "if (l !== null) {<!consequent!>} else {<!alternative!>}"
             }
         }
