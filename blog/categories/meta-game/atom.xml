@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-07T15:23:57-05:00</updated>
+  <updated>2015-03-07T15:46:02-05:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -180,6 +180,12 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="chec
 </div></p>
 
 <p>Hope this is a helpful way to think about language safety!</p>
+
+<p>Special thanks to (in alphabetical order):
+Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
+Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
+Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
+Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
 ]]></content>
   </entry>
   
