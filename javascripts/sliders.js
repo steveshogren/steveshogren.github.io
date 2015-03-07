@@ -48,6 +48,8 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.showWeights = false;
     $scope.langTotals = [];
 
+    $scope.showEdit = false;
+
     $scope.showRealName = false;
     $scope.getName = function(lang){
         if($scope.showRealName){return lang.name;}
@@ -115,11 +117,11 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.enforcedTypes = ["yes", "no", "warn"];
     $scope.enforcedNice = function(e){
         if (e==="warn") {
-            return "Unenforced: No extra penalty";
+            return "Unenforced (No extra penalty)";
         } else if(e==="yes") {
-            return "Enforced: Add bonus";
+            return "Enforced (Add bonus)";
         } 
-        return "Impossible: Add penalty";
+        return "Impossible (Add penalty)";
     };
 
     $scope.allLanguages = [
