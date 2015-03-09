@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lisp | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-07T16:19:55-05:00</updated>
+  <updated>2015-03-09T08:17:52-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Lazy Evaluation]]></title>
+    <link href="http://steveshogren.github.io/Lazy-Lists/"/>
+    <updated>2014-03-06T00:00:00-05:00</updated>
+    <id>http://steveshogren.github.io/Lazy-Lists</id>
+    <content type="html"><![CDATA[<p>
+  I just read an awesome way to define a lazy list. 
+</p>
+
+
+<p>
+  
+</p>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Intro To Macros]]></title>

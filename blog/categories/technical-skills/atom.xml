@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technical Skills | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-07T16:19:55-05:00</updated>
+  <updated>2015-03-09T08:17:52-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -123,7 +123,7 @@ below the table.</p>
 <select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
 </th>
 </tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" language-fn="check.fn"></tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
 <tr class="totals"><td>Totals</td>
 <td></td>
 <td ng-repeat="lang in langTotals track by $index">
@@ -140,8 +140,9 @@ below the table.</p>
 </div></p>
 
 <p>I want to see your language represented here! I&rsquo;ll happily take pull
-requests for new languages so long as they are in the same data
-structure found here: <a href="https://github.com/steveshogren/blog-source/blob/22f907bb2d43b1edf7ca8807c32bb4542c887d93/source/javascripts/sliders.js#L97-L158">language data structure</a></p>
+requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
+use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
+language data structure.</p>
 
 <p>I would love to see every major language represented, including major
 language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
@@ -168,14 +169,14 @@ request.</p>
 <div ng-show="showEdit">
 <h2><input ng-model="selectedLang.name"></input></h2>
 <div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(check.fn(selectedLang)) }}  </h3>
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
 <p>
-<textarea class="widetextarea" rows="5" ng-model="check.fn(selectedLang).desc"></textarea>
+<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
 <div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="check.fn(selectedLang).enforced"></select>
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
 <div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(check.fn(selectedLang).rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="check.fn(selectedLang).rawCode" />
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
 </div>
 </p>
 </div>
@@ -184,13 +185,14 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="chec
 <p><div ng-show="!showEdit">
 <h2> {{ selectedLang.name }} </h2>
 <div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(check.fn(selectedLang)) }}  </h3>
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
 <p>
- {{ check.fn(selectedLang).desc }} 
+ {{ selectedLang[check.key].desc }} 
 <div>
-Code:  {{ enforcedNice(check.fn(selectedLang).enforced)  }} 
-<div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(check.fn(selectedLang).rawCode) }}  </div>
+Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }} 
+<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
 </div>
 </p>
 </div>
@@ -200,6 +202,7 @@ Code:  {{ enforcedNice(check.fn(selectedLang).enforced)  }}
 <p>Hope this is a helpful way to think about language safety!</p>
 
 <p>Special thanks to (in alphabetical order):
+Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
 Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
 Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
 Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and

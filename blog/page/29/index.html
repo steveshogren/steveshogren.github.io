@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ &hellip;">
+  <meta name="description" content="December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
+      <h1 class="entry-title"><a href="/new-years-triumph/">New Year&#8217;s Android Triumph</a></h1>
     
     
       <p class="meta">
@@ -95,76 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  Up until recently, most of my programming was in php, which does not
-  support named parameters
-  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
-  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
-  so while switching to VB.NET and python, I have come to really
-  appreciate this handy feature.
-</p>
-<p>
- Named parameters is one of those handy little things that can make
-  your life a little easier. Say, in python, you have a function that
-  takes a boolean value. Normally, I would create a variable just to
-  hold that boolean value, then pass it in, to try to be easier for
-  the next guy to understand.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-  Who knows what window&#8217;s parameter is? What the heck is true anyway,
-  the window? <a href="http://www.jetbrains.com/pycharm/"
-  target="_blank">PyCharm</a> knows (and if you are using python
-  without it, I implore you to treat yourself to the demo) otherwise
-  you have to look up the function <em>like a barbarian</em> to see
-  what is going on. Sure, you can make it more clear with:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>Better then nothing, but still lame.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  Boom! Way easier to read, no extra variables hanging around making
-  trouble. Many times I have made function parameters, called them one
-  thing, then made a variable with a slightly different name to pass
-  in for legibility, but no more of that crap! Now, when I have the
-  inclination to make a variable just to clarify something, I just
-  name the parameter and pass in the value right there, like a
-  civilized gentleman should.
-
-</p>
-<p>
- Additionally, VB.NET has this too, with the slightly goofier
-  syntax of the &#8220;:=&#8221;
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  My cohort Daniel Miladinov pointed out that this is calling the
-  assignment operator directly, since calling it with just the equals
-  would perform
-  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
-</p>
+  <div class="entry-content"><p>December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.<p />The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours. I basically had a &#8220;buggy beta&#8221; by Wednesday morning, and all the problems remaining were ones I didn&#8217;t know how to solve or hide, and while all the graphics where there, I could barely stand to look at them. I felt like I was spinning my wheels with no progress. My friend Dan tried to talk me down, pointing out with some clarity that there was no gun to my head, and I was doing this for myself, so I could stop any time. Amusingly enough, that was exactly what I needed to hear. I was doing this for myself, to better myself, to learn more discipline. I wanted to stretch my abilities to the limits. So, I pushed through. I found a book that showed me how to fix my problems, and I didn&#8217;t stop until every bug I could find was fixed, and everything my poor family pointed out (I made them each play it like a dozen different times) was smoothed.<p />  And last night, after about a hundred hours of total work this month, I slid under the wire with roughly two hours to spare. The game is not in the market YET, because at the end of it all, I concluded I would rather spend the few dozen more hours to convert it to OpenGL ES, and add in a few neat things I was unable to do using the Android canvas, but for a v1, I am immensely proud of the whole experience.<p />I can say, unequivocally; WHEW. <p />This challenge was a fantastic learning experience, and I had several great reminders of what my dad always told me growing up: <strong>just work smarter, son, not harder</strong>.</p>
 </div>
   
   
@@ -227,11 +158,11 @@
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
       <li class="post">
-        <a href="/emacs-project-tip/">Emacs Project Tip</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
   </ul>
@@ -242,7 +173,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
     </li>
     
     
@@ -252,12 +183,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     
