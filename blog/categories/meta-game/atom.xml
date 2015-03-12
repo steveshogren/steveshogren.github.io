@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-09T08:17:52-04:00</updated>
+  <updated>2015-03-12T07:04:25-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -139,6 +139,14 @@ below the table.</p>
 </table>
 </div></p>
 
+<p><h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
+
+<p>Current Languages:
+<span ng-repeat="lang in allLanguages">
+ {{ getName(lang) }}, 
+</select></p>
+
 <p>I want to see your language represented here! I&rsquo;ll happily take pull
 requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
 use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
@@ -149,9 +157,6 @@ language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
 are vastly different in abilities. Similarly &ldquo;Scala &ndash; The Better Java&rdquo;
 and &ldquo;Scala &ndash; The JVM Haskell&rdquo; have vastly different idioms with
 apparently very separate communities.</p>
-
-<p><h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
 
 <p><div ng-show="showRealName"> Feel free to put in your own examples by
 playing with the samples below. Code surrounded with &lt;! !> is ignored

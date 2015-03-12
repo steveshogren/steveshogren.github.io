@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I can&#8217;t get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts &hellip;">
+  <meta name="description" content="I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +87,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/why-i-cant-get-focused-its-a-double-entendre/">Why I Can&#8217;t Get Focused (It&#8217;s a Double Entendre)</a></h1>
+      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
     
     
       <p class="meta">
@@ -95,7 +97,9 @@
   </header>
 
 
-  <div class="entry-content"><p>I can&#8217;t get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts out so I can get back to work.<p />I got a call from a recruiter the other day trying to get me to come interview at this job. Right now I am working in VB.NET and Actionscript. Until this job, I was always working in open-source languages: Perl, PHP, and some Java. This is my first real divergence from that pattern, and of course it is in two languages that are, to say the least, not very popular with the open source crowd. This gets me wondering, &#8220;what if when I decide to move on, all the fun jobs look down their noses at me for working in unpopular languages?&#8221;.<p /> To be fair, I still program quite a bit outside work in my favorite languages, and that is all well and good.<p />For some reason though, that recruiter really got under my skin. I keep asking myself questions like, &#8220;is spending time right now making a Java game for the Android a good choice long term?&#8221; or, &#8220;should I spend any more time learning Python with Django, or just get more invested in Javascript and node.js?&#8221;.<p /> These are not questions I want to be asking myself. <p />So, I sit down to think about it and get it out of my system. What kind of programmer do I want to be in 5 years? I know without a moment&#8217;s hesitation. <p /> <strong>I want to be the kind of programmer who is not tied to any one language or platform, but is instantly effective and rapidly excellent in </strong><strong><em>every</em> language and platform. </strong><p />Right now, I am learning Common Lisp. Why? To learn better functional programming. Why do I play with Javascript? To be better at client-side web programming. PHP/Python? Server-side web programming. *.NET? Compiled, versioned programming. Android games? For fun! Why do I all this? Because the programmer I want to be is not constrained to his language/platform<em> at all</em>. The programmer I want to be programs at a level <em>over the language</em>.&nbsp;</p>
+  <div class="entry-content">I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
 </div>
   
   
@@ -158,11 +162,11 @@
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
       </li>
     
   </ul>
@@ -173,7 +177,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
     </li>
     
     
@@ -183,12 +187,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

@@ -360,13 +360,13 @@ tableApp.controller('TableCtrl', function ($scope) {
             },
             variableMutation: {
                 enforced: "warn",
-                desc: "The Immutable.js library offers a simple set of tools for adding in immutability, under the Immutable namespace. Source: https://github.com/facebook/immutable-js",
-                rawCode: "Immutable.Map(<!object!>)"
+                desc: "Core javascript offers Object.freeze as a means of looking the value and structure of an object.  Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze The Immutable.js library offers a simple set of tools for adding in immutability, under the Immutable namespace. Source: https://github.com/facebook/immutable-js",
+                rawCode: "a = Object.freeze(<!object!>)"
             },
             markupName: "javascript",
             memoryDeallocation: {
                 enforced: "yes",
-                desc: "Handled By Garbage Collector."
+                desc: "For most cases this is handled By Garbage Collector. See: http://javascript.info/tutorial/memory-leaks"
             },
             comment: "//",
             wrongCast: {
@@ -378,14 +378,80 @@ tableApp.controller('TableCtrl', function ($scope) {
                 desc: "In Javascript, the common pattern is to check if something is there with an if statement before accessing something that might not be there.",
                 rawCode: "if (l !== null) {<!consequent!>} else {<!alternative!>}"
             }
+        },
+        {
+            name: "Coffee Script",
+            softname: "Caffinated Transpiled Lang",
+            markupName: "coffeescript",
+            comment: "#",
+
+            nullField: {
+                enforced: "warn",
+                desc: "The Existential Operator alleviates the difficulty in testing for undefined Javascript variables. ",
+                rawCode: "l ? <!alternative!>"
+            },
+            nullList: {
+                enforced: "warn",
+                desc: "This could potentially be accomplished with the existential operator (?) as well, but this is a more general case.",
+                rawCode: "l || []"
+            },
+            wrongVaribleType: {
+                enforced: "warn",
+                desc: "The instance of operator allows complex types in both Coffee Script and Javascript to be examined for a common prototype.  This does not work on most primitive types.",
+                rawCode: "o instanceof <!prototype!>"
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc: "Coffeescript arrays grow as needed to fit their data and are commonly implemented as sparse arrays.  They do not do automatic bounds checking.",
+                rawCode: "if l.length > i <!consequent!> else <!alternative!>"
+            },
+            wrongCast: {
+                enforced: "no",
+                desc: "No real idiomatic way to check."
+            },
+            wrongTypeToMethod: {
+                enforced: "no",
+                desc: "Method arguments, like variables have no intrinsic type associated with them.  The typeof and instanceof operators may be used as needed."
+            },
+            missingMethodOrField: {
+                enforced: "warn",
+                desc: "The accessor variant of the Existential Operator will cause access to undefined fields/methods to return 'undefined' rather than throwing an exception.",
+                rawCode: "a?.b"
+            },
+            missingEnum: {
+                enforced: "no",
+                desc: "Neither Javascript or Coffeescript support the concept of an Enum. No way to idiomatically check."
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc: "Core javascript, and hence Coffescript offers Object.freeze as a means of looking the value and structure of an object.  Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze The Immutable.js library offers a simple set of tools for adding in immutability, under the Immutable namespace. Source: https://github.com/facebook/immutable-js",
+                rawCode: "a = Object.freeze(<!object!>)"
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc: "Javascript is single threaded, and uses a queue for asynchronous execution responses like from calls to Ajax methods. As such, deadlocks are not possible by design. Javascript therefore is restricted in its abilities, but this is about categorizing safety only. Source: http://stackoverflow.com/a/17969359/496112"
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc: "For most cases this is handled By Garbage Collector. See: http://javascript.info/tutorial/memory-leaks"
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc: "No way to prevent these, and therefore the alternative is to write algorithms in a loop construct. It is not idiomatic to use recursion because of this. While any recursive algorithm can be expressed in a loop, it can require more size and possibly a less intuitive algorithm. Source: http://stackoverflow.com/questions/9497625/javascript-recursion-maximum-call-stack-size-exceeded "
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            }
         }
     ];
 
-    $scope.languages = 
-     [$scope.allLanguages[0],
-     $scope.allLanguages[1],
-     $scope.allLanguages[2],
-     $scope.allLanguages[3]];
+    $scope.languages = [
+        $scope.allLanguages[0],
+        $scope.allLanguages[1],
+        $scope.allLanguages[2],
+        $scope.allLanguages[3],
+    ];
 
     $scope.updateTotals();
     $scope.selectedLang = $scope.languages[0];

@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for &hellip;">
+  <meta name="description" content="So, working through the Land of Lisp book, getting the hang of it. Chapter Six, the author starts off by talking a little about the Common Lisp REPL &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/on-developer-certifications/">On Developer Certifications</a></h1>
+      <h1 class="entry-title"><a href="/lisp-repl/">Lisp REPL</a></h1>
     
     
       <p class="meta">
@@ -95,7 +95,42 @@
   </header>
 
 
-  <div class="entry-content"><p>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.<p /> Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months. Who would be on the committee? And what would they agree on to enforce? Regex? Recursion, OO, testability, and functional programming?&nbsp; Proof of understanding in the half-dozen <a href="http://norvig.com/21-days.html" target="_blank">&#8220;mind expanding&#8221;</a> languages? Not going to happen. Not while my Joomla-site maintaining friend and my Android 3D game authoring cohort are both lumped under the title &#8220;software developer&#8221;. The field is too vast, the content too broad, and the jobs too diverse. <p /> So, we are doomed to wallow. Or are we? What is the one thing we all have to do?<em> Get hired.</em><p />I used to be a big sissy about interviewing for jobs. Especially interviews full of the nit-picky details I can never remember, yeah, I <em>really</em> hate those. I would moan and groan about how the interviewer could only answer those questions because they had to look them up the other day. &#8220;MySQL index implementations, what am I, a DBA?!&#8221;, I would screech to anyone who would listen, &#8220;They must have misunderstood, I am a developer, when would I ever need to know that?!&#8221;<p /> But.<p />Interview prep gets me to cram stuff into my head I would otherwise skim or avoid if just sitting at home programming for fun. I get a great refresher on all the stuff I am fully able to do at work, but maybe I haven&#8217;t needed in a while. Like linked-lists. In four years of fairly diverse programming jobs, I have<strong> yet</strong> to need a linked list for anything, but man, when that day comes, I have linked-lists in a quick-draw holster. I used to say the same thing about trees, then last year, I had a problem that surely needed a tree, and hear you me, I had that data being in-order traversed before you could say: &#8220;tree&#8221;. Would I have even <em>remembered</em> <em>what trees are good for</em> without my semi-annual refresher?<p /> My wife is a commercial pilot, and every so often she is required to skim over all those little details about being a pilot, refreshing <em>everything</em>, double-checking her knowledge so she can keep her licenses, <em>even if she hasn&#8217;t needed a certain technique since the last test</em>. Huh. Sounds like me, every so often, cramming for an interview.<p />  We don&#8217;t need certifications for being a programmer. We already have the tools in hand, and just need to learn to use them better. <strong>Interviews are our certifications. </strong></p><p>This is a double-edged sword, because this means that, &#8220;what you sow, you will also reap&#8221;.  The responsibility to keep standards high falls on the interviewer. If  you interview a candidate for tricky puzzle questions, or in-depth  knowledge of C++ libraries, you will find someone who knows those  things, and possibly ONLY knows those things. I have seen developers hired who couldn&#8217;t handle VCS merging or shipping actual software, but were absolute <em>geniuses</em> when it came to programming language trivia and puzzle questions.</p><p>A few months ago, I read of a guy with no programming experience who did like 100 interviews in a few weeks, till he was a master interviewee. By the end, he was able to pick his choice of companies, and <strong>yet </strong><strong>he couldn&#8217;t ship software</strong>. He gamed a system <em>intended</em> to sort out good developers by asking questions that are ancillary to development, without actually having the candidate <em>prove any real ability</em>. And now that company has a developer who is great at gaming systems, but unskilled at development: I hope they have a good training program.</p><p>No offense intended to the man who did this, I <strong>really </strong>admire his tenacity and clever thinking, and I think he will do well regardless of the task. But it speaks volumes to the brokenness of the interview system for those companies that would hire a completely unskilled developer based on the correct answers to trivia questions about programming.</p><p>Parting question to consider for interviewers: if interviews are our certifications, what should a candidate be able to do to be &#8220;certified&#8221; to be able to do the job in question?</p>
+  <div class="entry-content"><p>
+  So, working through the Land of Lisp book, getting the hang of it.
+</p>
+<p>
+Chapter Six, the author starts off by talking a little about
+  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
+  of the &#8220;command line&#8221; for interacting with lisp. It is pretty cool,
+  you type in code, and it executes. And then he opens the hood a
+  little:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defun</span> <span class="nv">repl</span> <span class="p">()</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">eval </span><span class="p">(</span><span class="nf">read</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+WHAAAAAAAAAAAAAAA??!?!?!
+</p>
+<p>
+I just about spit my drink all over the monitor laughing. The
+function <strong>eval()</strong> evaluates whatever text is passed in
+as code, in this case, from the command line via the obviously
+named <strong>read</strong> and after executing
+it, <strong>print()</strong> prints the result, and it just does that
+forever till you quit.
+</p>
+<p>
+That means, you could make one of these for any language that can
+evaluate strings into code. I know python has one built-in. Php can
+evaluate code with eval, and a quick search shows a highly nifty (and
+robust from the looks of
+it) <a href="https://github.com/facebook/phpsh">REPL for php</a>
+complements of facebook. Sweet. Or, you can use php -a for the
+interactive mode.
+</p>
 </div>
   
   
@@ -158,11 +193,11 @@
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
       </li>
     
   </ul>
@@ -173,7 +208,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
     </li>
     
     
@@ -183,12 +218,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

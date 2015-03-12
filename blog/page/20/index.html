@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
+  <meta name="description" content="Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
+      <h1 class="entry-title"><a href="/quality-is-future-speed/">Quality Is Future Speed</a></h1>
     
     
       <p class="meta">
@@ -95,120 +95,7 @@
   </header>
 
 
-  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
-<br />
-<br />
-One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
-</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
-</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
-</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
-</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
-</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>      <span class="mi">1</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
-</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
-<br />
-<br />
-At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
-<br />
-<br />
-I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
-<br />
-<br />
-Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
-<br />
-<br />
-I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
-<br />
-<br />
-No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
-<br />
-<br />
-The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
+  <div class="entry-content"><p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
 </div>
   
   
@@ -271,11 +158,11 @@ The discovery of such tools is what is making learning clojure such a profoundly
       </li>
     
       <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+        <a href="/emacs-project-tip/">Emacs Project Tip</a>
       </li>
     
   </ul>
@@ -286,7 +173,7 @@ The discovery of such tools is what is making learning clojure such a profoundly
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
     </li>
     
     
@@ -296,12 +183,12 @@ The discovery of such tools is what is making learning clojure such a profoundly
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     
