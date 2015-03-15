@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unit Testing | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-12T07:04:25-04:00</updated>
+  <updated>2015-03-15T14:11:14-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Where to Store Known Issues]]></title>
+    <link href="http://steveshogren.github.io/known-issue-storage/"/>
+    <updated>2014-06-14T22:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/known-issue-storage</id>
+    <content type="html"><![CDATA[<p>Unit tests are the best place to store known issues.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Good Design, Java, or Unit Testing. Pick two.]]></title>
+    <link href="http://steveshogren.github.io/di-is-a-hack/"/>
+    <updated>2014-05-06T12:05:00-04:00</updated>
+    <id>http://steveshogren.github.io/di-is-a-hack</id>
+    <content type="html"><![CDATA[<p>Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?</p>
+
+<p>You cannot have unit testing in Java/C# without dependency injection.</p>
+
+<p>If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
+use/reuse/refactor? Or do you do it because you have to? Can you think
+of a single time where DI made anything easier?</p>
+
+<p>The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.</p>
+
+<p>For example, how would we unit test a function that talks to the
+database in C# without a framework that requires mappings and global
+singletons? We would put an interface around the database connection,
+then pass it into the constructor through an optional parameter. Our
+test would then make another implementor of that interface, and pass
+it in when testing. This is par for the course in Java as well.</p>
+
+<p>``` csharp
+// DBConnection.cs
+public interface IDBConnection { }
+public class DBConnection : IDBConnection{ }</p>
+
+<p>// RepositoryFactory.cs
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using Helpers;</p>
+
+<p>namespace Repositories
+{</p>
+
+<pre><code>public class RepositoryFactory {
+    IDBConnection con;
+    public RepositoryFactory(IDBConnection con) {
+        this.con = con;
+    }
+    public RepositoryFactory() : this(new DBConnection()) { }
+    public void Insert(string sql) {
+        this.con.Execute(sql);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Tests grow in maintenance difficulty with the size of the function
+being tested. Often this leads to a design with many small
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to &ldquo;test&rdquo;. Usually, such a design will have several classes in a row
+that each only calls the next. This &ldquo;chain&rdquo; of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.</p>
+
+<p>Comparatively, in languages like Javascript, Ruby, and Clojure,
+replacing a function for testing is easy! Every function does not need
+a twenty-line wrapper, instead we simply replace the function we want
+to &ldquo;inject&rdquo; with a new function. Here is an example in Javascript:</p>
+
+<p>``` javascript
+function Insert(sql) { getConnection().Execute(sql);}
+function getConnection() { return new DatabaseConnection(); }</p>
+
+<p>// &ldquo;Mock&rdquo; the getConnection function in a unit test
+getConnection = function() { return { Execute: function(sql) {}}};
+```</p>
+
+<p>I am now able to test my &ldquo;Insert&rdquo; function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+without constraining itself to &ldquo;what works for testing&rdquo;.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Don't Mock Concrete Classes]]></title>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-12T07:04:25-04:00</updated>
+  <updated>2015-03-15T14:11:14-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -144,7 +144,7 @@ ng-click="showRealName = !!!showRealName">Click to see backing code and unmask n
 
 <p>Current Languages:
 <span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}, 
+ {{ getName(lang) }}: {{ allLangTotals[$index] }}, 
 </select></p>
 
 <p>I want to see your language represented here! I&rsquo;ll happily take pull

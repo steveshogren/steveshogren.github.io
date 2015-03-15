@@ -8,9 +8,13 @@ tableApp.directive('scoreRow', function(){
             scope.weight = 100;
             scope.score = scope.$parent.score;
             scope.languages = scope.$parent.languages;
+            scope.allLanguages = scope.$parent.allLanguages;
             scope.$watch('weight', function(n, old){
                 if(n !== old){
                     scope.languages.map(function(l){
+                        l[scope.rowKey].weight = n;
+                    });
+                    scope.allLanguages.map(function(l){
                         l[scope.rowKey].weight = n;
                     });
 
@@ -44,6 +48,7 @@ tableApp.controller('TableCtrl', function ($scope) {
     $scope.inabilityPenalty = 30;
     $scope.showWeights = false;
     $scope.langTotals = [];
+    $scope.allLangTotals = [];
 
     $scope.showEdit = false;
 
@@ -107,7 +112,16 @@ tableApp.controller('TableCtrl', function ($scope) {
         {name:"Guaranteed Code Evaluation When Passed To a Function", key:"consistentCodeExecution"}
     ];
 
+    $scope.updateAllTotals = function(){
+        $scope.allLangTotals = [];
+        $scope.allLanguages.map(function(l){
+            var t = $scope.langChecks.reduce(function(ret, next){
+                return ret + $scope.score(l[next.key]);
+            },0);
+            $scope.allLangTotals.push(t);
+        });};
     $scope.updateTotals = function(){
+        $scope.updateAllTotals();
         $scope.langTotals = [];
         $scope.languages.map(function(l){
             var t = $scope.langChecks.reduce(function(ret, next){
@@ -381,7 +395,7 @@ tableApp.controller('TableCtrl', function ($scope) {
         },
         {
             name: "Coffee Script",
-            softname: "Caffinated Transpiled Lang",
+            softname: "Caffinated Lang",
             markupName: "coffeescript",
             comment: "#",
 

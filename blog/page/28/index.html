@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any &hellip;">
+  <meta name="description" content="Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/on-lisp-part-1/">On Lisp: Part 1</a></h1>
+      <h1 class="entry-title"><a href="/quality-is-future-speed/">Quality Is Future Speed</a></h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content">I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.
+  <div class="entry-content"><p>Lately, I have been deliberating on <strong>quality</strong> <strong>vs. speed</strong>. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#8217;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider <em>all </em>time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#8217;s post <a href="http://steve-yegge.blogspot.com/2008/06/done-and-gets-things-smart.html">Done, and Get&#8217;s Things Smart</a>, and I think I agree with Yegge on this point, that it <em>is</em> possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek. <p />  There are many facets to this, of course, but I have been playing with this mental model. Specifically, my insight here is a new definition of quality: <strong>quality is future speed</strong>. In my mind, quality that is not for future speed <strong>is</strong> an extravagance, something programmers do to entertain themselves, and it is worse than cutting corners in the present, because it sacrifices current work for no future gain. <p />  Lately, my personal projects have taken a certain theme: I want more practice tuning my programming to be as fast as possible <em>both for today and for the future</em>. And to be perfectly honest, usually there is a lot more &#8220;future&#8221; in most systems than just &#8220;today&#8221;. <p />  So, how have I been doing this? I set arbitrarily short deadlines for myself, so I am forced to practice dropping anything that is not directly related to speed. I then try to rotate projects every month, so I am forced to return to old work, to learn better where I made bad choices that cost me <em>future </em>speed. <p />  Doing this with the right mindset is very humbling, and very insightful. Honestly, this may happen at work accidentally from time to time as well, but rarely at work am I able to carefully reflect on the mistakes of the past. At home, the pain I feel is my own, no one suffers at home other than me, and there is no one to blame but myself. If an architecture is brittle, or the test coverage is low, or the design is resistant to change, (all of which have happened) I am able to take those lessons to heart <em>because I directly caused those problems</em>.<p />  I encourage anyone who, like me, seeks to be a more excellent developer, to give this a try: start a couple of side projects (and don&#8217;t worry, it took me a year to get the ones I have), and set yourself some crazy tight &#8220;delivery dates&#8221;. Heck, make real products and try to make some money off them, maybe you will be able to get some side-cash! But then, after you have &#8220;delivered&#8221;, take some time to rest, maybe read a book or two, tinker with some other projects, and after a break, return to analyze your past work. Set yourself another strict deadline, try to make a second version, or add some more features. You will find some incredibly valuable lessons there.</p>
 </div>
   
   
@@ -135,8 +135,9 @@
       <a href="/ego-driven-development/">Ego Driven Development</a>
     </li>
     <li class="post">
-      <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
+      <a href="/programming-language-safety-algorithm/">Language Safety Score</a>
     </li>
+
     <li class="post">
       <a href="/intro-to-macros/">Intro To Macros</a>
     </li>
@@ -150,6 +151,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
+      </li>
+    
+      <li class="post">
         <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
       </li>
     
@@ -158,11 +163,7 @@
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
-      </li>
-    
-      <li class="post">
-        <a href="/emacs-project-tip/">Emacs Project Tip</a>
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
   </ul>
@@ -173,7 +174,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">20</span></a>
     </li>
     
     
@@ -183,12 +184,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your &hellip;">
+  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
+the match statement is in F#. Using match allows the compiler to
+give us &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +87,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/intro-to-macros/">Intro to Macros</a></h1>
+      <h1 class="entry-title"><a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a></h1>
     
     
       <p class="meta">
@@ -95,61 +97,13 @@
   </header>
 
 
-  <div class="entry-content"><p>
-Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">doCalc</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">doAwesome</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">doCalc</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#before substitution...</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">test</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="n">doAwesome</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># when substituted...</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">test</span> <span class="p">()</span>
-</span><span class='line'>   <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-Ignoring scoping, the function/call system allows for immense power in programing languages. The function lets you &#8220;expand&#8221; a simple call into a much larger block of code. The expanded code can be vastly large. In our example above, the (doCalc) function is small, but it reality it could be doing hundreds of lines of code, which also would have to be substituted in place. The difference is real functions do not work this way. Real functions have their values evaluated before getting passed in as parameters.
-</p>
-<p dir="ltr">Macros are similar to the substitution model, with one expressed difference: by default, macros operate on the text of the code itself, not the values. Think of how expansion works in the simple if statement.</p>
+  <div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
+the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
+give us warnings for missing cases, no matter what the type.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">=</span> <span class="n">doOtherHugeCalc</span><span class="p">()</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Does the huge calc function execute each time? Not at all, you are guaranteed that only one will happen at any given run through that block of code.</p>
-<p dir="ltr">Let’s say you wanted to make a generic function that would abstract away that call, and let you return the values, maybe something like this:</p>
+<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
+inversion of the usual OO way of polymorphism. Here is an example that
+is probably familiar to everyone: getting a database connection.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -169,28 +123,158 @@ Ignoring scoping, the function/call system allows for immense power in programin
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">ifworkday</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">first</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">second</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">ifworkday</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">doOtherHugeCalc</span><span class="p">())</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">#when the values are “shown”</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">ifworkday</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">2</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">3</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">x</span> <span class="o">=</span> <span class="n">ifworkday</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># CALLED BOTH FUNCTIONS</span>
+</span><span class='line'><span class="c1">// somewhere in the code...</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>
-But wait, now BOTH functions get called, you are doing exactly twice as many huge calcs as needed. Now, those familiar with javascript probably are already itching with the solution, &#8220;JUST WRAP THEM IN ANONYMOUS FUNCTIONS!!!&#8221;. I hear you, sure that works in this super simple example, but macros let you do this without that extra wordiness.  Macros defer evaluating parameters. Think of a macro as a function, but the biggest difference is parameters DON&#8217;T get called till you choose to call them.
-</p>
+
+
+<p>In our example here, we have two concrete implementers of the
+<code>IPaymentRepository</code>, each one with their own implementations. This is
+a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
+would put each of these classes in their own files.</p>
+
+<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
+and interfaces to use pattern matching.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">InMemory</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="nc">Values</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetPaymentRepo</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s2">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="s2">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="nc">InMemory</span>
+</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nc">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// somewhere in the code ...</span>
+</span><span class='line'><span class="k">let</span> <span class="n">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="nc">GetPaymentRepo</span>
+</span><span class='line'><span class="k">let</span> <span class="n">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="nc">GetAll</span> <span class="n">repo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice how we separated our behavior from our types? The
+<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
+are just empty types, much like an <code>Enum</code>. We are still able to get
+polymorphic behavior from them, using <code>match</code>.</p>
+
+<p>But why would we want to store our behavior separate from the type?</p>
+
+<p>By storing the behavior separate from the type, changes that effect a
+single behavior (adding a new function, changing a function&rsquo;s api,
+removing a function) are easier, because they are all grouped
+together. A change to the api of the <code>GetAll</code> function is harder in
+the traditional OO interface structure, requiring modifying several
+files.</p>
+
+<p>Similarly, a change requiring adding a new type is difficult in a
+pattern matching structure, as it will require finding every pattern
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!</p>
+
+<p>As to safety, adding a new type is easy with interfaces, but the
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Neither compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th> Adding a Type  </th>
+<th> Modifying Behavior </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong>OO Interfaces/Classes</strong>  </td>
+<td>  Easier / Less Safe  </td>
+<td> Harder / Safe </td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Pattern Matching Types</strong>  </td>
+<td>  Harder / Safe  </td>
+<td> Easier / Safe</td>
+</tr>
+</tbody>
+</table>
+
+
+<br />
+
+
+<p>I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.</p>
+
+<p>Consider the change where we want to add a new function to the
+<code>IPaymentRepository</code> interface and change the location of the in
+memory dictionary to be stored internally. In the interfaces and
+classes example, that requires editing <em>three separate files</em>.</p>
+
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -209,53 +293,40 @@ But wait, now BOTH functions get called, you are doing exactly twice as many hug
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#if it is a macro...</span>
-</span><span class='line'><span class="n">defmacro</span> <span class="n">ifworkday</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">first</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">second</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="n">ifworkday</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">doOtherHugeCalc</span><span class="p">())</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#when the values are “shown”</span>
-</span><span class='line'><span class="n">defmacro</span> <span class="n">ifworkday</span><span class="p">(</span><span class="s2">&quot;1+1&quot;</span><span class="p">,</span> <span class="s2">&quot;doOtherHugeCalc()&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">workday</span><span class="p">(</span><span class="n">today</span><span class="p">())</span> <span class="k">do</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;1+1&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;doOtherHugeCalc()&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
+</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<p dir="ltr">Now, in this simple ruby example, I had to use strings and eval to approximate what happens with macros in other languages. Since this is unwieldy, let’s switch to clojure, where it is more natural.</p>
-I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="err">‘</span><span class="p">(</span><span class="nf">a</span> <span class="nv">b</span> <span class="nv">c</span> <span class="nv">d</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; (a b c d)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">This is a list of four symbols. Symbols are basically like an enum or a keyword that only equals itself. So it is possible to say:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">= </span><span class="err">‘</span><span class="nv">a</span> <span class="err">‘</span><span class="nv">a</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">but that’s pretty much it. If I tried to evaluate a symbol, it would complain that the symbol has no definition, since it is trying to treat it like a variable lookup.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; nothing gets evaluated inside the list at all..</span>
-</span><span class='line'><span class="err">‘</span><span class="p">(</span><span class="nf">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Now you are left with a list of symbols, unevaluated. The defmacro form, for each parameter, gives you such a list of unevaluated symbols.</p>
-
+<p>Here is the change to add a new function in the pattern matching example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -269,149 +340,55 @@ I said that macros defer evaluation, they do that, but they also do much more. L
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;;before compilation</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">ifWorkday</span> <span class="p">[</span><span class="nv">bigCalc1</span>, <span class="nv">bigCalc2</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span>
-</span><span class='line'>    <span class="o">~</span><span class="nv">bigCalc1</span>
-</span><span class='line'>    <span class="o">~</span><span class="nv">bigCalc2</span><span class="p">))</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">InMemory</span> <span class="k">of</span> <span class="nc">Dictionary</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">,</span> <span class="nc">IPayment</span><span class="o">&gt;</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Postgres</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">;; the call</span>
-</span><span class='line'><span class="p">(</span><span class="nf">ifWorkday</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">))</span>
+</span><span class='line'><span class="k">let</span> <span class="nc">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="nc">IPayment</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nc">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="nc">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="nc">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1">;;... after compilation...</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">ifWorkday</span> <span class="p">[(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>, <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">)]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">)))</span>
-</span><span class='line'><span class="c1">;; after compilation the call gets _transformed_ into:</span>
-</span><span class='line'><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">workday</span> <span class="p">(</span><span class="nf">today</span><span class="p">))</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">otherBigCalc</span><span class="p">))</span>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nc">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="nc">Values</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nc">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="nc">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-<p dir="ltr">The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc). I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.</p>
-<p dir="ltr">But that is a stupid example. Making your own if statements is the most basic uses of macros. But it demonstrates the point: macros generate code. This is profound, but hard to grasp for the first time. Macros expand code before compilation time, and therefore can be used to generate lots of code automatically.</p>
 
-<p>
-For extra credit, let’s take a bigger example in the same vein as our custom ifWorkday. I am making a game, and in it, I want an easy abstraction that gives me back one of several options with a custom percent chance. Ideally, something like
-</p>
+<p>In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
+<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
+didn&rsquo;t add it in the pattern match, the compiler would give us a
+warning!</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">if25</span> <span class="p">(</span><span class="nf">doFirst</span><span class="p">)</span> <span class="p">(</span><span class="nf">doSecond</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Between the options of traditional interfaces verses pattern matching,
+neither way is truly the best for every circumstance: each comes with
+a trade-off. I liken the trade-offs to the &ldquo;grain of the
+data&rdquo;. Whichever way your system is likely to change the most, that is
+the way you want to optimize your type. The good news is: in F# you
+can have a mix of both, and it is relatively easy to convert back and
+forth depending on how your system is changing the most.</p>
 
-<p>
-where the number corresponds to the percent chance that the next item will be executed and returned. In this example, (doFirst) will only happen 25% of the time and (doSecond) 75% of the time. This demonstrates a more interesting use of macros, the ability to generate other functions (or even other macros). Here is the code:
-</p>
+<p>Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">make-percents</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nb">list </span><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">macro-name</span> <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;if&quot;</span> <span class="nv">num</span><span class="p">))]</span>
-</span><span class='line'>                    <span class="o">`</span><span class="p">(</span><span class="kd">defmacro </span><span class="o">~</span><span class="nv">macro-name</span> <span class="p">[</span><span class="nv">x#</span> <span class="nv">y#</span><span class="p">]</span>
-</span><span class='line'>                      <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="o">~~</span><span class="nv">num</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x#</span> <span class="o">~</span><span class="nv">y#</span><span class="p">))))</span>
-</span><span class='line'>                <span class="p">(</span><span class="nb">range </span><span class="mi">100</span><span class="p">))))</span>
-</span><span class='line'><span class="p">(</span><span class="nf">make-percents</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.</p>
 
-<p>
-This macro only needs to be called once, and what it does is generates this:
-</p>
+<p>If you want additional reading on the topic of polymorphism, check out
+<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if0</span> <span class="p">[</span><span class="nv">x__2603__auto__</span> <span class="nv">y__2604__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">0</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2603__auto__</span> <span class="o">~</span><span class="nv">y__2604__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if1</span> <span class="p">[</span><span class="nv">x__2604__auto__</span> <span class="nv">y__2605__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">1</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2604__auto__</span> <span class="o">~</span><span class="nv">y__2605__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if2</span> <span class="p">[</span><span class="nv">x__2606__auto__</span> <span class="nv">y__2607__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">2</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2606__auto__</span> <span class="o">~</span><span class="nv">y__2607__auto__</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;;...</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">if99</span> <span class="p">[</span><span class="nv">x__2609__auto__</span> <span class="nv">y__2601__auto__</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">99</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x__2609__auto__</span> <span class="o">~</span><span class="nv">y__2601__auto__</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">I hope the profundity of this hits you like a ton of bricks. With under 10 lines of macro code (and calling it) we auto-generated 100 macros! This 10 lines of code gets expanded to 100 more lines! Sure, this is a simple, almost silly example, but imagine what you could do with this sort of power. In a more complex example, you could be auto-generating vast amounts of code this way, code that you don’t have to write every time by hand. Don&#8217;t let the x__2506__auto__ parameter names scare you, I will explain that in a bit.</p>
-<p>
-Those generated macros should not be too hard to understand after the previous ifWorkday macro, and they can be called just like we expect. Let&#8217;s deconstruct (make-percents).
-</p>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">`</span><span class="p">(</span><span class="nb">list </span><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">The ~@ is like unquote from above, the only difference is instead of just unquoting a list to be evaluated, it extracts the values from the list and sticks them in place. I like to think of it as just removing the outer parens in the unquoted list.</p>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x</span> <span class="err">‘</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="p">(</span><span class="mi">3</span> <span class="mi">4</span><span class="p">))]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nb">+ </span><span class="mi">8</span> <span class="o">~@</span><span class="nv">x</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; (clojure.core/+ 8 1 2 (3 4))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">The (list) function is just how we make a list of elements.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">list </span><span class="err">‘</span><span class="nv">a</span> <span class="err">‘</span><span class="nv">b</span> <span class="err">‘</span><span class="nv">c</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;;=&gt; (a b c)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-The (map) function has two arguments: the first, a function; the second, a list of elements to “map” over.
-</p>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">~@</span><span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">num</span><span class="p">]</span> <span class="p">(</span><span class="nf">...</span><span class="p">))</span>
-</span><span class='line'>       <span class="p">(</span><span class="nb">range </span><span class="mi">100</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">As you can see here, the ~@() tells us to unquote the whole form, re-enabling the evaluation, and therefore running the map call. The map then calls the anonymous function 100 times, with the num being the numbers 0..99. Inside the anon function we have a let binding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">macro-name</span> <span class="p">(</span><span class="nb">symbol </span><span class="p">(</span><span class="nb">str </span><span class="s">&quot;if&quot;</span> <span class="nv">num</span><span class="p">))]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">This line is more simple, it makes a let that binds to the value macro-name a symbol that looks like ‘if1, ‘if2, .. depending on which iteration of the loop you are on.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">`</span><span class="p">(</span><span class="kd">defmacro </span><span class="o">~</span><span class="nv">macro-name</span> <span class="p">[</span><span class="nv">x#</span> <span class="nv">y#</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="o">~~</span><span class="nv">num</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">100</span><span class="p">))</span> <span class="o">~</span><span class="nv">x#</span> <span class="o">~</span><span class="nv">y#</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p dir="ltr">Here is the actual returned “template” of the macro. The # at the end of the parameter name ensures that it is unique, which is really really useful when you consider that the code returned from a macro replaces the call in place. To make sure you don’t accidentally double bind the same name, clojure will give you a warning like “cannot let unqualified name” if you try to let a value without including the # at the end inside a template, another really handy feature. What gets generated by x# looks something like x__2506__auto__ which is guaranteed to be unique. The reason you need this is in case there was another value bound to x inside your code, it could cause a conflict, and in certain circumstances, really break your code, so this prevents such conflicts. You should only need these when creating parameters or let bindings inside the template. All the values &#8220;outside&#8221; the template do not need to have the # appended to their names, since they will not actually be a part of the returned template.</p>
-<p dir="ltr">The only odd thing here is the double ~~num. Notice how many quote levels deep we are. It is possible to unquote to “step” back up a level in the template. By the time we get to the ~~num, the original function parameter of num was two “levels” higher, so to access it, we have to “step up” two levels. Let me highlight it in colors, to make it easier to see.</p>
-
-<img src="/images/macro.jpg" title="" >
-
-<p dir="ltr">See how by unquoting ~macro-name one level in line 3, and unquoting ~~num two levels on line 4, we bring them both back “up” to the “red” level where they were defined? Similarly, by unquoting ~x# and ~y# one level on line 4, we bring them back “up” to their “blue” definition level? This is an incredibly powerful tool that allows immense expansion of code in a tiny amount of space. If you think of the returned code form as a “template”, this quoting and unquoting lets you step in and out of evaluation with ease.</p>
-<p dir="ltr">In the end, when the (make-percents) macro is called, it produces 100 macros that are callable just like any other macro. To tell the whole story, I wrote this into my game, then decided I wanted a more sophisticated macro that could take any number of percentages, but this remained a good way to explain this specific pattern of looped macro generation.</p>
-<p dir="ltr">Hopefully, this article caused you to see how incredibly powerful macros can be, allowing effectively infinite auto-generation of code. The field of macros is still very under-explored, as most languages do not allow them at all, they remain a largely undiscovered, and yet incredibly powerful tool.</p>
-<p dir="ltr">For further reading, I highly recommend Let Over Lambda, the first 6 chapters of which are free <a href="http://letoverlambda.com/index.cl/toc">here</a>. Let Over Lambda is written with examples in Common Lisp, but the macro parts are very similar in Clojure, so is a valuable read.</p>
-&nbsp;
+<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
 </div>
   
   
@@ -451,8 +428,9 @@ The (map) function has two arguments: the first, a function; the second, a list 
       <a href="/ego-driven-development/">Ego Driven Development</a>
     </li>
     <li class="post">
-      <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
+      <a href="/programming-language-safety-algorithm/">Language Safety Score</a>
     </li>
+
     <li class="post">
       <a href="/intro-to-macros/">Intro To Macros</a>
     </li>
@@ -466,6 +444,10 @@ The (map) function has two arguments: the first, a function; the second, a list 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
+      </li>
+    
+      <li class="post">
         <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
       </li>
     
@@ -474,11 +456,7 @@ The (map) function has two arguments: the first, a function; the second, a list 
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
-      </li>
-    
-      <li class="post">
-        <a href="/emacs-project-tip/">Emacs Project Tip</a>
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
   </ul>
@@ -489,7 +467,7 @@ The (map) function has two arguments: the first, a function; the second, a list 
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">20</span></a>
     </li>
     
     
@@ -499,12 +477,12 @@ The (map) function has two arguments: the first, a function; the second, a list 
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     

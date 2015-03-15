@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed &hellip;">
+  <meta name="description" content="December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +85,7 @@ fla. I followed &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
+      <h1 class="entry-title"><a href="/new-years-triumph/">New Year&#8217;s Android Triumph</a></h1>
     
     
       <p class="meta">
@@ -97,9 +95,7 @@ fla. I followed &hellip;">
   </header>
 
 
-  <div class="entry-content">I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
+  <div class="entry-content"><p>December 1st, I made myself a New Year&#8217;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.<p />The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours. I basically had a &#8220;buggy beta&#8221; by Wednesday morning, and all the problems remaining were ones I didn&#8217;t know how to solve or hide, and while all the graphics where there, I could barely stand to look at them. I felt like I was spinning my wheels with no progress. My friend Dan tried to talk me down, pointing out with some clarity that there was no gun to my head, and I was doing this for myself, so I could stop any time. Amusingly enough, that was exactly what I needed to hear. I was doing this for myself, to better myself, to learn more discipline. I wanted to stretch my abilities to the limits. So, I pushed through. I found a book that showed me how to fix my problems, and I didn&#8217;t stop until every bug I could find was fixed, and everything my poor family pointed out (I made them each play it like a dozen different times) was smoothed.<p />  And last night, after about a hundred hours of total work this month, I slid under the wire with roughly two hours to spare. The game is not in the market YET, because at the end of it all, I concluded I would rather spend the few dozen more hours to convert it to OpenGL ES, and add in a few neat things I was unable to do using the Android canvas, but for a v1, I am immensely proud of the whole experience.<p />I can say, unequivocally; WHEW. <p />This challenge was a fantastic learning experience, and I had several great reminders of what my dad always told me growing up: <strong>just work smarter, son, not harder</strong>.</p>
 </div>
   
   
@@ -139,8 +135,9 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
       <a href="/ego-driven-development/">Ego Driven Development</a>
     </li>
     <li class="post">
-      <a href="/new-job-todo-list/">How to Suck Less at Your New Job</a>
+      <a href="/programming-language-safety-algorithm/">Language Safety Score</a>
     </li>
+
     <li class="post">
       <a href="/intro-to-macros/">Intro To Macros</a>
     </li>
@@ -154,6 +151,10 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
+      </li>
+    
+      <li class="post">
         <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
       </li>
     
@@ -162,11 +163,7 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
       </li>
     
       <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
-      </li>
-    
-      <li class="post">
-        <a href="/emacs-project-tip/">Emacs Project Tip</a>
+        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
   </ul>
@@ -177,7 +174,7 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">16</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">20</span></a>
     </li>
     
     
@@ -187,12 +184,12 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
     </li>
     
     
