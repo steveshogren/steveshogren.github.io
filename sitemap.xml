@@ -134,15 +134,19 @@
     </url>
     <url>
         <loc>http://steveshogren.github.io/programming-language-safety-algorithm/</loc>
-        <lastmod>2015-03-15T14:02:17-04:00</lastmod>
+        <lastmod>2015-03-17T07:21:15-04:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/pattern-matching-case-study/</loc>
-        <lastmod>2015-03-15T14:10:07-04:00</lastmod>
+        <lastmod>2015-03-15T14:13:26-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://steveshogren.github.io/case-study-domain-modeling-in-f-number-part-2/</loc>
+        <lastmod>2015-03-17T07:31:41-04:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/blog/archives/</loc>
-        <lastmod>2015-03-15T14:10:07-04:00</lastmod>
+        <lastmod>2015-03-17T07:31:41-04:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/robots.txt</loc>
@@ -150,6 +154,6 @@
     </url>
     <url>
         <loc>http://steveshogren.github.io/</loc>
-        <lastmod>2015-03-15T14:10:07-04:00</lastmod>
+        <lastmod>2015-03-17T07:31:41-04:00</lastmod>
     </url>
 </urlset>

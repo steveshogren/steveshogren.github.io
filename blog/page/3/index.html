@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Clojure is a delightful language, and here are six uncommonly
-discussed reasons why. 1 &ndash; Dead Simple Unit Test Mocking Clojure is the easiest &hellip;">
+  <meta name="description" content="I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +87,7 @@ discussed reasons why. 1 &ndash; Dead Simple Unit Test Mocking Clojure is the ea
       
   <header>
     
-      <h1 class="entry-title"><a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a></h1>
+      <h1 class="entry-title"><a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a></h1>
     
     
       <p class="meta">
@@ -96,295 +97,200 @@ discussed reasons why. 1 &ndash; Dead Simple Unit Test Mocking Clojure is the ea
   </header>
 
 
-  <div class="entry-content"><p>Clojure is a delightful language, and here are six uncommonly
-discussed reasons why.</p>
+  <div class="entry-content"><p>I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &ldquo;has strong-static
+types&rdquo;.</p>
 
-<h2>1 &ndash; Dead Simple Unit Test Mocking</h2>
+<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.</p>
 
-<p>Clojure is the easiest language to unit test I have ever
-seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
-replacement of the function definition. No extraneous interfaces, no
-dependency injection, no mocking framework.  The built-in function <code>with-redefs</code>
-will replace any function in any library or
-namespace with a new definition.</p>
+<p>I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">next-id</span> <span class="p">[</span><span class="nv">connection</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nf">get-current-id</span> <span class="nv">connection</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">testing</span> <span class="s">&quot;next-id&quot;</span>
-</span><span class='line'>  <span class="c1">;; bind get-current-id to a function that always returns 4 </span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">with-redefs</span> <span class="p">[</span><span class="nv">get-current-id</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="mi">4</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">next-id</span> <span class="s">&quot;fake connection&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
+<p>By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
+is to build such good abstractions.</p>
 
+<pre><code>This model is not about language "power".
+</code></pre>
 
-<p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
-the scope of <code>with-redefs</code>. Couldn&rsquo;t be more simple! The binding
-only is in scope for code inside and called by the s-expression of the
-with-redefs, so no need to unbind it after the test.</p>
+<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
+&ldquo;abstract-ability&rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
+level.</p>
 
-<h2>2 &ndash; Amazing Editing</h2>
+<p>Rather than focus on what is <em>possible</em> with a language, I will
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.</p>
 
-<p>Many arguments have been made over those contentious
-parentheses. While the most powerful use of s-expressions is to easily
-allow macros, for the day to day, s-expressions have a very important
-use: amazing editing!</p>
+<p>To score a language, simply figure out how many characters it costs to
+&ldquo;prevent&rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is language enforced, like F#&rsquo;s
+Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.</p>
 
-<p><img class="center" src="http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif" title="image" alt="images"></p>
+<p>If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 (by default) for a &ldquo;every change run
+and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.</p>
 
-<p>With ParEdit (available in most editors), it is trivial to select,
-move, replace, grow, or shrink any s-expression, string, map, or
-list. <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">This animated guide</a>
-shows excellent examples of ParEdit that are too
-complex to explain here.</p>
+<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
+</code></pre>
 
-<p>Languages that don&rsquo;t have a surrounding delimiter for expressions
-leave you jumping around with the mouse and arrow keys a whole lot more.
-Because it is so much easier to write a parser to select <code>(add 1 2)</code>
-than it is for <code>add(1, 2)</code>, the tooling can be so much better.</p>
+<p>Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.</p>
 
-<p>No local editing tool I have seen comes close to Vim with ParEdit for
-effective editing.</p>
+<p><div ng-app="TableApp">
+<div ng-controller="TableCtrl"></p>
 
-<h2>3 &ndash; Live Attached Repl</h2>
+<p>Language Enforced Bonus:
+ {{ enforcedScore }}
+<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
 
-<p>Developing in Clojure against a running version of the program is a
-huge bonus for development speed. While possible to get similar
-behavior with an attached debugger in other languages, the fluidity of
-an always-on live attached repl is incredible. At any point, it is
-possible to run and rerun any given expression to see the
-results. More than once, I have seen an exception caused by calling a
-certain function. I trace that function to see the exact inputs that
-cause the exception, and am able to quickly run every line of the
-offending function to see the source.</p>
+<p>Language Inability Penalty:
+ {{ inabilityPenalty }}
+<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
 
-<p>If a debugger sheds light on a single line at a time when running an
-application, a live attached repl sheds light on the entire
-application.</p>
+<p>Show Weights <input type="checkbox" ng-model="showWeights" />
+<p class="lead">
+<div style="overflow-x:scroll">
+<table class="langtable">
+<tr>
+<th>Safety Check</th>
+<th></th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
+</th>
+</tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
+<tr class="totals"><td>Totals</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ lang }}
+</td>
+</tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ percentageTotals(lang) }}%
+</td>
+</tr>
+</table>
+</div></p>
 
-<h2>4 &ndash; No-fuss Polymorphism</h2>
+<p><h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
 
-<p>One of the best claims about &ldquo;traditional&rdquo; Java OO is
-polymorphism. The ability to make an interface with concrete classes
-gives the powerful ability to replace behavior dynamically. The
-trouble is, Java&rsquo;s polymorphic dynamic dispatch is single dispatch &ndash; the
-decision of which method to call is limited to a single thing: the
-type of the callee. If this was the only type of dynamic dispatch you
-ever knew of, it might be hard for you to consciously realize it was
-ever a limitation, especially if you&rsquo;ve never seen examples of
-multiple dispatch.</p>
+<p>Current Languages:
+<span ng-repeat="lang in allLanguages">
+ {{ getName(lang) }}: {{ allLangTotals[$index] }},
+</select></p>
 
-<p>While most of the time, in any language with first class functions, it
-is possible to achieve a similar effect by passing functions, it is
-also possible to get a similar value with something called multimethods.</p>
+<p>I want to see your language represented here! I&rsquo;ll happily take pull
+requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
+use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
+language data structure.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:dog</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;woof says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:cat</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;mow says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;woof says Spike&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;mow says Mr Cat&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>I would love to see every major language represented, including major
+language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &ldquo;Scala &ndash; The Better Java&rdquo;
+and &ldquo;Scala &ndash; The JVM Haskell&rdquo; have vastly different idioms with
+apparently very separate communities.</p>
 
+<p><div ng-show="showRealName"> Feel free to put in your own examples by
+playing with the samples below. Code surrounded with &lt;! !> is ignored
+from the tally, since it would vary heavily based on the language and
+desired result. Variable and type names are kept at single characters,
+which are counted. Feel free to add in your own language below, and
+use the copy feature to extract the data structure to use in a pull
+request.</p>
 
-<p>In this example, we use the <code>:animal</code> keyword to be the &ldquo;route&rdquo; function,
-and the two methods fill in two of the possible concrete types. We are
-not limited to just a keyword, we can dispatch on anything on the
-passed map, for example, the oddness of the id:</p>
+<p><h2>Select Language:
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
+</h2>
+<button ng-click="showEdit = !showEdit">Edit Language</button>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+<div ng-show="showEdit">
+<h2><input ng-model="selectedLang.name"></input></h2>
+<div ng-repeat="check in langChecks">
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
+<p>
+<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
+<div>
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
+</div>
+</p>
+</div>
+</div></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">odds?</span> <span class="p">(</span><span class="nb">comp </span><span class="nv">odd?</span> <span class="ss">:id</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">true</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;odd id&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">false</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;even id&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;odd id&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;even id&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><div ng-show="!showEdit">
+<h2> {{ selectedLang.name }} </h2>
+<div ng-repeat="check in langChecks">
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
+<p>
+ {{ selectedLang[check.key].desc }}
+<div>
+Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }}
+<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
+</div>
+</p>
+</div>
+</div>
+</div></p>
 
+<p>Hope this is a helpful way to think about language safety!</p>
 
-<p>While both examples are a bit silly, they should demonstrate the power
-of simple polymorphism. But you might think, what about inheritance?
-Multimethods allow that too!</p>
-
-<h2>5 &ndash; Simple Multiple Inheritance</h2>
-
-<p>We don&rsquo;t build inheritance on a single type, but on a hierarchy of
-keywords. Those can be dispatched on just like any other
-keyword. First, an example hierarchy of keywords using the built-in
-functions <code>derive</code> and <code>isa?</code>. These <code>::</code> keywords are
-namespaced, which prevents collisions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::cat</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::cat</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::mammal</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>A <code>::dog</code> is-a <code>::mammal</code> and is-a <code>::hairy</code>, the
-classical diamond problem (without the common ancestor, which is
-possible, but unneeded for the example).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;chirps&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;breathes&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;chirps&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Dog&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;breathes&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">shave</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;shivers&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::hairy</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;stuggles&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;maybe cant be shaved!&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">prefer-method</span> <span class="nv">shave</span> <span class="ss">::hairy</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;shivers&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Rufs&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;stuggles&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We can see the <code>::dog</code> keyword doesn&rsquo;t have an explicit speak or shave
-implementation, which is fine, because it will then use the &ldquo;preferred&rdquo;
-parent implementation, which returns &ldquo;breathes&rdquo; for speak or
-&ldquo;struggles&rdquo; for shave. Since we can have a keyword be the child of
-multiple parents, we get a multiple inherited behavior, where the
-preferred match is the one returned.</p>
-
-<p>This is possible because the default equality check of multimethod is
-the <code>isa?</code> function. Because of this, uses of multimethod
-hierarchies can have inherited behavior for complex structures.</p>
-
-<h2>6 &ndash; Mostly Monadic</h2>
-
-<p>Languages like Haskell and F# have tools like the maybe monad that add
-safety to operations. For example, using the maybe monad can
-completely prevent null reference exceptions by making you ensure you
-&ldquo;unpack&rdquo; the value every time.</p>
-
-<p>How does Clojure address this? In a typical Clojure way, which gives
-80% of the value for 20% of the effort, Clojure has a great
-relationship with empty lists and nil. Rather than wrapping every
-value that is nullable in a type, Clojure&rsquo;s default functions all
-<em>mostly</em> deal with nil and empty without throwing exceptions. For
-example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">get </span><span class="p">{</span><span class="ss">:id</span> <span class="mi">5</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 5</span>
-</span><span class='line'><span class="p">(</span><span class="nb">get </span><span class="nv">nil</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">])</span>
-</span><span class='line'><span class="c1">;; =&gt; 3</span>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'><span class="p">(</span><span class="nb">count </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 0</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This allows functions to be chained without fear that along the way a
-nil will get returned.</p>
-
-<p>Since most of the core functions are &ldquo;smart&rdquo; about nil, you gain much
-of the value and safety of monads without most of the
-hassle. Ultimately, a more rich type system would allow for custom
-types which can be domain specific, but in day-to-day working,
-primitive safety is still a huge win.</p>
-
-<h2>Conclusion</h2>
-
-<p>These are a few simple features that keep me coming back to Clojure,
-even from languages like F# and Haskell. While Clojure is a bit more
-wordy than the ML family, and not as type safe, the simplicity of
-these features keep me coming back for more!</p>
+<p>Special thanks to (in alphabetical order):
+Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
+Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
+Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
+Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
+Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
 </div>
   
   
@@ -440,19 +346,19 @@ these features keep me coming back for more!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/case-study-domain-modeling-in-f-number-part-2/">Case Study: Domain Modeling in F# - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
       <li class="post">
-        <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
+        <a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a>
       </li>
     
       <li class="post">
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
   </ul>
@@ -463,7 +369,7 @@ these features keep me coming back for more!</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">21</span></a>
     </li>
     
     

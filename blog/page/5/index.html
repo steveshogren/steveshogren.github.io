@@ -9,9 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="One of my favorite things about F# is how it lets you choose how you want
-to align your data. In the previous posts highlighting on
-pattern matching &hellip;">
+  <meta name="description" content="Have you noticed that there are so many different styles of
+interviews? Recently on /r/programming, there have been a rash of people
+complaining that &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +87,7 @@ pattern matching &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a></h1>
+      <h1 class="entry-title"><a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a></h1>
     
     
       <p class="meta">
@@ -97,131 +97,18 @@ pattern matching &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>One of my favorite things about F# is how it lets you choose how you want
-to align your data.</p>
+  <div class="entry-content"><p>Have you noticed that there are so many different styles of
+interviews?</p>
 
-<p>In the previous posts highlighting on
-<a href="http://deliberate-software.com/function-pattern-matching/">pattern matching</a>
-and
-<a href="http://deliberate-software.com/inversed-polymorphism/">inverted polymorphism</a>
-we covered how pattern matching in F# is safer than <code>if</code>
-statements and can replace classes and interfaces for polymorphism. If
-you are unfamiliar with these concepts, you might want to skim those
-first.</p>
+<p>Recently on /r/programming, there have been a rash of people
+complaining that interviews are terrible. My favorite was the
+commenter who claimed to make the typical FizzBuzz test a tiny bit
+harder by asking for a new word on prime numbers, and no using a
+library call! When others pointed out how hard that is, he was like
+&ldquo;aren&rsquo;t primes just not evenly divisible by 2 or 3?&rdquo;</p>
 
-<p>Today, for the 6th day of the
-<a href="https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/">F# Advent Calendar</a>
-I wanted to highlight F#&rsquo;s flexibility in solving the
-&ldquo;<a href="http://c2.com/cgi/wiki?ExpressionProblem">expression problem</a>&rdquo;.</p>
-
-<p>Let&rsquo;s show the two alternatives, first here is one with interfaces:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">IChristmasTrees</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">abstract</span> <span class="k">member</span> <span class="nc">Cost</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
-</span><span class='line'>    <span class="k">abstract</span> <span class="k">member</span> <span class="nc">Colors</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">type</span> <span class="nc">PlasticTree</span><span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">interface</span> <span class="nc">IChristmasTrees</span> <span class="k">with</span>
-</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Cost</span><span class="o">(</span><span class="n">jolly_factor</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">jolly_factor</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
-</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Colors</span><span class="bp">()</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;silver&quot;</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">type</span> <span class="nc">LiveTree</span><span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">let</span> <span class="nc">HEAD_ACHE</span> <span class="o">=</span> <span class="mi">15</span>
-</span><span class='line'>    <span class="k">interface</span> <span class="nc">IChristmasTrees</span> <span class="k">with</span>
-</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Cost</span><span class="o">(</span><span class="n">jolly_factor</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">jolly_factor</span> <span class="o">+</span> <span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="nc">HEAD_ACHE</span>
-</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Colors</span><span class="bp">()</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Now the same functionality using pattern matching and discriminated unions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">IChristmasTrees2</span> <span class="o">=</span>
-</span><span class='line'>  <span class="o">|</span> <span class="nc">PlasticTree</span>
-</span><span class='line'>  <span class="o">|</span> <span class="nc">LiveTree</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="n">colors</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>  <span class="o">|</span> <span class="nc">PlasticTree</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;silver&quot;</span><span class="o">]</span>
-</span><span class='line'>  <span class="o">|</span> <span class="nc">LiveTree</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="n">cost</span> <span class="n">tree</span> <span class="n">jolly_factor</span> <span class="o">=</span>
-</span><span class='line'>  <span class="k">match</span> <span class="n">tree</span> <span class="k">with</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nc">PlasticTree</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">jolly_factor</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nc">LiveTree</span> <span class="o">-&gt;</span>
-</span><span class='line'>      <span class="k">let</span> <span class="nc">HEAD_ACHE</span> <span class="o">=</span> <span class="mi">15</span>
-</span><span class='line'>      <span class="o">(</span><span class="n">jolly_factor</span> <span class="o">+</span> <span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="nc">HEAD_ACHE</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>What changes if we want to add a new type of tree? In the class-based
-example, adding a new type is quite simple, you only need to edit one
-place to find all the definitions regarding the new type.</p>
-
-<p><img class="center" src="/images/new-interfaces.png" title="image" alt="images"></p>
-
-<p>In the pattern matching example, adding a new type requires editing
-every single place you created a function that matches on the
-type.</p>
-
-<p><img class="center" src="/images/new-pattern-matching.png" title="image" alt="images"></p>
-
-<p>Thankfully, in both cases the compiler gives warnings about missing
-functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
-
-<p>What about changing an existing function or adding a new function? We
-now see the opposite behavior. Classes become harder to edit, because
-the functions are spread across multiple classes.</p>
-
-<p><img class="center" src="/images/change-interfaces.png" title="image" alt="images"></p>
-
-<p>A pattern matching system is now the easier to modify, each function
-only lives in one place.</p>
-
-<p><img class="center" src="/images/change-pattern-matching.png" title="image" alt="images"></p>
-
-<p>And that is the expression problem! The best thing about F# is that
-you get to pick which one is better for each type of data! If you know
-a certain type will need new behavior often, but rarely need new
-types, use pattern matching. If you know there is a static set of
-functions for a set of types, but the type list changes often, maybe
-the traditional interfaces and classes makes the most sense.</p>
-
-<p>There is no reason not to mix and match the two ways to handle
-polymorphism, so you are free to choose the best representation for
-each type of data you have!</p>
-
-<p>Happy F#-filled Festivities!</p>
+<p>I saw that comment, and I knew I had a perfect example for the state
+of interviewing!</p>
 </div>
   
   
@@ -277,19 +164,19 @@ each type of data you have!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/case-study-domain-modeling-in-f-number-part-2/">Case Study: Domain Modeling in F# - Part 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
       <li class="post">
-        <a href="/programming-language-safety-algorithm/">Programming Language Safety Algorithm</a>
+        <a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a>
       </li>
     
       <li class="post">
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/optimizing-for-crappy-interviews/">Opimizing for Crappy Interviews</a>
       </li>
     
   </ul>
@@ -300,7 +187,7 @@ each type of data you have!</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">21</span></a>
     </li>
     
     
