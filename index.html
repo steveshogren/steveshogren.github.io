@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +87,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/case-study-domain-modeling-in-f-number-part-2/">Case Study: Domain Modeling in F# - Part 2</a></h1>
+      <h1 class="entry-title"><a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a></h1>
     
     
       <p class="meta">
@@ -96,7 +97,146 @@
   </header>
 
 
-  <div class="entry-content">
+  <div class="entry-content"><p>Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.</p>
+
+<p>To illustrate this, I found some old code I&rsquo;d written to interact with
+a legacy system. The system uses many single enums on a record to keep
+track of statuses. When one changes, it can cause others to change as
+well.</p>
+
+<p>Here is a typical function that combines two enums to recalculate a
+third.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">PositionType</span> <span class="nf">GetPositionType</span> <span class="p">(</span><span class="n">MovementType</span> <span class="n">movementType</span><span class="p">,</span> <span class="n">ApplyToParty</span> <span class="n">applyToParty</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Held</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Posted</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Undefined</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With some regularity, new records are added to these types of enums,
+causing a dangerous search and update across the system fixing all the
+if/else or switch/case statements.</p>
+
+<p>Right off the bat, pattern matching is a huge win here, taking a hard
+to comprehend function and making the domain concepts clear.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nc">GetPositionType</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Held</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Posted</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">MovementType</span><span class="p">.</span><span class="nc">Undefined</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nn">ApplyToParty</span><span class="p">.</span><span class="nc">Undefined</span> <span class="o">-&gt;</span> <span class="nn">PositionType</span><span class="p">.</span><span class="nc">Undefined</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we&rsquo;d be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.</p>
+
+<p>Next though, this got me thinking. Why does this set of three enums
+have to be calculated? Why are they even separate? Ah, of course,
+right now they are stored in the database and ORM objects, each with a
+separate field and set of enum ids. Changing that would be costly.</p>
+
+<p>What I want is a domain layer a level higher than the typical database
+ORM classes, something to convert my ORM classes into that will be
+able to do work in a safer way.</p>
+
+<p>Rather than three enums that are supposed to change in lock step (but
+might get out of date), I really want a concept of the three combined
+and &ldquo;frozen&rdquo; together.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">Direction</span> <span class="o">=</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Posted_Return_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetDirection</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Principal</span>  <span class="o">-&gt;</span> <span class="nc">Held_Deliver_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Held_Return_Counterparty</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">-&gt;</span> <span class="nc">Posted_Return_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Posted_Deliver_Counterparty</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Now I have a combined Direction that merges the three concepts into
+one. It is impossible with this new merged type to have an invalid
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nc">GetMovementTypeToSaveInORM</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span> <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Deliver</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Posted_Return_Principal</span> <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Return</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetSendFn</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span> <span class="o">|</span> <span class="nc">Posted_Return_Principal</span> <span class="o">-&gt;</span> <span class="nc">SendMessageToPrincipal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span> <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">SendMessageToCounterparty</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While it is possible to make an equivalent C# enum and combine these
+in a similar way, it is inherently unsafe (nothing to guarantee you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.</p>
+
+<p>Because F# interops so well with C#, it is possible to build in a
+domain layer in F# immediately that calls down to your C# ORM
+classes. Converting from a set of dangerous C# enums into a
+constrained and safe F# discriminated union is easy and will simplify
+your domain to its essence.</p>
+
+<p>For reasons like this, when I have to build something with a rich
+domain, I reach for F#.</p>
 </div>
   
   
@@ -150,10 +290,6 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/case-study-domain-modeling-in-f-number-part-2/">Case Study: Domain Modeling in F# - Part 2</a>
-      </li>
-    
-      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
@@ -165,6 +301,10 @@
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
       </li>
     
+      <li class="post">
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+      </li>
+    
   </ul>
 </section>
 <section>
@@ -173,7 +313,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">21</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">17</span></a>
     </li>
     
     
@@ -183,12 +323,12 @@
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     

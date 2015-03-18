@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I used to hate type systems. As a junior programmer, I did most of my
-work in Perl and PHP, so working in C#/Java always felt so
-overwrought. In Java &hellip;">
+  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +85,7 @@ overwrought. In Java &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/typing-saves-you-time/">Typing Saves You Time</a></h1>
+      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
     
     
       <p class="meta">
@@ -97,17 +95,14 @@ overwrought. In Java &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I used to hate type systems. As a junior programmer, I did most of my
-work in Perl and PHP, so working in C#/Java always felt so
-overwrought. In Java especially, one has to write out the type of the
-varible almost every time you use it, which explodes the amount of
-busywork the developer must do.</p>
-
-<p>Unit tests are a poor man&rsquo;s type system.</p>
-
-<p>There, I said it. You know why I think this? Becuase I just took (am
-taking?) over a legacy codebase. You know what makes that way easier?
-Typing.</p>
+  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
+<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
+<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
+<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
+<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
+<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
+<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
+<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
 </div>
   
   
@@ -163,10 +158,6 @@ Typing.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/case-study-domain-modeling-in-f-number-part-2/">Case Study: Domain Modeling in F# - Part 2</a>
-      </li>
-    
-      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
@@ -178,6 +169,10 @@ Typing.</p>
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
       </li>
     
+      <li class="post">
+        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
+      </li>
+    
   </ul>
 </section>
 <section>
@@ -186,7 +181,7 @@ Typing.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">21</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">17</span></a>
     </li>
     
     
@@ -196,12 +191,12 @@ Typing.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/unit-testing/"><span>Unit Testing</span><span style="float:right">1</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">4</span></a>
+      <a href="/blog/categories/lisp/"><span>Lisp</span><span style="float:right">3</span></a>
     </li>
     
     
