@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ &hellip;">
+  <meta name="description" content="I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
+      <h1 class="entry-title"><a href="/on-lisp-part-1/">On Lisp: Part 1</a></h1>
     
     
       <p class="meta">
@@ -95,76 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><p>
-  Up until recently, most of my programming was in php, which does not
-  support named parameters
-  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
-  target="_blank">this</a> doesn&#8217;t count, and it will get you lynched)
-  so while switching to VB.NET and python, I have come to really
-  appreciate this handy feature.
-</p>
-<p>
- Named parameters is one of those handy little things that can make
-  your life a little easier. Say, in python, you have a function that
-  takes a boolean value. Normally, I would create a variable just to
-  hold that boolean value, then pass it in, to try to be easier for
-  the next guy to understand.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-  Who knows what window&#8217;s parameter is? What the heck is true anyway,
-  the window? <a href="http://www.jetbrains.com/pycharm/"
-  target="_blank">PyCharm</a> knows (and if you are using python
-  without it, I implore you to treat yourself to the demo) otherwise
-  you have to look up the function <em>like a barbarian</em> to see
-  what is going on. Sure, you can make it more clear with:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>Better then nothing, but still lame.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  Boom! Way easier to read, no extra variables hanging around making
-  trouble. Many times I have made function parameters, called them one
-  thing, then made a variable with a slightly different name to pass
-  in for legibility, but no more of that crap! Now, when I have the
-  inclination to make a variable just to clarify something, I just
-  name the parameter and pass in the value right there, like a
-  civilized gentleman should.
-
-</p>
-<p>
- Additionally, VB.NET has this too, with the slightly goofier
-  syntax of the &#8220;:=&#8221;
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  My cohort Daniel Miladinov pointed out that this is calling the
-  assignment operator directly, since calling it with just the equals
-  would perform
-  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
-</p>
+  <div class="entry-content">I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.
 </div>
   
   
@@ -220,6 +151,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/superiority-fatigue/">Superiority Fatigue</a>
+      </li>
+    
+      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
@@ -229,10 +164,6 @@
     
       <li class="post">
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
   </ul>
@@ -248,7 +179,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">20</span></a>
     </li>
     
     
@@ -289,7 +220,7 @@
 </p>
 
 <script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
+<script src="/javascripts/sliders2.js" type="text/javascript"></script>
 
 </footer>
   

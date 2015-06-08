@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid. I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
+  <meta name="description" content="I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
+      <h1 class="entry-title"><a href="/clojure-debugger/">Clojure&#8230; Debugger?</a></h1>
     
     
       <p class="meta">
@@ -95,14 +95,120 @@
   </header>
 
 
-  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
-<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#8217;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
-<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
-<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn&#8217;t cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
-<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
-<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
-<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
-<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
+  <div class="entry-content">I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
+<br />
+<br />
+One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
+<br />
+<br />
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
+</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
+</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
+</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
+</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
+</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
+</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
+</span></code></pre></td></tr></table></div></figure>
+<br />
+<br />
+Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
+<br />
+<br />
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
+</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>      <span class="mi">1</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
+</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
+</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
+</span></code></pre></td></tr></table></div></figure>
+<br />
+<br />
+At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&#8217;s execution is brilliant and inconceivably handy.
+<br />
+<br />
+At first, I thought, &#8220;well that is an incredibly cool party trick, but a party trick nonetheless&#8221;. A few days of regular clojure development later, I realized the profundity of this library.
+<br />
+<br />
+I have had on my list of &#8220;pain points&#8221; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
+<br />
+<br />
+Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> &#8220;Well, duh&#8221;, you say. I am not talking about syntax! I am talking about the <em>tools.</em>
+<br />
+<br />
+I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &#8220;put in a breakpoint, run the code, pause at that place, inspect values, etc&#8221;. When I first saw tools.trace, the image of a &#8220;debugger replacement&#8221; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&#8217;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&#8217;s and out&#8217;s were, and all of a sudden it clicked. &#8220;I just found my new debugger&#8221;, and, &#8220;wow, this debugger is way less hassle&#8221;.
+<br />
+<br />
+No, of course this doesn&#8217;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
+<br />
+<br />
+The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &#8220;default ide&#8221; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&#8217;s meta-programming is simply the most mind altering thing I have experienced in programming.
 </div>
   
   
@@ -158,6 +264,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/superiority-fatigue/">Superiority Fatigue</a>
+      </li>
+    
+      <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
       </li>
     
@@ -167,10 +277,6 @@
     
       <li class="post">
         <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a>
       </li>
     
   </ul>
@@ -186,7 +292,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">19</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">20</span></a>
     </li>
     
     
@@ -227,7 +333,7 @@
 </p>
 
 <script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
+<script src="/javascripts/sliders2.js" type="text/javascript"></script>
 
 </footer>
   

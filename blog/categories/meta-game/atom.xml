@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-03-17T20:37:00-04:00</updated>
+  <updated>2015-06-08T08:23:58-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Superiority Fatigue]]></title>
+    <link href="http://steveshogren.github.io/superiority-fatigue/"/>
+    <updated>2015-05-14T19:13:00-04:00</updated>
+    <id>http://steveshogren.github.io/superiority-fatigue</id>
+    <content type="html"><![CDATA[<p>Learning new tools, technologies, and methodologies is
+hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
+good comprehension of the tool, and now, filled with excitement, you try to
+explain it to someone else.</p>
+
+<p>They almost always react with hostility.</p>
+
+<p>What is going on? You just took time to learn this exciting tool that could save
+everyone a lot of time, and not only do they not care, but they resent you for
+it!  Don&rsquo;t they see how this could be great for everyone?</p>
+
+<p>The issue, like humans, is complex and dynamic. Maybe they feel like you&rsquo;ve now
+made them look lazy in comparison. Maybe they have tried other tools in the past
+only to discover they weren&rsquo;t as a good as promised. Maybe they are afraid they
+won&rsquo;t be able to learn the new tool as quickly as they need to, and will be left
+behind. Maybe they are afraid all the time they spent learning the existing
+tools will have been wasted. Maybe they are comfortable where they are, and
+don&rsquo;t care about increased productivity. Maybe they are tired of learning new
+things.</p>
+
+<p>Most times I have seen this, I think the root emotion is fear. Fear of failure,
+of change, of being embarrassed, of looking inferior. Fear is a powerful
+emotion.</p>
+
+<p>When you respond with further hostility, this only will compound their
+fear. Should they put their comfort and ego before the needs of the business?
+No, but your counterattack will only further prove to them that their fear was
+deserved.</p>
+
+<p>The final hardest part of learning a new tool is when you are forced to use an
+inferior tool. Suddenly that liberating fresh air of power is replaced with a
+suffocating claustrophobia of weakness. Even if the tool isn&rsquo;t really that
+inferior, it now <em>feels</em> terrible. It becomes worse when you and many others
+around you agree with the better value proposition of a new tool, and yet you
+are still required to use the inferior tool due to someone in power blocking you
+for political reasons.</p>
+
+<p>For the developer who sets out to learn new things, you must learn to deal with
+inferior tools. Once you start learning, you will always find yourself in a
+situation where you are required to use an inferior tool. For me, this has been
+one of the hardest things to face in my career.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Programming Language Safety Score]]></title>
@@ -729,116 +778,6 @@ started now, and have fun!</p>
 </p> <p> This is the story of how I learned an important lesson: if
   you are going to database, LEARN TO DATABASE.
 </p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
-    <link href="http://steveshogren.github.io/streaks/"/>
-    <updated>2014-01-28T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/streaks</id>
-    <content type="html"><![CDATA[<p>
-  You know what will make you a phenomenally better developer?
-  Deliberate practice. How do you get such practice? By doing it every
-  single day. Random bursts of effort over the odd weekend will gain
-  you practically nothing comparatively, even if the time investment
-  is the same. Your mind needs repetition and consistent effort to
-  improve. So what do you want to get better at?  Pick your highest
-  value subject: vim, regex, functional programming, meta-programming,
-  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
-  practice it every single day. Easy as that.
-</p>
-
-
-<p>
-  When GitHub first came out with the "streak" feature on the front
-  page, I realized it was time to stop my binge coding on the
-  occasional weekend and start a system. Inspired by other recent
-  system-based successes (working out every day), I decided to code
-  every day for a year.
-</p>
-
-
-<p>
-  I quickly realized that anything requiring detailed plans and
-  designs is harder to do. Working though a book, on the other hand,
-  is easy to start and stop. I started working through a book I had
-  tried to read before: Let Over Lambda.
-</p>
-
-
-<p>
-  Let Over Lambda is intense, filled with deeply complex concepts
-  written in Common Lisp, a language with which I was only passingly
-  familiar. But I managed to get through it without hardly any
-  difficulty. How did I do that?
-</p>
-
-
-<p>
-  I got a cheap netbook, and started to code on the train ride home.
-  Interestingly, without any internet, I was much less distracted, and
-  could just sit down and be in the zone within the minute (this from
-  the guy whom it takes 20+ minutes to get in the zone at work). With
-  only a limited span of ~25 minutes, I had no time to waste, and
-  without people to talk to my brain just falls into it. I can only
-  pinpoint a few times I could not get into the zone, and those were
-  extreme circumstances of exhaustion or illness.
-</p>
-
-
-<p>
-  In ten months, I have:
-  <ul>
-    <li>
-      worked through Let Over Lambda once and read it twice
-    </li>
-    <li>
-      worked twice through the PLAI programming languages book
-      (once in Scheme and once in F#)
-    </li>
-    <li>
-      read Clojure Programming, F# 3.0 Programming, and am currently
-      in Real World Haskell
-    </li>
-    <li>
-      completed the exercises up to chapter three of SICP
-    </li>
-    <li>
-      authored a small Clojure library for run time type checking
-      (don't use mine, use Prismatic's)
-    </li>
-    <li>
-      prepared and given a two hour talk about macros at a local meet-up
-    </li>
-  </ul>
-  Pretty incredible for only ~25 minutes a day! That is more
-  programming books than I had read in the previous 2 years. I have
-  improved mightily in such a short time, and it does not feel
-  stressful in the least. Now, when I get home, if I feel like
-  watching movies, cooking, or playing board games/Dark Souls all
-  night, no problem! I can relax knowing I have accomplished my goals
-  for the day. All in all, the last ten months have been incredible:
-  some of the most rewarding, relaxing, and fulfilling months of my
-  life.
-</p>
-
-
-<p>
-  Before you scoff and point out that not everyone can take the train
-  to work, consider this: get a portable computer, load up your
-  environment, tools, and some pdfs. The next morning, leave for work
-  ~25 minutes early. You will probably get in way sooner due to the
-  decreased traffic (now you have earned back that time). Sit quietly
-  in your car, and without the distractions of internet or other
-  people, knock out a little programming. Maybe start with SICP (the
-  best programming book I have ever read). See how much you can read
-  and do before work starts. Do that for a month, every day. I
-  guarantee you will learn something amazing.
-</p>
-
-
-
 ]]></content>
   </entry>
   
