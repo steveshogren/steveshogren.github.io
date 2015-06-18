@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Learning Vim is a waste of time; I can prove it! - Anonymous I recently had a gentle discussion with a new teammate about whether
-or not they should &hellip;">
+  <meta name="description" content="I recently have been working in a Clojure project which is made up of
+several microservices. While trying to build in a secure method for
+each &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +87,7 @@ or not they should &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/skill-continuum/">Software Skills Continuum</a></h1>
+      <h1 class="entry-title"><a href="/emacs-project-tip/">Emacs Project Tip</a></h1>
     
     
       <p class="meta">
@@ -96,236 +97,131 @@ or not they should &hellip;">
   </header>
 
 
-  <div class="entry-content"><pre><code>    Learning Vim is a waste of time; I can prove it! - Anonymous
-</code></pre>
+  <div class="entry-content"><p>I recently have been working in a Clojure project which is made up of
+several microservices. While trying to build in a secure method for
+each service to be able to call the others, I&rsquo;ve been in several
+different projects at the same time.</p>
 
-<p>I recently had a gentle discussion with a new teammate about whether
-or not they should learn to use Vim. My team uses a Vim emulator
-inside Visual Studio and Emacs, and so we recommended he learn at
-least the basics so to reduce friction when pair-programming (which we
-do almost all the time).</p>
+<p>At least once I accidentally opened the wrong &ldquo;handler.clj&rdquo; buffer,
+and spent a few minutes adding a function that never worked. Since I
+hate doing things like this, I wanted a simple way to see what project
+I was currently viewing.</p>
 
-<p>He really had no desire to learn it, and took no small amount of
-offense when we suggested it. The friction he felt trying to &ldquo;start
-over&rdquo; really bothered him. He set out to prove that Vim was not worth
-his time, and that it was actually us who needed to stop using it,
-because we were the duped slow ones.</p>
+<p>I started with a changing the title of the frame to show the whole
+path of the current buffer, like this:</p>
 
-<p>As any such localized experiments go, he never really came up with
-anything conclusive either way. Personally, I suspect he spent more
-time trying to figure out why Vim was worse than if he had just
-buckled down and learned it. This got me thinking about skills we
-learn as developers, and how much they cost.</p>
+<p><img class="center" src="/images/title.png" title="image" alt="images"></p>
 
-<h1>Skills</h1>
+<p>The code to change the title is simple, and the default in some of the
+pre-packaged emacs bundles:</p>
 
-<p>Most skills fall along a continuum of tactical to strategic.</p>
-
-<h3>Tactical Skills</h3>
-
-<ul>
-<li>Typing speed/accuracy</li>
-<li>Keyboard shortcuts</li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
-<li>Clean coding practices</li>
-<li>Refactoring tools</li>
-<li>Repl Driven Development / Test Driven Development</li>
-<li>Debugging</li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">frame-title-format</span>
+</span><span class='line'>      <span class="o">&#39;</span><span class="p">((</span><span class="ss">:eval</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))</span>
+</span><span class='line'>                 <span class="s">&quot;%b&quot;</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>Mid-way Skills</h3>
+<p>This is fine, but still not great. The font is tiny and the important
+part: &ldquo;octopress&rdquo; is buried. I wanted something a little more fluid,
+so I could easily tell the different projects apart instantly. I came
+up with the idea to color the background faintly different based on
+the path of the file. Files with a path containing &ldquo;octopress&rdquo; might
+be different from those containing &ldquo;.emacs&rdquo;.</p>
 
-<ul>
-<li>Unit testing</li>
-<li>Building abstractions</li>
-<li>Designing simple solutions</li>
-<li>Automating tasks</li>
-<li>Learning new languages and frameworks</li>
-</ul>
+<p>Thankfully, <code>buffer-face-mode</code> makes it easy to change a single
+property of a single buffer&rsquo;s face without changing any other
+buffer. So long as you disable buffer-face-mode when closing emacs,
+your files will open with the correct coloring scheme, then have the
+new background overlaid.</p>
 
+<p>While not perfect, this was the result.</p>
 
-<h3>Strategic Skills</h3>
+<p><img class="center" src="/images/colors.png" title="image" alt="images"></p>
 
-<ul>
-<li>Gathering requirements</li>
-<li>Training developers</li>
-<li>Organizing and leading teams</li>
-<li>&ldquo;Understanding the real problem&rdquo;</li>
-</ul>
+<p>The colors I choose are only faintly different, but just enough for me
+to tell instantly which is which.</p>
 
+<p>The buffer colors are applied when opening a file, using these
+functions:</p>
 
-<p>The more strategic the skills, the &ldquo;softer&rdquo; they become. The reason
-for this is that soft skills often allow for the greatest leverage on
-a project.</p>
-
-<p>Why is this?</p>
-
-<p>Consider the developer, who by more accurately gathering requirements
-for a few extra days, realizes that the stakeholder can use a
-preexisting solution instead of a six month planned project. If you
-consider how many keystrokes he saved, there is no way he could have
-possibly typed fast enough or refactored efficiently enough to make up
-for that saved six months of effort. Unless he can typed out a six
-month project in a few days, his time was better spent where it
-was. Obviously, these opportunities do not happen all the time, but
-they <em>do</em> happen.</p>
-
-<p>Think about the return on investment for training developers. If you
-have an average team (and yes, we all do), there is a good chance you
-have some lower performing developers. I have witnessed many times
-where a few months of pairing to brush up the skills of a less skilled
-developer allowed them to become much more productive. In terms of
-total company effort, that small investment paid back many times
-before the end of the year as the newly trained developer was able to
-tackle their work with the renewed vigor that comes from a greater
-mastery of their work.</p>
-
-<p>Similarly, the judicious use of automation for deployment, testing,
-and building greatly reduces the friction of development for entire
-teams. Lowered friction means less cognitive burden.</p>
-
-<p>That being said, I think there comes a point where you have to put
-fingers to keyboard and actually produce working software. Of course,
-the fastest and best software is the software you never have to
-write. But, when you absolutely must write or modify software, the
-skill to actually execute becomes very important. Tactical skills
-increase in significance the closer you get to the work.</p>
-
-<p>While a great software tactician will never &ldquo;beat&rdquo; a great strategist
-in terms of raw business value, a great strategist that is a terrible
-tactician can only talk their way out of work. A strategist who
-forgets or ignores good tactics is what we call an &ldquo;architecture
-astronaut&rdquo; or an &ldquo;ivory tower architect&rdquo;. These disconnected
-strategists eventually start to remove business value as their
-solutions make less and less practical sense.</p>
-
-<p>I think a developer who wants to improve should make sure they are
-improving all across the spectrum. Don&rsquo;t focus only on strategic or
-tactical skills, but seek projects and teams that will allow you to
-gain skills across the board. I like to try to focus on one skill from
-each side of the continuum each year. This year, it is emacs
-automation and monads on the tactical side, and leading mature teams
-on the strategic. By alternating readings, I find fuel to apply the
-strategies using these new tactics!</p>
-
-<p>Lastly, on the subject of &ldquo;what to study&rdquo;, I think it is possible to
-study a number of subjects all across the continuum. Unless you have
-weeks where you never type any code at all, you can practice and learn
-new tactical techniques all the time. If it slows you down today, but
-speeds you up next week, it might just be worth it. Even if it slowed
-you down to a quarter your usual speed for two weeks, but then gives
-you a measly 5% boost to productively after that, you&rsquo;ll earn that
-time back by the end of the year, plus some. And 5% is not hard to
-do. I&rsquo;d guess learning a few new navigation or refactoring shortcuts
-would net you 5% easily.</p>
-
-<p>When studying more strategic skills, the same holds, but they are
-harder to learn. The best way I have found for learning strategic
-skills is to read books about it, and try to work around others who
-are good at it. Neither books or working with others will get you all
-the way there, you also have to apply it yourself.</p>
-
-<h1>Progression</h1>
-
-<p>I usually recommend that the more experienced a person is, the more
-mastery they should have in the tactical skills. A suggested path I&rsquo;ve
-recommended for a new developer would look like this:</p>
-
-<h3>0 &ndash; 6 Months:</h3>
-
-<ul>
-<li>Typing speed/accuracy</li>
-<li>Keyboard shortcuts</li>
-<li>Repl Driven Development / Test Driven Development</li>
-<li>Unit testing</li>
-<li>Clean coding practices</li>
-<li>Designing simple solutions</li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-buffer-face-mode-variable</span> <span class="p">(</span><span class="nv">color</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">buffer-face-mode-face</span> <span class="p">(</span><span class="nb">list</span> <span class="ss">:background</span> <span class="nv">color</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-set-theme-on-mode</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">cond</span>
+</span><span class='line'>    <span class="c1">;; add your own project/color mappings here</span>
+</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;halcyon&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;#00001A&quot;</span><span class="p">))</span>
+</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;dwarf&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;#001A1A&quot;</span><span class="p">))</span>
+</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;nimbus&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
+</span><span class='line'>     <span class="p">(</span><span class="no">t</span> <span class="s">&quot;&quot;</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>0 &ndash; 2 Years:</h3>
+<p>To force them to run when opening a file, since I use helm, I set it
+to execute on exiting helm for any reason:</p>
 
-<ul>
-<li>Debugging</li>
-<li>Refactoring tools</li>
-<li>Building abstractions</li>
-<li>Automating tasks</li>
-<li>Learning new languages and frameworks</li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
-</ul>
-
-
-<h3>0 &ndash; 50+ Years:</h3>
-
-<ul>
-<li>Gathering requirements</li>
-<li>Training developers</li>
-<li>Organizing and leading teams</li>
-<li>Understanding the real problem</li>
-</ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;helm-after-action-hook</span> <span class="ss">&#39;my-set-theme-on-mode</span><span class="p">)</span>
+</span><span class='line'><span class="c1">;; uncomment if not using helm</span>
+</span><span class='line'><span class="c1">;; (add-hook &#39;find-file-hook &#39;my-set-theme-on-mode)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>This is not a hard and fast list. If you are completely unsure of what
-to learn, I recommend this rough progression just to get you
-started. If you are a two year developer, and you cannot touch type, I
-think learning it can really help, alongside the other 0 &ndash; 2 year
-skills.</p>
+<p>Lastly, to make sure emacs applies my normal theme and settings to a
+buffer when starting, I disable buffer-face-mode on all buffers before
+exiting.</p>
 
-<p>Not all skills along the list build on a mastery of the ones below
-it. A developer can absolutely get to a very senior mastery of the
-strategic skills only knowing one language and using notepad.exe. I
-believe that they are missing out on a deep richness that comes from
-better knowing their field, and I suggest they spend some time learning new
-languages and tools. The more tactical the skill, usually, the easier
-it is to learn, so it won&rsquo;t take very much time to come up to
-speed.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">disable-all-buffer-face-mode</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">current</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">-map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="k">progn</span> <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>                             <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">0</span><span class="p">)))</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">current</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;kill-emacs-hook</span> <span class="ss">&#39;disable-all-buffer-face-mode</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>The hardest thing I think a more senior developer has to deal with is
-humbling themselves to learn a perceived &ldquo;entry-level&rdquo; skill. I have
-another post brewing about this very topic, so I&rsquo;ll not get too much
-into it here. But if you have gotten to a place where you feel like
-you are so senior that some skills are too &ldquo;entry-level&rdquo; for you to
-learn, I think you need to humble yourself and learn them. Nothing can
-be gained from pretending like they are not valuable. Additionally,
-the assumption that your time is now so valuable that it is &ldquo;a waste&rdquo;
-to spend it on learning tactical skills is absurd.</p>
 
-<p>Claiming you are too good to waste on low level skills not only
-belittles everyone around you, but belies a deep misunderstanding of
-our field. The senior developer who takes five times as long to enter
-and edit code isn&rsquo;t just spending longer to do that task, but they are
-paying a missed opportunity cost in time they could have spent in more
-strategic endeavors. They could have been training, planning,
-gathering requirements, building better automation, etc, instead they
-stubbornly claim &ldquo;typing isn&rsquo;t what software is about&rdquo;. By giving it
-so little credence, they have made it most of their actual mental
-effort! Take simple touch-typing. Imagine how much mental effort it
-takes the hunt-and-peck typist to write out a single line of
-code. That is mental overhead that is simply wasted. The developer who
-doesn&rsquo;t have to think about how to move a file or edit a structure
-finds themselves quickly through the tactical efforts with little
-distraction, free to think deeply.</p>
+<p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
+the -map function.</p>
 
-<h1>Resources</h1>
+<p>While not the only solution, this seemed a simple and elegant way to
+quickly be reminded of your current project.</p>
 
-<p>Here are some links and books to get you started on these topics.</p>
-
-<ul>
-<li>Typing speed/accuracy &ndash; <a href="http://store.steampowered.com/agecheck/app/246580/">Typing of the Dead</a></li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs &ndash; <a href="http://vim-adventures.com/">Vim Adventures</a></li>
-<li>Clean coding practices &ndash; <a href="https://cleancoders.com/">Clean Coders</a></li>
-<li>Repl Driven Development &ndash; <a href="http://blog.jayfields.com/2014/01/repl-driven-development.html">RDD</a></li>
-<li>Test Driven Development &ndash; <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530</a></li>
-<li>Debugging &ndash; <a href="http://c.learncodethehardway.org/book/ex31.html">Debugging</a></li>
-<li>Building abstractions / Designing Simple Solutions &ndash; <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start">Structure and Interpretation of Computer Programs</a></li>
-<li>Training developers &ndash; <a href="http://en.wikipedia.org/wiki/Pair_programming">Pair Programming</a></li>
-<li>Organizing and leading teams &ndash; <a href="http://managinghumans.com/">Managing Humans</a></li>
-<li>Understanding the real problem &ndash; <a href="http://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow">Thinking Fast and Slow</a></li>
-<li>Learning new languages and frameworks &ndash; <a href="http://norvig.com/21-days.html">Teach Yourself Programming in Ten Years</a></li>
-<li>Automating tasks <a href="http://www.stuartellis.eu/articles/rake/">Rake to Automate Tasks</a></li>
-</ul>
-
+<p>Enjoy!</p>
 </div>
   
   
@@ -381,6 +277,10 @@ distraction, free to think deeply.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
+      </li>
+    
+      <li class="post">
         <a href="/superiority-fatigue/">Superiority Fatigue</a>
       </li>
     
@@ -390,10 +290,6 @@ distraction, free to think deeply.</p>
     
       <li class="post">
         <a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a>
-      </li>
-    
-      <li class="post">
-        <a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a>
       </li>
     
   </ul>
@@ -409,7 +305,7 @@ distraction, free to think deeply.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">21</span></a>
     </li>
     
     

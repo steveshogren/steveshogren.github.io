@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Meta Game | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-06-08T08:23:58-04:00</updated>
+  <updated>2015-06-18T08:18:02-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learning Lisp Was Hard]]></title>
+    <link href="http://steveshogren.github.io/learning-lisp-was-hard/"/>
+    <updated>2015-06-17T07:02:00-04:00</updated>
+    <id>http://steveshogren.github.io/learning-lisp-was-hard</id>
+    <content type="html"><![CDATA[<p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.</p>
+
+<p>When I set out to learn a Lisp, I expected it would be easy.</p>
+
+<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
+natural!&rdquo;</p>
+
+<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
+than one) and shortly master it to be able to ship a website with it.</p>
+
+<p>What happened instead took me a little longer&hellip;</p>
+
+<ul>
+<li>05/11 &ndash; 06/11 &ndash; ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
+<li>04/12 &ndash; 08/12 &ndash; ~60 Hrs Rewrote a PHP side project in Clojure</li>
+<li>08/12 &ndash; 08/12 &ndash; ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
+<li>08/12 &ndash; 09/12 &ndash; ~10 Hrs Read <em>Clojure Programming</em> twice</li>
+<li>09/12 &ndash; 12/12 &ndash; ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
+<li>05/13 &ndash; 07/13 &ndash; ~50 Hrs Worked through <em>Let Over Lambda</em></li>
+<li>05/13 &ndash; 07/14 &ndash; ~250 Hrs Worked through <em>SICP</em></li>
+<li>07/14 &ndash; Shipped production Clojure code</li>
+</ul>
+
+
+<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
+
+<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
+deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.</p>
+
+<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
+Typed Racket, and Clojure before I felt confident enough to suggest shipping
+Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
+some people will snort with derision at how much time it took me &ndash; which is kind
+of the point of this post.</p>
+
+<p>This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.</p>
+
+<p>If you are struggling and feel like a failure, understand <em>there is no wrong
+way</em>. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.</p>
+
+<p>If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
+
+<h1>Was it worth it?</h1>
+
+<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Superiority Fatigue]]></title>
@@ -697,87 +781,6 @@ effort to really master the craft is easy to spot and hard to
 fake. Most people want to work with those who think like them, and you
 cannot think like a master engineer only knowing one tool, so get
 started now, and have fun!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learn to Database]]></title>
-    <link href="http://steveshogren.github.io/Learn-To-Database/"/>
-    <updated>2014-04-16T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/Learn-To-Database</id>
-    <content type="html"><![CDATA[<p>
-  "... and it has to return 45,000 records a minute, or we are all
-  screwed."
-</p>
-
-
-<p> <p> Monday morning, we inherited a legacy codebase. Tuesday, the
-  word came down on stone tablets. Forty-five thousand records a
-  minute, and no amount of political maneuvering or incremental gains
-  were going to do. Too many broken promises. The last team mass quit
-  over three months, leaving us the two most junior
-  developers. Someone high up promised big, and the buck stopped with
-  us.
-</p> <p> &ldquo;Does anyone even know the throughput now?&rdquo;
-</p> <p> We still don&rsquo;t even have the dumb thing running on our
-  machines. Two weeks later we have it running and enough data to test
-  it. 2500 records a minute. When scaled to 45000 records it is still
-  going 30 minutes later, so it doesn&rsquo;t even scale linearly. We are
-  screwed.
-</p> <p> Most of us are front-end developers who stepped forward when
-  everyone else stepped back. Databases are a distant memory,
-  something we maybe did a few jobs back. You &ldquo;join&rdquo; tables, right?
-  What we know of this process is it selects from 2-3 dozen databases
-  using an ORM while running through an engine that does some
-  supposedly massive calculations on the data, returning a message with
-  several hundred fields. It can&rsquo;t be that hard to speed up.
-</p> <p> &ldquo;We need a new architecture, with read-optimized databases
-  and queue-based messaging.&rdquo;
-</p> <p> None of us have ever built such a system, but we have read
-  about it, and like the faithful we nod solemnly in agreement. Why
-  not? If the database is read-optimized, surely it will perform like
-  we need. But a few desist.
-</p> <p> Like paratroopers dropped into unknown territory without a
-  map, we start to canvas the code, looking for landmarks. We split
-  into two teams, one to try to speed up the current system, the other
-  to start on the new architecture. Two teams trying two different
-  approaches doubles our chances, right? Whiteboards around our desks
-  fill with maps, glossaries, and diagrams. My team starts to dissect
-  this mostly home-made ORM.
-</p> <p> &ldquo;Why is this selecting from the same table twice?&rdquo;
-</p> <p> The ORM generated query selects a list of id&rsquo;s from table A,
-  then puts those id&rsquo;s into a list as a filter for the same table:
-</p> <p>
-  SELECT * FROM A WHERE ID IN (SELECT ID FROM A WHERE &hellip;)
-</p> <p> We scratch our heads a bit, but hey, that can&rsquo;t hurt
-  anything, surely the database figures that sort of stuff out? Isn&rsquo;t
-  that what&hellip; indexes do? Our most database-savvy developer can&rsquo;t
-  stop coming back to that query. He says it doesn&rsquo;t smell
-  right. Finally, he takes out the &ldquo;WHERE IN&rdquo; filter, shims in the
-  query, and runs the process.
-</p> <p>
-  &ldquo;Guys, the whole thing, all 45k came back in 40 seconds.&rdquo;
-</p> <p> We scoff at him, good joke! Our profiling showed time chewed
-  up fairly evenly at every level throughout the entire
-  process, not just the initial query. So the process came back,
-  just empty, right? And who knows what Ancient Ones you disturbed by
-  messing around with what the ORM generates, it will probably never
-  work again. We run it again, 40 seconds, correct count of
-  records. Odd, freak coincidence. We run it with the old filter still
-  in place, it comes back 30+ minutes later, same exact data. Whoa,
-  wait, what?
-</p> <p> Turns out, this ORM uses SELECT-WHERE-IN for every entity
-  join. That first SELECT FROM A WHERE ID IN (SELECT ID FROM A WHERE
-  &hellip;) was used as the base criteria for every single lazy look-up of
-  every entity on A, which were legion. What looked like slowness
-  across the entire process was really ORM lazy loading at every
-  level, with that first SELECT-WHERE-IN as the final filter in a line
-  of nested SELECTS, some four levels deep. That initial bad query
-  gets run countless times, and when it is slow, the whole system is
-  slow.
-</p> <p> This is the story of how I learned an important lesson: if
-  you are going to database, LEARN TO DATABASE.
-</p></p>
 ]]></content>
   </entry>
   
