@@ -145,12 +145,16 @@
         <lastmod>2015-06-08T07:12:01-04:00</lastmod>
     </url>
     <url>
+        <loc>http://steveshogren.github.io/language-versions/</loc>
+        <lastmod>2015-07-20T21:01:11-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://steveshogren.github.io/learning-lisp-was-hard/</loc>
         <lastmod>2015-06-18T08:16:51-04:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/blog/archives/</loc>
-        <lastmod>2015-06-18T08:16:51-04:00</lastmod>
+        <lastmod>2015-07-20T21:01:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://steveshogren.github.io/robots.txt</loc>
@@ -158,6 +162,6 @@
     </url>
     <url>
         <loc>http://steveshogren.github.io/</loc>
-        <lastmod>2015-06-18T08:16:51-04:00</lastmod>
+        <lastmod>2015-07-20T21:01:11-04:00</lastmod>
     </url>
 </urlset>

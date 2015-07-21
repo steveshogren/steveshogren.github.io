@@ -45,25 +45,25 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.$watch('languages[2]', $scope.watchTotalsFn, true);
     $scope.$watch('languages[3]', $scope.watchTotalsFn, true);
 
-    $scope.enforcedScore = 30;
-    $scope.inabilityPenalty = 30;
+    $scope.enforcedScore = 1;
+    $scope.inabilityPenalty = 1;
     $scope.showWeights = false;
     $scope.langTotals = [];
     $scope.allLangTotals = [];
 
     $scope.showEdit = true;
 
-    $scope.showRealName = false;
+    $scope.showRealName = true;
     $scope.getName = function(lang){
         if($scope.showRealName){return lang.name;}
         return lang.softname;
     };
-    
+
     $scope.percentageTotals = function(total){
         var min = Math.min.apply(null, $scope.langTotals),
             max = Math.max.apply(null, $scope.langTotals) - min,
             shiftedTotal = total - min;
-        return Math.ceil(100-((100*(shiftedTotal))/max));
+        return Math.ceil(((100*(shiftedTotal))/max));
     };
 
     $scope.cleanCode = function(c){
@@ -73,11 +73,14 @@ tableApp2.controller('TableCtrl', function ($scope) {
     };
 
     $scope.scoreClass = function(score){
-        if (score > 0) {
-            return "red";
-        } else if (score < 0) {
-            return "green";
-        } 
+        if (score < 0) {
+            //return "red";
+            //return "#FF6600";
+            return "#FF6666";
+        } else if (score > 0) {
+            //return "green";
+            return "#00CC99";
+        }
         return "white";
     };
     $scope.score = function(t){
@@ -87,9 +90,9 @@ tableApp2.controller('TableCtrl', function ($scope) {
         var count = 0;
         var delta = 0;
         if (t.enforced === "yes") {
-            delta = -$scope.enforcedScore;
+            delta = $scope.enforcedScore;
         } else if (t.enforced === "no"){
-            delta = $scope.inabilityPenalty;
+            delta = -$scope.inabilityPenalty;
         } else if (t.enforced === "warn"){
             delta = 0;
         }
@@ -104,22 +107,33 @@ tableApp2.controller('TableCtrl', function ($scope) {
 
 
     $scope.langChecks = [
-        {name:"Test for Null Variable Reference", key:"nullField"},
-        {name:"Null List Iteration", key:"nullList"},
-        {name:"Putting wrong type into variable", key:"wrongVaribleType"},
-        {name:"Missing List Element ", key:"missingListElem"},
-        {name:"Incorrect Type Casting", key:"wrongCast"},
-        {name:"Passing Wrong Type to Method", key:"wrongTypeToMethod"},
-        {
-            name:"Calling or Setting Misspelled Method, Field, Function, Variable",
-            key:"missingMethodOrField"
-        },
-        {name:"Missing Enum Value In Switch/Case or If/Else", key:"missingEnum"},
-        {name:"Unexpected Variable Mutation", key:"variableMutation"},
-        {name:"Deadlock prevention", key:"deadLocks"},
-        {name:"Memory Deallocation", key:"memoryDeallocation"},
-        {name:"Stack Overflow Exceptions Caused by Recursion", key:"recursionStackOverflow"},
-        {name:"Guaranteed Code Evaluation When Passed To a Function", key:"consistentCodeExecution"}
+        {name:"Prevent Null Variable Usage", key:"nullField",
+         desc:"Ensuring that the symbol you are currently referring to is not a null reference before using it"},
+        {name:"Prevent Null List Iteration", key:"nullList",
+         desc:"Ensuring that a list or array is not null before iterating over it"},
+        {name:"Prevent Variable Reuse for Different Type", key:"wrongVaribleType",
+         desc:"Preventing the replacement of a symbol in scope with a value or reference to a different type, primitive, or data structure than was originally used"},
+        {name:"Ensure List Element Exists", key:"missingListElem",
+         desc:"Preventing looking up an element from a list or array that does not exist"},
+        {name:"Ensure Safe Type Casting", key:"wrongCast",
+         desc:"Preventing a coercion or cast that fails in a way that leaves you with invalid data or a bad reference"},
+        {name:"Prevent Passing Wrong Type to Method", key:"wrongTypeToMethod",
+         desc:"Preventing passing a primitive, type, or data structure to a method that cannot operate on it"},
+        {name:"Calling or Setting Misspelled Method, Field, Function, Variable",
+         key:"missingMethodOrField",
+         desc:"Preventing referring to a symbol that does not exist in the current scope"},
+        {name:"Missing Enum Value In Switch/Case or If/Else", key:"missingEnum",
+         desc:"Preventing dispatch errors caused by adding a new value to an enum without updating all existing usages of that enum to handle the new case"},
+        {name:"Prevent Variable Mutation", key:"variableMutation",
+         desc:"For example, I pass data to a function, will the data come back the same as I passed it, or will it have mutated in some way? "},
+        {name:"Prevent Deadlocks", key:"deadLocks",
+         desc: "Preventing thread deadlocks at the language level"},
+        {name:"Guarantee Memory Deallocation", key:"memoryDeallocation",
+         desc:"Is memory automatically deallocated after all uses of it have completed their work"},
+        {name:"Tail Call Optimization", key:"recursionStackOverflow",
+         desc:"Are recursive calls in the tail position of a function optimized to reuse the current stack, preventing stack overflow exceptions"},
+        {name:"Guaranteed Code Evaluation When Passed To a Function", key:"consistentCodeExecution",
+         desc:"Does calling a function cause it to evaluate immediately, or is it instead passed as an unevaluated thunk"}
     ];
 
     $scope.updateAllTotals = function(){
@@ -145,13 +159,15 @@ tableApp2.controller('TableCtrl', function ($scope) {
     $scope.enforcedTypes = ["yes", "no", "warn"];
     $scope.enforcedNice = function(e){
         if (e==="warn") {
-            return "Unenforced (No extra penalty)";
+            // return "Unenforced (No extra penalty)";
+            return "Unenforced (Runtime): 0";
         } else if(e==="yes") {
-            return "Enforced (Add bonus)";
-        } 
-        return "Impossible (Add penalty)";
+            return "Enforced (Pre-runtime): 1";
+        }
+        return "Impossible: -1";
     };
 
+    $scope.languageRatios = JSON.parse("[{\"ratio\":24.506666,\"lang\":\"csharp\",\"bugs\":3676,\"repos\":150},{\"ratio\":3.6190476,\"lang\":\"fsharp\",\"bugs\":76,\"repos\":21},{\"ratio\":2.53211,\"lang\":\"clojure\",\"bugs\":276,\"repos\":109},{\"ratio\":44.226665,\"lang\":\"js\",\"bugs\":6634,\"repos\":150},{\"ratio\":23.373333,\"lang\":\"coffeescript\",\"bugs\":3506,\"repos\":150},{\"ratio\":10.786667,\"lang\":\"scala\",\"bugs\":1618,\"repos\":150},{\"ratio\":54.62,\"lang\":\"php\",\"bugs\":8193,\"repos\":150},{\"ratio\":22.693333,\"lang\":\"go\",\"bugs\":3404,\"repos\":150},{\"ratio\":36.633335,\"lang\":\"java\",\"bugs\":5495,\"repos\":150},{\"ratio\":11.171429,\"lang\":\"haskell\",\"bugs\":782,\"repos\":70},{\"ratio\":11.36,\"lang\":\"ruby\",\"bugs\":1704,\"repos\":150},{\"ratio\":18.3,\"lang\":\"python\",\"bugs\":2745,\"repos\":150}]");
     $scope.allLanguages = [
         {
             missingEnum: {
@@ -230,7 +246,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 desc: "In F#, the idiomatic list cannot be made null by the compiler, so there is no check. Source: https://msdn.microsoft.com/en-us/library/dd233197(v=vs.110).aspx"
             },
             deadLocks: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "As far as I know, there is no way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
@@ -466,6 +482,448 @@ tableApp2.controller('TableCtrl', function ($scope) {
             consistentCodeExecution: {
                 enforced: "yes",
                 desc: "Compiler Enforced."
+            }
+        },
+        {
+            name: "Scala",
+            softname: "Scala",
+            markupName: "scala",
+            comment: "//",
+            missingEnum: {
+                enforced: "warn",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "warn",
+                desc:"",
+            },
+            nullList: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            },
+            wrongVaribleType: {
+                enforced: "yes",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "no",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "yes",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "yes",
+                desc:"",
+            },
+            nullField: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+            name: "PHP",
+            softname: "PHP",
+            markupName: "php",
+            comment: "//",
+            missingEnum: {
+                enforced: "no",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc:"",
+            },
+            nullList: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongVaribleType: {
+                enforced: "no",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "warn",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "warn",
+                desc:"",
+            },
+            nullField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+            name: "Go",
+            softname: "Go",
+            markupName: "java",
+            comment: "",
+            missingEnum: {
+                enforced: "no",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc:"",
+            },
+            nullList: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "no",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongVaribleType: {
+                enforced: "yes",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "yes",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            nullField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+            name: "Java",
+            softname: "Java",
+            markupName: "java",
+            comment: "//",
+            missingEnum: {
+                enforced: "no",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc:"",
+            },
+            nullList: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "no",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongVaribleType: {
+                enforced: "yes",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "yes",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            nullField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+            name: "Haskell",
+            softname: "Haskell",
+            markupName: "haskell",
+            comment: "",
+            missingEnum: {
+                enforced: "yes",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "yes",
+                desc:"",
+            },
+            nullList: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "no",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongVaribleType: {
+                enforced: "yes",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "no",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "yes",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            },
+            nullField: {
+                enforced: "yes",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+
+            name: "Ruby",
+            softname: "Ruby",
+            markupName: "ruby",
+            comment: "//",
+            missingEnum: {
+                enforced: "no",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc:"",
+            },
+            nullList: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "warn",
+                desc:"",
+            },
+            wrongVaribleType: {
+                enforced: "no",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "no",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            nullField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            }
+        },
+        {
+            name: "Python",
+            softname: "Python",
+            markupName: "python",
+            comment: "",
+            missingEnum: {
+                enforced: "no",
+                desc:"",
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc:"",
+            },
+            nullList: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc:"",
+            },
+            missingMethodOrField: {
+                enforced: "warn",
+                desc:"",
+            },
+            wrongVaribleType: {
+                enforced: "no",
+                desc:"",
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc:"",
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            wrongTypeToMethod: {
+                enforced: "no",
+                desc:"",
+            },
+            variableMutation: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            memoryDeallocation: {
+                enforced: "yes",
+                desc:"",
+            },
+            wrongCast: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
+            },
+            nullField: {
+                enforced: "warn",
+                desc:"",
+                rawCode:""
             }
         }
     ];

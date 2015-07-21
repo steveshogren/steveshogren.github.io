@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Learning new tools, technologies, and methodologies is
-hard. Counter-intuitively, the most exhausting part is after you&rsquo;ve gained a
-good &hellip;">
+  <meta name="description" content="Changing programming tooling can be likened to major and minor versions in
+semantic versioning. Major updates are big, new concepts that have no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +86,7 @@ good &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/superiority-fatigue/">Superiority Fatigue</a></h1>
+      <h1 class="entry-title"><a href="/language-versions/">Language Versions</a></h1>
     
     
       <p class="meta">
@@ -97,47 +96,79 @@ good &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Learning new tools, technologies, and methodologies is
-hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
-good comprehension of the tool, and now, filled with excitement, you try to
-explain it to someone else.</p>
+  <div class="entry-content"><p>Changing programming tooling can be likened to major and minor versions in
+semantic versioning.</p>
 
-<p>They almost always react with hostility.</p>
+<p>Major updates are big, new concepts that have no parallel. Minor updates
+probably include features that improve the situation, but do not fundamentally
+cause a large shift in thinking or process.</p>
 
-<p>What is going on? You just took time to learn this exciting tool that could save
-everyone a lot of time, and not only do they not care, but they resent you for
-it!  Don&rsquo;t they see how this could be great for everyone?</p>
+<p>I am not talking about social or financial aspects, like hiring. Hiring is a
+complex beast entirely in its own category. The criteria for choosing a tool
+when hiring a few hundred offshore developers is very different for hiring for a
+team of three senior developers. I&rsquo;ll leave that to the reader to determine.</p>
 
-<p>The issue, like humans, is complex and dynamic. Maybe they feel like you&rsquo;ve now
-made them look lazy in comparison. Maybe they have tried other tools in the past
-only to discover they weren&rsquo;t as a good as promised. Maybe they are afraid they
-won&rsquo;t be able to learn the new tool as quickly as they need to, and will be left
-behind. Maybe they are afraid all the time they spent learning the existing
-tools will have been wasted. Maybe they are comfortable where they are, and
-don&rsquo;t care about increased productivity. Maybe they are tired of learning new
-things.</p>
+<p>What are some examples of these value changes?</p>
 
-<p>Most times I have seen this, I think the root emotion is fear. Fear of failure,
-of change, of being embarrassed, of looking inferior. Fear is a powerful
-emotion.</p>
+<h2>Minor Benefits</h2>
 
-<p>When you respond with further hostility, this only will compound their
-fear. Should they put their comfort and ego before the needs of the business?
-No, but your counterattack will only further prove to them that their fear was
-deserved.</p>
+<h3>Perl &ndash; PHP &ndash; Python &ndash; Ruby</h3>
 
-<p>The final hardest part of learning a new tool is when you are forced to use an
-inferior tool. Suddenly that liberating fresh air of power is replaced with a
-suffocating claustrophobia of weakness. Even if the tool isn&rsquo;t really that
-inferior, it now <em>feels</em> terrible. It becomes worse when you and many others
-around you agree with the better value proposition of a new tool, and yet you
-are still required to use the inferior tool due to someone in power blocking you
-for political reasons.</p>
+<p>Switching from Perl to PHP for me was a minor change. I was able to carry over
+almost all my skills, and for the most part, the differences were mostly
+syntactic. Later, when I started using Python, most of my experience from Perl
+and PHP was still useful. The libraries had different names, and a few concepts
+were different, but on the whole, all three were in a same class of productivity
+for me.</p>
 
-<p>For the developer who sets out to learn new things, you must learn to deal with
-inferior tools. Once you start learning, you will always find yourself in a
-situation where you are required to use an inferior tool. For me, this has been
-one of the hardest things to face in my career.</p>
+<p>More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
+found much of my previous experience was still valuable. I can almost guess what
+things will be called or how they should be used. I still have to look up
+library names and keywords, but on the whole, the languages all provide very
+similar workflows. I suspect all four are in the same class of productivity,
+with some minor differences here and there. These days I put effort only into
+maintaining familiarity with one of these languages, since I am confident I
+could quickly relearn any of the other three on demand.</p>
+
+<h3>Java &ndash; VB.NET &ndash; CSharp</h3>
+
+<p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
+productivity. For the most part, all the expectations and experience carries
+between the three. Obviously the tools are different, and there are a number of
+gotchas, but nothing changed my productivity in any major way. I doubt any of
+those three have any one killer feature that cannot be had in the other.</p>
+
+<h2>Major Benefits</h2>
+
+<h3>Automated Testing</h3>
+
+<p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
+testing was a major change with large productivity benefits. All my experience
+to date was still useful, but I needed a whole new set of skills to be able to
+apply the techniques. Tools like dependency injection, mocking, TDD, and
+continuous integration enabled me to build and revive much larger
+systems. Automated testing is a skill that applies well to every language I&rsquo;ve
+worked in, with benefits that grow increasingly valuable with more complex
+systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
+classes of problems.</p>
+
+<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+
+<p>Repl based development with live hot patching was another major change. It
+required a new way of thinking about programming, and with it came an
+instantaneous feedback loop. Much like unit testing, it was an entirely new
+skill, but opened up a very fast method of building up a system from small
+parts. Additionally, it allowed me to rapidly progress in my skills, because I
+could instantly see live feedback from my code, without needing to write a whole
+test just to execute the code.</p>
+
+<h3>Powerful Static Typing (moving from C# to F#)</h3>
+
+<p>Moving from a typical static typed language to one with algebraic data types has
+been a major change, with major productivity benefits. I have noticed entire
+classes of defects disappearing. Additionally, because of the better compiler
+errors, the resulting codebases are much easier to refactor, which means a
+faster reaction to a changing domain.</p>
 </div>
   
   
@@ -197,15 +228,15 @@ one of the hardest things to face in my career.</p>
       </li>
     
       <li class="post">
+        <a href="/language-versions/">Language Versions</a>
+      </li>
+    
+      <li class="post">
         <a href="/superiority-fatigue/">Superiority Fatigue</a>
       </li>
     
       <li class="post">
         <a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a>
-      </li>
-    
-      <li class="post">
-        <a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a>
       </li>
     
   </ul>
