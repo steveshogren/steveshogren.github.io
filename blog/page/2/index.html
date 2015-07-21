@@ -9,8 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Changing programming tooling can be likened to major and minor versions in
-semantic versioning. Major updates are big, new concepts that have no &hellip;">
+  <meta name="description" content="Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +86,7 @@ semantic versioning. Major updates are big, new concepts that have no &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/language-versions/">Language Versions</a></h1>
+      <h1 class="entry-title"><a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a></h1>
     
     
       <p class="meta">
@@ -96,79 +96,82 @@ semantic versioning. Major updates are big, new concepts that have no &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Changing programming tooling can be likened to major and minor versions in
-semantic versioning.</p>
+  <div class="entry-content"><p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.</p>
 
-<p>Major updates are big, new concepts that have no parallel. Minor updates
-probably include features that improve the situation, but do not fundamentally
-cause a large shift in thinking or process.</p>
+<p>When I set out to learn a Lisp, I expected it would be easy.</p>
 
-<p>I am not talking about social or financial aspects, like hiring. Hiring is a
-complex beast entirely in its own category. The criteria for choosing a tool
-when hiring a few hundred offshore developers is very different for hiring for a
-team of three senior developers. I&rsquo;ll leave that to the reader to determine.</p>
+<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
+natural!&rdquo;</p>
 
-<p>What are some examples of these value changes?</p>
+<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
+than one) and shortly master it to be able to ship a website with it.</p>
 
-<h2>Minor Benefits</h2>
+<p>What happened instead took me a little longer&hellip;</p>
 
-<h3>Perl &ndash; PHP &ndash; Python &ndash; Ruby</h3>
+<ul>
+<li>05/11 &ndash; 06/11 &ndash; ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
+<li>04/12 &ndash; 08/12 &ndash; ~60 Hrs Rewrote a PHP side project in Clojure</li>
+<li>08/12 &ndash; 08/12 &ndash; ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
+<li>08/12 &ndash; 09/12 &ndash; ~10 Hrs Read <em>Clojure Programming</em> twice</li>
+<li>09/12 &ndash; 12/12 &ndash; ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
+<li>05/13 &ndash; 07/13 &ndash; ~50 Hrs Worked through <em>Let Over Lambda</em></li>
+<li>05/13 &ndash; 07/14 &ndash; ~250 Hrs Worked through <em>SICP</em></li>
+<li>07/14 &ndash; Shipped production Clojure code</li>
+</ul>
 
-<p>Switching from Perl to PHP for me was a minor change. I was able to carry over
-almost all my skills, and for the most part, the differences were mostly
-syntactic. Later, when I started using Python, most of my experience from Perl
-and PHP was still useful. The libraries had different names, and a few concepts
-were different, but on the whole, all three were in a same class of productivity
-for me.</p>
 
-<p>More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
-found much of my previous experience was still valuable. I can almost guess what
-things will be called or how they should be used. I still have to look up
-library names and keywords, but on the whole, the languages all provide very
-similar workflows. I suspect all four are in the same class of productivity,
-with some minor differences here and there. These days I put effort only into
-maintaining familiarity with one of these languages, since I am confident I
-could quickly relearn any of the other three on demand.</p>
+<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
 
-<h3>Java &ndash; VB.NET &ndash; CSharp</h3>
+<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
+deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.</p>
 
-<p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
-productivity. For the most part, all the expectations and experience carries
-between the three. Obviously the tools are different, and there are a number of
-gotchas, but nothing changed my productivity in any major way. I doubt any of
-those three have any one killer feature that cannot be had in the other.</p>
+<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
+Typed Racket, and Clojure before I felt confident enough to suggest shipping
+Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
+some people will snort with derision at how much time it took me &ndash; which is kind
+of the point of this post.</p>
 
-<h2>Major Benefits</h2>
+<p>This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.</p>
 
-<h3>Automated Testing</h3>
+<p>If you are struggling and feel like a failure, understand <em>there is no wrong
+way</em>. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.</p>
 
-<p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
-testing was a major change with large productivity benefits. All my experience
-to date was still useful, but I needed a whole new set of skills to be able to
-apply the techniques. Tools like dependency injection, mocking, TDD, and
-continuous integration enabled me to build and revive much larger
-systems. Automated testing is a skill that applies well to every language I&rsquo;ve
-worked in, with benefits that grow increasingly valuable with more complex
-systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
-classes of problems.</p>
+<p>If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
 
-<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+<h1>Was it worth it?</h1>
 
-<p>Repl based development with live hot patching was another major change. It
-required a new way of thinking about programming, and with it came an
-instantaneous feedback loop. Much like unit testing, it was an entirely new
-skill, but opened up a very fast method of building up a system from small
-parts. Additionally, it allowed me to rapidly progress in my skills, because I
-could instantly see live feedback from my code, without needing to write a whole
-test just to execute the code.</p>
-
-<h3>Powerful Static Typing (moving from C# to F#)</h3>
-
-<p>Moving from a typical static typed language to one with algebraic data types has
-been a major change, with major productivity benefits. I have noticed entire
-classes of defects disappearing. Additionally, because of the better compiler
-errors, the resulting codebases are much easier to refactor, which means a
-faster reaction to a changing domain.</p>
+<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.</p>
 </div>
   
   
@@ -224,11 +227,11 @@ faster reaction to a changing domain.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
+        <a href="/language-versions/">Language Versions</a>
       </li>
     
       <li class="post">
-        <a href="/language-versions/">Language Versions</a>
+        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
       </li>
     
       <li class="post">
