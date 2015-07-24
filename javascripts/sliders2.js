@@ -133,7 +133,9 @@ tableApp2.controller('TableCtrl', function ($scope) {
         {name:"Tail Call Optimization", key:"recursionStackOverflow",
          desc:"Are recursive calls in the tail position of a function optimized to reuse the current stack, preventing stack overflow exceptions"},
         {name:"Guaranteed Code Evaluation When Passed To a Function", key:"consistentCodeExecution",
-         desc:"Does calling a function cause it to evaluate immediately, or is it instead passed as an unevaluated thunk"}
+         desc:"Does calling a function cause it to evaluate immediately, or is it instead passed as an unevaluated thunk"},
+        {name:"Functional Purity", key:"functionalPurity",
+         desc:"Does calling a function with given arguments always return the same result"}
     ];
 
     $scope.updateAllTotals = function(){
@@ -167,7 +169,6 @@ tableApp2.controller('TableCtrl', function ($scope) {
         return "Impossible: -1";
     };
 
-    $scope.languageRatios = JSON.parse("[{\"ratio\":24.506666,\"lang\":\"csharp\",\"bugs\":3676,\"repos\":150},{\"ratio\":3.6190476,\"lang\":\"fsharp\",\"bugs\":76,\"repos\":21},{\"ratio\":2.53211,\"lang\":\"clojure\",\"bugs\":276,\"repos\":109},{\"ratio\":44.226665,\"lang\":\"js\",\"bugs\":6634,\"repos\":150},{\"ratio\":23.373333,\"lang\":\"coffeescript\",\"bugs\":3506,\"repos\":150},{\"ratio\":10.786667,\"lang\":\"scala\",\"bugs\":1618,\"repos\":150},{\"ratio\":54.62,\"lang\":\"php\",\"bugs\":8193,\"repos\":150},{\"ratio\":22.693333,\"lang\":\"go\",\"bugs\":3404,\"repos\":150},{\"ratio\":36.633335,\"lang\":\"java\",\"bugs\":5495,\"repos\":150},{\"ratio\":11.171429,\"lang\":\"haskell\",\"bugs\":782,\"repos\":70},{\"ratio\":11.36,\"lang\":\"ruby\",\"bugs\":1704,\"repos\":150},{\"ratio\":18.3,\"lang\":\"python\",\"bugs\":2745,\"repos\":150}]");
     $scope.allLanguages = [
         {
             missingEnum: {
@@ -184,7 +185,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 rawCode: "if (l != null) {<!consequent!>} else {<!alternative!>}"
             },
             deadLocks: {
-                enforced: "no",
+                enforced: "warn",
                 desc: "As far as I know, there is way to prevent deadlocks at the compiler level, and it may not be possible, but it gets scored."
             },
             missingMethodOrField: {
@@ -629,7 +630,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 rawCode:""
             },
             deadLocks: {
-                enforced: "no",
+                enforced: "warn",
                 desc:"",
             },
             missingMethodOrField: {
@@ -692,7 +693,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 rawCode:""
             },
             deadLocks: {
-                enforced: "no",
+                enforced: "warn",
                 desc:"",
             },
             missingMethodOrField: {
@@ -741,6 +742,10 @@ tableApp2.controller('TableCtrl', function ($scope) {
             softname: "Haskell",
             markupName: "haskell",
             comment: "",
+            functionalPurity: {
+                enforced: "yes",
+                desc:"",
+            },
             missingEnum: {
                 enforced: "yes",
                 desc:"",
@@ -755,7 +760,7 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 rawCode:""
             },
             deadLocks: {
-                enforced: "no",
+                enforced: "warn",
                 desc:"",
             },
             missingMethodOrField: {
@@ -936,5 +941,21 @@ tableApp2.controller('TableCtrl', function ($scope) {
     ];
 
     $scope.updateTotals();
+    $scope.getBugsRatio = function(lang) {return lang["bug-commit-ratio"];}
+    $scope.getTestsRatio = function(lang) {return lang["tests-commits-ratio"];}
     $scope.selectedLang = $scope.languages[0];
+    $scope.sorter = function(langs) {
+        return langs.sort(function(a, b){
+            var keyA = a["tests-commits-ratio"],
+                keyB = b["tests-commits-ratio"];
+            // Compare the 2 dates
+            if(keyA < keyB) return -1;
+            if(keyA > keyB) return 1;
+            return 0;
+        });
+    };
+
+    $scope.languageRatios = JSON.parse(
+        "[{\"tests-commits-ratio\":0.017439904,\"bug-and-test-commit-ratio\":34.84375,\"name\":\"csharp\",\"bug-commit-ratio\":0.03261284,\"bugs\":1453,\"repos\":64,\"score\":3,\"commits\":44553,\"total-repos\":307572,\"test\":777},{\"tests-commits-ratio\":0.0014933478,\"bug-and-test-commit-ratio\":8.761905,\"name\":\"fsharp\",\"bug-commit-ratio\":0.023486288,\"bugs\":173,\"repos\":21,\"score\":9,\"commits\":7366,\"total-repos\":4180,\"test\":11},{\"tests-commits-ratio\":0.00876137,\"bug-and-test-commit-ratio\":6.733333,\"name\":\"clojure\",\"bug-commit-ratio\":0.011503478,\"bugs\":172,\"repos\":45,\"score\":3,\"commits\":14952,\"total-repos\":30257,\"test\":131},{\"tests-commits-ratio\":0.0027743443,\"bug-and-test-commit-ratio\":21.957144,\"name\":\"js\",\"bug-commit-ratio\":0.039445132,\"bugs\":1436,\"repos\":70,\"score\":-3,\"commits\":36405,\"total-repos\":1475201,\"test\":101},{\"tests-commits-ratio\":0.007376024,\"bug-and-test-commit-ratio\":41.153847,\"name\":\"coffeescript\",\"bug-commit-ratio\":0.047242288,\"bugs\":1851,\"repos\":52,\"score\":-2,\"commits\":39181,\"total-repos\":49716,\"test\":289},{\"tests-commits-ratio\":0.04074265,\"bug-and-test-commit-ratio\":33.442307,\"name\":\"scala\",\"bug-commit-ratio\":0.01904762,\"bugs\":554,\"repos\":52,\"score\":6,\"commits\":29085,\"total-repos\":49937,\"test\":1185},{\"tests-commits-ratio\":0.07703413,\"bug-and-test-commit-ratio\":134.54099,\"name\":\"php\",\"bug-commit-ratio\":0.031669293,\"bugs\":2391,\"repos\":61,\"score\":-1,\"commits\":75499,\"total-repos\":630816,\"test\":5816},{\"tests-commits-ratio\":0.050468475,\"bug-and-test-commit-ratio\":62.554054,\"name\":\"go\",\"bug-commit-ratio\":0.024698375,\"bugs\":1521,\"repos\":74,\"score\":3,\"commits\":61583,\"total-repos\":75802,\"test\":3108},{\"tests-commits-ratio\":0.033524733,\"bug-and-test-commit-ratio\":38.77193,\"name\":\"java\",\"bug-commit-ratio\":0.032567736,\"bugs\":1089,\"repos\":57,\"score\":3,\"commits\":33438,\"total-repos\":1224939,\"test\":1121},{\"tests-commits-ratio\":0.0026110662,\"bug-and-test-commit-ratio\":10.75,\"name\":\"haskell\",\"bug-commit-ratio\":0.015551204,\"bugs\":405,\"repos\":44,\"score\":10,\"commits\":26043,\"total-repos\":37328,\"test\":68},{\"tests-commits-ratio\":0.03903771,\"bug-and-test-commit-ratio\":26.753845,\"name\":\"ruby\",\"bug-commit-ratio\":0.020303702,\"bugs\":595,\"repos\":65,\"score\":-2,\"commits\":29305,\"total-repos\":826600,\"test\":1144},{\"tests-commits-ratio\":0.019477962,\"bug-and-test-commit-ratio\":22.339285,\"name\":\"python\",\"bug-commit-ratio\":0.02531419,\"bugs\":707,\"repos\":56,\"score\":-2,\"commits\":27929,\"total-repos\":721979,\"test\":544}]"
+    );
 });
