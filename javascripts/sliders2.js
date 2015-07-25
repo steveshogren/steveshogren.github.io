@@ -930,6 +930,67 @@ tableApp2.controller('TableCtrl', function ($scope) {
                 desc:"",
                 rawCode:""
             }
+        },
+        {
+            name: "Rust (No unsafe)",
+            softname: "Up-and-coming systems lang",
+            markupName: "safe-rust",
+            comment: "//",
+
+            missingEnum: {
+                enforced: "yes",
+                desc: "Compiler enforced."
+            },
+            recursionStackOverflow: {
+                enforced: "no",
+                desc: "LLVM can compile tail calls in optimized mode, but this is not guaranteed, and, in fact, may silently go away if the compiler inserts a destructor call."
+            },
+            nullList: {
+                enforced: "yes",
+                desc: "Null pointers are never allowed, and Option must be explicitly handled."
+            },
+            deadLocks: {
+                enforced: "warn",
+                desc: "Deadlocks are not considered unsafe."
+            },
+            missingMethodOrField: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            },
+            wrongVaribleType: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            },
+            consistentCodeExecution: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            },
+            missingListElem: {
+                enforced: "warn",
+                desc: "l[oob] will panic!() on oob, but l.get(oob) returns an Option (None, if it's oob).",
+                rawCode: "l.get(oob).map(|x| x.doSomething())"
+            },
+            wrongTypeToMethod: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            },
+            variableMutation: {
+                enforced: "yes",
+                desc: "Functions cannot mutate variables passed to them unless they take an explicitly mutable pointer, or take the variable as a move. In the latter case, the variable never comes back at all."
+            },
+            memoryDeallocation: {
+                enforced: "warn",
+                desc: "Handled by destructors, but it is possible to prevent destructors from being called."
+            },
+            wrongCast: {
+                enforced: "yes",
+                desc: "Compiler Enforced."
+            },
+            nullField: {
+                enforced: "yes",
+                desc: "Null pointers are never allowed, and Option must be explicitly handled.",
+                rawCode: "l.map(|x| x.do_something())"
+            }
         }
     ];
 

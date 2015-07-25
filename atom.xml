@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-07-24T10:13:03-04:00</updated>
+  <updated>2015-07-24T21:09:08-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -182,16 +182,24 @@ than expected bug count in Ruby and Clojure.</p>
 <h2>Special Thanks</h2>
 
 <p>Special thanks to (in alphabetical order):
-Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
-Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
-Max Haley,
-Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
-Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>,
-and Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
+<a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
+<a href="http://asymmetrical-view.com/">Kyle Burton</a> (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+<a href="https://github.com/danielmiladinov">Daniel Miladinov</a> (Java, Scala, Morale Support),
+Keith O&#8217;Brien (Ruby and JS),
+<a href="https://github.com/arlaneenalra">Chris Salch</a> (CoffeeScript and JS),
+and <a href="https://github.com/timvisher">Tim Visher</a> (Clojure).</p>
+
+<p>Additional thanks to the posters on
+<a href="https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/">/r/rust</a>,
+including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
+<a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
+<a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
 
 <h2>Complaints Department</h2>
 
-<p>Did I mess up something about a language here, or are missing a safety check? I&rsquo;ll happily take pull
+<p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
 requests for new languages:
 <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js">blog source</a>. Just
 pick an existing language, edit the name and values, and &ldquo;copy to clipboard&rdquo; to
