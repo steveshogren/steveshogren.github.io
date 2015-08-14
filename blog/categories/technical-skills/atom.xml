@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Technical Skills | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-07-24T21:09:08-04:00</updated>
+  <updated>2015-08-14T11:44:12-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,374 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SimpleMock: Language Agnostic Unit Test Mocking]]></title>
+    <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
+    <updated>2015-08-13T06:53:00-04:00</updated>
+    <id>http://steveshogren.github.io/simplemock-unit-test-mocking</id>
+    <content type="html"><![CDATA[<p>Don&rsquo;t worry, SimpleMock isn&rsquo;t another library! Like many good things, SimpleMock
+is a pattern. You can use the pattern to organize your testing code without
+mocking or complicated dependency injection.</p>
+
+<p>SimpleMock works in any language with closures that can be passed around by
+reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
+Python. I&rsquo;m sure you can think of others.</p>
+
+<h1>Benefits</h1>
+
+<ul>
+<li>Reduced boilerplate</li>
+<li>Saves interfaces for real polymorphism</li>
+<li>Simplifies test code</li>
+<li>Reduces testing concerns in production code</li>
+<li>Removes need for fragile IoC containers</li>
+<li>Encourages better abstraction design</li>
+<li>Can convert one class at a time!</li>
+</ul>
+
+
+<p>The SimpleMock pattern promotes a better design of your abstractions and simpler
+tests. The pattern also reduces boilerplate and the pollution of your production
+code with testing concerns.</p>
+
+<p>If you aren&rsquo;t familiar with the normal pattern of unit test mocking using
+interfaces, dependency injection, and mock libraries, scroll down to &ldquo;The
+Non-SimpleMock Way&rdquo; at the end of the post.</p>
+
+<h1>SimpleMock Pattern</h1>
+
+<p>The SimpleMock pattern is aptly named.</p>
+
+<ol>
+<li>Replace Test-Only Interfaces With Functions</li>
+<li>Define Dependencies Inline</li>
+<li>Write Better Abstractions</li>
+</ol>
+
+
+<h1>Step One: Replace Test-Only Interfaces With Functions</h1>
+
+<p>My examples are in C# because that is what I got paid to write today &ndash; it is
+freshest in memory. C# has an incredible ability to create and pass around
+lambdas and function references. Here is an example of using functions instead
+of interfaces.</p>
+
+<p>``` csharp
+public class CurrentTime : ICurrentTime {</p>
+
+<pre><code>public DateTime GetCurrentTime() {
+    return DateTime.Now();
+}
+</code></pre>
+
+<p>}
+public class Translator {</p>
+
+<pre><code>private Func&lt;DateTime&gt; _getCurrentTime;
+
+public Translator() : this(new CurrentTime().GetCurrentTime) {}
+
+public Translator(Func&lt;DateTime&gt; getCurrentTime) {
+    this._getCurrentTime = getCurrentTime;
+}
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with just lambdas
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var now = DateTime.Now;
+
+var sut = new Translator(() =&gt; now);
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(now.ToString() + ": test", result);
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>The test code is quite simple! No longer do we need the dependency on third
+party mocking libraries, or the relatively complicated setup logic. Instead we
+can simply inject the lambda at runtime, replacing that pointer. We didn&rsquo;t need
+the whole interface, really we just needed the simple signature of the function.</p>
+
+<h1>Step 2: Define Dependencies Inline</h1>
+
+<p>We can take it even a step further. Why use constructor injection at all? Since
+all we really want is a single mutable dispatch table row, why not just make it
+that way?</p>
+
+<p>``` csharp
+public class Translator {</p>
+
+<pre><code>internal Func&lt;DateTime&gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with just inline lambdas
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var now = DateTime.Now;
+var sut = new Translator();
+sut._getCurrentTime = () =&gt; now;
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(now.ToString() + ": test", result);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Now we&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch
+line! &ldquo;Go to definition&rdquo; now takes me to the actual line with the actual called
+function! We&rsquo;ve replaced a dependency on a class based interface with a function
+signature. The function signature <em>is</em> the interface!</p>
+
+<p>You probably noticed we have lost something with this final version. We have
+lost the ability to inject polymorphic behavior through the constructor. If you
+need it, simply go back to injecting the interface in the constructor or by
+passing it into the function itself. In practice, I have found this is needed
+very rarely, making the SimpleMock pattern a better tool to reach for first.</p>
+
+<h1>Step 3: Write Better Abstractions</h1>
+
+<p>Lastly, SimpleMock actually promotes better designs. For example, a coworker was
+writing some tests today and ran into a complicated situation. Take the
+following sanitized code:</p>
+
+<p>``` csharp
+public class WorkDoer {</p>
+
+<pre><code>internal Action&lt;Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+internal Action&lt;Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
+    ignoreElements(t1);
+    ignoreElements(t2);
+    removeIgnoredElements(t1);
+    removeIgnoredElements(t2);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>How would you check that each section was called? Our naive solution was a
+complicated lambda with a &ldquo;timesCalled&rdquo; counter and an if statement to assert
+against each argument, but it turns nasty quickly:</p>
+
+<p>``` csharp
+/// Nasty test code
+[TestCase]
+public void TestWorkDoer () {</p>
+
+<pre><code>var sut = new WorkDoer();
+
+var ignoredCalledTimes = 0;
+sut.ignoreElements = (t) =&gt; {
+    ignoredCalledTimes++;
+    if (ignoredCalledTimes == 1) {
+        Assert.AreEqual(t1, t);
+    } else {
+        Assert.AreEqual(t2, t);
+    }
+};
+var removedCalledTimes = 0;
+sut.removeIgnoredElements = (t) =&gt; {
+    removedCalledTimes++;
+    if (removedCalledTimes == 1) {
+        Assert.AreEqual(t1, t);
+    } else {
+        Assert.AreEqual(t2, t);
+    }
+};
+
+var t1 = new Thing();
+var t2 = new Thing();
+
+var result = sut.IgnoreAndRemoveThings(t1, t2);
+Assert.AreEqual(2, removedCalledTimes);
+Assert.AreEqual(2, ignoredCalledTimes);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
+Conditionals?! In a test?! Unconscionable.</p>
+
+<p>In situations like this, we have two easy options. Option one is to just use
+a third party mocking library, replacing the functions from inside the test
+code. This gives us access to all the sophisticated mocking tools available.</p>
+
+<p>My preferred option is seeking to decomplect the production code by using better
+abstractions.</p>
+
+<p>I have found that strong reliance of mocking libraries enables worse designs.
+Consider the code, what makes it so hard to test? Not knowing which element is
+called when, doing the same work on two parameters, and reference mutation all
+make this a poor abstraction. Why not simplify?</p>
+
+<p>``` csharp
+public class WorkDoer {</p>
+
+<pre><code>internal Func&lt;Thing, Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+internal Func&lt;Thing, Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+public List&lt;Thing&gt; IgnoreAndRemoveThings(List&lt;Thing&gt; ts) {
+    return ts.Select(t =&gt; removeIgnoredElements(ignoreElements(t)));
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Simpler test
+[TestCase]
+public void TestWorkDoer () {</p>
+
+<pre><code>var sut = new WorkDoer();
+var expected = new Thing();
+var ts = new List&lt;Thing&gt;{new Thing()};
+
+sut.ignoreElements = (t) =&gt; new Thing();
+
+sut.removeIgnoredElements = (t) =&gt; {
+    Assert.AreEqual(t, sut.ignoreElements(t));
+    return expected;
+};
+
+var result = sut.IgnoreAndRemoveThings(ts);
+
+Assert.AreEqual(expected, result.First())
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Much better! Yes, we had to change a few signatures. We get the same work done,
+but now the code is actually a lot more useful. Our test code is absolutely
+comparable with anything you&rsquo;d find using a mocking library. I am absolutely
+okay with using a mocking library when absolutely needed, but I always carefully
+consider my abstractions and design first.</p>
+
+<p>If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is absolutely the
+only tool for the job, and that is fine. But for most work around the yard, you
+can leave the chainsaw in the shed.</p>
+
+<h1>Conclusion</h1>
+
+<p>I’ve shown how you can really simplify your code with SimpleMock. The dispatch
+row is clear and easy to read. We have removed some third party mocking
+dependencies. You can remove a lot of the boilerplate &ldquo;for making it more
+testable&rdquo; from your code. The test code is greatly simplified, and injection a
+breeze. The result: much simpler code, just as easy to test.</p>
+
+<p>Thanks to Shuwei Chen for helping me put this together!</p>
+
+<h1>The Non-SimpleMock Way</h1>
+
+<p>If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.</p>
+
+<p>The traditional way of performing C# unit test mocking involves dependency
+injection and interface mocking using a mocking library. For dependency
+injection, it is common to use a tool like Ninject or hand-rolled constructor
+injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
+an example of a class and its testing code without any business logic.</p>
+
+<p>``` csharp
+public interface ICurrentTime {</p>
+
+<pre><code>DateTime GetCurrentTime();
+</code></pre>
+
+<p>}</p>
+
+<p>public class CurrentTime : ICurrentTime {</p>
+
+<pre><code>public DateTime GetCurrentTime() {
+    return DateTime.Now();
+}
+</code></pre>
+
+<p>}</p>
+
+<p>public class Translator {</p>
+
+<pre><code>private readonly ICurrentTime ct;
+
+public Translator() : this(new CurrentTime()) {}
+
+public Translator(ICurrentTime currentTime) {
+    this.ct = currentTime;
+}
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", ct.GetCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with Moq
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var rightNow = DateTime.Now;
+var mock = new Mock&lt;ICurrentTime&gt;();
+
+mock.Setup(a=&gt;a.GetCurrentTime()).Returns(rightNow);
+
+var sut = new Translator(mock.Object);
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(rightNow.ToString() + ": test", result);
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>If you&rsquo;ve done much C# unit testing, this should look familiar. We want to
+inject some code that is potentially long-running or dynamic. We put that code
+into a class, add an interface, then inject that interface into the class we
+want to test. To test it, we mock the interface, creating a different concrete
+class at test runtime which implements that interface. We can setup that mock to
+respond with anything, which we use for assertions.</p>
+
+<h1>What&rsquo;s Wrong with the Non-SimpleMock Way?</h1>
+
+<p>The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don&rsquo;t really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic.</p>
+
+<p>What we have done is create a very small and primitive dispatch table. The
+table has one row: something that has a function with the signature of <code>() -&gt; DateTime</code> or, as it is known in C#: <code>Func&lt;DateTime&gt;</code>.  We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That&rsquo;s a lot of boilerplate!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Language Safety Score Mark 2]]></title>
@@ -657,118 +1025,6 @@ polymorphism, so you are free to choose the best representation for
 each type of data you have!</p>
 
 <p>Happy F#-filled Festivities!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs Project Tip]]></title>
-    <link href="http://steveshogren.github.io/emacs-project-tip/"/>
-    <updated>2014-12-06T08:45:00-05:00</updated>
-    <id>http://steveshogren.github.io/emacs-project-tip</id>
-    <content type="html"><![CDATA[<p>I recently have been working in a Clojure project which is made up of
-several microservices. While trying to build in a secure method for
-each service to be able to call the others, I&rsquo;ve been in several
-different projects at the same time.</p>
-
-<p>At least once I accidentally opened the wrong &ldquo;handler.clj&rdquo; buffer,
-and spent a few minutes adding a function that never worked. Since I
-hate doing things like this, I wanted a simple way to see what project
-I was currently viewing.</p>
-
-<p>I started with a changing the title of the frame to show the whole
-path of the current buffer, like this:</p>
-
-<p><img class="center" src="/images/title.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
-
-<p>The code to change the title is simple, and the default in some of the
-pre-packaged emacs bundles:</p>
-
-<p>``` common-lisp
-(setq frame-title-format</p>
-
-<pre><code>  '((:eval (if (buffer-file-name)
-               (abbreviate-file-name (buffer-file-name))
-             "%b"))))
-</code></pre>
-
-<p>```</p>
-
-<p>This is fine, but still not great. The font is tiny and the important
-part: &ldquo;octopress&rdquo; is buried. I wanted something a little more fluid,
-so I could easily tell the different projects apart instantly. I came
-up with the idea to color the background faintly different based on
-the path of the file. Files with a path containing &ldquo;octopress&rdquo; might
-be different from those containing &ldquo;.emacs&rdquo;.</p>
-
-<p>Thankfully, <code>buffer-face-mode</code> makes it easy to change a single
-property of a single buffer&rsquo;s face without changing any other
-buffer. So long as you disable buffer-face-mode when closing emacs,
-your files will open with the correct coloring scheme, then have the
-new background overlaid.</p>
-
-<p>While not perfect, this was the result.</p>
-
-<p><img class="center" src="/images/colors.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
-
-<p>The colors I choose are only faintly different, but just enough for me
-to tell instantly which is which.</p>
-
-<p>The buffer colors are applied when opening a file, using these
-functions:</p>
-
-<p>``` common-lisp
-(defun my-buffer-face-mode-variable (color)
-  (interactive)
-  (setq buffer-face-mode-face (list :background color))
-  (buffer-face-mode 1))</p>
-
-<p>(defun my-set-theme-on-mode ()
-  (interactive)
-  (let ((file-name (buffer-file-name)))</p>
-
-<pre><code>(cond
-;; add your own project/color mappings here
- ((string-match "halcyon" file-name) (my-buffer-face-mode-variable "#00001A"))
- ((string-match "dwarf" file-name) (my-buffer-face-mode-variable "#001A1A"))
- ((string-match "nimbus" file-name) (my-buffer-face-mode-variable "black"))
- (t ""))))
-</code></pre>
-
-<p>```</p>
-
-<p>To force them to run when opening a file, since I use helm, I set it
-to execute on exiting helm for any reason:</p>
-
-<p><code>common-lisp
-(add-hook 'helm-after-action-hook 'my-set-theme-on-mode)
-;; uncomment if not using helm
-;; (add-hook 'find-file-hook 'my-set-theme-on-mode)
-</code></p>
-
-<p>Lastly, to make sure emacs applies my normal theme and settings to a
-buffer when starting, I disable buffer-face-mode on all buffers before
-exiting.</p>
-
-<p>``` common-lisp
-(defun disable-all-buffer-face-mode ()
-  (interactive)
-  (let ((current (get-buffer (current-buffer))))</p>
-
-<pre><code>(-map (lambda (x) (progn (switch-to-buffer x)
-                         (buffer-face-mode 0))) (buffer-list))
-(switch-to-buffer current 1)))
-</code></pre>
-
-<p>(add-hook &lsquo;kill-emacs-hook 'disable-all-buffer-face-mode)
-```</p>
-
-<p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
-the -map function.</p>
-
-<p>While not the only solution, this seemed a simple and elegant way to
-quickly be reminded of your current project.</p>
-
-<p>Enjoy!</p>
 ]]></content>
   </entry>
   

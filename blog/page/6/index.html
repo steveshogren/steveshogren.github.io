@@ -9,9 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much &hellip;">
+  <meta name="description" content="Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +87,7 @@ safety is much &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a></h1>
+      <h1 class="entry-title"><a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a></h1>
     
     
       <p class="meta">
@@ -97,200 +97,146 @@ safety is much &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much more nuanced than a binary bit of &ldquo;has strong-static
-types&rdquo;.</p>
+  <div class="entry-content"><p>Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.</p>
 
-<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
-thoughts of unit tests, long build times, and red squiggles in an
-IDE. But, in day-to-day development, there are so many times when we
-are bitten by things that somehow just slip through the cracks.</p>
+<p>To illustrate this, I found some old code I&rsquo;d written to interact with
+a legacy system. The system uses many single enums on a record to keep
+track of statuses. When one changes, it can cause others to change as
+well.</p>
 
-<p>I put together this scoring model to get a sense of how safe a
-language is at the primitive level, and if it isn&rsquo;t safe by default,
-how much it costs to manually make it safe. Since all abstractions
-eventually result in a series of primitive operations, I decided that
-focusing only on primitives would still be a valuable (if incomplete)
-data point. While any good library will handle all primitive checks
-and present the consumer with a well-designed abstraction, in the end,
-the consumer is still left wiring libraries together, building their
-own primitive abstractions for integration. Due to the impossibility of
-measuring the quality of abstractions in all libraries for a language,
-I left that entirely out of scope of this model, unless it is designed
-as a primitive check.</p>
+<p>Here is a typical function that combines two enums to recalculate a
+third.</p>
 
-<p>By focusing on only primitive operations: making and calling
-functions, naming data, working with sequences, and dealing with
-language primitive data types, I slimmed down the large range of
-possible error vectors to a small handful. While in some languages it
-is common to use user-defined classes to wrap around a set of
-primitives, those classes are still doing the same primitive work,
-just hidden behind a user-created abstraction. The more ways it is
-possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
-is to build such good abstractions.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">PositionType</span> <span class="nf">GetPositionType</span> <span class="p">(</span><span class="n">MovementType</span> <span class="n">movementType</span><span class="p">,</span> <span class="n">ApplyToParty</span> <span class="n">applyToParty</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Held</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Posted</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Undefined</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>This model is not about language "power".
-</code></pre>
 
-<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
-&ldquo;abstract-ability&rdquo; of a language. In any language that supports
-abstractions (functions, classes, modules, naming data), I am
-convinced, given enough code, all Turing complete langauges can do the
-same work. This model is only about the costs to prevent unexpected
-&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
-level.</p>
+<p>With some regularity, new records are added to these types of enums,
+causing a dangerous search and update across the system fixing all the
+if/else or switch/case statements.</p>
 
-<p>Rather than focus on what is <em>possible</em> with a language, I will
-instead focus on what is typically idiomatic to that community. For
-example, if it is possible to achieve a level of safety in a language
-but by doing something uncommon, that should not be counted.</p>
+<p>Right off the bat, pattern matching is a huge win here, taking a hard
+to comprehend function and making the domain concepts clear.</p>
 
-<p>To score a language, simply figure out how many characters it costs to
-&ldquo;prevent&rdquo; a certain type of error, and add that to the
-total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
-default) to make up for the lack of unit tests and code exercising
-needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
-importing the module will have a negligible effect on the code size
-and complexity.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nc">GetPositionType</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Held</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Posted</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">MovementType</span><span class="p">.</span><span class="nc">Undefined</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nn">ApplyToParty</span><span class="p">.</span><span class="nc">Undefined</span> <span class="o">-&gt;</span> <span class="nn">PositionType</span><span class="p">.</span><span class="nc">Undefined</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 (by default) for a &ldquo;every change run
-and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
-overflow exceptions caused by recursion.</p>
 
-<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
-</code></pre>
+<p>If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we&rsquo;d be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.</p>
 
-<p>Rather than tell you my thoughts (or survey for) hard-coded
-weightings, all checks are weighted the same by default. Feel free to
-apply your own weightings, to better match to your or your team&rsquo;s
-specific needs and preferences. The languages are masked by default to
-protect the innocent. You can unmask the names and see the code used
-below the table.</p>
+<p>Next though, this got me thinking. Why does this set of three enums
+have to be calculated? Why are they even separate? Ah, of course,
+right now they are stored in the database and ORM objects, each with a
+separate field and set of enum ids. Changing that would be costly.</p>
 
-<p><div ng-app="TableApp">
-<div ng-controller="TableCtrl"></p>
+<p>What I want is a domain layer a level higher than the typical database
+ORM classes, something to convert my ORM classes into that will be
+able to do work in a safer way.</p>
 
-<p>Language Enforced Bonus:
- {{ enforcedScore }}
-<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
+<p>Rather than three enums that are supposed to change in lock step (but
+might get out of date), I really want a concept of the three combined
+and &ldquo;frozen&rdquo; together.</p>
 
-<p>Language Inability Penalty:
- {{ inabilityPenalty }}
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">Direction</span> <span class="o">=</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Posted_Return_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetDirection</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Principal</span>  <span class="o">-&gt;</span> <span class="nc">Held_Deliver_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Held_Return_Counterparty</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Return</span><span class="o">,</span> <span class="nc">Principal</span> <span class="o">-&gt;</span> <span class="nc">Posted_Return_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Deliver</span><span class="o">,</span> <span class="nc">Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Posted_Deliver_Counterparty</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Show Weights <input type="checkbox" ng-model="showWeights" />
-<p class="lead">
-<div style="overflow-x:scroll">
-<table class="langtable">
-<tr>
-<th>Safety Check</th>
-<th></th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
-</th>
-</tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
-<tr class="totals"><td>Totals</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ lang }}
-</td>
-</tr>
-<tr class="totals"><td>Magnitude</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}%
-</td>
-</tr>
-</table>
-</div></p>
 
-<p><h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
+<p></p>
 
-<p>Current Languages:
-<span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }},
-</select></p>
+<p>Now I have a combined Direction that merges the three concepts into
+one. It is impossible with this new merged type to have an invalid
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:</p>
 
-<p>I want to see your language represented here! I&rsquo;ll happily take pull
-requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
-use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
-language data structure.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nc">GetMovementTypeToSaveInORM</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span> <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Deliver</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Posted_Return_Principal</span> <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">Return</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nc">GetSendFn</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Deliver_Principal</span> <span class="o">|</span> <span class="nc">Posted_Return_Principal</span> <span class="o">-&gt;</span> <span class="nc">SendMessageToPrincipal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="nc">Held_Return_Counterparty</span> <span class="o">|</span> <span class="nc">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="nc">SendMessageToCounterparty</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>I would love to see every major language represented, including major
-language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
-are vastly different in abilities. Similarly &ldquo;Scala &ndash; The Better Java&rdquo;
-and &ldquo;Scala &ndash; The JVM Haskell&rdquo; have vastly different idioms with
-apparently very separate communities.</p>
 
-<p><div ng-show="showRealName"> Feel free to put in your own examples by
-playing with the samples below. Code surrounded with &lt;! !> is ignored
-from the tally, since it would vary heavily based on the language and
-desired result. Variable and type names are kept at single characters,
-which are counted. Feel free to add in your own language below, and
-use the copy feature to extract the data structure to use in a pull
-request.</p>
+<p>While it is possible to make an equivalent C# enum and combine these
+in a similar way, it is inherently unsafe (nothing to guarantee you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.</p>
 
-<p><h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-</h2>
-<button ng-click="showEdit = !showEdit">Edit Language</button>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-<div ng-show="showEdit">
-<h2><input ng-model="selectedLang.name"></input></h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
-<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
-<div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-<div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div></p>
+<p>Because F# interops so well with C#, it is possible to build in a
+domain layer in F# immediately that calls down to your C# ORM
+classes. Converting from a set of dangerous C# enums into a
+constrained and safe F# discriminated union is easy and will simplify
+your domain to its essence.</p>
 
-<p><div ng-show="!showEdit">
-<h2> {{ selectedLang.name }} </h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
- {{ selectedLang[check.key].desc }}
-<div>
-Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }}
-<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div>
-</div></p>
-
-<p>Hope this is a helpful way to think about language safety!</p>
-
-<p>Special thanks to (in alphabetical order):
-Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
-Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
-Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
-Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
-Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
+<p>For reasons like this, when I have to build something with a rich
+domain, I reach for F#.</p>
 </div>
   
   
@@ -346,6 +292,10 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
+      </li>
+    
+      <li class="post">
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
@@ -357,10 +307,6 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
         <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
       </li>
     
-      <li class="post">
-        <a href="/superiority-fatigue/">Superiority Fatigue</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -369,12 +315,12 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">23</span></a>
     </li>
     
     

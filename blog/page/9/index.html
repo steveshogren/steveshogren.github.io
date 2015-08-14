@@ -9,9 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I recently have been working in a Clojure project which is made up of
-several microservices. While trying to build in a secure method for
-each &hellip;">
+  <meta name="description" content="One of my favorite things about F# is how it lets you choose how you want
+to align your data. In the previous posts highlighting on
+pattern matching &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +87,7 @@ each &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/emacs-project-tip/">Emacs Project Tip</a></h1>
+      <h1 class="entry-title"><a href="/christmas-f-number-polymorphism/">Christmas F# Polymorphism</a></h1>
     
     
       <p class="meta">
@@ -97,57 +97,24 @@ each &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>I recently have been working in a Clojure project which is made up of
-several microservices. While trying to build in a secure method for
-each service to be able to call the others, I&rsquo;ve been in several
-different projects at the same time.</p>
+  <div class="entry-content"><p>One of my favorite things about F# is how it lets you choose how you want
+to align your data.</p>
 
-<p>At least once I accidentally opened the wrong &ldquo;handler.clj&rdquo; buffer,
-and spent a few minutes adding a function that never worked. Since I
-hate doing things like this, I wanted a simple way to see what project
-I was currently viewing.</p>
+<p>In the previous posts highlighting on
+<a href="http://deliberate-software.com/function-pattern-matching/">pattern matching</a>
+and
+<a href="http://deliberate-software.com/inversed-polymorphism/">inverted polymorphism</a>
+we covered how pattern matching in F# is safer than <code>if</code>
+statements and can replace classes and interfaces for polymorphism. If
+you are unfamiliar with these concepts, you might want to skim those
+first.</p>
 
-<p>I started with a changing the title of the frame to show the whole
-path of the current buffer, like this:</p>
+<p>Today, for the 6th day of the
+<a href="https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/">F# Advent Calendar</a>
+I wanted to highlight F#&rsquo;s flexibility in solving the
+&ldquo;<a href="http://c2.com/cgi/wiki?ExpressionProblem">expression problem</a>&rdquo;.</p>
 
-<p><img class="center" src="/images/title.png" title="image" alt="images"></p>
-
-<p>The code to change the title is simple, and the default in some of the
-pre-packaged emacs bundles:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="k">setq</span> <span class="nv">frame-title-format</span>
-</span><span class='line'>      <span class="o">&#39;</span><span class="p">((</span><span class="ss">:eval</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
-</span><span class='line'>                   <span class="p">(</span><span class="nv">abbreviate-file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))</span>
-</span><span class='line'>                 <span class="s">&quot;%b&quot;</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is fine, but still not great. The font is tiny and the important
-part: &ldquo;octopress&rdquo; is buried. I wanted something a little more fluid,
-so I could easily tell the different projects apart instantly. I came
-up with the idea to color the background faintly different based on
-the path of the file. Files with a path containing &ldquo;octopress&rdquo; might
-be different from those containing &ldquo;.emacs&rdquo;.</p>
-
-<p>Thankfully, <code>buffer-face-mode</code> makes it easy to change a single
-property of a single buffer&rsquo;s face without changing any other
-buffer. So long as you disable buffer-face-mode when closing emacs,
-your files will open with the correct coloring scheme, then have the
-new background overlaid.</p>
-
-<p>While not perfect, this was the result.</p>
-
-<p><img class="center" src="/images/colors.png" title="image" alt="images"></p>
-
-<p>The colors I choose are only faintly different, but just enough for me
-to tell instantly which is which.</p>
-
-<p>The buffer colors are applied when opening a file, using these
-functions:</p>
+<p>Let&rsquo;s show the two alternatives, first here is one with interfaces:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -163,38 +130,26 @@ functions:</p>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-buffer-face-mode-variable</span> <span class="p">(</span><span class="nv">color</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">setq</span> <span class="nv">buffer-face-mode-face</span> <span class="p">(</span><span class="nb">list</span> <span class="ss">:background</span> <span class="nv">color</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">1</span><span class="p">))</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">IChristmasTrees</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">abstract</span> <span class="k">member</span> <span class="nc">Cost</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+</span><span class='line'>    <span class="k">abstract</span> <span class="k">member</span> <span class="nc">Colors</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="kt">string</span> <span class="kt">list</span>
 </span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-set-theme-on-mode</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">cond</span>
-</span><span class='line'>    <span class="c1">;; add your own project/color mappings here</span>
-</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;halcyon&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;#00001A&quot;</span><span class="p">))</span>
-</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;dwarf&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;#001A1A&quot;</span><span class="p">))</span>
-</span><span class='line'>     <span class="p">((</span><span class="nv">string-match</span> <span class="s">&quot;nimbus&quot;</span> <span class="nv">file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">my-buffer-face-mode-variable</span> <span class="s">&quot;black&quot;</span><span class="p">))</span>
-</span><span class='line'>     <span class="p">(</span><span class="no">t</span> <span class="s">&quot;&quot;</span><span class="p">))))</span>
+</span><span class='line'><span class="k">type</span> <span class="nc">PlasticTree</span><span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">interface</span> <span class="nc">IChristmasTrees</span> <span class="k">with</span>
+</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Cost</span><span class="o">(</span><span class="n">jolly_factor</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">jolly_factor</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Colors</span><span class="bp">()</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;silver&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">type</span> <span class="nc">LiveTree</span><span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">let</span> <span class="nc">HEAD_ACHE</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span class='line'>    <span class="k">interface</span> <span class="nc">IChristmasTrees</span> <span class="k">with</span>
+</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Cost</span><span class="o">(</span><span class="n">jolly_factor</span><span class="o">)</span> <span class="o">=</span> <span class="o">(</span><span class="n">jolly_factor</span> <span class="o">+</span> <span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="nc">HEAD_ACHE</span>
+</span><span class='line'>        <span class="k">member</span> <span class="n">this</span><span class="o">.</span><span class="nc">Colors</span><span class="bp">()</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>To force them to run when opening a file, since I use helm, I set it
-to execute on exiting helm for any reason:</p>
+<p></p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;helm-after-action-hook</span> <span class="ss">&#39;my-set-theme-on-mode</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; uncomment if not using helm</span>
-</span><span class='line'><span class="c1">;; (add-hook &#39;find-file-hook &#39;my-set-theme-on-mode)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Lastly, to make sure emacs applies my normal theme and settings to a
-buffer when starting, I disable buffer-face-mode on all buffers before
-exiting.</p>
+<p>Now the same functionality using pattern matching and discriminated unions.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -204,24 +159,69 @@ exiting.</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">disable-all-buffer-face-mode</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">current</span> <span class="p">(</span><span class="nv">get-buffer</span> <span class="p">(</span><span class="nv">current-buffer</span><span class="p">))))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">-map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span> <span class="p">(</span><span class="k">progn</span> <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">x</span><span class="p">)</span>
-</span><span class='line'>                             <span class="p">(</span><span class="nv">buffer-face-mode</span> <span class="mi">0</span><span class="p">)))</span> <span class="p">(</span><span class="nv">buffer-list</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">switch-to-buffer</span> <span class="nv">current</span> <span class="mi">1</span><span class="p">)))</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">IChristmasTrees2</span> <span class="o">=</span>
+</span><span class='line'>  <span class="o">|</span> <span class="nc">PlasticTree</span>
+</span><span class='line'>  <span class="o">|</span> <span class="nc">LiveTree</span>
 </span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;kill-emacs-hook</span> <span class="ss">&#39;disable-all-buffer-face-mode</span><span class="p">)</span>
+</span><span class='line'><span class="k">let</span> <span class="n">colors</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>  <span class="o">|</span> <span class="nc">PlasticTree</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;silver&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="o">|</span> <span class="nc">LiveTree</span> <span class="o">-&gt;</span> <span class="o">[</span><span class="s2">&quot;green&quot;</span><span class="o">;</span><span class="s2">&quot;brown&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="n">cost</span> <span class="n">tree</span> <span class="n">jolly_factor</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">match</span> <span class="n">tree</span> <span class="k">with</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">PlasticTree</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">jolly_factor</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nc">LiveTree</span> <span class="o">-&gt;</span>
+</span><span class='line'>      <span class="k">let</span> <span class="nc">HEAD_ACHE</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span class='line'>      <span class="o">(</span><span class="n">jolly_factor</span> <span class="o">+</span> <span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="nc">HEAD_ACHE</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
-the -map function.</p>
+<p></p>
 
-<p>While not the only solution, this seemed a simple and elegant way to
-quickly be reminded of your current project.</p>
+<p>What changes if we want to add a new type of tree? In the class-based
+example, adding a new type is quite simple, you only need to edit one
+place to find all the definitions regarding the new type.</p>
 
-<p>Enjoy!</p>
+<p><img class="center" src="/images/new-interfaces.png" title="image" alt="images"></p>
+
+<p>In the pattern matching example, adding a new type requires editing
+every single place you created a function that matches on the
+type.</p>
+
+<p><img class="center" src="/images/new-pattern-matching.png" title="image" alt="images"></p>
+
+<p>Thankfully, in both cases the compiler gives warnings about missing
+functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
+
+<p>What about changing an existing function or adding a new function? We
+now see the opposite behavior. Classes become harder to edit, because
+the functions are spread across multiple classes.</p>
+
+<p><img class="center" src="/images/change-interfaces.png" title="image" alt="images"></p>
+
+<p>A pattern matching system is now the easier to modify, each function
+only lives in one place.</p>
+
+<p><img class="center" src="/images/change-pattern-matching.png" title="image" alt="images"></p>
+
+<p>And that is the expression problem! The best thing about F# is that
+you get to pick which one is better for each type of data! If you know
+a certain type will need new behavior often, but rarely need new
+types, use pattern matching. If you know there is a static set of
+functions for a set of types, but the type list changes often, maybe
+the traditional interfaces and classes makes the most sense.</p>
+
+<p>There is no reason not to mix and match the two ways to handle
+polymorphism, so you are free to choose the best representation for
+each type of data you have!</p>
+
+<p>Happy F#-filled Festivities!</p>
 </div>
   
   
@@ -277,6 +277,10 @@ quickly be reminded of your current project.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
+      </li>
+    
+      <li class="post">
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
@@ -288,10 +292,6 @@ quickly be reminded of your current project.</p>
         <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
       </li>
     
-      <li class="post">
-        <a href="/superiority-fatigue/">Superiority Fatigue</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -300,12 +300,12 @@ quickly be reminded of your current project.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">23</span></a>
     </li>
     
     

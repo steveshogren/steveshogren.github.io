@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Learning new tools, technologies, and methodologies is
-hard. Counter-intuitively, the most exhausting part is after you&rsquo;ve gained a
-good &hellip;">
+  <meta name="description" content="Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +86,7 @@ good &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/superiority-fatigue/">Superiority Fatigue</a></h1>
+      <h1 class="entry-title"><a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a></h1>
     
     
       <p class="meta">
@@ -97,47 +96,82 @@ good &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>Learning new tools, technologies, and methodologies is
-hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
-good comprehension of the tool, and now, filled with excitement, you try to
-explain it to someone else.</p>
+  <div class="entry-content"><p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.</p>
 
-<p>They almost always react with hostility.</p>
+<p>When I set out to learn a Lisp, I expected it would be easy.</p>
 
-<p>What is going on? You just took time to learn this exciting tool that could save
-everyone a lot of time, and not only do they not care, but they resent you for
-it!  Don&rsquo;t they see how this could be great for everyone?</p>
+<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
+natural!&rdquo;</p>
 
-<p>The issue, like humans, is complex and dynamic. Maybe they feel like you&rsquo;ve now
-made them look lazy in comparison. Maybe they have tried other tools in the past
-only to discover they weren&rsquo;t as a good as promised. Maybe they are afraid they
-won&rsquo;t be able to learn the new tool as quickly as they need to, and will be left
-behind. Maybe they are afraid all the time they spent learning the existing
-tools will have been wasted. Maybe they are comfortable where they are, and
-don&rsquo;t care about increased productivity. Maybe they are tired of learning new
-things.</p>
+<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
+than one) and shortly master it to be able to ship a website with it.</p>
 
-<p>Most times I have seen this, I think the root emotion is fear. Fear of failure,
-of change, of being embarrassed, of looking inferior. Fear is a powerful
-emotion.</p>
+<p>What happened instead took me a little longer&hellip;</p>
 
-<p>When you respond with further hostility, this only will compound their
-fear. Should they put their comfort and ego before the needs of the business?
-No, but your counterattack will only further prove to them that their fear was
-deserved.</p>
+<ul>
+<li>05/11 &ndash; 06/11 &ndash; ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
+<li>04/12 &ndash; 08/12 &ndash; ~60 Hrs Rewrote a PHP side project in Clojure</li>
+<li>08/12 &ndash; 08/12 &ndash; ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
+<li>08/12 &ndash; 09/12 &ndash; ~10 Hrs Read <em>Clojure Programming</em> twice</li>
+<li>09/12 &ndash; 12/12 &ndash; ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
+<li>05/13 &ndash; 07/13 &ndash; ~50 Hrs Worked through <em>Let Over Lambda</em></li>
+<li>05/13 &ndash; 07/14 &ndash; ~250 Hrs Worked through <em>SICP</em></li>
+<li>07/14 &ndash; Shipped production Clojure code</li>
+</ul>
 
-<p>The final hardest part of learning a new tool is when you are forced to use an
-inferior tool. Suddenly that liberating fresh air of power is replaced with a
-suffocating claustrophobia of weakness. Even if the tool isn&rsquo;t really that
-inferior, it now <em>feels</em> terrible. It becomes worse when you and many others
-around you agree with the better value proposition of a new tool, and yet you
-are still required to use the inferior tool due to someone in power blocking you
-for political reasons.</p>
 
-<p>For the developer who sets out to learn new things, you must learn to deal with
-inferior tools. Once you start learning, you will always find yourself in a
-situation where you are required to use an inferior tool. For me, this has been
-one of the hardest things to face in my career.</p>
+<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
+
+<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
+deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.</p>
+
+<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
+Typed Racket, and Clojure before I felt confident enough to suggest shipping
+Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
+some people will snort with derision at how much time it took me &ndash; which is kind
+of the point of this post.</p>
+
+<p>This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.</p>
+
+<p>If you are struggling and feel like a failure, understand <em>there is no wrong
+way</em>. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.</p>
+
+<p>If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
+
+<h1>Was it worth it?</h1>
+
+<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.</p>
 </div>
   
   
@@ -193,6 +227,10 @@ one of the hardest things to face in my career.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
+      </li>
+    
+      <li class="post">
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
@@ -204,10 +242,6 @@ one of the hardest things to face in my career.</p>
         <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
       </li>
     
-      <li class="post">
-        <a href="/superiority-fatigue/">Superiority Fatigue</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -216,12 +250,12 @@ one of the hardest things to face in my career.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">18</span></a>
+      <a href="/blog/categories/technical-skills/"><span>Technical Skills</span><span style="float:right">19</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/meta-game/"><span>Meta Game</span><span style="float:right">23</span></a>
     </li>
     
     
