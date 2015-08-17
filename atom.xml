@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
-  <updated>2015-08-14T11:44:12-04:00</updated>
+  <updated>2015-08-17T08:15:00-04:00</updated>
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -18,9 +18,8 @@
     <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
     <updated>2015-08-13T06:53:00-04:00</updated>
     <id>http://steveshogren.github.io/simplemock-unit-test-mocking</id>
-    <content type="html"><![CDATA[<p>Don&rsquo;t worry, SimpleMock isn&rsquo;t another library! Like many good things, SimpleMock
-is a pattern. You can use the pattern to organize your testing code without
-mocking or complicated dependency injection.</p>
+    <content type="html"><![CDATA[<p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency injection.</p>
 
 <p>SimpleMock works in any language with closures that can be passed around by
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
