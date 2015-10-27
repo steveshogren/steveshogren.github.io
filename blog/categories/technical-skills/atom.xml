@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
+<<<<<<< HEAD
   <title><![CDATA[Category: technical skills | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
   <updated>2015-10-27T08:40:32-04:00</updated>
+=======
+  <title><![CDATA[Category: Technical Skills | Deliberate Software]]></title>
+  <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
+  <link href="http://steveshogren.github.io/"/>
+  <updated>2015-08-17T08:15:00-04:00</updated>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -14,6 +21,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[F# Unit Testing with SimpleMock]]></title>
     <link href="http://steveshogren.github.io/f-number-unit-testing/"/>
     <updated>2015-10-21T16:41:00-04:00</updated>
@@ -150,6 +158,8 @@ classes for mutability.</p>
   </entry>
   
   <entry>
+=======
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
     <title type="html"><![CDATA[SimpleMock: Language Agnostic Unit Test Mocking]]></title>
     <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
     <updated>2015-08-13T06:53:00-04:00</updated>
@@ -161,6 +171,7 @@ organize your testing code without mocking or complicated dependency injection.<
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
 Python. I&rsquo;m sure you can think of others.</p>
 
+<<<<<<< HEAD
 <h2>Example:</h2>
 
 <p>Here is a brief (if a bit silly) example of the final pattern:</p>
@@ -187,6 +198,9 @@ public void TestLineCounter () {
 </code></pre>
 
 <h2>Benefits</h2>
+=======
+<h1>Benefits</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <ul>
 <li>Reduced boilerplate</li>
@@ -207,7 +221,11 @@ code with testing concerns.</p>
 interfaces, dependency injection, and mock libraries, scroll down to &ldquo;The
 Non-SimpleMock Way&rdquo; at the end of the post.</p>
 
+<<<<<<< HEAD
 <h2>SimpleMock Pattern</h2>
+=======
+<h1>SimpleMock Pattern</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>The SimpleMock pattern is aptly named.</p>
 
@@ -218,13 +236,20 @@ Non-SimpleMock Way&rdquo; at the end of the post.</p>
 </ol>
 
 
+<<<<<<< HEAD
 <h2>Step One: Replace Test-Only Interfaces With Functions</h2>
 
 <p>My examples are in C# because that is what I got paid to write today - it is
+=======
+<h1>Step One: Replace Test-Only Interfaces With Functions</h1>
+
+<p>My examples are in C# because that is what I got paid to write today &ndash; it is
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 freshest in memory. C# has an incredible ability to create and pass around
 lambdas and function references. Here is an example of using functions instead
 of interfaces.</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">public class CurrentTime : ICurrentTime {
     public DateTime GetCurrentTime() {
         return DateTime.Now();
@@ -257,17 +282,67 @@ public void TestCurrentTimeTranslator () {
 }
 </code></pre>
 
+=======
+<p>``` csharp
+public class CurrentTime : ICurrentTime {</p>
+
+<pre><code>public DateTime GetCurrentTime() {
+    return DateTime.Now();
+}
+</code></pre>
+
+<p>}
+public class Translator {</p>
+
+<pre><code>private Func&lt;DateTime&gt; _getCurrentTime;
+
+public Translator() : this(new CurrentTime().GetCurrentTime) {}
+
+public Translator(Func&lt;DateTime&gt; getCurrentTime) {
+    this._getCurrentTime = getCurrentTime;
+}
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with just lambdas
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var now = DateTime.Now;
+
+var sut = new Translator(() =&gt; now);
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(now.ToString() + ": test", result);
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>The test code is quite simple! No longer do we need the dependency on third
 party mocking libraries, or the relatively complicated setup logic. Instead we
 can simply inject the lambda at runtime, replacing that pointer. We didn&rsquo;t need
 the whole interface, really we just needed the simple signature of the function.</p>
 
+<<<<<<< HEAD
 <h2>Step 2: Define Dependencies Inline</h2>
+=======
+<h1>Step 2: Define Dependencies Inline</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>We can take it even a step further. Why use constructor injection at all? Since
 all we really want is a single mutable dispatch table row, why not just make it
 that way?</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">public class Translator {
     internal Func&lt;DateTime&gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
 
@@ -292,6 +367,39 @@ public void TestCurrentTimeTranslator () {
 <p>We&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
 &ldquo;Go to definition&rdquo; now takes me to the actual line with the actual called
 function. We&rsquo;ve replaced a dependency on a class based interface with a function
+=======
+<p>``` csharp
+public class Translator {</p>
+
+<pre><code>internal Func&lt;DateTime&gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", _getCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with just inline lambdas
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var now = DateTime.Now;
+var sut = new Translator();
+sut._getCurrentTime = () =&gt; now;
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(now.ToString() + ": test", result);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Now we&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch
+line! &ldquo;Go to definition&rdquo; now takes me to the actual line with the actual called
+function! We&rsquo;ve replaced a dependency on a class based interface with a function
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 signature. The function signature <em>is</em> the interface!</p>
 
 <p>You probably noticed we have lost something with this final version. We have
@@ -300,12 +408,17 @@ need it, simply go back to injecting the interface in the constructor or by
 passing it into the function itself. In practice, I have found this is needed
 very rarely, making the SimpleMock pattern a better tool to reach for first.</p>
 
+<<<<<<< HEAD
 <h2>Step 3: Write Better Abstractions</h2>
+=======
+<h1>Step 3: Write Better Abstractions</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>Lastly, SimpleMock actually promotes better designs. For example, a coworker was
 writing some tests today and ran into a complicated situation. Take the
 following sanitized code:</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">public class WorkDoer {
     internal Action&lt;Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
     internal Action&lt;Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
@@ -319,10 +432,31 @@ following sanitized code:</p>
 }
 </code></pre>
 
+=======
+<p>``` csharp
+public class WorkDoer {</p>
+
+<pre><code>internal Action&lt;Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+internal Action&lt;Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
+    ignoreElements(t1);
+    ignoreElements(t2);
+    removeIgnoredElements(t1);
+    removeIgnoredElements(t2);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>How would you check that each section was called? Our naive solution was a
 complicated lambda with a &ldquo;timesCalled&rdquo; counter and an if statement to assert
 against each argument, but it turns nasty quickly:</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">/// Nasty test code
 [TestCase]
 public void TestWorkDoer () {
@@ -356,6 +490,45 @@ public void TestWorkDoer () {
 }
 </code></pre>
 
+=======
+<p>``` csharp
+/// Nasty test code
+[TestCase]
+public void TestWorkDoer () {</p>
+
+<pre><code>var sut = new WorkDoer();
+
+var ignoredCalledTimes = 0;
+sut.ignoreElements = (t) =&gt; {
+    ignoredCalledTimes++;
+    if (ignoredCalledTimes == 1) {
+        Assert.AreEqual(t1, t);
+    } else {
+        Assert.AreEqual(t2, t);
+    }
+};
+var removedCalledTimes = 0;
+sut.removeIgnoredElements = (t) =&gt; {
+    removedCalledTimes++;
+    if (removedCalledTimes == 1) {
+        Assert.AreEqual(t1, t);
+    } else {
+        Assert.AreEqual(t2, t);
+    }
+};
+
+var t1 = new Thing();
+var t2 = new Thing();
+
+var result = sut.IgnoreAndRemoveThings(t1, t2);
+Assert.AreEqual(2, removedCalledTimes);
+Assert.AreEqual(2, ignoredCalledTimes);
+</code></pre>
+
+<p>}
+```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
 Conditionals?! In a test?! Unconscionable.</p>
 
@@ -371,6 +544,7 @@ Consider the code, what makes it so hard to test? Not knowing which element is
 called when, doing the same work on two parameters, and reference mutation all
 make this a poor abstraction. Why not simplify?</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">public class WorkDoer {
     internal Func&lt;Thing, Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
     internal Func&lt;Thing, Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
@@ -412,6 +586,56 @@ for the job, and that is fine. But for most work around the yard, you can leave
 the chainsaw in the shed.</p>
 
 <h2>Conclusion</h2>
+=======
+<p>``` csharp
+public class WorkDoer {</p>
+
+<pre><code>internal Func&lt;Thing, Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+internal Func&lt;Thing, Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+public List&lt;Thing&gt; IgnoreAndRemoveThings(List&lt;Thing&gt; ts) {
+    return ts.Select(t =&gt; removeIgnoredElements(ignoreElements(t)));
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Simpler test
+[TestCase]
+public void TestWorkDoer () {</p>
+
+<pre><code>var sut = new WorkDoer();
+var expected = new Thing();
+var ts = new List&lt;Thing&gt;{new Thing()};
+
+sut.ignoreElements = (t) =&gt; new Thing();
+
+sut.removeIgnoredElements = (t) =&gt; {
+    Assert.AreEqual(t, sut.ignoreElements(t));
+    return expected;
+};
+
+var result = sut.IgnoreAndRemoveThings(ts);
+
+Assert.AreEqual(expected, result.First())
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Much better! Yes, we had to change a few signatures. We get the same work done,
+but now the code is actually a lot more useful. Our test code is absolutely
+comparable with anything you&rsquo;d find using a mocking library. I am absolutely
+okay with using a mocking library when absolutely needed, but I always carefully
+consider my abstractions and design first.</p>
+
+<p>If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is absolutely the
+only tool for the job, and that is fine. But for most work around the yard, you
+can leave the chainsaw in the shed.</p>
+
+<h1>Conclusion</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>I’ve shown how you can really simplify your code with SimpleMock. The dispatch
 row is clear and easy to read. We have removed some third party mocking
@@ -421,7 +645,11 @@ breeze. The result: much simpler code, just as easy to test.</p>
 
 <p>Thanks to Shuwei Chen for helping me put this together!</p>
 
+<<<<<<< HEAD
 <h2>The Non-SimpleMock Way</h2>
+=======
+<h1>The Non-SimpleMock Way</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>If you are familiar with unit test mocking with interfaces, this part is
 probably boring. Feel free to skip.</p>
@@ -432,6 +660,7 @@ injection, it is common to use a tool like Ninject or hand-rolled constructor
 injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
 an example of a class and its testing code without any business logic.</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">public interface ICurrentTime {
     DateTime GetCurrentTime();
 }
@@ -472,6 +701,62 @@ public void TestCurrentTimeTranslator () {
 }
 </code></pre>
 
+=======
+<p>``` csharp
+public interface ICurrentTime {</p>
+
+<pre><code>DateTime GetCurrentTime();
+</code></pre>
+
+<p>}</p>
+
+<p>public class CurrentTime : ICurrentTime {</p>
+
+<pre><code>public DateTime GetCurrentTime() {
+    return DateTime.Now();
+}
+</code></pre>
+
+<p>}</p>
+
+<p>public class Translator {</p>
+
+<pre><code>private readonly ICurrentTime ct;
+
+public Translator() : this(new CurrentTime()) {}
+
+public Translator(ICurrentTime currentTime) {
+    this.ct = currentTime;
+}
+
+public string Translate(string input) {
+    return string.Format("{0}: {1}", ct.GetCurrentTime().ToString(), input);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>/// Test Code with Moq
+[TestCase]
+public void TestCurrentTimeTranslator () {</p>
+
+<pre><code>var rightNow = DateTime.Now;
+var mock = new Mock&lt;ICurrentTime&gt;();
+
+mock.Setup(a=&gt;a.GetCurrentTime()).Returns(rightNow);
+
+var sut = new Translator(mock.Object);
+
+var result = sut.Translate("test");
+
+Assert.AreEqual(rightNow.ToString() + ": test", result);
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>If you&rsquo;ve done much C# unit testing, this should look familiar. We want to
 inject some code that is potentially long-running or dynamic. We put that code
 into a class, add an interface, then inject that interface into the class we
@@ -479,7 +764,11 @@ want to test. To test it, we mock the interface, creating a different concrete
 class at test runtime which implements that interface. We can setup that mock to
 respond with anything, which we use for assertions.</p>
 
+<<<<<<< HEAD
 <h2>What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
+=======
+<h1>What&rsquo;s Wrong with the Non-SimpleMock Way?</h1>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>The first problem is we have created a whole interface just for testing.
 Interfaces are for polymorphism, but we don&rsquo;t really need polymorphism for this
@@ -725,6 +1014,7 @@ well.</p>
 <p>Here is a typical function that combines two enums to recalculate a
 third.</p>
 
+<<<<<<< HEAD
 <pre><code class="csharp">        public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
         {
             if ((movementType == MovementType.Deliver &amp;&amp; applyToParty == ApplyToParty.Principal)
@@ -738,6 +1028,25 @@ third.</p>
         }
 </code></pre>
 
+=======
+<p>``` csharp</p>
+
+<pre><code>    public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
+    {
+        if ((movementType == MovementType.Deliver &amp;&amp; applyToParty == ApplyToParty.Principal)
+            || (movementType == MovementType.Return &amp;&amp; applyToParty == ApplyToParty.Counterparty))
+            return PositionType.Held;
+        if ((movementType == MovementType.Return &amp;&amp; applyToParty == ApplyToParty.Principal)
+            || (movementType == MovementType.Deliver &amp;&amp; applyToParty == ApplyToParty.Counterparty))
+            return PositionType.Posted;
+
+        return PositionType.Undefined;
+    }
+</code></pre>
+
+<p>```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>With some regularity, new records are added to these types of enums,
 causing a dangerous search and update across the system fixing all the
 if/else or switch/case statements.</p>
@@ -745,12 +1054,25 @@ if/else or switch/case statements.</p>
 <p>Right off the bat, pattern matching is a huge win here, taking a hard
 to comprehend function and making the domain concepts clear.</p>
 
+<<<<<<< HEAD
 <pre><code class="fsharp">let GetPositionType = function
     | Deliver, Principal | Return, Counterparty -&gt; Held
     | Return, Principal | Deliver, Counterparty -&gt; Posted
     | MovementType.Undefined, _ | _, ApplyToParty.Undefined -&gt; PositionType.Undefined
 </code></pre>
 
+=======
+<p>``` fsharp
+let GetPositionType = function</p>
+
+<pre><code>| Deliver, Principal | Return, Counterparty -&gt; Held
+| Return, Principal | Deliver, Counterparty -&gt; Posted
+| MovementType.Undefined, _ | _, ApplyToParty.Undefined -&gt; PositionType.Undefined
+</code></pre>
+
+<p>```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>If we add a new status to any of these, we will get a compiler warning
 in every place letting us know. If that alone was the win, we&rsquo;d be
 still be ahead by a lot. The domain is so clear here, I can print this
@@ -769,6 +1091,7 @@ able to do work in a safer way.</p>
 might get out of date), I really want a concept of the three combined
 and &ldquo;frozen&rdquo; together.</p>
 
+<<<<<<< HEAD
 <pre><code class="fsharp">type Direction = 
     | Held_Deliver_Principal
     | Held_Return_Counterparty
@@ -782,11 +1105,30 @@ let GetDirection = function
    | Deliver, Counterparty -&gt; Posted_Deliver_Counterparty
 </code></pre>
 
+=======
+<p>``` fsharp
+type Direction =</p>
+
+<pre><code>| Held_Deliver_Principal
+| Held_Return_Counterparty
+| Posted_Return_Principal
+| Posted_Deliver_Counterparty
+</code></pre>
+
+<p>let GetDirection = function
+   | Deliver, Principal  &ndash;> Held_Deliver_Principal
+   | Return, Counterparty &ndash;> Held_Return_Counterparty
+   | Return, Principal &ndash;> Posted_Return_Principal
+   | Deliver, Counterparty &ndash;> Posted_Deliver_Counterparty
+```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Now I have a combined Direction that merges the three concepts into
 one. It is impossible with this new merged type to have an invalid
 state across the three. Getting any of the types back out to convert
 into the ORM classes or do some work is as simple as another match:</p>
 
+<<<<<<< HEAD
 <pre><code class="fsharp">let GetMovementTypeToSaveInORM = function
    | Held_Deliver_Principal | Posted_Deliver_Counterparty -&gt; Deliver
    | Posted_Return_Principal | Held_Return_Counterparty -&gt; Return
@@ -795,6 +1137,17 @@ let GetSendFn = function
    | Held_Deliver_Principal | Posted_Return_Principal -&gt; SendMessageToPrincipal
    | Held_Return_Counterparty | Posted_Deliver_Counterparty -&gt; SendMessageToCounterparty
 </code></pre>
+=======
+<p>``` fsharp
+let GetMovementTypeToSaveInORM = function
+   | Held_Deliver_Principal | Posted_Deliver_Counterparty &ndash;> Deliver
+   | Posted_Return_Principal | Held_Return_Counterparty &ndash;> Return</p>
+
+<p>let GetSendFn = function
+   | Held_Deliver_Principal | Posted_Return_Principal &ndash;> SendMessageToPrincipal
+   | Held_Return_Counterparty | Posted_Deliver_Counterparty &ndash;> SendMessageToCounterparty
+```</p>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>While it is possible to make an equivalent C# enum and combine these
 in a similar way, it is inherently unsafe (nothing to guarantee you
@@ -956,8 +1309,13 @@ language data structure.</p>
 
 <p>I would love to see every major language represented, including major
 language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
+<<<<<<< HEAD
 are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
 and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
+=======
+are vastly different in abilities. Similarly &ldquo;Scala &ndash; The Better Java&rdquo;
+and &ldquo;Scala &ndash; The JVM Haskell&rdquo; have vastly different idioms with
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 apparently very separate communities.</p>
 
 <p><div ng-show="showRealName"> Feel free to put in your own examples by
@@ -1017,4 +1375,118 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
 ]]></content>
   </entry>
   
+<<<<<<< HEAD
+=======
+  <entry>
+    <title type="html"><![CDATA[Christmas F# Polymorphism]]></title>
+    <link href="http://steveshogren.github.io/christmas-f-number-polymorphism/"/>
+    <updated>2014-12-06T13:37:00-05:00</updated>
+    <id>http://steveshogren.github.io/christmas-f-number-polymorphism</id>
+    <content type="html"><![CDATA[<p>One of my favorite things about F# is how it lets you choose how you want
+to align your data.</p>
+
+<p>In the previous posts highlighting on
+<a href="http://deliberate-software.com/function-pattern-matching/">pattern matching</a>
+and
+<a href="http://deliberate-software.com/inversed-polymorphism/">inverted polymorphism</a>
+we covered how pattern matching in F# is safer than <code>if</code>
+statements and can replace classes and interfaces for polymorphism. If
+you are unfamiliar with these concepts, you might want to skim those
+first.</p>
+
+<p>Today, for the 6th day of the
+<a href="https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/">F# Advent Calendar</a>
+I wanted to highlight F#&rsquo;s flexibility in solving the
+&ldquo;<a href="http://c2.com/cgi/wiki?ExpressionProblem">expression problem</a>&rdquo;.</p>
+
+<p>Let&rsquo;s show the two alternatives, first here is one with interfaces:</p>
+
+<p>``` fsharp
+type IChristmasTrees =</p>
+
+<pre><code>abstract member Cost : int -&gt; int
+abstract member Colors : unit -&gt; string list
+</code></pre>
+
+<p>type PlasticTree() =</p>
+
+<pre><code>interface IChristmasTrees with
+    member this.Cost(jolly_factor) = (100 * jolly_factor) / 2
+    member this.Colors() = ["green";"silver"]
+</code></pre>
+
+<p>type LiveTree() =</p>
+
+<pre><code>let HEAD_ACHE = 15
+interface IChristmasTrees with
+    member this.Cost(jolly_factor) = (jolly_factor + 10) * HEAD_ACHE
+    member this.Colors() = ["green";"brown"]
+</code></pre>
+
+<p>```</p>
+
+<p>Now the same functionality using pattern matching and discriminated unions.</p>
+
+<p>``` fsharp
+type IChristmasTrees2 =
+  | PlasticTree
+  | LiveTree</p>
+
+<p>let colors = function
+  | PlasticTree &ndash;> [&ldquo;green&rdquo;;&ldquo;silver&rdquo;]
+  | LiveTree &ndash;> [&ldquo;green&rdquo;;&ldquo;brown&rdquo;]</p>
+
+<p>let cost tree jolly_factor =
+  match tree with</p>
+
+<pre><code>| PlasticTree -&gt; (100 * jolly_factor) / 2
+| LiveTree -&gt;
+  let HEAD_ACHE = 15
+  (jolly_factor + 10) * HEAD_ACHE
+</code></pre>
+
+<p>```</p>
+
+<p>What changes if we want to add a new type of tree? In the class-based
+example, adding a new type is quite simple, you only need to edit one
+place to find all the definitions regarding the new type.</p>
+
+<p><img class="center" src="/images/new-interfaces.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
+
+<p>In the pattern matching example, adding a new type requires editing
+every single place you created a function that matches on the
+type.</p>
+
+<p><img class="center" src="/images/new-pattern-matching.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
+
+<p>Thankfully, in both cases the compiler gives warnings about missing
+functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
+
+<p>What about changing an existing function or adding a new function? We
+now see the opposite behavior. Classes become harder to edit, because
+the functions are spread across multiple classes.</p>
+
+<p><img class="center" src="/images/change-interfaces.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
+
+<p>A pattern matching system is now the easier to modify, each function
+only lives in one place.</p>
+
+<p><img class="center" src="/images/change-pattern-matching.png" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
+
+<p>And that is the expression problem! The best thing about F# is that
+you get to pick which one is better for each type of data! If you know
+a certain type will need new behavior often, but rarely need new
+types, use pattern matching. If you know there is a static set of
+functions for a set of types, but the type list changes often, maybe
+the traditional interfaces and classes makes the most sense.</p>
+
+<p>There is no reason not to mix and match the two ways to handle
+polymorphism, so you are free to choose the best representation for
+each type of data you have!</p>
+
+<p>Happy F#-filled Festivities!</p>
+]]></content>
+  </entry>
+  
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 </feed>

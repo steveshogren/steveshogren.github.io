@@ -1,4 +1,8 @@
 User-agent: *
 Disallow: 
 
+<<<<<<< HEAD
 Sitemap: http://steveshogren.github.io/sitemap.xml 
+=======
+Sitemap: http://steveshogren.github.io/sitemap.xml 
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b

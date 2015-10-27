@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
+<<<<<<< HEAD
   <title><![CDATA[Category: unit testing | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
   <updated>2015-10-27T08:40:32-04:00</updated>
+=======
+  <title><![CDATA[Category: Unit Testing | Deliberate Software]]></title>
+  <link href="http://steveshogren.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
+  <link href="http://steveshogren.github.io/"/>
+  <updated>2015-08-17T08:15:00-04:00</updated>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -42,6 +49,7 @@ through the constructor like this:
 </p>
 
 
+<<<<<<< HEAD
 <pre><code class="php">class Velocity {
   public function __construct (PayoffCalc $PayoffCalc) {
     $this-&gt;_PayoffCalc = $PayoffCalc;
@@ -53,11 +61,32 @@ through the constructor like this:
 }
 </code></pre>
 
+=======
+<p>``` php
+class Velocity {
+  public function __construct (PayoffCalc $PayoffCalc) {</p>
+
+<pre><code>$this-&gt;_PayoffCalc = $PayoffCalc;
+</code></pre>
+
+<p>  }
+  public function toFloat() {</p>
+
+<pre><code>$paymentPerDay = $this-&gt;_PayoffCalc-&gt;getPaymentPerDay();
+return $this-&gt;_calculate($paymentPerDay);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>
 Would have a test driving it, looking like this:
 </p>
 
 
+<<<<<<< HEAD
 <pre><code class="php">public function test_velocity_validDailyPayment() {
   $paymentPerDay = 3;
   $expectedVelocity = 1392;
@@ -72,6 +101,25 @@ Would have a test driving it, looking like this:
 </code></pre>
 
 <p></p></p>
+=======
+<p>``` php
+public function test_velocity_validDailyPayment() {
+  $paymentPerDay = 3;
+  $expectedVelocity = 1392;
+  //Mock PayoffCalc->getPaymentPerDay() to return 3
+  $PayoffCalc = $this->getMock(&lsquo;PayoffCalc&rsquo;, array(&lsquo;getPaymentPerDay&rsquo;));
+  $PayoffCalc->expects($this->once())</p>
+
+<pre><code>         -&gt;method('getPaymentPerDay')
+         -&gt;will($this-&gt;returnValue($paymentPerDay));
+</code></pre>
+
+<p>  $Velocity = new Velocity($PayoffCalc);
+  $this->assertEquals($expectedVelocity, $Velocity->toFloat());
+}
+```
+</p></p>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>
 For several months now, writing unit tests this way has become
@@ -140,16 +188,25 @@ target="_blank">Role</a>.
 </p>
 
 
+<<<<<<< HEAD
 <pre><code class="php">interface PaymentPerDayRetriever {
   public function getPaymentPerDay();
 }
 </code></pre>
+=======
+<p><code>php
+interface PaymentPerDayRetriever {
+  public function getPaymentPerDay();
+}
+</code></p>
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>
 Then use the interface in the test:
 </p>
 
 
+<<<<<<< HEAD
 <pre><code class="php">public function test_velocity_validDailyPayment() {
     $paymentPerDay = 3;
     $expectedVelocity = 1392;
@@ -163,6 +220,25 @@ Then use the interface in the test:
 }
 </code></pre>
 
+=======
+<p>``` php
+public function test_velocity_validDailyPayment() {</p>
+
+<pre><code>$paymentPerDay = 3;
+$expectedVelocity = 1392;
+//Mock PayoffCalc-&gt;getPaymentPerDay() to return 3
+$PayoffCalc = $this-&gt;getMock('PaymentPerDayRetriever');
+$PayoffCalc-&gt;expects($this-&gt;any())
+    -&gt;method('getPaymentPerDay')
+    -&gt;will($this-&gt;returnValue($paymentPerDay));
+   $Velocity = new Velocity($PayoffCalc);
+$this-&gt;assertEquals($expectedVelocity, $Velocity-&gt;toFloat());
+</code></pre>
+
+<p>}
+```</p>
+
+>>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>
 By mocking the interface, I have freed my Velocity class from knowing
 about the rest of the old PayoffCalc interface, and when I realize
