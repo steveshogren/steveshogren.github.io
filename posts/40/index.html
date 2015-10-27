@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deliberate Software</title>
+  <meta name="author" content="Steve Shogren">
+
+  
+  <meta name="description" content="One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://steveshogren.github.io/posts/40/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="/javascripts/libs/angular.js"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46040901-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Deliberate Software</a></h1>
+  
+    <h2>With deliberate practice come consistent results</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="steveshogren.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">All Posts</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-04-12T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/41">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/39">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+<section class="about-me">
+  <h1>Steve Shogren</h1>
+  <div class="about-text">
+    <p>
+      Insights gathered while learning to deliberately craft software.
+    </p>
+  </div>
+  <span class="gravatar">
+    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
+  </span>
+</section>
+
+<section>
+  <h1>Top Posts</h1>
+  <ul id="recent_posts">
+    <li class="post">
+      <a href="/ego-driven-development/">Ego Driven Development</a>
+    </li>
+    <li class="post">
+      <a href="/programming-language-safety-algorithm/">Language Safety Score</a>
+    </li>
+
+    <li class="post">
+      <a href="/intro-to-macros/">Intro To Macros</a>
+    </li>
+    <li class="post">
+      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
+      </li>
+    
+      <li class="post">
+        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
+      </li>
+    
+      <li class="post">
+        <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/language-versions/">Language Versions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="recent_posts">
+    
+    
+    <li class="post">
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">20</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">23</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">1</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/lisp/"><span>lisp</span><span style="float:right">3</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">2</span></a>
+    </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Steve Shogren -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+<script src="/javascripts/sliders.js" type="text/javascript"></script>
+<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Case Study: Type-safe Domain Modeling in F# - Deliberate Software</title>
+  <meta name="author" content="Steve Shogren">
+
+  
+  <meta name="description" content="Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://steveshogren.github.io/pattern-matching-case-study/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<script src="/javascripts/libs/angular.js"></script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46040901-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Deliberate Software</a></h1>
+  
+    <h2>With deliberate practice come consistent results</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="steveshogren.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">All Posts</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Case Study: Type-safe Domain Modeling in F#</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-14T09:42:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.</p>
+
+<p>To illustrate this, I found some old code I&rsquo;d written to interact with
+a legacy system. The system uses many single enums on a record to keep
+track of statuses. When one changes, it can cause others to change as
+well.</p>
+
+<p>Here is a typical function that combines two enums to recalculate a
+third.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">PositionType</span> <span class="nf">GetPositionType</span> <span class="p">(</span><span class="n">MovementType</span> <span class="n">movementType</span><span class="p">,</span> <span class="n">ApplyToParty</span> <span class="n">applyToParty</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Held</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
+</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Posted</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Undefined</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With some regularity, new records are added to these types of enums,
+causing a dangerous search and update across the system fixing all the
+if/else or switch/case statements.</p>
+
+<p>Right off the bat, pattern matching is a huge win here, taking a hard
+to comprehend function and making the domain concepts clear.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">GetPositionType</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Held</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Posted</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">MovementType</span><span class="p">.</span><span class="n">Undefined</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nn">ApplyToParty</span><span class="p">.</span><span class="n">Undefined</span> <span class="o">-&gt;</span> <span class="nn">PositionType</span><span class="p">.</span><span class="n">Undefined</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we&rsquo;d be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.</p>
+
+<p>Next though, this got me thinking. Why does this set of three enums
+have to be calculated? Why are they even separate? Ah, of course,
+right now they are stored in the database and ORM objects, each with a
+separate field and set of enum ids. Changing that would be costly.</p>
+
+<p>What I want is a domain layer a level higher than the typical database
+ORM classes, something to convert my ORM classes into that will be
+able to do work in a safer way.</p>
+
+<p>Rather than three enums that are supposed to change in lock step (but
+might get out of date), I really want a concept of the three combined
+and &ldquo;frozen&rdquo; together.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">Direction</span> <span class="o">=</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Held_Deliver_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Held_Return_Counterparty</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Posted_Return_Principal</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetDirection</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Principal</span>  <span class="o">-&gt;</span> <span class="n">Held_Deliver_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Held_Return_Counterparty</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">-&gt;</span> <span class="n">Posted_Return_Principal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Posted_Deliver_Counterparty</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Now I have a combined Direction that merges the three concepts into
+one. It is impossible with this new merged type to have an invalid
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">GetMovementTypeToSaveInORM</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Deliver_Principal</span> <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="n">Deliver</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Posted_Return_Principal</span> <span class="o">|</span> <span class="n">Held_Return_Counterparty</span> <span class="o">-&gt;</span> <span class="n">Return</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetSendFn</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Deliver_Principal</span> <span class="o">|</span> <span class="n">Posted_Return_Principal</span> <span class="o">-&gt;</span> <span class="n">SendMessageToPrincipal</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Return_Counterparty</span> <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="n">SendMessageToCounterparty</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While it is possible to make an equivalent C# enum and combine these
+in a similar way, it is inherently unsafe (nothing to guarantee you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.</p>
+
+<p>Because F# interops so well with C#, it is possible to build in a
+domain layer in F# immediately that calls down to your C# ORM
+classes. Converting from a set of dangerous C# enums into a
+constrained and safe F# discriminated union is easy and will simplify
+your domain to its essence.</p>
+
+<p>For reasons like this, when I have to build something with a rich
+domain, I reach for F#.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-14T09:42:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:42 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://steveshogren.github.io/pattern-matching-case-study/" data-via="" data-counturl="http://steveshogren.github.io/pattern-matching-case-study/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/programming-language-safety-algorithm/" title="Previous Post: Programming Language Safety Score">&laquo; Programming Language Safety Score</a>
+      
+      
+        <a class="basic-alignment right" href="/superiority-fatigue/" title="Next Post: Superiority Fatigue">Superiority Fatigue &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section class="about-me">
+  <h1>Steve Shogren</h1>
+  <div class="about-text">
+    <p>
+      Insights gathered while learning to deliberately craft software.
+    </p>
+  </div>
+  <span class="gravatar">
+    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
+  </span>
+</section>
+
+<section>
+  <h1>Top Posts</h1>
+  <ul id="recent_posts">
+    <li class="post">
+      <a href="/ego-driven-development/">Ego Driven Development</a>
+    </li>
+    <li class="post">
+      <a href="/programming-language-safety-algorithm/">Language Safety Score</a>
+    </li>
+
+    <li class="post">
+      <a href="/intro-to-macros/">Intro To Macros</a>
+    </li>
+    <li class="post">
+      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
+    </li>
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
+      </li>
+    
+      <li class="post">
+        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
+      </li>
+    
+      <li class="post">
+        <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/language-versions/">Language Versions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="recent_posts">
+    
+    
+    <li class="post">
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">20</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">23</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">1</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/lisp/"><span>lisp</span><span style="float:right">3</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">2</span></a>
+    </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Steve Shogren -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+<script src="/javascripts/sliders.js" type="text/javascript"></script>
+<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
