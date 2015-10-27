@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-<<<<<<< HEAD
   <title><![CDATA[Category: f# | Deliberate Software]]></title>
   <link href="http://steveshogren.github.io/blog/categories/f-number/atom.xml" rel="self"/>
   <link href="http://steveshogren.github.io/"/>
   <updated>2015-10-27T08:40:32-04:00</updated>
-=======
-  <title><![CDATA[Category: F# | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/f-number/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-08-17T08:15:00-04:00</updated>
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
   <id>http://steveshogren.github.io/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -33,7 +26,6 @@ give us warnings for missing cases, no matter what the type.</p>
 inversion of the usual OO way of polymorphism. Here is an example that
 is probably familiar to everyone: getting a database connection.</p>
 
-<<<<<<< HEAD
 <pre><code class="csharp">    public interface IPaymentRepository {
         IEnumerable&lt;IPayment&gt; GetAll ();
     }
@@ -65,43 +57,6 @@ is probably familiar to everyone: getting a database connection.</p>
     var payments = repo.GetAll();
 </code></pre>
 
-=======
-<p>``` csharp</p>
-
-<pre><code>public interface IPaymentRepository {
-    IEnumerable&lt;IPayment&gt; GetAll ();
-}
-// InMemory.cs
-public class InMemory : IPaymentRepository {
-    public IEnumerable&lt;IPayment&gt; GetAll (){
-        return Config.payments.Values;
-    }
-}
-// Postgres.cs
-public class Postgres : IPaymentRepository {
-    public IEnumerable&lt;IPayment&gt; GetAll (){
-        throw new NotImplementedException();
-    }
-}
-// RepositoryFactory.cs
-public class RepositoryFactory {
-    public static IPaymentRepository GetPaymentRepo () {
-        if (Config.configuration["useInMemory"] == "true") {
-            return new InMemory();
-        } else {
-            return new Postgres();
-        }
-    }
-}
-
-// somewhere in the code...
-var repo = RepositoryFactory.GetPaymentRepo();
-var payments = repo.GetAll();
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>In our example here, we have two concrete implementers of the
 <code>IPaymentRepository</code>, each one with their own implementations. This is
 a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
@@ -110,7 +65,6 @@ would put each of these classes in their own files.</p>
 <p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
 and interfaces to use pattern matching.</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">type PaymentRepository = 
    | InMemory
    | Postgres
@@ -128,30 +82,6 @@ let GetPaymentRepo =
 let repo = Payments.GetPaymentRepo
 let payments = Payments.GetAll repo
 </code></pre>
-=======
-<p>``` fsharp
-type PaymentRepository =
-   | InMemory
-   | Postgres</p>
-
-<p>let GetAll = function</p>
-
-<pre><code>| InMemory -&gt; Config.payments.Values;
-| Postgres -&gt; raise(NotImplementedException())
-</code></pre>
-
-<p>let GetPaymentRepo =</p>
-
-<pre><code>match Config.configuration.["useInMemory"] with
-    | "true" -&gt; InMemory
-    | _ -&gt; Postgres 
-</code></pre>
-
-<p>// somewhere in the code &hellip;
-let repo = Payments.GetPaymentRepo
-let payments = Payments.GetAll repo
-```</p>
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 
 <p>Notice how we separated our behavior from our types? The
 <code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
@@ -185,31 +115,17 @@ with pattern matching, it is safer.</p>
 <thead>
 <tr>
 <th></th>
-<<<<<<< HEAD
-=======
-<th></th>
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <th> Adding a Type  </th>
 <th> Modifying Behavior </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<<<<<<< HEAD
 <td><strong>OO Interfaces/Classes</strong>  </td>
 <td>  Easier / Less Safe  </td>
 <td> Harder / Safe</td>
 </tr>
 <tr>
-=======
-<td></td>
-<td><strong>OO Interfaces/Classes</strong>  </td>
-<td>  Easier / Less Safe  </td>
-<td> Harder / Safe </td>
-</tr>
-<tr>
-<td></td>
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <td><strong>Pattern Matching Types</strong>  </td>
 <td>  Harder / Safe  </td>
 <td> Easier / Safe</td>
@@ -218,15 +134,8 @@ with pattern matching, it is safer.</p>
 </table>
 
 
-<<<<<<< HEAD
 <p><br />
 I almost always find myself modifying the functions of an
-=======
-<br />
-
-
-<p>I almost always find myself modifying the functions of an
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 interface more than I find myself adding new types. For that typical
 use case, pattern matching is probably the better choice.</p>
 
@@ -235,7 +144,6 @@ use case, pattern matching is probably the better choice.</p>
 memory dictionary to be stored internally. In the interfaces and
 classes example, that requires editing <em>three separate files</em>.</p>
 
-<<<<<<< HEAD
 <pre><code class="csharp">    // IPaymentRepostory.cs
     public interface IPaymentRepository {
         IEnumerable&lt;IPayment&gt; GetAll ();
@@ -278,60 +186,6 @@ let GetAll = function
         | Postgres -&gt; raise(NotImplementedException())
 </code></pre>
 
-=======
-<p>``` csharp</p>
-
-<pre><code>// IPaymentRepostory.cs
-public interface IPaymentRepository {
-    IEnumerable&lt;IPayment&gt; GetAll ();
-    void Add(IPayment payment);
-}
-// InMemory.cs
-public class InMemory : IPaymentRepository {
-    public Dictionary&lt;int, IPayment&gt; payments = new Dictionary&lt;int, IPayment&gt;();
-    public void Add(IPayment payment) {
-        payments.Add(payment.GetId(),payment);
-    }
-    public IEnumerable&lt;IPayment&gt; GetAll (){
-        return payments.Values;
-    }
-}
-// Postgres.cs
-public class Postgres : IPaymentRepository {
-    public void Add(IPayment payment) {
-        throw new NotImplementedException();
-    }
-    public IEnumerable&lt;IPayment&gt; GetAll (){
-        throw new NotImplementedException();
-    }
-}
-</code></pre>
-
-<p>```</p>
-
-<p>Here is the change to add a new function in the pattern matching example:</p>
-
-<p>``` fsharp
-type PaymentRepository =
-   | InMemory of Dictionary&lt;int, IPayment>
-   | Postgres</p>
-
-<p>let Add db (payment:IPayment) =</p>
-
-<pre><code>match db with
-    | InMemory payments -&gt; payments.Add(payment.GetId(),payment);
-    | Postgres -&gt; raise(NotImplementedException())
-</code></pre>
-
-<p>let GetAll = function</p>
-
-<pre><code>    | InMemory payments -&gt; payments.Values;
-    | Postgres -&gt; raise(NotImplementedException())
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>In case you were concerned that these F# types do not have any state,
 they actually can have fields just like regular classes. Notice the
 <code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
@@ -379,7 +233,6 @@ easier to read.</p>
 
 <p>Consider the following code that converts an Int to a string.</p>
 
-<<<<<<< HEAD
 <pre><code class="csharp">public enum Language {
     Spanish,
     English
@@ -412,51 +265,6 @@ public static string convert(int number, Language lang) {
 }
 </code></pre>
 
-=======
-<p>``` csharp
-public enum Language {</p>
-
-<pre><code>Spanish,
-English
-</code></pre>
-
-<p>}
-public static string convert(int number, Language lang) {</p>
-
-<pre><code>string ret = "";
-if (lang == Language.English) {
-    switch(number) {
-        case 0: ret = "zero"; break;
-        case 1: ret = "one"; break;
-        default: ret = "..."; break;
-    }
-} else if (lang == Language.Spanish) {
-    switch(number) {
-        case 0: ret = "zero"; break;
-        case 1: ret = "uno"; break;
-        default: ret = "~~~"; break;
-    }
-}
-return ret;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>What happens when we make this simple change?</p>
-
-<p>``` csharp
-public enum Language {</p>
-
-<pre><code>Spanish,
-English,
-German
-</code></pre>
-
-<p>}
-```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Does the code still compile? Sure does! Does the compiler/IDE offer us
 any indication that something is missing? Nope! Our code has a
 potential bug that is only exposed at run-time, and nothing will tell
@@ -469,7 +277,6 @@ manual checking.</p>
 seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
 that it just makes things even worse.</p>
 
-<<<<<<< HEAD
 <pre><code class="csharp">    public interface ILanguage {
         String convert(int num);
     }
@@ -508,50 +315,6 @@ that it just makes things even worse.</p>
     }
 </code></pre>
 
-=======
-<p>``` csharp</p>
-
-<pre><code>public interface ILanguage {
-    String convert(int num);
-}
-public class Spanish : ILanguage {
-    public String convert (int num) {
-        var ret = "";
-        switch (num) {
-            case 0: ret = "zero"; break;
-            case 1: ret = "uno"; break;
-            default: ret = "~~~"; break;
-        }
-        return ret;
-    }
-}
-public class English : ILanguage {
-    public String convert (int num) {
-        var ret = "";
-        switch (num) {
-            case 0: ret = "zero"; break;
-            case 1: ret = "one"; break;
-            default: ret = "..."; break;
-        }
-        return ret;
-    }
-}
-// somewhere else...
-public static string convert(int x, Language lang) {
-    return getLanguage(lang).convert(x);
-}
-public static ILanguage getLanguage(Language lang) {
-    switch (lang) {
-        case Language.English: return new English() ; break;
-        case Language.Spanish: return new Spanish() ; break;
-        default: throw new Exception();
-    }
-}
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>We have turned 21 lines in one file into 36 in three files (not
 counting namespaces and imports). Does this new structure give us any
 additional safety when we add a new concrete implementation? How about
@@ -577,7 +340,6 @@ parameter in C# would be <code>int number</code>; in F# it is written
 you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
 second it is a lot more powerful!</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">let convert(number:Int, lang:Language) :string =
     match lang with
         | Language.English -&gt; 
@@ -587,21 +349,6 @@ second it is a lot more powerful!</p>
                | _ -&gt; "..."
 </code></pre>
 
-=======
-<p>``` fsharp
-let convert(number:Int, lang:Language) :string =</p>
-
-<pre><code>match lang with
-    | Language.English -&gt; 
-        match number with
-           | 1 -&gt; "one" 
-           | 2 -&gt; "two" 
-           | _ -&gt; "..."
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>We are using the same enum from the C# file, but it is missing
 something, right? Where are the Spanish and German parts? I try to
 compile this and what do I see?</p>
@@ -619,23 +366,11 @@ catch this class of errors.</p>
 <p>Heck, if you really want to keep your classes and interfaces in C#,
 you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">let convert(number, lang) =
     match lang with
         | Language.English -&gt; English().convert(number)
 </code></pre>
 
-=======
-<p>``` fsharp
-let convert(number, lang) =</p>
-
-<pre><code>match lang with
-    | Language.English -&gt; English().convert(number)
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>This still calls the C# class above, and now the compiler gives us a
 warning when we add a new enum value!</p>
 
@@ -650,7 +385,6 @@ converted an unsafe <code>if</code> and <code>switch</code> statement into a typ
 <code>match/with</code> statement allows for patterns matched to have a <code>when</code>
 clause which only matches when the condition is true:</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">let convert(number, lang) =
     match lang with
         | Language.English -&gt; 
@@ -663,24 +397,6 @@ clause which only matches when the condition is true:</p>
                 | 0 -&gt; "zero"
 </code></pre>
 
-=======
-<p>``` fsharp
-let convert(number, lang) =</p>
-
-<pre><code>match lang with
-    | Language.English -&gt; 
-        match number with 
-            | x when x &gt; 5 -&gt; "Large!"
-            | 0 -&gt; "zero"
-    | Language.Spanish -&gt; 
-        match number with 
-            | x when x &gt; 5 -&gt; "Grande!"
-            | 0 -&gt; "zero"
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Running the compiler again give us:</p>
 
 <p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
@@ -696,7 +412,6 @@ once. We can convert our more complex structure to something simpler
 using this trick, and the compiler is still intelligent enough to
 check for missing cases.</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">let convert(number, lang) =
     match lang, number with
         | Language.English, 0 -&gt; "zero" 
@@ -707,22 +422,6 @@ check for missing cases.</p>
         | Language.Spanish, x when x &gt; 5 -&gt; "Grande!"
 </code></pre>
 
-=======
-<p>``` fsharp
-let convert(number, lang) =</p>
-
-<pre><code>match lang, number with
-    | Language.English, 0 -&gt; "zero" 
-    | Language.English, 1 -&gt; "one"
-    | Language.English, x when x &gt; 1 -&gt; "Larger than one!"
-    | Language.English, _ -&gt; "dunno"
-    | Language.Spanish, 0 -&gt; "zero" 
-    | Language.Spanish, x when x &gt; 5 -&gt; "Grande!"
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
 <code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
 default for any number in <code>Language.English</code> not already matched. The
@@ -740,7 +439,6 @@ match, you can remove the <code>match/with</code> line and use the <code>functio
 keyword, and simply match against the parameters (which I reversed for
 clarity, but do not need to be written).</p>
 
-<<<<<<< HEAD
 <pre><code class="fsharp">let convert = function
     | Language.English, 0 -&gt; "zero" 
     | Language.English, 1 -&gt; "one"
@@ -750,21 +448,6 @@ clarity, but do not need to be written).</p>
     | Language.Spanish, _ -&gt; "~~~"
 </code></pre>
 
-=======
-<p>```fsharp
-let convert = function</p>
-
-<pre><code>| Language.English, 0 -&gt; "zero" 
-| Language.English, 1 -&gt; "one"
-| Language.English, _ -&gt; "..."
-| Language.Spanish, 0 -&gt; "zero" 
-| Language.Spanish, 1 -&gt; "uno" 
-| Language.Spanish, _ -&gt; "~~~"
-</code></pre>
-
-<p>```</p>
-
->>>>>>> 9746fb2699c65d83fea530ecbb324e98d6468c7b
 <p>Our original 17 line convert function, converted into a <em>safer</em> 7
 lines! I never had to specify what the types of lang, number and the
 return type are, because the compiler is able to figure that out from
