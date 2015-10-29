@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-10-29T17:54:50-04:00</updated>
+  <updated>2015-10-29T17:56:04-04:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -102,10 +102,11 @@ this wasn&rsquo;t a test, I was determined to be at my most professional and fin
 with my head held high.</p>
 
 <p>Five developers walk out before I can finish my first sentence. One of the
-remaining interviewers asks if I could live code them a web scraper in any
-language instead of the presentation. I turn my laptop around (still no
-projector) and ask if PHP is acceptable. They are a Python shop, and PHP is the
-closest to what they use that I am comfortable using when this nervous.</p>
+remaining six interviewers looks embarrassed and asks if I could live code them
+a web scraper in any language instead of the presentation. I turn my laptop
+around (still no projector) and ask if PHP is acceptable. They are a Python
+shop, and PHP is the closest to what they use that I am comfortable using when
+this nervous.</p>
 
 <pre><code>"PHP? Gross. I suppose if it is all you know..."
 </code></pre>
