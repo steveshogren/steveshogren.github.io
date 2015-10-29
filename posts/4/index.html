@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
-semantic version number. Small features that incrementally improve &hellip;">
+  <meta name="description" content="I want to make a model that predicts bugs. I previously wrote a table for scoring language safety:
+Programming Language Safety Score,
+but it was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@ semantic version number. Small features that incrementally improve &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://steveshogren.github.io/posts/4/">
+  <link rel="canonical" href="http://deliberate-software.com/posts/4/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
@@ -65,7 +66,7 @@ semantic version number. Small features that incrementally improve &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="steveshogren.github.io">
+    <input type="hidden" name="sitesearch" value="deliberate-software.com">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -86,7 +87,7 @@ semantic version number. Small features that incrementally improve &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/language-versions/">Language Versions</a></h1>
+      <h1 class="entry-title"><a href="/safety-rank-part-2/">Language Safety Score Mark 2</a></h1>
     
     
       <p class="meta">
@@ -95,86 +96,218 @@ semantic version number. Small features that incrementally improve &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-07-20T10:36:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:36 am</span></time>
+<time class='entry-date' datetime='2015-07-24T10:13:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
-semantic version number. Small features that incrementally improve your
-situation are like minor updates. They don&rsquo;t cause any large shifts in thinking
-or process. Major updates are big, new concepts, quantum jumps in theory or
-practice.</p>
+  <div class="entry-content"><p>I want to make a model that predicts bugs.</p>
 
-<p>I am not talking about the political, social, or financial aspects of a
-toolchain. For example, hiring is a complex beast entirely in its own
-category. The criteria for choosing a tool when hiring a few hundred offshore
-developers is very different than the criteria for hiring for a team of three
-senior developers. I&rsquo;ll leave those aspects alone.</p>
+<p>I previously wrote a table for scoring language safety:
+<a href="http://deliberate-software.com/programming-language-safety-algorithm/">Programming Language Safety Score</a>,
+but it was extremely time consuming to score new languages or make modifications.</p>
 
-<p>What are some examples of these value changes I&rsquo;ve noticed in my development?</p>
+<h2>Simplify, Simplify</h2>
 
-<h2>Minor Benefits</h2>
+<p>After being told I was <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>
+the data, I&rsquo;ve attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1 (language enforced),
+0 (possible, but you have to remember to do it), or -1 (impossible). When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn&rsquo;t
+matter.</p>
 
-<h3>Perl - PHP - Python - Ruby</h3>
+<p><img class="center" src="/images/rplot.jpg" title="image" alt="images"></p>
 
-<p>Switching from Perl to PHP for me was a minor change. I was able to carry over
-almost all my skills, and for the most part, the differences were mostly
-syntactic. Later, when I started using Python, most of my experience from Perl
-and PHP was still useful. The libraries had different names, and a few concepts
-were different, but on the whole, all three were in a same class of productivity
-for me.</p>
+<p>The code I used to generate the plot and normalize the scores can be found here:
+<a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
 
-<p>More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
-found much of my previous experience was still valuable. I can almost guess what
-things will be called or how they should be used. I still have to look up
-library names and keywords, but on the whole, the languages all provide very
-similar workflows. I suspect all four are in the same class of productivity,
-with some minor differences here and there. These days I put effort only into
-maintaining familiarity with one of these languages, since I am confident I
-could quickly relearn any of the other three on demand.</p>
+<h2>Safety Definitions</h2>
 
-<h3>Java - VB.NET - CSharp</h3>
+<p>A definition of the safety checks is as follows:</p>
 
-<p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
-productivity. For the most part, all the expectations and experience carries
-between the three. Obviously the tools are different, and there are a number of
-gotchas, but nothing changed my productivity in any major way. I doubt any of
-those three have any one killer feature that cannot be had in the other.</p>
+<p><div ng-app="TableApp2">
+<div ng-controller="TableCtrl">
+<table class="langtable">
+<tr><th>Check</th> <th>Description</th></tr>
+<tr ng-repeat="check in langChecks">
+<td> {{ check.name }} </td>
+<td>  {{ check.desc }}  </td>
+</tr>
+</table></p>
 
-<h2>Major Benefits</h2>
+<p>The new scores are shown here, with a lot more languages added in:</p>
 
-<h3>Automated Testing</h3>
+<p><p class="lead">
+<div style="overflow-x:scroll">
+<table class="langtable">
+<tr>
+<th>Safety Check</th>
+<th></th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
+</th>
+</tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
+<tr class="totals"><td>Totals</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ lang }}
+</td>
+</tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ percentageTotals(lang) }}%
+</td>
+</tr>
+</table>
+</div></p>
 
-<p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
-testing was a major change with large productivity benefits. All my experience
-to date was still useful, but I needed a whole new set of skills to be able to
-apply the techniques. Tools like dependency injection, mocking, TDD, and
-continuous integration enabled me to build and revive much larger
-systems. Automated testing is a skill that applies well to every language I&rsquo;ve
-worked in, with benefits that grow increasingly valuable with more complex
-systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
-classes of problems.</p>
+<p>Current Languages:
+<span ng-repeat="lang in allLanguages">
+ {{ getName(lang) }}: {{ allLangTotals[$index] }},
+</select></p>
 
-<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+<h2>So, What&rsquo;s the Point?</h2>
 
-<p>Repl based development with live hot patching was another major change. It
-required a new way of thinking about programming, and with it came an
-instantaneous feedback loop. Much like unit testing, it was an entirely new
-skill, but opened up a very fast method of building up a system from small
-parts. Additionally, it allowed me to rapidly progress in my skills, because I
-could instantly see live feedback from my code, without needing to write a whole
-test just to execute the code.</p>
+<p>To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors.</p>
 
-<h3>Powerful Static Typing (moving from C# to F#)</h3>
+<p>I decided to rely on the count of commits as a standard for a unit of work. My
+assumption was that across fifty different projects, the commit sizes would
+average out. Once the unit of work was decided on, I wanted to find the ratio of
+bugs per commit for each language.</p>
 
-<p>Moving from a typical static typed language to one with algebraic data types has
-been a major change, with major productivity benefits. I have noticed entire
-classes of defects disappearing. Additionally, because of the better compiler
-errors, the resulting codebases are much easier to refactor, which means a
-faster reaction to a changing domain.</p>
+<p>I collected the ratio of bugs logged per commit for each repository, and after
+grouping by primary language, removed the top and bottom 25% using the
+bug/commit ratio, which is a common practice in statistics to help find a more
+accurate average. I summed the bugs and commits of those remaining repositories
+grouped by language, finding a total average bug/commit ratio for each language
+grouping. Here is that data, sorted by safety score.</p>
+
+<p><table class="langtable">
+<tr><th>Language</th>
+<th>Bugs</th>
+<th>Commits</th>
+<th>Repositories</th>
+<th>Bug/Commits</th>
+<tr ng-repeat="lang in languageRatios">
+<td> {{ lang.name }} </td>
+<td> {{ lang.bugs }} </td>
+<td> {{ lang.commits }} </td>
+<td> {{ lang.repos }} </td>
+<td> {{ getBugsRatio(lang) }} </td>
+</tr>
+</table></p>
+
+<p>Here are the languages sorted by safety score with bug/commit ratios:</p>
+
+<p><img class="center" src="/images/errorChart.jpg" title="image" alt="images">
+<img class="center" src="/images/bugsAverage.jpg" title="image" alt="images"></p>
+
+<p>I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.</p>
+
+<p><img class="center" src="/images/bothMags.jpg" title="image" alt="images"></p>
+
+<p>Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
+buck the trend, but otherwise the languages follow a pretty consistent slope
+down in bugs. Taking the correlation gives a
+<a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">correlation coefficient</a>
+of .55</p>
+
+<h2>What About Unit Tests?</h2>
+
+<p>Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
+other factor, I collected data on how many tests each repository had. I counted
+the number of files containing &ldquo;test&rdquo; or &ldquo;spec&rdquo;, which gave the following,
+sorted by tests per commit:</p>
+
+<p><table class="langtable">
+<tr><th>Language</th>
+<th>Tests</th>
+<th>Commits</th>
+<th>Repositories</th>
+<th>Tests/Commits</th></tr>
+<tr ng-repeat="lang in sorter(languageRatios)">
+<td> {{ lang.name }} </td>
+<td> {{ lang.test }} </td>
+<td> {{ lang.commits }} </td>
+<td> {{ lang.repos }} </td>
+<td> {{ getTestsRatio(lang) }} </td>
+</tr>
+</table></p>
+
+<p>PHP, Python, and Ruby all have a higher then average number of tests, but
+Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
+average number of tests, yet they score relatively average in bugs/commit.</p>
+
+<h2>Conclusion</h2>
+
+<p>In conclusion, the current safety model I have proposed seems to account for a
+moderate reduction in bugs per commit across the sampled languages, but is not
+the only factor. It currently is unable to account for a significantly lower
+than expected bug count in Ruby and Clojure.</p>
+
+<h2>Special Thanks</h2>
+
+<p>Special thanks to (in alphabetical order):
+<a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
+<a href="http://asymmetrical-view.com/">Kyle Burton</a> (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+<a href="https://github.com/danielmiladinov">Daniel Miladinov</a> (Java, Scala, Morale Support),
+Keith O'Brien (Ruby and JS),
+<a href="https://github.com/arlaneenalra">Chris Salch</a> (CoffeeScript and JS),
+and <a href="https://github.com/timvisher">Tim Visher</a> (Clojure).</p>
+
+<p>Additional thanks to the posters on
+<a href="https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/">/r/rust</a>,
+including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
+<a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
+<a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
+
+<h2>Complaints Department</h2>
+
+<p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
+requests for new languages:
+<a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js">blog source</a>. Just
+pick an existing language, edit the name and values, and &ldquo;copy to clipboard&rdquo; to
+build your own language data structure. Send it to me in a PR and I&rsquo;ll include
+it along with a thanks on the page.</p>
+
+<p><div ng-show="showRealName">
+<h2>Select Language:
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+</h2>
+<h2><input ng-model="selectedLang.name"></input></h2>
+<table class="langtable">
+<tr><th>Check</th><th>Option</th></tr>
+<tr ng-repeat="check in langChecks">
+<td style="background-color: {{scoreClass(score(selectedLang[check.key]))}} ">
+ {{ check.name }}:  {{score(selectedLang[check.key]) }}
+</td>
+<td>
+<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+</td>
+</tr>
+</table></p>
 </div>
   
   
@@ -230,6 +363,10 @@ faster reaction to a changing domain.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/on-defeat/">Interview Humiliation</a>
+      </li>
+    
+      <li class="post">
         <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
       </li>
     
@@ -245,10 +382,6 @@ faster reaction to a changing domain.</p>
         <a href="/language-versions/">Language Versions</a>
       </li>
     
-      <li class="post">
-        <a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -262,7 +395,7 @@ faster reaction to a changing domain.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">23</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
     </li>
     
     

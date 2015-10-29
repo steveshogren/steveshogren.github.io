@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: f# | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/f-number/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/blog/categories/f-number/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Inverted Polymorphism with Pattern Matching]]></title>
-    <link href="http://steveshogren.github.io/inversed-polymorphism/"/>
+    <link href="http://deliberate-software.com/inversed-polymorphism/"/>
     <updated>2014-04-28T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/inversed-polymorphism</id>
+    <id>http://deliberate-software.com/inversed-polymorphism</id>
     <content type="html"><![CDATA[<p>In my last post on the power of pattern matching, we saw how powerful
 the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
 give us warnings for missing cases, no matter what the type.</p>
@@ -225,9 +225,9 @@ with high performance and interoperability with existing C# libraries.</p>
   
   <entry>
     <title type="html"><![CDATA[Pattern Matching - Make the Compiler Work for You]]></title>
-    <link href="http://steveshogren.github.io/function-pattern-matching/"/>
+    <link href="http://deliberate-software.com/function-pattern-matching/"/>
     <updated>2014-04-28T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/function-pattern-matching</id>
+    <id>http://deliberate-software.com/function-pattern-matching</id>
     <content type="html"><![CDATA[<p>Pattern matching is a simple tool that will make your code safer and
 easier to read.</p>
 

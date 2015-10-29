@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: unit testing | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/blog/categories/unit-testing/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Don't Mock Concrete Classes]]></title>
-    <link href="http://steveshogren.github.io/dont-mock-concrete-classes/"/>
+    <link href="http://deliberate-software.com/dont-mock-concrete-classes/"/>
     <updated>2011-05-24T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/dont-mock-concrete-classes</id>
+    <id>http://deliberate-software.com/dont-mock-concrete-classes</id>
     <content type="html"><![CDATA[<p>(They have thin skin)</p>
 
 

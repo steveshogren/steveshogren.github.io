@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: meta game | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/meta-game/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/blog/categories/meta-game/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -14,10 +14,167 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Interview Humiliation]]></title>
+    <link href="http://deliberate-software.com/on-defeat/"/>
+    <updated>2015-10-29T19:01:00-04:00</updated>
+    <id>http://deliberate-software.com/on-defeat</id>
+    <content type="html"><![CDATA[<p>One day, I went into an interview, and I was humiliated.</p>
+
+<h3>The Setup</h3>
+
+<p>I used to think very highly of myself. This was early on in the TDD craze, and I
+was one of the best I knew at it. I knew interfaces, classes, mocking
+frameworks, and best practices. I&rsquo;d been taught all the tricks from some very
+smart people, and my confidence was high. Not only that, but I&rsquo;d just finished
+at work the restoration of an abandoned legacy codebase to a bug-free, fully
+tested state completely on my own.</p>
+
+<p>I&rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&rsquo;t been programming more
+than a couple years. My first job, they&rsquo;d made me a team lead over some very
+senior developers within a year my hire date. I was learning Clojure and Common
+Lisp, and had just shipped an Android game I made entirely alone (including the
+2D physics engine).</p>
+
+<p>I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn&rsquo;t know. I&rsquo;m mostly self
+taught, so a lot of common CS concepts felt alien. I was waking up before work
+and teaching myself algorithms, lisps, and math.</p>
+
+<p>At the time, I did not enjoy my job. I felt like my vast talents were wasted,
+and I was determined to get what I deserved. My arrogance pushed me both to
+unhappiness where I was, but also to tirelessly struggle to be better than
+everyone else around me.</p>
+
+<p>Enter Company A.</p>
+
+<p>I flew through the phone screen &ldquo;this is the best phone screen we&rsquo;ve seen!&rdquo; Of
+course it is. &ldquo;Your resume is very impressive.&rdquo; Oh, I know!</p>
+
+<p>I get to the on-site interview.</p>
+
+<h3>The On-Site</h3>
+
+<p>I hadn&rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
+asked to present a project I&rsquo;d worked on, and I picked my recently shipped
+physics game that was up on Google Play. I walked into the reception area a few
+minutes early.</p>
+
+<pre><code>"You are 25 minutes late."
+</code></pre>
+
+<p>What?! I have the email saying 9:30! No matter, I can salvage this. I walk into
+a conference room with a dozen people sitting around a table looking bored and
+pissed.</p>
+
+<pre><code>"Let's see your presentation."
+</code></pre>
+
+<p>I start to open up my laptop.</p>
+
+<pre><code>"Oh, wow, Linux, what is this, 2003? I'd hoped I'd never have to see the
+grub boot screen again! Can't you afford a real machine?"
+</code></pre>
+
+<p>They only have the Mac projector cable. No adapter. I&rsquo;d thought ahead, and
+handed one of the developers a thumb drive with the presentation and code.
+Meanwhile the interviewers are joking and laughing to each other at my choice of
+clothes.</p>
+
+<pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
+</code></pre>
+
+<p>I start presenting about the 2D physics engine I&rsquo;d written for my game. One of
+the most interesting parts to me was how I&rsquo;d first written it without any unit
+testing, following just Clean Code practices. I then re-wrote it using heavy
+TDD. The design turned out very different both times, which I thought was
+interesting to see how TDD had influenced the design.</p>
+
+<p>About five minutes in, I am cut off:</p>
+
+<pre><code>"This presentation is bullshit. You have no evidence, nothing valuable to
+show, just spurious subjective opinions. You've put up a straw man and now
+are trying to knock it down assuming we are idiots. I've seen enough."
+</code></pre>
+
+<p>I remain calm and professional, and start to address the raised concerns. I play
+the meta-game, wondering if perhaps this is a test to see how I&rsquo;ll react when
+questioned and embarrassed. Even if this wasn&rsquo;t a test, I was determined to be
+the most professional in the room and finish with my head held high.</p>
+
+<p>Five developers walk out before I can finish my first sentence. One of the
+remaining interviewers asks if I could live code them a web scraper in any
+language. I turn my laptop around (still no projector) and ask if PHP is
+acceptable. They are a Python shop, and PHP is the closest to what they use that
+I am comfortable using when this nervous.</p>
+
+<pre><code>"PHP? Gross. I suppose if it is all you know..."
+</code></pre>
+
+<p>Unfortunately, I&rsquo;ve got so much adrenaline in me that it takes me a few tries to
+log in. I get on a roll after five minutes, and write the scraper. They throw me
+a few more requirements, and within a half hour I&rsquo;ve written stories for and
+completed them all. At least two of the interviewers seem quite impressed.
+Someone looks at their watch, &ldquo;wow, that&rsquo;s all the stories we have, I guess
+let&rsquo;s break for lunch.&rdquo;</p>
+
+<p>Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
+suit and dress shoes. When we get back from lunch I am hot, tired, and
+foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
+patent leather shoes. I am called into the conference room again. At this point,
+I am genuinely curious if this is some sort of extreme patience/calmness test,
+or if I am being filmed for a reality show. No such luck.</p>
+
+<p>At the head of the table is the developer who &ldquo;called me out&rdquo; for my
+presentation. He looks at me, rolls his eyes, and asks in the most sarcastic
+tone I have ever heard:</p>
+
+<pre><code>"So, got any questions for me?"
+</code></pre>
+
+<p>I ask a few normal questions, meanwhile he is constantly checking his watch and
+rolling his eyes. He answers briefly and rudely. I thank him for his time, and
+ask him if there is more. He laughs.</p>
+
+<pre><code>"Oh, we are done here."
+</code></pre>
+
+<p>I am shown to the door.</p>
+
+<p>I sit in the car for a half hour, wondering what just happened. I look over to
+the passenger seat piled high with text books I have been studying, books on
+language design, compilers, algorithms, physics engines, TDD, and productivity.</p>
+
+<p>I was asked none of it.</p>
+
+<h3>Aftermath</h3>
+
+<p>I found out later their recruiter had given me and many other candidates the
+wrong time. She was fired shortly after.</p>
+
+<p>I never found out if I had done something to make everyone so angry. I now
+suspect that they were massively turned off by a host of things. Polyglot
+programming, practicing TDD, the suit, the not Mac, and the late arrival
+probably all contributed to an immediate disqualification. I rationally realize
+they were terrible and treated me terribly, but the embarrassment is still
+there.</p>
+
+<p>A number of times I have woken up in a cold sweat having dreamt about that
+interview. In the large scheme of things, a bad interview is such a small thing,
+but fear is fear.</p>
+
+<p>Few events in my professional life have shaped me as much as that interview. I
+have turned it into a forge for my talent, the hammer to bang my pride. When I
+don&rsquo;t know something, I am more willing to shrug and laugh it off, all while
+learning as fast as I can. When I am humiliated professionally, I know I&rsquo;ve come
+through worse and thrived.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[SimpleMock: Language Agnostic Unit Test Mocking]]></title>
-    <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
+    <link href="http://deliberate-software.com/simplemock-unit-test-mocking/"/>
     <updated>2015-08-13T06:53:00-04:00</updated>
-    <id>http://steveshogren.github.io/simplemock-unit-test-mocking</id>
+    <id>http://deliberate-software.com/simplemock-unit-test-mocking</id>
     <content type="html"><![CDATA[<p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
 organize your testing code without mocking or complicated dependency injection.</p>
 
@@ -359,9 +516,9 @@ wish to test. That&rsquo;s a lot of boilerplate!</p>
   
   <entry>
     <title type="html"><![CDATA[Language Safety Score Mark 2]]></title>
-    <link href="http://steveshogren.github.io/safety-rank-part-2/"/>
+    <link href="http://deliberate-software.com/safety-rank-part-2/"/>
     <updated>2015-07-24T10:13:00-04:00</updated>
-    <id>http://steveshogren.github.io/safety-rank-part-2</id>
+    <id>http://deliberate-software.com/safety-rank-part-2</id>
     <content type="html"><![CDATA[<p>I want to make a model that predicts bugs.</p>
 
 <p>I previously wrote a table for scoring language safety:
@@ -572,9 +729,9 @@ it along with a thanks on the page.</p>
   
   <entry>
     <title type="html"><![CDATA[Learning Lisp Was Hard]]></title>
-    <link href="http://steveshogren.github.io/learning-lisp-was-hard/"/>
+    <link href="http://deliberate-software.com/learning-lisp-was-hard/"/>
     <updated>2015-06-17T07:02:00-04:00</updated>
-    <id>http://steveshogren.github.io/learning-lisp-was-hard</id>
+    <id>http://deliberate-software.com/learning-lisp-was-hard</id>
     <content type="html"><![CDATA[<p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
 get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
 learning a Lisp.</p>
@@ -656,9 +813,9 @@ Idris, J, R, Forth, etc.</p>
   
   <entry>
     <title type="html"><![CDATA[Superiority Fatigue]]></title>
-    <link href="http://steveshogren.github.io/superiority-fatigue/"/>
+    <link href="http://deliberate-software.com/superiority-fatigue/"/>
     <updated>2015-05-14T19:13:00-04:00</updated>
-    <id>http://steveshogren.github.io/superiority-fatigue</id>
+    <id>http://deliberate-software.com/superiority-fatigue</id>
     <content type="html"><![CDATA[<p>Learning new tools, technologies, and methodologies is
 hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
 good comprehension of the tool, and now, filled with excitement, you try to
@@ -700,208 +857,6 @@ for political reasons.</p>
 inferior tools. Once you start learning, you will always find yourself in a
 situation where you are required to use an inferior tool. For me, this has been
 one of the hardest things to face in my career.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Programming Language Safety Score]]></title>
-    <link href="http://steveshogren.github.io/programming-language-safety-algorithm/"/>
-    <updated>2015-02-17T14:13:00-05:00</updated>
-    <id>http://steveshogren.github.io/programming-language-safety-algorithm</id>
-    <content type="html"><![CDATA[<p>I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much more nuanced than a binary bit of &ldquo;has strong-static
-types&rdquo;.</p>
-
-<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
-thoughts of unit tests, long build times, and red squiggles in an
-IDE. But, in day-to-day development, there are so many times when we
-are bitten by things that somehow just slip through the cracks.</p>
-
-<p>I put together this scoring model to get a sense of how safe a
-language is at the primitive level, and if it isn&rsquo;t safe by default,
-how much it costs to manually make it safe. Since all abstractions
-eventually result in a series of primitive operations, I decided that
-focusing only on primitives would still be a valuable (if incomplete)
-data point. While any good library will handle all primitive checks
-and present the consumer with a well-designed abstraction, in the end,
-the consumer is still left wiring libraries together, building their
-own primitive abstractions for integration. Due to the impossibility of
-measuring the quality of abstractions in all libraries for a language,
-I left that entirely out of scope of this model, unless it is designed
-as a primitive check.</p>
-
-<p>By focusing on only primitive operations: making and calling
-functions, naming data, working with sequences, and dealing with
-language primitive data types, I slimmed down the large range of
-possible error vectors to a small handful. While in some languages it
-is common to use user-defined classes to wrap around a set of
-primitives, those classes are still doing the same primitive work,
-just hidden behind a user-created abstraction. The more ways it is
-possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
-is to build such good abstractions.</p>
-
-<pre><code>This model is not about language "power".
-</code></pre>
-
-<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
-&ldquo;abstract-ability&rdquo; of a language. In any language that supports
-abstractions (functions, classes, modules, naming data), I am
-convinced, given enough code, all Turing complete langauges can do the
-same work. This model is only about the costs to prevent unexpected
-&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
-level.</p>
-
-<p>Rather than focus on what is <em>possible</em> with a language, I will
-instead focus on what is typically idiomatic to that community. For
-example, if it is possible to achieve a level of safety in a language
-but by doing something uncommon, that should not be counted.</p>
-
-<p>To score a language, simply figure out how many characters it costs to
-&ldquo;prevent&rdquo; a certain type of error, and add that to the
-total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
-default) to make up for the lack of unit tests and code exercising
-needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
-importing the module will have a negligible effect on the code size
-and complexity.</p>
-
-<p>If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 (by default) for a &ldquo;every change run
-and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
-overflow exceptions caused by recursion.</p>
-
-<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
-</code></pre>
-
-<p>Rather than tell you my thoughts (or survey for) hard-coded
-weightings, all checks are weighted the same by default. Feel free to
-apply your own weightings, to better match to your or your team&rsquo;s
-specific needs and preferences. The languages are masked by default to
-protect the innocent. You can unmask the names and see the code used
-below the table.</p>
-
-<p><div ng-app="TableApp">
-<div ng-controller="TableCtrl"></p>
-
-<p>Language Enforced Bonus:
- {{ enforcedScore }} 
-<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
-
-<p>Language Inability Penalty:
- {{ inabilityPenalty }} 
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
-
-<p>Show Weights <input type="checkbox" ng-model="showWeights" />
-<p class="lead">
-<div style="overflow-x:scroll">
-<table class="langtable">
-<tr>
-<th>Safety Check</th>
-<th></th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
-</th>
-</tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
-<tr class="totals"><td>Totals</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ lang }} 
-</td>
-</tr>
-<tr class="totals"><td>Magnitude</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}% 
-</td>
-</tr>
-</table>
-</div></p>
-
-<p><h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
-
-<p>Current Languages:
-<span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }}, 
-</select></p>
-
-<p>I want to see your language represented here! I&rsquo;ll happily take pull
-requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
-use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
-language data structure.</p>
-
-<p>I would love to see every major language represented, including major
-language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
-are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
-and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
-apparently very separate communities.</p>
-
-<p><div ng-show="showRealName"> Feel free to put in your own examples by
-playing with the samples below. Code surrounded with &lt;! !> is ignored
-from the tally, since it would vary heavily based on the language and
-desired result. Variable and type names are kept at single characters,
-which are counted. Feel free to add in your own language below, and
-use the copy feature to extract the data structure to use in a pull
-request.</p>
-
-<p><h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-</h2>
-<button ng-click="showEdit = !showEdit">Edit Language</button>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-<div ng-show="showEdit">
-<h2><input ng-model="selectedLang.name"></input></h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
-<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
-<div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-<div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div></p>
-
-<p><div ng-show="!showEdit">
-<h2> {{ selectedLang.name }} </h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
- {{ selectedLang[check.key].desc }} 
-<div>
-Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }} 
-<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div>
-</div></p>
-
-<p>Hope this is a helpful way to think about language safety!</p>
-
-<p>Special thanks to (in alphabetical order):
-Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
-Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
-Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
-Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
-Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
 ]]></content>
   </entry>
   

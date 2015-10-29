@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: clojure | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/clojure/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Intro To Macros]]></title>
-    <link href="http://steveshogren.github.io/intro-to-macros/"/>
+    <link href="http://deliberate-software.com/intro-to-macros/"/>
     <updated>2013-08-19T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/intro-to-macros</id>
+    <id>http://deliberate-software.com/intro-to-macros</id>
     <content type="html"><![CDATA[<p>
 Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
 </p>
@@ -271,9 +271,9 @@ The (map) function has two arguments: the first, a function; the second, a list 
   
   <entry>
     <title type="html"><![CDATA[Clojure... Debugger?]]></title>
-    <link href="http://steveshogren.github.io/clojure-debugger/"/>
+    <link href="http://deliberate-software.com/clojure-debugger/"/>
     <updated>2013-08-17T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/clojure-debugger</id>
+    <id>http://deliberate-software.com/clojure-debugger</id>
     <content type="html"><![CDATA[<p>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
 <br />
 <br />

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: technical skills | Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/blog/categories/technical-skills/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/blog/categories/technical-skills/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[F# Unit Testing with SimpleMock]]></title>
-    <link href="http://steveshogren.github.io/f-number-unit-testing/"/>
+    <link href="http://deliberate-software.com/f-number-unit-testing/"/>
     <updated>2015-10-21T16:41:00-04:00</updated>
-    <id>http://steveshogren.github.io/f-number-unit-testing</id>
+    <id>http://deliberate-software.com/f-number-unit-testing</id>
     <content type="html"><![CDATA[<p>If you are considering using F#, you might be curious how to handle unit test
 mocking, especially if you want to use both modules and classes. In a language
 like C# or Java, the common method is to a DI container or handmade constructor
@@ -151,9 +151,9 @@ classes for mutability.</p>
   
   <entry>
     <title type="html"><![CDATA[SimpleMock: Language Agnostic Unit Test Mocking]]></title>
-    <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
+    <link href="http://deliberate-software.com/simplemock-unit-test-mocking/"/>
     <updated>2015-08-13T06:53:00-04:00</updated>
-    <id>http://steveshogren.github.io/simplemock-unit-test-mocking</id>
+    <id>http://deliberate-software.com/simplemock-unit-test-mocking</id>
     <content type="html"><![CDATA[<p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
 organize your testing code without mocking or complicated dependency injection.</p>
 
@@ -495,9 +495,9 @@ wish to test. That&rsquo;s a lot of boilerplate!</p>
   
   <entry>
     <title type="html"><![CDATA[Language Safety Score Mark 2]]></title>
-    <link href="http://steveshogren.github.io/safety-rank-part-2/"/>
+    <link href="http://deliberate-software.com/safety-rank-part-2/"/>
     <updated>2015-07-24T10:13:00-04:00</updated>
-    <id>http://steveshogren.github.io/safety-rank-part-2</id>
+    <id>http://deliberate-software.com/safety-rank-part-2</id>
     <content type="html"><![CDATA[<p>I want to make a model that predicts bugs.</p>
 
 <p>I previously wrote a table for scoring language safety:
@@ -708,9 +708,9 @@ it along with a thanks on the page.</p>
   
   <entry>
     <title type="html"><![CDATA[Case Study: Type-safe Domain Modeling in F#]]></title>
-    <link href="http://steveshogren.github.io/pattern-matching-case-study/"/>
+    <link href="http://deliberate-software.com/pattern-matching-case-study/"/>
     <updated>2015-03-14T09:42:00-04:00</updated>
-    <id>http://steveshogren.github.io/pattern-matching-case-study</id>
+    <id>http://deliberate-software.com/pattern-matching-case-study</id>
     <content type="html"><![CDATA[<p>Domain modeling in F# is significantly easier and safer than with the
 traditional .NET languages. This is because of the increased safety of
 pattern matching and the expressiveness of discriminated unions. These
@@ -817,9 +817,9 @@ domain, I reach for F#.</p>
   
   <entry>
     <title type="html"><![CDATA[Programming Language Safety Score]]></title>
-    <link href="http://steveshogren.github.io/programming-language-safety-algorithm/"/>
+    <link href="http://deliberate-software.com/programming-language-safety-algorithm/"/>
     <updated>2015-02-17T14:13:00-05:00</updated>
-    <id>http://steveshogren.github.io/programming-language-safety-algorithm</id>
+    <id>http://deliberate-software.com/programming-language-safety-algorithm</id>
     <content type="html"><![CDATA[<p>I think the time has come for a standard programming language safety
 score. I want to use this model to help show that the concept of
 safety is much more nuanced than a binary bit of &ldquo;has strong-static

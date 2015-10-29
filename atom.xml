@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Deliberate Software]]></title>
-  <link href="http://steveshogren.github.io/atom.xml" rel="self"/>
-  <link href="http://steveshogren.github.io/"/>
-  <updated>2015-10-27T08:40:32-04:00</updated>
-  <id>http://steveshogren.github.io/</id>
+  <link href="http://deliberate-software.com/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2015-10-29T08:39:23-04:00</updated>
+  <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
     
@@ -14,10 +14,167 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Interview Humiliation]]></title>
+    <link href="http://deliberate-software.com/on-defeat/"/>
+    <updated>2015-10-29T19:01:00-04:00</updated>
+    <id>http://deliberate-software.com/on-defeat</id>
+    <content type="html"><![CDATA[<p>One day, I went into an interview, and I was humiliated.</p>
+
+<h3>The Setup</h3>
+
+<p>I used to think very highly of myself. This was early on in the TDD craze, and I
+was one of the best I knew at it. I knew interfaces, classes, mocking
+frameworks, and best practices. I&rsquo;d been taught all the tricks from some very
+smart people, and my confidence was high. Not only that, but I&rsquo;d just finished
+at work the restoration of an abandoned legacy codebase to a bug-free, fully
+tested state completely on my own.</p>
+
+<p>I&rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&rsquo;t been programming more
+than a couple years. My first job, they&rsquo;d made me a team lead over some very
+senior developers within a year my hire date. I was learning Clojure and Common
+Lisp, and had just shipped an Android game I made entirely alone (including the
+2D physics engine).</p>
+
+<p>I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn&rsquo;t know. I&rsquo;m mostly self
+taught, so a lot of common CS concepts felt alien. I was waking up before work
+and teaching myself algorithms, lisps, and math.</p>
+
+<p>At the time, I did not enjoy my job. I felt like my vast talents were wasted,
+and I was determined to get what I deserved. My arrogance pushed me both to
+unhappiness where I was, but also to tirelessly struggle to be better than
+everyone else around me.</p>
+
+<p>Enter Company A.</p>
+
+<p>I flew through the phone screen &ldquo;this is the best phone screen we&rsquo;ve seen!&rdquo; Of
+course it is. &ldquo;Your resume is very impressive.&rdquo; Oh, I know!</p>
+
+<p>I get to the on-site interview.</p>
+
+<h3>The On-Site</h3>
+
+<p>I hadn&rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
+asked to present a project I&rsquo;d worked on, and I picked my recently shipped
+physics game that was up on Google Play. I walked into the reception area a few
+minutes early.</p>
+
+<pre><code>"You are 25 minutes late."
+</code></pre>
+
+<p>What?! I have the email saying 9:30! No matter, I can salvage this. I walk into
+a conference room with a dozen people sitting around a table looking bored and
+pissed.</p>
+
+<pre><code>"Let's see your presentation."
+</code></pre>
+
+<p>I start to open up my laptop.</p>
+
+<pre><code>"Oh, wow, Linux, what is this, 2003? I'd hoped I'd never have to see the
+grub boot screen again! Can't you afford a real machine?"
+</code></pre>
+
+<p>They only have the Mac projector cable. No adapter. I&rsquo;d thought ahead, and
+handed one of the developers a thumb drive with the presentation and code.
+Meanwhile the interviewers are joking and laughing to each other at my choice of
+clothes.</p>
+
+<pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
+</code></pre>
+
+<p>I start presenting about the 2D physics engine I&rsquo;d written for my game. One of
+the most interesting parts to me was how I&rsquo;d first written it without any unit
+testing, following just Clean Code practices. I then re-wrote it using heavy
+TDD. The design turned out very different both times, which I thought was
+interesting to see how TDD had influenced the design.</p>
+
+<p>About five minutes in, I am cut off:</p>
+
+<pre><code>"This presentation is bullshit. You have no evidence, nothing valuable to
+show, just spurious subjective opinions. You've put up a straw man and now
+are trying to knock it down assuming we are idiots. I've seen enough."
+</code></pre>
+
+<p>I remain calm and professional, and start to address the raised concerns. I play
+the meta-game, wondering if perhaps this is a test to see how I&rsquo;ll react when
+questioned and embarrassed. Even if this wasn&rsquo;t a test, I was determined to be
+the most professional in the room and finish with my head held high.</p>
+
+<p>Five developers walk out before I can finish my first sentence. One of the
+remaining interviewers asks if I could live code them a web scraper in any
+language. I turn my laptop around (still no projector) and ask if PHP is
+acceptable. They are a Python shop, and PHP is the closest to what they use that
+I am comfortable using when this nervous.</p>
+
+<pre><code>"PHP? Gross. I suppose if it is all you know..."
+</code></pre>
+
+<p>Unfortunately, I&rsquo;ve got so much adrenaline in me that it takes me a few tries to
+log in. I get on a roll after five minutes, and write the scraper. They throw me
+a few more requirements, and within a half hour I&rsquo;ve written stories for and
+completed them all. At least two of the interviewers seem quite impressed.
+Someone looks at their watch, &ldquo;wow, that&rsquo;s all the stories we have, I guess
+let&rsquo;s break for lunch.&rdquo;</p>
+
+<p>Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
+suit and dress shoes. When we get back from lunch I am hot, tired, and
+foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
+patent leather shoes. I am called into the conference room again. At this point,
+I am genuinely curious if this is some sort of extreme patience/calmness test,
+or if I am being filmed for a reality show. No such luck.</p>
+
+<p>At the head of the table is the developer who &ldquo;called me out&rdquo; for my
+presentation. He looks at me, rolls his eyes, and asks in the most sarcastic
+tone I have ever heard:</p>
+
+<pre><code>"So, got any questions for me?"
+</code></pre>
+
+<p>I ask a few normal questions, meanwhile he is constantly checking his watch and
+rolling his eyes. He answers briefly and rudely. I thank him for his time, and
+ask him if there is more. He laughs.</p>
+
+<pre><code>"Oh, we are done here."
+</code></pre>
+
+<p>I am shown to the door.</p>
+
+<p>I sit in the car for a half hour, wondering what just happened. I look over to
+the passenger seat piled high with text books I have been studying, books on
+language design, compilers, algorithms, physics engines, TDD, and productivity.</p>
+
+<p>I was asked none of it.</p>
+
+<h3>Aftermath</h3>
+
+<p>I found out later their recruiter had given me and many other candidates the
+wrong time. She was fired shortly after.</p>
+
+<p>I never found out if I had done something to make everyone so angry. I now
+suspect that they were massively turned off by a host of things. Polyglot
+programming, practicing TDD, the suit, the not Mac, and the late arrival
+probably all contributed to an immediate disqualification. I rationally realize
+they were terrible and treated me terribly, but the embarrassment is still
+there.</p>
+
+<p>A number of times I have woken up in a cold sweat having dreamt about that
+interview. In the large scheme of things, a bad interview is such a small thing,
+but fear is fear.</p>
+
+<p>Few events in my professional life have shaped me as much as that interview. I
+have turned it into a forge for my talent, the hammer to bang my pride. When I
+don&rsquo;t know something, I am more willing to shrug and laugh it off, all while
+learning as fast as I can. When I am humiliated professionally, I know I&rsquo;ve come
+through worse and thrived.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[F# Unit Testing With SimpleMock]]></title>
-    <link href="http://steveshogren.github.io/f-number-unit-testing/"/>
+    <link href="http://deliberate-software.com/f-number-unit-testing/"/>
     <updated>2015-10-21T16:41:00-04:00</updated>
-    <id>http://steveshogren.github.io/f-number-unit-testing</id>
+    <id>http://deliberate-software.com/f-number-unit-testing</id>
     <content type="html"><![CDATA[<p>If you are considering using F#, you might be curious how to handle unit test
 mocking, especially if you want to use both modules and classes. In a language
 like C# or Java, the common method is to a DI container or handmade constructor
@@ -218,9 +375,9 @@ classes for mutability.</p>
   
   <entry>
     <title type="html"><![CDATA[SimpleMock: Language Agnostic Unit Test Mocking]]></title>
-    <link href="http://steveshogren.github.io/simplemock-unit-test-mocking/"/>
+    <link href="http://deliberate-software.com/simplemock-unit-test-mocking/"/>
     <updated>2015-08-13T06:53:00-04:00</updated>
-    <id>http://steveshogren.github.io/simplemock-unit-test-mocking</id>
+    <id>http://deliberate-software.com/simplemock-unit-test-mocking</id>
     <content type="html"><![CDATA[<p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
 organize your testing code without mocking or complicated dependency injection.</p>
 
@@ -744,9 +901,9 @@ wish to test. That&rsquo;s a lot of boilerplate!</p>
   
   <entry>
     <title type="html"><![CDATA[Language Safety Score Mark 2]]></title>
-    <link href="http://steveshogren.github.io/safety-rank-part-2/"/>
+    <link href="http://deliberate-software.com/safety-rank-part-2/"/>
     <updated>2015-07-24T10:13:00-04:00</updated>
-    <id>http://steveshogren.github.io/safety-rank-part-2</id>
+    <id>http://deliberate-software.com/safety-rank-part-2</id>
     <content type="html"><![CDATA[<p>I want to make a model that predicts bugs.</p>
 
 <p>I previously wrote a table for scoring language safety:
@@ -764,7 +921,7 @@ very similar. The shape of the curve pretty much stays the same, which I was
 told indicates that the character count weighting was a variable that didn&rsquo;t
 matter.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/rplot.jpg" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/rplot.jpg" title="image" alt="images"></p>
 
 <p>The code I used to generate the plot and normalize the scores can be found here:
 <a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
@@ -861,13 +1018,13 @@ grouping. Here is that data, sorted by safety score.</p>
 
 <p>Here are the languages sorted by safety score with bug/commit ratios:</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/errorChart.jpg" title="image" alt="images">
-<img class="center" src="http://steveshogren.github.io/images/bugsAverage.jpg" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/errorChart.jpg" title="image" alt="images">
+<img class="center" src="http://deliberate-software.com/images/bugsAverage.jpg" title="image" alt="images"></p>
 
 <p>I took the magnitude of the safety scores and the bug/commit ratios. After
 inverting the safety scores, I overlaid them both onto a single graph.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/bothMags.jpg" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/bothMags.jpg" title="image" alt="images"></p>
 
 <p>Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
 buck the trend, but otherwise the languages follow a pretty consistent slope
@@ -957,9 +1114,9 @@ it along with a thanks on the page.</p>
   
   <entry>
     <title type="html"><![CDATA[Language Versions]]></title>
-    <link href="http://steveshogren.github.io/language-versions/"/>
+    <link href="http://deliberate-software.com/language-versions/"/>
     <updated>2015-07-20T10:36:00-04:00</updated>
-    <id>http://steveshogren.github.io/language-versions</id>
+    <id>http://deliberate-software.com/language-versions</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
 semantic version number. Small features that incrementally improve your
 situation are like minor updates. They don&rsquo;t cause any large shifts in thinking
@@ -1038,9 +1195,9 @@ faster reaction to a changing domain.</p>
   
   <entry>
     <title type="html"><![CDATA[Learning Lisp Was Hard]]></title>
-    <link href="http://steveshogren.github.io/learning-lisp-was-hard/"/>
+    <link href="http://deliberate-software.com/learning-lisp-was-hard/"/>
     <updated>2015-06-17T07:02:00-04:00</updated>
-    <id>http://steveshogren.github.io/learning-lisp-was-hard</id>
+    <id>http://deliberate-software.com/learning-lisp-was-hard</id>
     <content type="html"><![CDATA[<p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
 get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
 learning a Lisp.</p>
@@ -1122,9 +1279,9 @@ Idris, J, R, Forth, etc.</p>
   
   <entry>
     <title type="html"><![CDATA[Superiority Fatigue]]></title>
-    <link href="http://steveshogren.github.io/superiority-fatigue/"/>
+    <link href="http://deliberate-software.com/superiority-fatigue/"/>
     <updated>2015-05-14T19:13:00-04:00</updated>
-    <id>http://steveshogren.github.io/superiority-fatigue</id>
+    <id>http://deliberate-software.com/superiority-fatigue</id>
     <content type="html"><![CDATA[<p>Learning new tools, technologies, and methodologies is
 hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
 good comprehension of the tool, and now, filled with excitement, you try to
@@ -1171,9 +1328,9 @@ one of the hardest things to face in my career.</p>
   
   <entry>
     <title type="html"><![CDATA[Case Study: Type-safe Domain Modeling in F#]]></title>
-    <link href="http://steveshogren.github.io/pattern-matching-case-study/"/>
+    <link href="http://deliberate-software.com/pattern-matching-case-study/"/>
     <updated>2015-03-14T09:42:00-04:00</updated>
-    <id>http://steveshogren.github.io/pattern-matching-case-study</id>
+    <id>http://deliberate-software.com/pattern-matching-case-study</id>
     <content type="html"><![CDATA[<p>Domain modeling in F# is significantly easier and safer than with the
 traditional .NET languages. This is because of the increased safety of
 pattern matching and the expressiveness of discriminated unions. These
@@ -1319,9 +1476,9 @@ domain, I reach for F#.</p>
   
   <entry>
     <title type="html"><![CDATA[Programming Language Safety Score]]></title>
-    <link href="http://steveshogren.github.io/programming-language-safety-algorithm/"/>
+    <link href="http://deliberate-software.com/programming-language-safety-algorithm/"/>
     <updated>2015-02-17T14:13:00-05:00</updated>
-    <id>http://steveshogren.github.io/programming-language-safety-algorithm</id>
+    <id>http://deliberate-software.com/programming-language-safety-algorithm</id>
     <content type="html"><![CDATA[<p>I think the time has come for a standard programming language safety
 score. I want to use this model to help show that the concept of
 safety is much more nuanced than a binary bit of &ldquo;has strong-static
@@ -1521,9 +1678,9 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
   
   <entry>
     <title type="html"><![CDATA[Six Unusual Reasons Why Clojure Is a Delight]]></title>
-    <link href="http://steveshogren.github.io/unusual-reasons-why-clojure-is-a-delight/"/>
+    <link href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/"/>
     <updated>2015-02-09T11:36:00-05:00</updated>
-    <id>http://steveshogren.github.io/unusual-reasons-why-clojure-is-a-delight</id>
+    <id>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight</id>
     <content type="html"><![CDATA[<p>Clojure is a delightful language, and here are six uncommonly
 discussed reasons why.</p>
 
@@ -1818,9 +1975,9 @@ these features keep me coming back for more!</p>
   
   <entry>
     <title type="html"><![CDATA[Christmas F# Polymorphism]]></title>
-    <link href="http://steveshogren.github.io/christmas-f-number-polymorphism/"/>
+    <link href="http://deliberate-software.com/christmas-f-number-polymorphism/"/>
     <updated>2014-12-06T13:37:00-05:00</updated>
-    <id>http://steveshogren.github.io/christmas-f-number-polymorphism</id>
+    <id>http://deliberate-software.com/christmas-f-number-polymorphism</id>
     <content type="html"><![CDATA[<p>One of my favorite things about F# is how it lets you choose how you want
 to align your data.</p>
 
@@ -1912,13 +2069,13 @@ I wanted to highlight F#&rsquo;s flexibility in solving the
 example, adding a new type is quite simple, you only need to edit one
 place to find all the definitions regarding the new type.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/new-interfaces.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/new-interfaces.png" title="image" alt="images"></p>
 
 <p>In the pattern matching example, adding a new type requires editing
 every single place you created a function that matches on the
 type.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/new-pattern-matching.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/new-pattern-matching.png" title="image" alt="images"></p>
 
 <p>Thankfully, in both cases the compiler gives warnings about missing
 functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
@@ -1927,12 +2084,12 @@ functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
 now see the opposite behavior. Classes become harder to edit, because
 the functions are spread across multiple classes.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/change-interfaces.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/change-interfaces.png" title="image" alt="images"></p>
 
 <p>A pattern matching system is now the easier to modify, each function
 only lives in one place.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/change-pattern-matching.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/change-pattern-matching.png" title="image" alt="images"></p>
 
 <p>And that is the expression problem! The best thing about F# is that
 you get to pick which one is better for each type of data! If you know
@@ -1951,9 +2108,9 @@ each type of data you have!</p>
   
   <entry>
     <title type="html"><![CDATA[Emacs Project Tip]]></title>
-    <link href="http://steveshogren.github.io/emacs-project-tip/"/>
+    <link href="http://deliberate-software.com/emacs-project-tip/"/>
     <updated>2014-12-06T08:45:00-05:00</updated>
-    <id>http://steveshogren.github.io/emacs-project-tip</id>
+    <id>http://deliberate-software.com/emacs-project-tip</id>
     <content type="html"><![CDATA[<p>I recently have been working in a Clojure project which is made up of
 several microservices. While trying to build in a secure method for
 each service to be able to call the others, I&rsquo;ve been in several
@@ -1967,7 +2124,7 @@ I was currently viewing.</p>
 <p>I started with a changing the title of the frame to show the whole
 path of the current buffer, like this:</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/title.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/title.png" title="image" alt="images"></p>
 
 <p>The code to change the title is simple, and the default in some of the
 pre-packaged emacs bundles:</p>
@@ -1998,7 +2155,7 @@ new background overlaid.</p>
 
 <p>While not perfect, this was the result.</p>
 
-<p><img class="center" src="http://steveshogren.github.io/images/colors.png" title="image" alt="images"></p>
+<p><img class="center" src="http://deliberate-software.com/images/colors.png" title="image" alt="images"></p>
 
 <p>The colors I choose are only faintly different, but just enough for me
 to tell instantly which is which.</p>
@@ -2084,9 +2241,9 @@ quickly be reminded of your current project.</p>
   
   <entry>
     <title type="html"><![CDATA[Software Skills Continuum]]></title>
-    <link href="http://steveshogren.github.io/skill-continuum/"/>
+    <link href="http://deliberate-software.com/skill-continuum/"/>
     <updated>2014-12-02T07:26:00-05:00</updated>
-    <id>http://steveshogren.github.io/skill-continuum</id>
+    <id>http://deliberate-software.com/skill-continuum</id>
     <content type="html"><![CDATA[<pre><code>    Learning Vim is a waste of time; I can prove it! - Anonymous
 </code></pre>
 
@@ -2322,9 +2479,9 @@ distraction, free to think deeply.</p>
   
   <entry>
     <title type="html"><![CDATA[What Book Should I Read Next?]]></title>
-    <link href="http://steveshogren.github.io/next-book/"/>
+    <link href="http://deliberate-software.com/next-book/"/>
     <updated>2014-07-26T11:46:00-04:00</updated>
-    <id>http://steveshogren.github.io/next-book</id>
+    <id>http://deliberate-software.com/next-book</id>
     <content type="html"><![CDATA[<p>&ldquo;It&rsquo;s my first job, what book should I read first?&rdquo;</p>
 
 <p>Recently, a few developers I am mentoring were curious about what book
@@ -2520,9 +2677,9 @@ started now, and have fun!</p>
   
   <entry>
     <title type="html"><![CDATA[Inverted Polymorphism With Pattern Matching]]></title>
-    <link href="http://steveshogren.github.io/inversed-polymorphism/"/>
+    <link href="http://deliberate-software.com/inversed-polymorphism/"/>
     <updated>2014-04-28T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/inversed-polymorphism</id>
+    <id>http://deliberate-software.com/inversed-polymorphism</id>
     <content type="html"><![CDATA[<p>In my last post on the power of pattern matching, we saw how powerful
 the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
 give us warnings for missing cases, no matter what the type.</p>
@@ -2815,9 +2972,9 @@ with high performance and interoperability with existing C# libraries.</p>
   
   <entry>
     <title type="html"><![CDATA[Pattern Matching - Make the Compiler Work for You]]></title>
-    <link href="http://steveshogren.github.io/function-pattern-matching/"/>
+    <link href="http://deliberate-software.com/function-pattern-matching/"/>
     <updated>2014-04-28T22:05:00-04:00</updated>
-    <id>http://steveshogren.github.io/function-pattern-matching</id>
+    <id>http://deliberate-software.com/function-pattern-matching</id>
     <content type="html"><![CDATA[<p>Pattern matching is a simple tool that will make your code safer and
 easier to read.</p>
 
@@ -3167,9 +3324,9 @@ down bugs and more time adding on features!</p>
   
   <entry>
     <title type="html"><![CDATA[Learn to Database]]></title>
-    <link href="http://steveshogren.github.io/Learn-To-Database/"/>
+    <link href="http://deliberate-software.com/Learn-To-Database/"/>
     <updated>2014-04-16T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/Learn-To-Database</id>
+    <id>http://deliberate-software.com/Learn-To-Database</id>
     <content type="html"><![CDATA[<p>
   "... and it has to return 45,000 records a minute, or we are all
   screwed."
@@ -3245,9 +3402,9 @@ down bugs and more time adding on features!</p>
   
   <entry>
     <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
-    <link href="http://steveshogren.github.io/streaks/"/>
+    <link href="http://deliberate-software.com/streaks/"/>
     <updated>2014-01-28T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/streaks</id>
+    <id>http://deliberate-software.com/streaks</id>
     <content type="html"><![CDATA[<p>
   You know what will make you a phenomenally better developer?
   Deliberate practice. How do you get such practice? By doing it every
@@ -3342,9 +3499,9 @@ down bugs and more time adding on features!</p>
   
   <entry>
     <title type="html"><![CDATA[The 5:01 Developer]]></title>
-    <link href="http://steveshogren.github.io/501-developer/"/>
+    <link href="http://deliberate-software.com/501-developer/"/>
     <updated>2013-12-14T00:00:00-05:00</updated>
-    <id>http://steveshogren.github.io/501-developer</id>
+    <id>http://deliberate-software.com/501-developer</id>
     <content type="html"><![CDATA[<p>
   Can we agree for this post that money, energy, time, and effort are
   all forms of power? Like literally, if I wanted to build a building,
@@ -3490,9 +3647,9 @@ down bugs and more time adding on features!</p>
   
   <entry>
     <title type="html"><![CDATA[Intro to Macros]]></title>
-    <link href="http://steveshogren.github.io/intro-to-macros/"/>
+    <link href="http://deliberate-software.com/intro-to-macros/"/>
     <updated>2013-08-19T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/intro-to-macros</id>
+    <id>http://deliberate-software.com/intro-to-macros</id>
     <content type="html"><![CDATA[<p>
 Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
 </p>
@@ -3803,135 +3960,13 @@ The (map) function has two arguments: the first, a function; the second, a list 
 <p dir="ltr">Here is the actual returned “template” of the macro. The # at the end of the parameter name ensures that it is unique, which is really really useful when you consider that the code returned from a macro replaces the call in place. To make sure you don’t accidentally double bind the same name, clojure will give you a warning like “cannot let unqualified name” if you try to let a value without including the # at the end inside a template, another really handy feature. What gets generated by x# looks something like x__2506__auto__ which is guaranteed to be unique. The reason you need this is in case there was another value bound to x inside your code, it could cause a conflict, and in certain circumstances, really break your code, so this prevents such conflicts. You should only need these when creating parameters or let bindings inside the template. All the values "outside" the template do not need to have the # appended to their names, since they will not actually be a part of the returned template.</p>
 <p dir="ltr">The only odd thing here is the double ~~num. Notice how many quote levels deep we are. It is possible to unquote to “step” back up a level in the template. By the time we get to the ~~num, the original function parameter of num was two “levels” higher, so to access it, we have to “step up” two levels. Let me highlight it in colors, to make it easier to see.</p>
 
-<img src="http://steveshogren.github.io/images/macro.jpg" title="" >
+<img src="http://deliberate-software.com/images/macro.jpg" title="" >
 
 <p dir="ltr">See how by unquoting ~macro-name one level in line 3, and unquoting ~~num two levels on line 4, we bring them both back “up” to the “red” level where they were defined? Similarly, by unquoting ~x# and ~y# one level on line 4, we bring them back “up” to their “blue” definition level? This is an incredibly powerful tool that allows immense expansion of code in a tiny amount of space. If you think of the returned code form as a “template”, this quoting and unquoting lets you step in and out of evaluation with ease.</p>
 <p dir="ltr">In the end, when the (make-percents) macro is called, it produces 100 macros that are callable just like any other macro. To tell the whole story, I wrote this into my game, then decided I wanted a more sophisticated macro that could take any number of percentages, but this remained a good way to explain this specific pattern of looped macro generation.</p>
 <p dir="ltr">Hopefully, this article caused you to see how incredibly powerful macros can be, allowing effectively infinite auto-generation of code. The field of macros is still very under-explored, as most languages do not allow them at all, they remain a largely undiscovered, and yet incredibly powerful tool.</p>
 <p dir="ltr">For further reading, I highly recommend Let Over Lambda, the first 6 chapters of which are free <a href="http://letoverlambda.com/index.cl/toc">here</a>. Let Over Lambda is written with examples in Common Lisp, but the macro parts are very similar in Clojure, so is a valuable read.</p>
 &nbsp;
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure... Debugger?]]></title>
-    <link href="http://steveshogren.github.io/clojure-debugger/"/>
-    <updated>2013-08-17T00:00:00-04:00</updated>
-    <id>http://steveshogren.github.io/clojure-debugger</id>
-    <content type="html"><![CDATA[I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found <a title="here" href="https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj">here</a>.
-<br />
-<br />
-One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; trace-forms &quot;Trace all the forms in the given body. Returns any</span>
-</span><span class='line'><span class="c1">;; underlying uncaught exceptions that may make the forms fail.&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">trace-forms</span>
-</span><span class='line'> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">b</span> <span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>       <span class="nv">c</span> <span class="p">(</span><span class="nb">* </span><span class="nv">a</span> <span class="nv">b</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">4</span> <span class="mi">0</span><span class="p">))]</span>
-</span><span class='line'>   <span class="nv">c</span><span class="p">))</span>
-</span><span class='line'><span class="c1">;; =&gt; ArithmeticException Divide by zero</span>
-</span><span class='line'><span class="c1">;;      Form failed: (/ 4 0)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (* a b (/ 4 0))</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
-</span><span class='line'><span class="c1">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
-<br />
-<br />
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; example up from clouredocs.org:</span>
-</span><span class='line'>  <span class="c1">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">deftrace</span> <span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="nb">= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
-</span><span class='line'>      <span class="mi">1</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">(</span><span class="nf">fib</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1">;; =&gt; 5</span>
-</span><span class='line'>  <span class="c1">;; 1&gt; TRACE t2742: (fib 4)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | (fib 3)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2745: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2746: | | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2744: | | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2747: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2743: | =&gt; 3</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | (fib 2)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | (fib 1)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2749: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | (fib 0)</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2750: | | =&gt; 1</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2748: | =&gt; 2</span>
-</span><span class='line'>  <span class="c1">;;    TRACE t2742: =&gt; 5</span>
-</span></code></pre></td></tr></table></div></figure>
-<br />
-<br />
-At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it's execution is brilliant and inconceivably handy.
-<br />
-<br />
-At first, I thought, "well that is an incredibly cool party trick, but a party trick nonetheless". A few days of regular clojure development later, I realized the profundity of this library.
-<br />
-<br />
-I have had on my list of "pain points" an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
-<br />
-<br />
-Here is the grand reveal. <strong>Concepts and tools that other languages have sometimes look very different in clojure.</strong> "Well, duh", you say. I am not talking about syntax! I am talking about the <em>tools.</em>
-<br />
-<br />
-I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional "put in a breakpoint, run the code, pause at that place, inspect values, etc". When I first saw tools.trace, the image of a "debugger replacement" did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second's hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in's and out's were, and all of a sudden it clicked. "I just found my new debugger", and, "wow, this debugger is way less hassle".
-<br />
-<br />
-No, of course this doesn't do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
-<br />
-<br />
-The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the "default ide" tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure's meta-programming is simply the most mind altering thing I have experienced in programming.
 ]]></content>
   </entry>
   

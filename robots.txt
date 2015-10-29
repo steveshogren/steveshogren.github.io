@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://steveshogren.github.io/sitemap.xml 
+Sitemap: http://deliberate-software.com/sitemap.xml 
