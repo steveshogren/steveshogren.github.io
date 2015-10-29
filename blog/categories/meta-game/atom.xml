@@ -4,7 +4,7 @@
   <title><![CDATA[Category: meta game | Deliberate Software]]></title>
   <link href="http://deliberate-software.com/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-10-29T17:53:56-04:00</updated>
+  <updated>2015-10-29T17:54:50-04:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -81,7 +81,7 @@ joking and laughing to each other at my choice of clothes.</p>
 <pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
 </code></pre>
 
-<p>I roll with it, some joke about &ldquo;styling&rdquo;. I start presenting about the 2D
+<p>I roll with it, make some joke about &ldquo;styling&rdquo;. I start presenting about the 2D
 physics engine I&rsquo;d written as a learning project for my game. One of the most
 interesting parts to me was how I&rsquo;d first written it without any unit testing,
 following just Clean Code practices. I then re-wrote it using heavy TDD. The
