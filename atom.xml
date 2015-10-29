@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-10-29T16:47:06-04:00</updated>
+  <updated>2015-10-29T17:53:56-04:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -73,19 +73,20 @@ people sitting around a table looking bored and pissed.</p>
 grub boot screen again! Can't you afford a real machine?"
 </code></pre>
 
-<p>They only have the Mac projector cable. No adapter. I&rsquo;d thought ahead, and
-handed one of the developers a thumb drive with the presentation and code.
-Meanwhile the interviewers are joking and laughing to each other at my choice of
-clothes.</p>
+<p>I try to joke back while multitasking with my laptop. They only have the Mac
+projector cable. No adapter. I&rsquo;d thought ahead, and handed one of the developers
+a thumb drive with the presentation and code. Meanwhile the interviewers are
+joking and laughing to each other at my choice of clothes.</p>
 
 <pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
 </code></pre>
 
-<p>I start presenting about the 2D physics engine I&rsquo;d written as a learning project
-for my game. One of the most interesting parts to me was how I&rsquo;d first written
-it without any unit testing, following just Clean Code practices. I then
-re-wrote it using heavy TDD. The design turned out very different both times,
-which I thought was interesting to see how TDD had influenced the design.</p>
+<p>I roll with it, some joke about &ldquo;styling&rdquo;. I start presenting about the 2D
+physics engine I&rsquo;d written as a learning project for my game. One of the most
+interesting parts to me was how I&rsquo;d first written it without any unit testing,
+following just Clean Code practices. I then re-wrote it using heavy TDD. The
+design turned out very different both times, which I thought was interesting to
+see how TDD had influenced the design.</p>
 
 <p>About five minutes in, I am cut off:</p>
 
@@ -94,16 +95,17 @@ show, just spurious subjective opinions. You've put up a straw man and now
 are trying to knock it down assuming we are idiots. I've seen enough."
 </code></pre>
 
-<p>I remain calm and professional, and start to address the raised concerns. I play
-the meta-game, wondering if perhaps this is a test to see how I&rsquo;ll react when
-questioned and embarrassed. Even if this wasn&rsquo;t a test, I was determined to be
-the most professional in the room and finish with my head held high.</p>
+<p>At this point, it has been tops 15 minutes. I remain calm and professional, and
+start to address the raised concerns. I play the meta-game, wondering if perhaps
+this is a test to see how I&rsquo;ll react when questioned and embarrassed. Even if
+this wasn&rsquo;t a test, I was determined to be at my most professional and finish
+with my head held high.</p>
 
 <p>Five developers walk out before I can finish my first sentence. One of the
 remaining interviewers asks if I could live code them a web scraper in any
-language. I turn my laptop around (still no projector) and ask if PHP is
-acceptable. They are a Python shop, and PHP is the closest to what they use that
-I am comfortable using when this nervous.</p>
+language instead of the presentation. I turn my laptop around (still no
+projector) and ask if PHP is acceptable. They are a Python shop, and PHP is the
+closest to what they use that I am comfortable using when this nervous.</p>
 
 <pre><code>"PHP? Gross. I suppose if it is all you know..."
 </code></pre>
@@ -112,7 +114,7 @@ I am comfortable using when this nervous.</p>
 log in. I get on a roll after five minutes, and write the scraper. They throw me
 a few more requirements, and within a half hour I&rsquo;ve written stories for and
 completed them all. At least two of the interviewers seem quite impressed.
-Someone looks at their watch, &ldquo;wow, that&rsquo;s all the stories we have, I guess
+Someone looks at their watch, &ldquo;well, that&rsquo;s all the stories we have, I guess
 let&rsquo;s break for lunch.&rdquo;</p>
 
 <p>Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
@@ -123,8 +125,9 @@ I am genuinely curious if this is some sort of extreme patience/calmness test,
 or if I am being filmed for a reality show. No such luck.</p>
 
 <p>At the head of the table is the developer who &ldquo;called me out&rdquo; for my
-presentation. He looks at me, rolls his eyes, and asks in the most sarcastic
-tone I have ever heard:</p>
+presentation. Apparently my lunch mates were supposed to only take an hour, we
+took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
+sarcastic tone I have ever heard:</p>
 
 <pre><code>"So, got any questions for me?"
 </code></pre>
@@ -142,7 +145,8 @@ ask him if there is more. He laughs.</p>
 the passenger seat piled high with text books I have been studying, books on
 language design, compilers, algorithms, physics engines, TDD, and productivity.</p>
 
-<p>I was asked none of it.</p>
+<p>I was asked none of it. I threw up from stress out the car door into their
+parking lot.</p>
 
 <h3>Aftermath</h3>
 
@@ -151,14 +155,17 @@ wrong time. She was fired shortly after.</p>
 
 <p>I never found out if I had done something to make everyone so angry. I now
 suspect that they were massively turned off by a host of things. Polyglot
-programming, practicing TDD, the suit, the not Mac, and the late arrival
-probably all contributed to an immediate disqualification. I rationally realize
-they were terrible and treated me terribly, but the embarrassment is still
-there.</p>
+programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
+presentation probably all contributed to an immediate disqualification. I
+rationally realize they were terrible and treated me terribly, but the
+embarrassment is still there. I suspect my presentation was terrible from the
+get go: that they were expecting some rock-star and instead got me.</p>
 
 <p>A number of times I have woken up in a cold sweat having dreamt about that
 interview. In the large scheme of things, a bad interview is such a small thing,
-but fear is fear.</p>
+but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
+cocky, insufferable? Did my ego cause them to treat me that way, or was it all
+them? What could I have done differently? I was only in there for a few minutes!</p>
 
 <p>Few events in my professional life have shaped me as much as that interview. I
 have turned it into a forge for my talent, the anvil on which I beat my pride.
@@ -168,11 +175,11 @@ I&rsquo;ve come through worse and thrived.</p>
 
 <h3>Break The Cycle</h3>
 
-<p>Lastly, this story fills me with an overwhelming desire to never continue the
-cycle of abuse. I strive every interview to try to respectfully work with the
-candidate, and never humiliate them. I want every person I interview to leave
-feeling loved as a human and respected, even if they are completely incapable to
-perform the duties of the job.</p>
+<p>This story fills me with an overwhelming desire to never continue the cycle of
+abuse. I strive every interview to try to respectfully work with the candidate,
+and never humiliate them. I want every person I interview to leave feeling loved
+as a human and respected, even if they are completely incapable to perform the
+duties of the job.</p>
 
 <p>When I ask a question, if they struggle, we work it out together. When I ask for
 code, we write it together, even if that means I have to do all the work. I can
