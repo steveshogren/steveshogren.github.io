@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being &hellip;">
+  <meta name="description" content="In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +85,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/the-endless-debate/">The Endless Debate</a></h1>
+      <h1 class="entry-title"><a href="/testing-is-to-programming-what-math-is-to-eng/">Testing Is to Programming What Math Is to Engineering</a></h1>
     
     
       <p class="meta">
@@ -94,14 +94,78 @@
 
 
 
-<time class='entry-date' datetime='2011-07-22T00:00:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2011-09-26T00:00:00-04:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the "best" one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
+  <div class="entry-content"><p>
+  In ancient times, plenty of builders did their work without math,
+  and I would guess that a good portion of them likely did it faster
+  then their math-doing counterparts.
+</p>
+<p >
+  I am certain that when builders first started using math to prove
+  that buildings would stand up safely, they were mocked by their
+  math-less counterparts. I can hear them now, "Oh, Stephos, it takes
+  you 5 times longer to prove your building will stand up, real men
+  can just <em>see</em> that it will work". Even in modern times, many
+  people build houses and small buildings that probably don't even
+  need the math to really "prove" they work, but they perform the due
+  diligence anyway. On the other hand, some people today still build
+  houses, sheds, tree-houses, lofts, and fire pits without any
+  drawings or math at at all, and why should they? They are
+  responsible for the risk.
+</p>
+<p >
+  This is all fine, but, builders who shy away from math also don't
+  build airliners, space shuttles, and skyscrapers. An aircraft
+  designer who doesn't feel like using math to prove their aircraft
+  will fly is handed an "Experimental" sticker and gravely patted on
+  the back.
+</p>
+<p >
+  Today, programming is at the same place as both
+  ancient <strong>and</strong> modern engineering: many projects can
+  be done "by eye", and some of the most experienced programmers are
+  able to build immense projects alone without any sort of automated
+  testing at all. When you go to a forum and ask for help, you are
+  just as likely to hear from a "space shuttle" programmer as you are
+  to hear from a "tin shack" programmer. The "space shuttle"
+  programmer would be horrified to hear of working without automated
+  testing and rigorous review practices, whereas the "tin shack"
+  programmer would be horrified to think of the time wasted to
+  even <em>learn the procedures</em> to automatically prove his code
+  works as it should. The "space shuttle" programmer might work on the
+  same internal financial project for months or years, finally
+  releasing with zero defects; the "tin shack" programmer might churn
+  out several quick web sites a day. Neither project
+  is <em>better</em> then the other, they both might be perfect for
+  what their business needs.
+</p>
+<p>
+  I have heard several times from very good lone wolf programmers that
+  testing just slows them down, and in some ways, it does appear to be
+  a slowdown for them. Unfortunately, the cost to build even
+  medium-sized projects with several workers without automated testing
+  is only felt when it is too late, when the deadlines (and costs) are
+  spiraling out of control.
+</p>
+<p>
+  The disciplined application of mathematics transformed and
+  solidified the field of engineering into a field far more vast and
+  capable of some of the most incredible constructions imaginable.
+  Would we have smart-phones, GPS, modern cars, and airliners if
+  engineering had just avoided mathematics? Just imagine what the
+  field of programming could grow into if we continue to learn and
+  grow our testing, designing, and writing of software.
+</p>
+<p>
+  I propose that automated testing is to programming what math was
+  to ancient engineering.
+</p>
 </div>
   
   
@@ -157,6 +221,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
@@ -172,10 +240,6 @@
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
-      <li class="post">
-        <a href="/language-versions/">Language Versions</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -189,7 +253,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     

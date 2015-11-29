@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Deliberate Software</title>
+  <title>Conj 2015 - Teaching Clojure - Deliberate Software</title>
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
+  <meta name="description" content="My talk at Conj 2015, enjoy!
+Teaching Clojure
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://deliberate-software.com/posts/34/">
+  <link rel="canonical" href="http://deliberate-software.com/teaching-clojure/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
@@ -77,15 +79,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
+      <h1 class="entry-title">Conj 2015 - Teaching Clojure</h1>
     
     
       <p class="meta">
@@ -94,87 +93,62 @@
 
 
 
-<time class='entry-date' datetime='2011-06-28T00:00:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2015-11-18T11:19:10-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:19 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>
-  At work last month, I was assigned to fix some bugs in an
-  asynchronous legacy code base. My supervisor gave me a month to see
-  what I could do, and to see if I could fix a few tricky bugs. The
-  code is divided into two sections, a client application and a web
-  server. Both the client application and the server have their own
-  persistence, and they communicate through a soap web service.
-</p>
-<p>
-  I wanted to try and write some sort of end-to-end tests around this,
-  but I could not figure out how to get around that web service. I
-  don&#039;t want my tests to rely on a server having to always be up,
-  so I initially was planning on writing tests from the client
-  database to the web service, where I would just stub some responses.
-  I got about an hour into that plan, before I realized I would then
-  have to do that same thing on the server, and that sort of testing
-  will not really tell me what the code <i>does</i>. I needed to cover
-  this whole process end-to-end.
-</p>
-<p>
- I walked around for a bit, thinking. Then it hit me, both the server
- and client code are written in VB.NET, and, except for the web service, work
- just like plain old highly-coupled code. Hmmm.
-</p>
-<p>
- For the first pass, I wrote an interface to wrap the web service,
- then used dependency injection to inject a fake web service that (and
- here is the cool part) simply calls around the web service entirely
- to the server code directly and injects a different database
- connection string, so the server talks to a second database I have
- prepared.
-</p>
-<p>
- Just like that, I can run, all on my machine, 99 percent of the code
- in a single end-to-end test. I can even setup several client
- databases, and rotate them out, to &quot;swap&quot; between several
- clients in the middle of the tests.
-</p>
-<p>
- I added a few &quot;integration&quot; tests that do talk to a real
- published testing web service, just to make sure everything is still
- in place correctly.
-</p>
-<p>
-  Now, I said this was asynchronous, and it is, the executed
-  system-under-test kicks off a thread to talk to the web service, and
-  so to get it to test, I needed to wait for the thread to finish,
-  then do my assertions.
-</p>
-<p>
- I used a system where the spun off thread will set a boolean when it
- has finished running, to let the main thread know it has finished,
- and the main thread just keeps checking that boolean until it is
- true. While hackish, that is my current working solution, as no more
- then one thread is ever spun off at a time, I can just have my test
- wait for the thread to finish, then complete the required assertions.
-</p>
+<div class="entry-content"><p>My talk at Conj 2015, enjoy!
+<a href="https://www.youtube.com/watch?v=BsLiPt90HDo">Teaching Clojure</a></p>
 </div>
-  
-  
 
 
-    </article>
+  <footer>
+    <p class="meta">
+      
   
-  <div class="pagination">
+
+<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-11-18T11:19:10-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:19 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/meta-game/'>meta game</a>
+  
+</span>
+
+
+    </p>
     
-      <a class="prev" href="/posts/35">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/posts/33">Newer &rarr;</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/teaching-clojure/" data-via="" data-counturl="http://deliberate-software.com/teaching-clojure/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/on-defeat/" title="Previous Post: Interview Humiliation">&laquo; Interview Humiliation</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
 <aside class="sidebar">
   
     
@@ -277,6 +251,7 @@
 
   
 </aside>
+
 
     </div>
   </div>

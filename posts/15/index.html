@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
-the match statement is in F#. Using match allows the compiler to
-give us &hellip;">
+  <meta name="description" content="&ldquo;It&rsquo;s my first job, what book should I read first?&rdquo; Recently, a few developers I am mentoring were curious about what book
+to read &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +86,7 @@ give us &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a></h1>
+      <h1 class="entry-title"><a href="/next-book/">What Book Should I Read Next?</a></h1>
     
     
       <p class="meta">
@@ -96,300 +95,203 @@ give us &hellip;">
 
 
 
-<time class='entry-date' datetime='2014-04-28T22:05:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:05 pm</span></time>
+<time class='entry-date' datetime='2014-07-26T11:46:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:46 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
-the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
-give us warnings for missing cases, no matter what the type.</p>
+  <div class="entry-content"><p>&ldquo;It&rsquo;s my first job, what book should I read first?&rdquo;</p>
 
-<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
-inversion of the usual OO way of polymorphism. Here is an example that
-is probably familiar to everyone: getting a database connection.</p>
+<p>Recently, a few developers I am mentoring were curious about what book
+to read first. Even mid and senior level developers I&rsquo;ve known
+sometimes struggle with this question.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code...</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>If you want to be truly great, you have to read technical books and
+white papers, and you have to learn new programming languages. You
+could figure the content out yourself from first principles, but you
+will be about 50 years behind those who just read the
+books. Additionally, if you stick to a certain language, you are
+limiting yourself to only thinking about a problem in a way common to
+the language.</p>
 
+<p>Just like with adding new features to a project, you should prioritize
+your learning.</p>
 
-<p>In our example here, we have two concrete implementers of the
-<code>IPaymentRepository</code>, each one with their own implementations. This is
-a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
-would put each of these classes in their own files.</p>
+<p>I&rsquo;d start by getting into the mindset that you will need roughly a
+decade and at least ten thousand high quality hours to become a master
+programmer. To be able to get that many high-value hours, you will
+need to carefully select your jobs, and constantly be learning new
+things that actually make you a better developer.</p>
 
-<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
-and interfaces to use pattern matching.</p>
+<h2>Languages</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetPaymentRepo</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="s">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="n">InMemory</span>
-</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code ...</span>
-</span><span class='line'><span class="k">let</span> <span class="nv">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetPaymentRepo</span>
-</span><span class='line'><span class="k">let</span> <span class="nv">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetAll</span> <span class="n">repo</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code>    "A language that doesn't affect the way you think about programming,
+    is not worth knowing." - Alan Perlis
+</code></pre>
 
+<p>I agree with <a
+href="http://michaelochurch.wordpress.com/2012/07/27/six-languages-to-master/">other developers</a> who assert that a language is <a
+href="http://en.wikiquote.org/wiki/Alan_Perlis">not worth learning</a>
+unless it teaches you something new and mind-expanding. There are exceptions of course. Maybe you want to switch stacks to get an awesome high-value job. By all means, learn the new stack.</p>
 
-<p>Notice how we separated our behavior from our types? The
-<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
-are just empty types, much like an <code>Enum</code>. We are still able to get
-polymorphic behavior from them, using <code>match</code>.</p>
+<p>If you want to follow the extremely good <a
+href="http://pragprog.com/the-pragmatic-programmer">advice of others</a> and learn one new programming language a year, make each
+one count. For example, if you are a Ruby guy, it is safe to say you
+will learn nothing of really any mind-expanding value if you try to
+learn PHP, Python, JavaScript, or Perl.</p>
 
-<p>But why would we want to store our behavior separate from the type?</p>
+<p>Same for the family of Java, C++, C#, or VB.NET. One of those is plenty.</p>
 
-<p>By storing the behavior separate from the type, changes that effect a
-single behavior (adding a new function, changing a function&rsquo;s api,
-removing a function) are easier, because they are all grouped
-together. A change to the api of the <code>GetAll</code> function is harder in
-the traditional OO interface structure, requiring modifying several
-files.</p>
+<p>Instead shoot for languages that will really beef up your thought
+process. I like the advice given by <a href="http://norvig.com/21-days.html">Peter Norvig</a>:</p>
 
-<p>Similarly, a change requiring adding a new type is difficult in a
-pattern matching structure, as it will require finding every pattern
-match and adding in the additional case. Thankfully, the F# compiler
-checks both pattern matches and interfaces for us, letting us use the
-best tool for the job!</p>
+<pre><code>     "Learn at least a half dozen programming languages. Include one
+     language that supports class abstractions (like Java or C++), one that
+     supports functional abstraction (like Lisp or ML), one that supports
+     syntactic abstraction (like Lisp), one that supports declarative
+     specifications (like Prolog or C++ templates), one that supports
+     coroutines (like Icon or Scheme), and one that supports parallelism
+     (like Sisal)."
+</code></pre>
 
-<p>As to safety, adding a new type is easy with interfaces, but the
-developer is left without assistance to find all places the concrete
-classes are instantiated and add the new type. Neither compiler will
-offer any warnings for a new interface subclass. For pattern matching
-polymorphism, the compiler will warn that there are missing cases
-every place a change needs to be made. While harder to add a new type
-with pattern matching, it is safer.</p>
+<p>I would add to that my own personal list: a language that forces you
+to use monands for controlling side-effects (Haskell), and a language
+that allows for dependent types (Idris).</p>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th> Adding a Type  </th>
-<th> Modifying Behavior </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>OO Interfaces/Classes</strong>  </td>
-<td>  Easier / Less Safe  </td>
-<td> Harder / Safe</td>
-</tr>
-<tr>
-<td><strong>Pattern Matching Types</strong>  </td>
-<td>  Harder / Safe  </td>
-<td> Easier / Safe</td>
-</tr>
-</tbody>
-</table>
+<p>If you are saying, &ldquo;wow, in Python, you have to put a colon at the end
+of the function signature line, unlike in Ruby, that blows my mind&rdquo;,
+or &ldquo;wow, in Java, the String keyword is uppercase instead of
+lowercase!&rdquo; chances are you are getting a very low return for your
+investment of time.</p>
 
+<p>What is important about a new language is <em>not</em> a new syntax. A new
+syntax is just cruft that gets in the way of the new concepts. A new
+concept might be closures. If you have always worked in Java, a
+closure will really expand your mind. Or macros. If you have never
+seen macros, the concept alone is completely foreign, not just the
+syntax. That is where the value is. A good test if you are learning
+something new is if you have to research what the concept even means,
+without even needing to see the syntax first. For example, when I
+started learning monads, I didn&rsquo;t even need to see the syntax for how
+Haskell does them, I didn&rsquo;t even understand the concept <em>at all</em>, so I
+could read pretty much anything about the concept and get value out of
+it. That is the high value content.</p>
 
-<p><br />
-I almost always find myself modifying the functions of an
-interface more than I find myself adding new types. For that typical
-use case, pattern matching is probably the better choice.</p>
+<h2>Frameworks</h2>
 
-<p>Consider the change where we want to add a new function to the
-<code>IPaymentRepository</code> interface and change the location of the in
-memory dictionary to be stored internally. In the interfaces and
-classes example, that requires editing <em>three separate files</em>.</p>
+<p>I would say very few frameworks are going to expand your mind in a way
+that is worth the effort to learn them. Some very select frameworks
+can cause you to think of a problem in a novel way and thus expand
+your mind (off the top of my head: React.js, Core.Async, Akka,
+Datomic) but those are very few and far between.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Obviously, in production use, frameworks have their place, and they
+can provide an immense boost to your day-to-day productivity and
+safety, but very few overall will expand your mind in such a way that
+would make you better at the craft. It is not hard to reason why. A
+framework can only do what is possible in the language. If the
+language is only so powerful, the framework cannot be more powerful
+than that. You will be using tools that you could&rsquo;ve written yourself
+with your current skill level, but you won&rsquo;t even get the benefit of
+writing it yourself. Hopefully, those tools will be safer and save you
+a lot of time, but saved time cranking out widgets at work will not
+directly cause you to better understand programming.</p>
+
+<h2>Paradigms</h2>
+
+<p>It is fashionable these days to get into functional programming. If
+you haven&rsquo;t learned a language that supports a functional paradigm, I
+highly recommend that as a good place to start. That being the case,
+don&rsquo;t forget to add a logic, a literate, and a declarative programming
+language to your list too (you have ten years remember, you&rsquo;ll need a
+list). Why not pile on a stack based language too?</p>
+
+<h2>Libraries</h2>
+
+<p>While it is important to be aware of the libraries in your space, I
+would say these often provide the least mind-expanding
+opportunities. A library, much like a framework, is usually
+constrained by the power of the language. In most languages, libraries
+are just convenience abstractions at or below the same abstraction
+layer as the rest of your code. I would never consider doing my
+day-to-day work without the full power of available libraries, but
+they are not going to help me think any better about the work.</p>
+
+<h2>&ldquo;Meta&rdquo; books</h2>
+
+<p>A vast number of books exist that attempt to impart something of a
+&ldquo;mindset&rdquo; for the developer. Usually, the author is retelling his
+experiences, which can be entertaining, but of limited reuse. The best
+meta books are those that use actual research and data to try to
+explain our industry. Books like Peopleware, Code Complete, and
+Pragmatic Programmer are great in this regard. These best books can
+cause you to see the creation of software artifacts with a totally
+different light: e.g. I remember first reading about using a
+programming language to generate automatically the source files for a
+given project. At the time for me, it was revolutionary.</p>
+
+<h2>Pattern Books</h2>
+
+<p>I lately have come to think &ldquo;pattern books&rdquo; like Domain Driven Design,
+Design Patterns, Patterns of Enterprise Architecture, Refactoring, etc
+are just a way to try to replicate missing features in a language of a
+lower power. These seem to be written for entirely Java and C#, and are mostly
+complex solutions to complex problems created by the lack of power of the language. Apparently, I
+am not alone: <a
+href="http://www.c2.com/cgi/wiki?AreDesignPatternsMissingLanguageFeatures">Are Design Patterns Missing Language Features?</a></p>
+
+<p>That being said, I think some parts of these books are helpful,
+specifically, the ubiquitous language ideas from Domain Driven
+Design. If your team has decided on always using the terms from a
+certain book, and you are the only person who does not know them, I do
+recommend at least skimming it just to ensure smooth communication.</p>
+
+<h2>Suggestions</h2>
+
+<p>I won&rsquo;t suggest too many books or languages, but those I do are very
+highly recommended.</p>
+
+<ul>
+<li><a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start">Structure and Interpretation of Computer Programs</a>
+
+<ul>
+<li>The best book I&rsquo;ve ever read. No other book I&rsquo;ve read even comes close to beating this for sheer value per minute as this book. Do all the exercies, and you&rsquo;ll be way ahead of the curve.</li>
+</ul>
+</li>
+<li>Code Complete</li>
+<li>Clean Code</li>
+<li>Pragmatic Programmer</li>
+<li>Productive Programming</li>
+<li>Peopleware</li>
+</ul>
 
 
-<p>Here is the change to add a new function in the pattern matching example:</p>
+<h2>Wrap up</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span> <span class="k">of</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">int</span><span class="o">,</span> <span class="n">IPayment</span><span class="o">&gt;</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="n">IPayment</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="n">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>It takes courage to step outside your comfort zone and learn something
+new. You might be the only person learning something new on your
+team. That is ok! Don&rsquo;t worry about &ldquo;converting&rdquo; everyone else to the
+path of learning, and do not make fun of them or the only language
+they know. (Developers who only know one language take any comment
+good or bad about &ldquo;their&rdquo; language as a comment about themselves.) If
+you do make fun of them, you will start to resent them. It&rsquo;ll make you
+look like an outsider, and they will ignore you and finally push you
+out of the team.</p>
 
+<p>When you learn a new thing, be very careful to not run around trying
+to use it everywhere. I am very careful to not use any new tool in
+production until I&rsquo;ve &ldquo;moved on&rdquo; to learning another tool, so I could
+critically consider the best tool for the job without the &ldquo;honeymoon&rdquo;
+effect clouding my judgment.</p>
 
-<p>In case you were concerned that these F# types do not have any state,
-they actually can have fields just like regular classes. Notice the
-<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
-field! The new field does not need to be named until used in a pattern
-match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
-<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
-didn&rsquo;t add it in the pattern match, the compiler would give us a
-warning!</p>
-
-<p>Between the options of traditional interfaces verses pattern matching,
-neither way is truly the best for every circumstance: each comes with
-a trade-off. I liken the trade-offs to the &ldquo;grain of the
-data&rdquo;. Whichever way your system is likely to change the most, that is
-the way you want to optimize your type. The good news is: in F# you
-can have a mix of both, and it is relatively easy to convert back and
-forth depending on how your system is changing the most.</p>
-
-<p>Personally, I find F# pattern matching to be significantly easier to
-read. The same code in C# requires twice the lines in three separate
-files, which adds a complexity burden for no reason. The F# code is
-safer, smaller, and easier to modify than the C# equivalent.</p>
-
-<p>If you write code in C# or VB.NET right now, you could add in a
-project in F# today. All three languages are callable from the other
-two, so you could start by breaking out a small library that uses
-these feature immediately. F# modules and classes are callable from C#
-just like any other DLL library. In my mind, this is what sets F#
-apart from other languages: it is more powerful and safe than C#, but
-with high performance and interoperability with existing C# libraries.</p>
-
-<p>If you want additional reading on the topic of polymorphism, check out
-<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
-
-<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
+<p>My experience has been: keep getting better, and you will find
+yourself in better and better places to work. A person who puts in the
+effort to really master the craft is easy to spot and hard to
+fake. Most people want to work with those who think like them, and you
+cannot think like a master engineer only knowing one tool, so get
+started now, and have fun!</p>
 </div>
   
   
@@ -445,6 +347,10 @@ with high performance and interoperability with existing C# libraries.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
@@ -460,10 +366,6 @@ with high performance and interoperability with existing C# libraries.</p>
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
-      <li class="post">
-        <a href="/language-versions/">Language Versions</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -477,7 +379,7 @@ with high performance and interoperability with existing C# libraries.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     

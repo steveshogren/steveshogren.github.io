@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Pattern matching is a simple tool that will make your code safer and
-easier to read. Consider the following code that converts an Int to a string. 1 &hellip;">
+  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
+the match statement is in F#. Using match allows the compiler to
+give us &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +87,7 @@ easier to read. Consider the following code that converts an Int to a string. 1 
       
   <header>
     
-      <h1 class="entry-title"><a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a></h1>
+      <h1 class="entry-title"><a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a></h1>
     
     
       <p class="meta">
@@ -102,84 +103,13 @@ easier to read. Consider the following code that converts an Int to a string. 1 
   </header>
 
 
-  <div class="entry-content"><p>Pattern matching is a simple tool that will make your code safer and
-easier to read.</p>
+  <div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
+the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
+give us warnings for missing cases, no matter what the type.</p>
 
-<p>Consider the following code that converts an Int to a string.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">English</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kt">string</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What happens when we make this simple change?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">English</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">German</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
-any indication that something is missing? Nope! Our code has a
-potential bug that is only exposed at run-time, and nothing will tell
-us that. We made it fail gracefully by ensuring our code always
-returns at least an empty string, but we have created a bug that can
-only really be caught by something external: either automated tests or
-manual checking.</p>
-
-<p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
-seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
-that it just makes things even worse.</p>
+<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
+inversion of the usual OO way of polymorphism. Here is an example that
+is probably familiar to everyone: getting a database connection.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -210,137 +140,45 @@ that it just makes things even worse.</p>
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">String</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">);</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Spanish</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">English</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// somewhere else...</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">lang</span><span class="p">).</span><span class="n">convert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ILanguage</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">English</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Spanish</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">default</span><span class="p">:</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// somewhere in the code...</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>In our example here, we have two concrete implementers of the
+<code>IPaymentRepository</code>, each one with their own implementations. This is
+a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
+would put each of these classes in their own files.</p>
 
-<p>We have turned 21 lines in one file into 36 in three files (not
-counting namespaces and imports). Does this new structure give us any
-additional safety when we add a new concrete implementation? How about
-when we add a new enum value? This code is even more likely to cause
-bugs than the first, because now we have an implicit coupling between
-the enum and the concrete class. We could get rid of the enum, and
-&ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
-concrete class to instantiate.</p>
-
-<p>Imagine if the compiler could warn us when either the enum or the
-class changed. Imagine if instead of having to hunt down the possible
-uses, we could just compile and fix the errors.</p>
-
-<p>Good news, we can!</p>
-
-<p>Check out this F# code. If you have never seen F# before, I know, it
-looks completely crazy! It <em>still</em> looks a little weird to me, but
-just try to read it. I think you will surprise yourself. This is a
-function called <code>convert</code>, and if you keep in mind that the types
-always come AFTER the value, the code makes a lot more sense. A
-parameter in C# would be <code>int number</code>; in F# it is written
-<code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
-you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
-second it is a lot more powerful!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">:</span><span class="n">Int</span><span class="o">,</span> <span class="n">lang</span><span class="o">:</span><span class="n">Language</span><span class="o">)</span> <span class="o">:</span><span class="kt">string</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>               <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>               <span class="o">|</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;two&quot;</span>
-</span><span class='line'>               <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>We are using the same enum from the C# file, but it is missing
-something, right? Where are the Spanish and German parts? I try to
-compile this and what do I see?</p>
-
-<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
-matches on this expression. For example, the value 'enum&lt;Language&gt;
-(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
-
-<p>Spittake mushroom soup, the compiler just caught a potential bug for
-us! A C# run-time bug no less! Not only is this very powerful, but it
-is so simple. I can code the way I normally do, only now I get
-additional safety for free! And no unit or integration test would ever
-catch this class of errors.</p>
-
-<p>Heck, if you really want to keep your classes and interfaces in C#,
-you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span> <span class="n">English</span><span class="bp">()</span><span class="o">.</span><span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This still calls the C# class above, and now the compiler gives us a
-warning when we add a new enum value!</p>
-
-<p>In this way, pattern matching is able to clearly remove edge cases. We
-converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
-<code>match</code>.</p>
-
-<p>BONUS ROUND!</p>
-
-<p>What we have already seen of pattern matching makes it a better
-<code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
-<code>match/with</code> statement allows for patterns matched to have a <code>when</code>
-clause which only matches when the condition is true:</p>
+<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
+and interfaces to use pattern matching.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -352,35 +190,91 @@ clause which only matches when the condition is true:</p>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Large!&quot;</span>
-</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
-</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetPaymentRepo</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="s">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="n">InMemory</span>
+</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// somewhere in the code ...</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetPaymentRepo</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetAll</span> <span class="n">repo</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>Notice how we separated our behavior from our types? The
+<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
+are just empty types, much like an <code>Enum</code>. We are still able to get
+polymorphic behavior from them, using <code>match</code>.</p>
 
-<p>Running the compiler again give us:</p>
+<p>But why would we want to store our behavior separate from the type?</p>
 
-<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
-Warning FS0025: Incomplete pattern matches on this expression. For
-example, the value '1' may indicate a case not covered by the
-pattern(s). However, a pattern rule with a 'when' clause might
-successfully match this value. (FS0025) (monads-fsharp)</code></p>
+<p>By storing the behavior separate from the type, changes that effect a
+single behavior (adding a new function, changing a function&rsquo;s api,
+removing a function) are easier, because they are all grouped
+together. A change to the api of the <code>GetAll</code> function is harder in
+the traditional OO interface structure, requiring modifying several
+files.</p>
 
-<p>That&rsquo;s right, it checks numbers too.</p>
+<p>Similarly, a change requiring adding a new type is difficult in a
+pattern matching structure, as it will require finding every pattern
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!</p>
 
-<p>Lastly, it is possible to match on a combination of values, all at
-once. We can convert our more complex structure to something simpler
-using this trick, and the compiler is still intelligent enough to
-check for missing cases.</p>
+<p>As to safety, adding a new type is easy with interfaces, but the
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Neither compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Adding a Type  </th>
+<th> Modifying Behavior </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OO Interfaces/Classes</strong>  </td>
+<td>  Easier / Less Safe  </td>
+<td> Harder / Safe</td>
+</tr>
+<tr>
+<td><strong>Pattern Matching Types</strong>  </td>
+<td>  Harder / Safe  </td>
+<td> Easier / Safe</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br />
+I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.</p>
+
+<p>Consider the change where we want to add a new function to the
+<code>IPaymentRepository</code> interface and change the location of the in
+memory dictionary to be stored internally. In the interfaces and
+classes example, that requires editing <em>three separate files</em>.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -390,35 +284,50 @@ check for missing cases.</p>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span><span class="o">,</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Larger than one!&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;dunno&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
+</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
-
-<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
-<code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
-default for any number in <code>Language.English</code> not already matched. The
-bug in the code here is the missing <code>Language.Spanish</code> with numbers
-1-5. What does the compiler say?</p>
-
-<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
-expression. For example, the value '(_,1)' may indicate a case not
-covered by the pattern(s). However, a pattern rule with a 'when'
-clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
-
-<p>Lastly, let&rsquo;s show the final result of converting our original
-function to F#. If your entire function is just a single pattern
-match, you can remove the <code>match/with</code> line and use the <code>function</code>
-keyword, and simply match against the parameters (which I reversed for
-clarity, but do not need to be written).</p>
+<p>Here is the change to add a new function in the pattern matching example:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -427,25 +336,60 @@ clarity, but do not need to be written).</p>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;uno&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;~~~&quot;</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span> <span class="k">of</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">int</span><span class="o">,</span> <span class="n">IPayment</span><span class="o">&gt;</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="n">IPayment</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="n">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Our original 17 line convert function, converted into a <em>safer</em> 7
-lines! I never had to specify what the types of lang, number and the
-return type are, because the compiler is able to figure that out from
-the code I wrote.</p>
+<p>In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
+<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
+didn&rsquo;t add it in the pattern match, the compiler would give us a
+warning!</p>
 
-<p>If you are not convinced at this point that pattern matching is a big
-step forward in the safety and ease of development, I am not sure what
-else would convince you. More safety means less time spent tracking
-down bugs and more time adding on features!</p>
+<p>Between the options of traditional interfaces verses pattern matching,
+neither way is truly the best for every circumstance: each comes with
+a trade-off. I liken the trade-offs to the &ldquo;grain of the
+data&rdquo;. Whichever way your system is likely to change the most, that is
+the way you want to optimize your type. The good news is: in F# you
+can have a mix of both, and it is relatively easy to convert back and
+forth depending on how your system is changing the most.</p>
+
+<p>Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.</p>
+
+<p>If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.</p>
+
+<p>If you want additional reading on the topic of polymorphism, check out
+<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
+
+<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
 </div>
   
   
@@ -501,6 +445,10 @@ down bugs and more time adding on features!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
@@ -516,10 +464,6 @@ down bugs and more time adding on features!</p>
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
-      <li class="post">
-        <a href="/language-versions/">Language Versions</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -533,7 +477,7 @@ down bugs and more time adding on features!</p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     

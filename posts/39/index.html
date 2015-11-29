@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am a lazy lazy man, and as such I do not like to waste time waiting for things or doing dumb stuff.One place this is evident is in the browser. I &hellip;">
+  <meta name="description" content="I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,7 +87,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/neat-firefox-trick/">Neat Firefox Trick</a></h1>
+      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
     
     
       <p class="meta">
@@ -94,14 +96,16 @@
 
 
 
-<time class='entry-date' datetime='2011-04-18T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2011-05-04T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I am a lazy lazy man, and as such I do not like to waste time waiting for things or doing dumb stuff.<p />One place this is evident is in the browser. I like to know the cool shortcuts and tricks to speed me along my way, and Firefox has tons. Here are some neat tricks I learned this weekend.<p /> From anywhere in Firefox, <strong>Ctrl-k</strong> will take you to the "search bar" and <strong>Ctrl-L</strong> to the "address bar", that is cool, but it gets better.<p />When opening a new tab (<strong>Ctrl+t</strong>) it always defaults your cursor to the address bar. Now many people would just say, "hey steve, don't be a jerk, and just hit <strong>Tab</strong> to move to the search bar, then search." This works, but I search for stuff all the time, and like to cut down on keys even further. <p /> So, I wanted to make the address bar search google for me. To do this, go to about:config, and change the <strong>keyword.URL</strong> value to <a href="http://www.google.com/search?ie=UTF-8&amp;oe=UTF-8&amp;sourceid=navclient&amp;gfns=0&amp;q=">http://www.google.com/search?ie=UTF-8&amp;oe=UTF-8&amp;sourceid=navclient&amp;gfns=0&amp;q=</a> <p /> By default, if you type in "facebook", Firefox will search google and redirect you to the "I'm Feeling Lucky" result, due to the gfns=1. The first result is <a href="http://facebook.com">facebook.com</a>, so that is where you go. But since much of what I type is real searching and not a url, I want to see the results! Changing your <strong>keyword.URL</strong> will still search google, but it will now take you to the results page, which saves me a few extra seconds each search. <p /> Now, in the rare case where I just want to go to Facebook.com, I pull another trick and just type "facebook" and then <strong>Ctrl-Enter</strong> which will pre-pend the "www." and append the ".com"<p /> Wheew, in five to seven years, this might just have saved me the time I spent learning it.<p />Practicality: 2/10<br />Cool nerd learning: 9/10</p><p>EDIT - While this is cool, and I do have it working on my machines, I ended up muscle memorizing the longer but far more portable method of just <strong>Ctrl-t Tab</strong> or <strong>Ctrl-t Ctrl-k</strong>. I know this is not nearly as cool, but hey, if I can open and save a file in emacs, <em>I can do <span style="font-family:mceinline;">anything</span>.</em></p>
+  <div class="entry-content">I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
 </div>
   
   
@@ -157,6 +161,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
@@ -172,10 +180,6 @@
         <a href="/safety-rank-part-2/">Language Safety Score Mark 2</a>
       </li>
     
-      <li class="post">
-        <a href="/language-versions/">Language Versions</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -189,7 +193,7 @@
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     
