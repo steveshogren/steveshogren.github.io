@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Domain modeling in F# is significantly easier and safer than with the
-traditional .NET languages. This is because of the increased safety of
-pattern &hellip;">
+  <meta name="description" content="The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +85,7 @@ pattern &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/pattern-matching-case-study/">Case Study: Type-safe Domain Modeling in F#</a></h1>
+      <h1 class="entry-title"><a href="/the-endless-debate/">The Endless Debate</a></h1>
     
     
       <p class="meta">
@@ -96,27 +94,229 @@ pattern &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-03-14T09:42:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:42 am</span></time>
+<time class='entry-date' datetime='2011-07-22T00:00:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Domain modeling in F# is significantly easier and safer than with the
-traditional .NET languages. This is because of the increased safety of
-pattern matching and the expressiveness of discriminated unions. These
-concepts are not in C# or VB.NET, and therefore bring a new tool to
-the table.</p>
+  <div class="entry-content"><p><br />The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the "best" one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently. Unfortunately, my body has a hard time learning two completely different keyboard systems at the same time. Heck, three and a half years ago, I was still learning to touch-type. <p /> So, three years pass, and I am now no farther along. <p />Additionally, I read on an almost weekly basis, articles that explain how great Emacs and vim are, you just need to learn one, and learn it well. I wanted to stick with Emacs, for the built-in lisp, and <a href="http://blog.vivekhaldar.com/post/3996068979/the-levels-of-emacs-proficiency">several</a> of my <a href="http://sites.google.com/site/steveyegge2/effective-emacs">favorite</a> programmers highly advocate it. But, I wanted to pick up vim, because it is obviously the far superior text editor, and the default on Linux, and probably will help me not get Emacs <a href="http://xahlee.blogspot.com/2010/06/famous-emacs-people-with-hand-injuries.html">RSI</a> but, perversely, it is not nearly as easy to extend as Emacs. <p /> So, the debate raged in my head for three years, and I stupidly got better at neither. Then, the other day, it clicked. Vim is the greatest text editor of them all, with text objects, highly combine-able commands, and modal editing. Emacs is the greatest IDE of all, with an awesome programming language built-in and thousands of classes and libraries to build on. Vim is built in the tradition of a small, sharp UNIX tool; Emacs in the tradition of HAVING thousands of small sharp tools. <p /> Finally, in a rush, it clicked into place with earth-shattering force: I can make Vim inside Emacs, with lisp, but I really could not remake Emacs inside Vim. <p />Suddenly, in one glorious moment, the world all made sense. Vim, the greatest text editor, should be a part of Emacs, the greatest IDE! My searching had been in vain, there was no way to compare them, they are totally different tools!<p /> In my typical child-like innocence, I rolled up my sleeves, opened up an instance of Emacs, and started making Vim. A few hours later, Google pointed out the obvious: Emacs already has a vi mode built-in (viper). Better yet, with a simple file in the right place, I had <a href="http://www.emacswiki.org/emacs-es/Vimpulse">vimpulse </a>(the practically complete Vim mode) installed and ready to go. Suddenly, a huge weight lifted off my chest. I am free to use the best tool for the job, and, like Huck Finn, float off down the river, leaving silly feuds behind me. If my actions here seem unnatural, an abomination, an unholy union, I encourage you, leave behind the fan-boyism, pick up your tools, and come build something with men who see their tools for what they truly are: <span style="text-decoration:underline;">not a good hill to die on</span>.</p>
+</div>
+  
+  
 
-<p>To illustrate this, I found some old code I&rsquo;d written to interact with
-a legacy system. The system uses many single enums on a record to keep
-track of statuses. When one changes, it can cause others to change as
-well.</p>
 
-<p>Here is a typical function that combines two enums to recalculate a
-third.</p>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
+    
+    
+      <p class="meta">
+        
 
+
+
+
+<time class='entry-date' datetime='2011-06-28T00:00:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  At work last month, I was assigned to fix some bugs in an
+  asynchronous legacy code base. My supervisor gave me a month to see
+  what I could do, and to see if I could fix a few tricky bugs. The
+  code is divided into two sections, a client application and a web
+  server. Both the client application and the server have their own
+  persistence, and they communicate through a soap web service.
+</p>
+<p>
+  I wanted to try and write some sort of end-to-end tests around this,
+  but I could not figure out how to get around that web service. I
+  don&#039;t want my tests to rely on a server having to always be up,
+  so I initially was planning on writing tests from the client
+  database to the web service, where I would just stub some responses.
+  I got about an hour into that plan, before I realized I would then
+  have to do that same thing on the server, and that sort of testing
+  will not really tell me what the code <i>does</i>. I needed to cover
+  this whole process end-to-end.
+</p>
+<p>
+ I walked around for a bit, thinking. Then it hit me, both the server
+ and client code are written in VB.NET, and, except for the web service, work
+ just like plain old highly-coupled code. Hmmm.
+</p>
+<p>
+ For the first pass, I wrote an interface to wrap the web service,
+ then used dependency injection to inject a fake web service that (and
+ here is the cool part) simply calls around the web service entirely
+ to the server code directly and injects a different database
+ connection string, so the server talks to a second database I have
+ prepared.
+</p>
+<p>
+ Just like that, I can run, all on my machine, 99 percent of the code
+ in a single end-to-end test. I can even setup several client
+ databases, and rotate them out, to &quot;swap&quot; between several
+ clients in the middle of the tests.
+</p>
+<p>
+ I added a few &quot;integration&quot; tests that do talk to a real
+ published testing web service, just to make sure everything is still
+ in place correctly.
+</p>
+<p>
+  Now, I said this was asynchronous, and it is, the executed
+  system-under-test kicks off a thread to talk to the web service, and
+  so to get it to test, I needed to wait for the thread to finish,
+  then do my assertions.
+</p>
+<p>
+ I used a system where the spun off thread will set a boolean when it
+ has finished running, to let the main thread know it has finished,
+ and the main thread just keeps checking that boolean until it is
+ true. While hackish, that is my current working solution, as no more
+ then one thread is ever spun off at a time, I can just have my test
+ wait for the thread to finish, then complete the required assertions.
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/lisp-repl/">Lisp REPL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-06-04T00:00:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  So, working through the Land of Lisp book, getting the hang of it.
+</p>
+<p>
+Chapter Six, the author starts off by talking a little about
+  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
+  of the "command line" for interacting with lisp. It is pretty cool,
+  you type in code, and it executes. And then he opens the hood a
+  little:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defun</span> <span class="nv">repl</span> <span class="p">()</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">eval </span><span class="p">(</span><span class="nf">read</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+WHAAAAAAAAAAAAAAA??!?!?!
+</p>
+<p>
+I just about spit my drink all over the monitor laughing. The
+function <strong>eval()</strong> evaluates whatever text is passed in
+as code, in this case, from the command line via the obviously
+named <strong>read</strong> and after executing
+it, <strong>print()</strong> prints the result, and it just does that
+forever till you quit.
+</p>
+<p>
+That means, you could make one of these for any language that can
+evaluate strings into code. I know python has one built-in. Php can
+evaluate code with eval, and a quick search shows a highly nifty (and
+robust from the looks of
+it) <a href="https://github.com/facebook/phpsh">REPL for php</a>
+complements of facebook. Sweet. Or, you can use php -a for the
+interactive mode.
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/dont-mock-concrete-classes/">Don't Mock Concrete Classes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-05-24T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>(They have thin skin)</p>
+<p>I have been
+reading <a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1303935530&amp;sr=8-1"
+target="_blank">G.O.O.S.</a> and honestly, much of it has been just a
+reiteration. Until chapter 20, that is. I get to the section Don't
+Mock Concrete Classes, and it clicks.
+</p>
+<p>
+ Mocking concrete classes used to be my bread and butter. Almost every
+ unit test I wrote for the last year had several mocked concrete
+ implementations, to pass in as dependencies of the system under test.
+</p>
+<p>
+What do I mean by that? Imagine a class that takes one dependency
+through the constructor like this:
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">Velocity</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span> <span class="p">(</span><span class="nx">PayoffCalc</span> <span class="nv">$PayoffCalc</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_PayoffCalc</span> <span class="o">=</span> <span class="nv">$PayoffCalc</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">toFloat</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_PayoffCalc</span><span class="o">-&gt;</span><span class="na">getPaymentPerDay</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_calculate</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+Would have a test driving it, looking like this:
+</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -128,56 +328,82 @@ third.</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="n">PositionType</span> <span class="nf">GetPositionType</span> <span class="p">(</span><span class="n">MovementType</span> <span class="n">movementType</span><span class="p">,</span> <span class="n">ApplyToParty</span> <span class="n">applyToParty</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
-</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Held</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">if</span> <span class="p">((</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Return</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Principal</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">||</span> <span class="p">(</span><span class="n">movementType</span> <span class="p">==</span> <span class="n">MovementType</span><span class="p">.</span><span class="n">Deliver</span> <span class="p">&amp;&amp;</span> <span class="n">applyToParty</span> <span class="p">==</span> <span class="n">ApplyToParty</span><span class="p">.</span><span class="n">Counterparty</span><span class="p">))</span>
-</span><span class='line'>            <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Posted</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">Undefined</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">test_velocity_validDailyPayment</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$expectedVelocity</span> <span class="o">=</span> <span class="mi">1392</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">//Mock PayoffCalc-&gt;getPaymentPerDay() to return 3</span>
+</span><span class='line'>  <span class="nv">$PayoffCalc</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;PayoffCalc&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$PayoffCalc</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">once</span><span class="p">())</span>
+</span><span class='line'>             <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">)</span>
+</span><span class='line'>             <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">));</span>
+</span><span class='line'>  <span class="nv">$Velocity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Velocity</span><span class="p">(</span><span class="nv">$PayoffCalc</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expectedVelocity</span><span class="p">,</span> <span class="nv">$Velocity</span><span class="o">-&gt;</span><span class="na">toFloat</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>With some regularity, new records are added to these types of enums,
-causing a dangerous search and update across the system fixing all the
-if/else or switch/case statements.</p>
-
-<p>Right off the bat, pattern matching is a huge win here, taking a hard
-to comprehend function and making the domain concepts clear.</p>
-
+</p>
+<p>
+For several months now, writing unit tests this way has become
+increasingly irritating to me, for several reasons. First off, notice
+how phpunit does a mock? With a string for the classname and the
+method to mock. Obviously, in small scale this duplication is
+manageable, but imagine for a second thousands of unit tests all
+mocking this way, and you will realize it gets out of hand fast. More
+than once in the last year I have set out to refactor a classname or
+method signature, to have dozens of failing unit tests, because they
+all mock the <em>string</em> of the old name.
+</p>
+<p>
+ Secondly, and more importantly, I find this to be brittle because you
+ are locking yourself into an implementation of the class you need
+ mocked. What if I wanted to move that getPaymentPerDay to a different
+ class? Or I changed that version of getPaymentPerDay to
+ getPaymentPerMonth? I would have to traipse through every one of
+ those brittle mocks and rewrite their duplicated, crystalline
+ structure.
+</p>
+<p>
+ Stupid.
+</p>
+<p>
+My inner frustration was so great as to cause me to start thinking up
+all sorts of mad ways to get around this issue. Store the code needed
+to build that mock as text on the class itself, to be parsed and
+executed on the fly? Check. Create massive hierarchical testing
+libraries to build the mocks? Check. And all these did was mask the
+real issue. <strong>I was mocking the concrete
+implementation.</strong>
+</p>
+<p>
+ So, what would mocking the interface be? Well, PayoffCalc actually
+ has two public methods: getPayoffDate() and getPaymentPerDay(). The
+ Velocity class only needs getPaymentPerDay(), but by mocking the
+ concrete class, we are forcing it to depend on
+ the <strong>whole</strong> (undefined) interface of PayoffCalc.
+ Velocity does not need getPayoffDate(), but it is in the interface we
+ give it (in the form of the concrete PayoffCalc).
+</p>
+<p>
+ Whoa. Sounds
+ like <a href="http://en.wikipedia.org/wiki/Interface_segregation_principle"
+ target="_blank">ISP</a>. Written about by Bob Martin. Fifteen years
+ ago. *Forehead smack*
+</p>
+<p>
+I make an interface for this concept of PaymentPerDayRetriever, for
+lack of a
+better <a href="http://martinfowler.com/bliki/RoleInterface.html"
+target="_blank">Role</a>.
+</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">GetPositionType</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Held</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Posted</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">MovementType</span><span class="p">.</span><span class="n">Undefined</span><span class="o">,</span> <span class="o">_</span> <span class="o">|</span> <span class="o">_,</span> <span class="nn">ApplyToParty</span><span class="p">.</span><span class="n">Undefined</span> <span class="o">-&gt;</span> <span class="nn">PositionType</span><span class="p">.</span><span class="n">Undefined</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">interface</span> <span class="nx">PaymentPerDayRetriever</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">getPaymentPerDay</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>If we add a new status to any of these, we will get a compiler warning
-in every place letting us know. If that alone was the win, we&rsquo;d be
-still be ahead by a lot. The domain is so clear here, I can print this
-code out and hand it to my BA to ensure the logic is correct.</p>
-
-<p>Next though, this got me thinking. Why does this set of three enums
-have to be calculated? Why are they even separate? Ah, of course,
-right now they are stored in the database and ORM objects, each with a
-separate field and set of enum ids. Changing that would be costly.</p>
-
-<p>What I want is a domain layer a level higher than the typical database
-ORM classes, something to convert my ORM classes into that will be
-able to do work in a safer way.</p>
-
-<p>Rather than three enums that are supposed to change in lock step (but
-might get out of date), I really want a concept of the three combined
-and &ldquo;frozen&rdquo; together.</p>
-
+<p>
+Then use the interface in the test:
+</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -189,60 +415,34 @@ and &ldquo;frozen&rdquo; together.</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">Direction</span> <span class="o">=</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Held_Deliver_Principal</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Held_Return_Counterparty</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Posted_Return_Principal</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetDirection</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Principal</span>  <span class="o">-&gt;</span> <span class="n">Held_Deliver_Principal</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Held_Return_Counterparty</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Return</span><span class="o">,</span> <span class="n">Principal</span> <span class="o">-&gt;</span> <span class="n">Posted_Return_Principal</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Deliver</span><span class="o">,</span> <span class="n">Counterparty</span> <span class="o">-&gt;</span> <span class="n">Posted_Deliver_Counterparty</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">test_velocity_validDailyPayment</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$paymentPerDay</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>    <span class="nv">$expectedVelocity</span> <span class="o">=</span> <span class="mi">1392</span><span class="p">;</span>
+</span><span class='line'>    <span class="c1">//Mock PayoffCalc-&gt;getPaymentPerDay() to return 3</span>
+</span><span class='line'>    <span class="nv">$PayoffCalc</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMock</span><span class="p">(</span><span class="s1">&#39;PaymentPerDayRetriever&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$PayoffCalc</span><span class="o">-&gt;</span><span class="na">expects</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">any</span><span class="p">())</span>
+</span><span class='line'>        <span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;getPaymentPerDay&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">-&gt;</span><span class="na">will</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">returnValue</span><span class="p">(</span><span class="nv">$paymentPerDay</span><span class="p">));</span>
+</span><span class='line'>       <span class="nv">$Velocity</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Velocity</span><span class="p">(</span><span class="nv">$PayoffCalc</span><span class="p">);</span>
+</span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$expectedVelocity</span><span class="p">,</span> <span class="nv">$Velocity</span><span class="o">-&gt;</span><span class="na">toFloat</span><span class="p">());</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Now I have a combined Direction that merges the three concepts into
-one. It is impossible with this new merged type to have an invalid
-state across the three. Getting any of the types back out to convert
-into the ORM classes or do some work is as simple as another match:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">GetMovementTypeToSaveInORM</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Deliver_Principal</span> <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="n">Deliver</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Posted_Return_Principal</span> <span class="o">|</span> <span class="n">Held_Return_Counterparty</span> <span class="o">-&gt;</span> <span class="n">Return</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetSendFn</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Deliver_Principal</span> <span class="o">|</span> <span class="n">Posted_Return_Principal</span> <span class="o">-&gt;</span> <span class="n">SendMessageToPrincipal</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Held_Return_Counterparty</span> <span class="o">|</span> <span class="n">Posted_Deliver_Counterparty</span> <span class="o">-&gt;</span> <span class="n">SendMessageToCounterparty</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While it is possible to make an equivalent C# enum and combine these
-in a similar way, it is inherently unsafe (nothing to guarantee you
-covered every case) and therefore appropriately uncommon. The typical
-answer for safe polymorphic dispatch in C# is to use an interface and
-classes. Unfortunately, something still has to dispatch on that enum
-id, either inside a class or at the time of class instantiation. That
-is a vector for errors.</p>
-
-<p>Because F# interops so well with C#, it is possible to build in a
-domain layer in F# immediately that calls down to your C# ORM
-classes. Converting from a set of dangerous C# enums into a
-constrained and safe F# discriminated union is easy and will simplify
-your domain to its essence.</p>
-
-<p>For reasons like this, when I have to build something with a rich
-domain, I reach for F#.</p>
+<p>
+By mocking the interface, I have freed my Velocity class from knowing
+about the rest of the old PayoffCalc interface, and when I realize
+later that my PayoffCalc really is doing two totally separate things,
+I can just move the PaymentPerDayRetriever interface to
+getPaymentPerDay's new home (probably on the PaymentRepository, not
+shown here).
+</p>
+<p>
+ While this example only used one method per interface, in reality, it
+ would have all the methods necessary to complete that aspect of the
+ class.
+</p>
+<p>
+Fascinating.
+</p>
 </div>
   
   

@@ -9,8 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Clojure is a delightful language, and here are six uncommonly
-discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest &hellip;">
+  <meta name="description" content="I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +85,7 @@ discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest 
       
   <header>
     
-      <h1 class="entry-title"><a href="/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons Why Clojure Is a Delight</a></h1>
+      <h1 class="entry-title"><a href="/put-it-in-the-wiki/">Put It in the Wiki</a></h1>
     
     
       <p class="meta">
@@ -95,302 +94,72 @@ discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest 
 
 
 
-<time class='entry-date' datetime='2015-02-09T11:36:00-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 am</span></time>
+<time class='entry-date' datetime='2011-04-14T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Clojure is a delightful language, and here are six uncommonly
-discussed reasons why.</p>
-
-<h2>1 - Dead Simple Unit Test Mocking</h2>
-
-<p>Clojure is the easiest language to unit test I have ever
-seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
-replacement of the function definition. No extraneous interfaces, no
-dependency injection, no mocking framework.  The built-in function <code>with-redefs</code>
-will replace any function in any library or
-namespace with a new definition.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">next-id</span> <span class="p">[</span><span class="nv">connection</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nf">get-current-id</span> <span class="nv">connection</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">testing</span> <span class="s">&quot;next-id&quot;</span>
-</span><span class='line'>  <span class="c1">;; bind get-current-id to a lambda that always returns 4 </span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">with-redefs</span> <span class="p">[</span><span class="nv">get-current-id</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="mi">4</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">5</span> <span class="p">(</span><span class="nf">next-id</span> <span class="nv">nil</span><span class="p">)))))</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
+  <div class="entry-content"><p>I realize this is the most obvious thing ever, but everywhere I have worked has had a huge knowledge base of tips, tricks, processes, etc and a meager wiki with sparse, outdated, or worse, useless information.</p> <p>I have always been a champion of the wiki, and while a wiki can easily grow out of sync with the business, if you find yourself answering the same questions week after week, you need to document that somewhere, and a text document checked into code control doesn&#039;t count! Why not? You can&#039;t easily search across hundreds of text documents to find something, and if you <i>are</i> that tedious, then you also have to remember to update it <i>before</i> you search, otherwise you get stale information. And if you have that kind of free time and spare memory, you and I need to have a talk.</p> <p>So, a wiki it is. It is always up to date, always on, accessable anywhere with internet. Brilliant. </p> <p>And, most importantly, when someone asks me a familiar question, I simply tell them to Put It In The Wiki, because next time the first thing out of my mouth is Did You Check the Wiki?<br /> </p>
+</div>
+  
+  
 
 
-<p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
-the scope of <code>with-redefs</code>. Couldn&rsquo;t be more simple! The binding
-only is in scope for code inside and called by the s-expression of the
-with-redefs, so no need to unbind it after the test.</p>
-
-<h2>2 - Amazing Editing</h2>
-
-<p>Many arguments have been made over those contentious
-parentheses. While the most powerful use of s-expressions is to easily
-allow macros, for the day to day, s-expressions have a very important
-use: amazing editing!</p>
-
-<p><img class="center" src="http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif" title="image" alt="images"></p>
-
-<p>With ParEdit (available in most editors), it is trivial to select,
-move, replace, grow, or shrink any s-expression, string, map, or
-list. <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">This animated guide</a>
-shows excellent examples of ParEdit that are too
-complex to explain here.</p>
-
-<p>Languages that don&rsquo;t have a surrounding delimiter for expressions
-leave you jumping around with the mouse and arrow keys a whole lot more.
-Because it is so much easier to write a parser to select <code>(add 1 2)</code>
-than it is for <code>add(1, 2)</code>, the tooling can be so much better.</p>
-
-<p>No local editing tool I have seen comes close to Vim with ParEdit for
-effective editing.</p>
-
-<h2>3 - Live Attached Repl</h2>
-
-<p>Developing in Clojure against a running version of the program is a
-huge bonus for development speed. While possible to get similar
-behavior with an attached debugger in other languages, the fluidity of
-an always-on live attached repl is incredible. At any point, it is
-possible to run and rerun any given expression to see the
-results. More than once, I have seen an exception caused by calling a
-certain function. I trace that function to see the exact inputs that
-cause the exception, and am able to quickly run every line of the
-offending function to see the source.</p>
-
-<p>If a debugger sheds light on a single line at a time when running an
-application, a live attached repl sheds light on the entire
-application.</p>
-
-<h2>4 - No-fuss Polymorphism</h2>
-
-<p>One of the best claims about &ldquo;traditional&rdquo; Java OO is
-polymorphism. The ability to make an interface with concrete classes
-gives the powerful ability to replace behavior dynamically. The
-trouble is, Java&rsquo;s polymorphic dynamic dispatch is single dispatch - the
-decision of which method to call is limited to a single thing: the
-type of the callee. If this was the only type of dynamic dispatch you
-ever knew of, it might be hard for you to consciously realize it was
-ever a limitation, especially if you&rsquo;ve never seen examples of
-multiple dispatch.</p>
-
-<p>While most of the time, in any language with first class functions, it
-is possible to achieve a similar effect by passing functions, it is
-also possible to get a similar value with something called multimethods.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:dog</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;woof says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:cat</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;mow says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;woof says Spike&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;mow says Mr Cat&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
-<p>In this example, we use the <code>:animal</code> keyword to be the &ldquo;route&rdquo; function,
-and the two methods fill in two of the possible concrete types. We are
-not limited to just a keyword, we can dispatch on anything on the
-passed map, for example, the oddness of the id:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">odds?</span> <span class="p">(</span><span class="nb">comp </span><span class="nv">odd?</span> <span class="ss">:id</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">true</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;odd id&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">false</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;even id&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;odd id&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;even id&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>While both examples are a bit silly, they should demonstrate the power
-of simple polymorphism. But you might think, what about inheritance?
-Multimethods allow that too!</p>
-
-<h2>5 - Simple Multiple Inheritance</h2>
-
-<p>We don&rsquo;t build inheritance on a single type, but on a hierarchy of
-keywords. Those can be dispatched on just like any other
-keyword. First, an example hierarchy of keywords using the built-in
-functions <code>derive</code> and <code>isa?</code>. These <code>::</code> keywords are
-namespaced, which prevents collisions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::cat</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::cat</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::mammal</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span></code></pre></td></tr></table></div></figure>
+<time class='entry-date' datetime='2011-04-12T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
 
 
-<p>A <code>::dog</code> is-a <code>::mammal</code> and is-a <code>::hairy</code>, the
-classical diamond problem (without the common ancestor, which is
-possible, but unneeded for the example).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;chirps&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;breathes&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;chirps&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Dog&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;breathes&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">shave</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;shivers&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::hairy</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;stuggles&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;maybe cant be shaved!&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">prefer-method</span> <span class="nv">shave</span> <span class="ss">::hairy</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;shivers&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Rufs&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;stuggles&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+</div>
+  
+  
 
 
-<p>We can see the <code>::dog</code> keyword doesn&rsquo;t have an explicit speak or shave
-implementation, which is fine, because it will then use the &ldquo;preferred&rdquo;
-parent implementation, which returns &ldquo;breathes&rdquo; for speak or
-&ldquo;struggles&rdquo; for shave. Since we can have a keyword be the child of
-multiple parents, we get a multiple inherited behavior, where the
-preferred match is the one returned.</p>
-
-<p>This is possible because the default equality check of multimethod is
-the <code>isa?</code> function. Because of this, uses of multimethod
-hierarchies can have inherited behavior for complex structures.</p>
-
-<h2>6 - Mostly Monadic</h2>
-
-<p>Languages like Haskell and F# have tools like the maybe monad that add
-safety to operations. For example, using the maybe monad can
-completely prevent null reference exceptions by making you ensure you
-&ldquo;unpack&rdquo; the value every time.</p>
-
-<p>How does Clojure address this? In a typical Clojure way, which gives
-80% of the value for 20% of the effort, Clojure has a great
-relationship with empty lists and nil. Rather than wrapping every
-value that is nullable in a type, Clojure&rsquo;s default functions all
-<em>mostly</em> deal with nil and empty without throwing exceptions. For
-example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">get </span><span class="p">{</span><span class="ss">:id</span> <span class="mi">5</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 5</span>
-</span><span class='line'><span class="p">(</span><span class="nb">get </span><span class="nv">nil</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">])</span>
-</span><span class='line'><span class="c1">;; =&gt; 3</span>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'><span class="p">(</span><span class="nb">count </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 0</span>
-</span></code></pre></td></tr></table></div></figure>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
+    
+    
+      <p class="meta">
+        
 
 
-<p>This allows functions to be chained without fear that along the way a
-nil will get returned.</p>
 
-<p>Since most of the core functions are &ldquo;smart&rdquo; about nil, you gain much
-of the value and safety of monads without most of the
-hassle. Ultimately, a more rich type system would allow for custom
-types which can be domain specific, but in day-to-day working,
-primitive safety is still a huge win.</p>
 
-<h2>Conclusion</h2>
+<time class='entry-date' datetime='2011-04-11T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
 
-<p>These are a few simple features that keep me coming back to Clojure,
-even from languages like F# and Haskell. While Clojure is a bit more
-wordy than the ML family, and not as type safe, the simplicity of
-these features keep me coming back for more!</p>
+
+  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
 </div>
   
   
@@ -399,8 +168,6 @@ these features keep me coming back for more!</p>
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/posts/12">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     

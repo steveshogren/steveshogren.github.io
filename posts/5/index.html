@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I want to make a model that predicts bugs. I previously wrote a table for scoring language safety:
-Programming Language Safety Score,
-but it was &hellip;">
+  <meta name="description" content="Pattern matching is a simple tool that will make your code safer and
+easier to read. Consider the following code that converts an Int to a string. 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +86,7 @@ but it was &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/safety-rank-part-2/">Language Safety Score Mark 2</a></h1>
+      <h1 class="entry-title"><a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a></h1>
     
     
       <p class="meta">
@@ -96,218 +95,740 @@ but it was &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-07-24T10:13:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 am</span></time>
+<time class='entry-date' datetime='2014-04-28T22:05:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:05 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I want to make a model that predicts bugs.</p>
+  <div class="entry-content"><p>Pattern matching is a simple tool that will make your code safer and
+easier to read.</p>
 
-<p>I previously wrote a table for scoring language safety:
-<a href="http://deliberate-software.com/programming-language-safety-algorithm/">Programming Language Safety Score</a>,
-but it was extremely time consuming to score new languages or make modifications.</p>
+<p>Consider the following code that converts an Int to a string.</p>
 
-<h2>Simplify, Simplify</h2>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">English</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">string</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>After being told I was <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>
-the data, I&rsquo;ve attempted to clean up by simply checking if each category is
-enforced, possible, or impossible. I score each as either 1 (language enforced),
-0 (possible, but you have to remember to do it), or -1 (impossible). When the
-magnitudes of the new model are compared with the previous model, they come out
-very similar. The shape of the curve pretty much stays the same, which I was
-told indicates that the character count weighting was a variable that didn&rsquo;t
-matter.</p>
 
-<p><img class="center" src="/images/rplot.jpg" title="image" alt="images"></p>
+<p>What happens when we make this simple change?</p>
 
-<p>The code I used to generate the plot and normalize the scores can be found here:
-<a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">English</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">German</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Safety Definitions</h2>
 
-<p>A definition of the safety checks is as follows:</p>
+<p></p>
 
-<p><div ng-app="TableApp2">
-<div ng-controller="TableCtrl">
-<table class="langtable">
-<tr><th>Check</th> <th>Description</th></tr>
-<tr ng-repeat="check in langChecks">
-<td> {{ check.name }} </td>
-<td>  {{ check.desc }}  </td>
-</tr>
-</table></p>
+<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
+any indication that something is missing? Nope! Our code has a
+potential bug that is only exposed at run-time, and nothing will tell
+us that. We made it fail gracefully by ensuring our code always
+returns at least an empty string, but we have created a bug that can
+only really be caught by something external: either automated tests or
+manual checking.</p>
 
-<p>The new scores are shown here, with a lot more languages added in:</p>
+<p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
+seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
+that it just makes things even worse.</p>
 
-<p><p class="lead">
-<div style="overflow-x:scroll">
-<table class="langtable">
-<tr>
-<th>Safety Check</th>
-<th></th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
-</th>
-</tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
-<tr class="totals"><td>Totals</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ lang }}
-</td>
-</tr>
-<tr class="totals"><td>Magnitude</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}%
-</td>
-</tr>
-</table>
-</div></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Spanish</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">English</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// somewhere else...</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">lang</span><span class="p">).</span><span class="n">convert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ILanguage</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">English</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Spanish</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">default</span><span class="p">:</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Current Languages:
-<span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }},
-</select></p>
 
-<h2>So, What&rsquo;s the Point?</h2>
+<p></p>
 
-<p>To see how this model corresponds with data in the real world, I used the GitHub
-API to query for the number of bugs created in repositories with more than 15
-forks created in a span from 2011 to 2015. Commits were counted by summing the
-commit counts of all contributors.</p>
+<p>We have turned 21 lines in one file into 36 in three files (not
+counting namespaces and imports). Does this new structure give us any
+additional safety when we add a new concrete implementation? How about
+when we add a new enum value? This code is even more likely to cause
+bugs than the first, because now we have an implicit coupling between
+the enum and the concrete class. We could get rid of the enum, and
+&ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
+concrete class to instantiate.</p>
 
-<p>I decided to rely on the count of commits as a standard for a unit of work. My
-assumption was that across fifty different projects, the commit sizes would
-average out. Once the unit of work was decided on, I wanted to find the ratio of
-bugs per commit for each language.</p>
+<p>Imagine if the compiler could warn us when either the enum or the
+class changed. Imagine if instead of having to hunt down the possible
+uses, we could just compile and fix the errors.</p>
 
-<p>I collected the ratio of bugs logged per commit for each repository, and after
-grouping by primary language, removed the top and bottom 25% using the
-bug/commit ratio, which is a common practice in statistics to help find a more
-accurate average. I summed the bugs and commits of those remaining repositories
-grouped by language, finding a total average bug/commit ratio for each language
-grouping. Here is that data, sorted by safety score.</p>
+<p>Good news, we can!</p>
 
-<p><table class="langtable">
-<tr><th>Language</th>
-<th>Bugs</th>
-<th>Commits</th>
-<th>Repositories</th>
-<th>Bug/Commits</th>
-<tr ng-repeat="lang in languageRatios">
-<td> {{ lang.name }} </td>
-<td> {{ lang.bugs }} </td>
-<td> {{ lang.commits }} </td>
-<td> {{ lang.repos }} </td>
-<td> {{ getBugsRatio(lang) }} </td>
-</tr>
-</table></p>
+<p>Check out this F# code. If you have never seen F# before, I know, it
+looks completely crazy! It <em>still</em> looks a little weird to me, but
+just try to read it. I think you will surprise yourself. This is a
+function called <code>convert</code>, and if you keep in mind that the types
+always come AFTER the value, the code makes a lot more sense. A
+parameter in C# would be <code>int number</code>; in F# it is written
+<code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
+you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
+second it is a lot more powerful!</p>
 
-<p>Here are the languages sorted by safety score with bug/commit ratios:</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">:</span><span class="n">Int</span><span class="o">,</span> <span class="n">lang</span><span class="o">:</span><span class="n">Language</span><span class="o">)</span> <span class="o">:</span><span class="kt">string</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>               <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
+</span><span class='line'>               <span class="o">|</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;two&quot;</span>
+</span><span class='line'>               <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><img class="center" src="/images/errorChart.jpg" title="image" alt="images">
-<img class="center" src="/images/bugsAverage.jpg" title="image" alt="images"></p>
 
-<p>I took the magnitude of the safety scores and the bug/commit ratios. After
-inverting the safety scores, I overlaid them both onto a single graph.</p>
+<p></p>
 
-<p><img class="center" src="/images/bothMags.jpg" title="image" alt="images"></p>
+<p>We are using the same enum from the C# file, but it is missing
+something, right? Where are the Spanish and German parts? I try to
+compile this and what do I see?</p>
 
-<p>Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
-buck the trend, but otherwise the languages follow a pretty consistent slope
-down in bugs. Taking the correlation gives a
-<a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">correlation coefficient</a>
-of .55</p>
+<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
+matches on this expression. For example, the value 'enum&lt;Language&gt;
+(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
 
-<h2>What About Unit Tests?</h2>
+<p>Spittake mushroom soup, the compiler just caught a potential bug for
+us! A C# run-time bug no less! Not only is this very powerful, but it
+is so simple. I can code the way I normally do, only now I get
+additional safety for free! And no unit or integration test would ever
+catch this class of errors.</p>
 
-<p>Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
-other factor, I collected data on how many tests each repository had. I counted
-the number of files containing &ldquo;test&rdquo; or &ldquo;spec&rdquo;, which gave the following,
-sorted by tests per commit:</p>
+<p>Heck, if you really want to keep your classes and interfaces in C#,
+you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
 
-<p><table class="langtable">
-<tr><th>Language</th>
-<th>Tests</th>
-<th>Commits</th>
-<th>Repositories</th>
-<th>Tests/Commits</th></tr>
-<tr ng-repeat="lang in sorter(languageRatios)">
-<td> {{ lang.name }} </td>
-<td> {{ lang.test }} </td>
-<td> {{ lang.commits }} </td>
-<td> {{ lang.repos }} </td>
-<td> {{ getTestsRatio(lang) }} </td>
-</tr>
-</table></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span> <span class="n">English</span><span class="bp">()</span><span class="o">.</span><span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>PHP, Python, and Ruby all have a higher then average number of tests, but
-Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
-average number of tests, yet they score relatively average in bugs/commit.</p>
 
-<h2>Conclusion</h2>
+<p>This still calls the C# class above, and now the compiler gives us a
+warning when we add a new enum value!</p>
 
-<p>In conclusion, the current safety model I have proposed seems to account for a
-moderate reduction in bugs per commit across the sampled languages, but is not
-the only factor. It currently is unable to account for a significantly lower
-than expected bug count in Ruby and Clojure.</p>
+<p>In this way, pattern matching is able to clearly remove edge cases. We
+converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
+<code>match</code>.</p>
 
-<h2>Special Thanks</h2>
+<p>BONUS ROUND!</p>
 
-<p>Special thanks to (in alphabetical order):
-<a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
-<a href="http://asymmetrical-view.com/">Kyle Burton</a> (General Advice),
-Nils Creque (Listening Board),
-Max Haley (Python, Ruby, Teaching me how to math),
-<a href="https://github.com/danielmiladinov">Daniel Miladinov</a> (Java, Scala, Morale Support),
-Keith O'Brien (Ruby and JS),
-<a href="https://github.com/arlaneenalra">Chris Salch</a> (CoffeeScript and JS),
-and <a href="https://github.com/timvisher">Tim Visher</a> (Clojure).</p>
+<p>What we have already seen of pattern matching makes it a better
+<code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
+<code>match/with</code> statement allows for patterns matched to have a <code>when</code>
+clause which only matches when the condition is true:</p>
 
-<p>Additional thanks to the posters on
-<a href="https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/">/r/rust</a>,
-including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
-<a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
-<a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Large!&quot;</span>
+</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
+</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Complaints Department</h2>
 
-<p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
-requests for new languages:
-<a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js">blog source</a>. Just
-pick an existing language, edit the name and values, and &ldquo;copy to clipboard&rdquo; to
-build your own language data structure. Send it to me in a PR and I&rsquo;ll include
-it along with a thanks on the page.</p>
+<p></p>
 
-<p><div ng-show="showRealName">
-<h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-</h2>
-<h2><input ng-model="selectedLang.name"></input></h2>
-<table class="langtable">
-<tr><th>Check</th><th>Option</th></tr>
-<tr ng-repeat="check in langChecks">
-<td style="background-color: {{scoreClass(score(selectedLang[check.key]))}} ">
- {{ check.name }}:  {{score(selectedLang[check.key]) }}
-</td>
-<td>
-<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-</td>
-</tr>
-</table></p>
+<p>Running the compiler again give us:</p>
+
+<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
+Warning FS0025: Incomplete pattern matches on this expression. For
+example, the value '1' may indicate a case not covered by the
+pattern(s). However, a pattern rule with a 'when' clause might
+successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>That&rsquo;s right, it checks numbers too.</p>
+
+<p>Lastly, it is possible to match on a combination of values, all at
+once. We can convert our more complex structure to something simpler
+using this trick, and the compiler is still intelligent enough to
+check for missing cases.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span><span class="o">,</span> <span class="n">number</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Larger than one!&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;dunno&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
+<code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
+default for any number in <code>Language.English</code> not already matched. The
+bug in the code here is the missing <code>Language.Spanish</code> with numbers
+1-5. What does the compiler say?</p>
+
+<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
+expression. For example, the value '(_,1)' may indicate a case not
+covered by the pattern(s). However, a pattern rule with a 'when'
+clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
+
+<p>Lastly, let&rsquo;s show the final result of converting our original
+function to F#. If your entire function is just a single pattern
+match, you can remove the <code>match/with</code> line and use the <code>function</code>
+keyword, and simply match against the parameters (which I reversed for
+clarity, but do not need to be written).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;uno&quot;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;~~~&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our original 17 line convert function, converted into a <em>safer</em> 7
+lines! I never had to specify what the types of lang, number and the
+return type are, because the compiler is able to figure that out from
+the code I wrote.</p>
+
+<p>If you are not convinced at this point that pattern matching is a big
+step forward in the safety and ease of development, I am not sure what
+else would convince you. More safety means less time spent tracking
+down bugs and more time adding on features!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Learn-To-Database/">Learn to Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-16T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  "... and it has to return 45,000 records a minute, or we are all
+  screwed."
+</p> <p> Monday morning, we inherited a legacy codebase. Tuesday, the
+  word came down on stone tablets. Forty-five thousand records a
+  minute, and no amount of political maneuvering or incremental gains
+  were going to do. Too many broken promises. The last team mass quit
+  over three months, leaving us the two most junior
+  developers. Someone high up promised big, and the buck stopped with
+  us.
+</p> <p> "Does anyone even know the throughput now?"
+</p> <p> We still don't even have the dumb thing running on our
+  machines. Two weeks later we have it running and enough data to test
+  it. 2500 records a minute. When scaled to 45000 records it is still
+  going 30 minutes later, so it doesn't even scale linearly. We are
+  screwed.
+</p> <p> Most of us are front-end developers who stepped forward when
+  everyone else stepped back. Databases are a distant memory,
+  something we maybe did a few jobs back. You "join" tables, right?
+  What we know of this process is it selects from 2-3 dozen databases
+  using an ORM while running through an engine that does some
+  supposedly massive calculations on the data, returning a message with
+  several hundred fields. It can't be that hard to speed up.
+</p> <p> "We need a new architecture, with read-optimized databases
+  and queue-based messaging."
+</p> <p> None of us have ever built such a system, but we have read
+  about it, and like the faithful we nod solemnly in agreement. Why
+  not? If the database is read-optimized, surely it will perform like
+  we need. But a few desist.
+</p> <p> Like paratroopers dropped into unknown territory without a
+  map, we start to canvas the code, looking for landmarks. We split
+  into two teams, one to try to speed up the current system, the other
+  to start on the new architecture. Two teams trying two different
+  approaches doubles our chances, right? Whiteboards around our desks
+  fill with maps, glossaries, and diagrams. My team starts to dissect
+  this mostly home-made ORM.
+</p> <p> "Why is this selecting from the same table twice?"
+</p> <p> The ORM generated query selects a list of id's from table A,
+  then puts those id's into a list as a filter for the same table:
+</p> <p>
+  SELECT * FROM A WHERE ID IN (SELECT ID FROM A WHERE ...)
+</p> <p> We scratch our heads a bit, but hey, that can't hurt
+  anything, surely the database figures that sort of stuff out? Isn't
+  that what... indexes do? Our most database-savvy developer can't
+  stop coming back to that query. He says it doesn't smell
+  right. Finally, he takes out the "WHERE IN" filter, shims in the
+  query, and runs the process.
+</p> <p>
+  "Guys, the whole thing, all 45k came back in 40 seconds."
+</p> <p> We scoff at him, good joke! Our profiling showed time chewed
+  up fairly evenly at every level throughout the entire
+  process, not just the initial query. So the process came back,
+  just empty, right? And who knows what Ancient Ones you disturbed by
+  messing around with what the ORM generates, it will probably never
+  work again. We run it again, 40 seconds, correct count of
+  records. Odd, freak coincidence. We run it with the old filter still
+  in place, it comes back 30+ minutes later, same exact data. Whoa,
+  wait, what?
+</p> <p> Turns out, this ORM uses SELECT-WHERE-IN for every entity
+  join. That first SELECT FROM A WHERE ID IN (SELECT ID FROM A WHERE
+  ...) was used as the base criteria for every single lazy look-up of
+  every entity on A, which were legion. What looked like slowness
+  across the entire process was really ORM lazy loading at every
+  level, with that first SELECT-WHERE-IN as the final filter in a line
+  of nested SELECTS, some four levels deep. That initial bad query
+  gets run countless times, and when it is slow, the whole system is
+  slow.
+</p> <p> This is the story of how I learned an important lesson: if
+  you are going to database, LEARN TO DATABASE.
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/streaks/">Challenge - Code Every Day</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-28T00:00:00-05:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  You know what will make you a phenomenally better developer?
+  Deliberate practice. How do you get such practice? By doing it every
+  single day. Random bursts of effort over the odd weekend will gain
+  you practically nothing comparatively, even if the time investment
+  is the same. Your mind needs repetition and consistent effort to
+  improve. So what do you want to get better at?  Pick your highest
+  value subject: vim, regex, functional programming, meta-programming,
+  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
+  practice it every single day. Easy as that.
+</p>
+<p>
+  When GitHub first came out with the "streak" feature on the front
+  page, I realized it was time to stop my binge coding on the
+  occasional weekend and start a system. Inspired by other recent
+  system-based successes (working out every day), I decided to code
+  every day for a year.
+</p>
+<p>
+  I quickly realized that anything requiring detailed plans and
+  designs is harder to do. Working though a book, on the other hand,
+  is easy to start and stop. I started working through a book I had
+  tried to read before: Let Over Lambda.
+</p>
+<p>
+  Let Over Lambda is intense, filled with deeply complex concepts
+  written in Common Lisp, a language with which I was only passingly
+  familiar. But I managed to get through it without hardly any
+  difficulty. How did I do that?
+</p>
+<p>
+  I got a cheap netbook, and started to code on the train ride home.
+  Interestingly, without any internet, I was much less distracted, and
+  could just sit down and be in the zone within the minute (this from
+  the guy whom it takes 20+ minutes to get in the zone at work). With
+  only a limited span of ~25 minutes, I had no time to waste, and
+  without people to talk to my brain just falls into it. I can only
+  pinpoint a few times I could not get into the zone, and those were
+  extreme circumstances of exhaustion or illness.
+</p>
+<p>
+  In ten months, I have:
+  <ul>
+    <li>
+      worked through Let Over Lambda once and read it twice
+    </li>
+    <li>
+      worked twice through the PLAI programming languages book
+      (once in Scheme and once in F#)
+    </li>
+    <li>
+      read Clojure Programming, F# 3.0 Programming, and am currently
+      in Real World Haskell
+    </li>
+    <li>
+      completed the exercises up to chapter three of SICP
+    </li>
+    <li>
+      authored a small Clojure library for run time type checking
+      (don't use mine, use Prismatic's)
+    </li>
+    <li>
+      prepared and given a two hour talk about macros at a local meet-up
+    </li>
+  </ul>
+  Pretty incredible for only ~25 minutes a day! That is more
+  programming books than I had read in the previous 2 years. I have
+  improved mightily in such a short time, and it does not feel
+  stressful in the least. Now, when I get home, if I feel like
+  watching movies, cooking, or playing board games/Dark Souls all
+  night, no problem! I can relax knowing I have accomplished my goals
+  for the day. All in all, the last ten months have been incredible:
+  some of the most rewarding, relaxing, and fulfilling months of my
+  life.
+</p>
+<p>
+  Before you scoff and point out that not everyone can take the train
+  to work, consider this: get a portable computer, load up your
+  environment, tools, and some pdfs. The next morning, leave for work
+  ~25 minutes early. You will probably get in way sooner due to the
+  decreased traffic (now you have earned back that time). Sit quietly
+  in your car, and without the distractions of internet or other
+  people, knock out a little programming. Maybe start with SICP (the
+  best programming book I have ever read). See how much you can read
+  and do before work starts. Do that for a month, every day. I
+  guarantee you will learn something amazing.
+</p>
+  
+ 
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/501-developer/">The 5:01 Developer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-14T00:00:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  Can we agree for this post that money, energy, time, and effort are
+  all forms of power? Like literally, if I wanted to build a building,
+  I am going to need tools, skills, materials, labor. I can use the
+  most liquid form of power I have (cash) to acquire all these things,
+  or I can use a much less liquid form of power (my time) to harvest,
+  extract, refine, learn, and build my building myself. Usually,
+  economies of scale mean it is dramatically more efficient for me to
+  specialize in one way of converting time into liquid power. Then,
+  when I need something, I simply pass that money on to someone else
+  who is also a specialist.
+</p>
+<p>
+  Now you know why I don't quarry my own stone to build an
+  amphitheater in my back yard.
+</p>
+<p>
+  When you work a job, you are converting one form of power you have:
+  time (and usually skills), into another much more liquid form of
+  power: money. One can extend the model to include calories and
+  shelter (the power to sleep safely) along with time and skills.
+  Great, this is just basic economics, right? You need power (money)
+  to buy power (food and shelter) to buy power (time) to convert back
+  into more power (money). Since you are "harvesting" something finite
+  and therefore scarce (time out of your short life), if you are
+  disciplined and lucky, you can consistently end up with a net
+  positive.
+</p>
+<p>
+  On to the point! I read a post today mentioning
+  the <a href="http://www.hanselman.com/blog/DarkMatterDevelopersTheUnseen99.aspx">"5:01 developer"</a>. It made me mad.
+</p>
+<p>
+  Ideas like this are so subtle they just seep into your psyche. I
+  don't think anyone would say under normal conditions, "I should
+  really work for free today". But, effectively, that is what this
+  whole phrase is about. The phrase lets people who cram eight hours
+  of work into ten hours "get back" at those that get the same work
+  done in six to eight. To clarify, this title is not about "saving
+  the company" or "giving back to society"; those are unusual
+  conditions. No, it is a chastisement of developers who do not "give
+  back to the company". Sort of a tax, for the privilege of getting
+  paid to work there, you should, according to this ideal, just give
+  back some of that power they gave you. Thinking about this with the
+  power model, you should accept money to work there in exchange for
+  your time, but, when the time comes, you should deliberately
+  short-change yourself by giving them extra time. Like some sort of
+  weird tip.
+</p>
+<p>
+  Hopefully this sounds as ridiculous as it really is.
+</p>
+<p>
+  Now, in that post, the author sort of backpedals a little bit,
+  saying that <i>what he really meant</i> was a developer who stops
+  thinking about development as soon as work is over: someone not
+  passionate. The issue I have is the whole wording of that phrase
+  assumes a passion for their <i>job</i>, not a passion for
+  their <i>craft</i>.
+</p>
+<p>
+  I do not think it makes sense to demand every person
+  be <i>passionate</i> about the job they are doing. There have been
+  many times I have (even at a job I normally loved) done long,
+  boring, and fruitless work. I did not do that work out of my passion
+  for the "Mission: Save the World of Enterprise Banking", but because
+  I am a professional: I do what needs to be done to the best of my
+  abilities.
+</p>
+<p>
+  I think professionalism is very important. In others I work with, I
+  want to see the attitude that causes someone to stay abreast in
+  their field. I want to be around those who keep their own saws
+  sharp, who come in and work hard, and who push themselves and those
+  around them to be best they can.
+</p>
+<p>
+  Back to overtime: in my experience, very few offices care enough
+  about their developers to let them sharpen their saws at work, so
+  why would you waste your precious free time there? Will they pay you
+  more for it? Doubtful. Will they be less likely to fire you when
+  times get tough? <i>Maybe</i>. Sounds to me like a lot of
+  speculation. A lot of investment for a marginal or non-existent
+  return. If you want more money: either ask for a raise, go take a
+  raise at a new job, or work a second job on the side. Those have a
+  direct impact on your income. Putting in extra hours hoping someone
+  will notice and reward you for it makes about as much sense as
+  assuming you will get a raise for wearing the boss's favorite color
+  every day.
+</p>
+<p>
+  Consider the person who stays one extra hour a day as an
+  "investment". The typical end of the year raise scale I have seen in
+  the US in companies larger than 30 people is a 0-5% increase a
+  year. Uncommonly does someone get more than that, and should not be
+  considered a usual practice. The typical best you can expect is
+  5%, maybe a bonus (in four diverse jobs, none gave bonuses, so I
+  haven't considered them personally). Back to the extra hour a day. Not
+  completely out there, not putting in a vast amount extra, right?
+  Well, one extra hour is 12.5% percent more hours a day. But the most
+  you can expect, on average, is 5%, if you are lucky! To put it in
+  perspective, I have seen guys put in 12 hour days and get fired
+  because the boss didn't get along with them.
+</p>
+<p>
+  At a <i>few</i> points in my career, I worked longer hours. Once it
+  was because I truly enjoyed the work and it was fun. Another time it
+  was because I felt like the extra time was going to directly pay off
+  as an investment (it didn't). A few times I have stuck around to
+  "wrap this off" or "help out with something deeply unusual that has
+  to be done outside normal work hours". I recently recommended to my
+  little brother he work longer hours, as he was hired without many
+  needed skills and on shaky footing with the boss. He worked out a
+  deal where he spent two extra hours a day for a couple months
+  reading and practicing to get "caught up". His boss got to see his
+  hustle when he was the first one in and last one out every day; he
+  got to study away from the distractions of everyday life. <b>In all
+  circumstances, make overtime the exception, never the rule.</b>
+</p>
+<p>
+  One last point. Before you think me a selfish jerk about my free
+  time, know that I make it a daily habit to spend 30-60 minutes
+  outside work advancing my development skills. I practice interactive
+  rebases, work through awesome books, do online courses, advance side
+  projects, contribute to open source, give local meetup talks, and
+  learn new languages. These are the basics of what I feel is
+  necessary to sustain and advance myself as a professional. If I
+  simply worked a 45-50 hour work week instead, I personally would not
+  have the motivation to <i>afterwards</i> stay so abreast of
+  important changes in the development world. I would become much less
+  effective over time, never getting any better. When the need for new
+  paradigms or technologies arose, I would be so stuck in a rut that
+  fear and ignorance would drive all my decisions.
+</p>
+<p>
+  Treat overtime like an investment, and make it wisely. You are
+  literally mining your life for time, so make sure you are
+  comfortable with your investment strategies.
+</p>
+
 </div>
   
   

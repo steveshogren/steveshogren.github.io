@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="(All these great ideas, but no one is listening? Check out my
-book: Convincing Coworkers) One day, I went into an interview, and I was humiliated. &hellip;">
+  <meta name="description" content="I want to make a model that predicts bugs. I previously wrote a table for scoring language safety:
+Programming Language Safety Score,
+but it was &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,7 +87,7 @@ book: Convincing Coworkers) One day, I went into an interview, and I was humilia
       
   <header>
     
-      <h1 class="entry-title"><a href="/on-defeat/">Interview Humiliation</a></h1>
+      <h1 class="entry-title"><a href="/safety-rank-part-2/">Language Safety Score Mark 2</a></h1>
     
     
       <p class="meta">
@@ -95,194 +96,492 @@ book: Convincing Coworkers) One day, I went into an interview, and I was humilia
 
 
 
-<time class='entry-date' datetime='2015-10-29T19:01:00-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:01 pm</span></time>
+<time class='entry-date' datetime='2015-07-24T10:13:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 am</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>(All these great ideas, but no one is listening? Check out my
-book: <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>)</p>
+  <div class="entry-content"><p>I want to make a model that predicts bugs.</p>
 
-<p>One day, I went into an interview, and I was humiliated.</p>
+<p>I previously wrote a table for scoring language safety:
+<a href="http://deliberate-software.com/programming-language-safety-algorithm/">Programming Language Safety Score</a>,
+but it was extremely time consuming to score new languages or make modifications.</p>
 
-<h3>The Setup</h3>
+<h2>Simplify, Simplify</h2>
 
-<p>I used to think very highly of myself. This was early on in the Test Driven
-Development (TDD) craze, and I was one of the best I knew at it. I knew
-interfaces, classes, mocking frameworks, and best practices. I&rsquo;d been taught all
-the tricks from some very smart people, and my confidence was high. Not only
-that, but I&rsquo;d just finished at work the restoration of an abandoned legacy
-codebase to a bug-free, fully tested state completely on my own.</p>
+<p>After being told I was <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>
+the data, I&rsquo;ve attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1 (language enforced),
+0 (possible, but you have to remember to do it), or -1 (impossible). When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn&rsquo;t
+matter.</p>
 
-<p>I&rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&rsquo;t been programming more
-than a couple years. My first job, they&rsquo;d made me a team lead over some very
-senior developers within a year of my hire date. I was learning Clojure and
-Common Lisp, and had just shipped an Android game I made entirely alone
-(including the 2D physics engine).</p>
+<p><img class="center" src="/images/rplot.jpg" title="image" alt="images"></p>
 
-<p>I thought I was incredible. Yet, due to an overwhelming sense of Imposter
-Syndrome, I keenly knew that there were things I didn&rsquo;t know. I&rsquo;m mostly self
-taught, so a lot of common CS concepts felt alien. I was waking up before work
-and teaching myself algorithms, lisps, and math.</p>
+<p>The code I used to generate the plot and normalize the scores can be found here:
+<a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
 
-<p>Enter Company A.</p>
+<h2>Safety Definitions</h2>
 
-<p>I flew through the phone screen &ldquo;this is the best phone screen we&rsquo;ve seen!&rdquo; Of
-course it is. &ldquo;Your resume is very impressive.&rdquo; Oh, I know!</p>
+<p>A definition of the safety checks is as follows:</p>
 
-<p>I get to the on-site interview.</p>
+<p><div ng-app="TableApp2">
+<div ng-controller="TableCtrl">
+<table class="langtable">
+<tr><th>Check</th> <th>Description</th></tr>
+<tr ng-repeat="check in langChecks">
+<td> {{ check.name }} </td>
+<td>  {{ check.desc }}  </td>
+</tr>
+</table></p>
 
-<h3>The On-Site</h3>
+<p>The new scores are shown here, with a lot more languages added in:</p>
 
-<p>I hadn&rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
-asked to present a project I&rsquo;d worked on, and I picked my recently shipped
-physics game that was up on Google Play. I walked into the reception area a few
-minutes early.</p>
+<p><p class="lead">
+<div style="overflow-x:scroll">
+<table class="langtable">
+<tr>
+<th>Safety Check</th>
+<th></th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
+</th>
+</tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
+<tr class="totals"><td>Totals</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ lang }}
+</td>
+</tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ percentageTotals(lang) }}%
+</td>
+</tr>
+</table>
+</div></p>
 
-<pre><code>"You are 25 minutes late."
-</code></pre>
+<p>Current Languages:
+<span ng-repeat="lang in allLanguages">
+ {{ getName(lang) }}: {{ allLangTotals[$index] }},
+</select></p>
 
-<p>What?! I explain that I have the email saying 9:30! No matter, &ldquo;hurry, they are
-waiting!&rdquo; Maybe I can salvage this. I walk into a conference room with a dozen
-people sitting around a table looking bored and pissed.</p>
+<h2>So, What&rsquo;s the Point?</h2>
 
-<pre><code>"Let's see your presentation."
-</code></pre>
+<p>To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors.</p>
 
-<p>I start to open up my laptop. Meanwhile they start to joke around to each other:</p>
+<p>I decided to rely on the count of commits as a standard for a unit of work. My
+assumption was that across fifty different projects, the commit sizes would
+average out. Once the unit of work was decided on, I wanted to find the ratio of
+bugs per commit for each language.</p>
 
-<pre><code>"Oh, wow, Linux, what is this, 2003? I'd hoped I'd never have to see the
-grub boot screen again! Can't you afford a real machine?"
-</code></pre>
+<p>I collected the ratio of bugs logged per commit for each repository, and after
+grouping by primary language, removed the top and bottom 25% using the
+bug/commit ratio, which is a common practice in statistics to help find a more
+accurate average. I summed the bugs and commits of those remaining repositories
+grouped by language, finding a total average bug/commit ratio for each language
+grouping. Here is that data, sorted by safety score.</p>
 
-<p>I try to joke back while multitasking with my laptop. They only have the Mac
-projector cable. No adapter. I&rsquo;d thought ahead, and handed one of the developers
-a thumb drive with the presentation and code. Meanwhile the interviewers are
-joking and laughing to each other at my choice of clothes.</p>
+<p><table class="langtable">
+<tr><th>Language</th>
+<th>Bugs</th>
+<th>Commits</th>
+<th>Repositories</th>
+<th>Bug/Commits</th>
+<tr ng-repeat="lang in languageRatios">
+<td> {{ lang.name }} </td>
+<td> {{ lang.bugs }} </td>
+<td> {{ lang.commits }} </td>
+<td> {{ lang.repos }} </td>
+<td> {{ getBugsRatio(lang) }} </td>
+</tr>
+</table></p>
 
-<pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
-</code></pre>
+<p>Here are the languages sorted by safety score with bug/commit ratios:</p>
 
-<p>I roll with it, make some joke about &ldquo;styling&rdquo;. I start presenting about the 2D
-physics engine I&rsquo;d written as a learning project for my game. One of the most
-interesting parts to me was how I&rsquo;d first written it without any unit testing,
-following just Clean Code practices. I then re-wrote it using heavy TDD. The
-design turned out very different both times, which I thought was interesting to
-see how TDD had influenced the design.</p>
+<p><img class="center" src="/images/errorChart.jpg" title="image" alt="images">
+<img class="center" src="/images/bugsAverage.jpg" title="image" alt="images"></p>
 
-<p>About five minutes in, I am cut off:</p>
+<p>I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.</p>
 
-<pre><code>"This presentation is bullshit. You have no evidence, nothing valuable to
-show, just spurious subjective opinions. You've put up a straw man and now
-are trying to knock it down assuming we are idiots. I've seen enough."
-</code></pre>
+<p><img class="center" src="/images/bothMags.jpg" title="image" alt="images"></p>
 
-<p>At this point, it has been barely 15 minutes since I walked in. I remain calm
-and professional, and start to address the raised concerns. I play the
-meta-game, wondering if perhaps this is a test to see how I&rsquo;ll react when
-questioned and embarrassed. Even if this wasn&rsquo;t a test, I was determined to be
-at my most professional and finish with my head held high.</p>
+<p>Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
+buck the trend, but otherwise the languages follow a pretty consistent slope
+down in bugs. Taking the correlation gives a
+<a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">correlation coefficient</a>
+of .55</p>
 
-<p>Five developers walk out before I can finish my first sentence. One of the
-remaining six interviewers looks embarrassed and asks if I could live code them
-a web scraper in any language instead of the presentation. I turn my laptop
-around (still no projector) and ask if PHP is acceptable. They are a Python
-shop, and PHP is the closest to what they use that I am comfortable using when
-this nervous.</p>
+<h2>What About Unit Tests?</h2>
 
-<pre><code>"PHP? Gross. I suppose if it is all you know..."
-</code></pre>
+<p>Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
+other factor, I collected data on how many tests each repository had. I counted
+the number of files containing &ldquo;test&rdquo; or &ldquo;spec&rdquo;, which gave the following,
+sorted by tests per commit:</p>
 
-<p>Unfortunately, I&rsquo;ve got so much adrenaline in me that it takes me a few tries to
-log in. I get on a roll after five minutes, and write the scraper. They throw me
-a few more requirements, and within a half hour I&rsquo;ve written stories for and
-completed them all. At least two of the interviewers seem quite impressed.
-Someone looks at their watch, &ldquo;well, that&rsquo;s all the stories we have, I guess
-let&rsquo;s break for lunch.&rdquo;</p>
+<p><table class="langtable">
+<tr><th>Language</th>
+<th>Tests</th>
+<th>Commits</th>
+<th>Repositories</th>
+<th>Tests/Commits</th></tr>
+<tr ng-repeat="lang in sorter(languageRatios)">
+<td> {{ lang.name }} </td>
+<td> {{ lang.test }} </td>
+<td> {{ lang.commits }} </td>
+<td> {{ lang.repos }} </td>
+<td> {{ getTestsRatio(lang) }} </td>
+</tr>
+</table></p>
 
-<p>Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
-suit and dress shoes. When we get back from lunch I am hot, tired, and
-foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
-patent leather shoes. I am called into the conference room again. At this point,
-I am genuinely curious if this is some sort of extreme patience/calmness test,
-or if I am being filmed for a reality show. No such luck.</p>
+<p>PHP, Python, and Ruby all have a higher then average number of tests, but
+Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
+average number of tests, yet they score relatively average in bugs/commit.</p>
 
-<p>At the head of the table is the developer who &ldquo;called me out&rdquo; for my
-presentation. Apparently my lunch mates were supposed to only take an hour, we
-took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
-sarcastic tone I have ever heard:</p>
+<h2>Conclusion</h2>
 
-<pre><code>"So, got any questions for me?"
-</code></pre>
+<p>In conclusion, the current safety model I have proposed seems to account for a
+moderate reduction in bugs per commit across the sampled languages, but is not
+the only factor. It currently is unable to account for a significantly lower
+than expected bug count in Ruby and Clojure.</p>
 
-<p>I ask a few normal questions, meanwhile he is constantly checking his watch and
-rolling his eyes. He answers briefly and rudely. I thank him for his time, and
-ask him if there is more. He laughs.</p>
+<h2>Special Thanks</h2>
 
-<pre><code>"Oh, we are done here."
-</code></pre>
+<p>Special thanks to (in alphabetical order):
+<a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
+<a href="http://asymmetrical-view.com/">Kyle Burton</a> (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+<a href="https://github.com/danielmiladinov">Daniel Miladinov</a> (Java, Scala, Morale Support),
+Keith O'Brien (Ruby and JS),
+<a href="https://github.com/arlaneenalra">Chris Salch</a> (CoffeeScript and JS),
+and <a href="https://github.com/timvisher">Tim Visher</a> (Clojure).</p>
 
-<p>I am shown to the door.</p>
+<p>Additional thanks to the posters on
+<a href="https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/">/r/rust</a>,
+including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
+<a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
+<a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
 
-<p>I sit in the car for a half hour, wondering what just happened. I look over to
-the passenger seat piled high with text books I have been studying, books on
-language design, compilers, algorithms, physics engines, TDD, and productivity.</p>
+<h2>Complaints Department</h2>
 
-<p>I was asked none of it. I threw up from stress out the car door into their
-parking lot.</p>
+<p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
+requests for new languages:
+<a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js">blog source</a>. Just
+pick an existing language, edit the name and values, and &ldquo;copy to clipboard&rdquo; to
+build your own language data structure. Send it to me in a PR and I&rsquo;ll include
+it along with a thanks on the page.</p>
 
-<h3>Aftermath</h3>
+<p><div ng-show="showRealName">
+<h2>Select Language:
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+</h2>
+<h2><input ng-model="selectedLang.name"></input></h2>
+<table class="langtable">
+<tr><th>Check</th><th>Option</th></tr>
+<tr ng-repeat="check in langChecks">
+<td style="background-color: {{scoreClass(score(selectedLang[check.key]))}} ">
+ {{ check.name }}:  {{score(selectedLang[check.key]) }}
+</td>
+<td>
+<select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+</td>
+</tr>
+</table></p>
+</div>
+  
+  
 
-<p>I found out later their recruiter had given me and many other candidates the
-wrong time. She was fired shortly after.</p>
 
-<p>I never found out if I had done something to make everyone so angry. I now
-suspect that they were massively turned off by a host of things. Polyglot
-programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
-presentation probably all contributed to an immediate disqualification. I
-rationally realize they were terrible and treated me terribly, but the
-embarrassment is still there. I suspect my presentation was terrible from the
-get go: that they were expecting some rock-star and instead got me.</p>
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/language-versions/">Language Versions</a></h1>
+    
+    
+      <p class="meta">
+        
 
-<p>A number of times I have woken up in a cold sweat having dreamt about that
-interview. In the large scheme of things, a bad interview is such a small thing,
-but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
-cocky, insufferable? Did my ego cause them to treat me that way, or was it all
-them? What could I have done differently? I was only in there for a few minutes!</p>
 
-<p>Few events in my professional life have shaped me as much as that interview. I
-have turned it into a forge for my talent, the anvil on which I beat my pride.
-When I don&rsquo;t know something, I am more willing to shrug and laugh it off, all
-while learning as fast as I can. When I am humiliated professionally, I know
-I&rsquo;ve come through worse and thrived.</p>
 
-<h3>Break The Cycle</h3>
 
-<p>This story fills me with an overwhelming desire to never continue the cycle of
-abuse. I strive every interview to try to respectfully work with the candidate,
-and never humiliate them. I want every person I interview to leave feeling loved
-as a human and respected, even if they are completely incapable to perform the
-duties of the job.</p>
+<time class='entry-date' datetime='2015-07-20T10:36:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:36 am</span></time>
+        
+      </p>
+    
+  </header>
 
-<p>When I ask a question, if they struggle, we work it out together. When I ask for
-code, we write it together, even if that means I have to do all the work. I can
-make myself their servant, while still assessing their skill with accuracy and
-dispassion. Those with the skill will show it, and those without will not feel
-humiliated. I let them interview me, and if that means they want me to go up to
-the whiteboard and struggle through a merge sort, so be it. In this way, I push
-back against the interview culture that normalizes degradation and humiliation.</p>
 
-<p>If you are interviewing others, take a serious look at your practices. Would a
-failed candidate feel humiliated and disrespected? What will they tell their
-coworkers and friends at meetups about your company? Will they talk about
-feeling respected, and how they hope to get the chance to work with you one day?
-Or will they talk of a group of self-righteous jerks who abuse their power to
-make others feel small? You can break the cycle.</p>
+  <div class="entry-content"><p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
+semantic version number. Small features that incrementally improve your
+situation are like minor updates. They don&rsquo;t cause any large shifts in thinking
+or process. Major updates are big, new concepts, quantum jumps in theory or
+practice.</p>
 
-<p>(All these great ideas, but no one is listening? Check out my
-book: <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>)</p>
+<p>I am not talking about the political, social, or financial aspects of a
+toolchain. For example, hiring is a complex beast entirely in its own
+category. The criteria for choosing a tool when hiring a few hundred offshore
+developers is very different than the criteria for hiring for a team of three
+senior developers. I&rsquo;ll leave those aspects alone.</p>
+
+<p>What are some examples of these value changes I&rsquo;ve noticed in my development?</p>
+
+<h2>Minor Benefits</h2>
+
+<h3>Perl - PHP - Python - Ruby</h3>
+
+<p>Switching from Perl to PHP for me was a minor change. I was able to carry over
+almost all my skills, and for the most part, the differences were mostly
+syntactic. Later, when I started using Python, most of my experience from Perl
+and PHP was still useful. The libraries had different names, and a few concepts
+were different, but on the whole, all three were in a same class of productivity
+for me.</p>
+
+<p>More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
+found much of my previous experience was still valuable. I can almost guess what
+things will be called or how they should be used. I still have to look up
+library names and keywords, but on the whole, the languages all provide very
+similar workflows. I suspect all four are in the same class of productivity,
+with some minor differences here and there. These days I put effort only into
+maintaining familiarity with one of these languages, since I am confident I
+could quickly relearn any of the other three on demand.</p>
+
+<h3>Java - VB.NET - CSharp</h3>
+
+<p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
+productivity. For the most part, all the expectations and experience carries
+between the three. Obviously the tools are different, and there are a number of
+gotchas, but nothing changed my productivity in any major way. I doubt any of
+those three have any one killer feature that cannot be had in the other.</p>
+
+<h2>Major Benefits</h2>
+
+<h3>Automated Testing</h3>
+
+<p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
+testing was a major change with large productivity benefits. All my experience
+to date was still useful, but I needed a whole new set of skills to be able to
+apply the techniques. Tools like dependency injection, mocking, TDD, and
+continuous integration enabled me to build and revive much larger
+systems. Automated testing is a skill that applies well to every language I&rsquo;ve
+worked in, with benefits that grow increasingly valuable with more complex
+systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
+classes of problems.</p>
+
+<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+
+<p>Repl based development with live hot patching was another major change. It
+required a new way of thinking about programming, and with it came an
+instantaneous feedback loop. Much like unit testing, it was an entirely new
+skill, but opened up a very fast method of building up a system from small
+parts. Additionally, it allowed me to rapidly progress in my skills, because I
+could instantly see live feedback from my code, without needing to write a whole
+test just to execute the code.</p>
+
+<h3>Powerful Static Typing (moving from C# to F#)</h3>
+
+<p>Moving from a typical static typed language to one with algebraic data types has
+been a major change, with major productivity benefits. I have noticed entire
+classes of defects disappearing. Additionally, because of the better compiler
+errors, the resulting codebases are much easier to refactor, which means a
+faster reaction to a changing domain.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-17T07:02:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:02 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
+get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.</p>
+
+<p>When I set out to learn a Lisp, I expected it would be easy.</p>
+
+<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
+natural!&rdquo;</p>
+
+<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
+than one) and shortly master it to be able to ship a website with it.</p>
+
+<p>What happened instead took me a little longer&hellip;</p>
+
+<ul>
+<li>05/11 - 06/11 - ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
+<li>04/12 - 08/12 - ~60 Hrs Rewrote a PHP side project in Clojure</li>
+<li>08/12 - 08/12 - ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
+<li>08/12 - 09/12 - ~10 Hrs Read <em>Clojure Programming</em> twice</li>
+<li>09/12 - 12/12 - ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
+<li>05/13 - 07/13 - ~50 Hrs Worked through <em>Let Over Lambda</em></li>
+<li>05/13 - 07/14 - ~250 Hrs Worked through <em>SICP</em></li>
+<li>07/14 - Shipped production Clojure code</li>
+</ul>
+
+
+<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
+
+<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
+deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.</p>
+
+<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
+Typed Racket, and Clojure before I felt confident enough to suggest shipping
+Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
+some people will snort with derision at how much time it took me - which is kind
+of the point of this post.</p>
+
+<p>This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.</p>
+
+<p>If you are struggling and feel like a failure, understand <em>there is no wrong
+way</em>. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.</p>
+
+<p>If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
+
+<h1>Was it worth it?</h1>
+
+<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/superiority-fatigue/">Superiority Fatigue</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-14T19:13:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Learning new tools, technologies, and methodologies is
+hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
+good comprehension of the tool, and now, filled with excitement, you try to
+explain it to someone else.</p>
+
+<p>They almost always react with hostility.</p>
+
+<p>What is going on? You just took time to learn this exciting tool that could save
+everyone a lot of time, and not only do they not care, but they resent you for
+it!  Don&rsquo;t they see how this could be great for everyone?</p>
+
+<p>The issue, like humans, is complex and dynamic. Maybe they feel like you&rsquo;ve now
+made them look lazy in comparison. Maybe they have tried other tools in the past
+only to discover they weren&rsquo;t as a good as promised. Maybe they are afraid they
+won&rsquo;t be able to learn the new tool as quickly as they need to, and will be left
+behind. Maybe they are afraid all the time they spent learning the existing
+tools will have been wasted. Maybe they are comfortable where they are, and
+don&rsquo;t care about increased productivity. Maybe they are tired of learning new
+things.</p>
+
+<p>Most times I have seen this, I think the root emotion is fear. Fear of failure,
+of change, of being embarrassed, of looking inferior. Fear is a powerful
+emotion.</p>
+
+<p>When you respond with further hostility, this only will compound their
+fear. Should they put their comfort and ego before the needs of the business?
+No, but your counterattack will only further prove to them that their fear was
+deserved.</p>
+
+<p>The final hardest part of learning a new tool is when you are forced to use an
+inferior tool. Suddenly that liberating fresh air of power is replaced with a
+suffocating claustrophobia of weakness. Even if the tool isn&rsquo;t really that
+inferior, it now <em>feels</em> terrible. It becomes worse when you and many others
+around you agree with the better value proposition of a new tool, and yet you
+are still required to use the inferior tool due to someone in power blocking you
+for political reasons.</p>
+
+<p>For the developer who sets out to learn new things, you must learn to deal with
+inferior tools. Once you start learning, you will always find yourself in a
+situation where you are required to use an inferior tool. For me, this has been
+one of the hardest things to face in my career.</p>
 </div>
   
   
