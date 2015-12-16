@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-11-30T09:09:16-05:00</updated>
+  <updated>2015-12-16T08:58:47-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Daily Meditation Improved My Technical Leadership]]></title>
+    <link href="http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/"/>
+    <updated>2015-12-14T07:50:38-05:00</updated>
+    <id>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership</id>
+    <content type="html"><![CDATA[<p>A couple years ago, a coworker told me a success story about mindful meditation.
+He explained how his wife took a class that required an hour of daily meditation
+for a whole month. He reported that she found it uncomfortable, but the effects
+were astounding. She claimed to feel more relaxed, more focused, and more
+&ldquo;herself&rdquo;. She found new reserves of motivation. She dropped the book she&rsquo;d been
+trying to write for years, and started a business. After that business failed,
+she started another, this time successfully.</p>
+
+<p>Immediately convinced, I started by listening to guided
+<a href="https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation">mindfulness meditations</a>
+on YouTube and <a href="https://www.headspace.com/science">phone apps</a>. After a couple
+weeks of that, I started doing breathing exercises on my own while sitting
+listening to rain sounds. I made a habit of doing it for about an hour every day
+on my lunch break. A few months later, I hated it.</p>
+
+<p>For whatever reason, after each session I would feel very uncomfortable. I would
+be confronted with emotions that made me feel worthless and embarrassed. My mind
+was bringing forward all these painful memories and feelings. Over time, I
+started to dread the lunch break.</p>
+
+<h2>The Revelation</h2>
+
+<p>Then, one day, I had a profound sense of understanding. I realized what was
+causing these negative emotions. I was in the middle of a major push to guide
+our team to adopt a new programming language. While I&rsquo;d led many such
+initiatives before, I saw that I&rsquo;d always had the same struggles. My ego and
+self-worth were so tied into &ldquo;my&rdquo; campaigns that I wasn&rsquo;t able to clearly hear
+criticism. When people pointed out legitimate concerns or weaknesses, I would
+get embarrassed and take it as a personal failure.</p>
+
+<p>I could see, from the very beginning, my current &ldquo;campaign&rdquo; had been poorly
+executed. After researching the new technology for a long time, I felt like I
+saw a place where it could solve some of our needs. Instead of carefully writing
+out a proposal, I &ldquo;half-jokingly&rdquo; brought it up whenever I could. When the
+listeners didn&rsquo;t immediately react positively, I quickly retracted the idea,
+&ldquo;just kidding&rdquo;. Over weeks I dropped not-so-subtle hints, &ldquo;this would be better
+with&hellip;&rdquo;, or, &ldquo;we wouldn&rsquo;t have this problem if&hellip;&rdquo;. Instead of convincing
+anyone of anything, I just broadcasted to everyone how insecure I felt about the
+issue. Everyone could clearly see that I cared, but I was too afraid to put
+myself out there and make a serious suggestion. For months nothing changed, and
+I felt more and more bitter that &ldquo;my idea&rdquo; wasn&rsquo;t being listened to. In reality,
+I hadn&rsquo;t even made a serious suggestion yet!</p>
+
+<p>Eventually, the people around me started to listen and research the new
+language. They agreed it really did solve a need we had. After a while, enough
+people got on board that we started using it more. Even then, I held tightly to
+&ldquo;my idea&rdquo;, afraid that it would prove to be a failure. When someone ran into
+issues, I would get defensive. Even though I tried to keep my emotions in check,
+I clearly took any criticism of the language as if it was a personal failing, no
+matter how legitimate. I&rsquo;d tightly coupled my ego to my ideas, and I always had.</p>
+
+<p>After a few months of meditating, this idea rocked my world. My negative
+emotions came from a realization that my actions were not in line with my
+values. I don&rsquo;t want my self-worth to be tied to a simple tool. No tool is worth
+it. Every tool fails. I&rsquo;d sold myself short, lowered my self-worth to that of a
+tool. This completely blocked my ability to be an effective technical leader.</p>
+
+<p>I couldn&rsquo;t hear criticism of my ideas without getting defensive, so I couldn&rsquo;t
+think critically. I couldn&rsquo;t help work out solutions to the best of my ability,
+because that would mean admitting personal failure. Every side comment or
+momentary struggle felt like a catastrophe.</p>
+
+<p>After realizing this, I felt a wave of relief. My emotional struggle leading
+this programming language change made sense! And I had an easy way out! I simply
+had to distance myself from my ideas, separate my self-worth from my tools. The
+more I meditated, the easier it got.</p>
+
+<h2>Present Day</h2>
+
+<p>While I still sometimes get the old pang of embarrassment or defensiveness, now
+I understand where it comes from, and how to move forward. I can let my ideas
+go. I can consider ideas critically. I can make changes and adjustments if the
+ideas are not working.</p>
+
+<p>This summer I decided to write up my learning. I wanted to always be able to
+look back and remember these important lessons. My write-up was the seed for the
+book <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>. I explain
+the lessons learned from implementing a half dozen major technical changes, and
+how I learned to lead without letting my ego cloud my thinking.</p>
+
+<p>If you want to become a more effective leader, I highly recommend a practice of
+daily meditation. Meditation gives your mind a chance to deeply consider your
+actions and values. It allows your subconscious to reflect on what and why you
+act.</p>
+
+<p>Not everyone will struggle from the same issues as me. Every leader has a
+different set of challenges and situations. Meditation lets your mind analyze
+your unique weaknesses and strengths, coming up with a tailored perspective.
+Meditating allows your mind to creatively look for ways to improve itself. While
+rarely comfortable, this process can have incredible benefits.</p>
+
+<h2>Appendix: &ldquo;I&rsquo;m uncomfortable with the connotations of meditation&rdquo;</h2>
+
+<p>You may feel uncomfortable with meditation because of its current strong
+associations with religion. Meditation is not inherently religious. I consider
+meditation like an exercise routine for the mind. If you are religious, and
+exercise your body as a form of religious expression, exercise is a religious
+practice. If you are not religious, and you exercise to improve your health and
+well-being, exercise is a secular practice. Meditation is just a form of mental
+exercise. Simple as that.</p>
+
+<p>Meditation is a tool, and the tool wielder determines its use. Don&rsquo;t let a fear
+of the connotations of meditation stop you from experiencing improved
+leadership, creativity, and focus!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Conj 2015 - Teaching Clojure]]></title>
@@ -3536,154 +3648,6 @@ down bugs and more time adding on features!</p>
 </p>
   
  
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The 5:01 Developer]]></title>
-    <link href="http://deliberate-software.com/501-developer/"/>
-    <updated>2013-12-14T00:00:00-05:00</updated>
-    <id>http://deliberate-software.com/501-developer</id>
-    <content type="html"><![CDATA[<p>
-  Can we agree for this post that money, energy, time, and effort are
-  all forms of power? Like literally, if I wanted to build a building,
-  I am going to need tools, skills, materials, labor. I can use the
-  most liquid form of power I have (cash) to acquire all these things,
-  or I can use a much less liquid form of power (my time) to harvest,
-  extract, refine, learn, and build my building myself. Usually,
-  economies of scale mean it is dramatically more efficient for me to
-  specialize in one way of converting time into liquid power. Then,
-  when I need something, I simply pass that money on to someone else
-  who is also a specialist.
-</p>
-<p>
-  Now you know why I don't quarry my own stone to build an
-  amphitheater in my back yard.
-</p>
-<p>
-  When you work a job, you are converting one form of power you have:
-  time (and usually skills), into another much more liquid form of
-  power: money. One can extend the model to include calories and
-  shelter (the power to sleep safely) along with time and skills.
-  Great, this is just basic economics, right? You need power (money)
-  to buy power (food and shelter) to buy power (time) to convert back
-  into more power (money). Since you are "harvesting" something finite
-  and therefore scarce (time out of your short life), if you are
-  disciplined and lucky, you can consistently end up with a net
-  positive.
-</p>
-<p>
-  On to the point! I read a post today mentioning
-  the <a href="http://www.hanselman.com/blog/DarkMatterDevelopersTheUnseen99.aspx">"5:01 developer"</a>. It made me mad.
-</p>
-<p>
-  Ideas like this are so subtle they just seep into your psyche. I
-  don't think anyone would say under normal conditions, "I should
-  really work for free today". But, effectively, that is what this
-  whole phrase is about. The phrase lets people who cram eight hours
-  of work into ten hours "get back" at those that get the same work
-  done in six to eight. To clarify, this title is not about "saving
-  the company" or "giving back to society"; those are unusual
-  conditions. No, it is a chastisement of developers who do not "give
-  back to the company". Sort of a tax, for the privilege of getting
-  paid to work there, you should, according to this ideal, just give
-  back some of that power they gave you. Thinking about this with the
-  power model, you should accept money to work there in exchange for
-  your time, but, when the time comes, you should deliberately
-  short-change yourself by giving them extra time. Like some sort of
-  weird tip.
-</p>
-<p>
-  Hopefully this sounds as ridiculous as it really is.
-</p>
-<p>
-  Now, in that post, the author sort of backpedals a little bit,
-  saying that <i>what he really meant</i> was a developer who stops
-  thinking about development as soon as work is over: someone not
-  passionate. The issue I have is the whole wording of that phrase
-  assumes a passion for their <i>job</i>, not a passion for
-  their <i>craft</i>.
-</p>
-<p>
-  I do not think it makes sense to demand every person
-  be <i>passionate</i> about the job they are doing. There have been
-  many times I have (even at a job I normally loved) done long,
-  boring, and fruitless work. I did not do that work out of my passion
-  for the "Mission: Save the World of Enterprise Banking", but because
-  I am a professional: I do what needs to be done to the best of my
-  abilities.
-</p>
-<p>
-  I think professionalism is very important. In others I work with, I
-  want to see the attitude that causes someone to stay abreast in
-  their field. I want to be around those who keep their own saws
-  sharp, who come in and work hard, and who push themselves and those
-  around them to be best they can.
-</p>
-<p>
-  Back to overtime: in my experience, very few offices care enough
-  about their developers to let them sharpen their saws at work, so
-  why would you waste your precious free time there? Will they pay you
-  more for it? Doubtful. Will they be less likely to fire you when
-  times get tough? <i>Maybe</i>. Sounds to me like a lot of
-  speculation. A lot of investment for a marginal or non-existent
-  return. If you want more money: either ask for a raise, go take a
-  raise at a new job, or work a second job on the side. Those have a
-  direct impact on your income. Putting in extra hours hoping someone
-  will notice and reward you for it makes about as much sense as
-  assuming you will get a raise for wearing the boss's favorite color
-  every day.
-</p>
-<p>
-  Consider the person who stays one extra hour a day as an
-  "investment". The typical end of the year raise scale I have seen in
-  the US in companies larger than 30 people is a 0-5% increase a
-  year. Uncommonly does someone get more than that, and should not be
-  considered a usual practice. The typical best you can expect is
-  5%, maybe a bonus (in four diverse jobs, none gave bonuses, so I
-  haven't considered them personally). Back to the extra hour a day. Not
-  completely out there, not putting in a vast amount extra, right?
-  Well, one extra hour is 12.5% percent more hours a day. But the most
-  you can expect, on average, is 5%, if you are lucky! To put it in
-  perspective, I have seen guys put in 12 hour days and get fired
-  because the boss didn't get along with them.
-</p>
-<p>
-  At a <i>few</i> points in my career, I worked longer hours. Once it
-  was because I truly enjoyed the work and it was fun. Another time it
-  was because I felt like the extra time was going to directly pay off
-  as an investment (it didn't). A few times I have stuck around to
-  "wrap this off" or "help out with something deeply unusual that has
-  to be done outside normal work hours". I recently recommended to my
-  little brother he work longer hours, as he was hired without many
-  needed skills and on shaky footing with the boss. He worked out a
-  deal where he spent two extra hours a day for a couple months
-  reading and practicing to get "caught up". His boss got to see his
-  hustle when he was the first one in and last one out every day; he
-  got to study away from the distractions of everyday life. <b>In all
-  circumstances, make overtime the exception, never the rule.</b>
-</p>
-<p>
-  One last point. Before you think me a selfish jerk about my free
-  time, know that I make it a daily habit to spend 30-60 minutes
-  outside work advancing my development skills. I practice interactive
-  rebases, work through awesome books, do online courses, advance side
-  projects, contribute to open source, give local meetup talks, and
-  learn new languages. These are the basics of what I feel is
-  necessary to sustain and advance myself as a professional. If I
-  simply worked a 45-50 hour work week instead, I personally would not
-  have the motivation to <i>afterwards</i> stay so abreast of
-  important changes in the development world. I would become much less
-  effective over time, never getting any better. When the need for new
-  paradigms or technologies arose, I would be so stuck in a rut that
-  fear and ignorance would drive all my decisions.
-</p>
-<p>
-  Treat overtime like an investment, and make it wisely. You are
-  literally mining your life for time, so make sure you are
-  comfortable with your investment strategies.
-</p>
-
 ]]></content>
   </entry>
   

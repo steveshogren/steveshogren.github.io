@@ -4,7 +4,7 @@
   <title><![CDATA[Category: meta game | Deliberate Software]]></title>
   <link href="http://deliberate-software.com/blog/categories/meta-game/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-11-30T09:09:16-05:00</updated>
+  <updated>2015-12-16T08:58:47-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Daily Meditation Improved My Technical Leadership]]></title>
+    <link href="http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/"/>
+    <updated>2015-12-14T07:50:38-05:00</updated>
+    <id>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership</id>
+    <content type="html"><![CDATA[<p>A couple years ago, a coworker told me a success story about mindful meditation.
+He explained how his wife took a class that required an hour of daily meditation
+for a whole month. He reported that she found it uncomfortable, but the effects
+were astounding. She claimed to feel more relaxed, more focused, and more
+&ldquo;herself&rdquo;. She found new reserves of motivation. She dropped the book she&rsquo;d been
+trying to write for years, and started a business. After that business failed,
+she started another, this time successfully.</p>
+
+<p>Immediately convinced, I started by listening to guided
+<a href="https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation">mindfulness meditations</a>
+on YouTube and <a href="https://www.headspace.com/science">phone apps</a>. After a couple
+weeks of that, I started doing breathing exercises on my own while sitting
+listening to rain sounds. I made a habit of doing it for about an hour every day
+on my lunch break. A few months later, I hated it.</p>
+
+<p>For whatever reason, after each session I would feel very uncomfortable. I would
+be confronted with emotions that made me feel worthless and embarrassed. My mind
+was bringing forward all these painful memories and feelings. Over time, I
+started to dread the lunch break.</p>
+
+<h2>The Revelation</h2>
+
+<p>Then, one day, I had a profound sense of understanding. I realized what was
+causing these negative emotions. I was in the middle of a major push to guide
+our team to adopt a new programming language. While I&rsquo;d led many such
+initiatives before, I saw that I&rsquo;d always had the same struggles. My ego and
+self-worth were so tied into &ldquo;my&rdquo; campaigns that I wasn&rsquo;t able to clearly hear
+criticism. When people pointed out legitimate concerns or weaknesses, I would
+get embarrassed and take it as a personal failure.</p>
+
+<p>I could see, from the very beginning, my current &ldquo;campaign&rdquo; had been poorly
+executed. After researching the new technology for a long time, I felt like I
+saw a place where it could solve some of our needs. Instead of carefully writing
+out a proposal, I &ldquo;half-jokingly&rdquo; brought it up whenever I could. When the
+listeners didn&rsquo;t immediately react positively, I quickly retracted the idea,
+&ldquo;just kidding&rdquo;. Over weeks I dropped not-so-subtle hints, &ldquo;this would be better
+with&hellip;&rdquo;, or, &ldquo;we wouldn&rsquo;t have this problem if&hellip;&rdquo;. Instead of convincing
+anyone of anything, I just broadcasted to everyone how insecure I felt about the
+issue. Everyone could clearly see that I cared, but I was too afraid to put
+myself out there and make a serious suggestion. For months nothing changed, and
+I felt more and more bitter that &ldquo;my idea&rdquo; wasn&rsquo;t being listened to. In reality,
+I hadn&rsquo;t even made a serious suggestion yet!</p>
+
+<p>Eventually, the people around me started to listen and research the new
+language. They agreed it really did solve a need we had. After a while, enough
+people got on board that we started using it more. Even then, I held tightly to
+&ldquo;my idea&rdquo;, afraid that it would prove to be a failure. When someone ran into
+issues, I would get defensive. Even though I tried to keep my emotions in check,
+I clearly took any criticism of the language as if it was a personal failing, no
+matter how legitimate. I&rsquo;d tightly coupled my ego to my ideas, and I always had.</p>
+
+<p>After a few months of meditating, this idea rocked my world. My negative
+emotions came from a realization that my actions were not in line with my
+values. I don&rsquo;t want my self-worth to be tied to a simple tool. No tool is worth
+it. Every tool fails. I&rsquo;d sold myself short, lowered my self-worth to that of a
+tool. This completely blocked my ability to be an effective technical leader.</p>
+
+<p>I couldn&rsquo;t hear criticism of my ideas without getting defensive, so I couldn&rsquo;t
+think critically. I couldn&rsquo;t help work out solutions to the best of my ability,
+because that would mean admitting personal failure. Every side comment or
+momentary struggle felt like a catastrophe.</p>
+
+<p>After realizing this, I felt a wave of relief. My emotional struggle leading
+this programming language change made sense! And I had an easy way out! I simply
+had to distance myself from my ideas, separate my self-worth from my tools. The
+more I meditated, the easier it got.</p>
+
+<h2>Present Day</h2>
+
+<p>While I still sometimes get the old pang of embarrassment or defensiveness, now
+I understand where it comes from, and how to move forward. I can let my ideas
+go. I can consider ideas critically. I can make changes and adjustments if the
+ideas are not working.</p>
+
+<p>This summer I decided to write up my learning. I wanted to always be able to
+look back and remember these important lessons. My write-up was the seed for the
+book <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>. I explain
+the lessons learned from implementing a half dozen major technical changes, and
+how I learned to lead without letting my ego cloud my thinking.</p>
+
+<p>If you want to become a more effective leader, I highly recommend a practice of
+daily meditation. Meditation gives your mind a chance to deeply consider your
+actions and values. It allows your subconscious to reflect on what and why you
+act.</p>
+
+<p>Not everyone will struggle from the same issues as me. Every leader has a
+different set of challenges and situations. Meditation lets your mind analyze
+your unique weaknesses and strengths, coming up with a tailored perspective.
+Meditating allows your mind to creatively look for ways to improve itself. While
+rarely comfortable, this process can have incredible benefits.</p>
+
+<h2>Appendix: &ldquo;I&rsquo;m uncomfortable with the connotations of meditation&rdquo;</h2>
+
+<p>You may feel uncomfortable with meditation because of its current strong
+associations with religion. Meditation is not inherently religious. I consider
+meditation like an exercise routine for the mind. If you are religious, and
+exercise your body as a form of religious expression, exercise is a religious
+practice. If you are not religious, and you exercise to improve your health and
+well-being, exercise is a secular practice. Meditation is just a form of mental
+exercise. Simple as that.</p>
+
+<p>Meditation is a tool, and the tool wielder determines its use. Don&rsquo;t let a fear
+of the connotations of meditation stop you from experiencing improved
+leadership, creativity, and focus!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Conj 2015 - Teaching Clojure]]></title>
@@ -766,90 +878,6 @@ it along with a thanks on the page.</p>
 </td>
 </tr>
 </table></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Learning Lisp Was Hard]]></title>
-    <link href="http://deliberate-software.com/learning-lisp-was-hard/"/>
-    <updated>2015-06-17T07:02:00-04:00</updated>
-    <id>http://deliberate-software.com/learning-lisp-was-hard</id>
-    <content type="html"><![CDATA[<p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
-get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
-learning a Lisp.</p>
-
-<p>When I set out to learn a Lisp, I expected it would be easy.</p>
-
-<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
-Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
-how Lisp is his secret weapon, and figured I needed to get into this secret
-weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
-natural!&rdquo;</p>
-
-<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
-than one) and shortly master it to be able to ship a website with it.</p>
-
-<p>What happened instead took me a little longer&hellip;</p>
-
-<ul>
-<li>05/11 - 06/11 - ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
-<li>04/12 - 08/12 - ~60 Hrs Rewrote a PHP side project in Clojure</li>
-<li>08/12 - 08/12 - ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
-<li>08/12 - 09/12 - ~10 Hrs Read <em>Clojure Programming</em> twice</li>
-<li>09/12 - 12/12 - ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
-<li>05/13 - 07/13 - ~50 Hrs Worked through <em>Let Over Lambda</em></li>
-<li>05/13 - 07/14 - ~250 Hrs Worked through <em>SICP</em></li>
-<li>07/14 - Shipped production Clojure code</li>
-</ul>
-
-
-<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
-the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
-
-<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
-deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
-approximately 170 hours in at that point. The book that finally made it all
-click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
-pre-learning to be able to understand enough to internalize the material.</p>
-
-<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
-Typed Racket, and Clojure before I felt confident enough to suggest shipping
-Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
-some people will snort with derision at how much time it took me - which is kind
-of the point of this post.</p>
-
-<p>This timeline should show those who are struggling that what you are feeling is
-normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
-be. Clojure, macros, emacs, and a repl workflow are all very different from
-everything I was used to and significantly more powerful than I would&rsquo;ve
-guessed. It took a long time for that to become normal, and for that power to
-sink in and become a tool I anticipated having.</p>
-
-<p>If you are struggling and feel like a failure, understand <em>there is no wrong
-way</em>. It might take you a long time of repeated exposure before the alien
-tooling starts to look familiar, and then comfortable. Maybe that book you are
-struggling with actually IS too advanced, so find an easier one, and circle back
-to the harder book later. Maybe, like me, you need some part of many different
-books, tutorials, side projects, and katas.</p>
-
-<p>If you are struggling learning and in the Philly area, I am happy to meet up to
-chat. I am also happy to help over the wire as well. I understand how
-demoralizing the constant battle is to learn something new, especially when it
-feels like your ego is on the line and the whole internet is pressuring you to
-learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
-
-<h1>Was it worth it?</h1>
-
-<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
-now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
-and JS) that previously I did not have. I am significantly more productive at
-programming, regardless of the language. Work that was previously challenging is
-now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
-challenging. Was it learning Lisp specifically that caused all those changes?
-Probably not, but I believe it was learning something far outside my normal
-comfort zone that made the difference. I think I would have had equivalent
-experiences had I invested that time learning Scala (the ML parts), Haskell,
-Idris, J, R, Forth, etc.</p>
 ]]></content>
   </entry>
   
