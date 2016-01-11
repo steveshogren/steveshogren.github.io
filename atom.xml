@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2015-12-24T16:34:01-05:00</updated>
+  <updated>2016-01-11T07:11:07-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,179 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Designing a Compassionate Interview for a High Performing Individual]]></title>
+    <link href="http://deliberate-software.com/compassionate-interviewing/"/>
+    <updated>2016-01-11T07:01:58-05:00</updated>
+    <id>http://deliberate-software.com/compassionate-interviewing</id>
+    <content type="html"><![CDATA[<p>After my post <a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a>, a number of
+people have asked me how I interview compassionately. I strive to make my interviews as
+stress-free and respectful as possible while still rendering a yes/no at the end.</p>
+
+<p>Any good interview process needs to start with goals:</p>
+
+<ul>
+<li>Respect the candidate&rsquo;s time</li>
+<li>Make the candidate comfortable</li>
+<li>Under-skilled candidates should feel no shame</li>
+<li>Both passing and failing candidates should want to tell their friends to
+apply</li>
+<li>We should render the same decision if the interview is repeated multiple
+times (with different exercises each time)</li>
+<li>The candidate should know the process in advance and not be able to earn a
+pass through short term &ldquo;cramming&rdquo;</li>
+<li>The candidate should feel we are all working collaboratively, instead of us
+against them</li>
+</ul>
+
+
+<h2>The Ideal Candidate</h2>
+
+<p>We want to hire for high-level skills. Fast learning, strategic thinking, good
+design, and emotional intelligence are more important than rote memorization. We
+care more about &ldquo;ability to grow&rdquo; than &ldquo;current skills&rdquo;. Our job does not
+involve whiteboard coding, puzzle questions, or anything that can be discovered
+with a decent IDE, so those are left out.</p>
+
+<p>We care a lot about &ldquo;no jerks&rdquo;. We want our workplace to be fun, relaxing, and
+supportive. We want candidates who are comfortable being wrong and corrected
+regularly, and who can correct others politely.</p>
+
+<p>We do not care about any question that could be easily be answered by Google. If
+an internet search can easily answer the question, it is pointless to care if
+the human in front of me happens to know it. Given the search revolution of the
+last decade, the value of memorized facts falls to almost zero. Facts as a proxy
+for actual job skill probably used to be accurate until the internet allowed
+every interview question to become public record.</p>
+
+<h2>Scoring</h2>
+
+<p>I hope someone one day invents a perfect productivity score! For now, counting
+bugs, features, correct answers, etc, are all proxies that poorly represent
+actual productivity. If those actually worked, why don&rsquo;t we use them for raises,
+bonuses, and reviews? Because. They. Do. Not. Work.</p>
+
+<blockquote><p>Counting bugs, features, correct answers, etc, are all proxies that poorly
+represent actual productivity</p></blockquote>
+
+<p>A well-designed rubric <em>can</em> work. A rubric is a way of measuring the
+&ldquo;un-measurable&rdquo;. You probably have seen them in year-end reviews. A grid with
+categories on one side, and a 1-5 score with a paragraph explanation for each.
+We only score what has to be explained with a description from the interviewers.</p>
+
+<blockquote><p>&ldquo;How was the candidate&rsquo;s communication skills?&rdquo;</p>
+
+<p>&ldquo;They misunderstood me only a few times, and I only had trouble understanding
+them once or twice. The watchers all felt like the communication was pretty
+good. They were definitely above average: &frac34;.&rdquo;</p>
+
+<p>&ldquo;How about design skills?&rdquo;</p>
+
+<p>&ldquo;They were able to clearly design every abstraction. They deeply understood
+passing functions as values, see how this takes a function for polymorphism?
+We prodded a bit, and they were able to give a couple other ways to achieve
+the same behavior. We all agreed it was best the way it was. All said, they
+did most of the heavy lifting for this whole project, and it is superbly
+designed: 4/4&rdquo;</p></blockquote>
+
+<h2>Our Process</h2>
+
+<p>To &ldquo;level-set&rdquo; our expectations, we had several of our developers at different
+levels perform the interview live in front of the team. We made them use various
+languages and exercises they had never seen before. This &ldquo;level-setting&rdquo; helped
+us to see how known good developers perform when way out of their element and
+uncomfortable.</p>
+
+<p>All interviews are assigned to developers randomly, and all are expected to
+participate. The candidate should have two developers around at all time, to
+prevent bias by any individual. One pairs while the others rotate watching
+silently. The watchers are expected to stay quiet, to prevent confusion.</p>
+
+<p>Before the first interview, the candidate is sent something very much like this
+document. We think there is no way someone could &ldquo;fake us out&rdquo; on any criteria.
+The things we look for take years of practice to cultivate, so &ldquo;cramming&rdquo; should
+not help much (if at all). The one exception to that is if they have never heard
+of Test Driven Development, we do recommend they Google it for a few minutes, as
+prior knowledge helps smooth the phone screen considerably.</p>
+
+<h3>Phone Screen</h3>
+
+<p>We pair program over the internet using a shared programming environment called
+<a href="c9.io">Cloud9</a>. We (currently) have projects set up for Java, JavaScript,
+Python, Ruby, and C#. The candidate may choose their desired language. We then
+pair program using Test Driven Development to build out a well defined exercise.
+The candidate may entirely verbally &ldquo;navigate&rdquo;, while one of our programmers
+entirely &ldquo;drives&rdquo; and types out the code. This is acceptable.</p>
+
+<p>If the candidate has never seen any of those languages, Google or asking the
+interviewer is totally fair game, and does not count against them. If the
+candidate has completely no idea, the interviewer is expected to politely
+complete the task while keeping the candidate engaged.</p>
+
+<p>The phone screen is under an hour, with 30 minutes for the pair programming.
+The remaining time is for questions about our office. We let them drive the
+second half of the interview, asking us questions about what our team and
+process is like. We attempt to answer clearly and honestly, both good and bad.</p>
+
+<h3>In-Person</h3>
+
+<p>The in-person interview is from 9:30 to 3:00. We are not thrilled with how much
+time it takes and would like to shorten it, but so far have no superior
+alternatives.</p>
+
+<p>At the start of the day, we spend 30 minutes chatting and asking questions back
+and forth. Our questions are meant to tell us about the candidate&rsquo;s background
+and &ldquo;programming philosophy&rdquo;: books read, favorite languages, interesting
+projects they&rsquo;ve worked on, etc. We allow them as many questions as they would
+like.</p>
+
+<p>The rest of the day is very much like a &ldquo;typical day at work&rdquo;, but with
+programming exercises instead of production code. We pair program on the
+exercises, following the same flow from the phone screen. The exercises have no
+&ldquo;tricks&rdquo;, they are reasonably straightforward and don&rsquo;t require any prior domain
+or CS theory knowledge. Throughout the day, the candidate is free to get food,
+drinks, and run to the restroom.</p>
+
+<p>The developer who is pairing has a primary role of making the candidate feel
+comfortable and accomplish any effort with a 50/50 split of effort. If the
+candidate really is struggling, the developer is expected to keep working with
+the candidate, even to the point of doing the hard parts and giving them the
+easy parts. A completely unskilled candidate will see their pair doing all the
+work with a smile and politely asking for &ldquo;help&rdquo; with variable names and such.</p>
+
+<p>The developer pair is also expected to give the candidate some time to think
+if they are lost. The candidate at the end of the interview should feel like
+they have a complete understanding of what happened. The exercises are
+designed to be &ldquo;too much to finish&rdquo;, and as such finishing the exercises is
+not a success criteria as much as working well together and writing
+maintainable code.</p>
+
+<p>We feel this gives us a highly accurate understanding of a candidate&rsquo;s skill,
+while still putting them at ease. Many times we&rsquo;ve seen a terrified candidate
+light up fifteen minutes into a pairing session while watching their developer
+pair do most of the work. Something about seeing code written &ldquo;activates&rdquo; even
+the most nervous candidate. All the thoughts of nerves turn into a concrete
+&ldquo;oh, wait, I know what he just did, and I&rsquo;ve got an opinion on that!&rdquo;</p>
+
+<h2>Conclusion</h2>
+
+<p>We like this process because it is exactly what our job is like. We pair program
+for a lot of work, and the interview is meant to give candidates a sample of
+that. No one should show up for their first day of work and say, &ldquo;wait, I
+actually hate pair programming.&rdquo; By thinking through our goals and an &ldquo;ideal
+candidate&rdquo;, we were able to design a process that meets those goals.</p>
+
+<p>I recommend you take an hour to write out your goals and needs. Then see how
+your interview process matches. Are you looking for a &ldquo;human Google&rdquo;? Does your
+job involve whiteboard coding? Would telling the candidate the exact process in
+advance with all the questions let them game the system? Because every single
+interview question I&rsquo;ve seen is up on Google to be found and memorized on easy
+to read lists. How much time does your process take? Could it be shortened? Does
+it require the candidate to spend a lot of time at home? You might be surprised
+at what you find!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How Daily Meditation Improved My Technical Leadership]]></title>
@@ -2459,82 +2632,75 @@ learn as developers, and how much they cost.</p>
 </ul>
 
 
-<p>The more strategic the skills, the &ldquo;softer&rdquo; they become. The reason
-for this is that soft skills often allow for the greatest leverage on
-a project.</p>
+<p>The more strategic the skills, the &ldquo;softer&rdquo; they become. The reason for this is
+that soft skills often allow for the greatest leverage on a project.</p>
 
 <p>Why is this?</p>
 
-<p>Consider the developer, who by more accurately gathering requirements
-for a few extra days, realizes that the stakeholder can use a
-preexisting solution instead of a six month planned project. If you
-consider how many keystrokes he saved, there is no way he could have
-possibly typed fast enough or refactored efficiently enough to make up
-for that saved six months of effort. Unless he can typed out a six
-month project in a few days, his time was better spent where it
-was. Obviously, these opportunities do not happen all the time, but
-they <em>do</em> happen.</p>
+<p>Consider the developer, who by more accurately gathering requirements for a few
+extra days, realizes that the stakeholder can use a preexisting solution instead
+of a six month planned project. If you consider how many keystrokes he saved,
+there is no way he could have typed fast enough to make up six months of effort.
+Unless he can type out a six month project in a few days, his time was better
+spent where it was. Obviously, these opportunities do not happen all the time,
+but they <em>do</em> happen and it doesn&rsquo;t take more than one or two a year to have
+major impact!</p>
 
-<p>Think about the return on investment for training developers. If you
-have an average team (and yes, we all do), there is a good chance you
-have some lower performing developers. I have witnessed many times
-where a few months of pairing to brush up the skills of a less skilled
-developer allowed them to become much more productive. In terms of
-total company effort, that small investment paid back many times
-before the end of the year as the newly trained developer was able to
-tackle their work with the renewed vigor that comes from a greater
+<p>Think about the return on investment for training developers. If you have an
+average team (and yes, we all do), there is a good chance you have some lower
+performing developers. I have witnessed many times where a few months of pairing
+to brush up the skills of a less skilled developer allowed them to become much
+more productive. In terms of total company effort, that small investment paid
+back many times before the end of the year as the newly trained developer was
+able to tackle their work with the renewed vigor that comes from a greater
 mastery of their work.</p>
 
-<p>Similarly, the judicious use of automation for deployment, testing,
-and building greatly reduces the friction of development for entire
-teams. Lowered friction means less cognitive burden.</p>
+<p>Similarly, the judicious use of automation for deployment, testing, and building
+greatly reduces the friction of development for entire teams. Lowered friction
+means less cognitive burden.</p>
 
-<p>That being said, I think there comes a point where you have to put
-fingers to keyboard and actually produce working software. Of course,
-the fastest and best software is the software you never have to
-write. But, when you absolutely must write or modify software, the
-skill to actually execute becomes very important. Tactical skills
+<p>That being said, I think there comes a point where you have to put fingers to
+keyboard and actually produce working software. Of course, the fastest and best
+software is the software you never have to write. But, when you absolutely must
+write or modify software, the ability to execute is essential. Tactical skills
 increase in significance the closer you get to the work.</p>
 
-<p>While a great software tactician will never &ldquo;beat&rdquo; a great strategist
-in terms of raw business value, a great strategist that is a terrible
-tactician can only talk their way out of work. A strategist who
-forgets or ignores good tactics is what we call an &ldquo;architecture
-astronaut&rdquo; or an &ldquo;ivory tower architect&rdquo;. These disconnected
-strategists eventually start to remove business value as their
+<p>While a great software tactician will never &ldquo;beat&rdquo; a great strategist in terms
+of raw business value, a great strategist that is a terrible tactician can only
+talk their way out of work. A strategist who forgets or ignores good tactics is
+what we call an &ldquo;architecture astronaut&rdquo; or an &ldquo;ivory tower architect&rdquo;. These
+disconnected strategists eventually start to remove business value as their
 solutions make less and less practical sense.</p>
 
-<p>I think a developer who wants to improve should make sure they are
-improving all across the spectrum. Don&rsquo;t focus only on strategic or
-tactical skills, but seek projects and teams that will allow you to
-gain skills across the board. I like to try to focus on one skill from
-each side of the continuum each year. This year, it is emacs
-automation and monads on the tactical side, and leading mature teams
-on the strategic. By alternating readings, I find fuel to apply the
+<p>I think a developer who wants to improve should make sure they are improving all
+across the spectrum. Don&rsquo;t focus only on strategic or tactical skills, but seek
+projects and teams that will allow you to gain skills across the board. I like
+to try to focus on one skill from each side of the continuum each year. This
+year, it is emacs automation and monads on the tactical side, and leading mature
+teams on the strategic. By alternating readings, I find fuel to apply the
 strategies using these new tactics!</p>
 
-<p>Lastly, on the subject of &ldquo;what to study&rdquo;, I think it is possible to
-study a number of subjects all across the continuum. Unless you have
-weeks where you never type any code at all, you can practice and learn
-new tactical techniques all the time. If it slows you down today, but
-speeds you up next week, it might just be worth it. Even if it slowed
-you down to a quarter your usual speed for two weeks, but then gives
-you a measly 5% boost to productively after that, you&rsquo;ll earn that
-time back by the end of the year, plus some. And 5% is not hard to
-do. I&rsquo;d guess learning a few new navigation or refactoring shortcuts
-would net you 5% easily.</p>
+<p>Lastly, on the subject of &ldquo;what to study&rdquo;, I think it is possible to study a
+number of subjects all across the continuum. Unless you have weeks where you
+never type any code at all, you can practice and learn new tactical techniques
+all the time. If it slows you down today, but speeds you up next week, it might
+just be worth it. Even if it slowed you down to a quarter your usual speed for
+two weeks, but then gives you a measly 5% boost to productively after that,
+you&rsquo;ll earn that time back by the end of the year, plus some. And 5% is not hard
+to do. I&rsquo;d guess learning a few new navigation or refactoring shortcuts would
+net you 5% easily.</p>
 
-<p>When studying more strategic skills, the same holds, but they are
-harder to learn. The best way I have found for learning strategic
-skills is to read books about it, and try to work around others who
-are good at it. Neither books or working with others will get you all
-the way there, you also have to apply it yourself.</p>
+<p>When studying more strategic skills, the same holds, but they are harder to
+learn. The best way I have found for learning strategic skills is to read books
+about it, and try to work around others who are good at it. Neither books or
+working with others will get you all the way there, you also have to apply it
+yourself.</p>
 
 <h1>Progression</h1>
 
-<p>I usually recommend that the more experienced a person is, the more
-mastery they should have in the tactical skills. A suggested path I&rsquo;ve
-recommended for a new developer would look like this:</p>
+<p>I usually recommend that the more experienced a person is, the more mastery they
+should have in the tactical skills. A suggested path I&rsquo;ve recommended for a new
+developer would look like this:</p>
 
 <h3>0 - 6 Months:</h3>
 
@@ -2570,46 +2736,41 @@ recommended for a new developer would look like this:</p>
 </ul>
 
 
-<p>This is not a hard and fast list. If you are completely unsure of what
-to learn, I recommend this rough progression just to get you
-started. If you are a two year developer, and you cannot touch type, I
-think learning it can really help, alongside the other 0 - 2 year
-skills.</p>
+<p>This is not a hard and fast list. If you are completely unsure of what to learn,
+I recommend this rough progression just to get you started. If you are a two
+year developer, and you cannot touch type, I think learning it can really help,
+alongside the other 0 - 2 year skills.</p>
 
-<p>Not all skills along the list build on a mastery of the ones below
-it. A developer can absolutely get to a very senior mastery of the
-strategic skills only knowing one language and using notepad.exe. I
-believe that they are missing out on a deep richness that comes from
-better knowing their field, and I suggest they spend some time learning new
-languages and tools. The more tactical the skill, usually, the easier
-it is to learn, so it won&rsquo;t take very much time to come up to
-speed.</p>
+<p>Not all skills along the list build on a mastery of the ones below it. A
+developer can absolutely get to a very senior mastery of the strategic skills
+only knowing one language and using notepad.exe. I believe that they are missing
+out on a deep richness that comes from better knowing their field, and I suggest
+they spend some time learning new languages and tools. The more tactical the
+skill, usually, the easier it is to learn, so it won&rsquo;t take very much time to
+come up to speed.</p>
 
-<p>The hardest thing I think a more senior developer has to deal with is
-humbling themselves to learn a perceived &ldquo;entry-level&rdquo; skill. I have
-another post brewing about this very topic, so I&rsquo;ll not get too much
-into it here. But if you have gotten to a place where you feel like
-you are so senior that some skills are too &ldquo;entry-level&rdquo; for you to
-learn, I think you need to humble yourself and learn them. Nothing can
-be gained from pretending like they are not valuable. Additionally,
-the assumption that your time is now so valuable that it is &ldquo;a waste&rdquo;
-to spend it on learning tactical skills is absurd.</p>
+<p>The hardest thing I think a more senior developer has to deal with is humbling
+themselves to learn a perceived &ldquo;entry-level&rdquo; skill. I have another post brewing
+about this very topic, so I&rsquo;ll not get too much into it here. But if you have
+gotten to a place where you feel like you are so senior that some skills are too
+&ldquo;entry-level&rdquo; for you to learn, I think you need to humble yourself and learn
+them. Nothing can be gained from pretending like they are not valuable.
+Additionally, the assumption that your time is now so valuable that it is &ldquo;a
+waste&rdquo; to spend it on learning tactical skills is absurd.</p>
 
-<p>Claiming you are too good to waste on low level skills not only
-belittles everyone around you, but belies a deep misunderstanding of
-our field. The senior developer who takes five times as long to enter
-and edit code isn&rsquo;t just spending longer to do that task, but they are
-paying a missed opportunity cost in time they could have spent in more
-strategic endeavors. They could have been training, planning,
-gathering requirements, building better automation, etc, instead they
-stubbornly claim &ldquo;typing isn&rsquo;t what software is about&rdquo;. By giving it
-so little credence, they have made it most of their actual mental
-effort! Take simple touch-typing. Imagine how much mental effort it
-takes the hunt-and-peck typist to write out a single line of
-code. That is mental overhead that is simply wasted. The developer who
-doesn&rsquo;t have to think about how to move a file or edit a structure
-finds themselves quickly through the tactical efforts with little
-distraction, free to think deeply.</p>
+<p>Claiming you are too good to waste on low level skills not only belittles
+everyone around you, but belies a deep misunderstanding of our field. The senior
+developer who takes five times as long to enter and edit code isn&rsquo;t just
+spending longer to do that task, but they are paying a missed opportunity cost
+in time they could have spent in more strategic endeavors. They could have been
+training, planning, gathering requirements, building better automation, etc,
+instead they stubbornly claim &ldquo;typing isn&rsquo;t what software is about&rdquo;. By giving
+it so little credence, they have made it most of their actual mental effort!
+Take simple touch-typing. Imagine how much mental effort it takes the
+hunt-and-peck typist to write out a single line of code. That is mental overhead
+that is simply wasted. The developer who doesn&rsquo;t have to think about how to move
+a file or edit a structure finds themselves quickly through the tactical efforts
+with little distraction, free to think deeply.</p>
 
 <h1>Resources</h1>
 
@@ -3553,103 +3714,6 @@ down bugs and more time adding on features!</p>
 </p> <p> This is the story of how I learned an important lesson: if
   you are going to database, LEARN TO DATABASE.
 </p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Challenge - Code Every Day]]></title>
-    <link href="http://deliberate-software.com/streaks/"/>
-    <updated>2014-01-28T00:00:00-05:00</updated>
-    <id>http://deliberate-software.com/streaks</id>
-    <content type="html"><![CDATA[<p>
-  You know what will make you a phenomenally better developer?
-  Deliberate practice. How do you get such practice? By doing it every
-  single day. Random bursts of effort over the odd weekend will gain
-  you practically nothing comparatively, even if the time investment
-  is the same. Your mind needs repetition and consistent effort to
-  improve. So what do you want to get better at?  Pick your highest
-  value subject: vim, regex, functional programming, meta-programming,
-  OO, TDD, async co-routines, threading, graphics, web, etc, etc, and
-  practice it every single day. Easy as that.
-</p>
-<p>
-  When GitHub first came out with the "streak" feature on the front
-  page, I realized it was time to stop my binge coding on the
-  occasional weekend and start a system. Inspired by other recent
-  system-based successes (working out every day), I decided to code
-  every day for a year.
-</p>
-<p>
-  I quickly realized that anything requiring detailed plans and
-  designs is harder to do. Working though a book, on the other hand,
-  is easy to start and stop. I started working through a book I had
-  tried to read before: Let Over Lambda.
-</p>
-<p>
-  Let Over Lambda is intense, filled with deeply complex concepts
-  written in Common Lisp, a language with which I was only passingly
-  familiar. But I managed to get through it without hardly any
-  difficulty. How did I do that?
-</p>
-<p>
-  I got a cheap netbook, and started to code on the train ride home.
-  Interestingly, without any internet, I was much less distracted, and
-  could just sit down and be in the zone within the minute (this from
-  the guy whom it takes 20+ minutes to get in the zone at work). With
-  only a limited span of ~25 minutes, I had no time to waste, and
-  without people to talk to my brain just falls into it. I can only
-  pinpoint a few times I could not get into the zone, and those were
-  extreme circumstances of exhaustion or illness.
-</p>
-<p>
-  In ten months, I have:
-  <ul>
-    <li>
-      worked through Let Over Lambda once and read it twice
-    </li>
-    <li>
-      worked twice through the PLAI programming languages book
-      (once in Scheme and once in F#)
-    </li>
-    <li>
-      read Clojure Programming, F# 3.0 Programming, and am currently
-      in Real World Haskell
-    </li>
-    <li>
-      completed the exercises up to chapter three of SICP
-    </li>
-    <li>
-      authored a small Clojure library for run time type checking
-      (don't use mine, use Prismatic's)
-    </li>
-    <li>
-      prepared and given a two hour talk about macros at a local meet-up
-    </li>
-  </ul>
-  Pretty incredible for only ~25 minutes a day! That is more
-  programming books than I had read in the previous 2 years. I have
-  improved mightily in such a short time, and it does not feel
-  stressful in the least. Now, when I get home, if I feel like
-  watching movies, cooking, or playing board games/Dark Souls all
-  night, no problem! I can relax knowing I have accomplished my goals
-  for the day. All in all, the last ten months have been incredible:
-  some of the most rewarding, relaxing, and fulfilling months of my
-  life.
-</p>
-<p>
-  Before you scoff and point out that not everyone can take the train
-  to work, consider this: get a portable computer, load up your
-  environment, tools, and some pdfs. The next morning, leave for work
-  ~25 minutes early. You will probably get in way sooner due to the
-  decreased traffic (now you have earned back that time). Sit quietly
-  in your car, and without the distractions of internet or other
-  people, knock out a little programming. Maybe start with SICP (the
-  best programming book I have ever read). See how much you can read
-  and do before work starts. Do that for a month, every day. I
-  guarantee you will learn something amazing.
-</p>
-  
- 
 ]]></content>
   </entry>
   

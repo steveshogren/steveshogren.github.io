@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: management | Deliberate Software]]></title>
+  <link href="http://deliberate-software.com/blog/categories/management/atom.xml" rel="self"/>
+  <link href="http://deliberate-software.com/"/>
+  <updated>2016-01-11T07:11:07-05:00</updated>
+  <id>http://deliberate-software.com/</id>
+  <author>
+    <name><![CDATA[Steve Shogren]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How Daily Meditation Improved My Technical Leadership]]></title>
+    <link href="http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/"/>
+    <updated>2015-12-14T07:50:38-05:00</updated>
+    <id>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership</id>
+    <content type="html"><![CDATA[<p><img class="right emailImage" src="/images/meditation.jpg" width="200" title="&lsquo;meditation&rsquo; &lsquo;meditation&rsquo;" ></p>
+
+<p>A couple years ago, a coworker told me a success story about mindful meditation.
+He explained how his wife took a class that required an hour of daily meditation
+for a whole month. He reported that she found it uncomfortable, but the effects
+were astounding. She claimed to feel more relaxed, more focused, and more
+&ldquo;herself&rdquo;. She found new reserves of motivation. She dropped the book she&rsquo;d been
+trying to write for years, and started a business. After that business failed,
+she started another, this time successfully.</p>
+
+<p>Immediately convinced, I started by listening to guided
+<a href="https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation">mindfulness meditations</a>
+on YouTube and <a href="https://www.headspace.com/science">phone apps</a>. After a couple
+weeks of that, I started doing breathing exercises on my own while sitting
+listening to rain sounds. I made a habit of doing it for about an hour every day
+on my lunch break. A few months later, I hated it.</p>
+
+<p>For whatever reason, after each session I would feel very uncomfortable. I would
+be confronted with emotions that made me feel worthless and embarrassed. My mind
+was bringing forward all these painful memories and feelings. Over time, I
+started to dread the lunch break.</p>
+
+<h2>The Revelation</h2>
+
+<p>Then, one day, I had a profound sense of understanding. I realized what was
+causing these negative emotions. I was in the middle of a major push to guide
+our team to adopt a new programming language. While I&rsquo;d led many such
+initiatives before, I saw that I&rsquo;d always had the same struggles. My ego and
+self-worth were so tied into &ldquo;my&rdquo; campaigns that I wasn&rsquo;t able to clearly hear
+criticism. When people pointed out legitimate concerns or weaknesses, I would
+get embarrassed and take it as a personal failure.</p>
+
+<p>I could see, from the very beginning, my current &ldquo;campaign&rdquo; had been poorly
+executed. After researching the new technology for a long time, I felt like I
+saw a place where it could solve some of our needs. Instead of carefully writing
+out a proposal, I &ldquo;half-jokingly&rdquo; brought it up whenever I could. When the
+listeners didn&rsquo;t immediately react positively, I quickly retracted the idea,
+&ldquo;just kidding&rdquo;. Over weeks I dropped not-so-subtle hints, &ldquo;this would be better
+with&hellip;&rdquo;, or, &ldquo;we wouldn&rsquo;t have this problem if&hellip;&rdquo;. Instead of convincing
+anyone of anything, I just broadcasted to everyone how insecure I felt about the
+issue. Everyone could clearly see that I cared, but I was too afraid to put
+myself out there and make a serious suggestion. For months nothing changed, and
+I felt more and more bitter that &ldquo;my idea&rdquo; wasn&rsquo;t being listened to. In reality,
+I hadn&rsquo;t even made a serious suggestion yet!</p>
+
+<p>Eventually, the people around me started to listen and research the new
+language. They agreed it really did solve a need we had. After a while, enough
+people got on board that we started using it more. Even then, I held tightly to
+&ldquo;my idea&rdquo;, afraid that it would prove to be a failure. When someone ran into
+issues, I would get defensive. Even though I tried to keep my emotions in check,
+I clearly took any criticism of the language as if it was a personal failing, no
+matter how legitimate. I&rsquo;d tightly coupled my ego to my ideas, and I always had.</p>
+
+<p>After a few months of meditating, this idea rocked my world. My negative
+emotions came from a realization that my actions were not in line with my
+values. I don&rsquo;t want my self-worth to be tied to a simple tool. No tool is worth
+it. Every tool fails. I&rsquo;d sold myself short, lowered my self-worth to that of a
+tool. This completely blocked my ability to be an effective technical leader.</p>
+
+<p>I couldn&rsquo;t hear criticism of my ideas without getting defensive, so I couldn&rsquo;t
+think critically. I couldn&rsquo;t help work out solutions to the best of my ability,
+because that would mean admitting personal failure. Every side comment or
+momentary struggle felt like a catastrophe.</p>
+
+<p>After realizing this, I felt a wave of relief. My emotional struggle leading
+this programming language change made sense! And I had an easy way out! I simply
+had to distance myself from my ideas, separate my self-worth from my tools. The
+more I meditated, the easier it got.</p>
+
+<h2>Present Day</h2>
+
+<p>While I still sometimes get the old pang of embarrassment or defensiveness, now
+I understand where it comes from, and how to move forward. I can let my ideas
+go. I can consider ideas critically. I can make changes and adjustments if the
+ideas are not working.</p>
+
+<p>This summer I decided to write up my learning. I wanted to always be able to
+look back and remember these important lessons. My write-up was the seed for the
+book <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>. I explain
+the lessons learned from implementing a half dozen major technical changes, and
+how I learned to lead without letting my ego cloud my thinking.</p>
+
+<p>If you want to become a more effective leader, I highly recommend a practice of
+daily meditation. Meditation gives your mind a chance to deeply consider your
+actions and values. It allows your subconscious to reflect on what and why you
+act.</p>
+
+<p>Not everyone will struggle from the same issues as me. Every leader has a
+different set of challenges and situations. Meditation lets your mind analyze
+your unique weaknesses and strengths, coming up with a tailored perspective.
+Meditating allows your mind to creatively look for ways to improve itself. While
+rarely comfortable, this process can have incredible benefits.</p>
+
+<h2>Appendix: &ldquo;I&rsquo;m uncomfortable with the connotations of meditation&rdquo;</h2>
+
+<p>You may feel uncomfortable with meditation because of its current strong
+associations with religion. Meditation is not inherently religious. I consider
+meditation like an exercise routine for the mind. If you are religious, and
+exercise your body as a form of religious expression, exercise is a religious
+practice. If you are not religious, and you exercise to improve your health and
+well-being, exercise is a secular practice. Meditation is just a form of mental
+exercise. Simple as that.</p>
+
+<p>Meditation is a tool, and the tool wielder determines its use. Don&rsquo;t let a fear
+of the connotations of meditation stop you from experiencing improved
+leadership, creativity, and focus!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Interview Humiliation]]></title>
+    <link href="http://deliberate-software.com/on-defeat/"/>
+    <updated>2015-10-29T19:01:00-04:00</updated>
+    <id>http://deliberate-software.com/on-defeat</id>
+    <content type="html"><![CDATA[<p>(All these great ideas, but no one is listening? Check out my
+book: <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>)</p>
+
+<p>One day, I went into an interview, and I was humiliated.</p>
+
+<h3>The Setup</h3>
+
+<p>I used to think very highly of myself. This was early on in the Test Driven
+Development (TDD) craze, and I was one of the best I knew at it. I knew
+interfaces, classes, mocking frameworks, and best practices. I&rsquo;d been taught all
+the tricks from some very smart people, and my confidence was high. Not only
+that, but I&rsquo;d just finished at work the restoration of an abandoned legacy
+codebase to a bug-free, fully tested state completely on my own.</p>
+
+<p>I&rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&rsquo;t been programming more
+than a couple years. My first job, they&rsquo;d made me a team lead over some very
+senior developers within a year of my hire date. I was learning Clojure and
+Common Lisp, and had just shipped an Android game I made entirely alone
+(including the 2D physics engine).</p>
+
+<p>I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn&rsquo;t know. I&rsquo;m mostly self
+taught, so a lot of common CS concepts felt alien. I was waking up before work
+and teaching myself algorithms, lisps, and math.</p>
+
+<p>Enter Company A.</p>
+
+<p>I flew through the phone screen &ldquo;this is the best phone screen we&rsquo;ve seen!&rdquo; Of
+course it is. &ldquo;Your resume is very impressive.&rdquo; Oh, I know!</p>
+
+<p>I get to the on-site interview.</p>
+
+<h3>The On-Site</h3>
+
+<p>I hadn&rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
+asked to present a project I&rsquo;d worked on, and I picked my recently shipped
+physics game that was up on Google Play. I walked into the reception area a few
+minutes early.</p>
+
+<pre><code>"You are 25 minutes late."
+</code></pre>
+
+<p>What?! I explain that I have the email saying 9:30! No matter, &ldquo;hurry, they are
+waiting!&rdquo; Maybe I can salvage this. I walk into a conference room with a dozen
+people sitting around a table looking bored and pissed.</p>
+
+<pre><code>"Let's see your presentation."
+</code></pre>
+
+<p>I start to open up my laptop. Meanwhile they start to joke around to each other:</p>
+
+<pre><code>"Oh, wow, Linux, what is this, 2003? I'd hoped I'd never have to see the
+grub boot screen again! Can't you afford a real machine?"
+</code></pre>
+
+<p>I try to joke back while multitasking with my laptop. They only have the Mac
+projector cable. No adapter. I&rsquo;d thought ahead, and handed one of the developers
+a thumb drive with the presentation and code. Meanwhile the interviewers are
+joking and laughing to each other at my choice of clothes.</p>
+
+<pre><code>"A suit, classic, where are you interviewing after this, a sales job?"
+</code></pre>
+
+<p>I roll with it, make some joke about &ldquo;styling&rdquo;. I start presenting about the 2D
+physics engine I&rsquo;d written as a learning project for my game. One of the most
+interesting parts to me was how I&rsquo;d first written it without any unit testing,
+following just Clean Code practices. I then re-wrote it using heavy TDD. The
+design turned out very different both times, which I thought was interesting to
+see how TDD had influenced the design.</p>
+
+<p>About five minutes in, I am cut off:</p>
+
+<pre><code>"This presentation is bullshit. You have no evidence, nothing valuable to
+show, just spurious subjective opinions. You've put up a straw man and now
+are trying to knock it down assuming we are idiots. I've seen enough."
+</code></pre>
+
+<p>At this point, it has been barely 15 minutes since I walked in. I remain calm
+and professional, and start to address the raised concerns. I play the
+meta-game, wondering if perhaps this is a test to see how I&rsquo;ll react when
+questioned and embarrassed. Even if this wasn&rsquo;t a test, I was determined to be
+at my most professional and finish with my head held high.</p>
+
+<p>Five developers walk out before I can finish my first sentence. One of the
+remaining six interviewers looks embarrassed and asks if I could live code them
+a web scraper in any language instead of the presentation. I turn my laptop
+around (still no projector) and ask if PHP is acceptable. They are a Python
+shop, and PHP is the closest to what they use that I am comfortable using when
+this nervous.</p>
+
+<pre><code>"PHP? Gross. I suppose if it is all you know..."
+</code></pre>
+
+<p>Unfortunately, I&rsquo;ve got so much adrenaline in me that it takes me a few tries to
+log in. I get on a roll after five minutes, and write the scraper. They throw me
+a few more requirements, and within a half hour I&rsquo;ve written stories for and
+completed them all. At least two of the interviewers seem quite impressed.
+Someone looks at their watch, &ldquo;well, that&rsquo;s all the stories we have, I guess
+let&rsquo;s break for lunch.&rdquo;</p>
+
+<p>Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
+suit and dress shoes. When we get back from lunch I am hot, tired, and
+foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
+patent leather shoes. I am called into the conference room again. At this point,
+I am genuinely curious if this is some sort of extreme patience/calmness test,
+or if I am being filmed for a reality show. No such luck.</p>
+
+<p>At the head of the table is the developer who &ldquo;called me out&rdquo; for my
+presentation. Apparently my lunch mates were supposed to only take an hour, we
+took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
+sarcastic tone I have ever heard:</p>
+
+<pre><code>"So, got any questions for me?"
+</code></pre>
+
+<p>I ask a few normal questions, meanwhile he is constantly checking his watch and
+rolling his eyes. He answers briefly and rudely. I thank him for his time, and
+ask him if there is more. He laughs.</p>
+
+<pre><code>"Oh, we are done here."
+</code></pre>
+
+<p>I am shown to the door.</p>
+
+<p>I sit in the car for a half hour, wondering what just happened. I look over to
+the passenger seat piled high with text books I have been studying, books on
+language design, compilers, algorithms, physics engines, TDD, and productivity.</p>
+
+<p>I was asked none of it. I threw up from stress out the car door into their
+parking lot.</p>
+
+<h3>Aftermath</h3>
+
+<p>I found out later their recruiter had given me and many other candidates the
+wrong time. She was fired shortly after.</p>
+
+<p>I never found out if I had done something to make everyone so angry. I now
+suspect that they were massively turned off by a host of things. Polyglot
+programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
+presentation probably all contributed to an immediate disqualification. I
+rationally realize they were terrible and treated me terribly, but the
+embarrassment is still there. I suspect my presentation was terrible from the
+get go: that they were expecting some rock-star and instead got me.</p>
+
+<p>A number of times I have woken up in a cold sweat having dreamt about that
+interview. In the large scheme of things, a bad interview is such a small thing,
+but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
+cocky, insufferable? Did my ego cause them to treat me that way, or was it all
+them? What could I have done differently? I was only in there for a few minutes!</p>
+
+<p>Few events in my professional life have shaped me as much as that interview. I
+have turned it into a forge for my talent, the anvil on which I beat my pride.
+When I don&rsquo;t know something, I am more willing to shrug and laugh it off, all
+while learning as fast as I can. When I am humiliated professionally, I know
+I&rsquo;ve come through worse and thrived.</p>
+
+<h3>Break The Cycle</h3>
+
+<p>This story fills me with an overwhelming desire to never continue the cycle of
+abuse. I strive every interview to try to respectfully work with the candidate,
+and never humiliate them. I want every person I interview to leave feeling loved
+as a human and respected, even if they are completely incapable to perform the
+duties of the job.</p>
+
+<p>When I ask a question, if they struggle, we work it out together. When I ask for
+code, we write it together, even if that means I have to do all the work. I can
+make myself their servant, while still assessing their skill with accuracy and
+dispassion. Those with the skill will show it, and those without will not feel
+humiliated. I let them interview me, and if that means they want me to go up to
+the whiteboard and struggle through a merge sort, so be it. In this way, I push
+back against the interview culture that normalizes degradation and humiliation.</p>
+
+<p>If you are interviewing others, take a serious look at your practices. Would a
+failed candidate feel humiliated and disrespected? What will they tell their
+coworkers and friends at meetups about your company? Will they talk about
+feeling respected, and how they hope to get the chance to work with you one day?
+Or will they talk of a group of self-righteous jerks who abuse their power to
+make others feel small? You can break the cycle.</p>
+
+<p>(All these great ideas, but no one is listening? Check out my
+book: <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Software Skills Continuum]]></title>
+    <link href="http://deliberate-software.com/skill-continuum/"/>
+    <updated>2014-12-02T07:26:00-05:00</updated>
+    <id>http://deliberate-software.com/skill-continuum</id>
+    <content type="html"><![CDATA[<pre><code>    Learning Vim is a waste of time; I can prove it! - Anonymous
+</code></pre>
+
+<p>I recently had a gentle discussion with a new teammate about whether
+or not they should learn to use Vim. My team uses a Vim emulator
+inside Visual Studio and Emacs, and so we recommended he learn at
+least the basics so to reduce friction when pair-programming (which we
+do almost all the time).</p>
+
+<p>He really had no desire to learn it, and took no small amount of
+offense when we suggested it. The friction he felt trying to &ldquo;start
+over&rdquo; really bothered him. He set out to prove that Vim was not worth
+his time, and that it was actually us who needed to stop using it,
+because we were the duped slow ones.</p>
+
+<p>As any such localized experiments go, he never really came up with
+anything conclusive either way. Personally, I suspect he spent more
+time trying to figure out why Vim was worse than if he had just
+buckled down and learned it. This got me thinking about skills we
+learn as developers, and how much they cost.</p>
+
+<h1>Skills</h1>
+
+<p>Most skills fall along a continuum of tactical to strategic.</p>
+
+<h3>Tactical Skills</h3>
+
+<ul>
+<li>Typing speed/accuracy</li>
+<li>Keyboard shortcuts</li>
+<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
+<li>Clean coding practices</li>
+<li>Refactoring tools</li>
+<li>Repl Driven Development / Test Driven Development</li>
+<li>Debugging</li>
+</ul>
+
+
+<h3>Mid-way Skills</h3>
+
+<ul>
+<li>Unit testing</li>
+<li>Building abstractions</li>
+<li>Designing simple solutions</li>
+<li>Automating tasks</li>
+<li>Learning new languages and frameworks</li>
+</ul>
+
+
+<h3>Strategic Skills</h3>
+
+<ul>
+<li>Gathering requirements</li>
+<li>Training developers</li>
+<li>Organizing and leading teams</li>
+<li>&ldquo;Understanding the real problem&rdquo;</li>
+</ul>
+
+
+<p>The more strategic the skills, the &ldquo;softer&rdquo; they become. The reason for this is
+that soft skills often allow for the greatest leverage on a project.</p>
+
+<p>Why is this?</p>
+
+<p>Consider the developer, who by more accurately gathering requirements for a few
+extra days, realizes that the stakeholder can use a preexisting solution instead
+of a six month planned project. If you consider how many keystrokes he saved,
+there is no way he could have typed fast enough to make up six months of effort.
+Unless he can type out a six month project in a few days, his time was better
+spent where it was. Obviously, these opportunities do not happen all the time,
+but they <em>do</em> happen and it doesn&rsquo;t take more than one or two a year to have
+major impact!</p>
+
+<p>Think about the return on investment for training developers. If you have an
+average team (and yes, we all do), there is a good chance you have some lower
+performing developers. I have witnessed many times where a few months of pairing
+to brush up the skills of a less skilled developer allowed them to become much
+more productive. In terms of total company effort, that small investment paid
+back many times before the end of the year as the newly trained developer was
+able to tackle their work with the renewed vigor that comes from a greater
+mastery of their work.</p>
+
+<p>Similarly, the judicious use of automation for deployment, testing, and building
+greatly reduces the friction of development for entire teams. Lowered friction
+means less cognitive burden.</p>
+
+<p>That being said, I think there comes a point where you have to put fingers to
+keyboard and actually produce working software. Of course, the fastest and best
+software is the software you never have to write. But, when you absolutely must
+write or modify software, the ability to execute is essential. Tactical skills
+increase in significance the closer you get to the work.</p>
+
+<p>While a great software tactician will never &ldquo;beat&rdquo; a great strategist in terms
+of raw business value, a great strategist that is a terrible tactician can only
+talk their way out of work. A strategist who forgets or ignores good tactics is
+what we call an &ldquo;architecture astronaut&rdquo; or an &ldquo;ivory tower architect&rdquo;. These
+disconnected strategists eventually start to remove business value as their
+solutions make less and less practical sense.</p>
+
+<p>I think a developer who wants to improve should make sure they are improving all
+across the spectrum. Don&rsquo;t focus only on strategic or tactical skills, but seek
+projects and teams that will allow you to gain skills across the board. I like
+to try to focus on one skill from each side of the continuum each year. This
+year, it is emacs automation and monads on the tactical side, and leading mature
+teams on the strategic. By alternating readings, I find fuel to apply the
+strategies using these new tactics!</p>
+
+<p>Lastly, on the subject of &ldquo;what to study&rdquo;, I think it is possible to study a
+number of subjects all across the continuum. Unless you have weeks where you
+never type any code at all, you can practice and learn new tactical techniques
+all the time. If it slows you down today, but speeds you up next week, it might
+just be worth it. Even if it slowed you down to a quarter your usual speed for
+two weeks, but then gives you a measly 5% boost to productively after that,
+you&rsquo;ll earn that time back by the end of the year, plus some. And 5% is not hard
+to do. I&rsquo;d guess learning a few new navigation or refactoring shortcuts would
+net you 5% easily.</p>
+
+<p>When studying more strategic skills, the same holds, but they are harder to
+learn. The best way I have found for learning strategic skills is to read books
+about it, and try to work around others who are good at it. Neither books or
+working with others will get you all the way there, you also have to apply it
+yourself.</p>
+
+<h1>Progression</h1>
+
+<p>I usually recommend that the more experienced a person is, the more mastery they
+should have in the tactical skills. A suggested path I&rsquo;ve recommended for a new
+developer would look like this:</p>
+
+<h3>0 - 6 Months:</h3>
+
+<ul>
+<li>Typing speed/accuracy</li>
+<li>Keyboard shortcuts</li>
+<li>Repl Driven Development / Test Driven Development</li>
+<li>Unit testing</li>
+<li>Clean coding practices</li>
+<li>Designing simple solutions</li>
+</ul>
+
+
+<h3>0 - 2 Years:</h3>
+
+<ul>
+<li>Debugging</li>
+<li>Refactoring tools</li>
+<li>Building abstractions</li>
+<li>Automating tasks</li>
+<li>Learning new languages and frameworks</li>
+<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
+</ul>
+
+
+<h3>0 - 50+ Years:</h3>
+
+<ul>
+<li>Gathering requirements</li>
+<li>Training developers</li>
+<li>Organizing and leading teams</li>
+<li>Understanding the real problem</li>
+</ul>
+
+
+<p>This is not a hard and fast list. If you are completely unsure of what to learn,
+I recommend this rough progression just to get you started. If you are a two
+year developer, and you cannot touch type, I think learning it can really help,
+alongside the other 0 - 2 year skills.</p>
+
+<p>Not all skills along the list build on a mastery of the ones below it. A
+developer can absolutely get to a very senior mastery of the strategic skills
+only knowing one language and using notepad.exe. I believe that they are missing
+out on a deep richness that comes from better knowing their field, and I suggest
+they spend some time learning new languages and tools. The more tactical the
+skill, usually, the easier it is to learn, so it won&rsquo;t take very much time to
+come up to speed.</p>
+
+<p>The hardest thing I think a more senior developer has to deal with is humbling
+themselves to learn a perceived &ldquo;entry-level&rdquo; skill. I have another post brewing
+about this very topic, so I&rsquo;ll not get too much into it here. But if you have
+gotten to a place where you feel like you are so senior that some skills are too
+&ldquo;entry-level&rdquo; for you to learn, I think you need to humble yourself and learn
+them. Nothing can be gained from pretending like they are not valuable.
+Additionally, the assumption that your time is now so valuable that it is &ldquo;a
+waste&rdquo; to spend it on learning tactical skills is absurd.</p>
+
+<p>Claiming you are too good to waste on low level skills not only belittles
+everyone around you, but belies a deep misunderstanding of our field. The senior
+developer who takes five times as long to enter and edit code isn&rsquo;t just
+spending longer to do that task, but they are paying a missed opportunity cost
+in time they could have spent in more strategic endeavors. They could have been
+training, planning, gathering requirements, building better automation, etc,
+instead they stubbornly claim &ldquo;typing isn&rsquo;t what software is about&rdquo;. By giving
+it so little credence, they have made it most of their actual mental effort!
+Take simple touch-typing. Imagine how much mental effort it takes the
+hunt-and-peck typist to write out a single line of code. That is mental overhead
+that is simply wasted. The developer who doesn&rsquo;t have to think about how to move
+a file or edit a structure finds themselves quickly through the tactical efforts
+with little distraction, free to think deeply.</p>
+
+<h1>Resources</h1>
+
+<p>Here are some links and books to get you started on these topics.</p>
+
+<ul>
+<li>Typing speed/accuracy - <a href="http://store.steampowered.com/agecheck/app/246580/">Typing of the Dead</a></li>
+<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs - <a href="http://vim-adventures.com/">Vim Adventures</a></li>
+<li>Clean coding practices - <a href="https://cleancoders.com/">Clean Coders</a></li>
+<li>Repl Driven Development - <a href="http://blog.jayfields.com/2014/01/repl-driven-development.html">RDD</a></li>
+<li>Test Driven Development - <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530</a></li>
+<li>Debugging - <a href="http://c.learncodethehardway.org/book/ex31.html">Debugging</a></li>
+<li>Building abstractions / Designing Simple Solutions - <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start">Structure and Interpretation of Computer Programs</a></li>
+<li>Training developers - <a href="http://en.wikipedia.org/wiki/Pair_programming">Pair Programming</a></li>
+<li>Organizing and leading teams - <a href="http://managinghumans.com/">Managing Humans</a></li>
+<li>Understanding the real problem - <a href="http://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow">Thinking Fast and Slow</a></li>
+<li>Learning new languages and frameworks - <a href="http://norvig.com/21-days.html">Teach Yourself Programming in Ten Years</a></li>
+<li>Automating tasks <a href="http://www.stuartellis.eu/articles/rake/">Rake to Automate Tasks</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What Book Should I Read Next?]]></title>
+    <link href="http://deliberate-software.com/next-book/"/>
+    <updated>2014-07-26T11:46:00-04:00</updated>
+    <id>http://deliberate-software.com/next-book</id>
+    <content type="html"><![CDATA[<p>&ldquo;It&rsquo;s my first job, what book should I read first?&rdquo;</p>
+
+<p>Recently, a few developers I am mentoring were curious about what book
+to read first. Even mid and senior level developers I&rsquo;ve known
+sometimes struggle with this question.</p>
+
+<p>If you want to be truly great, you have to read technical books and
+white papers, and you have to learn new programming languages. You
+could figure the content out yourself from first principles, but you
+will be about 50 years behind those who just read the
+books. Additionally, if you stick to a certain language, you are
+limiting yourself to only thinking about a problem in a way common to
+the language.</p>
+
+<p>Just like with adding new features to a project, you should prioritize
+your learning.</p>
+
+<p>I&rsquo;d start by getting into the mindset that you will need roughly a
+decade and at least ten thousand high quality hours to become a master
+programmer. To be able to get that many high-value hours, you will
+need to carefully select your jobs, and constantly be learning new
+things that actually make you a better developer.</p>
+
+<h2>Languages</h2>
+
+<pre><code>    "A language that doesn't affect the way you think about programming,
+    is not worth knowing." - Alan Perlis
+</code></pre>
+
+<p>I agree with <a
+href="http://michaelochurch.wordpress.com/2012/07/27/six-languages-to-master/">other developers</a> who assert that a language is <a
+href="http://en.wikiquote.org/wiki/Alan_Perlis">not worth learning</a>
+unless it teaches you something new and mind-expanding. There are exceptions of course. Maybe you want to switch stacks to get an awesome high-value job. By all means, learn the new stack.</p>
+
+<p>If you want to follow the extremely good <a
+href="http://pragprog.com/the-pragmatic-programmer">advice of others</a> and learn one new programming language a year, make each
+one count. For example, if you are a Ruby guy, it is safe to say you
+will learn nothing of really any mind-expanding value if you try to
+learn PHP, Python, JavaScript, or Perl.</p>
+
+<p>Same for the family of Java, C++, C#, or VB.NET. One of those is plenty.</p>
+
+<p>Instead shoot for languages that will really beef up your thought
+process. I like the advice given by <a href="http://norvig.com/21-days.html">Peter Norvig</a>:</p>
+
+<pre><code>     "Learn at least a half dozen programming languages. Include one
+     language that supports class abstractions (like Java or C++), one that
+     supports functional abstraction (like Lisp or ML), one that supports
+     syntactic abstraction (like Lisp), one that supports declarative
+     specifications (like Prolog or C++ templates), one that supports
+     coroutines (like Icon or Scheme), and one that supports parallelism
+     (like Sisal)."
+</code></pre>
+
+<p>I would add to that my own personal list: a language that forces you
+to use monands for controlling side-effects (Haskell), and a language
+that allows for dependent types (Idris).</p>
+
+<p>If you are saying, &ldquo;wow, in Python, you have to put a colon at the end
+of the function signature line, unlike in Ruby, that blows my mind&rdquo;,
+or &ldquo;wow, in Java, the String keyword is uppercase instead of
+lowercase!&rdquo; chances are you are getting a very low return for your
+investment of time.</p>
+
+<p>What is important about a new language is <em>not</em> a new syntax. A new
+syntax is just cruft that gets in the way of the new concepts. A new
+concept might be closures. If you have always worked in Java, a
+closure will really expand your mind. Or macros. If you have never
+seen macros, the concept alone is completely foreign, not just the
+syntax. That is where the value is. A good test if you are learning
+something new is if you have to research what the concept even means,
+without even needing to see the syntax first. For example, when I
+started learning monads, I didn&rsquo;t even need to see the syntax for how
+Haskell does them, I didn&rsquo;t even understand the concept <em>at all</em>, so I
+could read pretty much anything about the concept and get value out of
+it. That is the high value content.</p>
+
+<h2>Frameworks</h2>
+
+<p>I would say very few frameworks are going to expand your mind in a way
+that is worth the effort to learn them. Some very select frameworks
+can cause you to think of a problem in a novel way and thus expand
+your mind (off the top of my head: React.js, Core.Async, Akka,
+Datomic) but those are very few and far between.</p>
+
+<p>Obviously, in production use, frameworks have their place, and they
+can provide an immense boost to your day-to-day productivity and
+safety, but very few overall will expand your mind in such a way that
+would make you better at the craft. It is not hard to reason why. A
+framework can only do what is possible in the language. If the
+language is only so powerful, the framework cannot be more powerful
+than that. You will be using tools that you could&rsquo;ve written yourself
+with your current skill level, but you won&rsquo;t even get the benefit of
+writing it yourself. Hopefully, those tools will be safer and save you
+a lot of time, but saved time cranking out widgets at work will not
+directly cause you to better understand programming.</p>
+
+<h2>Paradigms</h2>
+
+<p>It is fashionable these days to get into functional programming. If
+you haven&rsquo;t learned a language that supports a functional paradigm, I
+highly recommend that as a good place to start. That being the case,
+don&rsquo;t forget to add a logic, a literate, and a declarative programming
+language to your list too (you have ten years remember, you&rsquo;ll need a
+list). Why not pile on a stack based language too?</p>
+
+<h2>Libraries</h2>
+
+<p>While it is important to be aware of the libraries in your space, I
+would say these often provide the least mind-expanding
+opportunities. A library, much like a framework, is usually
+constrained by the power of the language. In most languages, libraries
+are just convenience abstractions at or below the same abstraction
+layer as the rest of your code. I would never consider doing my
+day-to-day work without the full power of available libraries, but
+they are not going to help me think any better about the work.</p>
+
+<h2>&ldquo;Meta&rdquo; books</h2>
+
+<p>A vast number of books exist that attempt to impart something of a
+&ldquo;mindset&rdquo; for the developer. Usually, the author is retelling his
+experiences, which can be entertaining, but of limited reuse. The best
+meta books are those that use actual research and data to try to
+explain our industry. Books like Peopleware, Code Complete, and
+Pragmatic Programmer are great in this regard. These best books can
+cause you to see the creation of software artifacts with a totally
+different light: e.g. I remember first reading about using a
+programming language to generate automatically the source files for a
+given project. At the time for me, it was revolutionary.</p>
+
+<h2>Pattern Books</h2>
+
+<p>I lately have come to think &ldquo;pattern books&rdquo; like Domain Driven Design,
+Design Patterns, Patterns of Enterprise Architecture, Refactoring, etc
+are just a way to try to replicate missing features in a language of a
+lower power. These seem to be written for entirely Java and C#, and are mostly
+complex solutions to complex problems created by the lack of power of the language. Apparently, I
+am not alone: <a
+href="http://www.c2.com/cgi/wiki?AreDesignPatternsMissingLanguageFeatures">Are Design Patterns Missing Language Features?</a></p>
+
+<p>That being said, I think some parts of these books are helpful,
+specifically, the ubiquitous language ideas from Domain Driven
+Design. If your team has decided on always using the terms from a
+certain book, and you are the only person who does not know them, I do
+recommend at least skimming it just to ensure smooth communication.</p>
+
+<h2>Suggestions</h2>
+
+<p>I won&rsquo;t suggest too many books or languages, but those I do are very
+highly recommended.</p>
+
+<ul>
+<li><a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start">Structure and Interpretation of Computer Programs</a>
+
+<ul>
+<li>The best book I&rsquo;ve ever read. No other book I&rsquo;ve read even comes close to beating this for sheer value per minute as this book. Do all the exercies, and you&rsquo;ll be way ahead of the curve.</li>
+</ul>
+</li>
+<li>Code Complete</li>
+<li>Clean Code</li>
+<li>Pragmatic Programmer</li>
+<li>Productive Programming</li>
+<li>Peopleware</li>
+</ul>
+
+
+<h2>Wrap up</h2>
+
+<p>It takes courage to step outside your comfort zone and learn something
+new. You might be the only person learning something new on your
+team. That is ok! Don&rsquo;t worry about &ldquo;converting&rdquo; everyone else to the
+path of learning, and do not make fun of them or the only language
+they know. (Developers who only know one language take any comment
+good or bad about &ldquo;their&rdquo; language as a comment about themselves.) If
+you do make fun of them, you will start to resent them. It&rsquo;ll make you
+look like an outsider, and they will ignore you and finally push you
+out of the team.</p>
+
+<p>When you learn a new thing, be very careful to not run around trying
+to use it everywhere. I am very careful to not use any new tool in
+production until I&rsquo;ve &ldquo;moved on&rdquo; to learning another tool, so I could
+critically consider the best tool for the job without the &ldquo;honeymoon&rdquo;
+effect clouding my judgment.</p>
+
+<p>My experience has been: keep getting better, and you will find
+yourself in better and better places to work. A person who puts in the
+effort to really master the craft is easy to spot and hard to
+fake. Most people want to work with those who think like them, and you
+cannot think like a master engineer only knowing one tool, so get
+started now, and have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The 5:01 Developer]]></title>
+    <link href="http://deliberate-software.com/501-developer/"/>
+    <updated>2013-12-14T00:00:00-05:00</updated>
+    <id>http://deliberate-software.com/501-developer</id>
+    <content type="html"><![CDATA[<p>
+  Can we agree for this post that money, energy, time, and effort are
+  all forms of power? Like literally, if I wanted to build a building,
+  I am going to need tools, skills, materials, labor. I can use the
+  most liquid form of power I have (cash) to acquire all these things,
+  or I can use a much less liquid form of power (my time) to harvest,
+  extract, refine, learn, and build my building myself. Usually,
+  economies of scale mean it is dramatically more efficient for me to
+  specialize in one way of converting time into liquid power. Then,
+  when I need something, I simply pass that money on to someone else
+  who is also a specialist.
+</p>
+
+
+<p>
+  Now you know why I don't quarry my own stone to build an
+  amphitheater in my back yard.
+</p>
+
+
+<p>
+  When you work a job, you are converting one form of power you have:
+  time (and usually skills), into another much more liquid form of
+  power: money. One can extend the model to include calories and
+  shelter (the power to sleep safely) along with time and skills.
+  Great, this is just basic economics, right? You need power (money)
+  to buy power (food and shelter) to buy power (time) to convert back
+  into more power (money). Since you are "harvesting" something finite
+  and therefore scarce (time out of your short life), if you are
+  disciplined and lucky, you can consistently end up with a net
+  positive.
+</p>
+
+
+<p>
+  On to the point! I read a post today mentioning
+  the <a href="http://www.hanselman.com/blog/DarkMatterDevelopersTheUnseen99.aspx">"5:01 developer"</a>. It made me mad.
+</p>
+
+
+<p>
+  Ideas like this are so subtle they just seep into your psyche. I
+  don't think anyone would say under normal conditions, "I should
+  really work for free today". But, effectively, that is what this
+  whole phrase is about. The phrase lets people who cram eight hours
+  of work into ten hours "get back" at those that get the same work
+  done in six to eight. To clarify, this title is not about "saving
+  the company" or "giving back to society"; those are unusual
+  conditions. No, it is a chastisement of developers who do not "give
+  back to the company". Sort of a tax, for the privilege of getting
+  paid to work there, you should, according to this ideal, just give
+  back some of that power they gave you. Thinking about this with the
+  power model, you should accept money to work there in exchange for
+  your time, but, when the time comes, you should deliberately
+  short-change yourself by giving them extra time. Like some sort of
+  weird tip.
+</p>
+
+
+<p>
+  Hopefully this sounds as ridiculous as it really is.
+</p>
+
+
+<p>
+  Now, in that post, the author sort of backpedals a little bit,
+  saying that <i>what he really meant</i> was a developer who stops
+  thinking about development as soon as work is over: someone not
+  passionate. The issue I have is the whole wording of that phrase
+  assumes a passion for their <i>job</i>, not a passion for
+  their <i>craft</i>.
+</p>
+
+
+<p>
+  I do not think it makes sense to demand every person
+  be <i>passionate</i> about the job they are doing. There have been
+  many times I have (even at a job I normally loved) done long,
+  boring, and fruitless work. I did not do that work out of my passion
+  for the "Mission: Save the World of Enterprise Banking", but because
+  I am a professional: I do what needs to be done to the best of my
+  abilities.
+</p>
+
+
+<p>
+  I think professionalism is very important. In others I work with, I
+  want to see the attitude that causes someone to stay abreast in
+  their field. I want to be around those who keep their own saws
+  sharp, who come in and work hard, and who push themselves and those
+  around them to be best they can.
+</p>
+
+
+<p>
+  Back to overtime: in my experience, very few offices care enough
+  about their developers to let them sharpen their saws at work, so
+  why would you waste your precious free time there? Will they pay you
+  more for it? Doubtful. Will they be less likely to fire you when
+  times get tough? <i>Maybe</i>. Sounds to me like a lot of
+  speculation. A lot of investment for a marginal or non-existent
+  return. If you want more money: either ask for a raise, go take a
+  raise at a new job, or work a second job on the side. Those have a
+  direct impact on your income. Putting in extra hours hoping someone
+  will notice and reward you for it makes about as much sense as
+  assuming you will get a raise for wearing the boss's favorite color
+  every day.
+</p>
+
+
+<p>
+  Consider the person who stays one extra hour a day as an
+  "investment". The typical end of the year raise scale I have seen in
+  the US in companies larger than 30 people is a 0-5% increase a
+  year. Uncommonly does someone get more than that, and should not be
+  considered a usual practice. The typical best you can expect is
+  5%, maybe a bonus (in four diverse jobs, none gave bonuses, so I
+  haven't considered them personally). Back to the extra hour a day. Not
+  completely out there, not putting in a vast amount extra, right?
+  Well, one extra hour is 12.5% percent more hours a day. But the most
+  you can expect, on average, is 5%, if you are lucky! To put it in
+  perspective, I have seen guys put in 12 hour days and get fired
+  because the boss didn't get along with them.
+</p>
+
+
+<p>
+  At a <i>few</i> points in my career, I worked longer hours. Once it
+  was because I truly enjoyed the work and it was fun. Another time it
+  was because I felt like the extra time was going to directly pay off
+  as an investment (it didn't). A few times I have stuck around to
+  "wrap this off" or "help out with something deeply unusual that has
+  to be done outside normal work hours". I recently recommended to my
+  little brother he work longer hours, as he was hired without many
+  needed skills and on shaky footing with the boss. He worked out a
+  deal where he spent two extra hours a day for a couple months
+  reading and practicing to get "caught up". His boss got to see his
+  hustle when he was the first one in and last one out every day; he
+  got to study away from the distractions of everyday life. <b>In all
+  circumstances, make overtime the exception, never the rule.</b>
+</p>
+
+
+<p>
+  One last point. Before you think me a selfish jerk about my free
+  time, know that I make it a daily habit to spend 30-60 minutes
+  outside work advancing my development skills. I practice interactive
+  rebases, work through awesome books, do online courses, advance side
+  projects, contribute to open source, give local meetup talks, and
+  learn new languages. These are the basics of what I feel is
+  necessary to sustain and advance myself as a professional. If I
+  simply worked a 45-50 hour work week instead, I personally would not
+  have the motivation to <i>afterwards</i> stay so abreast of
+  important changes in the development world. I would become much less
+  effective over time, never getting any better. When the need for new
+  paradigms or technologies arose, I would be so stuck in a rut that
+  fear and ignorance would drive all my decisions.
+</p>
+
+
+<p>
+  Treat overtime like an investment, and make it wisely. You are
+  literally mining your life for time, so make sure you are
+  comfortable with your investment strategies.
+</p>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

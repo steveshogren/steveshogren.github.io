@@ -9,8 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
-organize your testing code without mocking or complicated dependency &hellip;">
+  <meta name="description" content="If you are considering using F#, you might be curious how to handle unit test
+mocking, especially if you want to use both modules and classes. In a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,229 @@ organize your testing code without mocking or complicated dependency &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-10-21T16:41:00-04:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>4:41 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you are considering using F#, you might be curious how to handle unit test
+mocking, especially if you want to use both modules and classes. In a language
+like C# or Java, the common method is to a DI container or handmade constructor
+injection on a class. These &ldquo;entry points&rdquo; allow for a unit test to replace a
+real dependency with a test-only replacement.</p>
+
+<p>I previously posted an example that shows a much simpler way to inject
+dependencies called the <a href="http://deliberate-software.com/simplemock-unit-test-mocking/">SimpleMock pattern</a>. The SimpleMock pattern can also be
+used in F#, even if you are only using modules.</p>
+
+<h2>SimpleMock in F# Modules</h2>
+
+<p>We will assume you are mocking inside a module and not a class. Mocking inside
+an F# class would look much the same as it does in C#, which we showed in the
+SimpleMock post. Here is a sample program that does some work and persists the
+results.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">addAndSave</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">sum</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span class='line'>  <span class="nn">DBModule</span><span class="p">.</span><span class="n">saveSum</span> <span class="n">sum</span>
+</span><span class='line'>  <span class="n">sum</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>To apply the SimpleMock pattern, we can use argument currying by adding a simple
+function wrapper.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">addAndSave</span><span class="k">&#39;</span> <span class="n">saveSum</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">sum</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span class='line'>  <span class="n">saveSum</span> <span class="n">sum</span>
+</span><span class='line'>  <span class="n">sum</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">addAndSave</span> <span class="o">=</span> <span class="n">addAndSave&#39;</span> <span class="nn">DBModule</span><span class="p">.</span><span class="n">saveSum</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Test code</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">addAndSave_Test</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">calledVar</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">addAndSave&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">sum</span> <span class="o">-&gt;</span> <span class="n">calledVar</span> <span class="o">:=</span> <span class="n">sum</span><span class="o">)</span> <span class="mi">1</span> <span class="mi">2</span>
+</span><span class='line'>  <span class="nn">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">result</span><span class="o">)</span>
+</span><span class='line'>  <span class="nn">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="o">!</span><span class="n">calledVar</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>We started by renaming the <code>addAndSave</code> function with a trailing <code>'</code>. We
+created a new <code>addAndSave</code> that calls <code>addAndSave'</code> with the correct
+dependency for the first argument, leaving the rest of the arguments to be
+called later. Currying is what allows this ability. The new <code>addAndSave</code>
+function only needs the <code>x</code> and <code>y</code> parameters. At test time, we called <code>addAndSave'</code>, passing in the needed dependency, but using a lambda as the
+&ldquo;fake&rdquo;. The injection is as close to the dependency use as possible!</p>
+
+<h2>Bonus: SimpleMock Fake Helper</h2>
+
+<p>The earlier replacement for DBModule.saveSum is a bit complex, and it does not
+show us how many times the fake was called. We can easily make a helper that
+takes parameters and returns them when called, along withe count of times it was
+called.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">TestFakeResults</span><span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">member</span> <span class="k">val</span> <span class="n">timesCalled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">get</span><span class="o">,</span><span class="n">set</span>
+</span><span class='line'>  <span class="k">member</span> <span class="k">val</span> <span class="n">args</span><span class="o">:</span> <span class="kt">obj</span> <span class="kt">list</span> <span class="o">=</span> <span class="bp">[]</span> <span class="k">with</span> <span class="n">get</span><span class="o">,</span><span class="n">set</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">makeFake_OneArg</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestFakeResults</span><span class="bp">()</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">fake</span> <span class="o">=</span> <span class="o">(</span><span class="k">fun</span> <span class="n">p1</span> <span class="o">-&gt;</span>
+</span><span class='line'>                  <span class="n">results</span><span class="o">.</span><span class="n">args</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">::</span> <span class="n">results</span><span class="o">.</span><span class="n">args</span>
+</span><span class='line'>                  <span class="n">results</span><span class="o">.</span><span class="n">timesCalled</span> <span class="o">&lt;-</span> <span class="n">results</span><span class="o">.</span><span class="n">timesCalled</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'>                  <span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span><span class="n">fake</span><span class="o">,</span> <span class="n">results</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above code might be hard to comprehend at first! We have made a generic
+helper that can create any single argument fake we need. We return a tuple,
+containing the fake lambda and an instance of <code>TestFakeResults</code>. The fake
+lambda will populate the <code>TestFakeResults</code>, which we can access in the test
+via the second arg of the tuple.</p>
+
+<p>We can now re-write the previous test using <code>makeFake_OneArg</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="c1">// Test code</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">addAndSave_Test</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="o">(</span><span class="n">fakeSave</span><span class="o">,</span> <span class="n">fakeSaveCalling</span><span class="o">)</span> <span class="o">=</span> <span class="n">makeFake_OneArg</span><span class="bp">()</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">addAndSave&#39;</span> <span class="n">fakeSave</span> <span class="mi">1</span> <span class="mi">2</span>
+</span><span class='line'>  <span class="nn">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">result</span><span class="o">)</span>
+</span><span class='line'>  <span class="nn">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="n">fakeSaveCalling</span><span class="o">.</span><span class="n">args</span><span class="o">.[</span><span class="mi">0</span><span class="o">])</span>
+</span><span class='line'>  <span class="nn">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">fakeSaveCalling</span><span class="o">.</span><span class="n">timesCalled</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>The TestFakeResults can return information about the way it was called,
+including the list of all arguments. If we felt we needed the extra
+expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
+TestFakeResults and its constructor are not essential to the pattern. The most
+important part is learning to unit test in F# with confidence.</p>
+
+<h1>Double Bonus: When to Use a Class Instead of a Record</h1>
+
+<p>When I first wrote this post, I used a record instead of a class for the <code>TestFakeResults</code> type. If you have been bitten by the functional programming bug,
+you might have wondered at my usage of a mutable class. Here are two alternates
+of <code>makeFake_OneArg</code> which use records. You can probably see why I switched to a class:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">TestFakeResults</span> <span class="o">=</span> <span class="o">{</span><span class="n">timesCalled</span><span class="o">:</span><span class="n">int</span><span class="o">,</span> <span class="n">args</span> <span class="kt">obj</span> <span class="kt">list</span><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Using Record Alternate 1</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">makeFake_OneArg_RecordAlternate1</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">t</span> <span class="o">=</span> <span class="n">ref</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">a</span> <span class="o">:</span> <span class="kt">obj</span> <span class="kt">list</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span> <span class="bp">[]</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">fake</span> <span class="o">=</span> <span class="o">(</span><span class="k">fun</span> <span class="n">p1</span> <span class="o">-&gt;</span>
+</span><span class='line'>                  <span class="n">a</span> <span class="o">:=</span> <span class="n">p1</span> <span class="o">::</span> <span class="o">!</span><span class="n">a</span>
+</span><span class='line'>                  <span class="n">t</span> <span class="o">:=</span> <span class="o">!</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'>                  <span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span><span class="n">fake</span><span class="o">,</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span>
+</span><span class='line'>                <span class="o">{</span><span class="nn">TestFakeRecord</span><span class="p">.</span><span class="n">timesCalled</span> <span class="o">=</span> <span class="o">!</span><span class="n">t</span><span class="o">;</span>
+</span><span class='line'>                 <span class="n">args</span> <span class="o">=</span> <span class="o">!</span><span class="n">a</span><span class="o">}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Using Record Alternate 2</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">makeFake_OneArg_RecordAlternate2</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">ref</span> <span class="o">{</span><span class="nn">TestFakeRecord</span><span class="p">.</span><span class="n">timesCalled</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">args</span> <span class="o">=</span> <span class="bp">[]</span><span class="o">}</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nv">fake</span> <span class="o">=</span> <span class="o">(</span><span class="k">fun</span> <span class="n">p1</span> <span class="o">-&gt;</span>
+</span><span class='line'>              <span class="n">result</span> <span class="o">:=</span> <span class="o">{</span><span class="n">timesCalled</span> <span class="o">=</span> <span class="o">(!</span><span class="n">result</span><span class="o">).</span><span class="n">timesCalled</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>                         <span class="n">args</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">::</span> <span class="o">(!</span><span class="n">result</span><span class="o">).</span><span class="n">args</span><span class="o">}</span>
+</span><span class='line'>              <span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">(</span><span class="n">fake</span><span class="o">,</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="o">!</span><span class="n">result</span><span class="o">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The only way to use a record is to delay its construction via a lambda which
+must be executed by the test code. Both are complex: what we need is a mutable
+data structure which we can access via a reference. A record is not that. We can
+approximate it using tricks, but ultimately I find both alternatives to be too
+complex to justify their use. Sometimes a mutable data structure is the best
+choice to solve your problem efficiently. The power of F# is that it gives us
+the ability to choose the best tool for the job: records for immutability,
+classes for mutability.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -961,110 +1184,6 @@ faster reaction to a changing domain.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/learning-lisp-was-hard/">Learning Lisp Was Hard</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-17T07:02:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:02 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
-get Lisp&rdquo;. After hearing it for the third time, I thought back to my experience
-learning a Lisp.</p>
-
-<p>When I set out to learn a Lisp, I expected it would be easy.</p>
-
-<p>I figured, &ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
-Python, and Java, this should be a cakewalk!&rdquo;. I&rsquo;d read Paul Graham&rsquo;s essays on
-how Lisp is his secret weapon, and figured I needed to get into this secret
-weapon stuff. My ego said, &ldquo;since Paul is amazing, and I am too, I&rsquo;ll be a
-natural!&rdquo;</p>
-
-<p>I expected to tinker around with &ldquo;Lisp&rdquo; (I didn&rsquo;t know there was more
-than one) and shortly master it to be able to ship a website with it.</p>
-
-<p>What happened instead took me a little longer&hellip;</p>
-
-<ul>
-<li>05/11 - 06/11 - ~15 Hrs Attempted <em>Land Of Lisp</em> (gave up)</li>
-<li>04/12 - 08/12 - ~60 Hrs Rewrote a PHP side project in Clojure</li>
-<li>08/12 - 08/12 - ~5 Hrs Attempted <em>Let Over Lambda</em> (gave up)</li>
-<li>08/12 - 09/12 - ~10 Hrs Read <em>Clojure Programming</em> twice</li>
-<li>09/12 - 12/12 - ~30 Hrs Took <em>CS173 Programming Languages</em> online at Brown University</li>
-<li>05/13 - 07/13 - ~50 Hrs Worked through <em>Let Over Lambda</em></li>
-<li>05/13 - 07/14 - ~250 Hrs Worked through <em>SICP</em></li>
-<li>07/14 - Shipped production Clojure code</li>
-</ul>
-
-
-<p>This shows only the major events: books and large projects, but doesn&rsquo;t show all
-the countless blogs, tutorials, and tiny projects that also filled in the gaps.</p>
-
-<p>I think Lisps started to &ldquo;click&rdquo; for me around mid 2013, about two years after
-deciding that I&rsquo;d &ldquo;tinker around&rdquo; for a bit before &ldquo;mastering&rdquo; it. I was
-approximately 170 hours in at that point. The book that finally made it all
-click was <em>Let Over Lambda</em>, but it took me two attempts and almost a year of
-pre-learning to be able to understand enough to internalize the material.</p>
-
-<p>All said and done, I spent approximately 420 hours between Common Lisp, Racket,
-Typed Racket, and Clojure before I felt confident enough to suggest shipping
-Clojure at work. I don&rsquo;t claim to be a fast learner at all, and I fully expect
-some people will snort with derision at how much time it took me - which is kind
-of the point of this post.</p>
-
-<p>This timeline should show those who are struggling that what you are feeling is
-normal. Learning anything new is hard. The more &ldquo;new&rdquo; it is, the harder it will
-be. Clojure, macros, emacs, and a repl workflow are all very different from
-everything I was used to and significantly more powerful than I would&rsquo;ve
-guessed. It took a long time for that to become normal, and for that power to
-sink in and become a tool I anticipated having.</p>
-
-<p>If you are struggling and feel like a failure, understand <em>there is no wrong
-way</em>. It might take you a long time of repeated exposure before the alien
-tooling starts to look familiar, and then comfortable. Maybe that book you are
-struggling with actually IS too advanced, so find an easier one, and circle back
-to the harder book later. Maybe, like me, you need some part of many different
-books, tutorials, side projects, and katas.</p>
-
-<p>If you are struggling learning and in the Philly area, I am happy to meet up to
-chat. I am also happy to help over the wire as well. I understand how
-demoralizing the constant battle is to learn something new, especially when it
-feels like your ego is on the line and the whole internet is pressuring you to
-learn new things. Don&rsquo;t give up, it&rsquo;s not impossible.</p>
-
-<h1>Was it worth it?</h1>
-
-<p>I can anticipate the follow up question: &ldquo;was it worth it?&rdquo; Absolutely yes. I
-now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
-and JS) that previously I did not have. I am significantly more productive at
-programming, regardless of the language. Work that was previously challenging is
-now trivial, and work that was previously &ldquo;impossible&rdquo; now feels fun and
-challenging. Was it learning Lisp specifically that caused all those changes?
-Probably not, but I believe it was learning something far outside my normal
-comfort zone that made the difference. I think I would have had equivalent
-experiences had I invested that time learning Scala (the ML parts), Haskell,
-Idris, J, R, Forth, etc.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/3">&larr; Older</a>
@@ -1117,6 +1236,10 @@ Idris, J, R, Forth, etc.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
+      </li>
+    
+      <li class="post">
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
@@ -1132,10 +1255,6 @@ Idris, J, R, Forth, etc.</p>
         <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
       </li>
     
-      <li class="post">
-        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1144,32 +1263,52 @@ Idris, J, R, Forth, etc.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">21</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">1</span></a>
     </li>
     
   </ul>
@@ -1185,7 +1324,7 @@ Idris, J, R, Forth, etc.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Steve Shogren -
+  Copyright &copy; 2016 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

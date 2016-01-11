@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://deliberate-software.com/compassionate-interviewing/</loc>
+    <lastmod>2016-01-11T07:01:58-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</loc>
     <lastmod>2015-12-14T07:50:38-05:00</lastmod>
   </url>
@@ -192,12 +196,24 @@
     <loc>http://deliberate-software.com/blog/categories/unit-testing/</loc>
   </url>
   <url>
-    <loc>http://deliberate-software.com/blog/categories/lisp/</loc>
-  </url>
-  <url>
     <loc>http://deliberate-software.com/blog/categories/clojure/</loc>
   </url>
   <url>
+    <loc>http://deliberate-software.com/blog/categories/emacs/</loc>
+  </url>
+  <url>
+    <loc>http://deliberate-software.com/blog/categories/interviews/</loc>
+  </url>
+  <url>
+    <loc>http://deliberate-software.com/blog/categories/management/</loc>
+  </url>
+  <url>
     <loc>http://deliberate-software.com/blog/categories/f-number/</loc>
+  </url>
+  <url>
+    <loc>http://deliberate-software.com/blog/categories/c-number/</loc>
+  </url>
+  <url>
+    <loc>http://deliberate-software.com/blog/categories/haskell/</loc>
   </url>
 </urlset>

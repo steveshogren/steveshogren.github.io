@@ -9,7 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of &hellip;">
+  <meta name="description" content="Sometimes, it’s far more efficient to leave certain technical debts unpaid.
+I’m not saying we should leave messes, instead I am saying that cleaning &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/refactoring-not-free/">Sorry, but Refactorings Are Not Free (Technical Debt Interest)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-05-27T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p dir="ltr">Sometimes, it’s far more efficient to leave certain <a href="http://en.wikipedia.org/wiki/Technical_debt">technical debts</a> unpaid.</p>
+<p dir="ltr">I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don't just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.</p>
+<p dir="ltr">Not all technical debts are created equal: they consist of varying amounts of interest as well as principal. We still don’t have a way to accurately count the cost of technical debt. Fortunately, a little effort goes a long way toward estimating the its “payoff price”. Much like paying off a real debt, paying the highest-interest debts first makes the most sense.</p>
+<p dir="ltr">I’ll give you a real life example of some technical debt repayments. Last month at my work, we all agreed that all our namespaces, project names, and assembly names were woefully out of date. The naming confusion hadn't cost us a lot of time, but, like an annoying paper cut, we felt the pain whenever we looked at it. The system had outgrown the single small product it once was, and the names had not grown with it. A few project names did not even match up with their folders, causing extra disorientation every time anyone read them. We all voted to make updating all that cruft our “dev chore” of the week. Unfortunately, we did not weigh the relative cost versus the value of that cleanup to the team.</p>
+<p dir="ltr">Three weeks later, we were still neck-deep in cleanup. The renaming process caused many subtle bugs because of a variety of unconsidered issues. Our work ground to a halt as we put all hands on deck to finish the task and fix all the bugs.</p>
+<p dir="ltr">We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?</p>
+<p dir="ltr">Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?</p>
+<p dir="ltr">Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -244,36 +281,107 @@ While escaping from your stack requires effort, by following the steps you can a
   </header>
 
 
-  <div class="entry-content"><p><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.</span><p /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">EDD plagues many organizations; here just some of the symptoms you might encounter:</span><p /> </p><ul style="margin-top:0;margin-bottom:0;"><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">"Not Invented Here" syndrome:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Expressed most commonly in a desire for everything needed to be developed in house. E.g.: &ldquo;Need a CMS? Let&rsquo;s make our own from scratch!&rdquo; Perhaps, you work at a place where all your teammates do is constantly bring you bad ideas. Are they really all terrible? &nbsp;Or are only your ideas good enough for the organization? Not Invented Here can also apply to your own head, not just the organization.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Little to no test coverage of domain logic:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> There are plenty of great developers who do not need automated tests to remember all the little quirks of their systems when working alone, and that works fine until you bring on a second developer. Domain logic tests are about increasing communication and speed</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;"> for the team</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">, and they are part of being a good citizen of a team.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No dedicated UI person for external user interfaces or no actual user testing:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Either the developers or the manager think they are good enough to design excellent and understandable user interfaces or do not realize the importance of this. Think of a "Steve Jobs"-type manager who imagines himself to be a prodigy of design and usability, or the developer who "doesn't think design is all that hard". Real users trying out your software for a few minutes will tell you more than you would believe.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No dedicated QA for externally-facing software:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Someone who is experienced at breaking software should have a crack at it </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:italic;font-variant:normal;text-decoration:none;vertical-align:baseline;">before </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">it goes to users. Developers (including me) are too enamored with their own work to really take the time to break it, so someone with a sense of pride in finding problems needs to be given the task.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">"</span><a href="http://en.wikipedia.org/wiki/Ivory_Tower"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Ivory Tower</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">" or "</span><a href="http://www.joelonsoftware.com/articles/fog0000000018.html"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Architecture Astronaut</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">" team leads: </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">The team member that is focused on "perfection" of the design or code to the detriment of the business. This is not an easy distinction to make, and no one becomes this without a heart full of good intentions. "If only the test coverage could be higher" (when it is already high) or "we can make our own programming language to solve this so much more elegantly". Like I said, a fine line that takes many years of experience and deep familiarity with the business and the domain to discern.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Broad skill level spectrum (that stays static):</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> A huge gap in skill level between the best and worst team members. Most often happens when a bunch of new hires come on board, and were not skilled enough for the task or were not trained properly. The original team members decide the new members are "not worth the effort" and neglect to train them in the hopes they will be fired. Months, or even years later, the "new members" are still struggling along, berated by the "elites".</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">No pair programming:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Very few activities will raise the water level for all the team members like pairing. It trains new developers quickly, as well as allows the older developers to see the pain points of a system through a new set of eyes.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Micro-management in some areas, no management in others: </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">When</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> </span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">leads and managers put too much effort and management into some areas, to the neglect of other areas. Some tickets will be crammed with detail down to the database column names, others will be one-liners covering a month of work. Typically, this is a top-down effect, starting at upper management and trickling down to the lowest levels. Whatever the "eye of Sauron" is focused on is what the whole chain of command suddenly turns its laser focus towards, while the rest of the projects/tickets are abandoned by all but the developer assigned to the ticket.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Agile &ldquo;Lite&rdquo;:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> Everyone pretty much has heard that agile is a fast development methodology. What often happens is that management either does not learn enough about it to implement correctly, or does not like the "chaotic" nature of true agile, and so attempts to adopt the "best parts". Typically this means splitting work into "sprints" and having a "stand-up", while developers all just work off of tickets assigned and estimated by their leads. Often this happens because the person who makes the call on whether or not to implement agile falsely believes themselves (and the team) to be "good enough to not need it".</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Low</span><a href="http://www.joelonsoftware.com/articles/fog0000000043.html"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> </span><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">Joel Test</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:bold;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> score:</span><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> The Joel Test remains a great indicator of institutional ego. A team that scores low on the Joel Test does so because someone along the way decided that, "nah, we don't need that here, we are special", and almost certainly they are not. I have yet to hear of a team with a legitimate reason for a low Joel Test score.</span></li><li style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"><strong>*Edit* Low pay: </strong>Ah, yes, the shops that pay their developers significantly lower than the average in that location, language, and experience. This one is hard, because it really is almost always up to just one person, and the developer usually only gets to vote with their feet: by either staying or going. If you are that person, you had best consider what you are missing out on by remaining in a positon where you are underpaid.<br /></span></li></ul><p><br /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">Ego driven development is unfortunately self-reinforcing. Much of it is caused by individual pride, and usually it is driven by someone towards the top of the chain of command. While it can be a </span><a href="http://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle#Vicious_circle_2"><span style="font-size:15px;font-family:Arial;color:#1155cc;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:underline;vertical-align:baseline;">vicious cycle</span></a><span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;"> trickling down, it is possible to break out of the loop by fighting back against EDD with humility and an attitude of just doing what's best for the team. I have seen managers take tremendous crap from above, and never let a bit of it touch those below them. Those managers were heroes we all fought to impress, because we knew how hard they worked to make our teams better. I have seen experienced developers swallow their pride, and do the boring, tedious, hard, and less fun work for the betterment of the whole, in the process grew into someone much more productive.</span><p /> <span style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;">EDD is possible to defeat. Treat everyone with respect, and praise what steps they do take in the right direction. Set aside your ego, and when you get micro-managed and treated with disdain from those above you, do what it takes to make sure that doesn't trickle down to those below you and at your level. Pick a few things on this list that you know you are not doing well, and tackle the root cause. Swallow your pride, and do your part to be excellent, and your work will thrive. </span></p>
-</div>
-  
-  
+  <div class="entry-content"><p>Ego Driven Development, (EDD), is a software development anti-pattern where
+developers and managers repeatedly act as if established best practices do not
+apply to them, to the detriment of their organization. Institutional ego is most
+often to blame.</p>
+
+<p>EDD plagues many organizations; here just some of the symptoms you might
+encounter:</p>
+
+<ul>
+<li><p><strong>&ldquo;Not Invented Here&rdquo; syndrome.</strong> Expressed most commonly in a desire for
+everything needed to be developed in house. E.g.: &ldquo;Need a CMS? Let&rsquo;s make our
+own from scratch!&rdquo; Perhaps, you work at a place where all your teammates do is
+constantly bring you bad ideas. Are they really all terrible? Or are only your
+ideas good enough for the organization? Not Invented Here can also apply to
+your own head, not just the organization.</p></li>
+<li><p><strong>Little to no test coverage of domain logic.</strong> There are plenty of great
+developers who do not need automated tests to remember all the little quirks of
+their systems when working alone, and that works fine until you bring on a
+second developer. Domain logic tests are about increasing communication and
+speed for the team, and they are part of being a good citizen of a team.</p></li>
+<li><p><strong>No dedicated UI person for external user interfaces or no actual user
+testing.</strong> Either the developers or the manager think they are good enough to
+design excellent and understandable user interfaces or do not realize the
+importance of this. Think of a &ldquo;Steve Jobs&rdquo;-type manager who imagines himself to
+be a prodigy of design and usability, or the developer who &ldquo;doesn&rsquo;t think design
+is all that hard&rdquo;. Real users trying out your software for a few minutes will
+tell you more than you would believe.</p></li>
+<li><p><strong>No dedicated QA for externally-facing software.</strong> Someone who is experienced
+at breaking software should have a crack at it before it goes to users.
+Developers (including me) are too enamored with their own work to really take
+the time to break it, so someone with a sense of pride in finding problems needs
+to be given the task.</p></li>
+<li><p><strong>&ldquo;<a href="http://en.wikipedia.org/wiki/Ivory_Tower">Ivory Tower</a>&rdquo; or &ldquo;<a
+href="http://www.joelonsoftware.com/articles/fog0000000018.html">Architecture Astronaut</a>&rdquo; team leads.</strong> The team member that is focused on &ldquo;perfection&rdquo; of
+the design or code to the detriment of the business. This is not an easy
+distinction to make, and no one becomes this without a heart full of good
+intentions. &ldquo;If only the test coverage could be higher&rdquo; (when it is already
+high) or &ldquo;we can make our own programming language to solve this so much more
+elegantly&rdquo;. Like I said, a fine line that takes many years of experience and
+deep familiarity with the business and the domain to discern.</p></li>
+<li><p><strong>Broad skill level spectrum (that stays static).</strong> A huge gap in skill level
+between the best and worst team members. Most often happens when a bunch of new
+hires come on board, and were not skilled enough for the task or were not
+trained properly. The original team members decide the new members are &ldquo;not
+worth the effort&rdquo; and neglect to train them in the hopes they will be fired.
+Months, or even years later, the &ldquo;new members&rdquo; are still struggling along,
+berated by the &ldquo;elites&rdquo;.</p></li>
+<li><p><strong>No pair programming.</strong> Very few activities will raise the water level for
+all the team members like pairing. It trains new developers quickly, as well as
+allows the older developers to see the pain points of a system through a new set
+of eyes.</p></li>
+<li><p><strong>Micro-management in some areas, no management in others.</strong> When leads and
+managers put too much effort and management into some areas, to the neglect of
+other areas. Some tickets will be crammed with detail down to the database
+column names, others will be one-liners covering a month of work. Typically,
+this is a top-down effect, starting at upper management and trickling down to
+the lowest levels. Whatever the &ldquo;eye of Sauron&rdquo; is focused on is what the whole
+chain of command suddenly turns its laser focus towards, while the rest of the
+projects/tickets are abandoned by all but the developer assigned to the ticket.</p></li>
+<li><p><strong>Agile &ldquo;Lite&rdquo;.</strong> Everyone pretty much has heard that agile is a fast
+development methodology. What often happens is that management either does not
+learn enough about it to implement correctly, or does not like the &ldquo;chaotic&rdquo;
+nature of true agile, and so attempts to adopt the &ldquo;best parts&rdquo;. Typically this
+means splitting work into &ldquo;sprints&rdquo; and having a &ldquo;stand-up&rdquo;, while developers
+all just work off of tickets assigned and estimated by their leads. Often this
+happens because the person who makes the call on whether or not to implement
+agile falsely believes themselves (and the team) to be &ldquo;good enough to not need
+it&rdquo;.</p></li>
+<li><p><strong>Low <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">Joel Test</a> score.</strong> The Joel Test remains a great indicator of institutional ego.
+A team that scores low on the Joel Test does so because someone along the way
+decided that, &ldquo;nah, we don&rsquo;t need that here, we are special&rdquo;, and almost
+certainly they are not. I have yet to hear of a team with a legitimate reason
+for a low Joel Test score.</p></li>
+<li><p><strong>Low pay.</strong> Ah, yes, the shops that pay their developers significantly
+lower than the average in that location, language, and experience. This one is
+hard, because it really is almost always up to just one person, and the
+developer usually only gets to vote with their feet: by either staying or going.
+If you are that person, you had best consider what you are missing out on by
+remaining in a positon where you are underpaid.</p></li>
+</ul>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/learn-that-new-programming-language-the-start/">Learn That New Programming Language the Startup Way: For Intermediate Devs</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>Ego driven development is unfortunately self-reinforcing. Much of it is caused
+by individual pride, and usually it is driven by someone towards the top of the
+chain of command. While it can be a <a
+href="http://en.wikipedia.org/wiki/Virtuous_circle_and_vicious_circle#Vicious_circle_2">vicious cycle</a> trickling down, it is possible to break out of the loop by fighting
+back against EDD with humility and an attitude of just doing what&rsquo;s best for the
+team. I have seen managers take tremendous crap from above, and never let a bit
+of it touch those below them. Those managers were heroes we all fought to
+impress, because we knew how hard they worked to make our teams better. I have
+seen experienced developers swallow their pride, and do the boring, tedious,
+hard, and less fun work for the betterment of the whole, in the process grew
+into someone much more productive.</p>
 
-
-
-
-<time class='entry-date' datetime='2012-08-07T00:00:00-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don't, you have got to give it a shot at least once. You'll never be the same. And no, I am not talking about <a href="http://projecteuler.net/">Project Euler</a>, although that has its place.</p><p>First, do a bit of research, and get your hands on the best book on the language you can find. Second, research the language, and pick a project to which it is well suited. For example, to learn Clojure, I decided to re-write an old php project from scratch that I was well familiar with. (This also gives me the neat data point of seeing how much smaller the project is in Clojure)&nbsp;Try not to be too ambitious here, you want something you could pull off in your current go-to language.</p><p>Start the project, and work under a dozen hours on it, bashing your way through the first pains of installing the language/framework (my least favorite part), and getting a basic proof of concept together. If it's a web site, think "hello world" coming out of your database of choice. Tell all your friends what you are going to make, and when it is launching. Make sure the launch date is ambitious. Start to read the book splitting your time roughly 25/75 between reading and programming, using what you read to provide you with "ammunition" for your project. Do this in as short a loop as possible, so the reading and programming are never far apart.</p><p>Since you will be fighting through real problems, the reading is a hundred times more interesting. Almost every page you will have to stop yourself from shouting, "OF COURSE!" out loud at the book, because you have just discovered something that is an extremely real pain point to you. <span>You may find yourself laughing more than once in sheer delight</span> because you anticipated a part of the language correctly, and just found the syntax for it. If that is not happening, you probably need to adjust the ratio of programming to reading. You want to find that sweet spot of just barely learning what you need to succeed, and constantly being "saved" by reading that last tidbit last night. If even the simplest things take unpleasantly long, perhaps more reading. If the reading is dragging too much, try more programming. When you hit that sweet spot, the programming is an exhilarating rush, and the reading is actually fun. If none of these happen, perhaps you are learning a language that does not really teach you anything new, just a different syntax for the same thing you are used to doing, in which case, ask yourself why you are learning that language. There are plenty out there that will <a href="http://norvig.com/21-days.html">blow your mind</a>.</p><p>Don't forget that deadline either, your friends and family are waiting, remember? Hustle is the name of the game here, and don't worry, you'll make tons of mistakes, and you'll never forget a single one. Who cares? (No one will ever know but you!) If experience is learning from a lot of mistakes, you'll be the most experienced person around!</p><p>When that deadline looms, don't give up! Step up your game, slash the second-best features, and race for the finish. If you are way off your mark, you can consider pushing the date back, but still deliver something on your original date. Once you are done, unwind for a few months, take it easy, then repeat. After a couple of those iterations you will be seriously more experienced in a wide variety of languages, and you will find yourself much more confident in your language-that-pays.</p><p>Do this a couple of times and you'll not only get better at that language, you'll get better at all of them. You will start to see the underlying concepts that cause languages to be written the way they are. The language families will start to run together, and you will develop the intuition of what you need to do with just the trivial task of remembering (or looking up) the syntax. Your programming skill will move to a higher plane of abstraction, and you will think outside the specific language. The language just becomes an implementation detail, just words that tell the compiler or interpreter what you mean. Reading other people's code will become significantly easier, and you will find learning a new language is almost faster reading the masters' code on github than with a book at all.</p><p><strong>TL;DR</strong> <span>Don't let what little time you have discourage  you. A few minutes a day sneaking in one more function is better than a  few minutes a day moping in front of the TV wishing you had more time  for programming. </span>I understand not everyone can put in "this kind of time" (or energy) into side projects. Heck, plenty of times I cannot either. Sometimes, you only have a few hours a month on the good months. That's fine. Take that date, stretch it out to the end of the year. Slip in that reading on the ride home, or at lunch. Make every moment you spend on it count.</p>
+<p>EDD is possible to defeat. Treat everyone with respect, and praise what steps
+they do take in the right direction. Set aside your ego, and when you get
+micro-managed and treated with disdain from those above you, do what it takes to
+make sure that doesn&rsquo;t trickle down to those below you and at your level. Pick a
+few things on this list that you know you are not doing well, and tackle the
+root cause. Swallow your pride, and do your part to be excellent, and your work
+will thrive.</p>
 </div>
   
   
@@ -333,6 +441,10 @@ While escaping from your stack requires effort, by following the steps you can a
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
+      </li>
+    
+      <li class="post">
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
@@ -348,10 +460,6 @@ While escaping from your stack requires effort, by following the steps you can a
         <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
       </li>
     
-      <li class="post">
-        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -360,32 +468,52 @@ While escaping from your stack requires effort, by following the steps you can a
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">21</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">1</span></a>
     </li>
     
   </ul>
@@ -401,7 +529,7 @@ While escaping from your stack requires effort, by following the steps you can a
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Steve Shogren -
+  Copyright &copy; 2016 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

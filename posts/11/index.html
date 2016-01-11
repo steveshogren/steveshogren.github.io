@@ -9,7 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am a lazy lazy man, and as such I do not like to waste time waiting for things or doing dumb stuff.One place this is evident is in the browser. I &hellip;">
+  <meta name="description" content="I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,37 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/actionscript-unit-testing/">Actionscript Unit Testing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-05-04T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">I am trying to test a project that is huge and many of the
+&quot;classes&quot; are only defined as linkages from the main monster
+fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -167,36 +200,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/first-post-0/">First Post!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-04-11T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, after seeing for the one thousandth time that the best way to be a better developer/genius/DaVinci clone is to have a journal of important documentation and learned info, here is mine.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/posts/12">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -246,6 +252,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
+      </li>
+    
+      <li class="post">
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
@@ -261,10 +271,6 @@
         <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
       </li>
     
-      <li class="post">
-        <a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -273,32 +279,52 @@
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">20</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">21</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">1</span></a>
+      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/lisp/"><span>lisp</span><span style="float:right">3</span></a>
+      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">2</span></a>
+      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">1</span></a>
     </li>
     
   </ul>
@@ -314,7 +340,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Steve Shogren -
+  Copyright &copy; 2016 - Steve Shogren -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
