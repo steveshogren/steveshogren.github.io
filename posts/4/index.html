@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Clojure is a delightful language, and here are six uncommonly
-discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest &hellip;">
+  <meta name="description" content="I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,228 @@ discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-17T14:13:00-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:13 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &ldquo;has strong-static
+types&rdquo;.</p>
+
+<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.</p>
+
+<p>I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.</p>
+
+<p>By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
+is to build such good abstractions.</p>
+
+<pre><code>This model is not about language "power".
+</code></pre>
+
+<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
+&ldquo;abstract-ability&rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
+level.</p>
+
+<p>Rather than focus on what is <em>possible</em> with a language, I will
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.</p>
+
+<p>To score a language, simply figure out how many characters it costs to
+&ldquo;prevent&rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is language enforced, like F#&rsquo;s
+Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.</p>
+
+<p>If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 (by default) for a &ldquo;every change run
+and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.</p>
+
+<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
+</code></pre>
+
+<p>Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.</p>
+
+<p><div ng-app="TableApp">
+<div ng-controller="TableCtrl"></p>
+
+<p>Language Enforced Bonus:
+ {{ enforcedScore }}
+<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
+
+<p>Language Inability Penalty:
+ {{ inabilityPenalty }}
+<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
+
+<p>Show Weights <input type="checkbox" ng-model="showWeights" />
+<p class="lead">
+<div style="overflow-x:scroll">
+<table class="langtable">
+<tr>
+<th>Safety Check</th>
+<th></th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
+</th>
+<th>
+<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
+</th>
+</tr>
+<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
+<tr class="totals"><td>Totals</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ lang }}
+</td>
+</tr>
+<tr class="totals"><td>Magnitude</td>
+<td></td>
+<td ng-repeat="lang in langTotals track by $index">
+ {{ percentageTotals(lang) }}%
+</td>
+</tr>
+</table>
+</div></p>
+
+<p><h3><input ng-model="showRealName" type="checkbox" /><span
+ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
+
+<p>Current Languages:
+<span ng-repeat="lang in allLanguages">
+ {{ getName(lang) }}: {{ allLangTotals[$index] }},
+</select></p>
+
+<p>I want to see your language represented here! I&rsquo;ll happily take pull
+requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
+use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
+language data structure.</p>
+
+<p>I would love to see every major language represented, including major
+language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
+and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
+apparently very separate communities.</p>
+
+<p><div ng-show="showRealName"> Feel free to put in your own examples by
+playing with the samples below. Code surrounded with &lt;! !> is ignored
+from the tally, since it would vary heavily based on the language and
+desired result. Variable and type names are kept at single characters,
+which are counted. Feel free to add in your own language below, and
+use the copy feature to extract the data structure to use in a pull
+request.</p>
+
+<p><h2>Select Language:
+<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
+</h2>
+<button ng-click="showEdit = !showEdit">Edit Language</button>
+<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
+<div ng-show="showEdit">
+<h2><input ng-model="selectedLang.name"></input></h2>
+<div ng-repeat="check in langChecks">
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
+<p>
+<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
+<div>
+Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
+<div class="tablecode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
+</div>
+</p>
+</div>
+</div></p>
+
+<p><div ng-show="!showEdit">
+<h2> {{ selectedLang.name }} </h2>
+<div ng-repeat="check in langChecks">
+<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
+<p>
+ {{ selectedLang[check.key].desc }}
+<div>
+Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }}
+<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
+<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
+<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
+</div>
+</p>
+</div>
+</div>
+</div></p>
+
+<p>Hope this is a helpful way to think about language safety!</p>
+
+<p>Special thanks to (in alphabetical order):
+Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
+Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
+Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
+Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
+Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -704,252 +927,6 @@ quickly be reminded of your current project.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/skill-continuum/">Software Skills Continuum</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-12-02T07:26:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>7:26 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><pre><code>    Learning Vim is a waste of time; I can prove it! - Anonymous
-</code></pre>
-
-<p>I recently had a gentle discussion with a new teammate about whether
-or not they should learn to use Vim. My team uses a Vim emulator
-inside Visual Studio and Emacs, and so we recommended he learn at
-least the basics so to reduce friction when pair-programming (which we
-do almost all the time).</p>
-
-<p>He really had no desire to learn it, and took no small amount of
-offense when we suggested it. The friction he felt trying to &ldquo;start
-over&rdquo; really bothered him. He set out to prove that Vim was not worth
-his time, and that it was actually us who needed to stop using it,
-because we were the duped slow ones.</p>
-
-<p>As any such localized experiments go, he never really came up with
-anything conclusive either way. Personally, I suspect he spent more
-time trying to figure out why Vim was worse than if he had just
-buckled down and learned it. This got me thinking about skills we
-learn as developers, and how much they cost.</p>
-
-<h1>Skills</h1>
-
-<p>Most skills fall along a continuum of tactical to strategic.</p>
-
-<h3>Tactical Skills</h3>
-
-<ul>
-<li>Typing speed/accuracy</li>
-<li>Keyboard shortcuts</li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
-<li>Clean coding practices</li>
-<li>Refactoring tools</li>
-<li>Repl Driven Development / Test Driven Development</li>
-<li>Debugging</li>
-</ul>
-
-
-<h3>Mid-way Skills</h3>
-
-<ul>
-<li>Unit testing</li>
-<li>Building abstractions</li>
-<li>Designing simple solutions</li>
-<li>Automating tasks</li>
-<li>Learning new languages and frameworks</li>
-</ul>
-
-
-<h3>Strategic Skills</h3>
-
-<ul>
-<li>Gathering requirements</li>
-<li>Training developers</li>
-<li>Organizing and leading teams</li>
-<li>&ldquo;Understanding the real problem&rdquo;</li>
-</ul>
-
-
-<p>The more strategic the skills, the &ldquo;softer&rdquo; they become. The reason for this is
-that soft skills often allow for the greatest leverage on a project.</p>
-
-<p>Why is this?</p>
-
-<p>Consider the developer, who by more accurately gathering requirements for a few
-extra days, realizes that the stakeholder can use a preexisting solution instead
-of a six month planned project. If you consider how many keystrokes he saved,
-there is no way he could have typed fast enough to make up six months of effort.
-Unless he can type out a six month project in a few days, his time was better
-spent where it was. Obviously, these opportunities do not happen all the time,
-but they <em>do</em> happen and it doesn&rsquo;t take more than one or two a year to have
-major impact!</p>
-
-<p>Think about the return on investment for training developers. If you have an
-average team (and yes, we all do), there is a good chance you have some lower
-performing developers. I have witnessed many times where a few months of pairing
-to brush up the skills of a less skilled developer allowed them to become much
-more productive. In terms of total company effort, that small investment paid
-back many times before the end of the year as the newly trained developer was
-able to tackle their work with the renewed vigor that comes from a greater
-mastery of their work.</p>
-
-<p>Similarly, the judicious use of automation for deployment, testing, and building
-greatly reduces the friction of development for entire teams. Lowered friction
-means less cognitive burden.</p>
-
-<p>That being said, I think there comes a point where you have to put fingers to
-keyboard and actually produce working software. Of course, the fastest and best
-software is the software you never have to write. But, when you absolutely must
-write or modify software, the ability to execute is essential. Tactical skills
-increase in significance the closer you get to the work.</p>
-
-<p>While a great software tactician will never &ldquo;beat&rdquo; a great strategist in terms
-of raw business value, a great strategist that is a terrible tactician can only
-talk their way out of work. A strategist who forgets or ignores good tactics is
-what we call an &ldquo;architecture astronaut&rdquo; or an &ldquo;ivory tower architect&rdquo;. These
-disconnected strategists eventually start to remove business value as their
-solutions make less and less practical sense.</p>
-
-<p>I think a developer who wants to improve should make sure they are improving all
-across the spectrum. Don&rsquo;t focus only on strategic or tactical skills, but seek
-projects and teams that will allow you to gain skills across the board. I like
-to try to focus on one skill from each side of the continuum each year. This
-year, it is emacs automation and monads on the tactical side, and leading mature
-teams on the strategic. By alternating readings, I find fuel to apply the
-strategies using these new tactics!</p>
-
-<p>Lastly, on the subject of &ldquo;what to study&rdquo;, I think it is possible to study a
-number of subjects all across the continuum. Unless you have weeks where you
-never type any code at all, you can practice and learn new tactical techniques
-all the time. If it slows you down today, but speeds you up next week, it might
-just be worth it. Even if it slowed you down to a quarter your usual speed for
-two weeks, but then gives you a measly 5% boost to productively after that,
-you&rsquo;ll earn that time back by the end of the year, plus some. And 5% is not hard
-to do. I&rsquo;d guess learning a few new navigation or refactoring shortcuts would
-net you 5% easily.</p>
-
-<p>When studying more strategic skills, the same holds, but they are harder to
-learn. The best way I have found for learning strategic skills is to read books
-about it, and try to work around others who are good at it. Neither books or
-working with others will get you all the way there, you also have to apply it
-yourself.</p>
-
-<h1>Progression</h1>
-
-<p>I usually recommend that the more experienced a person is, the more mastery they
-should have in the tactical skills. A suggested path I&rsquo;ve recommended for a new
-developer would look like this:</p>
-
-<h3>0 - 6 Months:</h3>
-
-<ul>
-<li>Typing speed/accuracy</li>
-<li>Keyboard shortcuts</li>
-<li>Repl Driven Development / Test Driven Development</li>
-<li>Unit testing</li>
-<li>Clean coding practices</li>
-<li>Designing simple solutions</li>
-</ul>
-
-
-<h3>0 - 2 Years:</h3>
-
-<ul>
-<li>Debugging</li>
-<li>Refactoring tools</li>
-<li>Building abstractions</li>
-<li>Automating tasks</li>
-<li>Learning new languages and frameworks</li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs</li>
-</ul>
-
-
-<h3>0 - 50+ Years:</h3>
-
-<ul>
-<li>Gathering requirements</li>
-<li>Training developers</li>
-<li>Organizing and leading teams</li>
-<li>Understanding the real problem</li>
-</ul>
-
-
-<p>This is not a hard and fast list. If you are completely unsure of what to learn,
-I recommend this rough progression just to get you started. If you are a two
-year developer, and you cannot touch type, I think learning it can really help,
-alongside the other 0 - 2 year skills.</p>
-
-<p>Not all skills along the list build on a mastery of the ones below it. A
-developer can absolutely get to a very senior mastery of the strategic skills
-only knowing one language and using notepad.exe. I believe that they are missing
-out on a deep richness that comes from better knowing their field, and I suggest
-they spend some time learning new languages and tools. The more tactical the
-skill, usually, the easier it is to learn, so it won&rsquo;t take very much time to
-come up to speed.</p>
-
-<p>The hardest thing I think a more senior developer has to deal with is humbling
-themselves to learn a perceived &ldquo;entry-level&rdquo; skill. I have another post brewing
-about this very topic, so I&rsquo;ll not get too much into it here. But if you have
-gotten to a place where you feel like you are so senior that some skills are too
-&ldquo;entry-level&rdquo; for you to learn, I think you need to humble yourself and learn
-them. Nothing can be gained from pretending like they are not valuable.
-Additionally, the assumption that your time is now so valuable that it is &ldquo;a
-waste&rdquo; to spend it on learning tactical skills is absurd.</p>
-
-<p>Claiming you are too good to waste on low level skills not only belittles
-everyone around you, but belies a deep misunderstanding of our field. The senior
-developer who takes five times as long to enter and edit code isn&rsquo;t just
-spending longer to do that task, but they are paying a missed opportunity cost
-in time they could have spent in more strategic endeavors. They could have been
-training, planning, gathering requirements, building better automation, etc,
-instead they stubbornly claim &ldquo;typing isn&rsquo;t what software is about&rdquo;. By giving
-it so little credence, they have made it most of their actual mental effort!
-Take simple touch-typing. Imagine how much mental effort it takes the
-hunt-and-peck typist to write out a single line of code. That is mental overhead
-that is simply wasted. The developer who doesn&rsquo;t have to think about how to move
-a file or edit a structure finds themselves quickly through the tactical efforts
-with little distraction, free to think deeply.</p>
-
-<h1>Resources</h1>
-
-<p>Here are some links and books to get you started on these topics.</p>
-
-<ul>
-<li>Typing speed/accuracy - <a href="http://store.steampowered.com/agecheck/app/246580/">Typing of the Dead</a></li>
-<li>&ldquo;Mouse-free&rdquo; editing systems: Vim, Emacs - <a href="http://vim-adventures.com/">Vim Adventures</a></li>
-<li>Clean coding practices - <a href="https://cleancoders.com/">Clean Coders</a></li>
-<li>Repl Driven Development - <a href="http://blog.jayfields.com/2014/01/repl-driven-development.html">RDD</a></li>
-<li>Test Driven Development - <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530</a></li>
-<li>Debugging - <a href="http://c.learncodethehardway.org/book/ex31.html">Debugging</a></li>
-<li>Building abstractions / Designing Simple Solutions - <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-4.html#%_toc_start">Structure and Interpretation of Computer Programs</a></li>
-<li>Training developers - <a href="http://en.wikipedia.org/wiki/Pair_programming">Pair Programming</a></li>
-<li>Organizing and leading teams - <a href="http://managinghumans.com/">Managing Humans</a></li>
-<li>Understanding the real problem - <a href="http://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow">Thinking Fast and Slow</a></li>
-<li>Learning new languages and frameworks - <a href="http://norvig.com/21-days.html">Teach Yourself Programming in Ten Years</a></li>
-<li>Automating tasks <a href="http://www.stuartellis.eu/articles/rake/">Rake to Automate Tasks</a></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/5">&larr; Older</a>
@@ -1002,6 +979,10 @@ with little distraction, free to think deeply.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
+      </li>
+    
+      <li class="post">
         <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
       </li>
     
@@ -1017,10 +998,6 @@ with little distraction, free to think deeply.</p>
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
-      <li class="post">
-        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1034,7 +1011,7 @@ with little distraction, free to think deeply.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     
@@ -1059,7 +1036,7 @@ with little distraction, free to think deeply.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
     </li>
     
     

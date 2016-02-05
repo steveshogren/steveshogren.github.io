@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using Named Parameters - Deliberate Software</title>
+  <title>Development Disappointment Disorder - Deliberate Software</title>
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (this doesn't count, and it will get you lynched) so &hellip;">
+  <meta name="description" content="&ldquo;We&rsquo;ve never had a successful release&rdquo; You just finished this really hard feature. The whole thing was worse than
+anyone realized. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://deliberate-software.com/using-named-parameters/">
+  <link rel="canonical" href="http://deliberate-software.com/development-disappointment-disorder/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
@@ -82,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">Using Named Parameters</h1>
+      <h1 class="entry-title">Development Disappointment Disorder</h1>
     
     
       <p class="meta">
@@ -91,83 +92,106 @@
 
 
 
-<time class='entry-date' datetime='2011-05-05T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-02-04T16:58:25-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:58 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>
-  Up until recently, most of my programming was in php, which does not
-  support named parameters
-  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
-  target="_blank">this</a> doesn't count, and it will get you lynched)
-  so while switching to VB.NET and python, I have come to really
-  appreciate this handy feature.
-</p>
-<p>
- Named parameters is one of those handy little things that can make
-  your life a little easier. Say, in python, you have a function that
-  takes a boolean value. Normally, I would create a variable just to
-  hold that boolean value, then pass it in, to try to be easier for
-  the next guy to understand.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-  Who knows what window's parameter is? What the heck is true anyway,
-  the window? <a href="http://www.jetbrains.com/pycharm/"
-  target="_blank">PyCharm</a> knows (and if you are using python
-  without it, I implore you to treat yourself to the demo) otherwise
-  you have to look up the function <em>like a barbarian</em> to see
-  what is going on. Sure, you can make it more clear with:
-</p>
+<div class="entry-content"><blockquote><p>&ldquo;We&rsquo;ve never had a successful release&rdquo;</p></blockquote>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>You just finished this really hard feature. The whole thing was worse than
+anyone realized. Not only that, but the feature wasn&rsquo;t clearly explained, so you
+lost time churning on the actual requirements. Despite all the confusion,
+iteration, and technical challenges, you managed to get it working! You look
+back, savoring how much you have learned and grown.</p>
 
-<p>Better then nothing, but still lame.</p>
+<p>You show it off to the product owner. He barely seems to hear you. His shoulders
+slump in disappointment.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<blockquote><p>&ldquo;Great, but we are still four weeks behind.&rdquo;</p></blockquote>
 
-<p>
-  Boom! Way easier to read, no extra variables hanging around making
-  trouble. Many times I have made function parameters, called them one
-  thing, then made a variable with a slightly different name to pass
-  in for legibility, but no more of that crap! Now, when I have the
-  inclination to make a variable just to clarify something, I just
-  name the parameter and pass in the value right there, like a
-  civilized gentleman should.
+<p>Your team is infected with <strong>Development Disappointment Disorder</strong>.</p>
 
-</p>
-<p>
- Additionally, VB.NET has this too, with the slightly goofier
-  syntax of the ":="
-</p>
+<p>It looks different in every team. The manager who sets unreasonable deadlines
+then demands overtime. The project manager who gets angry at every little thing.
+Developers who feel they need to point fingers to shift the blame. The boss who
+is never happy no matter what is achieved. The team that feels they have never
+had a successful release.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<h2>Unreasonable Expectations</h2>
 
-<p>
-  My cohort Daniel Miladinov pointed out that this is calling the
-  assignment operator directly, since calling it with just the equals
-  would perform
-  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
-</p>
+<p><strong>Development Disappointment Disorder is caused by unreasonable expectations.</strong>
+Someone thinks, hopes, or wishes they can get 100 units of productivity from a
+team and codebase that only can sustain 30-40 units. They want the impossible,
+and no amount of cajoling, pressuring, yelling, or passive aggressive comments
+will change reality.</p>
+
+<p>Productivity is not completely a people problem. Every team has an upper limit
+to what they can produce in a system. The human mind has boundaries. Very real
+limits exist given the team&rsquo;s size and existing codebases. While new technical
+tools and libraries enable more productive teams, these changes often are
+hindered by an existing codebase. The team with a multi-million line C# codebase
+is not going to get much value from the productivity gains possible with
+Haskell&rsquo;s type system.</p>
+
+<p>You cannot rush software development without incurring a drop in quality,
+stability, or maintainability. The work is complex and difficult: every expert
+in our field agrees with adages like &ldquo;adding developers to a late project makes
+it later.&rdquo;</p>
+
+<h2>Suggestions</h2>
+
+<ul>
+<li><p><strong>For the technical staff:</strong> How accurate are your estimates? How consistent
+is your throughput? Do you regularly under-estimate your features? Do
+developers often say, &ldquo;oh, that&rsquo;s only&hellip;&rdquo;? Are some types of features &ldquo;always
+late&rdquo;?</p>
+
+<p>You must learn to be blameless in this situation, and that means striving to
+give as accurate an estimate as you can with what you have. Throwing estimates
+out without much thought only makes things worse. How long did a similar
+feature take last time? If you regularly have inaccurate estimates in a
+certain area of the system, put extra care into those estimates, working to
+provide the best estimate you can.</p></li>
+<li><p><strong>For the business:</strong> There is only so many units of productivity that fit
+into a given time frame.You need to assess every feature and estimate, and
+consider the risk with each.</p>
+
+<p>Acting disappointed, angry, or passive aggressive will not get you more
+features, it will only demotivate the technical staff. You will get more
+consistency, because they will consistently work slower. You will get more
+hours, but each hour will see a
+<a href="http://www.igda.org/?page=crunchsixlessons">massive drop in valuable work.</a></p></li>
+</ul>
+
+
+<blockquote><p>Acting disappointed, angry, or passive aggressive will not get you more features</p></blockquote>
+
+<p>  If you are unhappy with the work produced, you need to consider why. Were you
+  told it would be sooner? Did you promise that to someone? What changed since
+  then? If the feature isn&rsquo;t actually needed, why did you pick it? If spending
+  twice as much made it not worthwhile, was it really a good choice?</p>
+
+<p>  What would happen if you didn&rsquo;t promise <em>when</em> the features would be done?
+  Either way, your promise doesn&rsquo;t change when it will be done, it just adds
+  risk to your credibility. Often the only thing to be gained by giving out
+  estimates and time-lines is risk. Unless the customer is truly blocked on your
+  estimate, simply communicate what you are doing, not when you hope it will be
+  done.</p>
+
+<blockquote><p>Often the only thing to be gained by telling customers an estimate is risk</p></blockquote>
+
+<ul>
+<li><strong>For the team:</strong> Celebrate your successes. Abolish the notion of a &ldquo;failed
+release&rdquo;. Build up a culture that finds little victories throughout the
+release.</li>
+</ul>
+
+
+<p>With these tools you can fight Development Disappointment Disorder. You can
+start to celebrate what you do accomplish. <strong>A team that is energized and motivated will accomplish more.</strong> The team that celebrates their work will strive for more.</p>
 </div>
 
 
@@ -183,12 +207,12 @@
 
 
 
-<time class='entry-date' datetime='2011-05-05T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+<time class='entry-date' datetime='2016-02-04T16:58:25-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>4:58 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>
+    <a class='category' href='/blog/categories/management/'>management</a>, <a class='category' href='/blog/categories/meta-game/'>meta game</a>
   
 </span>
 
@@ -197,7 +221,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/using-named-parameters/" data-via="" data-counturl="http://deliberate-software.com/using-named-parameters/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/development-disappointment-disorder/" data-via="" data-counturl="http://deliberate-software.com/development-disappointment-disorder/" >Tweet</a>
   
   
   
@@ -206,10 +230,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/actionscript-unit-testing/" title="Previous Post: Actionscript Unit Testing">&laquo; Actionscript Unit Testing</a>
+        <a class="basic-alignment left" href="/compassionate-interviewing/" title="Previous Post: Designing A Compassionate Interview For A High Performing Individual">&laquo; Designing A Compassionate Interview For A High Performing Individual</a>
       
-      
-        <a class="basic-alignment right" href="/on-lisp-part-1/" title="Next Post: On Lisp: Part 1">On Lisp: Part 1 &raquo;</a>
       
     </p>
   </footer>

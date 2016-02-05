@@ -9,8 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Several times in the last week people have lamented to me that they &ldquo;just don&rsquo;t
-get Lisp&rdquo;. After hearing it for the third time, I &hellip;">
+  <meta name="description" content="Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
+semantic version number. Small features that incrementally improve &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,107 @@ get Lisp&rdquo;. After hearing it for the third time, I &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/language-versions/">Language Versions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-20T10:36:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:36 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
+semantic version number. Small features that incrementally improve your
+situation are like minor updates. They don&rsquo;t cause any large shifts in thinking
+or process. Major updates are big, new concepts, quantum jumps in theory or
+practice.</p>
+
+<p>I am not talking about the political, social, or financial aspects of a
+toolchain. For example, hiring is a complex beast entirely in its own
+category. The criteria for choosing a tool when hiring a few hundred offshore
+developers is very different than the criteria for hiring for a team of three
+senior developers. I&rsquo;ll leave those aspects alone.</p>
+
+<p>What are some examples of these value changes I&rsquo;ve noticed in my development?</p>
+
+<h2>Minor Benefits</h2>
+
+<h3>Perl - PHP - Python - Ruby</h3>
+
+<p>Switching from Perl to PHP for me was a minor change. I was able to carry over
+almost all my skills, and for the most part, the differences were mostly
+syntactic. Later, when I started using Python, most of my experience from Perl
+and PHP was still useful. The libraries had different names, and a few concepts
+were different, but on the whole, all three were in a same class of productivity
+for me.</p>
+
+<p>More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
+found much of my previous experience was still valuable. I can almost guess what
+things will be called or how they should be used. I still have to look up
+library names and keywords, but on the whole, the languages all provide very
+similar workflows. I suspect all four are in the same class of productivity,
+with some minor differences here and there. These days I put effort only into
+maintaining familiarity with one of these languages, since I am confident I
+could quickly relearn any of the other three on demand.</p>
+
+<h3>Java - VB.NET - CSharp</h3>
+
+<p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
+productivity. For the most part, all the expectations and experience carries
+between the three. Obviously the tools are different, and there are a number of
+gotchas, but nothing changed my productivity in any major way. I doubt any of
+those three have any one killer feature that cannot be had in the other.</p>
+
+<h2>Major Benefits</h2>
+
+<h3>Automated Testing</h3>
+
+<p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
+testing was a major change with large productivity benefits. All my experience
+to date was still useful, but I needed a whole new set of skills to be able to
+apply the techniques. Tools like dependency injection, mocking, TDD, and
+continuous integration enabled me to build and revive much larger
+systems. Automated testing is a skill that applies well to every language I&rsquo;ve
+worked in, with benefits that grow increasingly valuable with more complex
+systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
+classes of problems.</p>
+
+<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+
+<p>Repl based development with live hot patching was another major change. It
+required a new way of thinking about programming, and with it came an
+instantaneous feedback loop. Much like unit testing, it was an entirely new
+skill, but opened up a very fast method of building up a system from small
+parts. Additionally, it allowed me to rapidly progress in my skills, because I
+could instantly see live feedback from my code, without needing to write a whole
+test just to execute the code.</p>
+
+<h3>Powerful Static Typing (moving from C# to F#)</h3>
+
+<p>Moving from a typical static typed language to one with algebraic data types has
+been a major change, with major productivity benefits. I have noticed entire
+classes of defects disappearing. Additionally, because of the better compiler
+errors, the resulting codebases are much easier to refactor, which means a
+faster reaction to a changing domain.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -422,228 +523,6 @@ domain, I reach for F#.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/programming-language-safety-algorithm/">Programming Language Safety Score</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-17T14:13:00-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much more nuanced than a binary bit of &ldquo;has strong-static
-types&rdquo;.</p>
-
-<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
-thoughts of unit tests, long build times, and red squiggles in an
-IDE. But, in day-to-day development, there are so many times when we
-are bitten by things that somehow just slip through the cracks.</p>
-
-<p>I put together this scoring model to get a sense of how safe a
-language is at the primitive level, and if it isn&rsquo;t safe by default,
-how much it costs to manually make it safe. Since all abstractions
-eventually result in a series of primitive operations, I decided that
-focusing only on primitives would still be a valuable (if incomplete)
-data point. While any good library will handle all primitive checks
-and present the consumer with a well-designed abstraction, in the end,
-the consumer is still left wiring libraries together, building their
-own primitive abstractions for integration. Due to the impossibility of
-measuring the quality of abstractions in all libraries for a language,
-I left that entirely out of scope of this model, unless it is designed
-as a primitive check.</p>
-
-<p>By focusing on only primitive operations: making and calling
-functions, naming data, working with sequences, and dealing with
-language primitive data types, I slimmed down the large range of
-possible error vectors to a small handful. While in some languages it
-is common to use user-defined classes to wrap around a set of
-primitives, those classes are still doing the same primitive work,
-just hidden behind a user-created abstraction. The more ways it is
-possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
-is to build such good abstractions.</p>
-
-<pre><code>This model is not about language "power".
-</code></pre>
-
-<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
-&ldquo;abstract-ability&rdquo; of a language. In any language that supports
-abstractions (functions, classes, modules, naming data), I am
-convinced, given enough code, all Turing complete langauges can do the
-same work. This model is only about the costs to prevent unexpected
-&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
-level.</p>
-
-<p>Rather than focus on what is <em>possible</em> with a language, I will
-instead focus on what is typically idiomatic to that community. For
-example, if it is possible to achieve a level of safety in a language
-but by doing something uncommon, that should not be counted.</p>
-
-<p>To score a language, simply figure out how many characters it costs to
-&ldquo;prevent&rdquo; a certain type of error, and add that to the
-total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
-default) to make up for the lack of unit tests and code exercising
-needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
-importing the module will have a negligible effect on the code size
-and complexity.</p>
-
-<p>If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 (by default) for a &ldquo;every change run
-and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
-overflow exceptions caused by recursion.</p>
-
-<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
-</code></pre>
-
-<p>Rather than tell you my thoughts (or survey for) hard-coded
-weightings, all checks are weighted the same by default. Feel free to
-apply your own weightings, to better match to your or your team&rsquo;s
-specific needs and preferences. The languages are masked by default to
-protect the innocent. You can unmask the names and see the code used
-below the table.</p>
-
-<p><div ng-app="TableApp">
-<div ng-controller="TableCtrl"></p>
-
-<p>Language Enforced Bonus:
- {{ enforcedScore }}
-<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
-
-<p>Language Inability Penalty:
- {{ inabilityPenalty }}
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
-
-<p>Show Weights <input type="checkbox" ng-model="showWeights" />
-<p class="lead">
-<div style="overflow-x:scroll">
-<table class="langtable">
-<tr>
-<th>Safety Check</th>
-<th></th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
-</th>
-</tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
-<tr class="totals"><td>Totals</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ lang }}
-</td>
-</tr>
-<tr class="totals"><td>Magnitude</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}%
-</td>
-</tr>
-</table>
-</div></p>
-
-<p><h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
-
-<p>Current Languages:
-<span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }},
-</select></p>
-
-<p>I want to see your language represented here! I&rsquo;ll happily take pull
-requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
-use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
-language data structure.</p>
-
-<p>I would love to see every major language represented, including major
-language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
-are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
-and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
-apparently very separate communities.</p>
-
-<p><div ng-show="showRealName"> Feel free to put in your own examples by
-playing with the samples below. Code surrounded with &lt;! !> is ignored
-from the tally, since it would vary heavily based on the language and
-desired result. Variable and type names are kept at single characters,
-which are counted. Feel free to add in your own language below, and
-use the copy feature to extract the data structure to use in a pull
-request.</p>
-
-<p><h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-</h2>
-<button ng-click="showEdit = !showEdit">Edit Language</button>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-<div ng-show="showEdit">
-<h2><input ng-model="selectedLang.name"></input></h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
-<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
-<div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-<div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div></p>
-
-<p><div ng-show="!showEdit">
-<h2> {{ selectedLang.name }} </h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
- {{ selectedLang[check.key].desc }}
-<div>
-Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }}
-<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div>
-</div></p>
-
-<p>Hope this is a helpful way to think about language safety!</p>
-
-<p>Special thanks to (in alphabetical order):
-Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
-Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
-Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
-Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
-Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -696,6 +575,10 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
+      </li>
+    
+      <li class="post">
         <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
       </li>
     
@@ -711,10 +594,6 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
-      <li class="post">
-        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -728,7 +607,7 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     
@@ -753,7 +632,7 @@ Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
     
     
     <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
     </li>
     
     

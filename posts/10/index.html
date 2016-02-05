@@ -9,7 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="So, working through the Land of Lisp book, getting the hang of it. Chapter Six, the author starts off by talking a little about the Common Lisp REPL &hellip;">
+  <meta name="description" content="At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/end-to-end-web-service-testing/">End-to-End Web Service Testing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-06-28T00:00:00-04:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  At work last month, I was assigned to fix some bugs in an
+  asynchronous legacy code base. My supervisor gave me a month to see
+  what I could do, and to see if I could fix a few tricky bugs. The
+  code is divided into two sections, a client application and a web
+  server. Both the client application and the server have their own
+  persistence, and they communicate through a soap web service.
+</p>
+<p>
+  I wanted to try and write some sort of end-to-end tests around this,
+  but I could not figure out how to get around that web service. I
+  don&#039;t want my tests to rely on a server having to always be up,
+  so I initially was planning on writing tests from the client
+  database to the web service, where I would just stub some responses.
+  I got about an hour into that plan, before I realized I would then
+  have to do that same thing on the server, and that sort of testing
+  will not really tell me what the code <i>does</i>. I needed to cover
+  this whole process end-to-end.
+</p>
+<p>
+ I walked around for a bit, thinking. Then it hit me, both the server
+ and client code are written in VB.NET, and, except for the web service, work
+ just like plain old highly-coupled code. Hmmm.
+</p>
+<p>
+ For the first pass, I wrote an interface to wrap the web service,
+ then used dependency injection to inject a fake web service that (and
+ here is the cool part) simply calls around the web service entirely
+ to the server code directly and injects a different database
+ connection string, so the server talks to a second database I have
+ prepared.
+</p>
+<p>
+ Just like that, I can run, all on my machine, 99 percent of the code
+ in a single end-to-end test. I can even setup several client
+ databases, and rotate them out, to &quot;swap&quot; between several
+ clients in the middle of the tests.
+</p>
+<p>
+ I added a few &quot;integration&quot; tests that do talk to a real
+ published testing web service, just to make sure everything is still
+ in place correctly.
+</p>
+<p>
+  Now, I said this was asynchronous, and it is, the executed
+  system-under-test kicks off a thread to talk to the web service, and
+  so to get it to test, I needed to wait for the thread to finish,
+  then do my assertions.
+</p>
+<p>
+ I used a system where the spun off thread will set a boolean when it
+ has finished running, to let the main thread know it has finished,
+ and the main thread just keeps checking that boolean until it is
+ true. While hackish, that is my current working solution, as no more
+ then one thread is ever spun off at a time, I can just have my test
+ wait for the thread to finish, then complete the required assertions.
+</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -365,104 +450,6 @@ Fascinating.
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-05-05T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>
-  Up until recently, most of my programming was in php, which does not
-  support named parameters
-  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
-  target="_blank">this</a> doesn't count, and it will get you lynched)
-  so while switching to VB.NET and python, I have come to really
-  appreciate this handy feature.
-</p>
-<p>
- Named parameters is one of those handy little things that can make
-  your life a little easier. Say, in python, you have a function that
-  takes a boolean value. Normally, I would create a variable just to
-  hold that boolean value, then pass it in, to try to be easier for
-  the next guy to understand.
-</p>
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>
-  Who knows what window's parameter is? What the heck is true anyway,
-  the window? <a href="http://www.jetbrains.com/pycharm/"
-  target="_blank">PyCharm</a> knows (and if you are using python
-  without it, I implore you to treat yourself to the demo) otherwise
-  you have to look up the function <em>like a barbarian</em> to see
-  what is going on. Sure, you can make it more clear with:
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>Better then nothing, but still lame.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
-</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  Boom! Way easier to read, no extra variables hanging around making
-  trouble. Many times I have made function parameters, called them one
-  thing, then made a variable with a slightly different name to pass
-  in for legibility, but no more of that crap! Now, when I have the
-  inclination to make a variable just to clarify something, I just
-  name the parameter and pass in the value right there, like a
-  civilized gentleman should.
-
-</p>
-<p>
- Additionally, VB.NET has this too, with the slightly goofier
-  syntax of the ":="
-</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<p>
-  My cohort Daniel Miladinov pointed out that this is calling the
-  assignment operator directly, since calling it with just the equals
-  would perform
-  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/11">&larr; Older</a>
@@ -515,6 +502,10 @@ Fascinating.
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
+      </li>
+    
+      <li class="post">
         <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
       </li>
     
@@ -530,10 +521,6 @@ Fascinating.
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
-      <li class="post">
-        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -547,7 +534,7 @@ Fascinating.
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     
@@ -572,7 +559,7 @@ Fascinating.
     
     
     <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
     </li>
     
     

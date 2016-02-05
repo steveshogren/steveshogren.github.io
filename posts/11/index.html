@@ -9,9 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed &hellip;">
+  <meta name="description" content="Up until recently, most of my programming was in php, which does not support named parameters (this doesn't count, and it will get you lynched) so &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,104 @@ fla. I followed &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/using-named-parameters/">Using Named Parameters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-05-05T00:00:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>
+  Up until recently, most of my programming was in php, which does not
+  support named parameters
+  (<a href="http://docstore.mik.ua/orelly/webprog/pcook/ch06_05.htm"
+  target="_blank">this</a> doesn't count, and it will get you lynched)
+  so while switching to VB.NET and python, I have come to really
+  appreciate this handy feature.
+</p>
+<p>
+ Named parameters is one of those handy little things that can make
+  your life a little easier. Say, in python, you have a function that
+  takes a boolean value. Normally, I would create a variable just to
+  hold that boolean value, then pass it in, to try to be easier for
+  the next guy to understand.
+</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>
+  Who knows what window's parameter is? What the heck is true anyway,
+  the window? <a href="http://www.jetbrains.com/pycharm/"
+  target="_blank">PyCharm</a> knows (and if you are using python
+  without it, I implore you to treat yourself to the demo) otherwise
+  you have to look up the function <em>like a barbarian</em> to see
+  what is going on. Sure, you can make it more clear with:
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">collapse</span> <span class="o">=</span> <span class="n">true</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>Better then nothing, but still lame.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">do_stuff</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">window</span><span class="p">(</span><span class="n">collapse</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  Boom! Way easier to read, no extra variables hanging around making
+  trouble. Many times I have made function parameters, called them one
+  thing, then made a variable with a slightly different name to pass
+  in for legibility, but no more of that crap! Now, when I have the
+  inclination to make a variable just to clarify something, I just
+  name the parameter and pass in the value right there, like a
+  civilized gentleman should.
+
+</p>
+<p>
+ Additionally, VB.NET has this too, with the slightly goofier
+  syntax of the ":="
+</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="n">Authenticate</span><span class="p">(</span><span class="n">pAllowBackupPassword</span><span class="p">:</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>
+  My cohort Daniel Miladinov pointed out that this is calling the
+  assignment operator directly, since calling it with just the equals
+  would perform
+  an <a href="http://en.wikipedia.org/wiki/Equals_sign#In_computer_programming">equality operator</a>. Smart guy, Dan.
+</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -171,35 +267,6 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/active-record-pattern-testing/">Active Record Pattern Testing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-04-12T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/12">&larr; Older</a>
@@ -252,6 +319,10 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
+      </li>
+    
+      <li class="post">
         <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
       </li>
     
@@ -267,10 +338,6 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
         <a href="/on-defeat/">Interview Humiliation</a>
       </li>
     
-      <li class="post">
-        <a href="/f-number-unit-testing/">F# Unit Testing With SimpleMock</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -284,7 +351,7 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">24</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
     </li>
     
     
@@ -309,7 +376,7 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     
     
     <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">6</span></a>
+      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
     </li>
     
     
