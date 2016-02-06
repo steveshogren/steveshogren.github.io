@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2016-02-05T07:12:27-05:00</updated>
+  <updated>2016-02-06T13:16:28-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,400 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Haskell Is the Dark Souls of Programming]]></title>
+    <link href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/"/>
+    <updated>2016-02-06T11:22:29-05:00</updated>
+    <id>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming</id>
+    <content type="html"><![CDATA[<p>HUMOROUS POST AHEAD. Please don&rsquo;t hit me, Haskell does a great job of that
+already.</p>
+
+<p><img class="center solaire" src="http://deliberate-software.com/images/altar_of_sunlight.gif" width="500" title="solaire" alt="solaire"></p>
+
+<p>I decided to start the next version of my safety score posts. This time,
+however, I decided to do it in Haskell. I love Haskell for the same reasons I
+love Dark Souls. Fantastic and inscrutable lore, a great <del>combat</del> type
+system, a cliff-wall difficulty curve, and unending punishment.</p>
+
+<p>I want to collect some statistics from the GitHub API. Watch as I retrace my
+steps attempting the Tomb of the Dread HTTPS GET Request.</p>
+
+<h3>Step One - Stack (aka Pride Comes Before The Fall)</h3>
+
+<p>I download stack and start a project:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cd /home/jack/programming && stack new github-stats && cd github-stats
+</span><span class='line'>Downloading template "new-template" to create project "github-stats" in github-stats/ ...
+</span><span class='line'> ......
+</span><span class='line'>All done.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So far so good. Does it work?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  &gt; stack build && stack exec -- github-stats-exe 
+</span><span class='line'>   github-stats-0.1.0.0: configure
+</span><span class='line'>   ..... 
+</span><span class='line'>   Registering github-stats-0.1.0.0...
+</span><span class='line'>   someFunc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Awww yisss. This is going to be so easy!</p>
+
+<h3>Step Two - HTTPS GET Request (aka The Fall After The Pride)</h3>
+
+<p><img class="center giants" src="http://deliberate-software.com/images/tomb_of_the_giants.gif" width="450" title="giants" alt="giants"></p>
+
+<p>Now I need to query the GitHub API. Not my first time to the rodeo, I generate a
+personal access token from GitHub and copy it to a local file. What query should
+I run first? How about the count for all ASM tetris repositories? Poking around
+the <a href="https://developer.github.com/v3/search/#search-repositories">docs</a> comes up
+with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GET https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
+</span><span class='line'>User-Agent: steveshogren
+</span><span class='line'>Authorization: token PUT_TOKEN_HERE</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>{.. &ldquo;total_count&rdquo;: 354}</p></blockquote>
+
+<p>Easy life. Now how do you GET a resource in Haskell? Ah,
+<a href="https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html">Network.HTTP</a>!
+I copy the front page sample into <code>src/Lib.hs</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kr">module</span> <span class="nn">Lib</span>
+</span><span class='line'>    <span class="p">(</span> <span class="nf">someFunc</span>
+</span><span class='line'>    <span class="p">)</span> <span class="kr">where</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">x</span> <span class="ow">=</span> <span class="n">simpleHTTP</span> <span class="p">(</span><span class="n">getRequest</span> <span class="s">&quot;https://www.github.com/&quot;</span><span class="p">)</span> <span class="o">&gt;&gt;=</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">take</span> <span class="mi">100</span><span class="p">)</span> <span class="o">.</span> <span class="n">getResponseBody</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">=</span>
+</span><span class='line'>   <span class="n">print</span> <span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So simple! This is why laugh at my NodeJS loving friends! What a bunch of cretins.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">&gt;</span> <span class="n">stack</span> <span class="n">build</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">simpleHTTP</span><span class="err">’</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">17</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">getRequest</span><span class="err">’</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">77</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">getResponseBody</span><span class="err">’</span>
+</span><span class='line'><span class="kt">Compilation</span> <span class="n">failed</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Doesn&rsquo;t compile. Durp, hackage is a package library, I need to add this to my
+cabal. What is the name of the package? HTTP-4000? HTTP-4000.3.2? Nothing in
+hackage seems to indicate what goes into the cabal file. I discover it is just
+HTTP through trial and error. I update my cabal file&hellip; in all three
+build-depends&hellip;?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'>  <span class="n">build</span><span class="o">-</span><span class="n">depends</span><span class="kt">:</span>       <span class="n">base</span> <span class="o">&gt;=</span> <span class="mf">4.7</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span> <span class="mi">5</span>
+</span><span class='line'>                       <span class="p">,</span> <span class="kt">HTTP</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hrm, same error.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="o">&gt;</span> <span class="n">stack</span> <span class="n">build</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">simpleHTTP</span><span class="err">’</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">17</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">getRequest</span><span class="err">’</span>
+</span><span class='line'><span class="nf">src</span><span class="o">/</span><span class="kt">Lib</span><span class="o">.</span><span class="n">hs</span><span class="kt">:</span><span class="mi">5</span><span class="kt">:</span><span class="mi">77</span><span class="kt">:</span> <span class="kt">Not</span> <span class="kr">in</span> <span class="n">scope</span><span class="kt">:</span> <span class="err">‘</span><span class="n">getResponseBody</span><span class="err">’</span>
+</span><span class='line'><span class="kt">Compilation</span> <span class="n">failed</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oh, durp, I&rsquo;d need an import. (WHY ISN&rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
+doesn&rsquo;t work, I need <code>putStrLn</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kr">import</span> <span class="nn">Network.HTTP</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">x</span> <span class="ow">=</span> <span class="n">simpleHTTP</span> <span class="p">(</span><span class="n">getRequest</span> <span class="s">&quot;https://www.github.com/&quot;</span><span class="p">)</span> <span class="o">&gt;&gt;=</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">take</span> <span class="mi">100</span><span class="p">)</span> <span class="o">.</span> <span class="n">getResponseBody</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="n">putStrLn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here goes!!!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'> <span class="o">&gt;</span> <span class="n">stack</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">stack</span> <span class="n">exec</span> <span class="c1">-- github-stats-exe</span>
+</span><span class='line'><span class="nf">github</span><span class="o">-</span><span class="n">stats</span><span class="o">-</span><span class="n">exe</span><span class="kt">:</span> <span class="n">user</span> <span class="ne">error</span> <span class="p">(</span><span class="n">https</span> <span class="n">not</span> <span class="n">supported</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.</p>
+
+<blockquote><p>NOTE: This package only supports HTTP;</p></blockquote>
+
+<p><img class="center giants" src="http://deliberate-software.com/images/nope_better.gif" width="250" title="giants" alt="giants"></p>
+
+<p>When <del>playing Dark Souls</del>programming Haskell, sometimes the best move
+is to run away. I search again. <code>haskell https request</code> returns
+&ldquo;http-conduit&rdquo; as the best choice. After adding http-conduit to my cabal, I come
+up with this beast without any surprises:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="nf">query</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="kt">String</span>
+</span><span class='line'><span class="nf">query</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>    <span class="n">initReq</span> <span class="ow">&lt;-</span> <span class="n">parseUrl</span> <span class="s">&quot;https://api.github.com/search/repositories&quot;</span>
+</span><span class='line'>    <span class="kr">let</span> <span class="n">r</span> <span class="ow">=</span> <span class="n">initReq</span>
+</span><span class='line'>                   <span class="p">{</span> <span class="n">method</span> <span class="ow">=</span> <span class="s">&quot;GET&quot;</span>
+</span><span class='line'>                    <span class="p">,</span> <span class="n">requestHeaders</span> <span class="ow">=</span> <span class="p">[(</span><span class="n">hUserAgent</span><span class="p">,</span> <span class="s">&quot;steveshogren&quot;</span><span class="p">)</span>
+</span><span class='line'>                                      <span class="p">,</span> <span class="p">(</span><span class="n">hAuthorization</span><span class="p">,</span> <span class="s">&quot;token PUT_TOKEN_HERE&quot;</span><span class="p">)]}</span>
+</span><span class='line'>    <span class="kr">let</span> <span class="n">request</span> <span class="ow">=</span> <span class="n">setQueryString</span> <span class="p">[(</span><span class="s">&quot;q&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;tetris+language:assembly&quot;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="p">,(</span><span class="s">&quot;order&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;desc&quot;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="p">,(</span><span class="s">&quot;sort&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;stars&quot;</span><span class="p">)]</span> <span class="n">r</span>
+</span><span class='line'>    <span class="n">manager</span> <span class="ow">&lt;-</span> <span class="n">newManager</span> <span class="n">tlsManagerSettings</span>
+</span><span class='line'>    <span class="n">res</span> <span class="ow">&lt;-</span> <span class="n">httpLbs</span> <span class="n">request</span> <span class="n">manager</span>
+</span><span class='line'>    <span class="n">return</span> <span class="o">.</span> <span class="n">show</span> <span class="o">.</span> <span class="n">responseBody</span> <span class="o">$</span> <span class="n">res</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>   <span class="n">query</span> <span class="o">&gt;&gt;=</span> <span class="n">putStrLn</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Huzzah! Results! I&rsquo;m getting back a monster string of json data.</p>
+
+<blockquote><p>&ldquo;\&rdquo;{\\&ldquo;total_count\\&rdquo;:66, &hellip;.}\"</p></blockquote>
+
+<p><img class="center solaire" src="http://deliberate-software.com/images/praisethesun.gif" width="150" title="solaire" alt="solaire"></p>
+
+<h3>Step Three - Parsing JSON</h3>
+
+<p>Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
+use Aeson and get the total_count value from the return, I needed the following
+additions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="cm">{-# LANGUAGE OverloadedStrings #-}</span>
+</span><span class='line'><span class="cm">{-# LANGUAGE DeriveGeneric #-}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nn">GHC.Generics</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Data.Aeson</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">data</span> <span class="kt">ResultCount</span> <span class="ow">=</span> <span class="kt">ResultCount</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">total_count</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="p">}</span>
+</span><span class='line'>  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Generic</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">instance</span> <span class="kt">ToJSON</span> <span class="kt">ResultCount</span>
+</span><span class='line'><span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">ResultCount</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ResultCount allows me to use <code>decode</code> from aeson instead of <code>show</code> to
+parse the &ldquo;total_count&rdquo; from the JSON response into an Int. Sure enough, it
+does!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="cm">{-# LANGUAGE OverloadedStrings #-}</span>
+</span><span class='line'><span class="cm">{-# LANGUAGE DeriveGeneric #-}</span>
+</span><span class='line'><span class="kr">module</span> <span class="nn">Lib</span>
+</span><span class='line'>    <span class="p">(</span> <span class="nf">someFunc</span>
+</span><span class='line'>    <span class="p">)</span> <span class="kr">where</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Control.Monad</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Network</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Network.HTTP.Conduit</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Network.HTTP.Types.Header</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">GHC.Generics</span>
+</span><span class='line'><span class="kr">import</span> <span class="nn">Data.Aeson</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">data</span> <span class="kt">ResultCount</span> <span class="ow">=</span> <span class="kt">ResultCount</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">total_count</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="p">}</span>
+</span><span class='line'>  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Generic</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">instance</span> <span class="kt">ToJSON</span> <span class="kt">ResultCount</span>
+</span><span class='line'><span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">ResultCount</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">query</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Int</span><span class="p">)</span>
+</span><span class='line'><span class="nf">query</span> <span class="ow">=</span> <span class="kr">do</span>
+</span><span class='line'>    <span class="n">initReq</span> <span class="ow">&lt;-</span> <span class="n">parseUrl</span> <span class="s">&quot;https://api.github.com/search/repositories&quot;</span>
+</span><span class='line'>    <span class="kr">let</span> <span class="n">r</span> <span class="ow">=</span> <span class="n">initReq</span>
+</span><span class='line'>                   <span class="p">{</span> <span class="n">method</span> <span class="ow">=</span> <span class="s">&quot;GET&quot;</span>
+</span><span class='line'>                    <span class="p">,</span> <span class="n">requestHeaders</span> <span class="ow">=</span> <span class="p">[(</span><span class="n">hUserAgent</span><span class="p">,</span> <span class="s">&quot;steveshogren&quot;</span><span class="p">)</span>
+</span><span class='line'>                                      <span class="p">,</span> <span class="p">(</span><span class="n">hAuthorization</span><span class="p">,</span> <span class="s">&quot;token PUT_TOKEN_HERE&quot;</span><span class="p">)]}</span>
+</span><span class='line'>    <span class="kr">let</span> <span class="n">request</span> <span class="ow">=</span> <span class="n">setQueryString</span> <span class="p">[(</span><span class="s">&quot;q&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;tetris+language:assembly&quot;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="p">,(</span><span class="s">&quot;order&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;desc&quot;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="p">,(</span><span class="s">&quot;sort&quot;</span><span class="p">,</span> <span class="kt">Just</span> <span class="s">&quot;stars&quot;</span><span class="p">)]</span> <span class="n">r</span>
+</span><span class='line'>    <span class="n">manager</span> <span class="ow">&lt;-</span> <span class="n">newManager</span> <span class="n">tlsManagerSettings</span>
+</span><span class='line'>    <span class="n">res</span> <span class="ow">&lt;-</span> <span class="n">httpLbs</span> <span class="n">request</span> <span class="n">manager</span>
+</span><span class='line'>    <span class="n">return</span> <span class="o">.</span> <span class="n">liftM</span> <span class="n">total_count</span> <span class="o">.</span> <span class="n">decode</span> <span class="o">.</span> <span class="n">responseBody</span> <span class="o">$</span> <span class="n">res</span>
+</span><span class='line'>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+</span><span class='line'><span class="nf">someFunc</span> <span class="ow">=</span> <span class="n">query</span> <span class="o">&gt;&gt;=</span> <span class="n">print</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Puts out: <code>Just 66</code>. Success! Wait. 66 isn&rsquo;t the same count I got when
+running from the browser. Check again. Sure enough, browser comes up with a
+totally different count.</p>
+
+<p><img class="center solaire" src="http://deliberate-software.com/images/come_at_me_bro.gif" width="400" title="solaire" alt="solaire"></p>
+
+<p>Maybe the query request isn&rsquo;t correct? Adding a <code>print request</code> on line 31
+after building the request shows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="kt">Request</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">host</span>                 <span class="ow">=</span> <span class="s">&quot;api.github.com&quot;</span>
+</span><span class='line'>  <span class="n">port</span>                 <span class="ow">=</span> <span class="mi">443</span>
+</span><span class='line'>  <span class="n">secure</span>               <span class="ow">=</span> <span class="kt">True</span>
+</span><span class='line'>  <span class="n">requestHeaders</span>       <span class="ow">=</span> <span class="p">[(</span><span class="s">&quot;User-Agent&quot;</span><span class="p">,</span><span class="s">&quot;steveshogren&quot;</span><span class="p">),(</span><span class="s">&quot;Authorization&quot;</span><span class="p">,</span><span class="s">&quot;token PUT_TOKEN_HERE&quot;</span><span class="p">)]</span>
+</span><span class='line'>  <span class="n">path</span>                 <span class="ow">=</span> <span class="s">&quot;/search/repositories&quot;</span>
+</span><span class='line'>  <span class="n">queryString</span>          <span class="ow">=</span> <span class="s">&quot;?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars&quot;</span>
+</span><span class='line'>  <span class="n">method</span>               <span class="ow">=</span> <span class="s">&quot;GET&quot;</span>
+</span><span class='line'>  <span class="n">proxy</span>                <span class="ow">=</span> <span class="kt">Nothing</span>
+</span><span class='line'>  <span class="n">rawBody</span>              <span class="ow">=</span> <span class="kt">False</span>
+</span><span class='line'>  <span class="n">redirectCount</span>        <span class="ow">=</span> <span class="mi">10</span>
+</span><span class='line'>  <span class="n">responseTimeout</span>      <span class="ow">=</span> <span class="kt">Just</span> <span class="p">(</span><span class="o">-</span><span class="mi">3425</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">requestVersion</span>       <span class="ow">=</span> <span class="kt">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The queryString isn&rsquo;t right!
+<code>?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars</code> It encoded my <code>+</code>
+and <code>:</code>! After an hour of reading through docs and researching URL encoding
+specs, it dawns on me. <code>+</code> is an encoded whitespace.</p>
+
+<blockquote><p>No face-palm gif could ever represent the shear magnitude of my current
+emotions&hellip; You&rsquo;ll have to use your imagination</p></blockquote>
+
+<p>I change my query to <code>("q", Just "tetris language:assembly")</code> and the right
+count comes back! <code>Just 354</code></p>
+
+<p>I finally have something that correctly fetches a count of repositories from
+GitHub and parses it into an Int. After over four hours of <del>Dark
+Souls</del>Haskell punishment, we deserve to enjoy a bonfire!</p>
+
+<p><img class="center solaire" src="http://deliberate-software.com/images/solaire_sitting.gif" width="400" title="solaire" alt="solaire"></p>
+
+<blockquote><p>Pixel gifs sourced from
+<a href="http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls">zedotagger</a> on
+deviantart, thanks zedotagger!</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Development Disappointment Disorder]]></title>
@@ -3389,358 +3783,6 @@ with high performance and interoperability with existing C# libraries.</p>
 <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
 
 <p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pattern Matching - Make the Compiler Work for You]]></title>
-    <link href="http://deliberate-software.com/function-pattern-matching/"/>
-    <updated>2014-04-28T22:05:00-04:00</updated>
-    <id>http://deliberate-software.com/function-pattern-matching</id>
-    <content type="html"><![CDATA[<p>Pattern matching is a simple tool that will make your code safer and
-easier to read.</p>
-
-<p>Consider the following code that converts an Int to a string.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">English</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="kt">string</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">lang</span> <span class="p">==</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">switch</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>            <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What happens when we make this simple change?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">enum</span> <span class="n">Language</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">Spanish</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">English</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">German</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
-any indication that something is missing? Nope! Our code has a
-potential bug that is only exposed at run-time, and nothing will tell
-us that. We made it fail gracefully by ensuring our code always
-returns at least an empty string, but we have created a bug that can
-only really be caught by something external: either automated tests or
-manual checking.</p>
-
-<p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
-seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
-that it just makes things even worse.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">String</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Spanish</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;uno&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;~~~&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">English</span> <span class="p">:</span> <span class="n">ILanguage</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">String</span> <span class="nf">convert</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="kt">var</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">0</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;zero&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">case</span> <span class="m">1</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;one&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>          <span class="k">default</span><span class="p">:</span> <span class="n">ret</span> <span class="p">=</span> <span class="s">&quot;...&quot;</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// somewhere else...</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">convert</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">lang</span><span class="p">).</span><span class="n">convert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">ILanguage</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="n">Language</span> <span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">switch</span> <span class="p">(</span><span class="n">lang</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">English</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">English</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">case</span> <span class="n">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="p">:</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Spanish</span><span class="p">()</span> <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">default</span><span class="p">:</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>We have turned 21 lines in one file into 36 in three files (not
-counting namespaces and imports). Does this new structure give us any
-additional safety when we add a new concrete implementation? How about
-when we add a new enum value? This code is even more likely to cause
-bugs than the first, because now we have an implicit coupling between
-the enum and the concrete class. We could get rid of the enum, and
-&ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
-concrete class to instantiate.</p>
-
-<p>Imagine if the compiler could warn us when either the enum or the
-class changed. Imagine if instead of having to hunt down the possible
-uses, we could just compile and fix the errors.</p>
-
-<p>Good news, we can!</p>
-
-<p>Check out this F# code. If you have never seen F# before, I know, it
-looks completely crazy! It <em>still</em> looks a little weird to me, but
-just try to read it. I think you will surprise yourself. This is a
-function called <code>convert</code>, and if you keep in mind that the types
-always come AFTER the value, the code makes a lot more sense. A
-parameter in C# would be <code>int number</code>; in F# it is written
-<code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
-you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
-second it is a lot more powerful!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">:</span><span class="n">Int</span><span class="o">,</span> <span class="n">lang</span><span class="o">:</span><span class="n">Language</span><span class="o">)</span> <span class="o">:</span><span class="kt">string</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>               <span class="o">|</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>               <span class="o">|</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;two&quot;</span>
-</span><span class='line'>               <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>We are using the same enum from the C# file, but it is missing
-something, right? Where are the Spanish and German parts? I try to
-compile this and what do I see?</p>
-
-<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
-matches on this expression. For example, the value 'enum&lt;Language&gt;
-(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
-
-<p>Spittake mushroom soup, the compiler just caught a potential bug for
-us! A C# run-time bug no less! Not only is this very powerful, but it
-is so simple. I can code the way I normally do, only now I get
-additional safety for free! And no unit or integration test would ever
-catch this class of errors.</p>
-
-<p>Heck, if you really want to keep your classes and interfaces in C#,
-you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span> <span class="n">English</span><span class="bp">()</span><span class="o">.</span><span class="n">convert</span><span class="o">(</span><span class="n">number</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This still calls the C# class above, and now the compiler gives us a
-warning when we add a new enum value!</p>
-
-<p>In this way, pattern matching is able to clearly remove edge cases. We
-converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
-<code>match</code>.</p>
-
-<p>BONUS ROUND!</p>
-
-<p>What we have already seen of pattern matching makes it a better
-<code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
-<code>match/with</code> statement allows for patterns matched to have a <code>when</code>
-clause which only matches when the condition is true:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Large!&quot;</span>
-</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="k">match</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>                <span class="o">|</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
-</span><span class='line'>                <span class="o">|</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Running the compiler again give us:</p>
-
-<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
-Warning FS0025: Incomplete pattern matches on this expression. For
-example, the value '1' may indicate a case not covered by the
-pattern(s). However, a pattern rule with a 'when' clause might
-successfully match this value. (FS0025) (monads-fsharp)</code></p>
-
-<p>That&rsquo;s right, it checks numbers too.</p>
-
-<p>Lastly, it is possible to match on a combination of values, all at
-once. We can convert our more complex structure to something simpler
-using this trick, and the compiler is still intelligent enough to
-check for missing cases.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">lang</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">lang</span><span class="o">,</span> <span class="n">number</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Larger than one!&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;dunno&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="n">x</span> <span class="k">when</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">-&gt;</span> <span class="s">&quot;Grande!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
-<code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
-default for any number in <code>Language.English</code> not already matched. The
-bug in the code here is the missing <code>Language.Spanish</code> with numbers
-1-5. What does the compiler say?</p>
-
-<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
-expression. For example, the value '(_,1)' may indicate a case not
-covered by the pattern(s). However, a pattern rule with a 'when'
-clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
-
-<p>Lastly, let&rsquo;s show the final result of converting our original
-function to F#. If your entire function is just a single pattern
-match, you can remove the <code>match/with</code> line and use the <code>function</code>
-keyword, and simply match against the parameters (which I reversed for
-clarity, but do not need to be written).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">let</span> <span class="nv">convert</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;one&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">English</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;...&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="s">&quot;zero&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;uno&quot;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="nn">Language</span><span class="p">.</span><span class="n">Spanish</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s">&quot;~~~&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Our original 17 line convert function, converted into a <em>safer</em> 7
-lines! I never had to specify what the types of lang, number and the
-return type are, because the compiler is able to figure that out from
-the code I wrote.</p>
-
-<p>If you are not convinced at this point that pattern matching is a big
-step forward in the safety and ease of development, I am not sure what
-else would convince you. More safety means less time spent tracking
-down bugs and more time adding on features!</p>
 ]]></content>
   </entry>
   

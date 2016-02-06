@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</loc>
+    <lastmod>2016-02-06T11:22:29-05:00</lastmod>
+  </url>
+  <url>
     <loc>http://deliberate-software.com/development-disappointment-disorder/</loc>
     <lastmod>2016-02-04T16:58:25-05:00</lastmod>
   </url>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: technical skills | Deliberate Software]]></title>
   <link href="http://deliberate-software.com/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2016-02-05T07:12:27-05:00</updated>
+  <updated>2016-02-06T13:16:28-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -12,6 +12,268 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Haskell is the Dark Souls of Programming]]></title>
+    <link href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/"/>
+    <updated>2016-02-06T11:22:29-05:00</updated>
+    <id>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming</id>
+    <content type="html"><![CDATA[<p>HUMOROUS POST AHEAD. Please don&rsquo;t hit me, Haskell does a great job of that
+already.</p>
+
+<p><img class="center solaire" src="/images/altar_of_sunlight.gif" width="500" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
+
+<p>I decided to start the next version of my safety score posts. This time,
+however, I decided to do it in Haskell. I love Haskell for the same reasons I
+love Dark Souls. Fantastic and inscrutable lore, a great <del>combat</del> type
+system, a cliff-wall difficulty curve, and unending punishment.</p>
+
+<p>I want to collect some statistics from the GitHub API. Watch as I retrace my
+steps attempting the Tomb of the Dread HTTPS GET Request.</p>
+
+<h3>Step One - Stack (aka Pride Comes Before The Fall)</h3>
+
+<p>I download stack and start a project:</p>
+
+<pre><code>&gt; cd /home/jack/programming &amp;&amp; stack new github-stats &amp;&amp; cd github-stats
+Downloading template "new-template" to create project "github-stats" in github-stats/ ...
+ ......
+All done.
+</code></pre>
+
+<p>So far so good. Does it work?</p>
+
+<pre><code class="">  &gt; stack build &amp;&amp; stack exec -- github-stats-exe 
+   github-stats-0.1.0.0: configure
+   ..... 
+   Registering github-stats-0.1.0.0...
+   someFunc
+</code></pre>
+
+<p>Awww yisss. This is going to be so easy!</p>
+
+<h3>Step Two - HTTPS GET Request (aka The Fall After The Pride)</h3>
+
+<p><img class="center giants" src="/images/tomb_of_the_giants.gif" width="450" title="&lsquo;giants&rsquo; &lsquo;giants&rsquo;" ></p>
+
+<p>Now I need to query the GitHub API. Not my first time to the rodeo, I generate a
+personal access token from GitHub and copy it to a local file. What query should
+I run first? How about the count for all ASM tetris repositories? Poking around
+the <a href="https://developer.github.com/v3/search/#search-repositories">docs</a> comes up
+with:</p>
+
+<pre><code class="">GET https://api.github.com/search/repositories?q=tetris+language:assembly&amp;sort=stars&amp;order=desc
+User-Agent: steveshogren
+Authorization: token PUT_TOKEN_HERE
+</code></pre>
+
+<blockquote><p>{.. &ldquo;total_count&rdquo;: 354}</p></blockquote>
+
+<p>Easy life. Now how do you GET a resource in Haskell? Ah,
+<a href="https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html">Network.HTTP</a>!
+I copy the front page sample into <code>src/Lib.hs</code></p>
+
+<pre><code class="haskell">module Lib
+    ( someFunc
+    ) where
+
+x = simpleHTTP (getRequest "https://www.github.com/") &gt;&gt;= fmap (take 100) . getResponseBody
+
+someFunc :: IO ()
+someFunc = 
+   print x
+</code></pre>
+
+<p>So simple! This is why laugh at my NodeJS loving friends! What a bunch of cretins.</p>
+
+<pre><code>&gt; stack build
+src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
+src/Lib.hs:5:17: Not in scope: ‘getRequest’
+src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
+Compilation failed.
+</code></pre>
+
+<p>Doesn&rsquo;t compile. Durp, hackage is a package library, I need to add this to my
+cabal. What is the name of the package? HTTP-4000? HTTP-4000.3.2? Nothing in
+hackage seems to indicate what goes into the cabal file. I discover it is just
+HTTP through trial and error. I update my cabal file&hellip; in all three
+build-depends&hellip;?</p>
+
+<pre><code>  build-depends:       base &gt;= 4.7 &amp;&amp; &lt; 5
+                       , HTTP
+</code></pre>
+
+<p>Hrm, same error.</p>
+
+<pre><code>&gt; stack build
+src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
+src/Lib.hs:5:17: Not in scope: ‘getRequest’
+src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
+Compilation failed.
+</code></pre>
+
+<p>Oh, durp, I&rsquo;d need an import. (WHY ISN&rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
+doesn&rsquo;t work, I need <code>putStrLn</code>.</p>
+
+<pre><code class="haskell">import Network.HTTP
+
+x = simpleHTTP (getRequest "https://www.github.com/") &gt;&gt;= fmap (take 100) . getResponseBody
+
+someFunc :: IO ()
+someFunc = x &gt;&gt;= putStrLn
+</code></pre>
+
+<p>Here goes!!!</p>
+
+<pre><code> &gt; stack build &amp;&amp; stack exec -- github-stats-exe
+github-stats-exe: user error (https not supported)
+</code></pre>
+
+<p>Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.</p>
+
+<blockquote><p>NOTE: This package only supports HTTP;</p></blockquote>
+
+<p><img class="center giants" src="/images/nope_better.gif" width="250" title="&lsquo;giants&rsquo; &lsquo;giants&rsquo;" ></p>
+
+<p>When <del>playing Dark Souls</del>programming Haskell, sometimes the best move
+is to run away. I search again. <code>haskell https request</code> returns
+&ldquo;http-conduit&rdquo; as the best choice. After adding http-conduit to my cabal, I come
+up with this beast without any surprises:</p>
+
+<pre><code class="haskell">query :: IO String
+query = do
+    initReq &lt;- parseUrl "https://api.github.com/search/repositories"
+    let r = initReq
+                   { method = "GET"
+                    , requestHeaders = [(hUserAgent, "steveshogren")
+                                      , (hAuthorization, "token PUT_TOKEN_HERE")]}
+    let request = setQueryString [("q", Just "tetris+language:assembly")
+                                 ,("order", Just "desc")
+                                 ,("sort", Just "stars")] r
+    manager &lt;- newManager tlsManagerSettings
+    res &lt;- httpLbs request manager
+    return . show . responseBody $ res
+
+someFunc :: IO ()
+someFunc = do
+   query &gt;&gt;= putStrLn
+</code></pre>
+
+<p>Huzzah! Results! I&rsquo;m getting back a monster string of json data.</p>
+
+<blockquote><p>&ldquo;\&rdquo;{\\&ldquo;total_count\\&rdquo;:66, &hellip;.}\"</p></blockquote>
+
+<p><img class="center solaire" src="/images/praisethesun.gif" width="150" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
+
+<h3>Step Three - Parsing JSON</h3>
+
+<p>Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
+use Aeson and get the total_count value from the return, I needed the following
+additions:</p>
+
+<pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
+
+import GHC.Generics
+import Data.Aeson
+
+data ResultCount = ResultCount {
+  total_count :: Int }
+  deriving (Generic, Show)
+
+instance ToJSON ResultCount
+instance FromJSON ResultCount
+</code></pre>
+
+<p>ResultCount allows me to use <code>decode</code> from aeson instead of <code>show</code> to
+parse the &ldquo;total_count&rdquo; from the JSON response into an Int. Sure enough, it
+does!</p>
+
+<pre><code class="haskell">{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
+module Lib
+    ( someFunc
+    ) where
+
+import Control.Monad
+import Network
+import Network.HTTP.Conduit
+import Network.HTTP.Types.Header
+import GHC.Generics
+import Data.Aeson
+
+data ResultCount = ResultCount {
+  total_count :: Int }
+  deriving (Generic, Show)
+
+instance ToJSON ResultCount
+instance FromJSON ResultCount
+
+query :: IO (Maybe Int)
+query = do
+    initReq &lt;- parseUrl "https://api.github.com/search/repositories"
+    let r = initReq
+                   { method = "GET"
+                    , requestHeaders = [(hUserAgent, "steveshogren")
+                                      , (hAuthorization, "token PUT_TOKEN_HERE")]}
+    let request = setQueryString [("q", Just "tetris+language:assembly")
+                                 ,("order", Just "desc")
+                                 ,("sort", Just "stars")] r
+    manager &lt;- newManager tlsManagerSettings
+    res &lt;- httpLbs request manager
+    return . liftM total_count . decode . responseBody $ res
+
+someFunc :: IO ()
+someFunc = query &gt;&gt;= print
+</code></pre>
+
+<p>Puts out: <code>Just 66</code>. Success! Wait. 66 isn&rsquo;t the same count I got when
+running from the browser. Check again. Sure enough, browser comes up with a
+totally different count.</p>
+
+<p><img class="center solaire" src="/images/come_at_me_bro.gif" width="400" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
+
+<p>Maybe the query request isn&rsquo;t correct? Adding a <code>print request</code> on line 31
+after building the request shows:</p>
+
+<pre><code>Request {
+  host                 = "api.github.com"
+  port                 = 443
+  secure               = True
+  requestHeaders       = [("User-Agent","steveshogren"),("Authorization","token PUT_TOKEN_HERE")]
+  path                 = "/search/repositories"
+  queryString          = "?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars"
+  method               = "GET"
+  proxy                = Nothing
+  rawBody              = False
+  redirectCount        = 10
+  responseTimeout      = Just (-3425)
+  requestVersion       = HTTP/1.1
+}
+</code></pre>
+
+<p>The queryString isn&rsquo;t right!
+<code>?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars</code> It encoded my <code>+</code>
+and <code>:</code>! After an hour of reading through docs and researching URL encoding
+specs, it dawns on me. <code>+</code> is an encoded whitespace.</p>
+
+<blockquote><p>No face-palm gif could ever represent the shear magnitude of my current
+emotions&hellip; You&rsquo;ll have to use your imagination</p></blockquote>
+
+<p>I change my query to <code>("q", Just "tetris language:assembly")</code> and the right
+count comes back! <code>Just 354</code></p>
+
+<p>I finally have something that correctly fetches a count of repositories from
+GitHub and parses it into an Int. After over four hours of <del>Dark
+Souls</del>Haskell punishment, we deserve to enjoy a bonfire!</p>
+
+<p><img class="center solaire" src="/images/solaire_sitting.gif" width="400" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
+
+<blockquote><p>Pixel gifs sourced from
+<a href="http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls">zedotagger</a> on
+deviantart, thanks zedotagger!</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[F# Unit Testing with SimpleMock]]></title>
@@ -812,208 +1074,6 @@ your domain to its essence.</p>
 
 <p>For reasons like this, when I have to build something with a rich
 domain, I reach for F#.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Programming Language Safety Score]]></title>
-    <link href="http://deliberate-software.com/programming-language-safety-algorithm/"/>
-    <updated>2015-02-17T14:13:00-05:00</updated>
-    <id>http://deliberate-software.com/programming-language-safety-algorithm</id>
-    <content type="html"><![CDATA[<p>I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much more nuanced than a binary bit of &ldquo;has strong-static
-types&rdquo;.</p>
-
-<p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
-thoughts of unit tests, long build times, and red squiggles in an
-IDE. But, in day-to-day development, there are so many times when we
-are bitten by things that somehow just slip through the cracks.</p>
-
-<p>I put together this scoring model to get a sense of how safe a
-language is at the primitive level, and if it isn&rsquo;t safe by default,
-how much it costs to manually make it safe. Since all abstractions
-eventually result in a series of primitive operations, I decided that
-focusing only on primitives would still be a valuable (if incomplete)
-data point. While any good library will handle all primitive checks
-and present the consumer with a well-designed abstraction, in the end,
-the consumer is still left wiring libraries together, building their
-own primitive abstractions for integration. Due to the impossibility of
-measuring the quality of abstractions in all libraries for a language,
-I left that entirely out of scope of this model, unless it is designed
-as a primitive check.</p>
-
-<p>By focusing on only primitive operations: making and calling
-functions, naming data, working with sequences, and dealing with
-language primitive data types, I slimmed down the large range of
-possible error vectors to a small handful. While in some languages it
-is common to use user-defined classes to wrap around a set of
-primitives, those classes are still doing the same primitive work,
-just hidden behind a user-created abstraction. The more ways it is
-possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
-is to build such good abstractions.</p>
-
-<pre><code>This model is not about language "power".
-</code></pre>
-
-<p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
-&ldquo;abstract-ability&rdquo; of a language. In any language that supports
-abstractions (functions, classes, modules, naming data), I am
-convinced, given enough code, all Turing complete langauges can do the
-same work. This model is only about the costs to prevent unexpected
-&ldquo;confusion&rdquo; between the programmer and the machine at the primitive
-level.</p>
-
-<p>Rather than focus on what is <em>possible</em> with a language, I will
-instead focus on what is typically idiomatic to that community. For
-example, if it is possible to achieve a level of safety in a language
-but by doing something uncommon, that should not be counted.</p>
-
-<p>To score a language, simply figure out how many characters it costs to
-&ldquo;prevent&rdquo; a certain type of error, and add that to the
-total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
-default) to make up for the lack of unit tests and code exercising
-needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
-importing the module will have a negligible effect on the code size
-and complexity.</p>
-
-<p>If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 (by default) for a &ldquo;every change run
-and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
-overflow exceptions caused by recursion.</p>
-
-<pre><code>A lower score is "safer", needing less (or no) code to achieve the same level of safety.
-</code></pre>
-
-<p>Rather than tell you my thoughts (or survey for) hard-coded
-weightings, all checks are weighted the same by default. Feel free to
-apply your own weightings, to better match to your or your team&rsquo;s
-specific needs and preferences. The languages are masked by default to
-protect the innocent. You can unmask the names and see the code used
-below the table.</p>
-
-<p><div ng-app="TableApp">
-<div ng-controller="TableCtrl"></p>
-
-<p>Language Enforced Bonus:
- {{ enforcedScore }} 
-<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
-
-<p>Language Inability Penalty:
- {{ inabilityPenalty }} 
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
-
-<p>Show Weights <input type="checkbox" ng-model="showWeights" />
-<p class="lead">
-<div style="overflow-x:scroll">
-<table class="langtable">
-<tr>
-<th>Safety Check</th>
-<th></th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[0]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[1]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[2]"></select>
-</th>
-<th>
-<select ng-options="getName(lang) for lang in allLanguages" ng-model="languages[3]"></select>
-</th>
-</tr>
-<tr ng-repeat="check in langChecks" score-row name="check.name" row-key="check.key"></tr>
-<tr class="totals"><td>Totals</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ lang }} 
-</td>
-</tr>
-<tr class="totals"><td>Magnitude</td>
-<td></td>
-<td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}% 
-</td>
-</tr>
-</table>
-</div></p>
-
-<p><h3><input ng-model="showRealName" type="checkbox" /><span
-ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3></p>
-
-<p>Current Languages:
-<span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }}, 
-</select></p>
-
-<p>I want to see your language represented here! I&rsquo;ll happily take pull
-requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
-use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
-language data structure.</p>
-
-<p>I would love to see every major language represented, including major
-language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
-are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
-and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
-apparently very separate communities.</p>
-
-<p><div ng-show="showRealName"> Feel free to put in your own examples by
-playing with the samples below. Code surrounded with &lt;! !> is ignored
-from the tally, since it would vary heavily based on the language and
-desired result. Variable and type names are kept at single characters,
-which are counted. Feel free to add in your own language below, and
-use the copy feature to extract the data structure to use in a pull
-request.</p>
-
-<p><h2>Select Language:
-<select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
-</h2>
-<button ng-click="showEdit = !showEdit">Edit Language</button>
-<button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-<div ng-show="showEdit">
-<h2><input ng-model="selectedLang.name"></input></h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
-<textarea class="widetextarea" rows="5" ng-model="selectedLang[check.key].desc"></textarea>
-<div>
-Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
-<div class="tablecode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div></p>
-
-<p><div ng-show="!showEdit">
-<h2> {{ selectedLang.name }} </h2>
-<div ng-repeat="check in langChecks">
-<h3> {{ check.name }} :  {{ score(selectedLang[check.key]) }}  </h3>
-<p>
- {{ selectedLang[check.key].desc }} 
-<div>
-Code:  {{ enforcedNice(selectedLang[check.key].enforced)  }} 
-<div class="tablecode" ng-if="selectedLang[check.key].rawCode">1234567890123456789012345678901234567890</div>
-<div class="tablecode" >  {{ cleanCode(selectedLang[check.key].rawCode) }}  </div>
-<input type="text" style="width:90%;" ng-model="selectedLang[check.key].rawCode" />
-</div>
-</p>
-</div>
-</div>
-</div></p>
-
-<p>Hope this is a helpful way to think about language safety!</p>
-
-<p>Special thanks to (in alphabetical order):
-Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
-Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
-Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
-Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
-Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
 ]]></content>
   </entry>
   
