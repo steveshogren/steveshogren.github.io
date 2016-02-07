@@ -4,7 +4,7 @@
   <title><![CDATA[Category: technical skills | Deliberate Software]]></title>
   <link href="http://deliberate-software.com/blog/categories/technical-skills/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2016-02-06T13:16:28-05:00</updated>
+  <updated>2016-02-07T09:23:51-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -252,8 +252,7 @@ after building the request shows:</p>
 }
 </code></pre>
 
-<p>The queryString isn&rsquo;t right!
-<code>?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars</code> It encoded my <code>+</code>
+<p>The queryString isn&rsquo;t right! <code>?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars</code> It encoded my <code>+</code>
 and <code>:</code>! After an hour of reading through docs and researching URL encoding
 specs, it dawns on me. <code>+</code> is an encoded whitespace.</p>
 
@@ -268,6 +267,46 @@ GitHub and parses it into an Int. After over four hours of <del>Dark
 Souls</del>Haskell punishment, we deserve to enjoy a bonfire!</p>
 
 <p><img class="center solaire" src="/images/solaire_sitting.gif" width="400" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
+
+<h2>Edit: Bonus Round!</h2>
+
+<p>Thanks to
+<a href="http://bitemyapp.com/posts/2016-02-06-haskell-is-not-trivial-not-unfair.html">Chris Allen</a>
+and
+<a href="https://www.reddit.com/r/programming/comments/44hdl6/haskell_is_the_dark_souls_of_programming/czqaxfu">/u/JeanParker</a>
+for pointing me towards <a href="http://www.serpentine.com/wreq/">wreq</a>, which weirdly
+didn&rsquo;t come up when I looked around for libs yesterday. Yep, it was 6th on the
+Google when searching for <code>haskell https get</code>. <code>Network.HTTP</code> is the
+top three results, and that doesn&rsquo;t even <em>do</em> https.</p>
+
+<p>¯\<em>(ツ)</em>/¯</p>
+
+<p>Armed with their helpful suggestions, I knocked this out this morning.</p>
+
+<pre><code class="haskell">import Network.Wreq
+import Control.Lens
+import Data.Aeson
+import Data.Aeson.Lens
+import qualified Data.Text as T
+import qualified Data.ByteString.Char8 as BS
+
+opts :: String -&gt; String -&gt; Options
+opts lang token = defaults &amp; param "q" .~ [T.pack $ "tetris language:" ++ lang]
+                        &amp; param "order" .~ ["desc"]
+                        &amp; param "sort" .~ ["stars"]
+                        &amp; header "Authorization" .~ [BS.pack $ "token " ++ token]
+
+query lang = do
+    token &lt;- readFile "token"
+    r &lt;- getWith (opts lang token) "https://api.github.com/search/repositories"
+    return $ r ^? responseBody . key "total_count" . _Number
+</code></pre>
+
+<p>MUCH better. This includes reading my token from file called &ldquo;token&rdquo; so I don&rsquo;t
+accidentally commit it. Also includes building up the different query options
+based on inputs, which was the next step. Thanks y'all.</p>
+
+<p><img class="center solaire" src="/images/solaire_idle.gif" width="200" title="&lsquo;solaire&rsquo; &lsquo;solaire&rsquo;" ></p>
 
 <blockquote><p>Pixel gifs sourced from
 <a href="http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls">zedotagger</a> on
