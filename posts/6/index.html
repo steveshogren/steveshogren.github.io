@@ -9,8 +9,9 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="Pattern matching is a simple tool that will make your code safer and
-easier to read. Consider the following code that converts an Int to a string. 1 &hellip;">
+  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
+the match statement is in F#. Using match allows the compiler to
+give us &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +81,321 @@ easier to read. Consider the following code that converts an Int to a string. 1 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/inversed-polymorphism/">Inverted Polymorphism With Pattern Matching</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-28T22:05:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:05 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
+the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
+give us warnings for missing cases, no matter what the type.</p>
+
+<p>Let&rsquo;s look at how pattern matching changes our design, allowing for an
+inversion of the usual OO way of polymorphism. Here is an example that
+is probably familiar to everyone: getting a database connection.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// somewhere in the code...</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In our example here, we have two concrete implementers of the
+<code>IPaymentRepository</code>, each one with their own implementations. This is
+a typical OO way to deal with polymorphism. Usually, &ldquo;best practices&rdquo;
+would put each of these classes in their own files.</p>
+
+<p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
+and interfaces to use pattern matching.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetPaymentRepo</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="s">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="n">InMemory</span>
+</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// somewhere in the code ...</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetPaymentRepo</span>
+</span><span class='line'><span class="k">let</span> <span class="nv">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetAll</span> <span class="n">repo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice how we separated our behavior from our types? The
+<code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
+are just empty types, much like an <code>Enum</code>. We are still able to get
+polymorphic behavior from them, using <code>match</code>.</p>
+
+<p>But why would we want to store our behavior separate from the type?</p>
+
+<p>By storing the behavior separate from the type, changes that effect a
+single behavior (adding a new function, changing a function&rsquo;s api,
+removing a function) are easier, because they are all grouped
+together. A change to the api of the <code>GetAll</code> function is harder in
+the traditional OO interface structure, requiring modifying several
+files.</p>
+
+<p>Similarly, a change requiring adding a new type is difficult in a
+pattern matching structure, as it will require finding every pattern
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!</p>
+
+<p>As to safety, adding a new type is easy with interfaces, but the
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Neither compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Adding a Type  </th>
+<th> Modifying Behavior </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OO Interfaces/Classes</strong>  </td>
+<td>  Easier / Less Safe  </td>
+<td> Harder / Safe</td>
+</tr>
+<tr>
+<td><strong>Pattern Matching Types</strong>  </td>
+<td>  Harder / Safe  </td>
+<td> Easier / Safe</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br />
+I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.</p>
+
+<p>Consider the change where we want to add a new function to the
+<code>IPaymentRepository</code> interface and change the location of the in
+memory dictionary to be stored internally. In the interfaces and
+classes example, that requires editing <em>three separate files</em>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
+</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// InMemory.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// Postgres.cs</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the change to add a new function in the pattern matching example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span> <span class="k">of</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">int</span><span class="o">,</span> <span class="n">IPayment</span><span class="o">&gt;</span>
+</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="n">IPayment</span><span class="o">)</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="n">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+<code>Dictionary&lt;int, IPayment&gt;</code> next to the <code>InMemory</code> type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is <code>payments</code> inside the <code>Add</code> and
+<code>GetAll</code> functions after we pattern match <code>InMemory</code>. In fact, if we
+didn&rsquo;t add it in the pattern match, the compiler would give us a
+warning!</p>
+
+<p>Between the options of traditional interfaces verses pattern matching,
+neither way is truly the best for every circumstance: each comes with
+a trade-off. I liken the trade-offs to the &ldquo;grain of the
+data&rdquo;. Whichever way your system is likely to change the most, that is
+the way you want to optimize your type. The good news is: in F# you
+can have a mix of both, and it is relatively easy to convert back and
+forth depending on how your system is changing the most.</p>
+
+<p>Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.</p>
+
+<p>If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.</p>
+
+<p>If you want additional reading on the topic of polymorphism, check out
+<a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
+
+<p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -668,174 +984,6 @@ down bugs and more time adding on features!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/501-developer/">The 5:01 Developer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-14T00:00:00-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>
-  Can we agree for this post that money, energy, time, and effort are
-  all forms of power? Like literally, if I wanted to build a building,
-  I am going to need tools, skills, materials, labor. I can use the
-  most liquid form of power I have (cash) to acquire all these things,
-  or I can use a much less liquid form of power (my time) to harvest,
-  extract, refine, learn, and build my building myself. Usually,
-  economies of scale mean it is dramatically more efficient for me to
-  specialize in one way of converting time into liquid power. Then,
-  when I need something, I simply pass that money on to someone else
-  who is also a specialist.
-</p>
-<p>
-  Now you know why I don't quarry my own stone to build an
-  amphitheater in my back yard.
-</p>
-<p>
-  When you work a job, you are converting one form of power you have:
-  time (and usually skills), into another much more liquid form of
-  power: money. One can extend the model to include calories and
-  shelter (the power to sleep safely) along with time and skills.
-  Great, this is just basic economics, right? You need power (money)
-  to buy power (food and shelter) to buy power (time) to convert back
-  into more power (money). Since you are "harvesting" something finite
-  and therefore scarce (time out of your short life), if you are
-  disciplined and lucky, you can consistently end up with a net
-  positive.
-</p>
-<p>
-  On to the point! I read a post today mentioning
-  the <a href="http://www.hanselman.com/blog/DarkMatterDevelopersTheUnseen99.aspx">"5:01 developer"</a>. It made me mad.
-</p>
-<p>
-  Ideas like this are so subtle they just seep into your psyche. I
-  don't think anyone would say under normal conditions, "I should
-  really work for free today". But, effectively, that is what this
-  whole phrase is about. The phrase lets people who cram eight hours
-  of work into ten hours "get back" at those that get the same work
-  done in six to eight. To clarify, this title is not about "saving
-  the company" or "giving back to society"; those are unusual
-  conditions. No, it is a chastisement of developers who do not "give
-  back to the company". Sort of a tax, for the privilege of getting
-  paid to work there, you should, according to this ideal, just give
-  back some of that power they gave you. Thinking about this with the
-  power model, you should accept money to work there in exchange for
-  your time, but, when the time comes, you should deliberately
-  short-change yourself by giving them extra time. Like some sort of
-  weird tip.
-</p>
-<p>
-  Hopefully this sounds as ridiculous as it really is.
-</p>
-<p>
-  Now, in that post, the author sort of backpedals a little bit,
-  saying that <i>what he really meant</i> was a developer who stops
-  thinking about development as soon as work is over: someone not
-  passionate. The issue I have is the whole wording of that phrase
-  assumes a passion for their <i>job</i>, not a passion for
-  their <i>craft</i>.
-</p>
-<p>
-  I do not think it makes sense to demand every person
-  be <i>passionate</i> about the job they are doing. There have been
-  many times I have (even at a job I normally loved) done long,
-  boring, and fruitless work. I did not do that work out of my passion
-  for the "Mission: Save the World of Enterprise Banking", but because
-  I am a professional: I do what needs to be done to the best of my
-  abilities.
-</p>
-<p>
-  I think professionalism is very important. In others I work with, I
-  want to see the attitude that causes someone to stay abreast in
-  their field. I want to be around those who keep their own saws
-  sharp, who come in and work hard, and who push themselves and those
-  around them to be best they can.
-</p>
-<p>
-  Back to overtime: in my experience, very few offices care enough
-  about their developers to let them sharpen their saws at work, so
-  why would you waste your precious free time there? Will they pay you
-  more for it? Doubtful. Will they be less likely to fire you when
-  times get tough? <i>Maybe</i>. Sounds to me like a lot of
-  speculation. A lot of investment for a marginal or non-existent
-  return. If you want more money: either ask for a raise, go take a
-  raise at a new job, or work a second job on the side. Those have a
-  direct impact on your income. Putting in extra hours hoping someone
-  will notice and reward you for it makes about as much sense as
-  assuming you will get a raise for wearing the boss's favorite color
-  every day.
-</p>
-<p>
-  Consider the person who stays one extra hour a day as an
-  "investment". The typical end of the year raise scale I have seen in
-  the US in companies larger than 30 people is a 0-5% increase a
-  year. Uncommonly does someone get more than that, and should not be
-  considered a usual practice. The typical best you can expect is
-  5%, maybe a bonus (in four diverse jobs, none gave bonuses, so I
-  haven't considered them personally). Back to the extra hour a day. Not
-  completely out there, not putting in a vast amount extra, right?
-  Well, one extra hour is 12.5% percent more hours a day. But the most
-  you can expect, on average, is 5%, if you are lucky! To put it in
-  perspective, I have seen guys put in 12 hour days and get fired
-  because the boss didn't get along with them.
-</p>
-<p>
-  At a <i>few</i> points in my career, I worked longer hours. Once it
-  was because I truly enjoyed the work and it was fun. Another time it
-  was because I felt like the extra time was going to directly pay off
-  as an investment (it didn't). A few times I have stuck around to
-  "wrap this off" or "help out with something deeply unusual that has
-  to be done outside normal work hours". I recently recommended to my
-  little brother he work longer hours, as he was hired without many
-  needed skills and on shaky footing with the boss. He worked out a
-  deal where he spent two extra hours a day for a couple months
-  reading and practicing to get "caught up". His boss got to see his
-  hustle when he was the first one in and last one out every day; he
-  got to study away from the distractions of everyday life. <b>In all
-  circumstances, make overtime the exception, never the rule.</b>
-</p>
-<p>
-  One last point. Before you think me a selfish jerk about my free
-  time, know that I make it a daily habit to spend 30-60 minutes
-  outside work advancing my development skills. I practice interactive
-  rebases, work through awesome books, do online courses, advance side
-  projects, contribute to open source, give local meetup talks, and
-  learn new languages. These are the basics of what I feel is
-  necessary to sustain and advance myself as a professional. If I
-  simply worked a 45-50 hour work week instead, I personally would not
-  have the motivation to <i>afterwards</i> stay so abreast of
-  important changes in the development world. I would become much less
-  effective over time, never getting any better. When the need for new
-  paradigms or technologies arose, I would be so stuck in a rut that
-  fear and ignorance would drive all my decisions.
-</p>
-<p>
-  Treat overtime like an investment, and make it wisely. You are
-  literally mining your life for time, so make sure you are
-  comfortable with your investment strategies.
-</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/7">&larr; Older</a>
@@ -888,6 +1036,10 @@ down bugs and more time adding on features!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
       </li>
     
@@ -903,10 +1055,6 @@ down bugs and more time adding on features!</p>
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
-      <li class="post">
-        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -915,12 +1063,12 @@ down bugs and more time adding on features!</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
     </li>
     
     
@@ -961,6 +1109,11 @@ down bugs and more time adding on features!</p>
     
     <li class="post">
       <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
     </li>
     
   </ul>

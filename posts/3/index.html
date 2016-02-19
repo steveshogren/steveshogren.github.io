@@ -9,9 +9,8 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="I want to make a model that predicts bugs. I previously wrote a table for scoring language safety:
-Programming Language Safety Score,
-but it was &hellip;">
+  <meta name="description" content="SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +80,552 @@ but it was &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-08-13T06:53:00-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>6:53 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency injection.</p>
+
+<p>SimpleMock works in any language with closures that can be passed around by
+reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
+Python. I&rsquo;m sure you can think of others.</p>
+
+<h2>Example:</h2>
+
+<p>Here is a brief (if a bit silly) example of the final pattern:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">LineCounter</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;&gt;</span> <span class="n">_readLines</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadLines</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">CountLines</span><span class="p">(</span><span class="kt">string</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">_readLines</span><span class="p">(</span><span class="n">filename</span><span class="p">).</span><span class="n">Count</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">/// Test Code</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestLineCounter</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">LineCounter</span><span class="p">();</span>
+</span><span class='line'>    <span class="c1">// &quot;SimpleMock&quot; of File.ReadLines</span>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">_readLines</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span> <span class="n">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;{</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="s">&quot;that&quot;</span><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">CountLines</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Benefits</h2>
+
+<ul>
+<li>Reduced boilerplate</li>
+<li>Saves interfaces for real polymorphism</li>
+<li>Simplifies test code</li>
+<li>Reduces testing concerns in production code</li>
+<li>Removes need for fragile IoC containers</li>
+<li>Encourages better abstraction design</li>
+<li>Can convert one class at a time!</li>
+</ul>
+
+
+<p>The SimpleMock pattern promotes a better design of your abstractions and simpler
+tests. The pattern also reduces boilerplate and the pollution of your production
+code with testing concerns.</p>
+
+<p>If you aren&rsquo;t familiar with the normal pattern of unit test mocking using
+interfaces, dependency injection, and mock libraries, scroll down to &ldquo;The
+Non-SimpleMock Way&rdquo; at the end of the post.</p>
+
+<h2>SimpleMock Pattern</h2>
+
+<p>The SimpleMock pattern is aptly named.</p>
+
+<ol>
+<li>Replace Test-Only Interfaces With Functions</li>
+<li>Define Dependencies Inline</li>
+<li>Write Better Abstractions</li>
+</ol>
+
+
+<h2>Step One: Replace Test-Only Interfaces With Functions</h2>
+
+<p>My examples are in C# because that is what I got paid to write today - it is
+freshest in memory. C# has an incredible ability to create and pass around
+lambdas and function references. Here is an example of using functions instead
+of interfaces.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">CurrentTime</span> <span class="p">:</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Translator</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">_getCurrentTime</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">Translator</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">CurrentTime</span><span class="p">().</span><span class="n">GetCurrentTime</span><span class="p">)</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">Translator</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">getCurrentTime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">_getCurrentTime</span> <span class="p">=</span> <span class="n">getCurrentTime</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Translate</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">_getCurrentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">/// Test Code</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestCurrentTimeTranslator</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">now</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Translator</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">now</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">Translate</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;: test&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The test code is quite simple! No longer do we need the dependency on third
+party mocking libraries, or the relatively complicated setup logic. Instead we
+can simply inject the lambda at runtime, replacing that pointer. We didn&rsquo;t need
+the whole interface, really we just needed the simple signature of the function.</p>
+
+<h2>Step 2: Define Dependencies Inline</h2>
+
+<p>We can take it even a step further. Why use constructor injection at all? Since
+all we really want is a single mutable dispatch table row, why not just make it
+that way?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Translator</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">_getCurrentTime</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CurrentTime</span><span class="p">().</span><span class="n">GetCurrentTime</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Translate</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">_getCurrentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">/// Test Code</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestCurrentTimeTranslator</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">now</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Translator</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">_getCurrentTime</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">now</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">Translate</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;: test&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
+&ldquo;Go to definition&rdquo; now takes me to the actual line with the actual called
+function. We&rsquo;ve replaced a dependency on a class based interface with a function
+signature. The function signature <em>is</em> the interface!</p>
+
+<p>You probably noticed we have lost something with this final version. We have
+lost the ability to inject polymorphic behavior through the constructor. If you
+need it, simply go back to injecting the interface in the constructor or by
+passing it into the function itself. In practice, I have found this is needed
+very rarely, making the SimpleMock pattern a better tool to reach for first.</p>
+
+<h2>Step 3: Write Better Abstractions</h2>
+
+<p>Lastly, SimpleMock actually promotes better designs. For example, a coworker was
+writing some tests today and ran into a complicated situation. Take the
+following sanitized code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">WorkDoer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">ignoreElements</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ThingIgnorer</span><span class="p">().</span><span class="n">IgnoreElements</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">removeIgnoredElements</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ThingRemover</span><span class="p">().</span><span class="n">RemoveElements</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">IgnoreAndRemoveThings</span><span class="p">(</span><span class="n">Thing</span> <span class="n">t1</span><span class="p">,</span> <span class="n">Thing</span> <span class="n">t2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">ignoreElements</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">ignoreElements</span><span class="p">(</span><span class="n">t2</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">removeIgnoredElements</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">removeIgnoredElements</span><span class="p">(</span><span class="n">t2</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How would you check that each section was called? Our naive solution was a
+complicated lambda with a &ldquo;timesCalled&rdquo; counter and an if statement to assert
+against each argument, but it turns nasty quickly:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">/// Nasty test code</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestWorkDoer</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">WorkDoer</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">ignoredCalledTimes</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">ignoreElements</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">ignoredCalledTimes</span><span class="p">++;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">ignoredCalledTimes</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">removedCalledTimes</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">removeIgnoredElements</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">removedCalledTimes</span><span class="p">++;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">removedCalledTimes</span> <span class="p">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">t1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thing</span><span class="p">();</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">t2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thing</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">IgnoreAndRemoveThings</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">removedCalledTimes</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">ignoredCalledTimes</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
+Conditionals?! In a test?! Unconscionable.</p>
+
+<p>In situations like this, we have two easy options. Option one is to just use
+a third party mocking library, replacing the functions from inside the test
+code. This gives us access to all the sophisticated mocking tools available.</p>
+
+<p>My preferred option is seeking to decomplect the production code by using better
+abstractions.</p>
+
+<p>I have found that strong reliance of mocking libraries enables worse designs.
+Consider the code, what makes it so hard to test? Not knowing which element is
+called when, doing the same work on two parameters, and reference mutation all
+make this a poor abstraction. Why not simplify?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">WorkDoer</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">,</span> <span class="n">Thing</span><span class="p">&gt;</span> <span class="n">ignoreElements</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ThingIgnorer</span><span class="p">().</span><span class="n">IgnoreElements</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">,</span> <span class="n">Thing</span><span class="p">&gt;</span> <span class="n">removeIgnoredElements</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ThingRemover</span><span class="p">().</span><span class="n">RemoveElements</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">IgnoreAndRemoveThings</span><span class="p">(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;</span> <span class="n">ts</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">ts</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">t</span> <span class="p">=&gt;</span> <span class="n">removeIgnoredElements</span><span class="p">(</span><span class="n">ignoreElements</span><span class="p">(</span><span class="n">t</span><span class="p">)));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">/// Simpler test</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestWorkDoer</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">WorkDoer</span><span class="p">();</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">expected</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Thing</span><span class="p">();</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">ts</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Thing</span><span class="p">&gt;{</span><span class="k">new</span> <span class="n">Thing</span><span class="p">()};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">ignoreElements</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">Thing</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">sut</span><span class="p">.</span><span class="n">removeIgnoredElements</span> <span class="p">=</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sut</span><span class="p">.</span><span class="n">ignoreElements</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">expected</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">IgnoreAndRemoveThings</span><span class="p">(</span><span class="n">ts</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">First</span><span class="p">())</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Much better! Yes, we had to change a few signatures. We get the same work done,
+but now the code is actually a lot more useful. Our test code is comparable with
+anything you&rsquo;d find using a mocking library. I am absolutely okay with using a
+mocking library when needed, but I always carefully consider my abstractions and
+design first.</p>
+
+<p>If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
+for the job, and that is fine. But for most work around the yard, you can leave
+the chainsaw in the shed.</p>
+
+<h2>Conclusion</h2>
+
+<p>I’ve shown how you can really simplify your code with SimpleMock. The dispatch
+row is clear and easy to read. We have removed some third party mocking
+dependencies. You can remove a lot of the boilerplate &ldquo;for making it more
+testable&rdquo; from your code. The test code is greatly simplified, and injection a
+breeze. The result: much simpler code, just as easy to test.</p>
+
+<p>Thanks to Shuwei Chen for helping me put this together!</p>
+
+<h2>The Non-SimpleMock Way</h2>
+
+<p>If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.</p>
+
+<p>The traditional way of performing C# unit test mocking involves dependency
+injection and interface mocking using a mocking library. For dependency
+injection, it is common to use a tool like Ninject or hand-rolled constructor
+injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
+an example of a class and its testing code without any business logic.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">CurrentTime</span> <span class="p">:</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Translator</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ICurrentTime</span> <span class="n">ct</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">Translator</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">CurrentTime</span><span class="p">())</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="nf">Translator</span><span class="p">(</span><span class="n">ICurrentTime</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="n">ct</span> <span class="p">=</span> <span class="n">currentTime</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Translate</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">ct</span><span class="p">.</span><span class="n">GetCurrentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">/// Test Code with Moq</span>
+</span><span class='line'><span class="na">[TestCase]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">TestCurrentTimeTranslator</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">rightNow</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">mock</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Mock</span><span class="p">&lt;</span><span class="n">ICurrentTime</span><span class="p">&gt;();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">mock</span><span class="p">.</span><span class="n">Setup</span><span class="p">(</span><span class="n">a</span><span class="p">=&gt;</span><span class="n">a</span><span class="p">.</span><span class="n">GetCurrentTime</span><span class="p">()).</span><span class="n">Returns</span><span class="p">(</span><span class="n">rightNow</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">sut</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Translator</span><span class="p">(</span><span class="n">mock</span><span class="p">.</span><span class="n">Object</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">Translate</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Assert</span><span class="p">.</span><span class="n">AreEqual</span><span class="p">(</span><span class="n">rightNow</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s">&quot;: test&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&rsquo;ve done much C# unit testing, this should look familiar. We want to
+inject some code that is potentially long-running or dynamic. We put that code
+into a class, add an interface, then inject that interface into the class we
+want to test. To test it, we mock the interface, creating a different concrete
+class at test runtime which implements that interface. We can setup that mock to
+respond with anything, which we use for assertions.</p>
+
+<h2>What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
+
+<p>The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don&rsquo;t really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic.</p>
+
+<p>What we have done is create a very small and primitive dispatch table. The
+table has one row: something that has a function with the signature of <code>() -&gt; DateTime</code> or, as it is known in C#: <code>Func&lt;DateTime&gt;</code>.  We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That&rsquo;s a lot of boilerplate!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -520,75 +1065,6 @@ Idris, J, R, Forth, etc.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/superiority-fatigue/">Superiority Fatigue</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-05-14T19:13:00-04:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:13 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Learning new tools, technologies, and methodologies is
-hard. Counter-intuitively, the most exhausting part is <em>after</em> you&rsquo;ve gained a
-good comprehension of the tool, and now, filled with excitement, you try to
-explain it to someone else.</p>
-
-<p>They almost always react with hostility.</p>
-
-<p>What is going on? You just took time to learn this exciting tool that could save
-everyone a lot of time, and not only do they not care, but they resent you for
-it!  Don&rsquo;t they see how this could be great for everyone?</p>
-
-<p>The issue, like humans, is complex and dynamic. Maybe they feel like you&rsquo;ve now
-made them look lazy in comparison. Maybe they have tried other tools in the past
-only to discover they weren&rsquo;t as a good as promised. Maybe they are afraid they
-won&rsquo;t be able to learn the new tool as quickly as they need to, and will be left
-behind. Maybe they are afraid all the time they spent learning the existing
-tools will have been wasted. Maybe they are comfortable where they are, and
-don&rsquo;t care about increased productivity. Maybe they are tired of learning new
-things.</p>
-
-<p>Most times I have seen this, I think the root emotion is fear. Fear of failure,
-of change, of being embarrassed, of looking inferior. Fear is a powerful
-emotion.</p>
-
-<p>When you respond with further hostility, this only will compound their
-fear. Should they put their comfort and ego before the needs of the business?
-No, but your counterattack will only further prove to them that their fear was
-deserved.</p>
-
-<p>The final hardest part of learning a new tool is when you are forced to use an
-inferior tool. Suddenly that liberating fresh air of power is replaced with a
-suffocating claustrophobia of weakness. Even if the tool isn&rsquo;t really that
-inferior, it now <em>feels</em> terrible. It becomes worse when you and many others
-around you agree with the better value proposition of a new tool, and yet you
-are still required to use the inferior tool due to someone in power blocking you
-for political reasons.</p>
-
-<p>For the developer who sets out to learn new things, you must learn to deal with
-inferior tools. Once you start learning, you will always find yourself in a
-situation where you are required to use an inferior tool. For me, this has been
-one of the hardest things to face in my career.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/4">&larr; Older</a>
@@ -641,6 +1117,10 @@ one of the hardest things to face in my career.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
       </li>
     
@@ -656,10 +1136,6 @@ one of the hardest things to face in my career.</p>
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
-      <li class="post">
-        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -668,12 +1144,12 @@ one of the hardest things to face in my career.</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
     </li>
     
     
@@ -714,6 +1190,11 @@ one of the hardest things to face in my career.</p>
     
     <li class="post">
       <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
     </li>
     
   </ul>

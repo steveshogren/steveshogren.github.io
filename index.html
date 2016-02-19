@@ -9,8 +9,7 @@
   <meta name="author" content="Steve Shogren">
 
   
-  <meta name="description" content="HUMOROUS POST AHEAD. Please don&rsquo;t hit me, Haskell does a great job of that
-already. I decided to start the next version of my safety score &hellip;">
+  <meta name="description" content="&ldquo;ActiveRecord is so hot right now!&rdquo; - comment in 2006 Pop Culture Architecture is the current &ldquo;fad&rdquo; of the day. I have seen &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +79,79 @@ already. I decided to start the next version of my safety score &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/pop-culture-architecture/">Pop Culture Architecture</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-02-19T06:55:30-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:55 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>&ldquo;ActiveRecord is so hot right now!&rdquo; - comment in 2006</p></blockquote>
+
+<p>Pop Culture Architecture is the current &ldquo;fad&rdquo; of the day. I have seen it be
+microservices, business capabilities, CQRS, test driven development,
+service-oriented architecture, ORMs, and ActiveRecord. Each of these have been
+fashionable at some point.</p>
+
+<p>Fashion is ultimately a signaling mechanism for status. We are attracted to
+fashionable architectures because they signal we have worked on elite teams. The
+more difficult or costly the trade-offs of the architecture, the more elite and
+special our team must have been to implement it successfully.</p>
+
+<h2>Example: Microservices</h2>
+
+<p>Microservices is a current fashionable design. Microservices have very clear
+pros and cons. They come with the ability to have a huge team or a fragmented
+deployment that potentially allows for horizontal scaling. For that ability, you
+will pay the immense costs: loss of strong consistency and transactions, a
+labyrinthine operational footprint and deployment, increased communication
+effort, expensive integration testing, and a code base that takes longer to
+program. <a href="http://martinfowler.com/articles/microservice-trade-offs.html">(1)</a>.</p>
+
+<p>If you have a small team or system that does not need horizontal scaling on
+every single component, a microservice architecture is unlikely to solve your
+communication or trust issues. You will spend dollars on deployment, consistency
+issues, distributed debugging, and basic programming just to save a penny on
+communication and teamwork.
+<a href="http://www.stackbuilders.com/news/the-hidden-costs-of-microservices">(2)</a></p>
+
+<p>For most teams, the logical conclusion probably will be: a microservice
+architecture solves problems we don&rsquo;t have.</p>
+
+<p>Microservices remain fashionable because they indicate work at the size and
+scale of a handful of elite companies. You would only likely encounter a couple
+hundred companies in the world that have a development staff so large or loads
+so high as to truly require such a system. Because of the rarity of actual need,
+it is a perfect signaling mechanism for status.</p>
+
+<p>Saying that you implemented a microservice architecture implies &ldquo;my team was so
+large or my product so popular, my team could afford to pay almost any cost to
+meet the demand.&rdquo;</p>
+
+<p>Carefully consider your architecture decisions. Do not allow fashion to dictate
+your choices. Take pride in selecting the appropriate architecture for the
+project, no matter how unpopular.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -870,140 +942,6 @@ at what you find!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-14T07:50:38-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:50 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right emailImage" src="/images/meditation.jpg" width="200" title="meditation" alt="meditation"></p>
-
-<p>A couple years ago, a coworker told me a success story about mindful meditation.
-He explained how his wife took a class that required an hour of daily meditation
-for a whole month. He reported that she found it uncomfortable, but the effects
-were astounding. She claimed to feel more relaxed, more focused, and more
-&ldquo;herself&rdquo;. She found new reserves of motivation. She dropped the book she&rsquo;d been
-trying to write for years, and started a business. After that business failed,
-she started another, this time successfully.</p>
-
-<p>Immediately convinced, I started by listening to guided
-<a href="https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation">mindfulness meditations</a>
-on YouTube and <a href="https://www.headspace.com/science">phone apps</a>. After a couple
-weeks of that, I started doing breathing exercises on my own while sitting
-listening to rain sounds. I made a habit of doing it for about an hour every day
-on my lunch break. A few months later, I hated it.</p>
-
-<p>For whatever reason, after each session I would feel very uncomfortable. I would
-be confronted with emotions that made me feel worthless and embarrassed. My mind
-was bringing forward all these painful memories and feelings. Over time, I
-started to dread the lunch break.</p>
-
-<h2>The Revelation</h2>
-
-<p>Then, one day, I had a profound sense of understanding. I realized what was
-causing these negative emotions. I was in the middle of a major push to guide
-our team to adopt a new programming language. While I&rsquo;d led many such
-initiatives before, I saw that I&rsquo;d always had the same struggles. My ego and
-self-worth were so tied into &ldquo;my&rdquo; campaigns that I wasn&rsquo;t able to clearly hear
-criticism. When people pointed out legitimate concerns or weaknesses, I would
-get embarrassed and take it as a personal failure.</p>
-
-<p>I could see, from the very beginning, my current &ldquo;campaign&rdquo; had been poorly
-executed. After researching the new technology for a long time, I felt like I
-saw a place where it could solve some of our needs. Instead of carefully writing
-out a proposal, I &ldquo;half-jokingly&rdquo; brought it up whenever I could. When the
-listeners didn&rsquo;t immediately react positively, I quickly retracted the idea,
-&ldquo;just kidding&rdquo;. Over weeks I dropped not-so-subtle hints, &ldquo;this would be better
-with&hellip;&rdquo;, or, &ldquo;we wouldn&rsquo;t have this problem if&hellip;&rdquo;. Instead of convincing
-anyone of anything, I just broadcasted to everyone how insecure I felt about the
-issue. Everyone could clearly see that I cared, but I was too afraid to put
-myself out there and make a serious suggestion. For months nothing changed, and
-I felt more and more bitter that &ldquo;my idea&rdquo; wasn&rsquo;t being listened to. In reality,
-I hadn&rsquo;t even made a serious suggestion yet!</p>
-
-<p>Eventually, the people around me started to listen and research the new
-language. They agreed it really did solve a need we had. After a while, enough
-people got on board that we started using it more. Even then, I held tightly to
-&ldquo;my idea&rdquo;, afraid that it would prove to be a failure. When someone ran into
-issues, I would get defensive. Even though I tried to keep my emotions in check,
-I clearly took any criticism of the language as if it was a personal failing, no
-matter how legitimate. I&rsquo;d tightly coupled my ego to my ideas, and I always had.</p>
-
-<p>After a few months of meditating, this idea rocked my world. My negative
-emotions came from a realization that my actions were not in line with my
-values. I don&rsquo;t want my self-worth to be tied to a simple tool. No tool is worth
-it. Every tool fails. I&rsquo;d sold myself short, lowered my self-worth to that of a
-tool. This completely blocked my ability to be an effective technical leader.</p>
-
-<p>I couldn&rsquo;t hear criticism of my ideas without getting defensive, so I couldn&rsquo;t
-think critically. I couldn&rsquo;t help work out solutions to the best of my ability,
-because that would mean admitting personal failure. Every side comment or
-momentary struggle felt like a catastrophe.</p>
-
-<p>After realizing this, I felt a wave of relief. My emotional struggle leading
-this programming language change made sense! And I had an easy way out! I simply
-had to distance myself from my ideas, separate my self-worth from my tools. The
-more I meditated, the easier it got.</p>
-
-<h2>Present Day</h2>
-
-<p>While I still sometimes get the old pang of embarrassment or defensiveness, now
-I understand where it comes from, and how to move forward. I can let my ideas
-go. I can consider ideas critically. I can make changes and adjustments if the
-ideas are not working.</p>
-
-<p>This summer I decided to write up my learning. I wanted to always be able to
-look back and remember these important lessons. My write-up was the seed for the
-book <a href="https://leanpub.com/convincingcoworkers">Convincing Coworkers</a>. I explain
-the lessons learned from implementing a half dozen major technical changes, and
-how I learned to lead without letting my ego cloud my thinking.</p>
-
-<p>If you want to become a more effective leader, I highly recommend a practice of
-daily meditation. Meditation gives your mind a chance to deeply consider your
-actions and values. It allows your subconscious to reflect on what and why you
-act.</p>
-
-<p>Not everyone will struggle from the same issues as me. Every leader has a
-different set of challenges and situations. Meditation lets your mind analyze
-your unique weaknesses and strengths, coming up with a tailored perspective.
-Meditating allows your mind to creatively look for ways to improve itself. While
-rarely comfortable, this process can have incredible benefits.</p>
-
-<h2>Appendix: &ldquo;I&rsquo;m uncomfortable with the connotations of meditation&rdquo;</h2>
-
-<p>You may feel uncomfortable with meditation because of its current strong
-associations with religion. Meditation is not inherently religious. I consider
-meditation like an exercise routine for the mind. If you are religious, and
-exercise your body as a form of religious expression, exercise is a religious
-practice. If you are not religious, and you exercise to improve your health and
-well-being, exercise is a secular practice. Meditation is just a form of mental
-exercise. Simple as that.</p>
-
-<p>Meditation is a tool, and the tool wielder determines its use. Don&rsquo;t let a fear
-of the connotations of meditation stop you from experiencing improved
-leadership, creativity, and focus!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1054,6 +992,10 @@ leadership, creativity, and focus!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
+      </li>
+    
+      <li class="post">
         <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
       </li>
     
@@ -1069,10 +1011,6 @@ leadership, creativity, and focus!</p>
         <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
       </li>
     
-      <li class="post">
-        <a href="/teaching-clojure/">Conj 2015 - Teaching Clojure</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -1081,12 +1019,12 @@ leadership, creativity, and focus!</p>
     
     
     <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">22</span></a>
+      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
     </li>
     
     
     <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">25</span></a>
+      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
     </li>
     
     
@@ -1127,6 +1065,11 @@ leadership, creativity, and focus!</p>
     
     <li class="post">
       <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
+    </li>
+    
+    
+    <li class="post">
+      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
     </li>
     
   </ul>
