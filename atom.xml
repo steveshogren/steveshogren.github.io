@@ -4,7 +4,7 @@
   <title><![CDATA[Deliberate Software]]></title>
   <link href="http://deliberate-software.com/atom.xml" rel="self"/>
   <link href="http://deliberate-software.com/"/>
-  <updated>2016-02-19T07:08:38-05:00</updated>
+  <updated>2016-02-19T17:09:09-05:00</updated>
   <id>http://deliberate-software.com/</id>
   <author>
     <name><![CDATA[Steve Shogren]]></name>
@@ -21,9 +21,9 @@
     <content type="html"><![CDATA[<blockquote><p>&ldquo;ActiveRecord is so hot right now!&rdquo; - comment in 2006</p></blockquote>
 
 <p>Pop Culture Architecture is the current &ldquo;fad&rdquo; of the day. I have seen it be
-microservices, business capabilities, CQRS, test driven development,
-service-oriented architecture, ORMs, and ActiveRecord. Each of these have been
-fashionable at some point.</p>
+microservices, business capabilities, CQRS, service-oriented architecture,
+Domain-Driven Design, and MVC. Each of these have been fashionable at some
+point.</p>
 
 <p>Fashion is ultimately a signaling mechanism for status. We are attracted to
 fashionable architectures because they signal we have worked on elite teams. The
