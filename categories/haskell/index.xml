@@ -30,7 +30,7 @@ unending punishment.&lt;/p&gt;
 &lt;p&gt;I download stack and start a project:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats
-Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ ...
+Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ ... 
  ......
 All done.
 &lt;/code&gt;&lt;/pre&gt;
@@ -252,16 +252,16 @@ after building the request shows:&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The queryString isn&amp;rsquo;t right! &lt;code&gt;?q=tetris%2Blanguage%3Aassembly&amp;amp;order=desc&amp;amp;sort=stars&lt;/code&gt; It encoded my &lt;code&gt;+&lt;/code&gt;
-and &lt;code&gt;:&lt;/code&gt;! After an hour of reading through docs and researching URL encoding
-specs, it dawns on me. &lt;code&gt;+&lt;/code&gt; is an encoded whitespace.&lt;/p&gt;
+&lt;p&gt;The queryString isn&amp;rsquo;t right! It encoded my &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;:&lt;/code&gt;! After an hour of
+reading through docs and researching URL encoding specs, it dawns on me. &lt;code&gt;+&lt;/code&gt;
+is an encoded whitespace.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;No face-palm gif could ever represent the shear magnitude of my current
 emotions&amp;hellip; You&amp;rsquo;ll have to use your imagination&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I change my query to &lt;code&gt;(&amp;quot;q&amp;quot;, Just &amp;quot;tetris language:assembly&amp;quot;)&lt;/code&gt; and the right
+&lt;p&gt;I change my query to &lt;code&gt;&amp;quot;tetris language:assembly&amp;quot;&lt;/code&gt; and the right
 count comes back! &lt;code&gt;Just 354&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;I finally have something that correctly fetches a count of repositories from

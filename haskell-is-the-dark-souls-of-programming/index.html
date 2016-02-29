@@ -50,7 +50,7 @@
     },
     "datePublished": "2016-02-06",
     "description": "",
-    "wordCount":  1133 
+    "wordCount":  1130 
   }
 </script>
 
@@ -85,18 +85,16 @@
     <header id="main-header">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header col-lg-7">
+      <div class="navbar-header ">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <div class="col-centered centered">
-        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
-        </div>
+        <a class="navbar-brand" href="http://deliberate-software.com/">Deliberate Software</a>
       </div>
-      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+      <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
             <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
@@ -145,7 +143,7 @@
 
   <small>
   &middot; Read in about 6 min
-  &middot; (1133 Words)
+  &middot; (1130 Words)
 </small>
 
 
@@ -182,7 +180,7 @@ unending punishment.</p>
 <p>I download stack and start a project:</p>
 
 <pre><code class="language-bash">&gt; cd /home/jack/programming &amp;&amp; stack new github-stats &amp;&amp; cd github-stats
-Downloading template &quot;new-template&quot; to create project &quot;github-stats&quot; in github-stats/ ...
+Downloading template &quot;new-template&quot; to create project &quot;github-stats&quot; in github-stats/ ... 
  ......
 All done.
 </code></pre>
@@ -404,16 +402,16 @@ after building the request shows:</p>
 }
 </code></pre>
 
-<p>The queryString isn&rsquo;t right! <code>?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars</code> It encoded my <code>+</code>
-and <code>:</code>! After an hour of reading through docs and researching URL encoding
-specs, it dawns on me. <code>+</code> is an encoded whitespace.</p>
+<p>The queryString isn&rsquo;t right! It encoded my <code>+</code> and <code>:</code>! After an hour of
+reading through docs and researching URL encoding specs, it dawns on me. <code>+</code>
+is an encoded whitespace.</p>
 
 <blockquote>
 <p>No face-palm gif could ever represent the shear magnitude of my current
 emotions&hellip; You&rsquo;ll have to use your imagination</p>
 </blockquote>
 
-<p>I change my query to <code>(&quot;q&quot;, Just &quot;tetris language:assembly&quot;)</code> and the right
+<p>I change my query to <code>&quot;tetris language:assembly&quot;</code> and the right
 count comes back! <code>Just 354</code></p>
 
 <p>I finally have something that correctly fetches a count of repositories from

@@ -5,15 +5,15 @@
 /* } */
 
 .border {
-  border: 2px solid black;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 0;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0;
 }
 .book {
-  border: 2px solid black;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 0;
-  max-width:100%;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0;
+    max-width:100%;
 }
 .underline {
     border-bottom: 1px solid black;
@@ -33,7 +33,7 @@
 .sidebar_li {
     padding: .5em 0;
     border-bottom: 1px solid #ededed;
-    list-style: none; 
+    list-style: none;
     margin: none;
     display: list-item;
     text-align: -webkit-match-parent;
@@ -54,19 +54,19 @@
 .navbar-nav,
 .navbar-nav>li>a,
 .navbar-default .navbar-brand
-{
-    color: black !important;
-    background-color: #FFFFFF !important;
-}
+ {
+     color: black !important;
+     background-color: #FFFFFF !important;
+ }
 /* a .label { */
 /*     color: white; */
 /*     text-decoration: none; */
 /* } */
 .evens {
-    background-color: gray;    
+    background-color: gray;
 }
 .enforcedscore {
-    color: green;    
+    color: green;
 }
 .header-text {
     /* font-family: georgia,"times new roman",times,serif; */
@@ -75,7 +75,7 @@
     /* width: 100%; */
 }
 .serif {
-   font-family: georgia,"times new roman",times,serif; 
+    font-family: georgia,"times new roman",times,serif;
 }
 .content {
     /* font-family: georgia,"times new roman",times,serif; */
@@ -83,6 +83,16 @@
     /* line-height: 24px; */
     /* font-weight: 400; */
     font-size: 18px;
+}
+img {
+    max-width: 100%;
+}
+pre code, code, .hljs {
+    overflow: scroll !important;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
 }
 
 html {
@@ -110,8 +120,8 @@ body > .container {
 }
 
 .nopadding {
-  padding: 0 !important;
-  margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 
