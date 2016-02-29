@@ -88,7 +88,7 @@ img {
     max-width: 100%;
 }
 pre code, code, .hljs {
-    overflow: scroll !important;
+    overflow: auto !important;
     word-wrap: normal;
     overflow-wrap: normal;
     white-space: pre;
