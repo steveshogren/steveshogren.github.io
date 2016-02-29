@@ -1,112 +1,190 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <title>Language Safety Score Mark 2 - Deliberate Software</title>
-  <meta name="author" content="Steve Shogren">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Programming Language Safety Score Mark 2  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Programming Language Safety Score Mark 2  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/safety-rank-part-2/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-07-24T00:00:00Z" />
+<meta property="og:article:modified_time" content="2015-07-24T00:00:00Z" />
 
   
-  <meta name="description" content="I want to make a model that predicts bugs. I previously wrote a table for scoring language safety:
-Programming Language Safety Score,
-but it was &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://deliberate-software.com/safety-rank-part-2/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<script src="/javascripts/libs/angular.js"></script>
-
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Programming Language Safety Score Mark 2" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/safety-rank-part-2/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46040901-1']);
-    _gaq.push(['_trackPageview']);
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Programming Language Safety Score Mark 2",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2015-07-24",
+    "description": "",
+    "wordCount":  771 
+  }
+</script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/safety-rank-part-2/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
 
 
 </head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Deliberate Software</a></h1>
-  
-    <h2>With deliberate practice come consistent results</h2>
-  
-</hgroup>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header col-lg-7">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="col-centered centered">
+        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
+        </div>
+      </div>
+      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">Programming Language Safety Score Mark 2
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-07-24">24 Jul, 2015</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 4 min
+  &middot; (771 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
   
-</ul>
+  <a href="http://deliberate-software.com/categories/haskell" class="label label-default">haskell</a>
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="deliberate-software.com">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
+  <a href="http://deliberate-software.com/categories/clojure" class="label label-default">clojure</a>
   
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">All Posts</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
+  <a href="http://deliberate-software.com/categories/fsharp" class="label label-default">fsharp</a>
   
-  <header>
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
+  
+
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
     
-      <h1 class="entry-title">Language Safety Score Mark 2</h1>
+  <div class="content">
     
-    
-      <p class="meta">
-        
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="/javascripts/sliders2.js"></script>
 
-
-
-<time class='entry-date' datetime='2015-07-24T10:13:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>I want to make a model that predicts bugs.</p>
+<p>I want to make a model that predicts bugs.</p>
 
 <p>I previously wrote a table for scoring language safety:
-<a href="http://deliberate-software.com/programming-language-safety-algorithm/">Programming Language Safety Score</a>,
+<a href="/programming-language-safety-algorithm">Programming Language Safety Score</a>,
 but it was extremely time consuming to score new languages or make modifications.</p>
 
-<h2>Simplify, Simplify</h2>
+<h2 id="simplify-simplify:97a282fd1f3c6848927d72787ebd3b6e">Simplify, Simplify</h2>
 
 <p>After being told I was <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>
 the data, I&rsquo;ve attempted to clean up by simply checking if each category is
@@ -117,28 +195,28 @@ very similar. The shape of the curve pretty much stays the same, which I was
 told indicates that the character count weighting was a variable that didn&rsquo;t
 matter.</p>
 
-<p><img class="center" src="/images/rplot.jpg" title="image" alt="images"></p>
+<p><img src="/images/rplot.jpg"></img></p>
 
 <p>The code I used to generate the plot and normalize the scores can be found here:
 <a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
 
-<h2>Safety Definitions</h2>
+<h2 id="safety-definitions:97a282fd1f3c6848927d72787ebd3b6e">Safety Definitions</h2>
 
 <p>A definition of the safety checks is as follows:</p>
 
-<p><div ng-app="TableApp2">
+<div ng-app="TableApp2">
 <div ng-controller="TableCtrl">
 <table class="langtable">
 <tr><th>Check</th> <th>Description</th></tr>
 <tr ng-repeat="check in langChecks">
-<td> {{ check.name }} </td>
-<td>  {{ check.desc }}  </td>
+<td>{{ check.name }} </td>
+<td> {{ check.desc }}  </td>
 </tr>
-</table></p>
+</table>
 
-<p>The new scores are shown here, with a lot more languages added in:</p>
+The new scores are shown here, with a lot more languages added in:
 
-<p><p class="lead">
+<p class="lead">
 <div style="overflow-x:scroll">
 <table class="langtable">
 <tr>
@@ -161,24 +239,24 @@ matter.</p>
 <tr class="totals"><td>Totals</td>
 <td></td>
 <td ng-repeat="lang in langTotals track by $index">
- {{ lang }}
+{{ lang }}
 </td>
 </tr>
 <tr class="totals"><td>Magnitude</td>
 <td></td>
 <td ng-repeat="lang in langTotals track by $index">
- {{ percentageTotals(lang) }}%
+{{ percentageTotals(lang) }}%
 </td>
 </tr>
 </table>
-</div></p>
+</div>
 
 <p>Current Languages:
 <span ng-repeat="lang in allLanguages">
- {{ getName(lang) }}: {{ allLangTotals[$index] }},
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
 </select></p>
 
-<h2>So, What&rsquo;s the Point?</h2>
+<h2 id="so-what-s-the-point:97a282fd1f3c6848927d72787ebd3b6e">So, What&rsquo;s the Point?</h2>
 
 <p>To see how this model corresponds with data in the real world, I used the GitHub
 API to query for the number of bugs created in repositories with more than 15
@@ -197,30 +275,30 @@ accurate average. I summed the bugs and commits of those remaining repositories
 grouped by language, finding a total average bug/commit ratio for each language
 grouping. Here is that data, sorted by safety score.</p>
 
-<p><table class="langtable">
+<table class="langtable">
 <tr><th>Language</th>
 <th>Bugs</th>
 <th>Commits</th>
 <th>Repositories</th>
 <th>Bug/Commits</th>
 <tr ng-repeat="lang in languageRatios">
-<td> {{ lang.name }} </td>
-<td> {{ lang.bugs }} </td>
-<td> {{ lang.commits }} </td>
-<td> {{ lang.repos }} </td>
-<td> {{ getBugsRatio(lang) }} </td>
+<td>{{ lang.name }} </td>
+<td>{{ lang.bugs }} </td>
+<td>{{ lang.commits }} </td>
+<td>{{ lang.repos }} </td>
+<td>{{ getBugsRatio(lang) }} </td>
 </tr>
-</table></p>
+</table>
 
 <p>Here are the languages sorted by safety score with bug/commit ratios:</p>
 
-<p><img class="center" src="/images/errorChart.jpg" title="image" alt="images">
-<img class="center" src="/images/bugsAverage.jpg" title="image" alt="images"></p>
+<p><img src="/images/errorChart.jpg"></img>
+<img src="/images/bugsAverage.jpg"></img></p>
 
 <p>I took the magnitude of the safety scores and the bug/commit ratios. After
 inverting the safety scores, I overlaid them both onto a single graph.</p>
 
-<p><img class="center" src="/images/bothMags.jpg" title="image" alt="images"></p>
+<p><img src="/images/bothMags.jpg"></img></p>
 
 <p>Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
 buck the trend, but otherwise the languages follow a pretty consistent slope
@@ -228,40 +306,40 @@ down in bugs. Taking the correlation gives a
 <a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">correlation coefficient</a>
 of .55</p>
 
-<h2>What About Unit Tests?</h2>
+<h2 id="what-about-unit-tests:97a282fd1f3c6848927d72787ebd3b6e">What About Unit Tests?</h2>
 
 <p>Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
 other factor, I collected data on how many tests each repository had. I counted
 the number of files containing &ldquo;test&rdquo; or &ldquo;spec&rdquo;, which gave the following,
 sorted by tests per commit:</p>
 
-<p><table class="langtable">
+<table class="langtable">
 <tr><th>Language</th>
 <th>Tests</th>
 <th>Commits</th>
 <th>Repositories</th>
 <th>Tests/Commits</th></tr>
 <tr ng-repeat="lang in sorter(languageRatios)">
-<td> {{ lang.name }} </td>
-<td> {{ lang.test }} </td>
-<td> {{ lang.commits }} </td>
-<td> {{ lang.repos }} </td>
-<td> {{ getTestsRatio(lang) }} </td>
+<td>{{ lang.name }} </td>
+<td>{{ lang.test }} </td>
+<td>{{ lang.commits }} </td>
+<td>{{ lang.repos }} </td>
+<td>{{ getTestsRatio(lang) }} </td>
 </tr>
-</table></p>
+</table>
 
 <p>PHP, Python, and Ruby all have a higher then average number of tests, but
 Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
 average number of tests, yet they score relatively average in bugs/commit.</p>
 
-<h2>Conclusion</h2>
+<h2 id="conclusion:97a282fd1f3c6848927d72787ebd3b6e">Conclusion</h2>
 
 <p>In conclusion, the current safety model I have proposed seems to account for a
 moderate reduction in bugs per commit across the sampled languages, but is not
 the only factor. It currently is unable to account for a significantly lower
 than expected bug count in Ruby and Clojure.</p>
 
-<h2>Special Thanks</h2>
+<h2 id="special-thanks:97a282fd1f3c6848927d72787ebd3b6e">Special Thanks</h2>
 
 <p>Special thanks to (in alphabetical order):
 <a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
@@ -269,7 +347,7 @@ than expected bug count in Ruby and Clojure.</p>
 Nils Creque (Listening Board),
 Max Haley (Python, Ruby, Teaching me how to math),
 <a href="https://github.com/danielmiladinov">Daniel Miladinov</a> (Java, Scala, Morale Support),
-Keith O'Brien (Ruby and JS),
+Keith O&rsquo;Brien (Ruby and JS),
 <a href="https://github.com/arlaneenalra">Chris Salch</a> (CoffeeScript and JS),
 and <a href="https://github.com/timvisher">Tim Visher</a> (Clojure).</p>
 
@@ -279,7 +357,7 @@ including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
 <a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
 <a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
 
-<h2>Complaints Department</h2>
+<h2 id="complaints-department:97a282fd1f3c6848927d72787ebd3b6e">Complaints Department</h2>
 
 <p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
 requests for new languages:
@@ -288,237 +366,205 @@ pick an existing language, edit the name and values, and &ldquo;copy to clipboar
 build your own language data structure. Send it to me in a PR and I&rsquo;ll include
 it along with a thanks on the page.</p>
 
-<p><div ng-show="showRealName">
-<h2>Select Language:
+<div ng-show="showRealName">
+<span>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 <button ng-click="copyToClipboard(selectedLang)">Copy Changes to Clipboard</button>
-</h2>
-<h2><input ng-model="selectedLang.name"></input></h2>
+</span>
+<span><input ng-model="selectedLang.name"></input></span>
 <table class="langtable">
 <tr><th>Check</th><th>Option</th></tr>
 <tr ng-repeat="check in langChecks">
-<td style="background-color: {{scoreClass(score(selectedLang[check.key]))}} ">
- {{ check.name }}:  {{score(selectedLang[check.key]) }}
+<td style="background-color:{{scoreClass(score(selectedLang[check.key]))}} ">
+{{ check.name }}: {{score(selectedLang[check.key]) }}
 </td>
 <td>
 <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="selectedLang[check.key].enforced"></select>
 </td>
 </tr>
-</table></p>
+</table>
+</div>
+</div>
+</div>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2015-07-24T10:13:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:13 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/c-number/'>c#</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/f-number/'>f#</a>, <a class='category' href='/blog/categories/haskell/'>haskell</a>, <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/safety-rank-part-2/" data-via="" data-counturl="http://deliberate-software.com/safety-rank-part-2/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/language-versions/" title="Previous Post: Language Versions">&laquo; Language Versions</a>
-      
-      
-        <a class="basic-alignment right" href="/simplemock-unit-test-mocking/" title="Next Post: SimpleMock: Language Agnostic Unit Test Mocking">SimpleMock: Language Agnostic Unit Test Mocking &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-</div>
-
-<aside class="sidebar">
-  
-    
-<section class="about-me">
-  <h1>Steve Shogren</h1>
-  <div class="about-text">
-    <p>
-      Insights gathered while learning to deliberately craft software.
-    </p>
   </div>
-  <span class="gravatar">
-    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
-  </span>
-</section>
-
-<section>
-  <h1>Check out my new book!</h1>
-  <a href="https://leanpub.com/convincingcoworkers"><img class="bookclass" src="/images/convincingcoworkerscover.jpg" width="200"></a>
-</section>
-<section>
-  <h1>Top Posts</h1>
-  <ul id="recent_posts">
-    <li class="post">
-      <a href="/ego-driven-development/">Ego Driven Development</a>
-    </li>
-    <li class="post">
-      <a href="/safety-rank-part-2/">Language Safety Score 2</a>
-    </li>
-
-    <li class="post">
-      <a href="/intro-to-macros/">Intro To Macros</a>
-    </li>
-    <li class="post">
-      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-    </li>
-  </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
-      </li>
-    
-      <li class="post">
-        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
-      </li>
-    
-      <li class="post">
-        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-  <ul id="recent_posts">
-    
-    
-    <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
-    </li>
-    
-  </ul>
-</section>
+</div>
 
 
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
   
-</aside>
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/language-versions/" title="Language Versions">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/simplemock-unit-test-mocking/" title="SimpleMock: Language Agnostic Unit Test Mocking">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Steve Shogren -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+</div>
 
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
 
 </footer>
+
+        </div>
+        <div class="col-sm-3">
+           <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">24</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">22</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">7</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
   
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
 
 
 
 
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
 
-
-
-
-</body>
+  </body>
 </html>
+

@@ -1,105 +1,171 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <title>Language Versions - Deliberate Software</title>
-  <meta name="author" content="Steve Shogren">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Language Versions  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Language Versions  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/language-versions/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-07-20T00:00:00Z" />
+<meta property="og:article:modified_time" content="2015-07-20T00:00:00Z" />
 
   
-  <meta name="description" content="Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
-semantic version number. Small features that incrementally improve &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://deliberate-software.com/language-versions/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<script src="/javascripts/libs/angular.js"></script>
-
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Language Versions" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/language-versions/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46040901-1']);
-    _gaq.push(['_trackPageview']);
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Language Versions",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2015-07-20",
+    "description": "",
+    "wordCount":  639 
+  }
+</script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/language-versions/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
 
 
 </head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Deliberate Software</a></h1>
-  
-    <h2>With deliberate practice come consistent results</h2>
-  
-</hgroup>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header col-lg-7">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="col-centered centered">
+        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
+        </div>
+      </div>
+      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">Language Versions
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-07-20">20 Jul, 2015</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 3 min
+  &middot; (639 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
   
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="deliberate-software.com">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">All Posts</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
     
-      <h1 class="entry-title">Language Versions</h1>
+  <div class="content">
     
-    
-      <p class="meta">
-        
 
-
-
-
-<time class='entry-date' datetime='2015-07-20T10:36:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:36 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
+<p>Let&rsquo;s play a thought exercise. Imagine your development toolchain is like a
 semantic version number. Small features that incrementally improve your
 situation are like minor updates. They don&rsquo;t cause any large shifts in thinking
 or process. Major updates are big, new concepts, quantum jumps in theory or
@@ -113,9 +179,9 @@ senior developers. I&rsquo;ll leave those aspects alone.</p>
 
 <p>What are some examples of these value changes I&rsquo;ve noticed in my development?</p>
 
-<h2>Minor Benefits</h2>
+<h2 id="minor-benefits:7ae38f764e4092636cb20d48e9f35054">Minor Benefits</h2>
 
-<h3>Perl - PHP - Python - Ruby</h3>
+<h3 id="perl-php-python-ruby:7ae38f764e4092636cb20d48e9f35054">Perl - PHP - Python - Ruby</h3>
 
 <p>Switching from Perl to PHP for me was a minor change. I was able to carry over
 almost all my skills, and for the most part, the differences were mostly
@@ -133,7 +199,7 @@ with some minor differences here and there. These days I put effort only into
 maintaining familiarity with one of these languages, since I am confident I
 could quickly relearn any of the other three on demand.</p>
 
-<h3>Java - VB.NET - CSharp</h3>
+<h3 id="java-vb-net-csharp:7ae38f764e4092636cb20d48e9f35054">Java - VB.NET - CSharp</h3>
 
 <p>Moving between Java, VB.NET, and C# feel similarly minor in tangible
 productivity. For the most part, all the expectations and experience carries
@@ -141,9 +207,9 @@ between the three. Obviously the tools are different, and there are a number of
 gotchas, but nothing changed my productivity in any major way. I doubt any of
 those three have any one killer feature that cannot be had in the other.</p>
 
-<h2>Major Benefits</h2>
+<h2 id="major-benefits:7ae38f764e4092636cb20d48e9f35054">Major Benefits</h2>
 
-<h3>Automated Testing</h3>
+<h3 id="automated-testing:7ae38f764e4092636cb20d48e9f35054">Automated Testing</h3>
 
 <p>Switching from &ldquo;run it and see&rdquo; testing to automated unit and integration
 testing was a major change with large productivity benefits. All my experience
@@ -155,7 +221,7 @@ worked in, with benefits that grow increasingly valuable with more complex
 systems. I don&rsquo;t always automated test, but it is an invaluable tool for certain
 classes of problems.</p>
 
-<h3>REPL Development (moving from Python/Ruby to Clojure)</h3>
+<h3 id="repl-development-moving-from-python-ruby-to-clojure:7ae38f764e4092636cb20d48e9f35054">REPL Development (moving from Python/Ruby to Clojure)</h3>
 
 <p>Repl based development with live hot patching was another major change. It
 required a new way of thinking about programming, and with it came an
@@ -165,221 +231,191 @@ parts. Additionally, it allowed me to rapidly progress in my skills, because I
 could instantly see live feedback from my code, without needing to write a whole
 test just to execute the code.</p>
 
-<h3>Powerful Static Typing (moving from C# to F#)</h3>
+<h3 id="powerful-static-typing-moving-from-c-to-f:7ae38f764e4092636cb20d48e9f35054">Powerful Static Typing (moving from C# to F#)</h3>
 
 <p>Moving from a typical static typed language to one with algebraic data types has
 been a major change, with major productivity benefits. I have noticed entire
 classes of defects disappearing. Additionally, because of the better compiler
 errors, the resulting codebases are much easier to refactor, which means a
 faster reaction to a changing domain.</p>
-</div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2015-07-20T10:36:00-04:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:36 am</span></time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/language-versions/" data-via="" data-counturl="http://deliberate-software.com/language-versions/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/learning-lisp-was-hard/" title="Previous Post: Learning Lisp Was Hard">&laquo; Learning Lisp Was Hard</a>
-      
-      
-        <a class="basic-alignment right" href="/safety-rank-part-2/" title="Next Post: Language Safety Score Mark 2">Language Safety Score Mark 2 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-</div>
-
-<aside class="sidebar">
-  
-    
-<section class="about-me">
-  <h1>Steve Shogren</h1>
-  <div class="about-text">
-    <p>
-      Insights gathered while learning to deliberately craft software.
-    </p>
   </div>
-  <span class="gravatar">
-    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
-  </span>
-</section>
-
-<section>
-  <h1>Check out my new book!</h1>
-  <a href="https://leanpub.com/convincingcoworkers"><img class="bookclass" src="/images/convincingcoworkerscover.jpg" width="200"></a>
-</section>
-<section>
-  <h1>Top Posts</h1>
-  <ul id="recent_posts">
-    <li class="post">
-      <a href="/ego-driven-development/">Ego Driven Development</a>
-    </li>
-    <li class="post">
-      <a href="/safety-rank-part-2/">Language Safety Score 2</a>
-    </li>
-
-    <li class="post">
-      <a href="/intro-to-macros/">Intro To Macros</a>
-    </li>
-    <li class="post">
-      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-    </li>
-  </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
-      </li>
-    
-      <li class="post">
-        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
-      </li>
-    
-      <li class="post">
-        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-  <ul id="recent_posts">
-    
-    
-    <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
-    </li>
-    
-  </ul>
-</section>
+</div>
 
 
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
   
-</aside>
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/learning-lisp-was-hard/" title="Learning Lisp Was Hard">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/safety-rank-part-2/" title="Programming Language Safety Score Mark 2">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Steve Shogren -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+</div>
 
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
 
 </footer>
+
+        </div>
+        <div class="col-sm-3">
+           <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">24</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">22</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">7</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
   
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
 
 
 
 
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
 
-
-
-
-</body>
+  </body>
 </html>
+

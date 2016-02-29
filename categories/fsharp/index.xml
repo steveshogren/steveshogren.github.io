@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fsharp on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/fsharp/</link>
+    <description>Recent content in Fsharp on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Oct 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/fsharp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>F# Unit Testing With SimpleMock</title>
+      <link>http://deliberate-software.com/f-number-unit-testing/</link>
+      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
+      <description>
+
+&lt;p&gt;If you are considering using F#, you might be curious how to handle unit test
+mocking, especially if you want to use both modules and classes. In a language
+like C# or Java, the common method is to a DI container or handmade constructor
+injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a
+real dependency with a test-only replacement.&lt;/p&gt;
+
+&lt;p&gt;I previously posted an example that shows a much simpler way to inject
+dependencies called the &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock pattern&lt;/a&gt;. The SimpleMock pattern can also be
+used in F#, even if you are only using modules.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplemock-in-f-modules:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;SimpleMock in F# Modules&lt;/h2&gt;
+
+&lt;p&gt;We will assume you are mocking inside a module and not a class. Mocking inside
+an F# class would look much the same as it does in C#, which we showed in the
+SimpleMock post. Here is a sample program that does some work and persists the
+results.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave x y =
+  let sum = x + y
+  DBModule.saveSum sum
+  sum
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To apply the SimpleMock pattern, we can use argument currying by adding a simple
+function wrapper.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave&#39; saveSum x y = 
+  let sum = x + y
+  saveSum sum
+  sum
+let addAndSave = addAndSave&#39; DBModule.saveSum
+
+// Test code
+let addAndSave_Test =
+  let calledVar = ref 0
+  let result = addAndSave&#39; (fun sum -&amp;gt; calledVar := sum) 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, !calledVar)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We started by renaming the &lt;code&gt;addAndSave&lt;/code&gt; function with a trailing &lt;code&gt;&#39;&lt;/code&gt;. We
+created a new &lt;code&gt;addAndSave&lt;/code&gt; that calls &lt;code&gt;addAndSave&#39;&lt;/code&gt; with the correct
+dependency for the first argument, leaving the rest of the arguments to be
+called later. Currying is what allows this ability. The new &lt;code&gt;addAndSave&lt;/code&gt;
+function only needs the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; parameters. At test time, we called &lt;code&gt;addAndSave&#39;&lt;/code&gt;, passing in the needed dependency, but using a lambda as the
+&amp;ldquo;fake&amp;rdquo;. The injection is as close to the dependency use as possible!&lt;/p&gt;
+
+&lt;h2 id=&#34;bonus-simplemock-fake-helper:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Bonus: SimpleMock Fake Helper&lt;/h2&gt;
+
+&lt;p&gt;The earlier replacement for DBModule.saveSum is a bit complex, and it does not
+show us how many times the fake was called. We can easily make a helper that
+takes parameters and returns them when called, along withe count of times it was
+called.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults() =
+  member val timesCalled = 0 with get,set
+  member val args: obj list = [] with get,set
+
+let makeFake_OneArg () =
+  let results = new TestFakeResults()
+  let fake = (fun p1 -&amp;gt;
+                  results.args &amp;lt;- p1 :: results.args
+                  results.timesCalled &amp;lt;- results.timesCalled + 1
+                  ())
+  (fake, results)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above code might be hard to comprehend at first! We have made a generic
+helper that can create any single argument fake we need. We return a tuple,
+containing the fake lambda and an instance of &lt;code&gt;TestFakeResults&lt;/code&gt;. The fake
+lambda will populate the &lt;code&gt;TestFakeResults&lt;/code&gt;, which we can access in the test
+via the second arg of the tuple.&lt;/p&gt;
+
+&lt;p&gt;We can now re-write the previous test using &lt;code&gt;makeFake_OneArg&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;// Test code
+let addAndSave_Test =
+  let (fakeSave, fakeSaveCalling) = makeFake_OneArg()
+  let result = addAndSave&#39; fakeSave 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, fakeSaveCalling.args.[0])
+  Assert.AreEqual(1, fakeSaveCalling.timesCalled)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The TestFakeResults can return information about the way it was called,
+including the list of all arguments. If we felt we needed the extra
+expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
+TestFakeResults and its constructor are not essential to the pattern. The most
+important part is learning to unit test in F# with confidence.&lt;/p&gt;
+
+&lt;h1 id=&#34;double-bonus-when-to-use-a-class-instead-of-a-record:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Double Bonus: When to Use a Class Instead of a Record&lt;/h1&gt;
+
+&lt;p&gt;When I first wrote this post, I used a record instead of a class for the &lt;code&gt;TestFakeResults&lt;/code&gt; type. If you have been bitten by the functional programming bug,
+you might have wondered at my usage of a mutable class. Here are two alternates
+of &lt;code&gt;makeFake_OneArg&lt;/code&gt; which use records. You can probably see why I switched to a class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults = {timesCalled:int, args obj list}
+
+// Using Record Alternate 1
+let makeFake_OneArg_RecordAlternate1 () = 
+  let t = ref 0
+  let a : obj list ref = ref []
+  let fake = (fun p1 -&amp;gt;
+                  a := p1 :: !a
+                  t := !t + 1
+                  ())
+  (fake, (fun () -&amp;gt;
+                {TestFakeRecord.timesCalled = !t;
+                 args = !a}))
+
+// Using Record Alternate 2
+let makeFake_OneArg_RecordAlternate2 () = 
+  let result = ref {TestFakeRecord.timesCalled = 0; args = []}
+  let fake = (fun p1 -&amp;gt;
+              result := {timesCalled = (!result).timesCalled + 1;
+                         args = p1 :: (!result).args}
+              ())
+  (fake, (fun () -&amp;gt; !result))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The only way to use a record is to delay its construction via a lambda which
+must be executed by the test code. Both are complex: what we need is a mutable
+data structure which we can access via a reference. A record is not that. We can
+approximate it using tricks, but ultimately I find both alternatives to be too
+complex to justify their use. Sometimes a mutable data structure is the best
+choice to solve your problem efficiently. The power of F# is that it gives us
+the ability to choose the best tool for the job: records for immutability,
+classes for mutability.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Score Mark 2</title>
+      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <description>
+
+&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders2.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I want to make a model that predicts bugs.&lt;/p&gt;
+
+&lt;p&gt;I previously wrote a table for scoring language safety:
+&lt;a href=&#34;http://deliberate-software.com/programming-language-safety-algorithm&#34;&gt;Programming Language Safety Score&lt;/a&gt;,
+but it was extremely time consuming to score new languages or make modifications.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplify-simplify:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Simplify, Simplify&lt;/h2&gt;
+
+&lt;p&gt;After being told I was &lt;a href=&#34;https://en.wikipedia.org/wiki/Overfitting&#34;&gt;overfitting&lt;/a&gt;
+the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1 (language enforced),
+0 (possible, but you have to remember to do it), or -1 (impossible). When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn&amp;rsquo;t
+matter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rplot.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;The code I used to generate the plot and normalize the scores can be found here:
+&lt;a href=&#34;https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R&#34;&gt;scorePlot.R&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;safety-definitions:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Safety Definitions&lt;/h2&gt;
+
+&lt;p&gt;A definition of the safety checks is as follows:&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp2&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td&gt;{{ check.name }} &lt;/td&gt;
+&lt;td&gt; {{ check.desc }}  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+The new scores are shown here, with a lot more languages added in:
+
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }}
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}%
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;so-what-s-the-point:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;So, What&amp;rsquo;s the Point?&lt;/h2&gt;
+
+&lt;p&gt;To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors.&lt;/p&gt;
+
+&lt;p&gt;I decided to rely on the count of commits as a standard for a unit of work. My
+assumption was that across fifty different projects, the commit sizes would
+average out. Once the unit of work was decided on, I wanted to find the ratio of
+bugs per commit for each language.&lt;/p&gt;
+
+&lt;p&gt;I collected the ratio of bugs logged per commit for each repository, and after
+grouping by primary language, removed the top and bottom 25% using the
+bug/commit ratio, which is a common practice in statistics to help find a more
+accurate average. I summed the bugs and commits of those remaining repositories
+grouped by language, finding a total average bug/commit ratio for each language
+grouping. Here is that data, sorted by safety score.&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Bugs&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Bug/Commits&lt;/th&gt;
+&lt;tr ng-repeat=&#34;lang in languageRatios&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.bugs }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getBugsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here are the languages sorted by safety score with bug/commit ratios:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/errorChart.jpg&#34;&gt;&lt;/img&gt;
+&lt;img src=&#34;http://deliberate-software.com/images/bugsAverage.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/bothMags.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
+buck the trend, but otherwise the languages follow a pretty consistent slope
+down in bugs. Taking the correlation gives a
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient&#34;&gt;correlation coefficient&lt;/a&gt;
+of .55&lt;/p&gt;
+
+&lt;h2 id=&#34;what-about-unit-tests:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;What About Unit Tests?&lt;/h2&gt;
+
+&lt;p&gt;Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
+other factor, I collected data on how many tests each repository had. I counted
+the number of files containing &amp;ldquo;test&amp;rdquo; or &amp;ldquo;spec&amp;rdquo;, which gave the following,
+sorted by tests per commit:&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Tests&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Tests/Commits&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;lang in sorter(languageRatios)&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.test }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getTestsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;PHP, Python, and Ruby all have a higher then average number of tests, but
+Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
+average number of tests, yet they score relatively average in bugs/commit.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In conclusion, the current safety model I have proposed seems to account for a
+moderate reduction in bugs per commit across the sampled languages, but is not
+the only factor. It currently is unable to account for a significantly lower
+than expected bug count in Ruby and Clojure.&lt;/p&gt;
+
+&lt;h2 id=&#34;special-thanks:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Special Thanks&lt;/h2&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+&lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;Patrick Boe&lt;/a&gt; (Haskell, Sniff Test),
+&lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;Kyle Burton&lt;/a&gt; (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+&lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;Daniel Miladinov&lt;/a&gt; (Java, Scala, Morale Support),
+Keith O&amp;rsquo;Brien (Ruby and JS),
+&lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;Chris Salch&lt;/a&gt; (CoffeeScript and JS),
+and &lt;a href=&#34;https://github.com/timvisher&#34;&gt;Tim Visher&lt;/a&gt; (Clojure).&lt;/p&gt;
+
+&lt;p&gt;Additional thanks to the posters on
+&lt;a href=&#34;https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/&#34;&gt;/r/rust&lt;/a&gt;,
+including &lt;a href=&#34;https://www.reddit.com/user/notriddle&#34;&gt;/u/notriddle&lt;/a&gt;,
+&lt;a href=&#34;https://www.reddit.com/user/killercup&#34;&gt;/u/killercup&lt;/a&gt;, and
+&lt;a href=&#34;https://www.reddit.com/user/diegobernardes&#34;&gt;/u/diegobernardes&lt;/a&gt; who put together the Rust score.&lt;/p&gt;
+
+&lt;h2 id=&#34;complaints-department:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Complaints Department&lt;/h2&gt;
+
+&lt;p&gt;Did I mess up something about a language here, or am I missing a safety check? I&amp;rsquo;ll happily take pull
+requests for new languages:
+&lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js&#34;&gt;blog source&lt;/a&gt;. Just
+pick an existing language, edit the name and values, and &amp;ldquo;copy to clipboard&amp;rdquo; to
+build your own language data structure. Send it to me in a PR and I&amp;rsquo;ll include
+it along with a thanks on the page.&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt;
+&lt;span&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;/span&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt;&lt;th&gt;Option&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td style=&#34;background-color:{{scoreClass(score(selectedLang[check.key]))}} &#34;&gt;
+{{ check.name }}: {{score(selectedLang[check.key]) }}
+&lt;/td&gt;
+&lt;td&gt;
+&lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Case Study: Superior Domain Modeling in F#</title>
+      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
+      <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
+      <description>&lt;p&gt;Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.&lt;/p&gt;
+
+&lt;p&gt;To illustrate this, I found some old code I&amp;rsquo;d written to interact with
+a legacy system. The system uses many single enums on a record to keep
+track of statuses. When one changes, it can cause others to change as
+well.&lt;/p&gt;
+
+&lt;p&gt;Here is a typical function that combines two enums to recalculate a
+third.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;        public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
+        {
+            if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+                || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+                return PositionType.Held;
+            if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+                || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+                return PositionType.Posted;
+
+            return PositionType.Undefined;
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With some regularity, new records are added to these types of enums,
+causing a dangerous search and update across the system fixing all the
+if/else or switch/case statements.&lt;/p&gt;
+
+&lt;p&gt;Right off the bat, pattern matching is a huge win here, taking a hard
+to comprehend function and making the domain concepts clear.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetPositionType = function
+    | Deliver, Principal | Return, Counterparty -&amp;gt; Held
+    | Return, Principal | Deliver, Counterparty -&amp;gt; Posted
+    | MovementType.Undefined, _ | _, ApplyToParty.Undefined -&amp;gt; PositionType.Undefined
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we&amp;rsquo;d be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.&lt;/p&gt;
+
+&lt;p&gt;Next though, this got me thinking. Why does this set of three enums
+have to be calculated? Why are they even separate? Ah, of course,
+right now they are stored in the database and ORM objects, each with a
+separate field and set of enum ids. Changing that would be costly.&lt;/p&gt;
+
+&lt;p&gt;What I want is a domain layer a level higher than the typical database
+ORM classes, something to convert my ORM classes into that will be
+able to do work in a safer way.&lt;/p&gt;
+
+&lt;p&gt;Rather than three enums that are supposed to change in lock step (but
+might get out of date), I really want a concept of the three combined
+and &amp;ldquo;frozen&amp;rdquo; together.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type Direction = 
+    | Held_Deliver_Principal
+    | Held_Return_Counterparty
+    | Posted_Return_Principal
+    | Posted_Deliver_Counterparty
+    
+let GetDirection = function
+   | Deliver, Principal  -&amp;gt; Held_Deliver_Principal
+   | Return, Counterparty -&amp;gt; Held_Return_Counterparty
+   | Return, Principal -&amp;gt; Posted_Return_Principal
+   | Deliver, Counterparty -&amp;gt; Posted_Deliver_Counterparty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I have a combined Direction that merges the three concepts into
+one. It is impossible with this new merged type to have an invalid
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetMovementTypeToSaveInORM = function
+   | Held_Deliver_Principal | Posted_Deliver_Counterparty -&amp;gt; Deliver
+   | Posted_Return_Principal | Held_Return_Counterparty -&amp;gt; Return
+
+let GetSendFn = function
+   | Held_Deliver_Principal | Posted_Return_Principal -&amp;gt; SendMessageToPrincipal
+   | Held_Return_Counterparty | Posted_Deliver_Counterparty -&amp;gt; SendMessageToCounterparty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is possible to make an equivalent C# enum and combine these
+in a similar way, it is inherently unsafe (nothing to guarantee you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.&lt;/p&gt;
+
+&lt;p&gt;Because F# interops so well with C#, it is possible to build in a
+domain layer in F# immediately that calls down to your C# ORM
+classes. Converting from a set of dangerous C# enums into a
+constrained and safe F# discriminated union is easy and will simplify
+your domain to its essence.&lt;/p&gt;
+
+&lt;p&gt;For reasons like this, when I have to build something with a rich
+domain, I reach for F#.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Ranking</title>
+      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <description>&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static
+types&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.&lt;/p&gt;
+
+&lt;p&gt;I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&amp;rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.&lt;/p&gt;
+
+&lt;p&gt;By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &amp;ldquo;mistake&amp;rdquo; with a primitive, the more difficult it
+is to build such good abstractions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This model is not about language &amp;quot;power&amp;quot;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This model is not about ranking the &amp;ldquo;power&amp;rdquo;, &amp;ldquo;expressiveness&amp;rdquo;, or
+&amp;ldquo;abstract-ability&amp;rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&amp;ldquo;confusion&amp;rdquo; between the programmer and the machine at the primitive
+level.&lt;/p&gt;
+
+&lt;p&gt;Rather than focus on what is &lt;em&gt;possible&lt;/em&gt; with a language, I will
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.&lt;/p&gt;
+
+&lt;p&gt;To score a language, simply figure out how many characters it costs to
+&amp;ldquo;prevent&amp;rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is language enforced, like F#&amp;rsquo;s
+Option or C#&amp;rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &amp;ldquo;path&amp;rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.&lt;/p&gt;
+
+&lt;p&gt;If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 (by default) for a &amp;ldquo;every change run
+and debug to fix&amp;rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A lower score is &amp;quot;safer&amp;quot;, needing less (or no) code to achieve the same level of safety.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&amp;rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+
+Language Enforced Bonus:
+{{ enforcedScore }} 
+&lt;input ng-model=&#34;enforcedScore&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Language Inability Penalty:
+{{ inabilityPenalty }} 
+&lt;input ng-model=&#34;inabilityPenalty&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Show Weights &lt;input type=&#34;checkbox&#34; ng-model=&#34;showWeights&#34; /&gt;
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }} 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}% 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3&gt;&lt;input ng-model=&#34;showRealName&#34; type=&#34;checkbox&#34; /&gt;&lt;span
+ng-click=&#34;showRealName = !!!showRealName&#34;&gt;Click to see backing code and unmask names&lt;/span&gt;&lt;/h3&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;p&gt;I want to see your language represented here! I&amp;rsquo;ll happily take pull
+requests for new languages: &lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js&#34;&gt;blog source&lt;/a&gt;. Just
+use the &amp;ldquo;edit language&amp;rdquo; and &amp;ldquo;copy to clipboard&amp;rdquo; to build your own
+language data structure.&lt;/p&gt;
+
+&lt;p&gt;I would love to see every major language represented, including major
+language &amp;ldquo;idiom communities&amp;rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &amp;ldquo;Scala - The Better Java&amp;rdquo;
+and &amp;ldquo;Scala - The JVM Haskell&amp;rdquo; have vastly different idioms with
+apparently very separate communities.&lt;/p&gt;
+
+&lt;p&gt;Hope this is a helpful way to think about language safety!&lt;/p&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+Patrick Boe &lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;(twitter)&lt;/a&gt;,
+Kyle Burton &lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;(blog)&lt;/a&gt;,
+Daniel Miladinov &lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;(github)&lt;/a&gt;,
+Chris Salch &lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;(github)&lt;/a&gt;, and
+Tim Visher &lt;a href=&#34;https://github.com/timvisher&#34;&gt;(github)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt; Feel free to put in your own examples by playing
+with the samples below. Code surrounded with &lt;! !&gt; is ignored from the tally,
+since it would vary heavily based on the language and desired result. Variable
+and type names are kept at single characters, which are counted. Feel free to
+add in your own language below, and use the copy feature to extract the data
+structure to use in a pull request.
+
+&lt;div&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;/div&gt;
+&lt;button ng-click=&#34;showEdit = !showEdit&#34;&gt;Edit Language&lt;/button&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;div ng-show=&#34;showEdit&#34;&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+&lt;textarea class=&#34;widetextarea&#34; rows=&#34;5&#34; ng-model=&#34;selectedLang[check.key].desc&#34;&gt;&lt;/textarea&gt; 
+&lt;div&gt;
+Code: &lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;div class=&#34;tablecode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div ng-show=&#34;!showEdit&#34;&gt;
+&lt;span&gt;{{ selectedLang.name }} &lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+{{ selectedLang[check.key].desc }} 
+&lt;div&gt;
+Code: {{ enforcedNice(selectedLang[check.key].enforced)  }} 
+&lt;div class=&#34;tablecode&#34; ng-if=&#34;selectedLang[check.key].rawCode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Christmas F# Polymorphism</title>
+      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
+      <description>&lt;p&gt;One of my favorite things about F# is how it lets you choose how you want
+to align your data.&lt;/p&gt;
+
+&lt;p&gt;In the previous posts highlighting on
+&lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;pattern matching&lt;/a&gt;
+and
+&lt;a href=&#34;http://deliberate-software.com/inversed-polymorphism/&#34;&gt;inverted polymorphism&lt;/a&gt;
+we covered how pattern matching in F# is safer than &lt;code&gt;if&lt;/code&gt;
+statements and can replace classes and interfaces for polymorphism. If
+you are unfamiliar with these concepts, you might want to skim those
+first.&lt;/p&gt;
+
+&lt;p&gt;Today, for the 6th day of the
+&lt;a href=&#34;https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/&#34;&gt;F# Advent Calendar&lt;/a&gt;
+I wanted to highlight F#&amp;rsquo;s flexibility in solving the
+&amp;ldquo;&lt;a href=&#34;http://c2.com/cgi/wiki?ExpressionProblem&#34;&gt;expression problem&lt;/a&gt;&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s show the two alternatives, first here is one with interfaces:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees = 
+    abstract member Cost : int -&amp;gt; int
+    abstract member Colors : unit -&amp;gt; string list
+    
+type PlasticTree() =
+    interface IChristmasTrees with
+        member this.Cost(jolly_factor) = (100 * jolly_factor) / 2
+        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
+        
+type LiveTree() =
+    let HEAD_ACHE = 15
+    interface IChristmasTrees with
+        member this.Cost(jolly_factor) = (jolly_factor + 10) * HEAD_ACHE
+        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the same functionality using pattern matching and discriminated unions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees2 =
+  | PlasticTree
+  | LiveTree
+
+let colors = function
+  | PlasticTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
+  | LiveTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
+
+let cost tree jolly_factor =
+  match tree with
+    | PlasticTree -&amp;gt; (100 * jolly_factor) / 2
+    | LiveTree -&amp;gt;
+      let HEAD_ACHE = 15
+      (jolly_factor + 10) * HEAD_ACHE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What changes if we want to add a new type of tree? In the class-based
+example, adding a new type is quite simple, you only need to edit one
+place to find all the definitions regarding the new type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;In the pattern matching example, adding a new type requires editing
+every single place you created a function that matches on the
+type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Thankfully, in both cases the compiler gives warnings about missing
+functions or matches, so both are equally &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;What about changing an existing function or adding a new function? We
+now see the opposite behavior. Classes become harder to edit, because
+the functions are spread across multiple classes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;A pattern matching system is now the easier to modify, each function
+only lives in one place.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;And that is the expression problem! The best thing about F# is that
+you get to pick which one is better for each type of data! If you know
+a certain type will need new behavior often, but rarely need new
+types, use pattern matching. If you know there is a static set of
+functions for a set of types, but the type list changes often, maybe
+the traditional interfaces and classes makes the most sense.&lt;/p&gt;
+
+&lt;p&gt;There is no reason not to mix and match the two ways to handle
+polymorphism, so you are free to choose the best representation for
+each type of data you have!&lt;/p&gt;
+
+&lt;p&gt;Happy F#-filled Festivities!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Inverted Polymorphism</title>
+      <link>http://deliberate-software.com/inversed-polymorphism/</link>
+      <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/inversed-polymorphism/</guid>
+      <description>&lt;p&gt;In my last post on the power of pattern matching, we saw how powerful
+the &lt;code&gt;match&lt;/code&gt; statement is in F#. Using &lt;code&gt;match&lt;/code&gt; allows the compiler to
+give us warnings for missing cases, no matter what the type.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an
+inversion of the usual OO way of polymorphism. Here is an example that
+is probably familiar to everyone: getting a database connection.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;	public interface IPaymentRepository {
+		IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
+	}
+    // InMemory.cs
+	public class InMemory : IPaymentRepository {
+		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+			return Config.payments.Values;
+		}
+	}
+    // Postgres.cs
+	public class Postgres : IPaymentRepository {
+		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+			throw new NotImplementedException();
+		}
+	}
+    // RepositoryFactory.cs
+	public class RepositoryFactory {
+		public static IPaymentRepository GetPaymentRepo () {
+			if (Config.configuration[&amp;quot;useInMemory&amp;quot;] == &amp;quot;true&amp;quot;) {
+				return new InMemory();
+			} else {
+				return new Postgres();
+			}
+		}
+	}
+
+    // somewhere in the code...
+    var repo = RepositoryFactory.GetPaymentRepo();
+    var payments = repo.GetAll();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In our example here, we have two concrete implementers of the
+&lt;code&gt;IPaymentRepository&lt;/code&gt;, each one with their own implementations. This is
+a typical OO way to deal with polymorphism. Usually, &amp;ldquo;best practices&amp;rdquo;
+would put each of these classes in their own files.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at how we would invert the polymorphism of the C# classes
+and interfaces to use pattern matching.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type PaymentRepository = 
+   | InMemory
+   | Postgres
+
+let GetAll = function
+    | InMemory -&amp;gt; Config.payments.Values;
+    | Postgres -&amp;gt; raise(NotImplementedException())
+        
+let GetPaymentRepo = 
+    match Config.configuration.[&amp;quot;useInMemory&amp;quot;] with
+        | &amp;quot;true&amp;quot; -&amp;gt; InMemory
+        | _ -&amp;gt; Postgres 
+
+// somewhere in the code ...
+let repo = Payments.GetPaymentRepo
+let payments = Payments.GetAll repo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice how we separated our behavior from our types? The
+&lt;code&gt;PaymentRepository.InMemory&lt;/code&gt; and the &lt;code&gt;PaymentRepository.Postgres&lt;/code&gt; now
+are just empty types, much like an &lt;code&gt;Enum&lt;/code&gt;. We are still able to get
+polymorphic behavior from them, using &lt;code&gt;match&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But why would we want to store our behavior separate from the type?&lt;/p&gt;
+
+&lt;p&gt;By storing the behavior separate from the type, changes that effect a
+single behavior (adding a new function, changing a function&amp;rsquo;s api,
+removing a function) are easier, because they are all grouped
+together. A change to the api of the &lt;code&gt;GetAll&lt;/code&gt; function is harder in
+the traditional OO interface structure, requiring modifying several
+files.&lt;/p&gt;
+
+&lt;p&gt;Similarly, a change requiring adding a new type is difficult in a
+pattern matching structure, as it will require finding every pattern
+match and adding in the additional case. Thankfully, the F# compiler
+checks both pattern matches and interfaces for us, letting us use the
+best tool for the job!&lt;/p&gt;
+
+&lt;p&gt;As to safety, adding a new type is easy with interfaces, but the
+developer is left without assistance to find all places the concrete
+classes are instantiated and add the new type. Neither compiler will
+offer any warnings for a new interface subclass. For pattern matching
+polymorphism, the compiler will warn that there are missing cases
+every place a change needs to be made. While harder to add a new type
+with pattern matching, it is safer.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Adding a Type&lt;/th&gt;
+&lt;th&gt;Modifying Behavior&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OO Interfaces/Classes&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Easier / Less Safe&lt;/td&gt;
+&lt;td&gt;Harder / Safe&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pattern Matching Types&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Harder / Safe&lt;/td&gt;
+&lt;td&gt;Easier / Safe&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;br /&gt;
+I almost always find myself modifying the functions of an
+interface more than I find myself adding new types. For that typical
+use case, pattern matching is probably the better choice.&lt;/p&gt;
+
+&lt;p&gt;Consider the change where we want to add a new function to the
+&lt;code&gt;IPaymentRepository&lt;/code&gt; interface and change the location of the in
+memory dictionary to be stored internally. In the interfaces and
+classes example, that requires editing &lt;em&gt;three separate files&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;    // IPaymentRepostory.cs
+	public interface IPaymentRepository {
+		IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
+		void Add(IPayment payment);
+	}
+    // InMemory.cs
+	public class InMemory : IPaymentRepository {
+		public Dictionary&amp;lt;int, IPayment&amp;gt; payments = new Dictionary&amp;lt;int, IPayment&amp;gt;();
+		public void Add(IPayment payment) {
+			payments.Add(payment.GetId(),payment);
+		}
+		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+			return payments.Values;
+		}
+	}
+    // Postgres.cs
+	public class Postgres : IPaymentRepository {
+		public void Add(IPayment payment) {
+			throw new NotImplementedException();
+		}
+		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+			throw new NotImplementedException();
+		}
+	}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the change to add a new function in the pattern matching example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type PaymentRepository = 
+   | InMemory of Dictionary&amp;lt;int, IPayment&amp;gt;
+   | Postgres
+
+let Add db (payment:IPayment) = 
+    match db with
+        | InMemory payments -&amp;gt; payments.Add(payment.GetId(),payment);
+        | Postgres -&amp;gt; raise(NotImplementedException())
+
+let GetAll = function
+        | InMemory payments -&amp;gt; payments.Values;
+        | Postgres -&amp;gt; raise(NotImplementedException())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In case you were concerned that these F# types do not have any state,
+they actually can have fields just like regular classes. Notice the
+&lt;code&gt;Dictionary&amp;lt;int, IPayment&amp;gt;&lt;/code&gt; next to the &lt;code&gt;InMemory&lt;/code&gt; type? That is a
+field! The new field does not need to be named until used in a pattern
+match, so the only time it is named is &lt;code&gt;payments&lt;/code&gt; inside the &lt;code&gt;Add&lt;/code&gt; and
+&lt;code&gt;GetAll&lt;/code&gt; functions after we pattern match &lt;code&gt;InMemory&lt;/code&gt;. In fact, if we
+didn&amp;rsquo;t add it in the pattern match, the compiler would give us a
+warning!&lt;/p&gt;
+
+&lt;p&gt;Between the options of traditional interfaces verses pattern matching,
+neither way is truly the best for every circumstance: each comes with
+a trade-off. I liken the trade-offs to the &amp;ldquo;grain of the
+data&amp;rdquo;. Whichever way your system is likely to change the most, that is
+the way you want to optimize your type. The good news is: in F# you
+can have a mix of both, and it is relatively easy to convert back and
+forth depending on how your system is changing the most.&lt;/p&gt;
+
+&lt;p&gt;Personally, I find F# pattern matching to be significantly easier to
+read. The same code in C# requires twice the lines in three separate
+files, which adds a complexity burden for no reason. The F# code is
+safer, smaller, and easier to modify than the C# equivalent.&lt;/p&gt;
+
+&lt;p&gt;If you write code in C# or VB.NET right now, you could add in a
+project in F# today. All three languages are callable from the other
+two, so you could start by breaking out a small library that uses
+these feature immediately. F# modules and classes are callable from C#
+just like any other DLL library. In my mind, this is what sets F#
+apart from other languages: it is more powerful and safe than C#, but
+with high performance and interoperability with existing C# libraries.&lt;/p&gt;
+
+&lt;p&gt;If you want additional reading on the topic of polymorphism, check out
+&lt;a href=&#34;http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4&#34;&gt;section 2.4&lt;/a&gt; in SICP.&lt;/p&gt;
+
+&lt;p&gt;Discussion in the HN &lt;a href=&#34;https://news.ycombinator.com/item?id=7763069&#34;&gt;comments&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pattern Matching - Making the Compiler Work For You</title>
+      <link>http://deliberate-software.com/function-pattern-matching/</link>
+      <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/function-pattern-matching/</guid>
+      <description>&lt;p&gt;Pattern matching is a simple tool that will make your code safer and
+easier to read.&lt;/p&gt;
+
+&lt;p&gt;Consider the following code that converts an Int to a string.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public enum Language {
+    Spanish,
+    English
+}
+public static string convert(int number, Language lang) {
+    string ret = &amp;quot;&amp;quot;;
+    if (lang == Language.English) {
+        switch(number) {
+            case 0: ret = &amp;quot;zero&amp;quot;; break;
+            case 1: ret = &amp;quot;one&amp;quot;; break;
+            default: ret = &amp;quot;...&amp;quot;; break;
+        }
+    } else if (lang == Language.Spanish) {
+        switch(number) {
+            case 0: ret = &amp;quot;zero&amp;quot;; break;
+            case 1: ret = &amp;quot;uno&amp;quot;; break;
+            default: ret = &amp;quot;~~~&amp;quot;; break;
+        }
+    }
+    return ret;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What happens when we make this simple change?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public enum Language {
+    Spanish,
+    English,
+    German
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Does the code still compile? Sure does! Does the compiler/IDE offer us
+any indication that something is missing? Nope! Our code has a
+potential bug that is only exposed at run-time, and nothing will tell
+us that. We made it fail gracefully by ensuring our code always
+returns at least an empty string, but we have created a bug that can
+only really be caught by something external: either automated tests or
+manual checking.&lt;/p&gt;
+
+&lt;p&gt;The OO purists and &amp;ldquo;Anti-If&amp;rdquo; guys are probably leaping out of their
+seats. &amp;ldquo;Use classes and an interface!&amp;rdquo; they yell. Ok, sure. I assert
+that it just makes things even worse.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;	public interface ILanguage {
+		String convert(int num);
+	}
+	public class Spanish : ILanguage {
+		public String convert (int num) {
+			var ret = &amp;quot;&amp;quot;;
+	        switch (num) {
+				case 0: ret = &amp;quot;zero&amp;quot;; break;
+				case 1: ret = &amp;quot;uno&amp;quot;; break;
+				default: ret = &amp;quot;~~~&amp;quot;; break;
+	        }
+			return ret;
+		}
+	}
+	public class English : ILanguage {
+		public String convert (int num) {
+			var ret = &amp;quot;&amp;quot;;
+	        switch (num) {
+				case 0: ret = &amp;quot;zero&amp;quot;; break;
+				case 1: ret = &amp;quot;one&amp;quot;; break;
+				default: ret = &amp;quot;...&amp;quot;; break;
+	        }
+			return ret;
+		}
+	}
+    // somewhere else...
+    public static string convert(int x, Language lang) {
+        return getLanguage(lang).convert(x);
+    }
+    public static ILanguage getLanguage(Language lang) {
+        switch (lang) {
+            case Language.English: return new English() ; break;
+            case Language.Spanish: return new Spanish() ; break;
+            default: throw new Exception();
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We have turned 21 lines in one file into 36 in three files (not
+counting namespaces and imports). Does this new structure give us any
+additional safety when we add a new concrete implementation? How about
+when we add a new enum value? This code is even more likely to cause
+bugs than the first, because now we have an implicit coupling between
+the enum and the concrete class. We could get rid of the enum, and
+&amp;ldquo;pass in concrete class&amp;rdquo; but &lt;em&gt;something&lt;/em&gt; still has to say which
+concrete class to instantiate.&lt;/p&gt;
+
+&lt;p&gt;Imagine if the compiler could warn us when either the enum or the
+class changed. Imagine if instead of having to hunt down the possible
+uses, we could just compile and fix the errors.&lt;/p&gt;
+
+&lt;p&gt;Good news, we can!&lt;/p&gt;
+
+&lt;p&gt;Check out this F# code. If you have never seen F# before, I know, it
+looks completely crazy! It &lt;em&gt;still&lt;/em&gt; looks a little weird to me, but
+just try to read it. I think you will surprise yourself. This is a
+function called &lt;code&gt;convert&lt;/code&gt;, and if you keep in mind that the types
+always come AFTER the value, the code makes a lot more sense. A
+parameter in C# would be &lt;code&gt;int number&lt;/code&gt;; in F# it is written
+&lt;code&gt;number:Int&lt;/code&gt;. Don&amp;rsquo;t ask me why. The &lt;code&gt;match number with&lt;/code&gt; is just how
+you do the equivalent to a &lt;code&gt;switch/case&lt;/code&gt; in C#, but you will see in a
+second it is a lot more powerful!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let convert(number:Int, lang:Language) :string =
+    match lang with
+        | Language.English -&amp;gt; 
+            match number with
+               | 1 -&amp;gt; &amp;quot;one&amp;quot; 
+               | 2 -&amp;gt; &amp;quot;two&amp;quot; 
+               | _ -&amp;gt; &amp;quot;...&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We are using the same enum from the C# file, but it is missing
+something, right? Where are the Spanish and German parts? I try to
+compile this and what do I see?&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/Program.fs(11,11): Warning FS0025: Incomplete pattern
+matches on this expression. For example, the value &#39;enum&amp;lt;Language&amp;gt;
+(0)&#39; may indicate a case not covered by the pattern(s). (FS0025)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Spittake mushroom soup, the compiler just caught a potential bug for
+us! A C# run-time bug no less! Not only is this very powerful, but it
+is so simple. I can code the way I normally do, only now I get
+additional safety for free! And no unit or integration test would ever
+catch this class of errors.&lt;/p&gt;
+
+&lt;p&gt;Heck, if you really want to keep your classes and interfaces in C#,
+you can have some &amp;ldquo;glue code&amp;rdquo; in F#, and still get all the benefit!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let convert(number, lang) =
+    match lang with
+        | Language.English -&amp;gt; English().convert(number)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This still calls the C# class above, and now the compiler gives us a
+warning when we add a new enum value!&lt;/p&gt;
+
+&lt;p&gt;In this way, pattern matching is able to clearly remove edge cases. We
+converted an unsafe &lt;code&gt;if&lt;/code&gt; and &lt;code&gt;switch&lt;/code&gt; statement into a type safe
+&lt;code&gt;match&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;BONUS ROUND!&lt;/p&gt;
+
+&lt;p&gt;What we have already seen of pattern matching makes it a better
+&lt;code&gt;switch/case&lt;/code&gt; but what about the &lt;code&gt;if&lt;/code&gt; statement? Thankfully the
+&lt;code&gt;match/with&lt;/code&gt; statement allows for patterns matched to have a &lt;code&gt;when&lt;/code&gt;
+clause which only matches when the condition is true:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let convert(number, lang) =
+    match lang with
+        | Language.English -&amp;gt; 
+            match number with 
+                | x when x &amp;gt; 5 -&amp;gt; &amp;quot;Large!&amp;quot;
+                | 0 -&amp;gt; &amp;quot;zero&amp;quot;
+        | Language.Spanish -&amp;gt; 
+            match number with 
+                | x when x &amp;gt; 5 -&amp;gt; &amp;quot;Grande!&amp;quot;
+                | 0 -&amp;gt; &amp;quot;zero&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Running the compiler again give us:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
+Warning FS0025: Incomplete pattern matches on this expression. For
+example, the value &#39;1&#39; may indicate a case not covered by the
+pattern(s). However, a pattern rule with a &#39;when&#39; clause might
+successfully match this value. (FS0025) (monads-fsharp)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s right, it checks numbers too.&lt;/p&gt;
+
+&lt;p&gt;Lastly, it is possible to match on a combination of values, all at
+once. We can convert our more complex structure to something simpler
+using this trick, and the compiler is still intelligent enough to
+check for missing cases.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let convert(number, lang) =
+    match lang, number with
+        | Language.English, 0 -&amp;gt; &amp;quot;zero&amp;quot; 
+        | Language.English, 1 -&amp;gt; &amp;quot;one&amp;quot;
+        | Language.English, x when x &amp;gt; 1 -&amp;gt; &amp;quot;Larger than one!&amp;quot;
+        | Language.English, _ -&amp;gt; &amp;quot;dunno&amp;quot;
+        | Language.Spanish, 0 -&amp;gt; &amp;quot;zero&amp;quot; 
+        | Language.Spanish, x when x &amp;gt; 5 -&amp;gt; &amp;quot;Grande!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we introduce the &lt;code&gt;_&lt;/code&gt; which is equivalent to a &lt;code&gt;default&lt;/code&gt; in a C#
+&lt;code&gt;switch/case&lt;/code&gt; statement. The pattern &lt;code&gt;Language.English, _ -&amp;gt;&lt;/code&gt; sets a
+default for any number in &lt;code&gt;Language.English&lt;/code&gt; not already matched. The
+bug in the code here is the missing &lt;code&gt;Language.Spanish&lt;/code&gt; with numbers
+1-5. What does the compiler say?&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
+expression. For example, the value &#39;(_,1)&#39; may indicate a case not
+covered by the pattern(s). However, a pattern rule with a &#39;when&#39;
+clause might successfully match this value. (FS0025) (monads-fsharp)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Lastly, let&amp;rsquo;s show the final result of converting our original
+function to F#. If your entire function is just a single pattern
+match, you can remove the &lt;code&gt;match/with&lt;/code&gt; line and use the &lt;code&gt;function&lt;/code&gt;
+keyword, and simply match against the parameters (which I reversed for
+clarity, but do not need to be written).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let convert = function
+    | Language.English, 0 -&amp;gt; &amp;quot;zero&amp;quot; 
+    | Language.English, 1 -&amp;gt; &amp;quot;one&amp;quot;
+    | Language.English, _ -&amp;gt; &amp;quot;...&amp;quot;
+    | Language.Spanish, 0 -&amp;gt; &amp;quot;zero&amp;quot; 
+    | Language.Spanish, 1 -&amp;gt; &amp;quot;uno&amp;quot; 
+    | Language.Spanish, _ -&amp;gt; &amp;quot;~~~&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Our original 17 line convert function, converted into a &lt;em&gt;safer&lt;/em&gt; 7
+lines! I never had to specify what the types of lang, number and the
+return type are, because the compiler is able to figure that out from
+the code I wrote.&lt;/p&gt;
+
+&lt;p&gt;If you are not convinced at this point that pattern matching is a big
+step forward in the safety and ease of development, I am not sure what
+else would convince you. More safety means less time spent tracking
+down bugs and more time adding on features!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

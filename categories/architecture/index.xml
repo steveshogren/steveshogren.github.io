@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Architecture on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/architecture/</link>
+    <description>Recent content in Architecture on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Avoid Pop Culture Architecture</title>
+      <link>http://deliberate-software.com/pop-culture-architecture/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be
+microservices, business capabilities, CQRS, service-oriented architecture,
+Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each
+of these have been fashionable at some point.&lt;/p&gt;
+
+&lt;p&gt;Fashion is ultimately a signaling mechanism for status. We are attracted to
+fashionable architectures because they signal we have worked on elite teams. The
+more difficult or costly the trade-offs of the architecture, the more elite and
+special our team must have been to implement it successfully.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-microservices:5f95d372c851097c31e5c149858c384a&#34;&gt;Example: Microservices&lt;/h2&gt;
+
+&lt;p&gt;Microservices is a current fashionable design. Microservices have very clear
+pros and cons. They come with the ability to have a huge team or a fragmented
+deployment that potentially allows for horizontal scaling. For that ability, you
+will pay the immense costs: loss of strong consistency and transactions, a
+labyrinthine operational footprint and deployment, increased communication
+effort, expensive integration testing, and a code base that takes longer to
+program. &lt;a href=&#34;http://martinfowler.com/articles/microservice-trade-offs.html&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have a small team or system that does not need horizontal scaling on
+every single component, a microservice architecture is unlikely to solve your
+communication or trust issues. You will spend dollars on deployment, consistency
+issues, distributed debugging, and basic programming just to save a penny on
+communication and teamwork.
+&lt;a href=&#34;http://www.stackbuilders.com/news/the-hidden-costs-of-microservices&#34;&gt;(2)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For most teams, the logical conclusion probably will be: a microservice
+architecture solves problems we don&amp;rsquo;t have.&lt;/p&gt;
+
+&lt;p&gt;Microservices remain fashionable because they indicate work at the size and
+scale of a handful of elite companies. You would only likely encounter a couple
+hundred companies in the world that have a development staff so large or loads
+so high as to truly require such a system. Because of the rarity of actual need,
+it is a perfect signaling mechanism for status.&lt;/p&gt;
+
+&lt;p&gt;Saying that you implemented a microservice architecture implies &amp;ldquo;my team was so
+large or my product so popular, my team could afford to pay almost any cost to
+meet the demand.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Carefully consider your architecture decisions. Do not allow fashion to dictate
+your choices. Take pride in selecting the appropriate architecture for the
+project, no matter how unpopular.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
+      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <description>
+
+&lt;p&gt;SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency injection.&lt;/p&gt;
+
+&lt;p&gt;SimpleMock works in any language with closures that can be passed around by
+reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
+Python. I&amp;rsquo;m sure you can think of others.&lt;/p&gt;
+
+&lt;h2 id=&#34;example:442bb35a3947650665613cec7b90f820&#34;&gt;Example:&lt;/h2&gt;
+
+&lt;p&gt;Here is a brief (if a bit silly) example of the final pattern:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class LineCounter {
+    internal Func&amp;lt;string, IEnumerable&amp;lt;string&amp;gt;&amp;gt; _readLines = File.ReadLines;
+
+    public string CountLines(string filename) {
+        return _readLines(filename).Count();
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestLineCounter () {
+    var sut = new LineCounter();
+    // &amp;quot;SimpleMock&amp;quot; of File.ReadLines
+    sut._readLines = (string x) =&amp;gt; new List&amp;lt;string&amp;gt;{&amp;quot;test&amp;quot;, &amp;quot;that&amp;quot;};
+
+    var result = sut.CountLines(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(2, result);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;benefits:442bb35a3947650665613cec7b90f820&#34;&gt;Benefits&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reduced boilerplate&lt;/li&gt;
+&lt;li&gt;Saves interfaces for real polymorphism&lt;/li&gt;
+&lt;li&gt;Simplifies test code&lt;/li&gt;
+&lt;li&gt;Reduces testing concerns in production code&lt;/li&gt;
+&lt;li&gt;Removes need for fragile IoC containers&lt;/li&gt;
+&lt;li&gt;Encourages better abstraction design&lt;/li&gt;
+&lt;li&gt;Can convert one class at a time!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The SimpleMock pattern promotes a better design of your abstractions and simpler
+tests. The pattern also reduces boilerplate and the pollution of your production
+code with testing concerns.&lt;/p&gt;
+
+&lt;p&gt;If you aren&amp;rsquo;t familiar with the normal pattern of unit test mocking using
+interfaces, dependency injection, and mock libraries, scroll down to &amp;ldquo;The
+Non-SimpleMock Way&amp;rdquo; at the end of the post.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplemock-pattern:442bb35a3947650665613cec7b90f820&#34;&gt;SimpleMock Pattern&lt;/h2&gt;
+
+&lt;p&gt;The SimpleMock pattern is aptly named.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Replace Test-Only Interfaces With Functions&lt;/li&gt;
+&lt;li&gt;Define Dependencies Inline&lt;/li&gt;
+&lt;li&gt;Write Better Abstractions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-one-replace-test-only-interfaces-with-functions:442bb35a3947650665613cec7b90f820&#34;&gt;Step One: Replace Test-Only Interfaces With Functions&lt;/h2&gt;
+
+&lt;p&gt;My examples are in C# because that is what I got paid to write today - it is
+freshest in memory. C# has an incredible ability to create and pass around
+lambdas and function references. Here is an example of using functions instead
+of interfaces.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
+public class Translator {
+    private Func&amp;lt;DateTime&amp;gt; _getCurrentTime;
+
+    public Translator() : this(new CurrentTime().GetCurrentTime) {}
+
+    public Translator(Func&amp;lt;DateTime&amp;gt; getCurrentTime) {
+        this._getCurrentTime = getCurrentTime;
+    }
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var now = DateTime.Now;
+
+    var sut = new Translator(() =&amp;gt; now);
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The test code is quite simple! No longer do we need the dependency on third
+party mocking libraries, or the relatively complicated setup logic. Instead we
+can simply inject the lambda at runtime, replacing that pointer. We didn&amp;rsquo;t need
+the whole interface, really we just needed the simple signature of the function.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-define-dependencies-inline:442bb35a3947650665613cec7b90f820&#34;&gt;Step 2: Define Dependencies Inline&lt;/h2&gt;
+
+&lt;p&gt;We can take it even a step further. Why use constructor injection at all? Since
+all we really want is a single mutable dispatch table row, why not just make it
+that way?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class Translator {
+    internal Func&amp;lt;DateTime&amp;gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var now = DateTime.Now;
+    var sut = new Translator();
+    sut._getCurrentTime = () =&amp;gt; now;
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
+&amp;ldquo;Go to definition&amp;rdquo; now takes me to the actual line with the actual called
+function. We&amp;rsquo;ve replaced a dependency on a class based interface with a function
+signature. The function signature &lt;em&gt;is&lt;/em&gt; the interface!&lt;/p&gt;
+
+&lt;p&gt;You probably noticed we have lost something with this final version. We have
+lost the ability to inject polymorphic behavior through the constructor. If you
+need it, simply go back to injecting the interface in the constructor or by
+passing it into the function itself. In practice, I have found this is needed
+very rarely, making the SimpleMock pattern a better tool to reach for first.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-3-write-better-abstractions:442bb35a3947650665613cec7b90f820&#34;&gt;Step 3: Write Better Abstractions&lt;/h2&gt;
+
+&lt;p&gt;Lastly, SimpleMock actually promotes better designs. For example, a coworker was
+writing some tests today and ran into a complicated situation. Take the
+following sanitized code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
+    internal Action&amp;lt;Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+    internal Action&amp;lt;Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+    public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
+        ignoreElements(t1);
+        ignoreElements(t2);
+        removeIgnoredElements(t1);
+        removeIgnoredElements(t2);
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How would you check that each section was called? Our naive solution was a
+complicated lambda with a &amp;ldquo;timesCalled&amp;rdquo; counter and an if statement to assert
+against each argument, but it turns nasty quickly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;/// Nasty test code
+[TestCase]
+public void TestWorkDoer () {
+    var sut = new WorkDoer();
+
+    var ignoredCalledTimes = 0;
+    sut.ignoreElements = (t) =&amp;gt; {
+        ignoredCalledTimes++;
+        if (ignoredCalledTimes == 1) {
+            Assert.AreEqual(t1, t);
+        } else {
+            Assert.AreEqual(t2, t);
+        }
+    };
+    var removedCalledTimes = 0;
+    sut.removeIgnoredElements = (t) =&amp;gt; {
+        removedCalledTimes++;
+        if (removedCalledTimes == 1) {
+            Assert.AreEqual(t1, t);
+        } else {
+            Assert.AreEqual(t2, t);
+        }
+    };
+
+    var t1 = new Thing();
+    var t2 = new Thing();
+
+    var result = sut.IgnoreAndRemoveThings(t1, t2);
+    Assert.AreEqual(2, removedCalledTimes);
+    Assert.AreEqual(2, ignoredCalledTimes);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
+Conditionals?! In a test?! Unconscionable.&lt;/p&gt;
+
+&lt;p&gt;In situations like this, we have two easy options. Option one is to just use
+a third party mocking library, replacing the functions from inside the test
+code. This gives us access to all the sophisticated mocking tools available.&lt;/p&gt;
+
+&lt;p&gt;My preferred option is seeking to decomplect the production code by using better
+abstractions.&lt;/p&gt;
+
+&lt;p&gt;I have found that strong reliance of mocking libraries enables worse designs.
+Consider the code, what makes it so hard to test? Not knowing which element is
+called when, doing the same work on two parameters, and reference mutation all
+make this a poor abstraction. Why not simplify?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
+    internal Func&amp;lt;Thing, Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+    internal Func&amp;lt;Thing, Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+    public List&amp;lt;Thing&amp;gt; IgnoreAndRemoveThings(List&amp;lt;Thing&amp;gt; ts) {
+        return ts.Select(t =&amp;gt; removeIgnoredElements(ignoreElements(t)));
+    }
+}
+
+/// Simpler test
+[TestCase]
+public void TestWorkDoer () {
+    var sut = new WorkDoer();
+    var expected = new Thing();
+    var ts = new List&amp;lt;Thing&amp;gt;{new Thing()};
+
+    sut.ignoreElements = (t) =&amp;gt; new Thing();
+
+    sut.removeIgnoredElements = (t) =&amp;gt; {
+        Assert.AreEqual(t, sut.ignoreElements(t));
+        return expected;
+    };
+
+    var result = sut.IgnoreAndRemoveThings(ts);
+
+    Assert.AreEqual(expected, result.First())
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much better! Yes, we had to change a few signatures. We get the same work done,
+but now the code is actually a lot more useful. Our test code is comparable with
+anything you&amp;rsquo;d find using a mocking library. I am absolutely okay with using a
+mocking library when needed, but I always carefully consider my abstractions and
+design first.&lt;/p&gt;
+
+&lt;p&gt;If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
+for the job, and that is fine. But for most work around the yard, you can leave
+the chainsaw in the shed.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:442bb35a3947650665613cec7b90f820&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I’ve shown how you can really simplify your code with SimpleMock. The dispatch
+row is clear and easy to read. We have removed some third party mocking
+dependencies. You can remove a lot of the boilerplate &amp;ldquo;for making it more
+testable&amp;rdquo; from your code. The test code is greatly simplified, and injection a
+breeze. The result: much simpler code, just as easy to test.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Shuwei Chen for helping me put this together!&lt;/p&gt;
+
+&lt;h2 id=&#34;the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;The Non-SimpleMock Way&lt;/h2&gt;
+
+&lt;p&gt;If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.&lt;/p&gt;
+
+&lt;p&gt;The traditional way of performing C# unit test mocking involves dependency
+injection and interface mocking using a mocking library. For dependency
+injection, it is common to use a tool like Ninject or hand-rolled constructor
+injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
+an example of a class and its testing code without any business logic.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface ICurrentTime {
+    DateTime GetCurrentTime();
+}
+
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
+
+public class Translator {
+    private readonly ICurrentTime ct;
+
+    public Translator() : this(new CurrentTime()) {}
+
+    public Translator(ICurrentTime currentTime) {
+        this.ct = currentTime;
+    }
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, ct.GetCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code with Moq
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var rightNow = DateTime.Now;
+    var mock = new Mock&amp;lt;ICurrentTime&amp;gt;();
+
+    mock.Setup(a=&amp;gt;a.GetCurrentTime()).Returns(rightNow);
+
+    var sut = new Translator(mock.Object);
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(rightNow.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve done much C# unit testing, this should look familiar. We want to
+inject some code that is potentially long-running or dynamic. We put that code
+into a class, add an interface, then inject that interface into the class we
+want to test. To test it, we mock the interface, creating a different concrete
+class at test runtime which implements that interface. We can setup that mock to
+respond with anything, which we use for assertions.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-wrong-with-the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;What&amp;rsquo;s Wrong with the Non-SimpleMock Way?&lt;/h2&gt;
+
+&lt;p&gt;The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don&amp;rsquo;t really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic.&lt;/p&gt;
+
+&lt;p&gt;What we have done is create a very small and primitive dispatch table. The
+table has one row: something that has a function with the signature of &lt;code&gt;() -&amp;gt; DateTime&lt;/code&gt; or, as it is known in C#: &lt;code&gt;Func&amp;lt;DateTime&amp;gt;&lt;/code&gt;.  We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That&amp;rsquo;s a lot of boilerplate!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Christmas F# Polymorphism</title>
+      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
+      <description>&lt;p&gt;One of my favorite things about F# is how it lets you choose how you want
+to align your data.&lt;/p&gt;
+
+&lt;p&gt;In the previous posts highlighting on
+&lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;pattern matching&lt;/a&gt;
+and
+&lt;a href=&#34;http://deliberate-software.com/inversed-polymorphism/&#34;&gt;inverted polymorphism&lt;/a&gt;
+we covered how pattern matching in F# is safer than &lt;code&gt;if&lt;/code&gt;
+statements and can replace classes and interfaces for polymorphism. If
+you are unfamiliar with these concepts, you might want to skim those
+first.&lt;/p&gt;
+
+&lt;p&gt;Today, for the 6th day of the
+&lt;a href=&#34;https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/&#34;&gt;F# Advent Calendar&lt;/a&gt;
+I wanted to highlight F#&amp;rsquo;s flexibility in solving the
+&amp;ldquo;&lt;a href=&#34;http://c2.com/cgi/wiki?ExpressionProblem&#34;&gt;expression problem&lt;/a&gt;&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s show the two alternatives, first here is one with interfaces:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees = 
+    abstract member Cost : int -&amp;gt; int
+    abstract member Colors : unit -&amp;gt; string list
+    
+type PlasticTree() =
+    interface IChristmasTrees with
+        member this.Cost(jolly_factor) = (100 * jolly_factor) / 2
+        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
+        
+type LiveTree() =
+    let HEAD_ACHE = 15
+    interface IChristmasTrees with
+        member this.Cost(jolly_factor) = (jolly_factor + 10) * HEAD_ACHE
+        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the same functionality using pattern matching and discriminated unions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees2 =
+  | PlasticTree
+  | LiveTree
+
+let colors = function
+  | PlasticTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
+  | LiveTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
+
+let cost tree jolly_factor =
+  match tree with
+    | PlasticTree -&amp;gt; (100 * jolly_factor) / 2
+    | LiveTree -&amp;gt;
+      let HEAD_ACHE = 15
+      (jolly_factor + 10) * HEAD_ACHE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What changes if we want to add a new type of tree? In the class-based
+example, adding a new type is quite simple, you only need to edit one
+place to find all the definitions regarding the new type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;In the pattern matching example, adding a new type requires editing
+every single place you created a function that matches on the
+type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Thankfully, in both cases the compiler gives warnings about missing
+functions or matches, so both are equally &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;What about changing an existing function or adding a new function? We
+now see the opposite behavior. Classes become harder to edit, because
+the functions are spread across multiple classes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;A pattern matching system is now the easier to modify, each function
+only lives in one place.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;And that is the expression problem! The best thing about F# is that
+you get to pick which one is better for each type of data! If you know
+a certain type will need new behavior often, but rarely need new
+types, use pattern matching. If you know there is a static set of
+functions for a set of types, but the type list changes often, maybe
+the traditional interfaces and classes makes the most sense.&lt;/p&gt;
+
+&lt;p&gt;There is no reason not to mix and match the two ways to handle
+polymorphism, so you are free to choose the best representation for
+each type of data you have!&lt;/p&gt;
+
+&lt;p&gt;Happy F#-filled Festivities!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

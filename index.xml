@@ -1,0 +1,2240 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deliberate Software</title>
+    <link>http://deliberate-software.com/</link>
+    <description>Recent content on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Avoid Pop Culture Architecture</title>
+      <link>http://deliberate-software.com/pop-culture-architecture/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be
+microservices, business capabilities, CQRS, service-oriented architecture,
+Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each
+of these have been fashionable at some point.&lt;/p&gt;
+
+&lt;p&gt;Fashion is ultimately a signaling mechanism for status. We are attracted to
+fashionable architectures because they signal we have worked on elite teams. The
+more difficult or costly the trade-offs of the architecture, the more elite and
+special our team must have been to implement it successfully.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-microservices:5f95d372c851097c31e5c149858c384a&#34;&gt;Example: Microservices&lt;/h2&gt;
+
+&lt;p&gt;Microservices is a current fashionable design. Microservices have very clear
+pros and cons. They come with the ability to have a huge team or a fragmented
+deployment that potentially allows for horizontal scaling. For that ability, you
+will pay the immense costs: loss of strong consistency and transactions, a
+labyrinthine operational footprint and deployment, increased communication
+effort, expensive integration testing, and a code base that takes longer to
+program. &lt;a href=&#34;http://martinfowler.com/articles/microservice-trade-offs.html&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have a small team or system that does not need horizontal scaling on
+every single component, a microservice architecture is unlikely to solve your
+communication or trust issues. You will spend dollars on deployment, consistency
+issues, distributed debugging, and basic programming just to save a penny on
+communication and teamwork.
+&lt;a href=&#34;http://www.stackbuilders.com/news/the-hidden-costs-of-microservices&#34;&gt;(2)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For most teams, the logical conclusion probably will be: a microservice
+architecture solves problems we don&amp;rsquo;t have.&lt;/p&gt;
+
+&lt;p&gt;Microservices remain fashionable because they indicate work at the size and
+scale of a handful of elite companies. You would only likely encounter a couple
+hundred companies in the world that have a development staff so large or loads
+so high as to truly require such a system. Because of the rarity of actual need,
+it is a perfect signaling mechanism for status.&lt;/p&gt;
+
+&lt;p&gt;Saying that you implemented a microservice architecture implies &amp;ldquo;my team was so
+large or my product so popular, my team could afford to pay almost any cost to
+meet the demand.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Carefully consider your architecture decisions. Do not allow fashion to dictate
+your choices. Take pride in selecting the appropriate architecture for the
+project, no matter how unpopular.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Haskell is the Dark Souls of Programming</title>
+      <link>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
+      <pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
+      <description>
+
+&lt;p&gt;Please don&amp;rsquo;t hit me, Haskell does a great job of that already.&lt;/p&gt;
+
+&lt;p&gt;I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable
+lore, a great &lt;del&gt;combat&lt;/del&gt; type system, a cliff-wall difficulty curve, and
+unending punishment.&lt;/p&gt;
+
+&lt;p&gt;I want to collect some statistics from the GitHub API.&lt;/p&gt;
+
+&lt;h3 id=&#34;step-one-stack:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step One - Stack&lt;/h3&gt;
+
+&lt;p&gt;I download stack and start a project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats
+Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ ...
+ ......
+All done.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So far so good. Does it work?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  &amp;gt; stack build &amp;amp;&amp;amp; stack exec -- github-stats-exe 
+   github-stats-0.1.0.0: configure
+   ..... 
+   Registering github-stats-0.1.0.0...
+   someFunc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Awww yisss. This is going to be so easy!&lt;/p&gt;
+
+&lt;h3 id=&#34;step-two-https-get-request:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step Two - HTTPS GET Request&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/tomb_of_the_giants.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Now I need to query the GitHub API. Not my first time to the rodeo, I generate a
+personal access token from GitHub and copy it to a local file. What query should
+I run first? How about the count for all ASM tetris repositories? Poking around
+the &lt;a href=&#34;https://developer.github.com/v3/search/#search-repositories&#34;&gt;docs&lt;/a&gt; comes up
+with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET https://api.github.com/search/repositories?q=tetris+language:assembly&amp;amp;sort=stars&amp;amp;order=desc
+User-Agent: steveshogren
+Authorization: token PUT_TOKEN_HERE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;{.. &amp;ldquo;total_count&amp;rdquo;: 354}&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Easy life. Now how do you GET a resource in Haskell? Ah,
+&lt;a href=&#34;https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html&#34;&gt;Network.HTTP&lt;/a&gt;!
+I copy the front page sample into &lt;code&gt;src/Lib.hs&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module Lib
+    ( someFunc
+    ) where
+
+x = simpleHTTP (getRequest &amp;quot;https://www.github.com/&amp;quot;) &amp;gt;&amp;gt;= fmap (take 100) . getResponseBody
+
+someFunc :: IO ()
+someFunc = 
+   print x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So simple! This is why laugh at my NodeJS loving friends!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; stack build
+src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
+src/Lib.hs:5:17: Not in scope: ‘getRequest’
+src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
+Compilation failed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Doesn&amp;rsquo;t compile. Durp, hackage is a package library, I need to add this to my
+cabal. What is the name of the package? HTTP-4000? HTTP-4000.3.2? Nothing in
+hackage seems to indicate what goes into the cabal file. I discover it is just
+HTTP through trial and error. I update my cabal file&amp;hellip; in all three
+build-depends&amp;hellip;?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  build-depends:       base &amp;gt;= 4.7 &amp;amp;&amp;amp; &amp;lt; 5
+                       , HTTP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hrm, same error.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; stack build
+src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
+src/Lib.hs:5:17: Not in scope: ‘getRequest’
+src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
+Compilation failed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oh, durp, I&amp;rsquo;d need an import. (WHY ISN&amp;rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
+doesn&amp;rsquo;t work, I need &lt;code&gt;putStrLn&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Network.HTTP
+
+x = simpleHTTP (getRequest &amp;quot;https://www.github.com/&amp;quot;) &amp;gt;&amp;gt;= fmap (take 100) . getResponseBody
+
+someFunc :: IO ()
+someFunc = x &amp;gt;&amp;gt;= putStrLn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here goes!!!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; &amp;gt; stack build &amp;amp;&amp;amp; stack exec -- github-stats-exe
+github-stats-exe: user error (https not supported)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: This package only supports HTTP;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/nope_better.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;When &lt;del&gt;playing Dark Souls&lt;/del&gt;programming Haskell, sometimes the best move
+is to run away. I search again. &lt;code&gt;haskell https request&lt;/code&gt; returns
+&amp;ldquo;http-conduit&amp;rdquo; as the best choice. After adding http-conduit to my cabal, I come
+up with this beast without any surprises:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;query :: IO String
+query = do
+    initReq &amp;lt;- parseUrl &amp;quot;https://api.github.com/search/repositories&amp;quot;
+    let r = initReq
+                   { method = &amp;quot;GET&amp;quot;
+                    , requestHeaders = [(hUserAgent, &amp;quot;steveshogren&amp;quot;)
+                                      , (hAuthorization, &amp;quot;token PUT_TOKEN_HERE&amp;quot;)]}
+    let request = setQueryString [(&amp;quot;q&amp;quot;, Just &amp;quot;tetris+language:assembly&amp;quot;)
+                                 ,(&amp;quot;order&amp;quot;, Just &amp;quot;desc&amp;quot;)
+                                 ,(&amp;quot;sort&amp;quot;, Just &amp;quot;stars&amp;quot;)] r
+    manager &amp;lt;- newManager tlsManagerSettings
+    res &amp;lt;- httpLbs request manager
+    return . show . responseBody $ res
+
+someFunc :: IO ()
+someFunc = do
+   query &amp;gt;&amp;gt;= putStrLn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Huzzah! Results! I&amp;rsquo;m getting back a monster string of json data.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;\&amp;ldquo;{\\&amp;ldquo;total_count\\&amp;rdquo;:66, &amp;hellip;.}\&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/praisethesun.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;step-three-parsing-json:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step Three - Parsing JSON&lt;/h3&gt;
+
+&lt;p&gt;Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
+use Aeson and get the total_count value from the return, I needed the following
+additions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
+
+import GHC.Generics
+import Data.Aeson
+
+data ResultCount = ResultCount {
+  total_count :: Int }
+  deriving (Generic, Show)
+
+instance ToJSON ResultCount
+instance FromJSON ResultCount
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ResultCount allows me to use &lt;code&gt;decode&lt;/code&gt; from aeson instead of &lt;code&gt;show&lt;/code&gt; to
+parse the &amp;ldquo;total_count&amp;rdquo; from the JSON response into an Int. Sure enough, it
+does!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric #-}
+module Lib
+    ( someFunc
+    ) where
+
+import Control.Monad
+import Network
+import Network.HTTP.Conduit
+import Network.HTTP.Types.Header
+import GHC.Generics
+import Data.Aeson
+
+data ResultCount = ResultCount {
+  total_count :: Int }
+  deriving (Generic, Show)
+
+instance ToJSON ResultCount
+instance FromJSON ResultCount
+
+query :: IO (Maybe Int)
+query = do
+    initReq &amp;lt;- parseUrl &amp;quot;https://api.github.com/search/repositories&amp;quot;
+    let r = initReq
+                   { method = &amp;quot;GET&amp;quot;
+                    , requestHeaders = [(hUserAgent, &amp;quot;steveshogren&amp;quot;)
+                                      , (hAuthorization, &amp;quot;token PUT_TOKEN_HERE&amp;quot;)]}
+    let request = setQueryString [(&amp;quot;q&amp;quot;, Just &amp;quot;tetris+language:assembly&amp;quot;)
+                                 ,(&amp;quot;order&amp;quot;, Just &amp;quot;desc&amp;quot;)
+                                 ,(&amp;quot;sort&amp;quot;, Just &amp;quot;stars&amp;quot;)] r
+    manager &amp;lt;- newManager tlsManagerSettings
+    res &amp;lt;- httpLbs request manager
+    return . liftM total_count . decode . responseBody $ res
+
+someFunc :: IO ()
+someFunc = query &amp;gt;&amp;gt;= print
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Puts out: &lt;code&gt;Just 66&lt;/code&gt;. Success! Wait. 66 isn&amp;rsquo;t the same count I got when
+running from the browser. Check again. Sure enough, browser comes up with a
+totally different count.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/come_at_me_bro.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Maybe the query request isn&amp;rsquo;t correct? Adding a &lt;code&gt;print request&lt;/code&gt; on line 31
+after building the request shows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Request {
+  host                 = &amp;quot;api.github.com&amp;quot;
+  port                 = 443
+  secure               = True
+  requestHeaders       = [(&amp;quot;User-Agent&amp;quot;,&amp;quot;steveshogren&amp;quot;),(&amp;quot;Authorization&amp;quot;,&amp;quot;token PUT_TOKEN_HERE&amp;quot;)]
+  path                 = &amp;quot;/search/repositories&amp;quot;
+  queryString          = &amp;quot;?q=tetris%2Blanguage%3Aassembly&amp;amp;order=desc&amp;amp;sort=stars&amp;quot;
+  method               = &amp;quot;GET&amp;quot;
+  proxy                = Nothing
+  rawBody              = False
+  redirectCount        = 10
+  responseTimeout      = Just (-3425)
+  requestVersion       = HTTP/1.1
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The queryString isn&amp;rsquo;t right! &lt;code&gt;?q=tetris%2Blanguage%3Aassembly&amp;amp;order=desc&amp;amp;sort=stars&lt;/code&gt; It encoded my &lt;code&gt;+&lt;/code&gt;
+and &lt;code&gt;:&lt;/code&gt;! After an hour of reading through docs and researching URL encoding
+specs, it dawns on me. &lt;code&gt;+&lt;/code&gt; is an encoded whitespace.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;No face-palm gif could ever represent the shear magnitude of my current
+emotions&amp;hellip; You&amp;rsquo;ll have to use your imagination&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I change my query to &lt;code&gt;(&amp;quot;q&amp;quot;, Just &amp;quot;tetris language:assembly&amp;quot;)&lt;/code&gt; and the right
+count comes back! &lt;code&gt;Just 354&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I finally have something that correctly fetches a count of repositories from
+GitHub and parses it into an Int. After over four hours of &lt;del&gt;Dark
+Souls&lt;/del&gt;Haskell punishment, we deserve to enjoy a bonfire!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/solaire_sitting.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;edit-bonus-round:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Edit: Bonus Round!&lt;/h2&gt;
+
+&lt;p&gt;Thanks to
+&lt;a href=&#34;http://bitemyapp.com/posts/2016-02-06-haskell-is-not-trivial-not-unfair.html&#34;&gt;Chris Allen&lt;/a&gt;
+and
+&lt;a href=&#34;https://www.reddit.com/r/programming/comments/44hdl6/haskell_is_the_dark_souls_of_programming/czqaxfu&#34;&gt;/u/JeanParker&lt;/a&gt;
+for pointing me towards &lt;a href=&#34;http://www.serpentine.com/wreq/&#34;&gt;wreq&lt;/a&gt;, which weirdly
+didn&amp;rsquo;t come up when I looked around for libs yesterday. Yep, it was 6th on the
+Google when searching for &lt;code&gt;haskell https get&lt;/code&gt;. &lt;code&gt;Network.HTTP&lt;/code&gt; is the
+top three results, and that doesn&amp;rsquo;t even &lt;em&gt;do&lt;/em&gt; https.&lt;/p&gt;
+
+&lt;p&gt;¯\&lt;em&gt;(ツ)&lt;/em&gt;/¯&lt;/p&gt;
+
+&lt;p&gt;Armed with their helpful suggestions, I knocked this out this morning.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Network.Wreq
+import Control.Lens
+import Data.Aeson
+import Data.Aeson.Lens
+import qualified Data.Text as T
+import qualified Data.ByteString.Char8 as BS
+
+opts :: String -&amp;gt; String -&amp;gt; Options
+opts lang token = defaults &amp;amp; param &amp;quot;q&amp;quot; .~ [T.pack $ &amp;quot;tetris language:&amp;quot; ++ lang]
+                        &amp;amp; param &amp;quot;order&amp;quot; .~ [&amp;quot;desc&amp;quot;]
+                        &amp;amp; param &amp;quot;sort&amp;quot; .~ [&amp;quot;stars&amp;quot;]
+                        &amp;amp; header &amp;quot;Authorization&amp;quot; .~ [BS.pack $ &amp;quot;token &amp;quot; ++ token]
+
+query lang = do
+    token &amp;lt;- readFile &amp;quot;token&amp;quot;
+    r &amp;lt;- getWith (opts lang token) &amp;quot;https://api.github.com/search/repositories&amp;quot;
+    return $ r ^? responseBody . key &amp;quot;total_count&amp;quot; . _Number
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MUCH better. This includes reading my token from file called &amp;ldquo;token&amp;rdquo; so I don&amp;rsquo;t
+accidentally commit it. Also includes building up the different query options
+based on inputs, which was the next step. Thanks y&amp;rsquo;all.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/solaire_idle.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Pixel gifs sourced from
+&lt;a href=&#34;http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls&#34;&gt;zedotagger&lt;/a&gt; on
+deviantart, thanks zedotagger!&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Development Disappointment Disorder</title>
+      <link>http://deliberate-software.com/development-disappointment-disorder/</link>
+      <pubDate>Thu, 04 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/development-disappointment-disorder/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;We&amp;rsquo;ve never had a successful release&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You just finished this really hard feature. The whole thing was worse than
+anyone realized. Not only that, but the feature wasn&amp;rsquo;t clearly explained, so you
+lost time churning on the actual requirements. Despite all the confusion,
+iteration, and technical challenges, you managed to get it working! You look
+back, savoring how much you have learned and grown.&lt;/p&gt;
+
+&lt;p&gt;You show it off to the product owner. He barely seems to hear you. His shoulders
+slump in disappointment.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Great, but we are still four weeks behind.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your team is infected with &lt;strong&gt;Development Disappointment Disorder&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It looks different in every team. The manager who sets unreasonable deadlines
+then demands overtime. The project manager who gets angry at every little thing.
+Developers who feel they need to point fingers to shift the blame. The boss who
+is never happy no matter what is achieved. The team that feels they have never
+had a successful release.&lt;/p&gt;
+
+&lt;h2 id=&#34;unreasonable-expectations:4153c418f6ff9c9d005520a12de36a01&#34;&gt;Unreasonable Expectations&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Development Disappointment Disorder is caused by unreasonable expectations.&lt;/strong&gt;
+Someone thinks, hopes, or wishes they can get 100 units of productivity from a
+team and codebase that only can sustain 30-40 units. They want the impossible,
+and no amount of cajoling, pressuring, yelling, or passive aggressive comments
+will change reality.&lt;/p&gt;
+
+&lt;p&gt;Productivity is not completely a people problem. Every team has an upper limit
+to what they can produce in a system. The human mind has boundaries. Very real
+limits exist given the team&amp;rsquo;s size and existing codebases. While new technical
+tools and libraries enable more productive teams, these changes often are
+hindered by an existing codebase. The team with a multi-million line C# codebase
+is not going to get much value from the productivity gains possible with
+Haskell&amp;rsquo;s type system.&lt;/p&gt;
+
+&lt;p&gt;You cannot rush software development without incurring a drop in quality,
+stability, or maintainability. The work is complex and difficult: every expert
+in our field agrees with adages like &amp;ldquo;adding developers to a late project makes
+it later.&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;suggestions:4153c418f6ff9c9d005520a12de36a01&#34;&gt;Suggestions&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;For the technical staff:&lt;/strong&gt; How accurate are your estimates? How consistent
+is your throughput? Do you regularly under-estimate your features? Do
+developers often say, &amp;ldquo;oh, that&amp;rsquo;s only&amp;hellip;&amp;rdquo;? Are some types of features &amp;ldquo;always
+late&amp;rdquo;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You must learn to be blameless in this situation, and that means striving to
+  give as accurate an estimate as you can with what you have. Throwing estimates
+  out without much thought only makes things worse. How long did a similar
+  feature take last time? If you regularly have inaccurate estimates in a
+  certain area of the system, put extra care into those estimates, working to
+  provide the best estimate you can.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;For the business:&lt;/strong&gt; There is only so many units of productivity that fit
+into a given time frame.You need to assess every feature and estimate, and
+consider the risk with each.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Acting disappointed, angry, or passive aggressive will not get you more
+  features, it will only demotivate the technical staff. You will get more
+  consistency, because they will consistently work slower. You will get more
+  hours, but each hour will see a
+  &lt;a href=&#34;http://www.igda.org/?page=crunchsixlessons&#34;&gt;massive drop in valuable work.&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Acting disappointed, angry, or passive aggressive will not get you more features&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you are unhappy with the work produced, you need to consider why. Were you
+  told it would be sooner? Did you promise that to someone? What changed since
+  then? If the feature isn&amp;rsquo;t actually needed, why did you pick it? If spending
+  twice as much made it not worthwhile, was it really a good choice?&lt;/p&gt;
+
+&lt;p&gt;What would happen if you didn&amp;rsquo;t promise &lt;em&gt;when&lt;/em&gt; the features would be done?
+  Either way, your promise doesn&amp;rsquo;t change when it will be done, it just adds
+  risk to your credibility. Often the only thing to be gained by giving out
+  estimates and time-lines is risk. Unless the customer is truly blocked on your
+  estimate, simply communicate what you are doing, not when you hope it will be
+  done.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Often the only thing to be gained by telling customers an estimate is risk&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;For the team:&lt;/strong&gt; Celebrate your successes. Abolish the notion of a &amp;ldquo;failed
+release&amp;rdquo;. Build up a culture that finds little victories throughout the
+release.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With these tools you can fight Development Disappointment Disorder. You can
+start to celebrate what you do accomplish. &lt;strong&gt;A team that is energized and motivated will accomplish more.&lt;/strong&gt; The team that celebrates their work will strive for more.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Designing A Compassionate Interview For A High Performing Individual</title>
+      <link>http://deliberate-software.com/compassionate-interviewing/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/compassionate-interviewing/</guid>
+      <description>
+
+&lt;p&gt;After my post &lt;a href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;Interview Humiliation&lt;/a&gt;, a number of
+people have asked me how I interview compassionately. I strive to make my interviews as
+stress-free and respectful as possible while still rendering a yes/no at the end.&lt;/p&gt;
+
+&lt;p&gt;Any good interview process needs to start with goals:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Respect the candidate&amp;rsquo;s time&lt;/li&gt;
+&lt;li&gt;Make the candidate comfortable&lt;/li&gt;
+&lt;li&gt;Under-skilled candidates should feel no shame&lt;/li&gt;
+&lt;li&gt;Both passing and failing candidates should want to tell their friends to
+apply&lt;/li&gt;
+&lt;li&gt;We should render the same decision if the interview is repeated multiple
+times (with different exercises each time)&lt;/li&gt;
+&lt;li&gt;The candidate should know the process in advance and not be able to earn a
+pass through short term &amp;ldquo;cramming&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;The candidate should feel we are all working collaboratively, instead of us
+against them&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;the-ideal-candidate:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;The Ideal Candidate&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/whiteboards2.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;We want to hire for high-level skills. Fast learning, strategic thinking, good
+design, and emotional intelligence are more important than rote memorization. We
+care more about &amp;ldquo;ability to grow&amp;rdquo; than &amp;ldquo;current skills&amp;rdquo;. Our job does not
+involve whiteboard coding, puzzle questions, or anything that can be discovered
+with a decent IDE, so those are left out.&lt;/p&gt;
+
+&lt;p&gt;We care a lot about &amp;ldquo;no jerks&amp;rdquo;. We want our workplace to be fun, relaxing, and
+supportive. We want candidates who are comfortable being wrong and corrected
+regularly, and who can correct others politely.&lt;/p&gt;
+
+&lt;p&gt;We do not care about any question that could be easily be answered by Google. If
+an internet search can easily answer the question, it is pointless to care if
+the human in front of me happens to know it. Given the search revolution of the
+last decade, the value of memorized facts falls to almost zero. Facts as a proxy
+for actual job skill probably used to be accurate until the internet allowed
+every interview question to become public record.&lt;/p&gt;
+
+&lt;h2 id=&#34;scoring:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Scoring&lt;/h2&gt;
+
+&lt;p&gt;I hope someone one day invents a perfect productivity score! For now, counting
+bugs, features, correct answers, etc, are all proxies that poorly represent
+actual productivity. If those actually worked, why don&amp;rsquo;t we use them for raises,
+bonuses, and reviews? Because. They. Do. Not. Work.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Counting bugs, features, correct answers, etc, are all proxies that poorly
+represent actual productivity&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A well-designed rubric &lt;em&gt;can&lt;/em&gt; work. A rubric is a way of measuring the
+&amp;ldquo;un-measurable&amp;rdquo;. You probably have seen them in year-end reviews. A grid with
+categories on one side, and a 1-5 score with a paragraph explanation for each.
+We only score what has to be explained with a description from the interviewers.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;How was the candidate&amp;rsquo;s communication skills?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;They misunderstood me only a few times, and I only had trouble understanding
+them once or twice. The watchers all felt like the communication was pretty
+good. They were definitely above average: &amp;frac34;.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;How about design skills?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;They were able to clearly design every abstraction. They deeply understood
+passing functions as values, see how this takes a function for polymorphism?
+We prodded a bit, and they were able to give a couple other ways to achieve
+the same behavior. We all agreed it was best the way it was. All said, they
+did most of the heavy lifting for this whole project, and it is superbly
+designed: 4/4&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;our-process:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Our Process&lt;/h2&gt;
+
+&lt;p&gt;To &amp;ldquo;level-set&amp;rdquo; our expectations, we had several of our developers at different
+levels perform the interview live in front of the team. We made them use various
+languages and exercises they had never seen before. This &amp;ldquo;level-setting&amp;rdquo; helped
+us to see how known good developers perform when way out of their element and
+uncomfortable.&lt;/p&gt;
+
+&lt;p&gt;All interviews are assigned to developers randomly, and all are expected to
+participate. The candidate should have two developers around at all time, to
+prevent bias by any individual. One pairs while the others rotate watching
+silently. The watchers are expected to stay quiet, to prevent confusion.&lt;/p&gt;
+
+&lt;p&gt;Before the first interview, the candidate is sent something very much like this
+document. We think there is no way someone could &amp;ldquo;fake us out&amp;rdquo; on any criteria.
+The things we look for take years of practice to cultivate, so &amp;ldquo;cramming&amp;rdquo; should
+not help much (if at all). The one exception to that is if they have never heard
+of Test Driven Development, we do recommend they Google it for a few minutes, as
+prior knowledge helps smooth the phone screen considerably.&lt;/p&gt;
+
+&lt;h3 id=&#34;phone-screen:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Phone Screen&lt;/h3&gt;
+
+&lt;p&gt;We pair program over the internet using a shared programming environment called
+&lt;a href=&#34;c9.io&#34;&gt;Cloud9&lt;/a&gt;. We (currently) have projects set up for Java, JavaScript,
+Python, Ruby, and C#. The candidate may choose their desired language. We then
+pair program using Test Driven Development to build out a well defined exercise.
+The candidate may entirely verbally &amp;ldquo;navigate&amp;rdquo;, while one of our programmers
+entirely &amp;ldquo;drives&amp;rdquo; and types out the code. This is acceptable.&lt;/p&gt;
+
+&lt;p&gt;If the candidate has never seen any of those languages, Google or asking the
+interviewer is totally fair game, and does not count against them. If the
+candidate has completely no idea, the interviewer is expected to politely
+complete the task while keeping the candidate engaged.&lt;/p&gt;
+
+&lt;p&gt;The phone screen is under an hour, with 30 minutes for the pair programming.
+The remaining time is for questions about our office. We let them drive the
+second half of the interview, asking us questions about what our team and
+process is like. We attempt to answer clearly and honestly, both good and bad.&lt;/p&gt;
+
+&lt;h3 id=&#34;in-person:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;In-Person&lt;/h3&gt;
+
+&lt;p&gt;The in-person interview is from 9:30 to 3:00. We are not thrilled with how much
+time it takes and would like to shorten it, but so far have no superior
+alternatives.&lt;/p&gt;
+
+&lt;p&gt;At the start of the day, we spend 30 minutes chatting and asking questions back
+and forth. Our questions are meant to tell us about the candidate&amp;rsquo;s background
+and &amp;ldquo;programming philosophy&amp;rdquo;: books read, favorite languages, interesting
+projects they&amp;rsquo;ve worked on, etc. We allow them as many questions as they would
+like.&lt;/p&gt;
+
+&lt;p&gt;The rest of the day is very much like a &amp;ldquo;typical day at work&amp;rdquo;, but with
+programming exercises instead of production code. We pair program on the
+exercises, following the same flow from the phone screen. The exercises have no
+&amp;ldquo;tricks&amp;rdquo;, they are reasonably straightforward and don&amp;rsquo;t require any prior domain
+or CS theory knowledge. Throughout the day, the candidate is free to get food,
+drinks, and run to the restroom.&lt;/p&gt;
+
+&lt;p&gt;The developer who is pairing has a primary role of making the candidate feel
+comfortable and accomplish any effort with a 50/50 split of effort. If the
+candidate really is struggling, the developer is expected to keep working with
+the candidate, even to the point of doing the hard parts and giving them the
+easy parts. A completely unskilled candidate will see their pair doing all the
+work with a smile and politely asking for &amp;ldquo;help&amp;rdquo; with variable names and such.&lt;/p&gt;
+
+&lt;p&gt;The developer pair is also expected to give the candidate some time to think
+if they are lost. The candidate at the end of the interview should feel like
+they have a complete understanding of what happened. The exercises are
+designed to be &amp;ldquo;too much to finish&amp;rdquo;, and as such finishing the exercises is
+not a success criteria as much as working well together and writing
+maintainable code.&lt;/p&gt;
+
+&lt;p&gt;We feel this gives us a highly accurate understanding of a candidate&amp;rsquo;s skill,
+while still putting them at ease. Many times we&amp;rsquo;ve seen a terrified candidate
+light up fifteen minutes into a pairing session while watching their developer
+pair do most of the work. Something about seeing code written &amp;ldquo;activates&amp;rdquo; even
+the most nervous candidate. All the thoughts of nerves turn into a concrete
+&amp;ldquo;oh, wait, I know what he just did, and I&amp;rsquo;ve got an opinion on that!&amp;rdquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;We like this process because it is exactly what our job is like. We pair program
+for a lot of work, and the interview is meant to give candidates a sample of
+that. No one should show up for their first day of work and say, &amp;ldquo;wait, I
+actually hate pair programming.&amp;rdquo; By thinking through our goals and an &amp;ldquo;ideal
+candidate&amp;rdquo;, we were able to design a process that meets those goals.&lt;/p&gt;
+
+&lt;p&gt;I recommend you take an hour to write out your goals and needs. Then see how
+your interview process matches. Are you looking for a &amp;ldquo;human Google&amp;rdquo;? Does your
+job involve whiteboard coding? Would telling the candidate the exact process in
+advance with all the questions let them game the system? Because every single
+interview question I&amp;rsquo;ve seen is up on Google to be found and memorized on easy
+to read lists. How much time does your process take? Could it be shortened? Does
+it require the candidate to spend a lot of time at home? You might be surprised
+at what you find!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Daily Meditation Improves Technical Leadership</title>
+      <link>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
+      <description>
+
+&lt;p&gt;A couple years ago, a coworker told me a success story about mindful meditation.
+He explained how his wife took a class that required an hour of daily meditation
+for a whole month. He reported that she found it uncomfortable, but the effects
+were astounding. She claimed to feel more relaxed, more focused, and more
+&amp;ldquo;herself&amp;rdquo;. She found new reserves of motivation. She dropped the book she&amp;rsquo;d been
+trying to write for years, and started a business. After that business failed,
+she started another, this time successfully.&lt;/p&gt;
+
+&lt;p&gt;Immediately convinced, I started by listening to guided
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Mindfulness#Mindfulness_meditation&#34;&gt;mindfulness meditations&lt;/a&gt;
+on YouTube and &lt;a href=&#34;https://www.headspace.com/science&#34;&gt;phone apps&lt;/a&gt;. After a couple
+weeks of that, I started doing breathing exercises on my own while sitting
+listening to rain sounds. I made a habit of doing it for about an hour every day
+on my lunch break. A few months later, I hated it.&lt;/p&gt;
+
+&lt;p&gt;For whatever reason, after each session I would feel very uncomfortable. I would
+be confronted with emotions that made me feel worthless and embarrassed. My mind
+was bringing forward all these painful memories and feelings. Over time, I
+started to dread the lunch break.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-revelation:b62e7cc9b8c7dde38594fd84cce85d41&#34;&gt;The Revelation&lt;/h2&gt;
+
+&lt;p&gt;Then, one day, I had a profound sense of understanding. I realized what was
+causing these negative emotions. I was in the middle of a major push to guide
+our team to adopt a new programming language. While I&amp;rsquo;d led many such
+initiatives before, I saw that I&amp;rsquo;d always had the same struggles. My ego and
+self-worth were so tied into &amp;ldquo;my&amp;rdquo; campaigns that I wasn&amp;rsquo;t able to clearly hear
+criticism. When people pointed out legitimate concerns or weaknesses, I would
+get embarrassed and take it as a personal failure.&lt;/p&gt;
+
+&lt;p&gt;I could see, from the very beginning, my current &amp;ldquo;campaign&amp;rdquo; had been poorly
+executed. After researching the new technology for a long time, I felt like I
+saw a place where it could solve some of our needs. Instead of carefully writing
+out a proposal, I &amp;ldquo;half-jokingly&amp;rdquo; brought it up whenever I could. When the
+listeners didn&amp;rsquo;t immediately react positively, I quickly retracted the idea,
+&amp;ldquo;just kidding&amp;rdquo;. Over weeks I dropped not-so-subtle hints, &amp;ldquo;this would be better
+with&amp;hellip;&amp;ldquo;, or, &amp;ldquo;we wouldn&amp;rsquo;t have this problem if&amp;hellip;&amp;rdquo;. Instead of convincing
+anyone of anything, I just broadcasted to everyone how insecure I felt about the
+issue. Everyone could clearly see that I cared, but I was too afraid to put
+myself out there and make a serious suggestion. For months nothing changed, and
+I felt more and more bitter that &amp;ldquo;my idea&amp;rdquo; wasn&amp;rsquo;t being listened to. In reality,
+I hadn&amp;rsquo;t even made a serious suggestion yet!&lt;/p&gt;
+
+&lt;p&gt;Eventually, the people around me started to listen and research the new
+language. They agreed it really did solve a need we had. After a while, enough
+people got on board that we started using it more. Even then, I held tightly to
+&amp;ldquo;my idea&amp;rdquo;, afraid that it would prove to be a failure. When someone ran into
+issues, I would get defensive. Even though I tried to keep my emotions in check,
+I clearly took any criticism of the language as if it was a personal failing, no
+matter how legitimate. I&amp;rsquo;d tightly coupled my ego to my ideas, and I always had.&lt;/p&gt;
+
+&lt;p&gt;After a few months of meditating, this idea rocked my world. My negative
+emotions came from a realization that my actions were not in line with my
+values. I don&amp;rsquo;t want my self-worth to be tied to a simple tool. No tool is worth
+it. Every tool fails. I&amp;rsquo;d sold myself short, lowered my self-worth to that of a
+tool. This completely blocked my ability to be an effective technical leader.&lt;/p&gt;
+
+&lt;p&gt;I couldn&amp;rsquo;t hear criticism of my ideas without getting defensive, so I couldn&amp;rsquo;t
+think critically. I couldn&amp;rsquo;t help work out solutions to the best of my ability,
+because that would mean admitting personal failure. Every side comment or
+momentary struggle felt like a catastrophe.&lt;/p&gt;
+
+&lt;p&gt;After realizing this, I felt a wave of relief. My emotional struggle leading
+this programming language change made sense! And I had an easy way out! I simply
+had to distance myself from my ideas, separate my self-worth from my tools. The
+more I meditated, the easier it got.&lt;/p&gt;
+
+&lt;h2 id=&#34;present-day:b62e7cc9b8c7dde38594fd84cce85d41&#34;&gt;Present Day&lt;/h2&gt;
+
+&lt;p&gt;While I still sometimes get the old pang of embarrassment or defensiveness, now
+I understand where it comes from, and how to move forward. I can let my ideas
+go. I can consider ideas critically. I can make changes and adjustments if the
+ideas are not working.&lt;/p&gt;
+
+&lt;p&gt;This summer I decided to write up my learning. I wanted to always be able to
+look back and remember these important lessons. My write-up was the seed for the
+book &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;. I explain
+the lessons learned from implementing a half dozen major technical changes, and
+how I learned to lead without letting my ego cloud my thinking.&lt;/p&gt;
+
+&lt;p&gt;If you want to become a more effective leader, I highly recommend a practice of
+daily meditation. Meditation gives your mind a chance to deeply consider your
+actions and values. It allows your subconscious to reflect on what and why you
+act.&lt;/p&gt;
+
+&lt;p&gt;Not everyone will struggle from the same issues as me. Every leader has a
+different set of challenges and situations. Meditation lets your mind analyze
+your unique weaknesses and strengths, coming up with a tailored perspective.
+Meditating allows your mind to creatively look for ways to improve itself. While
+rarely comfortable, this process can have incredible benefits.&lt;/p&gt;
+
+&lt;h2 id=&#34;appendix-i-m-uncomfortable-with-the-connotations-of-meditation:b62e7cc9b8c7dde38594fd84cce85d41&#34;&gt;Appendix: &amp;ldquo;I&amp;rsquo;m uncomfortable with the connotations of meditation&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;You may feel uncomfortable with meditation because of its current strong
+associations with religion. Meditation is not inherently religious. I consider
+meditation like an exercise routine for the mind. If you are religious, and
+exercise your body as a form of religious expression, exercise is a religious
+practice. If you are not religious, and you exercise to improve your health and
+well-being, exercise is a secular practice. Meditation is just a form of mental
+exercise. Simple as that.&lt;/p&gt;
+
+&lt;p&gt;Meditation is a tool, and the tool wielder determines its use. Don&amp;rsquo;t let a fear
+of the connotations of meditation stop you from experiencing improved
+leadership, creativity, and focus!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Conj Talk: Teaching Clojure at IBM</title>
+      <link>http://deliberate-software.com/teaching-clojure/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/teaching-clojure/</guid>
+      <description>&lt;p&gt;My talk at Conj 2015, enjoy!
+&lt;a href=&#34;https://www.youtube.com/watch?v=BsLiPt90HDo&#34;&gt;Teaching Clojure&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Interview Humiliation</title>
+      <link>http://deliberate-software.com/on-defeat/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <description>
+
+&lt;p&gt;(All these great ideas, but no one is listening? Check out my
+book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;One day, I went into an interview, and I was humiliated.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-setup:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The Setup&lt;/h3&gt;
+
+&lt;p&gt;I used to think very highly of myself. This was early on in the Test Driven
+Development (TDD) craze, and I was one of the best I knew at it. I knew
+interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all
+the tricks from some very smart people, and my confidence was high. Not only
+that, but I&amp;rsquo;d just finished at work the restoration of an abandoned legacy
+codebase to a bug-free, fully tested state completely on my own.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&amp;rsquo;t been programming more
+than a couple years. My first job, they&amp;rsquo;d made me a team lead over some very
+senior developers within a year of my hire date. I was learning Clojure and
+Common Lisp, and had just shipped an Android game I made entirely alone
+(including the 2D physics engine).&lt;/p&gt;
+
+&lt;p&gt;I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn&amp;rsquo;t know. I&amp;rsquo;m mostly self
+taught, so a lot of common CS concepts felt alien. I was waking up before work
+and teaching myself algorithms, lisps, and math.&lt;/p&gt;
+
+&lt;p&gt;Enter Company A.&lt;/p&gt;
+
+&lt;p&gt;I flew through the phone screen &amp;ldquo;this is the best phone screen we&amp;rsquo;ve seen!&amp;rdquo; Of
+course it is. &amp;ldquo;Your resume is very impressive.&amp;rdquo; Oh, I know!&lt;/p&gt;
+
+&lt;p&gt;I get to the on-site interview.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-on-site:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The On-Site&lt;/h3&gt;
+
+&lt;p&gt;I hadn&amp;rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
+asked to present a project I&amp;rsquo;d worked on, and I picked my recently shipped
+physics game that was up on Google Play. I walked into the reception area a few
+minutes early.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;You are 25 minutes late.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What?! I explain that I have the email saying 9:30! No matter, &amp;ldquo;hurry, they are
+waiting!&amp;rdquo; Maybe I can salvage this. I walk into a conference room with a dozen
+people sitting around a table looking bored and pissed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Let&#39;s see your presentation.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I start to open up my laptop. Meanwhile, they start to joke around to each other:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, wow, Linux, what is this, 2003? I&#39;d hoped I&#39;d never have to see the
+grub boot screen again! Can&#39;t you afford a real machine?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I try to joke back while multitasking with my laptop. They only have the Mac
+projector cable. No adapter. I&amp;rsquo;d thought ahead, and handed one of the developers
+a thumb drive with the presentation and code. The interviewers are joking and
+laughing to each other at my choice of clothes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;A suit, classic, where are you interviewing after this, a sales job?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I roll with it, make some joke about &amp;ldquo;styling&amp;rdquo;. I start presenting about the 2D
+physics engine I&amp;rsquo;d written as a learning project for my game. One of the most
+interesting parts to me was how I&amp;rsquo;d first written it without any unit testing,
+following just Clean Code practices. I then re-wrote it using heavy TDD. The
+design turned out very different both times, which I thought was interesting to
+see how TDD had influenced the design.&lt;/p&gt;
+
+&lt;p&gt;About five minutes in, I am cut off:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;This presentation is bullshit. You have no evidence, nothing valuable to
+show, just spurious subjective opinions. You&#39;ve put up a straw man and now
+are trying to knock it down assuming we are idiots. I&#39;ve seen enough.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, it has been barely 15 minutes since I walked in. I remain calm
+and professional, and start to address the raised concerns. I play the
+meta-game, wondering if perhaps this is a test to see how I&amp;rsquo;ll react when
+questioned and embarrassed. Even if this wasn&amp;rsquo;t a test, I was determined to be
+at my most professional and finish with my head held high.&lt;/p&gt;
+
+&lt;p&gt;Five developers walk out before I can finish my first sentence. One of the
+remaining six interviewers looks embarrassed and asks if I could live code them
+a web scraper in any language instead of the presentation. I turn my laptop
+around (still no projector) and ask if PHP is acceptable. They are a Python
+shop, and PHP is the closest to what they use that I am comfortable using when
+this nervous.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;PHP? Gross. I suppose if it is all you know...&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unfortunately, I&amp;rsquo;ve got so much adrenaline in me that it takes me a few tries to
+log in. I get on a roll after five minutes, and write the scraper. They throw me
+a few more requirements, and within a half hour I&amp;rsquo;ve written stories for and
+completed them all. At least two of the interviewers seem quite impressed.
+Someone looks at their watch, &amp;ldquo;well, that&amp;rsquo;s all the stories we have, I guess
+let&amp;rsquo;s break for lunch.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
+suit and dress shoes. When we get back from lunch I am hot, tired, and
+foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
+patent leather shoes. I am called into the conference room again. At this point,
+I am genuinely curious if this is some sort of extreme patience/calmness test,
+or if I am being filmed for a reality show. No such luck.&lt;/p&gt;
+
+&lt;p&gt;At the head of the table is the developer who &amp;ldquo;called me out&amp;rdquo; for my
+presentation. Apparently my lunch mates were supposed to only take an hour, we
+took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
+sarcastic tone I have ever heard:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;So, got any questions for me?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I ask a few normal questions, meanwhile he is constantly checking his watch and
+rolling his eyes. He answers briefly and rudely. I thank him for his time, and
+ask him if there is more. He laughs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, we are done here.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I am shown to the door.&lt;/p&gt;
+
+&lt;p&gt;I sit in the car for a half hour, wondering what just happened. I look over to
+the passenger seat piled high with text books I have been studying, books on
+language design, compilers, algorithms, physics engines, TDD, and productivity.&lt;/p&gt;
+
+&lt;p&gt;I was asked none of it. I threw up from stress out the car door into their
+parking lot.&lt;/p&gt;
+
+&lt;h3 id=&#34;aftermath:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Aftermath&lt;/h3&gt;
+
+&lt;p&gt;I found out later their recruiter had given me and many other candidates the
+wrong time. She was fired shortly after.&lt;/p&gt;
+
+&lt;p&gt;I never found out if I had done something to make everyone so angry. I now
+suspect that they were massively turned off by a host of things. Polyglot
+programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
+presentation probably all contributed to an immediate disqualification. I
+rationally realize they were terrible and treated me terribly, but the
+embarrassment is still there. I suspect my presentation was terrible from the
+get go: that they were expecting some rock-star and instead got me.&lt;/p&gt;
+
+&lt;p&gt;A number of times I have woken up in a cold sweat having dreamt about that
+interview. In the large scheme of things, a bad interview is such a small thing,
+but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
+cocky, insufferable? Did my ego cause them to treat me that way, or was it all
+them? What could I have done differently? I was only in there for a few minutes!&lt;/p&gt;
+
+&lt;p&gt;Few events in my professional life have shaped me as much as that interview. I
+have turned it into a forge for my talent, the anvil on which I beat my pride.
+When I don&amp;rsquo;t know something, I am more willing to shrug and laugh it off, all
+while learning as fast as I can. When I am humiliated professionally, I know
+I&amp;rsquo;ve come through worse and thrived.&lt;/p&gt;
+
+&lt;h3 id=&#34;break-the-cycle:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Break The Cycle&lt;/h3&gt;
+
+&lt;p&gt;This story fills me with an overwhelming desire to never continue the cycle of
+abuse. I strive every interview to try to respectfully work with the candidate,
+and never humiliate them. I want every person I interview to leave feeling loved
+as a human and respected, even if they are completely incapable to perform the
+duties of the job.&lt;/p&gt;
+
+&lt;p&gt;When I ask a question, if they struggle, we work it out together. When I ask for
+code, we write it together, even if that means I have to do all the work. I can
+make myself their servant, while still assessing their skill with accuracy and
+dispassion. Those with the skill will show it, and those without will not feel
+humiliated. I let them interview me, and if that means they want me to go up to
+the whiteboard and struggle through a merge sort, so be it. In this way, I push
+back against the interview culture that normalizes degradation and humiliation.&lt;/p&gt;
+
+&lt;p&gt;If you are interviewing others, take a serious look at your practices. Would a
+failed candidate feel humiliated and disrespected? What will they tell their
+coworkers and friends at meetups about your company? Will they talk about
+feeling respected, and how they hope to get the chance to work with you one day?
+Or will they talk of a group of self-righteous jerks who abuse their power to
+make others feel small? You can break the cycle.&lt;/p&gt;
+
+&lt;p&gt;(All these great ideas, but no one is listening? Check out my
+book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>F# Unit Testing With SimpleMock</title>
+      <link>http://deliberate-software.com/f-number-unit-testing/</link>
+      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
+      <description>
+
+&lt;p&gt;If you are considering using F#, you might be curious how to handle unit test
+mocking, especially if you want to use both modules and classes. In a language
+like C# or Java, the common method is to a DI container or handmade constructor
+injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a
+real dependency with a test-only replacement.&lt;/p&gt;
+
+&lt;p&gt;I previously posted an example that shows a much simpler way to inject
+dependencies called the &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock pattern&lt;/a&gt;. The SimpleMock pattern can also be
+used in F#, even if you are only using modules.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplemock-in-f-modules:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;SimpleMock in F# Modules&lt;/h2&gt;
+
+&lt;p&gt;We will assume you are mocking inside a module and not a class. Mocking inside
+an F# class would look much the same as it does in C#, which we showed in the
+SimpleMock post. Here is a sample program that does some work and persists the
+results.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave x y =
+  let sum = x + y
+  DBModule.saveSum sum
+  sum
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To apply the SimpleMock pattern, we can use argument currying by adding a simple
+function wrapper.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave&#39; saveSum x y = 
+  let sum = x + y
+  saveSum sum
+  sum
+let addAndSave = addAndSave&#39; DBModule.saveSum
+
+// Test code
+let addAndSave_Test =
+  let calledVar = ref 0
+  let result = addAndSave&#39; (fun sum -&amp;gt; calledVar := sum) 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, !calledVar)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We started by renaming the &lt;code&gt;addAndSave&lt;/code&gt; function with a trailing &lt;code&gt;&#39;&lt;/code&gt;. We
+created a new &lt;code&gt;addAndSave&lt;/code&gt; that calls &lt;code&gt;addAndSave&#39;&lt;/code&gt; with the correct
+dependency for the first argument, leaving the rest of the arguments to be
+called later. Currying is what allows this ability. The new &lt;code&gt;addAndSave&lt;/code&gt;
+function only needs the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; parameters. At test time, we called &lt;code&gt;addAndSave&#39;&lt;/code&gt;, passing in the needed dependency, but using a lambda as the
+&amp;ldquo;fake&amp;rdquo;. The injection is as close to the dependency use as possible!&lt;/p&gt;
+
+&lt;h2 id=&#34;bonus-simplemock-fake-helper:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Bonus: SimpleMock Fake Helper&lt;/h2&gt;
+
+&lt;p&gt;The earlier replacement for DBModule.saveSum is a bit complex, and it does not
+show us how many times the fake was called. We can easily make a helper that
+takes parameters and returns them when called, along withe count of times it was
+called.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults() =
+  member val timesCalled = 0 with get,set
+  member val args: obj list = [] with get,set
+
+let makeFake_OneArg () =
+  let results = new TestFakeResults()
+  let fake = (fun p1 -&amp;gt;
+                  results.args &amp;lt;- p1 :: results.args
+                  results.timesCalled &amp;lt;- results.timesCalled + 1
+                  ())
+  (fake, results)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above code might be hard to comprehend at first! We have made a generic
+helper that can create any single argument fake we need. We return a tuple,
+containing the fake lambda and an instance of &lt;code&gt;TestFakeResults&lt;/code&gt;. The fake
+lambda will populate the &lt;code&gt;TestFakeResults&lt;/code&gt;, which we can access in the test
+via the second arg of the tuple.&lt;/p&gt;
+
+&lt;p&gt;We can now re-write the previous test using &lt;code&gt;makeFake_OneArg&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;// Test code
+let addAndSave_Test =
+  let (fakeSave, fakeSaveCalling) = makeFake_OneArg()
+  let result = addAndSave&#39; fakeSave 1 2
+  Assert.AreEqual(3, result)
+  Assert.AreEqual(3, fakeSaveCalling.args.[0])
+  Assert.AreEqual(1, fakeSaveCalling.timesCalled)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The TestFakeResults can return information about the way it was called,
+including the list of all arguments. If we felt we needed the extra
+expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
+TestFakeResults and its constructor are not essential to the pattern. The most
+important part is learning to unit test in F# with confidence.&lt;/p&gt;
+
+&lt;h1 id=&#34;double-bonus-when-to-use-a-class-instead-of-a-record:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Double Bonus: When to Use a Class Instead of a Record&lt;/h1&gt;
+
+&lt;p&gt;When I first wrote this post, I used a record instead of a class for the &lt;code&gt;TestFakeResults&lt;/code&gt; type. If you have been bitten by the functional programming bug,
+you might have wondered at my usage of a mutable class. Here are two alternates
+of &lt;code&gt;makeFake_OneArg&lt;/code&gt; which use records. You can probably see why I switched to a class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults = {timesCalled:int, args obj list}
+
+// Using Record Alternate 1
+let makeFake_OneArg_RecordAlternate1 () = 
+  let t = ref 0
+  let a : obj list ref = ref []
+  let fake = (fun p1 -&amp;gt;
+                  a := p1 :: !a
+                  t := !t + 1
+                  ())
+  (fake, (fun () -&amp;gt;
+                {TestFakeRecord.timesCalled = !t;
+                 args = !a}))
+
+// Using Record Alternate 2
+let makeFake_OneArg_RecordAlternate2 () = 
+  let result = ref {TestFakeRecord.timesCalled = 0; args = []}
+  let fake = (fun p1 -&amp;gt;
+              result := {timesCalled = (!result).timesCalled + 1;
+                         args = p1 :: (!result).args}
+              ())
+  (fake, (fun () -&amp;gt; !result))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The only way to use a record is to delay its construction via a lambda which
+must be executed by the test code. Both are complex: what we need is a mutable
+data structure which we can access via a reference. A record is not that. We can
+approximate it using tricks, but ultimately I find both alternatives to be too
+complex to justify their use. Sometimes a mutable data structure is the best
+choice to solve your problem efficiently. The power of F# is that it gives us
+the ability to choose the best tool for the job: records for immutability,
+classes for mutability.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
+      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <description>
+
+&lt;p&gt;SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+organize your testing code without mocking or complicated dependency injection.&lt;/p&gt;
+
+&lt;p&gt;SimpleMock works in any language with closures that can be passed around by
+reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
+Python. I&amp;rsquo;m sure you can think of others.&lt;/p&gt;
+
+&lt;h2 id=&#34;example:442bb35a3947650665613cec7b90f820&#34;&gt;Example:&lt;/h2&gt;
+
+&lt;p&gt;Here is a brief (if a bit silly) example of the final pattern:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class LineCounter {
+    internal Func&amp;lt;string, IEnumerable&amp;lt;string&amp;gt;&amp;gt; _readLines = File.ReadLines;
+
+    public string CountLines(string filename) {
+        return _readLines(filename).Count();
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestLineCounter () {
+    var sut = new LineCounter();
+    // &amp;quot;SimpleMock&amp;quot; of File.ReadLines
+    sut._readLines = (string x) =&amp;gt; new List&amp;lt;string&amp;gt;{&amp;quot;test&amp;quot;, &amp;quot;that&amp;quot;};
+
+    var result = sut.CountLines(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(2, result);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;benefits:442bb35a3947650665613cec7b90f820&#34;&gt;Benefits&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reduced boilerplate&lt;/li&gt;
+&lt;li&gt;Saves interfaces for real polymorphism&lt;/li&gt;
+&lt;li&gt;Simplifies test code&lt;/li&gt;
+&lt;li&gt;Reduces testing concerns in production code&lt;/li&gt;
+&lt;li&gt;Removes need for fragile IoC containers&lt;/li&gt;
+&lt;li&gt;Encourages better abstraction design&lt;/li&gt;
+&lt;li&gt;Can convert one class at a time!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The SimpleMock pattern promotes a better design of your abstractions and simpler
+tests. The pattern also reduces boilerplate and the pollution of your production
+code with testing concerns.&lt;/p&gt;
+
+&lt;p&gt;If you aren&amp;rsquo;t familiar with the normal pattern of unit test mocking using
+interfaces, dependency injection, and mock libraries, scroll down to &amp;ldquo;The
+Non-SimpleMock Way&amp;rdquo; at the end of the post.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplemock-pattern:442bb35a3947650665613cec7b90f820&#34;&gt;SimpleMock Pattern&lt;/h2&gt;
+
+&lt;p&gt;The SimpleMock pattern is aptly named.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Replace Test-Only Interfaces With Functions&lt;/li&gt;
+&lt;li&gt;Define Dependencies Inline&lt;/li&gt;
+&lt;li&gt;Write Better Abstractions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-one-replace-test-only-interfaces-with-functions:442bb35a3947650665613cec7b90f820&#34;&gt;Step One: Replace Test-Only Interfaces With Functions&lt;/h2&gt;
+
+&lt;p&gt;My examples are in C# because that is what I got paid to write today - it is
+freshest in memory. C# has an incredible ability to create and pass around
+lambdas and function references. Here is an example of using functions instead
+of interfaces.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
+public class Translator {
+    private Func&amp;lt;DateTime&amp;gt; _getCurrentTime;
+
+    public Translator() : this(new CurrentTime().GetCurrentTime) {}
+
+    public Translator(Func&amp;lt;DateTime&amp;gt; getCurrentTime) {
+        this._getCurrentTime = getCurrentTime;
+    }
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var now = DateTime.Now;
+
+    var sut = new Translator(() =&amp;gt; now);
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The test code is quite simple! No longer do we need the dependency on third
+party mocking libraries, or the relatively complicated setup logic. Instead we
+can simply inject the lambda at runtime, replacing that pointer. We didn&amp;rsquo;t need
+the whole interface, really we just needed the simple signature of the function.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-define-dependencies-inline:442bb35a3947650665613cec7b90f820&#34;&gt;Step 2: Define Dependencies Inline&lt;/h2&gt;
+
+&lt;p&gt;We can take it even a step further. Why use constructor injection at all? Since
+all we really want is a single mutable dispatch table row, why not just make it
+that way?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class Translator {
+    internal Func&amp;lt;DateTime&amp;gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var now = DateTime.Now;
+    var sut = new Translator();
+    sut._getCurrentTime = () =&amp;gt; now;
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
+&amp;ldquo;Go to definition&amp;rdquo; now takes me to the actual line with the actual called
+function. We&amp;rsquo;ve replaced a dependency on a class based interface with a function
+signature. The function signature &lt;em&gt;is&lt;/em&gt; the interface!&lt;/p&gt;
+
+&lt;p&gt;You probably noticed we have lost something with this final version. We have
+lost the ability to inject polymorphic behavior through the constructor. If you
+need it, simply go back to injecting the interface in the constructor or by
+passing it into the function itself. In practice, I have found this is needed
+very rarely, making the SimpleMock pattern a better tool to reach for first.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-3-write-better-abstractions:442bb35a3947650665613cec7b90f820&#34;&gt;Step 3: Write Better Abstractions&lt;/h2&gt;
+
+&lt;p&gt;Lastly, SimpleMock actually promotes better designs. For example, a coworker was
+writing some tests today and ran into a complicated situation. Take the
+following sanitized code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
+    internal Action&amp;lt;Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+    internal Action&amp;lt;Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+    public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
+        ignoreElements(t1);
+        ignoreElements(t2);
+        removeIgnoredElements(t1);
+        removeIgnoredElements(t2);
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How would you check that each section was called? Our naive solution was a
+complicated lambda with a &amp;ldquo;timesCalled&amp;rdquo; counter and an if statement to assert
+against each argument, but it turns nasty quickly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;/// Nasty test code
+[TestCase]
+public void TestWorkDoer () {
+    var sut = new WorkDoer();
+
+    var ignoredCalledTimes = 0;
+    sut.ignoreElements = (t) =&amp;gt; {
+        ignoredCalledTimes++;
+        if (ignoredCalledTimes == 1) {
+            Assert.AreEqual(t1, t);
+        } else {
+            Assert.AreEqual(t2, t);
+        }
+    };
+    var removedCalledTimes = 0;
+    sut.removeIgnoredElements = (t) =&amp;gt; {
+        removedCalledTimes++;
+        if (removedCalledTimes == 1) {
+            Assert.AreEqual(t1, t);
+        } else {
+            Assert.AreEqual(t2, t);
+        }
+    };
+
+    var t1 = new Thing();
+    var t2 = new Thing();
+
+    var result = sut.IgnoreAndRemoveThings(t1, t2);
+    Assert.AreEqual(2, removedCalledTimes);
+    Assert.AreEqual(2, ignoredCalledTimes);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
+Conditionals?! In a test?! Unconscionable.&lt;/p&gt;
+
+&lt;p&gt;In situations like this, we have two easy options. Option one is to just use
+a third party mocking library, replacing the functions from inside the test
+code. This gives us access to all the sophisticated mocking tools available.&lt;/p&gt;
+
+&lt;p&gt;My preferred option is seeking to decomplect the production code by using better
+abstractions.&lt;/p&gt;
+
+&lt;p&gt;I have found that strong reliance of mocking libraries enables worse designs.
+Consider the code, what makes it so hard to test? Not knowing which element is
+called when, doing the same work on two parameters, and reference mutation all
+make this a poor abstraction. Why not simplify?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
+    internal Func&amp;lt;Thing, Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
+    internal Func&amp;lt;Thing, Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
+
+    public List&amp;lt;Thing&amp;gt; IgnoreAndRemoveThings(List&amp;lt;Thing&amp;gt; ts) {
+        return ts.Select(t =&amp;gt; removeIgnoredElements(ignoreElements(t)));
+    }
+}
+
+/// Simpler test
+[TestCase]
+public void TestWorkDoer () {
+    var sut = new WorkDoer();
+    var expected = new Thing();
+    var ts = new List&amp;lt;Thing&amp;gt;{new Thing()};
+
+    sut.ignoreElements = (t) =&amp;gt; new Thing();
+
+    sut.removeIgnoredElements = (t) =&amp;gt; {
+        Assert.AreEqual(t, sut.ignoreElements(t));
+        return expected;
+    };
+
+    var result = sut.IgnoreAndRemoveThings(ts);
+
+    Assert.AreEqual(expected, result.First())
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much better! Yes, we had to change a few signatures. We get the same work done,
+but now the code is actually a lot more useful. Our test code is comparable with
+anything you&amp;rsquo;d find using a mocking library. I am absolutely okay with using a
+mocking library when needed, but I always carefully consider my abstractions and
+design first.&lt;/p&gt;
+
+&lt;p&gt;If mocking libraries and IoC containers are the chainsaws of the testing world,
+then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
+for the job, and that is fine. But for most work around the yard, you can leave
+the chainsaw in the shed.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:442bb35a3947650665613cec7b90f820&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I’ve shown how you can really simplify your code with SimpleMock. The dispatch
+row is clear and easy to read. We have removed some third party mocking
+dependencies. You can remove a lot of the boilerplate &amp;ldquo;for making it more
+testable&amp;rdquo; from your code. The test code is greatly simplified, and injection a
+breeze. The result: much simpler code, just as easy to test.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Shuwei Chen for helping me put this together!&lt;/p&gt;
+
+&lt;h2 id=&#34;the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;The Non-SimpleMock Way&lt;/h2&gt;
+
+&lt;p&gt;If you are familiar with unit test mocking with interfaces, this part is
+probably boring. Feel free to skip.&lt;/p&gt;
+
+&lt;p&gt;The traditional way of performing C# unit test mocking involves dependency
+injection and interface mocking using a mocking library. For dependency
+injection, it is common to use a tool like Ninject or hand-rolled constructor
+injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
+an example of a class and its testing code without any business logic.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface ICurrentTime {
+    DateTime GetCurrentTime();
+}
+
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now();
+    }
+}
+
+public class Translator {
+    private readonly ICurrentTime ct;
+
+    public Translator() : this(new CurrentTime()) {}
+
+    public Translator(ICurrentTime currentTime) {
+        this.ct = currentTime;
+    }
+
+    public string Translate(string input) {
+        return string.Format(&amp;quot;{0}: {1}&amp;quot;, ct.GetCurrentTime().ToString(), input);
+    }
+}
+
+/// Test Code with Moq
+[TestCase]
+public void TestCurrentTimeTranslator () {
+    var rightNow = DateTime.Now;
+    var mock = new Mock&amp;lt;ICurrentTime&amp;gt;();
+
+    mock.Setup(a=&amp;gt;a.GetCurrentTime()).Returns(rightNow);
+
+    var sut = new Translator(mock.Object);
+
+    var result = sut.Translate(&amp;quot;test&amp;quot;);
+
+    Assert.AreEqual(rightNow.ToString() + &amp;quot;: test&amp;quot;, result);
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve done much C# unit testing, this should look familiar. We want to
+inject some code that is potentially long-running or dynamic. We put that code
+into a class, add an interface, then inject that interface into the class we
+want to test. To test it, we mock the interface, creating a different concrete
+class at test runtime which implements that interface. We can setup that mock to
+respond with anything, which we use for assertions.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-wrong-with-the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;What&amp;rsquo;s Wrong with the Non-SimpleMock Way?&lt;/h2&gt;
+
+&lt;p&gt;The first problem is we have created a whole interface just for testing.
+Interfaces are for polymorphism, but we don&amp;rsquo;t really need polymorphism for this
+class. We simply want to mock it. The constructor injection is also test code
+polluting our business logic.&lt;/p&gt;
+
+&lt;p&gt;What we have done is create a very small and primitive dispatch table. The
+table has one row: something that has a function with the signature of &lt;code&gt;() -&amp;gt; DateTime&lt;/code&gt; or, as it is known in C#: &lt;code&gt;Func&amp;lt;DateTime&amp;gt;&lt;/code&gt;.  We will need to make
+this primitive dispatch table for every single mock in every single class we
+wish to test. That&amp;rsquo;s a lot of boilerplate!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Score Mark 2</title>
+      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <description>
+
+&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders2.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I want to make a model that predicts bugs.&lt;/p&gt;
+
+&lt;p&gt;I previously wrote a table for scoring language safety:
+&lt;a href=&#34;http://deliberate-software.com/programming-language-safety-algorithm&#34;&gt;Programming Language Safety Score&lt;/a&gt;,
+but it was extremely time consuming to score new languages or make modifications.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplify-simplify:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Simplify, Simplify&lt;/h2&gt;
+
+&lt;p&gt;After being told I was &lt;a href=&#34;https://en.wikipedia.org/wiki/Overfitting&#34;&gt;overfitting&lt;/a&gt;
+the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1 (language enforced),
+0 (possible, but you have to remember to do it), or -1 (impossible). When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn&amp;rsquo;t
+matter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rplot.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;The code I used to generate the plot and normalize the scores can be found here:
+&lt;a href=&#34;https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R&#34;&gt;scorePlot.R&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;safety-definitions:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Safety Definitions&lt;/h2&gt;
+
+&lt;p&gt;A definition of the safety checks is as follows:&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp2&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td&gt;{{ check.name }} &lt;/td&gt;
+&lt;td&gt; {{ check.desc }}  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+The new scores are shown here, with a lot more languages added in:
+
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }}
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}%
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;so-what-s-the-point:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;So, What&amp;rsquo;s the Point?&lt;/h2&gt;
+
+&lt;p&gt;To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors.&lt;/p&gt;
+
+&lt;p&gt;I decided to rely on the count of commits as a standard for a unit of work. My
+assumption was that across fifty different projects, the commit sizes would
+average out. Once the unit of work was decided on, I wanted to find the ratio of
+bugs per commit for each language.&lt;/p&gt;
+
+&lt;p&gt;I collected the ratio of bugs logged per commit for each repository, and after
+grouping by primary language, removed the top and bottom 25% using the
+bug/commit ratio, which is a common practice in statistics to help find a more
+accurate average. I summed the bugs and commits of those remaining repositories
+grouped by language, finding a total average bug/commit ratio for each language
+grouping. Here is that data, sorted by safety score.&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Bugs&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Bug/Commits&lt;/th&gt;
+&lt;tr ng-repeat=&#34;lang in languageRatios&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.bugs }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getBugsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here are the languages sorted by safety score with bug/commit ratios:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/errorChart.jpg&#34;&gt;&lt;/img&gt;
+&lt;img src=&#34;http://deliberate-software.com/images/bugsAverage.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/bothMags.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
+buck the trend, but otherwise the languages follow a pretty consistent slope
+down in bugs. Taking the correlation gives a
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient&#34;&gt;correlation coefficient&lt;/a&gt;
+of .55&lt;/p&gt;
+
+&lt;h2 id=&#34;what-about-unit-tests:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;What About Unit Tests?&lt;/h2&gt;
+
+&lt;p&gt;Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
+other factor, I collected data on how many tests each repository had. I counted
+the number of files containing &amp;ldquo;test&amp;rdquo; or &amp;ldquo;spec&amp;rdquo;, which gave the following,
+sorted by tests per commit:&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Tests&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Tests/Commits&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;lang in sorter(languageRatios)&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.test }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getTestsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;PHP, Python, and Ruby all have a higher then average number of tests, but
+Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
+average number of tests, yet they score relatively average in bugs/commit.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In conclusion, the current safety model I have proposed seems to account for a
+moderate reduction in bugs per commit across the sampled languages, but is not
+the only factor. It currently is unable to account for a significantly lower
+than expected bug count in Ruby and Clojure.&lt;/p&gt;
+
+&lt;h2 id=&#34;special-thanks:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Special Thanks&lt;/h2&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+&lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;Patrick Boe&lt;/a&gt; (Haskell, Sniff Test),
+&lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;Kyle Burton&lt;/a&gt; (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+&lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;Daniel Miladinov&lt;/a&gt; (Java, Scala, Morale Support),
+Keith O&amp;rsquo;Brien (Ruby and JS),
+&lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;Chris Salch&lt;/a&gt; (CoffeeScript and JS),
+and &lt;a href=&#34;https://github.com/timvisher&#34;&gt;Tim Visher&lt;/a&gt; (Clojure).&lt;/p&gt;
+
+&lt;p&gt;Additional thanks to the posters on
+&lt;a href=&#34;https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/&#34;&gt;/r/rust&lt;/a&gt;,
+including &lt;a href=&#34;https://www.reddit.com/user/notriddle&#34;&gt;/u/notriddle&lt;/a&gt;,
+&lt;a href=&#34;https://www.reddit.com/user/killercup&#34;&gt;/u/killercup&lt;/a&gt;, and
+&lt;a href=&#34;https://www.reddit.com/user/diegobernardes&#34;&gt;/u/diegobernardes&lt;/a&gt; who put together the Rust score.&lt;/p&gt;
+
+&lt;h2 id=&#34;complaints-department:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Complaints Department&lt;/h2&gt;
+
+&lt;p&gt;Did I mess up something about a language here, or am I missing a safety check? I&amp;rsquo;ll happily take pull
+requests for new languages:
+&lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js&#34;&gt;blog source&lt;/a&gt;. Just
+pick an existing language, edit the name and values, and &amp;ldquo;copy to clipboard&amp;rdquo; to
+build your own language data structure. Send it to me in a PR and I&amp;rsquo;ll include
+it along with a thanks on the page.&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt;
+&lt;span&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;/span&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt;&lt;th&gt;Option&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td style=&#34;background-color:{{scoreClass(score(selectedLang[check.key]))}} &#34;&gt;
+{{ check.name }}: {{score(selectedLang[check.key]) }}
+&lt;/td&gt;
+&lt;td&gt;
+&lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Language Versions</title>
+      <link>http://deliberate-software.com/language-versions/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/language-versions/</guid>
+      <description>
+
+&lt;p&gt;Let&amp;rsquo;s play a thought exercise. Imagine your development toolchain is like a
+semantic version number. Small features that incrementally improve your
+situation are like minor updates. They don&amp;rsquo;t cause any large shifts in thinking
+or process. Major updates are big, new concepts, quantum jumps in theory or
+practice.&lt;/p&gt;
+
+&lt;p&gt;I am not talking about the political, social, or financial aspects of a
+toolchain. For example, hiring is a complex beast entirely in its own
+category. The criteria for choosing a tool when hiring a few hundred offshore
+developers is very different than the criteria for hiring for a team of three
+senior developers. I&amp;rsquo;ll leave those aspects alone.&lt;/p&gt;
+
+&lt;p&gt;What are some examples of these value changes I&amp;rsquo;ve noticed in my development?&lt;/p&gt;
+
+&lt;h2 id=&#34;minor-benefits:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Minor Benefits&lt;/h2&gt;
+
+&lt;h3 id=&#34;perl-php-python-ruby:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Perl - PHP - Python - Ruby&lt;/h3&gt;
+
+&lt;p&gt;Switching from Perl to PHP for me was a minor change. I was able to carry over
+almost all my skills, and for the most part, the differences were mostly
+syntactic. Later, when I started using Python, most of my experience from Perl
+and PHP was still useful. The libraries had different names, and a few concepts
+were different, but on the whole, all three were in a same class of productivity
+for me.&lt;/p&gt;
+
+&lt;p&gt;More recently, on taking over a small Ruby codebase (scripts, not Rails), I again
+found much of my previous experience was still valuable. I can almost guess what
+things will be called or how they should be used. I still have to look up
+library names and keywords, but on the whole, the languages all provide very
+similar workflows. I suspect all four are in the same class of productivity,
+with some minor differences here and there. These days I put effort only into
+maintaining familiarity with one of these languages, since I am confident I
+could quickly relearn any of the other three on demand.&lt;/p&gt;
+
+&lt;h3 id=&#34;java-vb-net-csharp:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Java - VB.NET - CSharp&lt;/h3&gt;
+
+&lt;p&gt;Moving between Java, VB.NET, and C# feel similarly minor in tangible
+productivity. For the most part, all the expectations and experience carries
+between the three. Obviously the tools are different, and there are a number of
+gotchas, but nothing changed my productivity in any major way. I doubt any of
+those three have any one killer feature that cannot be had in the other.&lt;/p&gt;
+
+&lt;h2 id=&#34;major-benefits:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Major Benefits&lt;/h2&gt;
+
+&lt;h3 id=&#34;automated-testing:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Automated Testing&lt;/h3&gt;
+
+&lt;p&gt;Switching from &amp;ldquo;run it and see&amp;rdquo; testing to automated unit and integration
+testing was a major change with large productivity benefits. All my experience
+to date was still useful, but I needed a whole new set of skills to be able to
+apply the techniques. Tools like dependency injection, mocking, TDD, and
+continuous integration enabled me to build and revive much larger
+systems. Automated testing is a skill that applies well to every language I&amp;rsquo;ve
+worked in, with benefits that grow increasingly valuable with more complex
+systems. I don&amp;rsquo;t always automated test, but it is an invaluable tool for certain
+classes of problems.&lt;/p&gt;
+
+&lt;h3 id=&#34;repl-development-moving-from-python-ruby-to-clojure:7ae38f764e4092636cb20d48e9f35054&#34;&gt;REPL Development (moving from Python/Ruby to Clojure)&lt;/h3&gt;
+
+&lt;p&gt;Repl based development with live hot patching was another major change. It
+required a new way of thinking about programming, and with it came an
+instantaneous feedback loop. Much like unit testing, it was an entirely new
+skill, but opened up a very fast method of building up a system from small
+parts. Additionally, it allowed me to rapidly progress in my skills, because I
+could instantly see live feedback from my code, without needing to write a whole
+test just to execute the code.&lt;/p&gt;
+
+&lt;h3 id=&#34;powerful-static-typing-moving-from-c-to-f:7ae38f764e4092636cb20d48e9f35054&#34;&gt;Powerful Static Typing (moving from C# to F#)&lt;/h3&gt;
+
+&lt;p&gt;Moving from a typical static typed language to one with algebraic data types has
+been a major change, with major productivity benefits. I have noticed entire
+classes of defects disappearing. Additionally, because of the better compiler
+errors, the resulting codebases are much easier to refactor, which means a
+faster reaction to a changing domain.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Learning Lisp Was Hard</title>
+      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
+      <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
+      <description>
+
+&lt;p&gt;Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t
+get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.&lt;/p&gt;
+
+&lt;p&gt;When I set out to learn a Lisp, I expected it would be easy.&lt;/p&gt;
+
+&lt;p&gt;I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &amp;ldquo;since Paul is amazing, and I am too, I&amp;rsquo;ll be a
+natural!&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;I expected to tinker around with &amp;ldquo;Lisp&amp;rdquo; (I didn&amp;rsquo;t know there was more
+than one) and shortly master it (ship a website).&lt;/p&gt;
+
+&lt;p&gt;What happened instead took me a little longer&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;05/11 - 06/11 ~15 Hrs Attempted &lt;em&gt;Land Of Lisp&lt;/em&gt; (gave up)&lt;/li&gt;
+&lt;li&gt;04/12 - 08/12 ~60 Hrs Rewrote a PHP side project in Clojure&lt;/li&gt;
+&lt;li&gt;08/12 - 08/12 ~5 Hrs Attempted &lt;em&gt;Let Over Lambda&lt;/em&gt; (gave up)&lt;/li&gt;
+&lt;li&gt;08/12 - 09/12 ~10 Hrs Read &lt;em&gt;Clojure Programming&lt;/em&gt; twice&lt;/li&gt;
+&lt;li&gt;09/12 - 12/12 ~30 Hrs Took &lt;em&gt;CS173 Programming Languages&lt;/em&gt; online at Brown University&lt;/li&gt;
+&lt;li&gt;05/13 - 07/13 ~50 Hrs Worked through &lt;em&gt;Let Over Lambda&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;05/13 - 07/14 ~250 Hrs Worked through &lt;em&gt;SICP&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;07/14 - Shipped production Clojure code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This shows only the major events: books and large projects, but doesn&amp;rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.&lt;/p&gt;
+
+&lt;p&gt;I think Lisps started to &amp;ldquo;click&amp;rdquo; for me around mid 2013, about two years after
+deciding that I&amp;rsquo;d &amp;ldquo;tinker around&amp;rdquo; for a bit before &amp;ldquo;mastering&amp;rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was &lt;em&gt;Let Over Lambda&lt;/em&gt;, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.&lt;/p&gt;
+
+&lt;p&gt;All said and done, I spent approximately 420 hours between Scheme, Common Lisp,
+Racket, Typed Racket, and Clojure before I felt confident enough to suggest
+shipping Clojure at work. I don&amp;rsquo;t claim to be a fast learner at all, and I fully
+expect some people will snort with derision at how much time it took me - which
+is kind of the point of this post.&lt;/p&gt;
+
+&lt;p&gt;This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &amp;ldquo;new&amp;rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&amp;rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.&lt;/p&gt;
+
+&lt;p&gt;If you are struggling and feel like a failure, understand &lt;em&gt;there is no wrong
+way&lt;/em&gt;. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.&lt;/p&gt;
+
+&lt;p&gt;If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&amp;rsquo;t give up, it&amp;rsquo;s not impossible.&lt;/p&gt;
+
+&lt;h1 id=&#34;was-it-worth-it:9faaa4d71d8cbfa8443b331acd2e9e5e&#34;&gt;Was it worth it?&lt;/h1&gt;
+
+&lt;p&gt;I can anticipate the follow up question: &amp;ldquo;was it worth it?&amp;rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &amp;ldquo;impossible&amp;rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Superiority Fatigue</title>
+      <link>http://deliberate-software.com/superiority-fatigue/</link>
+      <pubDate>Thu, 14 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/superiority-fatigue/</guid>
+      <description>&lt;p&gt;Learning new tools, technologies, and methodologies is
+hard. Counter-intuitively, the most exhausting part is &lt;em&gt;after&lt;/em&gt; you&amp;rsquo;ve gained a
+good comprehension of the tool, and now, filled with excitement, you try to
+explain it to someone else.&lt;/p&gt;
+
+&lt;p&gt;They almost always react with hostility.&lt;/p&gt;
+
+&lt;p&gt;What is going on? You just took time to learn this exciting tool that could save
+everyone a lot of time, and not only do they not care, but they resent you for
+it!  Don&amp;rsquo;t they see how this could be great for everyone?&lt;/p&gt;
+
+&lt;p&gt;The issue, like humans, is complex and dynamic. Maybe they feel like you&amp;rsquo;ve now
+made them look lazy in comparison. Maybe they have tried other tools in the past
+only to discover they weren&amp;rsquo;t as a good as promised. Maybe they are afraid they
+won&amp;rsquo;t be able to learn the new tool as quickly as they need to, and will be left
+behind. Maybe they are afraid all the time they spent learning the existing
+tools will have been wasted. Maybe they are comfortable where they are, and
+don&amp;rsquo;t care about increased productivity. Maybe they are tired of learning new
+things.&lt;/p&gt;
+
+&lt;p&gt;Most times I have seen this, I think the root emotion is fear. Fear of failure,
+of change, of being embarrassed, of looking inferior. Fear is a powerful
+emotion.&lt;/p&gt;
+
+&lt;p&gt;When you respond with further hostility, this only will compound their
+fear. Should they put their comfort and ego before the needs of the business?
+No, but your counterattack will only further prove to them that their fear was
+deserved.&lt;/p&gt;
+
+&lt;p&gt;The final hardest part of learning a new tool is when you are forced to use an
+inferior tool. Suddenly that liberating fresh air of power is replaced with a
+suffocating claustrophobia of weakness. Even if the tool isn&amp;rsquo;t really that
+inferior, it now &lt;em&gt;feels&lt;/em&gt; terrible. It becomes worse when you and many others
+around you agree with the better value proposition of a new tool, and yet you
+are still required to use the inferior tool due to someone in power blocking you
+for political reasons.&lt;/p&gt;
+
+&lt;p&gt;For the developer who sets out to learn new things, you must learn to deal with
+inferior tools. Once you start learning, you will always find yourself in a
+situation where you are required to use an inferior tool. For me, this has been
+one of the hardest things to face in my career.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Case Study: Superior Domain Modeling in F#</title>
+      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
+      <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
+      <description>&lt;p&gt;Domain modeling in F# is significantly easier and safer than with the
+traditional .NET languages. This is because of the increased safety of
+pattern matching and the expressiveness of discriminated unions. These
+concepts are not in C# or VB.NET, and therefore bring a new tool to
+the table.&lt;/p&gt;
+
+&lt;p&gt;To illustrate this, I found some old code I&amp;rsquo;d written to interact with
+a legacy system. The system uses many single enums on a record to keep
+track of statuses. When one changes, it can cause others to change as
+well.&lt;/p&gt;
+
+&lt;p&gt;Here is a typical function that combines two enums to recalculate a
+third.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;        public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
+        {
+            if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+                || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+                return PositionType.Held;
+            if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+                || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+                return PositionType.Posted;
+
+            return PositionType.Undefined;
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With some regularity, new records are added to these types of enums,
+causing a dangerous search and update across the system fixing all the
+if/else or switch/case statements.&lt;/p&gt;
+
+&lt;p&gt;Right off the bat, pattern matching is a huge win here, taking a hard
+to comprehend function and making the domain concepts clear.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetPositionType = function
+    | Deliver, Principal | Return, Counterparty -&amp;gt; Held
+    | Return, Principal | Deliver, Counterparty -&amp;gt; Posted
+    | MovementType.Undefined, _ | _, ApplyToParty.Undefined -&amp;gt; PositionType.Undefined
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we add a new status to any of these, we will get a compiler warning
+in every place letting us know. If that alone was the win, we&amp;rsquo;d be
+still be ahead by a lot. The domain is so clear here, I can print this
+code out and hand it to my BA to ensure the logic is correct.&lt;/p&gt;
+
+&lt;p&gt;Next though, this got me thinking. Why does this set of three enums
+have to be calculated? Why are they even separate? Ah, of course,
+right now they are stored in the database and ORM objects, each with a
+separate field and set of enum ids. Changing that would be costly.&lt;/p&gt;
+
+&lt;p&gt;What I want is a domain layer a level higher than the typical database
+ORM classes, something to convert my ORM classes into that will be
+able to do work in a safer way.&lt;/p&gt;
+
+&lt;p&gt;Rather than three enums that are supposed to change in lock step (but
+might get out of date), I really want a concept of the three combined
+and &amp;ldquo;frozen&amp;rdquo; together.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type Direction = 
+    | Held_Deliver_Principal
+    | Held_Return_Counterparty
+    | Posted_Return_Principal
+    | Posted_Deliver_Counterparty
+    
+let GetDirection = function
+   | Deliver, Principal  -&amp;gt; Held_Deliver_Principal
+   | Return, Counterparty -&amp;gt; Held_Return_Counterparty
+   | Return, Principal -&amp;gt; Posted_Return_Principal
+   | Deliver, Counterparty -&amp;gt; Posted_Deliver_Counterparty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I have a combined Direction that merges the three concepts into
+one. It is impossible with this new merged type to have an invalid
+state across the three. Getting any of the types back out to convert
+into the ORM classes or do some work is as simple as another match:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetMovementTypeToSaveInORM = function
+   | Held_Deliver_Principal | Posted_Deliver_Counterparty -&amp;gt; Deliver
+   | Posted_Return_Principal | Held_Return_Counterparty -&amp;gt; Return
+
+let GetSendFn = function
+   | Held_Deliver_Principal | Posted_Return_Principal -&amp;gt; SendMessageToPrincipal
+   | Held_Return_Counterparty | Posted_Deliver_Counterparty -&amp;gt; SendMessageToCounterparty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is possible to make an equivalent C# enum and combine these
+in a similar way, it is inherently unsafe (nothing to guarantee you
+covered every case) and therefore appropriately uncommon. The typical
+answer for safe polymorphic dispatch in C# is to use an interface and
+classes. Unfortunately, something still has to dispatch on that enum
+id, either inside a class or at the time of class instantiation. That
+is a vector for errors.&lt;/p&gt;
+
+&lt;p&gt;Because F# interops so well with C#, it is possible to build in a
+domain layer in F# immediately that calls down to your C# ORM
+classes. Converting from a set of dangerous C# enums into a
+constrained and safe F# discriminated union is easy and will simplify
+your domain to its essence.&lt;/p&gt;
+
+&lt;p&gt;For reasons like this, when I have to build something with a rich
+domain, I reach for F#.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Ranking</title>
+      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <description>&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static
+types&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.&lt;/p&gt;
+
+&lt;p&gt;I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&amp;rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.&lt;/p&gt;
+
+&lt;p&gt;By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &amp;ldquo;mistake&amp;rdquo; with a primitive, the more difficult it
+is to build such good abstractions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This model is not about language &amp;quot;power&amp;quot;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This model is not about ranking the &amp;ldquo;power&amp;rdquo;, &amp;ldquo;expressiveness&amp;rdquo;, or
+&amp;ldquo;abstract-ability&amp;rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&amp;ldquo;confusion&amp;rdquo; between the programmer and the machine at the primitive
+level.&lt;/p&gt;
+
+&lt;p&gt;Rather than focus on what is &lt;em&gt;possible&lt;/em&gt; with a language, I will
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.&lt;/p&gt;
+
+&lt;p&gt;To score a language, simply figure out how many characters it costs to
+&amp;ldquo;prevent&amp;rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is language enforced, like F#&amp;rsquo;s
+Option or C#&amp;rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &amp;ldquo;path&amp;rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.&lt;/p&gt;
+
+&lt;p&gt;If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 (by default) for a &amp;ldquo;every change run
+and debug to fix&amp;rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A lower score is &amp;quot;safer&amp;quot;, needing less (or no) code to achieve the same level of safety.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&amp;rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+
+Language Enforced Bonus:
+{{ enforcedScore }} 
+&lt;input ng-model=&#34;enforcedScore&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Language Inability Penalty:
+{{ inabilityPenalty }} 
+&lt;input ng-model=&#34;inabilityPenalty&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Show Weights &lt;input type=&#34;checkbox&#34; ng-model=&#34;showWeights&#34; /&gt;
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }} 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}% 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3&gt;&lt;input ng-model=&#34;showRealName&#34; type=&#34;checkbox&#34; /&gt;&lt;span
+ng-click=&#34;showRealName = !!!showRealName&#34;&gt;Click to see backing code and unmask names&lt;/span&gt;&lt;/h3&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;p&gt;I want to see your language represented here! I&amp;rsquo;ll happily take pull
+requests for new languages: &lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js&#34;&gt;blog source&lt;/a&gt;. Just
+use the &amp;ldquo;edit language&amp;rdquo; and &amp;ldquo;copy to clipboard&amp;rdquo; to build your own
+language data structure.&lt;/p&gt;
+
+&lt;p&gt;I would love to see every major language represented, including major
+language &amp;ldquo;idiom communities&amp;rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &amp;ldquo;Scala - The Better Java&amp;rdquo;
+and &amp;ldquo;Scala - The JVM Haskell&amp;rdquo; have vastly different idioms with
+apparently very separate communities.&lt;/p&gt;
+
+&lt;p&gt;Hope this is a helpful way to think about language safety!&lt;/p&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+Patrick Boe &lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;(twitter)&lt;/a&gt;,
+Kyle Burton &lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;(blog)&lt;/a&gt;,
+Daniel Miladinov &lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;(github)&lt;/a&gt;,
+Chris Salch &lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;(github)&lt;/a&gt;, and
+Tim Visher &lt;a href=&#34;https://github.com/timvisher&#34;&gt;(github)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt; Feel free to put in your own examples by playing
+with the samples below. Code surrounded with &lt;! !&gt; is ignored from the tally,
+since it would vary heavily based on the language and desired result. Variable
+and type names are kept at single characters, which are counted. Feel free to
+add in your own language below, and use the copy feature to extract the data
+structure to use in a pull request.
+
+&lt;div&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;/div&gt;
+&lt;button ng-click=&#34;showEdit = !showEdit&#34;&gt;Edit Language&lt;/button&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;div ng-show=&#34;showEdit&#34;&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+&lt;textarea class=&#34;widetextarea&#34; rows=&#34;5&#34; ng-model=&#34;selectedLang[check.key].desc&#34;&gt;&lt;/textarea&gt; 
+&lt;div&gt;
+Code: &lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;div class=&#34;tablecode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div ng-show=&#34;!showEdit&#34;&gt;
+&lt;span&gt;{{ selectedLang.name }} &lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+{{ selectedLang[check.key].desc }} 
+&lt;div&gt;
+Code: {{ enforcedNice(selectedLang[check.key].enforced)  }} 
+&lt;div class=&#34;tablecode&#34; ng-if=&#34;selectedLang[check.key].rawCode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

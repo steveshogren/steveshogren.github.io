@@ -1,318 +1,345 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <title>Active Record Pattern Testing - Deliberate Software</title>
-  <meta name="author" content="Steve Shogren">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Active Record Pattern Testing  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Active Record Pattern Testing  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/active-record-pattern-testing/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2011-04-12T00:00:00Z" />
+<meta property="og:article:modified_time" content="2011-04-12T00:00:00Z" />
 
   
-  <meta name="description" content="One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this &hellip;">
+    
   
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
   
-  <link rel="canonical" href="http://deliberate-software.com/active-record-pattern-testing/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<script src="/javascripts/libs/angular.js"></script>
-
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Active Record Pattern Testing" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/active-record-pattern-testing/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46040901-1']);
-    _gaq.push(['_trackPageview']);
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Active Record Pattern Testing",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2011-04-12",
+    "description": "",
+    "wordCount":  467 
+  }
+</script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/active-record-pattern-testing/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
 
 
 </head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Deliberate Software</a></h1>
-  
-    <h2>With deliberate practice come consistent results</h2>
-  
-</hgroup>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header col-lg-7">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="col-centered centered">
+        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
+        </div>
+      </div>
+      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">Active Record Pattern Testing
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2011-04-12">12 Apr, 2011</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 3 min
+  &middot; (467 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
   
-</ul>
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="deliberate-software.com">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">All Posts</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Active Record Pattern Testing</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-04-12T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+ </div>
+<br>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2011-04-12T00:00:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/active-record-pattern-testing/" data-via="" data-counturl="http://deliberate-software.com/active-record-pattern-testing/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/first-post-0/" title="Previous Post: First Post!">&laquo; First Post!</a>
-      
-      
-        <a class="basic-alignment right" href="/put-it-in-the-wiki/" title="Next Post: Put it in the Wiki">Put it in the Wiki &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
 
 </div>
 
-<aside class="sidebar">
-  
+            <div class="">
     
-<section class="about-me">
-  <h1>Steve Shogren</h1>
-  <div class="about-text">
-    <p>
-      Insights gathered while learning to deliberately craft software.
-    </p>
+  <div class="content">
+    <p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+
   </div>
-  <span class="gravatar">
-    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
-  </span>
-</section>
-
-<section>
-  <h1>Check out my new book!</h1>
-  <a href="https://leanpub.com/convincingcoworkers"><img class="bookclass" src="/images/convincingcoworkerscover.jpg" width="200"></a>
-</section>
-<section>
-  <h1>Top Posts</h1>
-  <ul id="recent_posts">
-    <li class="post">
-      <a href="/ego-driven-development/">Ego Driven Development</a>
-    </li>
-    <li class="post">
-      <a href="/safety-rank-part-2/">Language Safety Score 2</a>
-    </li>
-
-    <li class="post">
-      <a href="/intro-to-macros/">Intro To Macros</a>
-    </li>
-    <li class="post">
-      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-    </li>
-  </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
-      </li>
-    
-      <li class="post">
-        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
-      </li>
-    
-      <li class="post">
-        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-  <ul id="recent_posts">
-    
-    
-    <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
-    </li>
-    
-  </ul>
-</section>
+</div>
 
 
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
   
-</aside>
+    <nav><ul class="pager">
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/actionscript-unit-testing/" title="Actionscript Unit Testing">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Steve Shogren -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+</div>
 
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
 
 </footer>
+
+        </div>
+        <div class="col-sm-3">
+           <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">24</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">22</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">7</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
   
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
 
 
 
 
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
 
-
-
-
-</body>
+  </body>
 </html>
+

@@ -1,106 +1,175 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <title>Inverted Polymorphism With Pattern Matching - Deliberate Software</title>
-  <meta name="author" content="Steve Shogren">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Inverted Polymorphism  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Inverted Polymorphism  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/inversed-polymorphism/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2014-04-28T00:00:00Z" />
+<meta property="og:article:modified_time" content="2014-04-28T00:00:00Z" />
 
   
-  <meta name="description" content="In my last post on the power of pattern matching, we saw how powerful
-the match statement is in F#. Using match allows the compiler to
-give us &hellip;">
+    
   
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
   
-  <link rel="canonical" href="http://deliberate-software.com/inversed-polymorphism/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<script src="/javascripts/libs/angular.js"></script>
-
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Inverted Polymorphism" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/inversed-polymorphism/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46040901-1']);
-    _gaq.push(['_trackPageview']);
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Inverted Polymorphism",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2014-04-28",
+    "description": "",
+    "wordCount":  1038 
+  }
+</script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/inversed-polymorphism/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
 
 
 </head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Deliberate Software</a></h1>
-  
-    <h2>With deliberate practice come consistent results</h2>
-  
-</hgroup>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header col-lg-7">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="col-centered centered">
+        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
+        </div>
+      </div>
+      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">Inverted Polymorphism
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2014-04-28">28 Apr, 2014</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 5 min
+  &middot; (1038 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
   
-</ul>
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="deliberate-software.com">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
+  <a href="http://deliberate-software.com/categories/fsharp" class="label label-default">fsharp</a>
   
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">All Posts</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
     
-      <h1 class="entry-title">Inverted Polymorphism With Pattern Matching</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-04-28T22:05:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:05 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>In my last post on the power of pattern matching, we saw how powerful
+  <div class="content">
+    <p>In my last post on the power of pattern matching, we saw how powerful
 the <code>match</code> statement is in F#. Using <code>match</code> allows the compiler to
 give us warnings for missing cases, no matter what the type.</p>
 
@@ -108,66 +177,36 @@ give us warnings for missing cases, no matter what the type.</p>
 inversion of the usual OO way of polymorphism. Here is an example that
 is probably familiar to everyone: getting a database connection.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">Config</span><span class="p">.</span><span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// RepositoryFactory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RepositoryFactory</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="n">IPaymentRepository</span> <span class="nf">GetPaymentRepo</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="p">.</span><span class="n">configuration</span><span class="p">[</span><span class="s">&quot;useInMemory&quot;</span><span class="p">]</span> <span class="p">==</span> <span class="s">&quot;true&quot;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemory</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">return</span> <span class="k">new</span> <span class="nf">Postgres</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code...</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">repo</span> <span class="p">=</span> <span class="n">RepositoryFactory</span><span class="p">.</span><span class="n">GetPaymentRepo</span><span class="p">();</span>
-</span><span class='line'><span class="kt">var</span> <span class="n">payments</span> <span class="p">=</span> <span class="n">repo</span><span class="p">.</span><span class="n">GetAll</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-csharp">	public interface IPaymentRepository {
+		IEnumerable&lt;IPayment&gt; GetAll ();
+	}
+    // InMemory.cs
+	public class InMemory : IPaymentRepository {
+		public IEnumerable&lt;IPayment&gt; GetAll (){
+			return Config.payments.Values;
+		}
+	}
+    // Postgres.cs
+	public class Postgres : IPaymentRepository {
+		public IEnumerable&lt;IPayment&gt; GetAll (){
+			throw new NotImplementedException();
+		}
+	}
+    // RepositoryFactory.cs
+	public class RepositoryFactory {
+		public static IPaymentRepository GetPaymentRepo () {
+			if (Config.configuration[&quot;useInMemory&quot;] == &quot;true&quot;) {
+				return new InMemory();
+			} else {
+				return new Postgres();
+			}
+		}
+	}
 
+    // somewhere in the code...
+    var repo = RepositoryFactory.GetPaymentRepo();
+    var payments = repo.GetAll();
+</code></pre>
 
 <p>In our example here, we have two concrete implementers of the
 <code>IPaymentRepository</code>, each one with their own implementations. This is
@@ -177,40 +216,23 @@ would put each of these classes in their own files.</p>
 <p>Let&rsquo;s look at how we would invert the polymorphism of the C# classes
 and interfaces to use pattern matching.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">InMemory</span> <span class="o">-&gt;</span> <span class="nn">Config</span><span class="p">.</span><span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetPaymentRepo</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="nn">Config</span><span class="p">.</span><span class="n">configuration</span><span class="o">.[</span><span class="s">&quot;useInMemory&quot;</span><span class="o">]</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="s">&quot;true&quot;</span> <span class="o">-&gt;</span> <span class="n">InMemory</span>
-</span><span class='line'>        <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// somewhere in the code ...</span>
-</span><span class='line'><span class="k">let</span> <span class="nv">repo</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetPaymentRepo</span>
-</span><span class='line'><span class="k">let</span> <span class="nv">payments</span> <span class="o">=</span> <span class="nn">Payments</span><span class="p">.</span><span class="n">GetAll</span> <span class="n">repo</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-fsharp">type PaymentRepository = 
+   | InMemory
+   | Postgres
 
+let GetAll = function
+    | InMemory -&gt; Config.payments.Values;
+    | Postgres -&gt; raise(NotImplementedException())
+        
+let GetPaymentRepo = 
+    match Config.configuration.[&quot;useInMemory&quot;] with
+        | &quot;true&quot; -&gt; InMemory
+        | _ -&gt; Postgres 
+
+// somewhere in the code ...
+let repo = Payments.GetPaymentRepo
+let payments = Payments.GetAll repo
+</code></pre>
 
 <p>Notice how we separated our behavior from our types? The
 <code>PaymentRepository.InMemory</code> and the <code>PaymentRepository.Postgres</code> now
@@ -244,24 +266,25 @@ with pattern matching, it is safer.</p>
 <thead>
 <tr>
 <th></th>
-<th> Adding a Type  </th>
-<th> Modifying Behavior </th>
+<th>Adding a Type</th>
+<th>Modifying Behavior</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
-<td><strong>OO Interfaces/Classes</strong>  </td>
-<td>  Easier / Less Safe  </td>
-<td> Harder / Safe</td>
+<td><strong>OO Interfaces/Classes</strong></td>
+<td>Easier / Less Safe</td>
+<td>Harder / Safe</td>
 </tr>
+
 <tr>
-<td><strong>Pattern Matching Types</strong>  </td>
-<td>  Harder / Safe  </td>
-<td> Easier / Safe</td>
+<td><strong>Pattern Matching Types</strong></td>
+<td>Harder / Safe</td>
+<td>Easier / Safe</td>
 </tr>
 </tbody>
 </table>
-
 
 <p><br />
 I almost always find myself modifying the functions of an
@@ -273,85 +296,47 @@ use case, pattern matching is probably the better choice.</p>
 memory dictionary to be stored internally. In the interfaces and
 classes example, that requires editing <em>three separate files</em>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// IPaymentRepostory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">interface</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">();</span>
-</span><span class='line'>  <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// InMemory.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">InMemory</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">payments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">IPayment</span><span class="p">&gt;();</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">payments</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">payment</span><span class="p">.</span><span class="n">GetId</span><span class="p">(),</span><span class="n">payment</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">return</span> <span class="n">payments</span><span class="p">.</span><span class="n">Values</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1">// Postgres.cs</span>
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Postgres</span> <span class="p">:</span> <span class="n">IPaymentRepository</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">void</span> <span class="nf">Add</span><span class="p">(</span><span class="n">IPayment</span> <span class="n">payment</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IPayment</span><span class="p">&gt;</span> <span class="n">GetAll</span> <span class="p">(){</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-csharp">    // IPaymentRepostory.cs
+	public interface IPaymentRepository {
+		IEnumerable&lt;IPayment&gt; GetAll ();
+		void Add(IPayment payment);
+	}
+    // InMemory.cs
+	public class InMemory : IPaymentRepository {
+		public Dictionary&lt;int, IPayment&gt; payments = new Dictionary&lt;int, IPayment&gt;();
+		public void Add(IPayment payment) {
+			payments.Add(payment.GetId(),payment);
+		}
+		public IEnumerable&lt;IPayment&gt; GetAll (){
+			return payments.Values;
+		}
+	}
+    // Postgres.cs
+	public class Postgres : IPaymentRepository {
+		public void Add(IPayment payment) {
+			throw new NotImplementedException();
+		}
+		public IEnumerable&lt;IPayment&gt; GetAll (){
+			throw new NotImplementedException();
+		}
+	}
+</code></pre>
 
 <p>Here is the change to add a new function in the pattern matching example:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">type</span> <span class="nc">PaymentRepository</span> <span class="o">=</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">InMemory</span> <span class="k">of</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">int</span><span class="o">,</span> <span class="n">IPayment</span><span class="o">&gt;</span>
-</span><span class='line'>   <span class="o">|</span> <span class="n">Postgres</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">Add</span> <span class="n">db</span> <span class="o">(</span><span class="n">payment</span><span class="o">:</span><span class="n">IPayment</span><span class="o">)</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">match</span> <span class="n">db</span> <span class="k">with</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Add</span><span class="o">(</span><span class="n">payment</span><span class="o">.</span><span class="n">GetId</span><span class="bp">()</span><span class="o">,</span><span class="n">payment</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nv">GetAll</span> <span class="o">=</span> <span class="k">function</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">InMemory</span> <span class="n">payments</span> <span class="o">-&gt;</span> <span class="n">payments</span><span class="o">.</span><span class="n">Values</span><span class="o">;</span>
-</span><span class='line'>        <span class="o">|</span> <span class="n">Postgres</span> <span class="o">-&gt;</span> <span class="n">raise</span><span class="o">(</span><span class="n">NotImplementedException</span><span class="bp">()</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-fsharp">type PaymentRepository = 
+   | InMemory of Dictionary&lt;int, IPayment&gt;
+   | Postgres
 
+let Add db (payment:IPayment) = 
+    match db with
+        | InMemory payments -&gt; payments.Add(payment.GetId(),payment);
+        | Postgres -&gt; raise(NotImplementedException())
+
+let GetAll = function
+        | InMemory payments -&gt; payments.Values;
+        | Postgres -&gt; raise(NotImplementedException())
+</code></pre>
 
 <p>In case you were concerned that these F# types do not have any state,
 they actually can have fields just like regular classes. Notice the
@@ -387,220 +372,184 @@ with high performance and interoperability with existing C# libraries.</p>
 <a href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4">section 2.4</a> in SICP.</p>
 
 <p>Discussion in the HN <a href="https://news.ycombinator.com/item?id=7763069">comments</a></p>
-</div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2014-04-28T22:05:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>10:05 pm</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/f-number/'>f#</a>, <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/inversed-polymorphism/" data-via="" data-counturl="http://deliberate-software.com/inversed-polymorphism/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/function-pattern-matching/" title="Previous Post: Pattern Matching - Make the Compiler Work for You">&laquo; Pattern Matching - Make the Compiler Work for You</a>
-      
-      
-        <a class="basic-alignment right" href="/next-book/" title="Next Post: What Book Should I Read Next?">What Book Should I Read Next? &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-</div>
-
-<aside class="sidebar">
-  
-    
-<section class="about-me">
-  <h1>Steve Shogren</h1>
-  <div class="about-text">
-    <p>
-      Insights gathered while learning to deliberately craft software.
-    </p>
   </div>
-  <span class="gravatar">
-    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
-  </span>
-</section>
-
-<section>
-  <h1>Check out my new book!</h1>
-  <a href="https://leanpub.com/convincingcoworkers"><img class="bookclass" src="/images/convincingcoworkerscover.jpg" width="200"></a>
-</section>
-<section>
-  <h1>Top Posts</h1>
-  <ul id="recent_posts">
-    <li class="post">
-      <a href="/ego-driven-development/">Ego Driven Development</a>
-    </li>
-    <li class="post">
-      <a href="/safety-rank-part-2/">Language Safety Score 2</a>
-    </li>
-
-    <li class="post">
-      <a href="/intro-to-macros/">Intro To Macros</a>
-    </li>
-    <li class="post">
-      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-    </li>
-  </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
-      </li>
-    
-      <li class="post">
-        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
-      </li>
-    
-      <li class="post">
-        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-  <ul id="recent_posts">
-    
-    
-    <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
-    </li>
-    
-  </ul>
-</section>
+</div>
 
 
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
   
-</aside>
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/function-pattern-matching/" title="Pattern Matching - Making the Compiler Work For You">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/next-book/" title="What Book Should I Read Next?">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Steve Shogren -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+</div>
 
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
 
 </footer>
+
+        </div>
+        <div class="col-sm-3">
+           <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">24</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">22</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">7</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
   
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
 
 
 
 
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
 
-
-
-
-</body>
+  </body>
 </html>
+

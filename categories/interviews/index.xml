@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interviews on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/interviews/</link>
+    <description>Recent content in Interviews on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Oct 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/interviews/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Interview Humiliation</title>
+      <link>http://deliberate-software.com/on-defeat/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <description>
+
+&lt;p&gt;(All these great ideas, but no one is listening? Check out my
+book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;One day, I went into an interview, and I was humiliated.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-setup:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The Setup&lt;/h3&gt;
+
+&lt;p&gt;I used to think very highly of myself. This was early on in the Test Driven
+Development (TDD) craze, and I was one of the best I knew at it. I knew
+interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all
+the tricks from some very smart people, and my confidence was high. Not only
+that, but I&amp;rsquo;d just finished at work the restoration of an abandoned legacy
+codebase to a bug-free, fully tested state completely on my own.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&amp;rsquo;t been programming more
+than a couple years. My first job, they&amp;rsquo;d made me a team lead over some very
+senior developers within a year of my hire date. I was learning Clojure and
+Common Lisp, and had just shipped an Android game I made entirely alone
+(including the 2D physics engine).&lt;/p&gt;
+
+&lt;p&gt;I thought I was incredible. Yet, due to an overwhelming sense of Imposter
+Syndrome, I keenly knew that there were things I didn&amp;rsquo;t know. I&amp;rsquo;m mostly self
+taught, so a lot of common CS concepts felt alien. I was waking up before work
+and teaching myself algorithms, lisps, and math.&lt;/p&gt;
+
+&lt;p&gt;Enter Company A.&lt;/p&gt;
+
+&lt;p&gt;I flew through the phone screen &amp;ldquo;this is the best phone screen we&amp;rsquo;ve seen!&amp;rdquo; Of
+course it is. &amp;ldquo;Your resume is very impressive.&amp;rdquo; Oh, I know!&lt;/p&gt;
+
+&lt;p&gt;I get to the on-site interview.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-on-site:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The On-Site&lt;/h3&gt;
+
+&lt;p&gt;I hadn&amp;rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
+asked to present a project I&amp;rsquo;d worked on, and I picked my recently shipped
+physics game that was up on Google Play. I walked into the reception area a few
+minutes early.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;You are 25 minutes late.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What?! I explain that I have the email saying 9:30! No matter, &amp;ldquo;hurry, they are
+waiting!&amp;rdquo; Maybe I can salvage this. I walk into a conference room with a dozen
+people sitting around a table looking bored and pissed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Let&#39;s see your presentation.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I start to open up my laptop. Meanwhile, they start to joke around to each other:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, wow, Linux, what is this, 2003? I&#39;d hoped I&#39;d never have to see the
+grub boot screen again! Can&#39;t you afford a real machine?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I try to joke back while multitasking with my laptop. They only have the Mac
+projector cable. No adapter. I&amp;rsquo;d thought ahead, and handed one of the developers
+a thumb drive with the presentation and code. The interviewers are joking and
+laughing to each other at my choice of clothes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;A suit, classic, where are you interviewing after this, a sales job?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I roll with it, make some joke about &amp;ldquo;styling&amp;rdquo;. I start presenting about the 2D
+physics engine I&amp;rsquo;d written as a learning project for my game. One of the most
+interesting parts to me was how I&amp;rsquo;d first written it without any unit testing,
+following just Clean Code practices. I then re-wrote it using heavy TDD. The
+design turned out very different both times, which I thought was interesting to
+see how TDD had influenced the design.&lt;/p&gt;
+
+&lt;p&gt;About five minutes in, I am cut off:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;This presentation is bullshit. You have no evidence, nothing valuable to
+show, just spurious subjective opinions. You&#39;ve put up a straw man and now
+are trying to knock it down assuming we are idiots. I&#39;ve seen enough.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, it has been barely 15 minutes since I walked in. I remain calm
+and professional, and start to address the raised concerns. I play the
+meta-game, wondering if perhaps this is a test to see how I&amp;rsquo;ll react when
+questioned and embarrassed. Even if this wasn&amp;rsquo;t a test, I was determined to be
+at my most professional and finish with my head held high.&lt;/p&gt;
+
+&lt;p&gt;Five developers walk out before I can finish my first sentence. One of the
+remaining six interviewers looks embarrassed and asks if I could live code them
+a web scraper in any language instead of the presentation. I turn my laptop
+around (still no projector) and ask if PHP is acceptable. They are a Python
+shop, and PHP is the closest to what they use that I am comfortable using when
+this nervous.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;PHP? Gross. I suppose if it is all you know...&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unfortunately, I&amp;rsquo;ve got so much adrenaline in me that it takes me a few tries to
+log in. I get on a roll after five minutes, and write the scraper. They throw me
+a few more requirements, and within a half hour I&amp;rsquo;ve written stories for and
+completed them all. At least two of the interviewers seem quite impressed.
+Someone looks at their watch, &amp;ldquo;well, that&amp;rsquo;s all the stories we have, I guess
+let&amp;rsquo;s break for lunch.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
+suit and dress shoes. When we get back from lunch I am hot, tired, and
+foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
+patent leather shoes. I am called into the conference room again. At this point,
+I am genuinely curious if this is some sort of extreme patience/calmness test,
+or if I am being filmed for a reality show. No such luck.&lt;/p&gt;
+
+&lt;p&gt;At the head of the table is the developer who &amp;ldquo;called me out&amp;rdquo; for my
+presentation. Apparently my lunch mates were supposed to only take an hour, we
+took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
+sarcastic tone I have ever heard:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;So, got any questions for me?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I ask a few normal questions, meanwhile he is constantly checking his watch and
+rolling his eyes. He answers briefly and rudely. I thank him for his time, and
+ask him if there is more. He laughs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, we are done here.&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I am shown to the door.&lt;/p&gt;
+
+&lt;p&gt;I sit in the car for a half hour, wondering what just happened. I look over to
+the passenger seat piled high with text books I have been studying, books on
+language design, compilers, algorithms, physics engines, TDD, and productivity.&lt;/p&gt;
+
+&lt;p&gt;I was asked none of it. I threw up from stress out the car door into their
+parking lot.&lt;/p&gt;
+
+&lt;h3 id=&#34;aftermath:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Aftermath&lt;/h3&gt;
+
+&lt;p&gt;I found out later their recruiter had given me and many other candidates the
+wrong time. She was fired shortly after.&lt;/p&gt;
+
+&lt;p&gt;I never found out if I had done something to make everyone so angry. I now
+suspect that they were massively turned off by a host of things. Polyglot
+programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
+presentation probably all contributed to an immediate disqualification. I
+rationally realize they were terrible and treated me terribly, but the
+embarrassment is still there. I suspect my presentation was terrible from the
+get go: that they were expecting some rock-star and instead got me.&lt;/p&gt;
+
+&lt;p&gt;A number of times I have woken up in a cold sweat having dreamt about that
+interview. In the large scheme of things, a bad interview is such a small thing,
+but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
+cocky, insufferable? Did my ego cause them to treat me that way, or was it all
+them? What could I have done differently? I was only in there for a few minutes!&lt;/p&gt;
+
+&lt;p&gt;Few events in my professional life have shaped me as much as that interview. I
+have turned it into a forge for my talent, the anvil on which I beat my pride.
+When I don&amp;rsquo;t know something, I am more willing to shrug and laugh it off, all
+while learning as fast as I can. When I am humiliated professionally, I know
+I&amp;rsquo;ve come through worse and thrived.&lt;/p&gt;
+
+&lt;h3 id=&#34;break-the-cycle:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Break The Cycle&lt;/h3&gt;
+
+&lt;p&gt;This story fills me with an overwhelming desire to never continue the cycle of
+abuse. I strive every interview to try to respectfully work with the candidate,
+and never humiliate them. I want every person I interview to leave feeling loved
+as a human and respected, even if they are completely incapable to perform the
+duties of the job.&lt;/p&gt;
+
+&lt;p&gt;When I ask a question, if they struggle, we work it out together. When I ask for
+code, we write it together, even if that means I have to do all the work. I can
+make myself their servant, while still assessing their skill with accuracy and
+dispassion. Those with the skill will show it, and those without will not feel
+humiliated. I let them interview me, and if that means they want me to go up to
+the whiteboard and struggle through a merge sort, so be it. In this way, I push
+back against the interview culture that normalizes degradation and humiliation.&lt;/p&gt;
+
+&lt;p&gt;If you are interviewing others, take a serious look at your practices. Would a
+failed candidate feel humiliated and disrespected? What will they tell their
+coworkers and friends at meetups about your company? Will they talk about
+feeling respected, and how they hope to get the chance to work with you one day?
+Or will they talk of a group of self-righteous jerks who abuse their power to
+make others feel small? You can break the cycle.&lt;/p&gt;
+
+&lt;p&gt;(All these great ideas, but no one is listening? Check out my
+book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>On Developer Certifications</title>
+      <link>http://deliberate-software.com/on-developer-certifications/</link>
+      <pubDate>Tue, 28 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-developer-certifications/</guid>
+      <description>&lt;p&gt;I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.&lt;p /&gt; Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months. Who would be on the committee? And what would they agree on to enforce? Regex? Recursion, OO, testability, and functional programming?&amp;nbsp; Proof of understanding in the half-dozen &lt;a href=&#34;http://norvig.com/21-days.html&#34; target=&#34;_blank&#34;&gt;&#34;mind expanding&#34;&lt;/a&gt; languages? Not going to happen. Not while my Joomla-site maintaining friend and my Android 3D game authoring cohort are both lumped under the title &#34;software developer&#34;. The field is too vast, the content too broad, and the jobs too diverse. &lt;p /&gt; So, we are doomed to wallow. Or are we? What is the one thing we all have to do?&lt;em&gt; Get hired.&lt;/em&gt;&lt;p /&gt;I used to be a big sissy about interviewing for jobs. Especially interviews full of the nit-picky details I can never remember, yeah, I &lt;em&gt;really&lt;/em&gt; hate those. I would moan and groan about how the interviewer could only answer those questions because they had to look them up the other day. &#34;MySQL index implementations, what am I, a DBA?!&#34;, I would screech to anyone who would listen, &#34;They must have misunderstood, I am a developer, when would I ever need to know that?!&#34;&lt;p /&gt; But.&lt;p /&gt;Interview prep gets me to cram stuff into my head I would otherwise skim or avoid if just sitting at home programming for fun. I get a great refresher on all the stuff I am fully able to do at work, but maybe I haven&#39;t needed in a while. Like linked-lists. In four years of fairly diverse programming jobs, I have&lt;strong&gt; yet&lt;/strong&gt; to need a linked list for anything, but man, when that day comes, I have linked-lists in a quick-draw holster. I used to say the same thing about trees, then last year, I had a problem that surely needed a tree, and hear you me, I had that data being in-order traversed before you could say: &#34;tree&#34;. Would I have even &lt;em&gt;remembered&lt;/em&gt; &lt;em&gt;what trees are good for&lt;/em&gt; without my semi-annual refresher?&lt;p /&gt; My wife is a commercial pilot, and every so often she is required to skim over all those little details about being a pilot, refreshing &lt;em&gt;everything&lt;/em&gt;, double-checking her knowledge so she can keep her licenses, &lt;em&gt;even if she hasn&#39;t needed a certain technique since the last test&lt;/em&gt;. Huh. Sounds like me, every so often, cramming for an interview.&lt;p /&gt;  We don&#39;t need certifications for being a programmer. We already have the tools in hand, and just need to learn to use them better. &lt;strong&gt;Interviews are our certifications. &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;This is a double-edged sword, because this means that, &#34;what you sow, you will also reap&#34;.  The responsibility to keep standards high falls on the interviewer. If  you interview a candidate for tricky puzzle questions, or in-depth  knowledge of C++ libraries, you will find someone who knows those  things, and possibly ONLY knows those things. I have seen developers hired who couldn&#39;t handle VCS merging or shipping actual software, but were absolute &lt;em&gt;geniuses&lt;/em&gt; when it came to programming language trivia and puzzle questions.&lt;/p&gt;&lt;p&gt;A few months ago, I read of a guy with no programming experience who did like 100 interviews in a few weeks, till he was a master interviewee. By the end, he was able to pick his choice of companies, and &lt;strong&gt;yet &lt;/strong&gt;&lt;strong&gt;he couldn&#39;t ship software&lt;/strong&gt;. He gamed a system &lt;em&gt;intended&lt;/em&gt; to sort out good developers by asking questions that are ancillary to development, without actually having the candidate &lt;em&gt;prove any real ability&lt;/em&gt;. And now that company has a developer who is great at gaming systems, but unskilled at development: I hope they have a good training program.&lt;/p&gt;&lt;p&gt;No offense intended to the man who did this, I &lt;strong&gt;really &lt;/strong&gt;admire his tenacity and clever thinking, and I think he will do well regardless of the task. But it speaks volumes to the brokenness of the interview system for those companies that would hire a completely unskilled developer based on the correct answers to trivia questions about programming.&lt;/p&gt;&lt;p&gt;Parting question to consider for interviewers: if interviews are our certifications, what should a candidate be able to do to be &#34;certified&#34; to be able to do the job in question?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,108 +1,182 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <title>Six Unusual Reasons Why Clojure Is a Delight - Deliberate Software</title>
-  <meta name="author" content="Steve Shogren">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Six Unusual Reasons why Clojure is a Delight  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Six Unusual Reasons why Clojure is a Delight  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2015-02-09T00:00:00Z" />
+<meta property="og:article:modified_time" content="2015-02-09T00:00:00Z" />
 
   
-  <meta name="description" content="Clojure is a delightful language, and here are six uncommonly
-discussed reasons why. 1 - Dead Simple Unit Test Mocking Clojure is the easiest &hellip;">
+    
   
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
   
-  <link rel="canonical" href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Deliberate Software" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-<script src="/javascripts/libs/angular.js"></script>
-
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Six Unusual Reasons why Clojure is a Delight" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46040901-1']);
-    _gaq.push(['_trackPageview']);
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Six Unusual Reasons why Clojure is a Delight",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2015-02-09",
+    "description": "",
+    "wordCount":  1245 
+  }
+</script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
 
 
 </head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Deliberate Software</a></h1>
-  
-    <h2>With deliberate practice come consistent results</h2>
-  
-</hgroup>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header col-lg-7">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="col-centered centered">
+        <a class="navbar-brand col-centered header-text" href="http://deliberate-software.com/">Deliberate Software</a>
+        </div>
+      </div>
+      <div id="navbar" class="col-lg-5 collapse navbar-collapse pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">Six Unusual Reasons why Clojure is a Delight
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-02-09">9 Feb, 2015</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 6 min
+  &middot; (1245 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
   
-</ul>
+  <a href="http://deliberate-software.com/categories/clojure" class="label label-default">clojure</a>
   
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="deliberate-software.com">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
   
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">All Posts</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
+  <a href="http://deliberate-software.com/categories/unit-testing" class="label label-default">Unit Testing</a>
   
-  <header>
+
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
     
-      <h1 class="entry-title">Six Unusual Reasons Why Clojure Is a Delight</h1>
+  <div class="content">
     
-    
-      <p class="meta">
-        
 
-
-
-
-<time class='entry-date' datetime='2015-02-09T11:36:00-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>Clojure is a delightful language, and here are six uncommonly
+<p>Clojure is a delightful language, and here are six uncommonly
 discussed reasons why.</p>
 
-<h2>1 - Dead Simple Unit Test Mocking</h2>
+<h2 id="1-dead-simple-unit-test-mocking:8b20eb90a7bf5bd93e271e1b65cf0feb">1 - Dead Simple Unit Test Mocking</h2>
 
 <p>Clojure is the easiest language to unit test I have ever
 seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
@@ -111,38 +185,28 @@ dependency injection, no mocking framework.  The built-in function <code>with-re
 will replace any function in any library or
 namespace with a new definition.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">next-id</span> <span class="p">[</span><span class="nv">connection</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="p">(</span><span class="nf">get-current-id</span> <span class="nv">connection</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">testing</span> <span class="s">&quot;next-id&quot;</span>
-</span><span class='line'>  <span class="c1">;; bind get-current-id to a lambda that always returns 4 </span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">with-redefs</span> <span class="p">[</span><span class="nv">get-current-id</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">_</span><span class="p">]</span> <span class="mi">4</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">5</span> <span class="p">(</span><span class="nf">next-id</span> <span class="nv">nil</span><span class="p">)))))</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(defn next-id [connection]
+  (+ 1 (get-current-id connection)))
 
+(testing &quot;next-id&quot;
+  ;; bind get-current-id to a lambda that always returns 4 
+  (with-redefs [get-current-id (fn [_] 4)]
+    (is (= 5 (next-id nil)))))
+</code></pre>
 
 <p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
 the scope of <code>with-redefs</code>. Couldn&rsquo;t be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
 with-redefs, so no need to unbind it after the test.</p>
 
-<h2>2 - Amazing Editing</h2>
+<h2 id="2-amazing-editing:8b20eb90a7bf5bd93e271e1b65cf0feb">2 - Amazing Editing</h2>
 
 <p>Many arguments have been made over those contentious
 parentheses. While the most powerful use of s-expressions is to easily
 allow macros, for the day to day, s-expressions have a very important
 use: amazing editing!</p>
 
-<p><img class="center" src="http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif" title="image" alt="images"></p>
+<p><img src="http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif"></img></p>
 
 <p>With ParEdit (available in most editors), it is trivial to select,
 move, replace, grow, or shrink any s-expression, string, map, or
@@ -158,7 +222,7 @@ than it is for <code>add(1, 2)</code>, the tooling can be so much better.</p>
 <p>No local editing tool I have seen comes close to Vim with ParEdit for
 effective editing.</p>
 
-<h2>3 - Live Attached Repl</h2>
+<h2 id="3-live-attached-repl:8b20eb90a7bf5bd93e271e1b65cf0feb">3 - Live Attached Repl</h2>
 
 <p>Developing in Clojure against a running version of the program is a
 huge bonus for development speed. While possible to get similar
@@ -174,7 +238,7 @@ offending function to see the source.</p>
 application, a live attached repl sheds light on the entire
 application.</p>
 
-<h2>4 - No-fuss Polymorphism</h2>
+<h2 id="4-no-fuss-polymorphism:8b20eb90a7bf5bd93e271e1b65cf0feb">4 - No-fuss Polymorphism</h2>
 
 <p>One of the best claims about &ldquo;traditional&rdquo; Java OO is
 polymorphism. The ability to make an interface with concrete classes
@@ -190,54 +254,36 @@ multiple dispatch.</p>
 is possible to achieve a similar effect by passing functions, it is
 also possible to get a similar value with something called multimethods.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:dog</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;woof says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">:cat</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;mow says &quot;</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">this</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;woof says Spike&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;mow says Mr Cat&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(defmulti speak :animal)
+(defmethod speak :dog [this] (str &quot;woof says &quot; (:name this)))
+(defmethod speak :cat [this] (str &quot;mow says &quot; (:name this)))
 
+(speak {:animal :dog :id 1 :name &quot;Spike&quot;})
+;; =&gt; &quot;woof says Spike&quot;
+(speak {:animal :cat :id 2 :name &quot;Mr Cat&quot;})
+;; =&gt; &quot;mow says Mr Cat&quot;
+</code></pre>
 
 <p>In this example, we use the <code>:animal</code> keyword to be the &ldquo;route&rdquo; function,
 and the two methods fill in two of the possible concrete types. We are
 not limited to just a keyword, we can dispatch on anything on the
 passed map, for example, the oddness of the id:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">odds?</span> <span class="p">(</span><span class="nb">comp </span><span class="nv">odd?</span> <span class="ss">:id</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">true</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;odd id&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">odds?</span> <span class="nv">false</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;even id&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:dog</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;odd id&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">odds?</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">:cat</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Cat&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;even id&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(defmulti odds? (comp odd? :id))
+(defmethod odds? true [d] &quot;odd id&quot;)
+(defmethod odds? false [c] &quot;even id&quot;)
 
+(odds? {:animal :dog :id 1 :name &quot;Spike&quot;})
+;; =&gt; &quot;odd id&quot;
+(odds? {:animal :cat :id 2 :name &quot;Mr Cat&quot;})
+;; =&gt; &quot;even id&quot;
+</code></pre>
 
 <p>While both examples are a bit silly, they should demonstrate the power
 of simple polymorphism. But you might think, what about inheritance?
 Multimethods allow that too!</p>
 
-<h2>5 - Simple Multiple Inheritance</h2>
+<h2 id="5-simple-multiple-inheritance:8b20eb90a7bf5bd93e271e1b65cf0feb">5 - Simple Multiple Inheritance</h2>
 
 <p>We don&rsquo;t build inheritance on a single type, but on a hierarchy of
 keywords. Those can be dispatched on just like any other
@@ -245,83 +291,47 @@ keyword. First, an example hierarchy of keywords using the built-in
 functions <code>derive</code> and <code>isa?</code>. These <code>::</code> keywords are
 namespaced, which prevents collisions.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::cat</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::dog</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">derive</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::dog</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; true</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::poodle</span> <span class="ss">::cat</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span><span class='line'><span class="p">(</span><span class="nf">isa?</span> <span class="ss">::mammal</span> <span class="ss">::hairy</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; false</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(derive ::cat ::mammal)
+(derive ::dog ::mammal)
+(derive ::dog ::hairy)
+(derive ::poodle ::dog)
 
+(isa? ::poodle ::dog)
+;; =&gt; true
+(isa? ::poodle ::mammal)
+;; =&gt; true
+(isa? ::poodle ::hairy)
+;; =&gt; true
+(isa? ::poodle ::cat)
+;; =&gt; false
+(isa? ::mammal ::hairy)
+;; =&gt; false
+</code></pre>
 
 <p>A <code>::dog</code> is-a <code>::mammal</code> and is-a <code>::hairy</code>, the
 classical diamond problem (without the common ancestor, which is
 possible, but unneeded for the example).</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">speak</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;chirps&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">speak</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;breathes&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;chirps&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">speak</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Mr Dog&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;breathes&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defmulti </span><span class="nv">shave</span> <span class="ss">:animal</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::poodle</span> <span class="p">[</span><span class="nv">d</span><span class="p">]</span> <span class="s">&quot;shivers&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::hairy</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;stuggles&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="kd">defmethod </span><span class="nv">shave</span> <span class="ss">::mammal</span> <span class="p">[</span><span class="nv">c</span><span class="p">]</span> <span class="s">&quot;maybe cant be shaved!&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">prefer-method</span> <span class="nv">shave</span> <span class="ss">::hairy</span> <span class="ss">::mammal</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::poodle</span> <span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;Spike&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;shivers&quot;</span>
-</span><span class='line'><span class="p">(</span><span class="nf">shave</span> <span class="p">{</span><span class="ss">:animal</span> <span class="ss">::dog</span> <span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;Rufs&quot;</span><span class="p">})</span>
-</span><span class='line'><span class="c1">;; =&gt; &quot;stuggles&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(defmulti speak :animal)
+(defmethod speak ::poodle [d] &quot;chirps&quot;)
+(defmethod speak ::mammal [c] &quot;breathes&quot;)
 
+(speak {:animal ::poodle :id 1 :name &quot;Spike&quot;})
+;; =&gt; &quot;chirps&quot;
+(speak {:animal ::dog :id 2 :name &quot;Mr Dog&quot;})
+;; =&gt; &quot;breathes&quot;
+
+(defmulti shave :animal)
+(defmethod shave ::poodle [d] &quot;shivers&quot;)
+(defmethod shave ::hairy [c] &quot;stuggles&quot;)
+(defmethod shave ::mammal [c] &quot;maybe cant be shaved!&quot;)
+(prefer-method shave ::hairy ::mammal)
+
+(shave {:animal ::poodle :id 1 :name &quot;Spike&quot;})
+;; =&gt; &quot;shivers&quot;
+(shave {:animal ::dog :id 2 :name &quot;Rufs&quot;})
+;; =&gt; &quot;stuggles&quot;
+</code></pre>
 
 <p>We can see the <code>::dog</code> keyword doesn&rsquo;t have an explicit speak or shave
 implementation, which is fine, because it will then use the &ldquo;preferred&rdquo;
@@ -334,7 +344,7 @@ preferred match is the one returned.</p>
 the <code>isa?</code> function. Because of this, uses of multimethod
 hierarchies can have inherited behavior for complex structures.</p>
 
-<h2>6 - Mostly Monadic</h2>
+<h2 id="6-mostly-monadic:8b20eb90a7bf5bd93e271e1b65cf0feb">6 - Mostly Monadic</h2>
 
 <p>Languages like Haskell and F# have tools like the maybe monad that add
 safety to operations. For example, using the maybe monad can
@@ -348,30 +358,18 @@ value that is nullable in a type, Clojure&rsquo;s default functions all
 <em>mostly</em> deal with nil and empty without throwing exceptions. For
 example:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">get </span><span class="p">{</span><span class="ss">:id</span> <span class="mi">5</span><span class="p">}</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 5</span>
-</span><span class='line'><span class="p">(</span><span class="nb">get </span><span class="nv">nil</span> <span class="ss">:id</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">])</span>
-</span><span class='line'><span class="c1">;; =&gt; 3</span>
-</span><span class='line'><span class="p">(</span><span class="nb">first </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; nil</span>
-</span><span class='line'><span class="p">(</span><span class="nb">count </span><span class="nv">nil</span><span class="p">)</span>
-</span><span class='line'><span class="c1">;; =&gt; 0</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(get {:id 5} :id)
+;; =&gt; 5
+(get nil :id)
+;; =&gt; nil
 
+(first [3 2 1])
+;; =&gt; 3
+(first nil)
+;; =&gt; nil
+(count nil)
+;; =&gt; 0
+</code></pre>
 
 <p>This allows functions to be chained without fear that along the way a
 nil will get returned.</p>
@@ -382,226 +380,190 @@ hassle. Ultimately, a more rich type system would allow for custom
 types which can be domain specific, but in day-to-day working,
 primitive safety is still a huge win.</p>
 
-<h2>Conclusion</h2>
+<h2 id="conclusion:8b20eb90a7bf5bd93e271e1b65cf0feb">Conclusion</h2>
 
 <p>These are a few simple features that keep me coming back to Clojure,
 even from languages like F# and Haskell. While Clojure is a bit more
 wordy than the ML family, and not as type safe, the simplicity of
 these features keep me coming back for more!</p>
-</div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Steve Shogren</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2015-02-09T11:36:00-05:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:36 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/technical-skills/'>technical skills</a>, <a class='category' href='/blog/categories/unit-testing/'>unit testing</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/" data-via="" data-counturl="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/christmas-f-number-polymorphism/" title="Previous Post: Christmas F# Polymorphism">&laquo; Christmas F# Polymorphism</a>
-      
-      
-        <a class="basic-alignment right" href="/programming-language-safety-algorithm/" title="Next Post: Programming Language Safety Score">Programming Language Safety Score &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-</div>
-
-<aside class="sidebar">
-  
-    
-<section class="about-me">
-  <h1>Steve Shogren</h1>
-  <div class="about-text">
-    <p>
-      Insights gathered while learning to deliberately craft software.
-    </p>
   </div>
-  <span class="gravatar">
-    <img src="http://www.gravatar.com/avatar/772ab2a207cb180ed699d22959b72dd9" alt="Gravatar of Steve Shogren " title="Gravatar of Steve Shogren" />
-  </span>
-</section>
-
-<section>
-  <h1>Check out my new book!</h1>
-  <a href="https://leanpub.com/convincingcoworkers"><img class="bookclass" src="/images/convincingcoworkerscover.jpg" width="200"></a>
-</section>
-<section>
-  <h1>Top Posts</h1>
-  <ul id="recent_posts">
-    <li class="post">
-      <a href="/ego-driven-development/">Ego Driven Development</a>
-    </li>
-    <li class="post">
-      <a href="/safety-rank-part-2/">Language Safety Score 2</a>
-    </li>
-
-    <li class="post">
-      <a href="/intro-to-macros/">Intro To Macros</a>
-    </li>
-    <li class="post">
-      <a href="/function-pattern-matching/">Pattern Matching - Make the Compiler Work for You</a>
-    </li>
-  </ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/pop-culture-architecture/">Pop Culture Architecture</a>
-      </li>
-    
-      <li class="post">
-        <a href="/haskell-is-the-dark-souls-of-programming/">Haskell Is the Dark Souls of Programming</a>
-      </li>
-    
-      <li class="post">
-        <a href="/development-disappointment-disorder/">Development Disappointment Disorder</a>
-      </li>
-    
-      <li class="post">
-        <a href="/compassionate-interviewing/">Designing a Compassionate Interview for a High Performing Individual</a>
-      </li>
-    
-      <li class="post">
-        <a href="/daily-meditation-greatly-improved-my-technical-leadership/">How Daily Meditation Improved My Technical Leadership</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Categories</h1>
-  <ul id="recent_posts">
-    
-    
-    <li class="post">
-      <a href="/blog/categories/technical-skills/"><span>technical skills</span><span style="float:right">23</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/meta-game/"><span>meta game</span><span style="float:right">26</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/unit-testing/"><span>unit testing</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/clojure/"><span>clojure</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/emacs/"><span>emacs</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/interviews/"><span>interviews</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/management/"><span>management</span><span style="float:right">8</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/f-number/"><span>f#</span><span style="float:right">7</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/c-number/"><span>c#</span><span style="float:right">4</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/haskell/"><span>haskell</span><span style="float:right">2</span></a>
-    </li>
-    
-    
-    <li class="post">
-      <a href="/blog/categories/architecture/"><span>architecture</span><span style="float:right">1</span></a>
-    </li>
-    
-  </ul>
-</section>
+</div>
 
 
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-
-
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
   
-</aside>
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/christmas-f-number-polymorphism/" title="Christmas F# Polymorphism">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/programming-language-safety-algorithm/" title="Programming Language Safety Ranking">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
 
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Steve Shogren -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+</div>
 
-<script src="/javascripts/sliders.js" type="text/javascript"></script>
-<script src="/javascripts/sliders2.js" type="text/javascript"></script>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
 
 </footer>
+
+        </div>
+        <div class="col-sm-3">
+           <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">8</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">24</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">22</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">7</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
   
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
 
 
 
 
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
 
 
-
-
-
-</body>
+  </body>
 </html>
+

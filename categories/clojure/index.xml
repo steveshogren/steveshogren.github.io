@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clojure on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/clojure/</link>
+    <description>Recent content in Clojure on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Conj Talk: Teaching Clojure at IBM</title>
+      <link>http://deliberate-software.com/teaching-clojure/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/teaching-clojure/</guid>
+      <description>&lt;p&gt;My talk at Conj 2015, enjoy!
+&lt;a href=&#34;https://www.youtube.com/watch?v=BsLiPt90HDo&#34;&gt;Teaching Clojure&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Score Mark 2</title>
+      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <description>
+
+&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders2.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I want to make a model that predicts bugs.&lt;/p&gt;
+
+&lt;p&gt;I previously wrote a table for scoring language safety:
+&lt;a href=&#34;http://deliberate-software.com/programming-language-safety-algorithm&#34;&gt;Programming Language Safety Score&lt;/a&gt;,
+but it was extremely time consuming to score new languages or make modifications.&lt;/p&gt;
+
+&lt;h2 id=&#34;simplify-simplify:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Simplify, Simplify&lt;/h2&gt;
+
+&lt;p&gt;After being told I was &lt;a href=&#34;https://en.wikipedia.org/wiki/Overfitting&#34;&gt;overfitting&lt;/a&gt;
+the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is
+enforced, possible, or impossible. I score each as either 1 (language enforced),
+0 (possible, but you have to remember to do it), or -1 (impossible). When the
+magnitudes of the new model are compared with the previous model, they come out
+very similar. The shape of the curve pretty much stays the same, which I was
+told indicates that the character count weighting was a variable that didn&amp;rsquo;t
+matter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rplot.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;The code I used to generate the plot and normalize the scores can be found here:
+&lt;a href=&#34;https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R&#34;&gt;scorePlot.R&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;safety-definitions:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Safety Definitions&lt;/h2&gt;
+
+&lt;p&gt;A definition of the safety checks is as follows:&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp2&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td&gt;{{ check.name }} &lt;/td&gt;
+&lt;td&gt; {{ check.desc }}  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+The new scores are shown here, with a lot more languages added in:
+
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }}
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}%
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;so-what-s-the-point:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;So, What&amp;rsquo;s the Point?&lt;/h2&gt;
+
+&lt;p&gt;To see how this model corresponds with data in the real world, I used the GitHub
+API to query for the number of bugs created in repositories with more than 15
+forks created in a span from 2011 to 2015. Commits were counted by summing the
+commit counts of all contributors.&lt;/p&gt;
+
+&lt;p&gt;I decided to rely on the count of commits as a standard for a unit of work. My
+assumption was that across fifty different projects, the commit sizes would
+average out. Once the unit of work was decided on, I wanted to find the ratio of
+bugs per commit for each language.&lt;/p&gt;
+
+&lt;p&gt;I collected the ratio of bugs logged per commit for each repository, and after
+grouping by primary language, removed the top and bottom 25% using the
+bug/commit ratio, which is a common practice in statistics to help find a more
+accurate average. I summed the bugs and commits of those remaining repositories
+grouped by language, finding a total average bug/commit ratio for each language
+grouping. Here is that data, sorted by safety score.&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Bugs&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Bug/Commits&lt;/th&gt;
+&lt;tr ng-repeat=&#34;lang in languageRatios&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.bugs }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getBugsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here are the languages sorted by safety score with bug/commit ratios:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/errorChart.jpg&#34;&gt;&lt;/img&gt;
+&lt;img src=&#34;http://deliberate-software.com/images/bugsAverage.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;I took the magnitude of the safety scores and the bug/commit ratios. After
+inverting the safety scores, I overlaid them both onto a single graph.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/bothMags.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Immediately it is obvious that Ruby, Python, PHP, and Clojure all seem to strongly
+buck the trend, but otherwise the languages follow a pretty consistent slope
+down in bugs. Taking the correlation gives a
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient&#34;&gt;correlation coefficient&lt;/a&gt;
+of .55&lt;/p&gt;
+
+&lt;h2 id=&#34;what-about-unit-tests:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;What About Unit Tests?&lt;/h2&gt;
+
+&lt;p&gt;Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
+other factor, I collected data on how many tests each repository had. I counted
+the number of files containing &amp;ldquo;test&amp;rdquo; or &amp;ldquo;spec&amp;rdquo;, which gave the following,
+sorted by tests per commit:&lt;/p&gt;
+
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Language&lt;/th&gt;
+&lt;th&gt;Tests&lt;/th&gt;
+&lt;th&gt;Commits&lt;/th&gt;
+&lt;th&gt;Repositories&lt;/th&gt;
+&lt;th&gt;Tests/Commits&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;lang in sorter(languageRatios)&#34;&gt;
+&lt;td&gt;{{ lang.name }} &lt;/td&gt;
+&lt;td&gt;{{ lang.test }} &lt;/td&gt;
+&lt;td&gt;{{ lang.commits }} &lt;/td&gt;
+&lt;td&gt;{{ lang.repos }} &lt;/td&gt;
+&lt;td&gt;{{ getTestsRatio(lang) }} &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;PHP, Python, and Ruby all have a higher then average number of tests, but
+Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
+average number of tests, yet they score relatively average in bugs/commit.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In conclusion, the current safety model I have proposed seems to account for a
+moderate reduction in bugs per commit across the sampled languages, but is not
+the only factor. It currently is unable to account for a significantly lower
+than expected bug count in Ruby and Clojure.&lt;/p&gt;
+
+&lt;h2 id=&#34;special-thanks:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Special Thanks&lt;/h2&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+&lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;Patrick Boe&lt;/a&gt; (Haskell, Sniff Test),
+&lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;Kyle Burton&lt;/a&gt; (General Advice),
+Nils Creque (Listening Board),
+Max Haley (Python, Ruby, Teaching me how to math),
+&lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;Daniel Miladinov&lt;/a&gt; (Java, Scala, Morale Support),
+Keith O&amp;rsquo;Brien (Ruby and JS),
+&lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;Chris Salch&lt;/a&gt; (CoffeeScript and JS),
+and &lt;a href=&#34;https://github.com/timvisher&#34;&gt;Tim Visher&lt;/a&gt; (Clojure).&lt;/p&gt;
+
+&lt;p&gt;Additional thanks to the posters on
+&lt;a href=&#34;https://www.reddit.com/r/rust/comments/3egx49/language_safety_score_mark_2/&#34;&gt;/r/rust&lt;/a&gt;,
+including &lt;a href=&#34;https://www.reddit.com/user/notriddle&#34;&gt;/u/notriddle&lt;/a&gt;,
+&lt;a href=&#34;https://www.reddit.com/user/killercup&#34;&gt;/u/killercup&lt;/a&gt;, and
+&lt;a href=&#34;https://www.reddit.com/user/diegobernardes&#34;&gt;/u/diegobernardes&lt;/a&gt; who put together the Rust score.&lt;/p&gt;
+
+&lt;h2 id=&#34;complaints-department:97a282fd1f3c6848927d72787ebd3b6e&#34;&gt;Complaints Department&lt;/h2&gt;
+
+&lt;p&gt;Did I mess up something about a language here, or am I missing a safety check? I&amp;rsquo;ll happily take pull
+requests for new languages:
+&lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders2.js&#34;&gt;blog source&lt;/a&gt;. Just
+pick an existing language, edit the name and values, and &amp;ldquo;copy to clipboard&amp;rdquo; to
+build your own language data structure. Send it to me in a PR and I&amp;rsquo;ll include
+it along with a thanks on the page.&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt;
+&lt;span&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;/span&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;&lt;th&gt;Check&lt;/th&gt;&lt;th&gt;Option&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;td style=&#34;background-color:{{scoreClass(score(selectedLang[check.key]))}} &#34;&gt;
+{{ check.name }}: {{score(selectedLang[check.key]) }}
+&lt;/td&gt;
+&lt;td&gt;
+&lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Learning Lisp Was Hard</title>
+      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
+      <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
+      <description>
+
+&lt;p&gt;Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t
+get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience
+learning a Lisp.&lt;/p&gt;
+
+&lt;p&gt;When I set out to learn a Lisp, I expected it would be easy.&lt;/p&gt;
+
+&lt;p&gt;I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
+Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on
+how Lisp is his secret weapon, and figured I needed to get into this secret
+weapon stuff. My ego said, &amp;ldquo;since Paul is amazing, and I am too, I&amp;rsquo;ll be a
+natural!&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;I expected to tinker around with &amp;ldquo;Lisp&amp;rdquo; (I didn&amp;rsquo;t know there was more
+than one) and shortly master it (ship a website).&lt;/p&gt;
+
+&lt;p&gt;What happened instead took me a little longer&amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;05/11 - 06/11 ~15 Hrs Attempted &lt;em&gt;Land Of Lisp&lt;/em&gt; (gave up)&lt;/li&gt;
+&lt;li&gt;04/12 - 08/12 ~60 Hrs Rewrote a PHP side project in Clojure&lt;/li&gt;
+&lt;li&gt;08/12 - 08/12 ~5 Hrs Attempted &lt;em&gt;Let Over Lambda&lt;/em&gt; (gave up)&lt;/li&gt;
+&lt;li&gt;08/12 - 09/12 ~10 Hrs Read &lt;em&gt;Clojure Programming&lt;/em&gt; twice&lt;/li&gt;
+&lt;li&gt;09/12 - 12/12 ~30 Hrs Took &lt;em&gt;CS173 Programming Languages&lt;/em&gt; online at Brown University&lt;/li&gt;
+&lt;li&gt;05/13 - 07/13 ~50 Hrs Worked through &lt;em&gt;Let Over Lambda&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;05/13 - 07/14 ~250 Hrs Worked through &lt;em&gt;SICP&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;07/14 - Shipped production Clojure code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This shows only the major events: books and large projects, but doesn&amp;rsquo;t show all
+the countless blogs, tutorials, and tiny projects that also filled in the gaps.&lt;/p&gt;
+
+&lt;p&gt;I think Lisps started to &amp;ldquo;click&amp;rdquo; for me around mid 2013, about two years after
+deciding that I&amp;rsquo;d &amp;ldquo;tinker around&amp;rdquo; for a bit before &amp;ldquo;mastering&amp;rdquo; it. I was
+approximately 170 hours in at that point. The book that finally made it all
+click was &lt;em&gt;Let Over Lambda&lt;/em&gt;, but it took me two attempts and almost a year of
+pre-learning to be able to understand enough to internalize the material.&lt;/p&gt;
+
+&lt;p&gt;All said and done, I spent approximately 420 hours between Scheme, Common Lisp,
+Racket, Typed Racket, and Clojure before I felt confident enough to suggest
+shipping Clojure at work. I don&amp;rsquo;t claim to be a fast learner at all, and I fully
+expect some people will snort with derision at how much time it took me - which
+is kind of the point of this post.&lt;/p&gt;
+
+&lt;p&gt;This timeline should show those who are struggling that what you are feeling is
+normal. Learning anything new is hard. The more &amp;ldquo;new&amp;rdquo; it is, the harder it will
+be. Clojure, macros, emacs, and a repl workflow are all very different from
+everything I was used to and significantly more powerful than I would&amp;rsquo;ve
+guessed. It took a long time for that to become normal, and for that power to
+sink in and become a tool I anticipated having.&lt;/p&gt;
+
+&lt;p&gt;If you are struggling and feel like a failure, understand &lt;em&gt;there is no wrong
+way&lt;/em&gt;. It might take you a long time of repeated exposure before the alien
+tooling starts to look familiar, and then comfortable. Maybe that book you are
+struggling with actually IS too advanced, so find an easier one, and circle back
+to the harder book later. Maybe, like me, you need some part of many different
+books, tutorials, side projects, and katas.&lt;/p&gt;
+
+&lt;p&gt;If you are struggling learning and in the Philly area, I am happy to meet up to
+chat. I am also happy to help over the wire as well. I understand how
+demoralizing the constant battle is to learn something new, especially when it
+feels like your ego is on the line and the whole internet is pressuring you to
+learn new things. Don&amp;rsquo;t give up, it&amp;rsquo;s not impossible.&lt;/p&gt;
+
+&lt;h1 id=&#34;was-it-worth-it:9faaa4d71d8cbfa8443b331acd2e9e5e&#34;&gt;Was it worth it?&lt;/h1&gt;
+
+&lt;p&gt;I can anticipate the follow up question: &amp;ldquo;was it worth it?&amp;rdquo; Absolutely yes. I
+now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
+and JS) that previously I did not have. I am significantly more productive at
+programming, regardless of the language. Work that was previously challenging is
+now trivial, and work that was previously &amp;ldquo;impossible&amp;rdquo; now feels fun and
+challenging. Was it learning Lisp specifically that caused all those changes?
+Probably not, but I believe it was learning something far outside my normal
+comfort zone that made the difference. I think I would have had equivalent
+experiences had I invested that time learning Scala (the ML parts), Haskell,
+Idris, J, R, Forth, etc.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Ranking</title>
+      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <description>&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;I think the time has come for a standard programming language safety
+score. I want to use this model to help show that the concept of
+safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static
+types&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes
+thoughts of unit tests, long build times, and red squiggles in an
+IDE. But, in day-to-day development, there are so many times when we
+are bitten by things that somehow just slip through the cracks.&lt;/p&gt;
+
+&lt;p&gt;I put together this scoring model to get a sense of how safe a
+language is at the primitive level, and if it isn&amp;rsquo;t safe by default,
+how much it costs to manually make it safe. Since all abstractions
+eventually result in a series of primitive operations, I decided that
+focusing only on primitives would still be a valuable (if incomplete)
+data point. While any good library will handle all primitive checks
+and present the consumer with a well-designed abstraction, in the end,
+the consumer is still left wiring libraries together, building their
+own primitive abstractions for integration. Due to the impossibility of
+measuring the quality of abstractions in all libraries for a language,
+I left that entirely out of scope of this model, unless it is designed
+as a primitive check.&lt;/p&gt;
+
+&lt;p&gt;By focusing on only primitive operations: making and calling
+functions, naming data, working with sequences, and dealing with
+language primitive data types, I slimmed down the large range of
+possible error vectors to a small handful. While in some languages it
+is common to use user-defined classes to wrap around a set of
+primitives, those classes are still doing the same primitive work,
+just hidden behind a user-created abstraction. The more ways it is
+possible to make a &amp;ldquo;mistake&amp;rdquo; with a primitive, the more difficult it
+is to build such good abstractions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;This model is not about language &amp;quot;power&amp;quot;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This model is not about ranking the &amp;ldquo;power&amp;rdquo;, &amp;ldquo;expressiveness&amp;rdquo;, or
+&amp;ldquo;abstract-ability&amp;rdquo; of a language. In any language that supports
+abstractions (functions, classes, modules, naming data), I am
+convinced, given enough code, all Turing complete langauges can do the
+same work. This model is only about the costs to prevent unexpected
+&amp;ldquo;confusion&amp;rdquo; between the programmer and the machine at the primitive
+level.&lt;/p&gt;
+
+&lt;p&gt;Rather than focus on what is &lt;em&gt;possible&lt;/em&gt; with a language, I will
+instead focus on what is typically idiomatic to that community. For
+example, if it is possible to achieve a level of safety in a language
+but by doing something uncommon, that should not be counted.&lt;/p&gt;
+
+&lt;p&gt;To score a language, simply figure out how many characters it costs to
+&amp;ldquo;prevent&amp;rdquo; a certain type of error, and add that to the
+total. Newlines, spaces, and tabs do not count, but all other
+punctuation does. If a specific check is language enforced, like F#&amp;rsquo;s
+Option or C#&amp;rsquo;s parameter type enforcement, that is given a -30 (by
+default) to make up for the lack of unit tests and code exercising
+needed to run that &amp;ldquo;path&amp;rdquo;. Do not count import lines for libraries, as
+importing the module will have a negligible effect on the code size
+and complexity.&lt;/p&gt;
+
+&lt;p&gt;If there is a safety feature that is not possible to achieve
+programmatically, we will add +30 (by default) for a &amp;ldquo;every change run
+and debug to fix&amp;rdquo; cost, such as Java not having a way to prevent stack
+overflow exceptions caused by recursion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A lower score is &amp;quot;safer&amp;quot;, needing less (or no) code to achieve the same level of safety.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Rather than tell you my thoughts (or survey for) hard-coded
+weightings, all checks are weighted the same by default. Feel free to
+apply your own weightings, to better match to your or your team&amp;rsquo;s
+specific needs and preferences. The languages are masked by default to
+protect the innocent. You can unmask the names and see the code used
+below the table.&lt;/p&gt;
+
+&lt;div ng-app=&#34;TableApp&#34;&gt;
+&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
+
+Language Enforced Bonus:
+{{ enforcedScore }} 
+&lt;input ng-model=&#34;enforcedScore&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Language Inability Penalty:
+{{ inabilityPenalty }} 
+&lt;input ng-model=&#34;inabilityPenalty&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
+
+Show Weights &lt;input type=&#34;checkbox&#34; ng-model=&#34;showWeights&#34; /&gt;
+&lt;p class=&#34;lead&#34;&gt;
+&lt;div style=&#34;overflow-x:scroll&#34;&gt;
+&lt;table class=&#34;langtable&#34;&gt;
+&lt;tr&gt;
+&lt;th&gt;Safety Check&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;th&gt;
+&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ lang }} 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
+{{ percentageTotals(lang) }}% 
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3&gt;&lt;input ng-model=&#34;showRealName&#34; type=&#34;checkbox&#34; /&gt;&lt;span
+ng-click=&#34;showRealName = !!!showRealName&#34;&gt;Click to see backing code and unmask names&lt;/span&gt;&lt;/h3&gt;
+
+&lt;p&gt;Current Languages:
+&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
+{{ getName(lang) }}: {{ allLangTotals[$index] }},
+&lt;/select&gt;&lt;/p&gt;
+
+&lt;p&gt;I want to see your language represented here! I&amp;rsquo;ll happily take pull
+requests for new languages: &lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js&#34;&gt;blog source&lt;/a&gt;. Just
+use the &amp;ldquo;edit language&amp;rdquo; and &amp;ldquo;copy to clipboard&amp;rdquo; to build your own
+language data structure.&lt;/p&gt;
+
+&lt;p&gt;I would love to see every major language represented, including major
+language &amp;ldquo;idiom communities&amp;rdquo;. For example, Clojure and Typed Clojure
+are vastly different in abilities. Similarly &amp;ldquo;Scala - The Better Java&amp;rdquo;
+and &amp;ldquo;Scala - The JVM Haskell&amp;rdquo; have vastly different idioms with
+apparently very separate communities.&lt;/p&gt;
+
+&lt;p&gt;Hope this is a helpful way to think about language safety!&lt;/p&gt;
+
+&lt;p&gt;Special thanks to (in alphabetical order):
+Patrick Boe &lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;(twitter)&lt;/a&gt;,
+Kyle Burton &lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;(blog)&lt;/a&gt;,
+Daniel Miladinov &lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;(github)&lt;/a&gt;,
+Chris Salch &lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;(github)&lt;/a&gt;, and
+Tim Visher &lt;a href=&#34;https://github.com/timvisher&#34;&gt;(github)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div ng-show=&#34;showRealName&#34;&gt; Feel free to put in your own examples by playing
+with the samples below. Code surrounded with &lt;! !&gt; is ignored from the tally,
+since it would vary heavily based on the language and desired result. Variable
+and type names are kept at single characters, which are counted. Feel free to
+add in your own language below, and use the copy feature to extract the data
+structure to use in a pull request.
+
+&lt;div&gt;Select Language:
+&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
+&lt;/div&gt;
+&lt;button ng-click=&#34;showEdit = !showEdit&#34;&gt;Edit Language&lt;/button&gt;
+&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
+&lt;div ng-show=&#34;showEdit&#34;&gt;
+&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+&lt;textarea class=&#34;widetextarea&#34; rows=&#34;5&#34; ng-model=&#34;selectedLang[check.key].desc&#34;&gt;&lt;/textarea&gt; 
+&lt;div&gt;
+Code: &lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
+&lt;div class=&#34;tablecode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div ng-show=&#34;!showEdit&#34;&gt;
+&lt;span&gt;{{ selectedLang.name }} &lt;/span&gt;
+&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
+&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
+&lt;p&gt;
+{{ selectedLang[check.key].desc }} 
+&lt;div&gt;
+Code: {{ enforcedNice(selectedLang[check.key].enforced)  }} 
+&lt;div class=&#34;tablecode&#34; ng-if=&#34;selectedLang[check.key].rawCode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
+&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
+&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
+&lt;/div&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Six Unusual Reasons why Clojure is a Delight</title>
+      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
+      <description>
+
+&lt;p&gt;Clojure is a delightful language, and here are six uncommonly
+discussed reasons why.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-dead-simple-unit-test-mocking:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;1 - Dead Simple Unit Test Mocking&lt;/h2&gt;
+
+&lt;p&gt;Clojure is the easiest language to unit test I have ever
+seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple
+replacement of the function definition. No extraneous interfaces, no
+dependency injection, no mocking framework.  The built-in function &lt;code&gt;with-redefs&lt;/code&gt;
+will replace any function in any library or
+namespace with a new definition.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn next-id [connection]
+  (+ 1 (get-current-id connection)))
+
+(testing &amp;quot;next-id&amp;quot;
+  ;; bind get-current-id to a lambda that always returns 4 
+  (with-redefs [get-current-id (fn [_] 4)]
+    (is (= 5 (next-id nil)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We &amp;ldquo;mock&amp;rdquo; the &lt;code&gt;get-current-id&lt;/code&gt; function to always return 4 inside
+the scope of &lt;code&gt;with-redefs&lt;/code&gt;. Couldn&amp;rsquo;t be more simple! The binding
+only is in scope for code inside and called by the s-expression of the
+with-redefs, so no need to unbind it after the test.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-amazing-editing:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;2 - Amazing Editing&lt;/h2&gt;
+
+&lt;p&gt;Many arguments have been made over those contentious
+parentheses. While the most powerful use of s-expressions is to easily
+allow macros, for the day to day, s-expressions have a very important
+use: amazing editing!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;With ParEdit (available in most editors), it is trivial to select,
+move, replace, grow, or shrink any s-expression, string, map, or
+list. &lt;a href=&#34;http://danmidwood.com/content/2014/11/21/animated-paredit.html&#34;&gt;This animated guide&lt;/a&gt;
+shows excellent examples of ParEdit that are too
+complex to explain here.&lt;/p&gt;
+
+&lt;p&gt;Languages that don&amp;rsquo;t have a surrounding delimiter for expressions
+leave you jumping around with the mouse and arrow keys a whole lot more.
+Because it is so much easier to write a parser to select &lt;code&gt;(add 1 2)&lt;/code&gt;
+than it is for &lt;code&gt;add(1, 2)&lt;/code&gt;, the tooling can be so much better.&lt;/p&gt;
+
+&lt;p&gt;No local editing tool I have seen comes close to Vim with ParEdit for
+effective editing.&lt;/p&gt;
+
+&lt;h2 id=&#34;3-live-attached-repl:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;3 - Live Attached Repl&lt;/h2&gt;
+
+&lt;p&gt;Developing in Clojure against a running version of the program is a
+huge bonus for development speed. While possible to get similar
+behavior with an attached debugger in other languages, the fluidity of
+an always-on live attached repl is incredible. At any point, it is
+possible to run and rerun any given expression to see the
+results. More than once, I have seen an exception caused by calling a
+certain function. I trace that function to see the exact inputs that
+cause the exception, and am able to quickly run every line of the
+offending function to see the source.&lt;/p&gt;
+
+&lt;p&gt;If a debugger sheds light on a single line at a time when running an
+application, a live attached repl sheds light on the entire
+application.&lt;/p&gt;
+
+&lt;h2 id=&#34;4-no-fuss-polymorphism:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;4 - No-fuss Polymorphism&lt;/h2&gt;
+
+&lt;p&gt;One of the best claims about &amp;ldquo;traditional&amp;rdquo; Java OO is
+polymorphism. The ability to make an interface with concrete classes
+gives the powerful ability to replace behavior dynamically. The
+trouble is, Java&amp;rsquo;s polymorphic dynamic dispatch is single dispatch - the
+decision of which method to call is limited to a single thing: the
+type of the callee. If this was the only type of dynamic dispatch you
+ever knew of, it might be hard for you to consciously realize it was
+ever a limitation, especially if you&amp;rsquo;ve never seen examples of
+multiple dispatch.&lt;/p&gt;
+
+&lt;p&gt;While most of the time, in any language with first class functions, it
+is possible to achieve a similar effect by passing functions, it is
+also possible to get a similar value with something called multimethods.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti speak :animal)
+(defmethod speak :dog [this] (str &amp;quot;woof says &amp;quot; (:name this)))
+(defmethod speak :cat [this] (str &amp;quot;mow says &amp;quot; (:name this)))
+
+(speak {:animal :dog :id 1 :name &amp;quot;Spike&amp;quot;})
+;; =&amp;gt; &amp;quot;woof says Spike&amp;quot;
+(speak {:animal :cat :id 2 :name &amp;quot;Mr Cat&amp;quot;})
+;; =&amp;gt; &amp;quot;mow says Mr Cat&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example, we use the &lt;code&gt;:animal&lt;/code&gt; keyword to be the &amp;ldquo;route&amp;rdquo; function,
+and the two methods fill in two of the possible concrete types. We are
+not limited to just a keyword, we can dispatch on anything on the
+passed map, for example, the oddness of the id:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti odds? (comp odd? :id))
+(defmethod odds? true [d] &amp;quot;odd id&amp;quot;)
+(defmethod odds? false [c] &amp;quot;even id&amp;quot;)
+
+(odds? {:animal :dog :id 1 :name &amp;quot;Spike&amp;quot;})
+;; =&amp;gt; &amp;quot;odd id&amp;quot;
+(odds? {:animal :cat :id 2 :name &amp;quot;Mr Cat&amp;quot;})
+;; =&amp;gt; &amp;quot;even id&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While both examples are a bit silly, they should demonstrate the power
+of simple polymorphism. But you might think, what about inheritance?
+Multimethods allow that too!&lt;/p&gt;
+
+&lt;h2 id=&#34;5-simple-multiple-inheritance:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;5 - Simple Multiple Inheritance&lt;/h2&gt;
+
+&lt;p&gt;We don&amp;rsquo;t build inheritance on a single type, but on a hierarchy of
+keywords. Those can be dispatched on just like any other
+keyword. First, an example hierarchy of keywords using the built-in
+functions &lt;code&gt;derive&lt;/code&gt; and &lt;code&gt;isa?&lt;/code&gt;. These &lt;code&gt;::&lt;/code&gt; keywords are
+namespaced, which prevents collisions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(derive ::cat ::mammal)
+(derive ::dog ::mammal)
+(derive ::dog ::hairy)
+(derive ::poodle ::dog)
+
+(isa? ::poodle ::dog)
+;; =&amp;gt; true
+(isa? ::poodle ::mammal)
+;; =&amp;gt; true
+(isa? ::poodle ::hairy)
+;; =&amp;gt; true
+(isa? ::poodle ::cat)
+;; =&amp;gt; false
+(isa? ::mammal ::hairy)
+;; =&amp;gt; false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A &lt;code&gt;::dog&lt;/code&gt; is-a &lt;code&gt;::mammal&lt;/code&gt; and is-a &lt;code&gt;::hairy&lt;/code&gt;, the
+classical diamond problem (without the common ancestor, which is
+possible, but unneeded for the example).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti speak :animal)
+(defmethod speak ::poodle [d] &amp;quot;chirps&amp;quot;)
+(defmethod speak ::mammal [c] &amp;quot;breathes&amp;quot;)
+
+(speak {:animal ::poodle :id 1 :name &amp;quot;Spike&amp;quot;})
+;; =&amp;gt; &amp;quot;chirps&amp;quot;
+(speak {:animal ::dog :id 2 :name &amp;quot;Mr Dog&amp;quot;})
+;; =&amp;gt; &amp;quot;breathes&amp;quot;
+
+(defmulti shave :animal)
+(defmethod shave ::poodle [d] &amp;quot;shivers&amp;quot;)
+(defmethod shave ::hairy [c] &amp;quot;stuggles&amp;quot;)
+(defmethod shave ::mammal [c] &amp;quot;maybe cant be shaved!&amp;quot;)
+(prefer-method shave ::hairy ::mammal)
+
+(shave {:animal ::poodle :id 1 :name &amp;quot;Spike&amp;quot;})
+;; =&amp;gt; &amp;quot;shivers&amp;quot;
+(shave {:animal ::dog :id 2 :name &amp;quot;Rufs&amp;quot;})
+;; =&amp;gt; &amp;quot;stuggles&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see the &lt;code&gt;::dog&lt;/code&gt; keyword doesn&amp;rsquo;t have an explicit speak or shave
+implementation, which is fine, because it will then use the &amp;ldquo;preferred&amp;rdquo;
+parent implementation, which returns &amp;ldquo;breathes&amp;rdquo; for speak or
+&amp;ldquo;struggles&amp;rdquo; for shave. Since we can have a keyword be the child of
+multiple parents, we get a multiple inherited behavior, where the
+preferred match is the one returned.&lt;/p&gt;
+
+&lt;p&gt;This is possible because the default equality check of multimethod is
+the &lt;code&gt;isa?&lt;/code&gt; function. Because of this, uses of multimethod
+hierarchies can have inherited behavior for complex structures.&lt;/p&gt;
+
+&lt;h2 id=&#34;6-mostly-monadic:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;6 - Mostly Monadic&lt;/h2&gt;
+
+&lt;p&gt;Languages like Haskell and F# have tools like the maybe monad that add
+safety to operations. For example, using the maybe monad can
+completely prevent null reference exceptions by making you ensure you
+&amp;ldquo;unpack&amp;rdquo; the value every time.&lt;/p&gt;
+
+&lt;p&gt;How does Clojure address this? In a typical Clojure way, which gives
+80% of the value for 20% of the effort, Clojure has a great
+relationship with empty lists and nil. Rather than wrapping every
+value that is nullable in a type, Clojure&amp;rsquo;s default functions all
+&lt;em&gt;mostly&lt;/em&gt; deal with nil and empty without throwing exceptions. For
+example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(get {:id 5} :id)
+;; =&amp;gt; 5
+(get nil :id)
+;; =&amp;gt; nil
+
+(first [3 2 1])
+;; =&amp;gt; 3
+(first nil)
+;; =&amp;gt; nil
+(count nil)
+;; =&amp;gt; 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This allows functions to be chained without fear that along the way a
+nil will get returned.&lt;/p&gt;
+
+&lt;p&gt;Since most of the core functions are &amp;ldquo;smart&amp;rdquo; about nil, you gain much
+of the value and safety of monads without most of the
+hassle. Ultimately, a more rich type system would allow for custom
+types which can be domain specific, but in day-to-day working,
+primitive safety is still a huge win.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;These are a few simple features that keep me coming back to Clojure,
+even from languages like F# and Haskell. While Clojure is a bit more
+wordy than the ML family, and not as type safe, the simplicity of
+these features keep me coming back for more!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Intro To Macros</title>
+      <link>http://deliberate-software.com/intro-to-macros/</link>
+      <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/intro-to-macros/</guid>
+      <description>&lt;p&gt;
+Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
+&lt;/p&gt;
+``` ruby
+def doCalc ()
+   return 1 + 2
+end
+def doAwesome (x) 
+   return doCalc() + x
+end 
+ 
+#before substitution...
+def test () 
+   return doAwesome(3)
+end
+ 
+# when substituted...
+def test ()
+   return (1 + 2) + 3
+end
+```
+&lt;p&gt;
+Ignoring scoping, the function/call system allows for immense power in programing languages. The function lets you &#34;expand&#34; a simple call into a much larger block of code. The expanded code can be vastly large. In our example above, the (doCalc) function is small, but it reality it could be doing hundreds of lines of code, which also would have to be substituted in place. The difference is real functions do not work this way. Real functions have their values evaluated before getting passed in as parameters.
+&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;Macros are similar to the substitution model, with one expressed difference: by default, macros operate on the text of the code itself, not the values. Think of how expansion works in the simple if statement.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;if workday(today()) do
+  x = 1 + 1
+else
+  x = doOtherHugeCalc()
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;Does the huge calc function execute each time? Not at all, you are guaranteed that only one will happen at any given run through that block of code.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;Let’s say you wanted to make a generic function that would abstract away that call, and let you return the values, maybe something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;def ifworkday(first, second)
+  if workday(today()) do
+    return first
+  else
+    return second
+  end
+end
+x = ifworkday(1 + 1, doOtherHugeCalc())
+ 
+#when the values are “shown”
+def ifworkday(2, 3)
+  if workday(today()) do
+    return 2
+  else
+    return 3
+  end
+end
+x = ifworkday(2, 3) # CALLED BOTH FUNCTIONS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+But wait, now BOTH functions get called, you are doing exactly twice as many huge calcs as needed. Now, those familiar with javascript probably are already itching with the solution, &#34;JUST WRAP THEM IN ANONYMOUS FUNCTIONS!!!&#34;. I hear you, sure that works in this super simple example, but macros let you do this without that extra wordiness.  Macros defer evaluating parameters. Think of a macro as a function, but the biggest difference is parameters DON&#39;T get called till you choose to call them.
+&lt;/p&gt;
+```
+#if it is a macro...
+defmacro ifworkday(first, second)
+  if workday(today()) do
+    return first
+  else
+    return second
+  end
+end
+ifworkday(1+1, doOtherHugeCalc())
+ 
+#when the values are “shown”
+defmacro ifworkday(&#34;1+1&#34;, &#34;doOtherHugeCalc()&#34;)
+  if workday(today()) do
+    return eval(&#34;1+1&#34;)
+  else
+    return eval(&#34;doOtherHugeCalc()&#34;)
+  end
+end
+```
+
+&lt;p dir=&#34;ltr&#34;&gt;Now, in this simple ruby example, I had to use strings and eval to approximate what happens with macros in other languages. Since this is unwieldy, let’s switch to clojure, where it is more natural.&lt;/p&gt;
+I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.
+
+``` clojure
+‘(a b c d)
+;;=&gt; (a b c d)
+```
+
+&lt;p dir=&#34;ltr&#34;&gt;This is a list of four symbols. Symbols are basically like an enum or a keyword that only equals itself. So it is possible to say:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(= ‘a ‘a)
+;;=&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;but that’s pretty much it. If I tried to evaluate a symbol, it would complain that the symbol has no definition, since it is trying to treat it like a variable lookup.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;;; nothing gets evaluated inside the list at all..
+‘(a b c) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;Now you are left with a list of symbols, unevaluated. The defmacro form, for each parameter, gives you such a list of unevaluated symbols.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;;;before compilation
+(defmacro ifWorkday [bigCalc1, bigCalc2]
+  `(if (workday (today))
+    ~bigCalc1
+    ~bigCalc2))
+ 
+;; the call
+(ifWorkday (+ 1 1) (otherBigCalc))
+ 
+;;... after compilation...
+(defmacro ifWorkday [(+ 1 1), (otherBigCalc)]
+  `(if (workday (today))
+    (+ 1 1)
+    (otherBigCalc)))
+;; after compilation the call gets _transformed_ into:
+(if (workday (today)) (+ 1 1) (otherBigCalc))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc). I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;But that is a stupid example. Making your own if statements is the most basic uses of macros. But it demonstrates the point: macros generate code. This is profound, but hard to grasp for the first time. Macros expand code before compilation time, and therefore can be used to generate lots of code automatically.&lt;/p&gt;
+
+&lt;p&gt;
+For extra credit, let’s take a bigger example in the same vein as our custom ifWorkday. I am making a game, and in it, I want an easy abstraction that gives me back one of several options with a custom percent chance. Ideally, something like
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(if25 (doFirst) (doSecond))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+where the number corresponds to the percent chance that the next item will be executed and returned. In this example, (doFirst) will only happen 25% of the time and (doSecond) 75% of the time. This demonstrates a more interesting use of macros, the ability to generate other functions (or even other macros). Here is the code:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmacro make-percents []
+  `(list ~@(map (fn [num]                                     
+                  (let [macro-name (symbol (str &amp;quot;if&amp;quot; num))]    
+                    `(defmacro ~macro-name [x# y#]               
+                      `(if (&amp;gt; ~~num (rand-int 100)) ~x# ~y#))))  
+                (range 100))))
+(make-percents)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+This macro only needs to be called once, and what it does is generates this:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmacro if0 [x__2603__auto__ y__2604__auto__]
+  `(if (&amp;gt; 0 (rand-int 100)) ~x__2603__auto__ ~y__2604__auto__))
+(defmacro if1 [x__2604__auto__ y__2605__auto__]
+  `(if (&amp;gt; 1 (rand-int 100)) ~x__2604__auto__ ~y__2605__auto__))
+(defmacro if2 [x__2606__auto__ y__2607__auto__]
+  `(if (&amp;gt; 2 (rand-int 100)) ~x__2606__auto__ ~y__2607__auto__))
+;;...
+(defmacro if99 [x__2609__auto__ y__2601__auto__]
+  `(if (&amp;gt; 99 (rand-int 100)) ~x__2609__auto__ ~y__2601__auto__))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;I hope the profundity of this hits you like a ton of bricks. With under 10 lines of macro code (and calling it) we auto-generated 100 macros! This 10 lines of code gets expanded to 100 more lines! Sure, this is a simple, almost silly example, but imagine what you could do with this sort of power. In a more complex example, you could be auto-generating vast amounts of code this way, code that you don’t have to write every time by hand. Don&#39;t let the x__2506__auto__ parameter names scare you, I will explain that in a bit.&lt;/p&gt;
+&lt;p&gt;
+Those generated macros should not be too hard to understand after the previous ifWorkday macro, and they can be called just like we expect. Let&#39;s deconstruct (make-percents).
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;`(list ~@(map (fn [num]  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;The ~@ is like unquote from above, the only difference is instead of just unquoting a list to be evaluated, it extracts the values from the list and sticks them in place. I like to think of it as just removing the outer parens in the unquoted list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(let [x ‘(1 2 (3 4))]
+  `(+ 8 ~@x))
+;; =&amp;gt; (clojure.core/+ 8 1 2 (3 4))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;The (list) function is just how we make a list of elements.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(list ‘a ‘b ‘c)
+;;=&amp;gt; (a b c)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+The (map) function has two arguments: the first, a function; the second, a list of elements to “map” over.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;~@(map (fn [num] (...))
+       (range 100))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;As you can see here, the ~@() tells us to unquote the whole form, re-enabling the evaluation, and therefore running the map call. The map then calls the anonymous function 100 times, with the num being the numbers 0..99. Inside the anon function we have a let binding:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(let [macro-name (symbol (str &amp;quot;if&amp;quot; num))] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;This line is more simple, it makes a let that binds to the value macro-name a symbol that looks like ‘if1, ‘if2, .. depending on which iteration of the loop you are on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;`(defmacro ~macro-name [x# y#]                
+  `(if (&amp;gt; ~~num (rand-int 100)) ~x# ~y#)))) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p dir=&#34;ltr&#34;&gt;Here is the actual returned “template” of the macro. The # at the end of the parameter name ensures that it is unique, which is really really useful when you consider that the code returned from a macro replaces the call in place. To make sure you don’t accidentally double bind the same name, clojure will give you a warning like “cannot let unqualified name” if you try to let a value without including the # at the end inside a template, another really handy feature. What gets generated by x# looks something like x__2506__auto__ which is guaranteed to be unique. The reason you need this is in case there was another value bound to x inside your code, it could cause a conflict, and in certain circumstances, really break your code, so this prevents such conflicts. You should only need these when creating parameters or let bindings inside the template. All the values &#34;outside&#34; the template do not need to have the # appended to their names, since they will not actually be a part of the returned template.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;The only odd thing here is the double ~~num. Notice how many quote levels deep we are. It is possible to unquote to “step” back up a level in the template. By the time we get to the ~~num, the original function parameter of num was two “levels” higher, so to access it, we have to “step up” two levels. Let me highlight it in colors, to make it easier to see.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/macro.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;p dir=&#34;ltr&#34;&gt;See how by unquoting ~macro-name one level in line 3, and unquoting ~~num two levels on line 4, we bring them both back “up” to the “red” level where they were defined? Similarly, by unquoting ~x# and ~y# one level on line 4, we bring them back “up” to their “blue” definition level? This is an incredibly powerful tool that allows immense expansion of code in a tiny amount of space. If you think of the returned code form as a “template”, this quoting and unquoting lets you step in and out of evaluation with ease.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;In the end, when the (make-percents) macro is called, it produces 100 macros that are callable just like any other macro. To tell the whole story, I wrote this into my game, then decided I wanted a more sophisticated macro that could take any number of percentages, but this remained a good way to explain this specific pattern of looped macro generation.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;Hopefully, this article caused you to see how incredibly powerful macros can be, allowing effectively infinite auto-generation of code. The field of macros is still very under-explored, as most languages do not allow them at all, they remain a largely undiscovered, and yet incredibly powerful tool.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;For further reading, I highly recommend Let Over Lambda, the first 6 chapters of which are free &lt;a href=&#34;http://letoverlambda.com/index.cl/toc&#34;&gt;here&lt;/a&gt;. Let Over Lambda is written with examples in Common Lisp, but the macro parts are very similar in Clojure, so is a valuable read.&lt;/p&gt;
+&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Clojure Debugger</title>
+      <link>http://deliberate-software.com/clojure-debugger/</link>
+      <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/clojure-debugger/</guid>
+      <description>&lt;p&gt;I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found &lt;a title=&#34;here&#34; href=&#34;https://github.com/timvisher/what-does-tools-trace-do/blob/master/src/what_does_tools_trace_do/core.clj&#34;&gt;here&lt;/a&gt;.
+&lt;br /&gt;
+&lt;br /&gt;
+One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
+&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;;; trace-forms &amp;quot;Trace all the forms in the given body. Returns any
+;; underlying uncaught exceptions that may make the forms fail.&amp;quot;
+(trace-forms
+ (let [a (+ 1 1)
+       b (* 2 2)
+       c (* a b (/ 4 0))]
+   c))
+;; =&amp;gt; ArithmeticException Divide by zero
+;;      Form failed: (/ 4 0)
+;;      Form failed: (* a b (/ 4 0))
+;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)
+;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)
+;;      clojure.lang.Numbers.divide (Numbers.java:156)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
+&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;;; example up from clouredocs.org:
+  ;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace
+  (deftrace fib [n]
+    (if (or (= n 0) (= n 1))
+      1
+      (+ (fib (- n 1)) (fib (- n 2)))))
+ 
+  (fib 4)
+  ;; =&amp;gt; 5
+  ;; 1&amp;gt; TRACE t2742: (fib 4)
+  ;;    TRACE t2743: | (fib 3)
+  ;;    TRACE t2744: | | (fib 2)
+  ;;    TRACE t2745: | | | (fib 1)
+  ;;    TRACE t2745: | | | =&amp;gt; 1
+  ;;    TRACE t2746: | | | (fib 0)
+  ;;    TRACE t2746: | | | =&amp;gt; 1
+  ;;    TRACE t2744: | | =&amp;gt; 2
+  ;;    TRACE t2747: | | (fib 1)
+  ;;    TRACE t2747: | | =&amp;gt; 1
+  ;;    TRACE t2743: | =&amp;gt; 3
+  ;;    TRACE t2748: | (fib 2)
+  ;;    TRACE t2749: | | (fib 1)
+  ;;    TRACE t2749: | | =&amp;gt; 1
+  ;;    TRACE t2750: | | (fib 0)
+  ;;    TRACE t2750: | | =&amp;gt; 1
+  ;;    TRACE t2748: | =&amp;gt; 2
+  ;;    TRACE t2742: =&amp;gt; 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&amp;rsquo;s execution is brilliant and inconceivably handy.
+&lt;br /&gt;
+&lt;br /&gt;
+At first, I thought, &amp;ldquo;well that is an incredibly cool party trick, but a party trick nonetheless&amp;rdquo;. A few days of regular clojure development later, I realized the profundity of this library.
+&lt;br /&gt;
+&lt;br /&gt;
+I have had on my list of &amp;ldquo;pain points&amp;rdquo; an item to learn how to debug clojure code. Once in a while, I have felt the need to find out exactly what was going on at a certain point, and had to awkwardly put in (do (pprint x) x) statements everywhere. Clearly though, that is lame.
+&lt;br /&gt;
+&lt;br /&gt;
+Here is the grand reveal. &lt;strong&gt;Concepts and tools that other languages have sometimes look very different in clojure.&lt;/strong&gt; &amp;ldquo;Well, duh&amp;rdquo;, you say. I am not talking about syntax! I am talking about the &lt;em&gt;tools.&lt;/em&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+I wanted a debugger (and, yes, I know at least traditional one exists for clojure), and so that is what I would have looked for: the traditional &amp;ldquo;put in a breakpoint, run the code, pause at that place, inspect values, etc&amp;rdquo;. When I first saw tools.trace, the image of a &amp;ldquo;debugger replacement&amp;rdquo; did not immediately enter my head. But, tools.trace basically gives me almost all the benefit of a traditional debugger at effectively no hassle or cost. Just now I was developing some code, and got stuck on a spot where something unexpected happened, and with only a second&amp;rsquo;s hassle, replaced a few defns with deftrace. I re-ran my code in the repl, and now got a printout of exactly what the in&amp;rsquo;s and out&amp;rsquo;s were, and all of a sudden it clicked. &amp;ldquo;I just found my new debugger&amp;rdquo;, and, &amp;ldquo;wow, this debugger is way less hassle&amp;rdquo;.
+&lt;br /&gt;
+&lt;br /&gt;
+No, of course this doesn&amp;rsquo;t do everything a full debugger does, but at least for the foreseeable future, it probably will do enough most of the time. The first time I need a real full debugger, I will go looking for it, but for now, I suspect this gets me my 80% benefit for way less than 20% hassle.
+&lt;br /&gt;
+&lt;br /&gt;
+The discovery of such tools is what is making learning clojure such a profoundly rewarding journey for me. I am being taught to think about the &amp;ldquo;default ide&amp;rdquo; tools in such a different light. Watching as community members distill out these sort of High-Value concentrate tools using Clojure&amp;rsquo;s meta-programming is simply the most mind altering thing I have experienced in programming.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lisp REPL</title>
+      <link>http://deliberate-software.com/lisp-repl/</link>
+      <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/lisp-repl/</guid>
+      <description>&lt;p&gt;
+  So, working through the Land of Lisp book, getting the hang of it.
+&lt;/p&gt;
+&lt;p&gt;
+Chapter Six, the author starts off by talking a little about
+  the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort
+  of the &#34;command line&#34; for interacting with lisp. It is pretty cool,
+  you type in code, and it executes. And then he opens the hood a
+  little:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defun repl ()
+    (loop (print (eval (read)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+WHAAAAAAAAAAAAAAA??!?!?!
+&lt;/p&gt;
+&lt;p&gt;
+I just about spit my drink all over the monitor laughing. The
+function &lt;strong&gt;eval()&lt;/strong&gt; evaluates whatever text is passed in
+as code, in this case, from the command line via the obviously
+named &lt;strong&gt;read&lt;/strong&gt; and after executing
+it, &lt;strong&gt;print()&lt;/strong&gt; prints the result, and it just does that
+forever till you quit.
+&lt;/p&gt;
+&lt;p&gt;
+That means, you could make one of these for any language that can
+evaluate strings into code. I know python has one built-in. Php can
+evaluate code with eval, and a quick search shows a highly nifty (and
+robust from the looks of
+it) &lt;a href=&#34;https://github.com/facebook/phpsh&#34;&gt;REPL for php&lt;/a&gt;
+complements of facebook. Sweet. Or, you can use php -a for the
+interactive mode.
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
