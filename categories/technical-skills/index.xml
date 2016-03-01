@@ -2268,35 +2268,35 @@ give us warnings for missing cases, no matter what the type.&lt;/p&gt;
 inversion of the usual OO way of polymorphism. Here is an example that
 is probably familiar to everyone: getting a database connection.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;	public interface IPaymentRepository {
-		IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
-	}
-    // InMemory.cs
-	public class InMemory : IPaymentRepository {
-		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-			return Config.payments.Values;
-		}
-	}
-    // Postgres.cs
-	public class Postgres : IPaymentRepository {
-		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-			throw new NotImplementedException();
-		}
-	}
-    // RepositoryFactory.cs
-	public class RepositoryFactory {
-		public static IPaymentRepository GetPaymentRepo () {
-			if (Config.configuration[&amp;quot;useInMemory&amp;quot;] == &amp;quot;true&amp;quot;) {
-				return new InMemory();
-			} else {
-				return new Postgres();
-			}
-		}
-	}
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface IPaymentRepository {
+    IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
+}
+// InMemory.cs
+public class InMemory : IPaymentRepository {
+    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+        return Config.payments.Values;
+    }
+}
+// Postgres.cs
+public class Postgres : IPaymentRepository {
+    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+        throw new NotImplementedException();
+    }
+}
+// RepositoryFactory.cs
+public class RepositoryFactory {
+    public static IPaymentRepository GetPaymentRepo () {
+        if (Config.configuration[&amp;quot;useInMemory&amp;quot;] == &amp;quot;true&amp;quot;) {
+            return new InMemory();
+        } else {
+            return new Postgres();
+        }
+    }
+}
 
-    // somewhere in the code...
-    var repo = RepositoryFactory.GetPaymentRepo();
-    var payments = repo.GetAll();
+// somewhere in the code...
+var repo = RepositoryFactory.GetPaymentRepo();
+var payments = repo.GetAll();
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In our example here, we have two concrete implementers of the
@@ -2387,30 +2387,30 @@ use case, pattern matching is probably the better choice.&lt;/p&gt;
 memory dictionary to be stored internally. In the interfaces and
 classes example, that requires editing &lt;em&gt;three separate files&lt;/em&gt;.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;    // IPaymentRepostory.cs
-	public interface IPaymentRepository {
-		IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
-		void Add(IPayment payment);
-	}
-    // InMemory.cs
-	public class InMemory : IPaymentRepository {
-		public Dictionary&amp;lt;int, IPayment&amp;gt; payments = new Dictionary&amp;lt;int, IPayment&amp;gt;();
-		public void Add(IPayment payment) {
-			payments.Add(payment.GetId(),payment);
-		}
-		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-			return payments.Values;
-		}
-	}
-    // Postgres.cs
-	public class Postgres : IPaymentRepository {
-		public void Add(IPayment payment) {
-			throw new NotImplementedException();
-		}
-		public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-			throw new NotImplementedException();
-		}
-	}
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;// IPaymentRepostory.cs
+public interface IPaymentRepository {
+    IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
+    void Add(IPayment payment);
+}
+// InMemory.cs
+public class InMemory : IPaymentRepository {
+    public Dictionary&amp;lt;int, IPayment&amp;gt; payments = new Dictionary&amp;lt;int, IPayment&amp;gt;();
+    public void Add(IPayment payment) {
+        payments.Add(payment.GetId(),payment);
+    }
+    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+        return payments.Values;
+    }
+}
+// Postgres.cs
+public class Postgres : IPaymentRepository {
+    public void Add(IPayment payment) {
+        throw new NotImplementedException();
+    }
+    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
+        throw new NotImplementedException();
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Here is the change to add a new function in the pattern matching example:&lt;/p&gt;
@@ -2521,42 +2521,42 @@ manual checking.&lt;/p&gt;
 seats. &amp;ldquo;Use classes and an interface!&amp;rdquo; they yell. Ok, sure. I assert
 that it just makes things even worse.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;	public interface ILanguage {
-		String convert(int num);
-	}
-	public class Spanish : ILanguage {
-		public String convert (int num) {
-			var ret = &amp;quot;&amp;quot;;
-	        switch (num) {
-				case 0: ret = &amp;quot;zero&amp;quot;; break;
-				case 1: ret = &amp;quot;uno&amp;quot;; break;
-				default: ret = &amp;quot;~~~&amp;quot;; break;
-	        }
-			return ret;
-		}
-	}
-	public class English : ILanguage {
-		public String convert (int num) {
-			var ret = &amp;quot;&amp;quot;;
-	        switch (num) {
-				case 0: ret = &amp;quot;zero&amp;quot;; break;
-				case 1: ret = &amp;quot;one&amp;quot;; break;
-				default: ret = &amp;quot;...&amp;quot;; break;
-	        }
-			return ret;
-		}
-	}
-    // somewhere else...
-    public static string convert(int x, Language lang) {
-        return getLanguage(lang).convert(x);
-    }
-    public static ILanguage getLanguage(Language lang) {
-        switch (lang) {
-            case Language.English: return new English() ; break;
-            case Language.Spanish: return new Spanish() ; break;
-            default: throw new Exception();
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface ILanguage {
+    String convert(int num);
+}
+public class Spanish : ILanguage {
+    public String convert (int num) {
+        var ret = &amp;quot;&amp;quot;;
+        switch (num) {
+            case 0: ret = &amp;quot;zero&amp;quot;; break;
+            case 1: ret = &amp;quot;uno&amp;quot;; break;
+            default: ret = &amp;quot;~~~&amp;quot;; break;
         }
+        return ret;
     }
+}
+public class English : ILanguage {
+    public String convert (int num) {
+        var ret = &amp;quot;&amp;quot;;
+        switch (num) {
+            case 0: ret = &amp;quot;zero&amp;quot;; break;
+            case 1: ret = &amp;quot;one&amp;quot;; break;
+            default: ret = &amp;quot;...&amp;quot;; break;
+        }
+        return ret;
+    }
+}
+// somewhere else...
+public static string convert(int x, Language lang) {
+    return getLanguage(lang).convert(x);
+}
+public static ILanguage getLanguage(Language lang) {
+    switch (lang) {
+        case Language.English: return new English() ; break;
+        case Language.Spanish: return new Spanish() ; break;
+        default: throw new Exception();
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We have turned 21 lines in one file into 36 in three files (not
