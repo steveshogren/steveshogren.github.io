@@ -87,6 +87,109 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     </item>
     
     <item>
+      <title>My Philosophy</title>
+      <link>http://deliberate-software.com/page/philosophy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/page/philosophy/</guid>
+      <description>&lt;div class=&#34;col-md-12&#34;&gt;
+&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Strategic&lt;/h2&gt;
+&lt;div class=&#34;col-md-12&#34;&gt;
+    &lt;div class=&#34;col-md-12&#34;&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Small, Self-Organizing Teams
+            &lt;/h3&gt;
+            &lt;p&gt;
+                When carefully mentored, a self-organizing team
+                accomplishes the most business value.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Servant Leadership
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Empowering and trusting your team increases intrinsic
+                motivation, engagement, and productivity.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Measurable Business Value
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Tracking business goals ensures the highest value work
+                is accomplished first.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-12&#34;&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Growth Mindset
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Everyone and everything can be improved. Nothing is sacred.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Deliberate Software
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Disciplined practice prevents common mistakes.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Sharpest Tools
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Allowing teams to choose the best tools produces the
+                most value.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Tactical&lt;/h2&gt;
+&lt;div class=&#34;col-md-12&#34;&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Pair Programming
+        &lt;/h3&gt;
+        &lt;p&gt;
+            No other practice improves the whole team like pair
+            programming. Prevents skill gaps and knowledge silos.
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Automated Testing
+        &lt;/h3&gt;
+        &lt;p&gt;
+            REPL-driven development, unit testing, and test-driven
+            development enable rapid crafting of high-quality systems.
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Continuous Integration
+        &lt;/h3&gt;
+        &lt;p&gt;
+            Scaling your team is only possible with accountability, and
+            CI is an excellent way to ensure accountability.
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
       <title>Writings</title>
       <link>http://deliberate-software.com/page/post/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
