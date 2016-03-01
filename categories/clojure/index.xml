@@ -770,8 +770,8 @@ these features keep me coming back for more!&lt;/p&gt;
       <description>&lt;p&gt;
 Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function.
 &lt;/p&gt;
-``` ruby
-def doCalc ()
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;def doCalc ()
    return 1 + 2
 end
 def doAwesome (x) 
@@ -787,7 +787,8 @@ end
 def test ()
    return (1 + 2) + 3
 end
-```
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;
 Ignoring scoping, the function/call system allows for immense power in programing languages. The function lets you &#34;expand&#34; a simple call into a much larger block of code. The expanded code can be vastly large. In our example above, the (doCalc) function is small, but it reality it could be doing hundreds of lines of code, which also would have to be substituted in place. The difference is real functions do not work this way. Real functions have their values evaluated before getting passed in as parameters.
 &lt;/p&gt;
@@ -826,8 +827,8 @@ x = ifworkday(2, 3) # CALLED BOTH FUNCTIONS
 &lt;p&gt;
 But wait, now BOTH functions get called, you are doing exactly twice as many huge calcs as needed. Now, those familiar with javascript probably are already itching with the solution, &#34;JUST WRAP THEM IN ANONYMOUS FUNCTIONS!!!&#34;. I hear you, sure that works in this super simple example, but macros let you do this without that extra wordiness.  Macros defer evaluating parameters. Think of a macro as a function, but the biggest difference is parameters DON&#39;T get called till you choose to call them.
 &lt;/p&gt;
-```
-#if it is a macro...
+
+&lt;pre&gt;&lt;code&gt;#if it is a macro...
 defmacro ifworkday(first, second)
   if workday(today()) do
     return first
@@ -838,22 +839,22 @@ end
 ifworkday(1+1, doOtherHugeCalc())
  
 #when the values are “shown”
-defmacro ifworkday(&#34;1+1&#34;, &#34;doOtherHugeCalc()&#34;)
+defmacro ifworkday(&amp;quot;1+1&amp;quot;, &amp;quot;doOtherHugeCalc()&amp;quot;)
   if workday(today()) do
-    return eval(&#34;1+1&#34;)
+    return eval(&amp;quot;1+1&amp;quot;)
   else
-    return eval(&#34;doOtherHugeCalc()&#34;)
+    return eval(&amp;quot;doOtherHugeCalc()&amp;quot;)
   end
 end
-```
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p dir=&#34;ltr&#34;&gt;Now, in this simple ruby example, I had to use strings and eval to approximate what happens with macros in other languages. Since this is unwieldy, let’s switch to clojure, where it is more natural.&lt;/p&gt;
-I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.
 
-``` clojure
-‘(a b c d)
-;;=&gt; (a b c d)
-```
+&lt;p&gt;I said that macros defer evaluation, they do that, but they also do much more. Lets look at a clojure list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;‘(a b c d)
+;;=&amp;gt; (a b c d)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p dir=&#34;ltr&#34;&gt;This is a list of four symbols. Symbols are basically like an enum or a keyword that only equals itself. So it is possible to say:&lt;/p&gt;
 
@@ -887,7 +888,12 @@ I said that macros defer evaluation, they do that, but they also do much more. L
 (if (workday (today)) (+ 1 1) (otherBigCalc))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p dir=&#34;ltr&#34;&gt;The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc). I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.&lt;/p&gt;
+&lt;p dir=&#34;ltr&#34;&gt;The ` is called syntax quote, it disables evaluation much like quote does (it just also namespaces everything inside for your convenience). The ~ is called an unquote, and it turns evaluation back on. In any given space, if you have a function called (id), and you called it like (`~id), it would mean the same as just calling (id), because you turned off evaluation, then turned it back on. Above, the bigCalc parameters are filled with the actual values passed in, the lists unevaluated of ‘(+ 1 1) and ‘(otherBigCalc).
+&lt;/p&gt;
+
+&lt;p&gt;
+I like to think of the return from a macro as a “template” to replace the original call with. Take the call (ifWorkday (+ 1 1) (otherBigCalc)). When calling the macro, the last thing returned from the macro is expected to be a list of clojure code to replace the original call at compile time. So, at compile time, (ifWorkday (+ 1 1) (otherBigCalc)) is replaced with (if (workday (today)) (+ 1 1) (otherBigCalc)) which is the return from the macro.&lt;/p&gt;
+
 &lt;p dir=&#34;ltr&#34;&gt;But that is a stupid example. Making your own if statements is the most basic uses of macros. But it demonstrates the point: macros generate code. This is profound, but hard to grasp for the first time. Macros expand code before compilation time, and therefore can be used to generate lots of code automatically.&lt;/p&gt;
 
 &lt;p&gt;
