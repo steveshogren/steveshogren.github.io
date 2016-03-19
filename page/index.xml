@@ -253,6 +253,17 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
 &lt;ul class=&#34;sidebar_ul&#34;&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
+        &lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;When Self-Organizing Teams Are Effective&lt;/a&gt;
+        &lt;span class=&#34;pull-right&#34;&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
+        
+        &lt;/span&gt;
+    &lt;/li&gt;
+    
+    &lt;li class=&#34;sidebar_li&#34;&gt;
         &lt;a href=&#34;http://deliberate-software.com/pop-culture-architecture/&#34;&gt;Avoid Pop Culture Architecture&lt;/a&gt;
         &lt;span class=&#34;pull-right&#34;&gt;
         

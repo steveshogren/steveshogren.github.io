@@ -6,8 +6,129 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Mar 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>When Self-Organizing Teams Are Effective</title>
+      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Great, now instead of programmers, we are politicians&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
+high-quality professionals.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-a-self-organizing-team:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;What Is A Self-Organizing Team?&lt;/h2&gt;
+
+&lt;p&gt;I have managed several self-organizing teams over the last few years. They are
+expected to follow these tenets:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The whole team organizes themselves to best meet the business needs&lt;/li&gt;
+&lt;li&gt;Each team chooses their practices and working agreements&lt;/li&gt;
+&lt;li&gt;All technical and organizational decisions are driven through consensus&lt;/li&gt;
+&lt;li&gt;Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;All staff participates in a culture of high-quality development&lt;/li&gt;
+&lt;li&gt;Systems and practices are designed to maintain greatest productivity across
+the next decade&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;when-it-works-well:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;When It Works Well&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Small teams&lt;/li&gt;
+&lt;li&gt;Highly skilled workers&lt;/li&gt;
+&lt;li&gt;Need for high-quality software&lt;/li&gt;
+&lt;li&gt;Business need for continuous and stable productivity for 5+ years&lt;/li&gt;
+&lt;li&gt;Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Self-organizing teams work best when most people on your team are eager to do
+more, be more, and learn more. A team of such developers will find a single
+leader to be a bottleneck. Running every idea past a single decision maker will
+impair their abilities to grow and gain critical thinking skills.&lt;/p&gt;
+
+&lt;h2 id=&#34;case-study:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Case Study&lt;/h2&gt;
+
+&lt;p&gt;I currently lead a self-organizing team of ten developers. We alone actively
+develop in a 4.6 million line codebase. The codebase is over 10 years old, and
+the entire team has turned over twice since the project started. This is no
+maintenance project, this quarter we converted the main calculation engine
+(~600KLOC) to allow calculations to be parallelized across dozens of nodes for a
+substantial increase in throughput.&lt;/p&gt;
+
+&lt;p&gt;Our team has recently been recognized as producing the most business value with
+the highest quality across our +700 person software company. Our CEO and SVP of
+Product have highlighted our recent accolades. I am certain this was only
+possible because of the intrinsic motivation of our staff caused by
+self-organization.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We actively develop in a 10 year old codebase sized at ~460KLOC per developer&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When deciding on working agreements, the original team voted on strict
+pair-programming, frequent pair switches
+(&lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;promiscuous pairing&lt;/a&gt;),
+and test-driven development. Each subsequent iteration of the team has continued
+to vote for these agreements. We believe that it is one of the easiest ways to
+keep a team capable in such an enormous codebase. Randomized pairing and 2-8
+hour switching prevents siloing of knowledge.&lt;/p&gt;
+
+&lt;p&gt;In any other company, our least experienced developers would be team leads and
+architects; and our most experienced developers would be CTO&amp;rsquo;s. They&amp;rsquo;ve gotten
+this experience by living it. In case you think we&amp;rsquo;ve hired a team of seasoned
+graybeards, our average developer only has six years of experience.&lt;/p&gt;
+
+&lt;p&gt;Each member of our team is responsible for &amp;ldquo;being the lead&amp;rdquo; in certain ways. The
+individual&amp;rsquo;s own interests guide them to develop expertise in subjects. By being
+an expert, others listen to them, so they often have an attentive audience when
+speaking on their specialties. This positive feedback loop encourages additional
+research.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-start:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;How to Start&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; The most important way to build such a team is to allow them to fail&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The team must be allowed to face the consequences of their actions in a safe
+space. If a refactoring project goes badly, the team should have the individual
+clean up their mess. When someone is spending time on a project that doesn&amp;rsquo;t
+align with the goals of the business, the team should speak with them. When a
+developer successfully campaigns for a change that increases productivity, it
+should be celebrated. In all cases, strive to have your office be a safe place
+to fail.&lt;/p&gt;
+
+&lt;p&gt;Every time someone in authority demands the team do something different, it
+reduces the intrinsic motivation of the team. Each demand teaches the team
+members that they don&amp;rsquo;t have to be responsible, someone else will take care of
+the &amp;ldquo;important&amp;rdquo; things for them. Treat such demands with the utmost care, only
+making demands extremely infrequently.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Fewer demands allows for greater intrinsic motivation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A self-organizing team is very much like a democracy. The team is expected and
+entrusted to organize around the needs of the business. Decisions should be made
+by consensus. Very rarely should an &amp;ldquo;override&amp;rdquo; be needed from management.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Self-organizing teams are one of the most effective ways to manage a
+high-performing group. The team benefits from the best aspects of each member.
+Team members &amp;ldquo;grow up&amp;rdquo; quickly, as they are exposed to others around them who
+behave like trusted professionals. Each developer becomes intrinsically
+motivated, outperforming their peers in similar command and control teams.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Avoid Pop Culture Architecture</title>
@@ -2025,214 +2146,6 @@ your domain to its essence.&lt;/p&gt;
 
 &lt;p&gt;For reasons like this, when I have to build something with a rich
 domain, I reach for F#.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Programming Language Safety Ranking</title>
-      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
-      <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
-      <description>&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;http://deliberate-software.com/javascripts/sliders.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;I think the time has come for a standard programming language safety
-score. I want to use this model to help show that the concept of
-safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static
-types&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes
-thoughts of unit tests, long build times, and red squiggles in an
-IDE. But, in day-to-day development, there are so many times when we
-are bitten by things that somehow just slip through the cracks.&lt;/p&gt;
-
-&lt;p&gt;I put together this scoring model to get a sense of how safe a
-language is at the primitive level, and if it isn&amp;rsquo;t safe by default,
-how much it costs to manually make it safe. Since all abstractions
-eventually result in a series of primitive operations, I decided that
-focusing only on primitives would still be a valuable (if incomplete)
-data point. While any good library will handle all primitive checks
-and present the consumer with a well-designed abstraction, in the end,
-the consumer is still left wiring libraries together, building their
-own primitive abstractions for integration. Due to the impossibility of
-measuring the quality of abstractions in all libraries for a language,
-I left that entirely out of scope of this model, unless it is designed
-as a primitive check.&lt;/p&gt;
-
-&lt;p&gt;By focusing on only primitive operations: making and calling
-functions, naming data, working with sequences, and dealing with
-language primitive data types, I slimmed down the large range of
-possible error vectors to a small handful. While in some languages it
-is common to use user-defined classes to wrap around a set of
-primitives, those classes are still doing the same primitive work,
-just hidden behind a user-created abstraction. The more ways it is
-possible to make a &amp;ldquo;mistake&amp;rdquo; with a primitive, the more difficult it
-is to build such good abstractions.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;This model is not about language &amp;quot;power&amp;quot;.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This model is not about ranking the &amp;ldquo;power&amp;rdquo;, &amp;ldquo;expressiveness&amp;rdquo;, or
-&amp;ldquo;abstract-ability&amp;rdquo; of a language. In any language that supports
-abstractions (functions, classes, modules, naming data), I am
-convinced, given enough code, all Turing complete langauges can do the
-same work. This model is only about the costs to prevent unexpected
-&amp;ldquo;confusion&amp;rdquo; between the programmer and the machine at the primitive
-level.&lt;/p&gt;
-
-&lt;p&gt;Rather than focus on what is &lt;em&gt;possible&lt;/em&gt; with a language, I will
-instead focus on what is typically idiomatic to that community. For
-example, if it is possible to achieve a level of safety in a language
-but by doing something uncommon, that should not be counted.&lt;/p&gt;
-
-&lt;p&gt;To score a language, simply figure out how many characters it costs to
-&amp;ldquo;prevent&amp;rdquo; a certain type of error, and add that to the
-total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&amp;rsquo;s
-Option or C#&amp;rsquo;s parameter type enforcement, that is given a -30 (by
-default) to make up for the lack of unit tests and code exercising
-needed to run that &amp;ldquo;path&amp;rdquo;. Do not count import lines for libraries, as
-importing the module will have a negligible effect on the code size
-and complexity.&lt;/p&gt;
-
-&lt;p&gt;If there is a safety feature that is not possible to achieve
-programmatically, we will add +30 (by default) for a &amp;ldquo;every change run
-and debug to fix&amp;rdquo; cost, such as Java not having a way to prevent stack
-overflow exceptions caused by recursion.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;A lower score is &amp;quot;safer&amp;quot;, needing less (or no) code to achieve the same level of safety.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Rather than tell you my thoughts (or survey for) hard-coded
-weightings, all checks are weighted the same by default. Feel free to
-apply your own weightings, to better match to your or your team&amp;rsquo;s
-specific needs and preferences. The languages are masked by default to
-protect the innocent. You can unmask the names and see the code used
-below the table.&lt;/p&gt;
-
-&lt;div ng-app=&#34;TableApp&#34;&gt;
-&lt;div ng-controller=&#34;TableCtrl&#34;&gt;
-
-Language Enforced Bonus:
-{{ enforcedScore }} 
-&lt;input ng-model=&#34;enforcedScore&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
-
-Language Inability Penalty:
-{{ inabilityPenalty }} 
-&lt;input ng-model=&#34;inabilityPenalty&#34; type=&#34;range&#34; min=&#34;0&#34; max=&#34;50&#34; /&gt;
-
-Show Weights &lt;input type=&#34;checkbox&#34; ng-model=&#34;showWeights&#34; /&gt;
-&lt;p class=&#34;lead&#34;&gt;
-&lt;div style=&#34;overflow-x:scroll&#34;&gt;
-&lt;table class=&#34;langtable&#34;&gt;
-&lt;tr&gt;
-&lt;th&gt;Safety Check&lt;/th&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;
-&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[0]&#34;&gt;&lt;/select&gt;
-&lt;/th&gt;
-&lt;th&gt;
-&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[1]&#34;&gt;&lt;/select&gt;
-&lt;/th&gt;
-&lt;th&gt;
-&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[2]&#34;&gt;&lt;/select&gt;
-&lt;/th&gt;
-&lt;th&gt;
-&lt;select ng-options=&#34;getName(lang) for lang in allLanguages&#34; ng-model=&#34;languages[3]&#34;&gt;&lt;/select&gt;
-&lt;/th&gt;
-&lt;/tr&gt;
-&lt;tr ng-repeat=&#34;check in langChecks&#34; score-row name=&#34;check.name&#34; row-key=&#34;check.key&#34;&gt;&lt;/tr&gt;
-&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Totals&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
-{{ lang }} 
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;totals&#34;&gt;&lt;td&gt;Magnitude&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td ng-repeat=&#34;lang in langTotals track by $index&#34;&gt;
-{{ percentageTotals(lang) }}% 
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;h3&gt;&lt;input ng-model=&#34;showRealName&#34; type=&#34;checkbox&#34; /&gt;&lt;span
-ng-click=&#34;showRealName = !!!showRealName&#34;&gt;Click to see backing code and unmask names&lt;/span&gt;&lt;/h3&gt;
-
-&lt;p&gt;Current Languages:
-&lt;span ng-repeat=&#34;lang in allLanguages&#34;&gt;
-{{ getName(lang) }}: {{ allLangTotals[$index] }},
-&lt;/select&gt;&lt;/p&gt;
-
-&lt;p&gt;I want to see your language represented here! I&amp;rsquo;ll happily take pull
-requests for new languages: &lt;a href=&#34;https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js&#34;&gt;blog source&lt;/a&gt;. Just
-use the &amp;ldquo;edit language&amp;rdquo; and &amp;ldquo;copy to clipboard&amp;rdquo; to build your own
-language data structure.&lt;/p&gt;
-
-&lt;p&gt;I would love to see every major language represented, including major
-language &amp;ldquo;idiom communities&amp;rdquo;. For example, Clojure and Typed Clojure
-are vastly different in abilities. Similarly &amp;ldquo;Scala - The Better Java&amp;rdquo;
-and &amp;ldquo;Scala - The JVM Haskell&amp;rdquo; have vastly different idioms with
-apparently very separate communities.&lt;/p&gt;
-
-&lt;p&gt;Hope this is a helpful way to think about language safety!&lt;/p&gt;
-
-&lt;p&gt;Special thanks to (in alphabetical order):
-Patrick Boe &lt;a href=&#34;https://twitter.com/traffichazard/&#34;&gt;(twitter)&lt;/a&gt;,
-Kyle Burton &lt;a href=&#34;http://asymmetrical-view.com/&#34;&gt;(blog)&lt;/a&gt;,
-Daniel Miladinov &lt;a href=&#34;https://github.com/danielmiladinov&#34;&gt;(github)&lt;/a&gt;,
-Chris Salch &lt;a href=&#34;https://github.com/arlaneenalra&#34;&gt;(github)&lt;/a&gt;, and
-Tim Visher &lt;a href=&#34;https://github.com/timvisher&#34;&gt;(github)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div ng-show=&#34;showRealName&#34;&gt; Feel free to put in your own examples by playing
-with the samples below. Code surrounded with &lt;! !&gt; is ignored from the tally,
-since it would vary heavily based on the language and desired result. Variable
-and type names are kept at single characters, which are counted. Feel free to
-add in your own language below, and use the copy feature to extract the data
-structure to use in a pull request.
-
-&lt;div&gt;Select Language:
-&lt;select ng-options=&#34;lang.name for lang in allLanguages&#34; ng-model=&#34;selectedLang&#34;&gt;&lt;/select&gt;
-&lt;/div&gt;
-&lt;button ng-click=&#34;showEdit = !showEdit&#34;&gt;Edit Language&lt;/button&gt;
-&lt;button ng-click=&#34;copyToClipboard(selectedLang)&#34;&gt;Copy Changes to Clipboard&lt;/button&gt;
-&lt;div ng-show=&#34;showEdit&#34;&gt;
-&lt;span&gt;&lt;input ng-model=&#34;selectedLang.name&#34;&gt;&lt;/input&gt;&lt;/span&gt;
-&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
-&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
-&lt;p&gt;
-&lt;textarea class=&#34;widetextarea&#34; rows=&#34;5&#34; ng-model=&#34;selectedLang[check.key].desc&#34;&gt;&lt;/textarea&gt; 
-&lt;div&gt;
-Code: &lt;select ng-options=&#34;enforcedNice(e) for e in enforcedTypes&#34; ng-model=&#34;selectedLang[check.key].enforced&#34;&gt;&lt;/select&gt;
-&lt;div class=&#34;tablecode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
-&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
-&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div ng-show=&#34;!showEdit&#34;&gt;
-&lt;span&gt;{{ selectedLang.name }} &lt;/span&gt;
-&lt;div ng-repeat=&#34;check in langChecks&#34;&gt;
-&lt;h3&gt;{{ check.name }} : {{ score(selectedLang[check.key]) }}  &lt;/h3&gt;
-&lt;p&gt;
-{{ selectedLang[check.key].desc }} 
-&lt;div&gt;
-Code: {{ enforcedNice(selectedLang[check.key].enforced)  }} 
-&lt;div class=&#34;tablecode&#34; ng-if=&#34;selectedLang[check.key].rawCode&#34;&gt;1234567890123456789012345678901234567890&lt;/div&gt;
-&lt;div class=&#34;tablecode&#34; &gt; {{ cleanCode(selectedLang[check.key].rawCode) }}  &lt;/div&gt;
-&lt;input type=&#34;text&#34; style=&#34;width:90%;&#34; ng-model=&#34;selectedLang[check.key].rawCode&#34; /&gt;
-&lt;/div&gt;
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     

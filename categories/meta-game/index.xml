@@ -6,8 +6,129 @@
     <description>Recent content in Meta Game on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Mar 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/meta-game/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>When Self-Organizing Teams Are Effective</title>
+      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Great, now instead of programmers, we are politicians&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
+high-quality professionals.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-a-self-organizing-team:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;What Is A Self-Organizing Team?&lt;/h2&gt;
+
+&lt;p&gt;I have managed several self-organizing teams over the last few years. They are
+expected to follow these tenets:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The whole team organizes themselves to best meet the business needs&lt;/li&gt;
+&lt;li&gt;Each team chooses their practices and working agreements&lt;/li&gt;
+&lt;li&gt;All technical and organizational decisions are driven through consensus&lt;/li&gt;
+&lt;li&gt;Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;All staff participates in a culture of high-quality development&lt;/li&gt;
+&lt;li&gt;Systems and practices are designed to maintain greatest productivity across
+the next decade&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;when-it-works-well:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;When It Works Well&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Small teams&lt;/li&gt;
+&lt;li&gt;Highly skilled workers&lt;/li&gt;
+&lt;li&gt;Need for high-quality software&lt;/li&gt;
+&lt;li&gt;Business need for continuous and stable productivity for 5+ years&lt;/li&gt;
+&lt;li&gt;Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Self-organizing teams work best when most people on your team are eager to do
+more, be more, and learn more. A team of such developers will find a single
+leader to be a bottleneck. Running every idea past a single decision maker will
+impair their abilities to grow and gain critical thinking skills.&lt;/p&gt;
+
+&lt;h2 id=&#34;case-study:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Case Study&lt;/h2&gt;
+
+&lt;p&gt;I currently lead a self-organizing team of ten developers. We alone actively
+develop in a 4.6 million line codebase. The codebase is over 10 years old, and
+the entire team has turned over twice since the project started. This is no
+maintenance project, this quarter we converted the main calculation engine
+(~600KLOC) to allow calculations to be parallelized across dozens of nodes for a
+substantial increase in throughput.&lt;/p&gt;
+
+&lt;p&gt;Our team has recently been recognized as producing the most business value with
+the highest quality across our +700 person software company. Our CEO and SVP of
+Product have highlighted our recent accolades. I am certain this was only
+possible because of the intrinsic motivation of our staff caused by
+self-organization.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We actively develop in a 10 year old codebase sized at ~460KLOC per developer&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When deciding on working agreements, the original team voted on strict
+pair-programming, frequent pair switches
+(&lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;promiscuous pairing&lt;/a&gt;),
+and test-driven development. Each subsequent iteration of the team has continued
+to vote for these agreements. We believe that it is one of the easiest ways to
+keep a team capable in such an enormous codebase. Randomized pairing and 2-8
+hour switching prevents siloing of knowledge.&lt;/p&gt;
+
+&lt;p&gt;In any other company, our least experienced developers would be team leads and
+architects; and our most experienced developers would be CTO&amp;rsquo;s. They&amp;rsquo;ve gotten
+this experience by living it. In case you think we&amp;rsquo;ve hired a team of seasoned
+graybeards, our average developer only has six years of experience.&lt;/p&gt;
+
+&lt;p&gt;Each member of our team is responsible for &amp;ldquo;being the lead&amp;rdquo; in certain ways. The
+individual&amp;rsquo;s own interests guide them to develop expertise in subjects. By being
+an expert, others listen to them, so they often have an attentive audience when
+speaking on their specialties. This positive feedback loop encourages additional
+research.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-start:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;How to Start&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; The most important way to build such a team is to allow them to fail&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The team must be allowed to face the consequences of their actions in a safe
+space. If a refactoring project goes badly, the team should have the individual
+clean up their mess. When someone is spending time on a project that doesn&amp;rsquo;t
+align with the goals of the business, the team should speak with them. When a
+developer successfully campaigns for a change that increases productivity, it
+should be celebrated. In all cases, strive to have your office be a safe place
+to fail.&lt;/p&gt;
+
+&lt;p&gt;Every time someone in authority demands the team do something different, it
+reduces the intrinsic motivation of the team. Each demand teaches the team
+members that they don&amp;rsquo;t have to be responsible, someone else will take care of
+the &amp;ldquo;important&amp;rdquo; things for them. Treat such demands with the utmost care, only
+making demands extremely infrequently.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Fewer demands allows for greater intrinsic motivation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A self-organizing team is very much like a democracy. The team is expected and
+entrusted to organize around the needs of the business. Decisions should be made
+by consensus. Very rarely should an &amp;ldquo;override&amp;rdquo; be needed from management.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Self-organizing teams are one of the most effective ways to manage a
+high-performing group. The team benefits from the best aspects of each member.
+Team members &amp;ldquo;grow up&amp;rdquo; quickly, as they are exposed to others around them who
+behave like trusted professionals. Each developer becomes intrinsically
+motivated, outperforming their peers in similar command and control teams.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Avoid Pop Culture Architecture</title>
@@ -1505,38 +1626,6 @@ Perhaps you’re thinking that this is just too much effort. Just like everythin
 &lt;br /&gt;
 &lt;br /&gt;
 While escaping from your stack requires effort, by following the steps you can achieve it in just a few hours a week. So, get out there and do it!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How to Suck Less at Your New Job</title>
-      <link>http://deliberate-software.com/new-job-todo-list/</link>
-      <pubDate>Sat, 19 Jan 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/new-job-todo-list/</guid>
-      <description>&lt;p&gt;One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.&lt;/p&gt;
-
-&lt;p&gt;For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.&lt;/p&gt;
-
-&lt;p&gt;Notice I said differently, not better.&lt;/p&gt;
-
-&lt;p&gt;All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way. I have seen new developers come onto a team and complain endlessly about something that is clearly a net benefit for them and the team. However, the team is so used to doing it their way that they cannot imagine changing.&lt;/p&gt;
-
-&lt;p&gt;Allow me to share a personally painful example.&lt;/p&gt;
-
-&lt;p&gt;Much to my regret, when I moved into .NET development coming from the scripting world, I complained non-stop about how annoying it was to have to assign a type to everything.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p dir=&#34;ltr&#34;&gt;&lt;p&gt;“I mean, in perl and php we got along great without it, so why on earth should anyone have to go through all this extra hassle?”&lt;/p&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I didn’t realize how strong typing enabled very powerful tooling, and to be perfectly honest, I probably didn’t care. However, I did realize that my complaints were falling on deaf ears. My co-workers, who had never even looked at a dynamically typed language before, didn’t care. Much worse, I was alienating myself from them, becoming&lt;em&gt; that guy&lt;/em&gt;, the one who just complains all the time. I sucked.&lt;/p&gt;
-
-&lt;p&gt;So, I decided on a new policy. Whenever something offended my sensibilities, seeming worse, wrong or just different, I would document it in a to-do list (I use &lt;a href=&#34;http://orgmode.org/&#34;&gt;org-mode&lt;/a&gt; in emacs, because it’s mind-alteringly cool). I would stop complaining about it, stop making sidelong hints at it. I would just add it to the list. Apparently, I was pretty opinionated about how to make that team better, because that list grew monstrously large in just a few months.&lt;/p&gt;
-
-&lt;p&gt;Next, I would review that list every week. Whenever I had downtime I would pick something small and try to implement whatever I needed to make that work, things like:  like installing a CI server, or figuring out how to unit test this crazy actionscript fla.&lt;/p&gt;
-
-&lt;p&gt;If an issue was too large or I lacked the understanding to resolve all at once, I would do root cause analysis and brainstorm different ways to achieve the goal. Sometimes, I would take something off the list, either because it was too costly to justify its value, or because sometimes I realized I was grossly incorrect in my understanding of the issue.&lt;/p&gt;
-
-&lt;p&gt;So, back to my example about static typing. After about a year, I realized there was no way I could reasonably argue it was worth a change. No one but me cared, no one was interested in&lt;a href=&#34;http://deliberate-software.com/how-to-escape-from-programming_language/&#34; target=&#34;_blank&#34;&gt; learning new languages to try to use for development&lt;/a&gt;, and the cost to convert anyway would have been staggering (and conversion was likely impossible).&lt;/p&gt;
 </description>
     </item>
     

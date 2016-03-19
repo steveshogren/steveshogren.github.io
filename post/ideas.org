@@ -1,0 +1,587 @@
+* Implicit Vs Explicit Code
+
+When choosing a code style, one of the major topics is whether or not to put in
+implicit keywords.
+
+``` haskell
+prefixer :: String -> String -> String
+prefixer prefix x y =
+    let t = prefix + x + y
+    in t
+```
+
+``` haskell
+prefixer prefix x y = prefix + x + y
+```
+
+``` csharp
+public namespace Helpers {
+  public class StringPrefixer {
+
+    private readonly String prefix;
+
+    public StringPrefixer(string prefix) {
+        this.prefix = prefix;
+    }
+    
+    public void Concat(string s1, string s2) {
+        String t = this.prefix + s1 + s2;
+        return t;
+    }
+  }
+}
+```
+
+``` csharp
+public namespace Helpers {
+  public class StringPrefixer {
+
+    String prefix;
+
+    public StringPrefixer(string prefix) {
+        prefix = prefix;
+    }
+    
+    public void Concat(string s1, string s2) {
+        return prefix + s1 + s2;
+    }
+  }
+}
+```
+* How Can You Stand OOP?
+I have spent the last couple years getting pretty good at Clojure and F#. I've
+also worked in Common Lisp, Racket, Typed Racket, and Haskell. While not the
+greatest functional programmer in the world, I feel pretty confident I can
+handle myself "at the keyboard".
+
+I currently work in a heavily unit-tested, very object-oriented C# codebase
+containing 4.3 million lines of code. Nine developers share responsibility for
+the codebase. That's almost 500KLOC per developer. The codebase has a few areas
+that were fantastic choices when made in 2008, but haven't aged very well.
+
+Recently, a big FP advocate joined our team. He asked me:
+
+    > How can you stand working in OOP? 
+
+* Programming Languages Are All Relative
+
+>>> You either die the hero, or live long enough to see yourself become the villain
+
+Can we agree that some programming languages are better suited to a task than
+others? A language that is the world's slowest at calculating equations is
+objectively the slowest at its task. A language that requires 100x more lines of
+code to accomplish its task is objectively 100x more wordy. Cycle speed and
+verbosity are possible to measure. If you design a good enough rubric, you can
+even measure something more complex, like language safety. (I am currently
+working on my third revision to the safety ranking, it is a complex topic!)
+
+But calculation speed and code verbosity isn't the whole story. What about
+readability, library maturity, learning resources and effort to learn, speed to
+write, and cost to maintain? What about "business value per development hour"?
+Truly the "best language" would be the one that produces the most dollars per
+dollar spent across the entire lifetime of the project.
+
+Unfortunately, it is impossible to calculate the business value per dollar
+spent. Software is trivial to copy and easy to deliver. I hypothesize that most
+successful projects succeed to due to luck, fashion, branding, or marketing
+rather than raw development speed. While some products are ruined from software
+that is too buggy or are lacking features, plenty of inferior products thrive
+for reasons unrelated to the technical merits of the product itself.
+
+For most projects, does it matter if you can deliver a better product a month
+before your competitor? A year? Or is it more likely that branding, sales,
+customer support, price, and fashion will dictate the market leader?
+
+Even the ability to innovate and develop new features quickly might not matter
+that much in industries where the cost to switch products is high. A slow,
+buggy, low feature system might still be better than the cost to switch to the
+new hotness.
+
+Programming languages, libraries, frameworks, and tools attempt to sell in this
+environment.
+* Is It A Bug?
+Recentlk
+* Losing The Faith
+
+I recently lost the faith.
+
+Six months ago, I was a functional programming zealot.
+
+If you'd asked me: "compare and contrast F# to C#", I'd have waved my hands and
+spoken of the increased safety, better domain modeling, better support for both
+functional programming and object-oriented programming, and increased brevity.
+If you'd asked me to guess a relative metric of "features/hour" when compared
+with C#, I would have guessed "8-10x more features/hour."
+
+Today, if asked that same question, I would say, "depends on the programmer:
+0-1.5x".
+
+In programming culture, like attracts like. Programming zealots attract other
+zealots. What really attracts these groups to each other is their fanaticism,
+not really their preferred tools. Whenever someone preaches the power of FP, a
+crowd gathers - some to cheer, some to jeer.
+
+The problem with programming tools is that you have to have faith. No conclusive
+research exists around language productivity. Without science, only faith
+remains.
+
+The other day, I went back to add a feature to a personal Clojure project. I had
+written it to be the paragon of beauty. High unit test coverage, carefully
+designed WebDriver tests, bi-directional migration scripts, and a makefile to
+automate every task.
+
+I estimated the feature would take an hour. Nine hours later, I finally finished
+it. I'd aged a hundred years. All the great Clojure features were helpful, but
+no language could make that task easy. In that moment, sitting with the feature
+complete, I saw so clearly why I had been so zealous.
+
+In large projects, actual programming is a relatively small part of the work.
+Requirements gathering, team communication, database migrations, build servers,
+database access, authorization, logging, reporting, and UI tweaks take the most
+time. Unfortunately, the only artifacts of all that are thousands of files
+filled with code. The work that takes the most time often leaves the least
+artifacts.
+
+The language and libraries are such a small part of that, but they are really
+the only things I can control. While I cannot change the need for database
+migrations, I _can_ argue to change the language I use!
+
+I still have my preferred tools. If starting a new Windows project, I would
+still pick F#. If starting a new JVM project, I would waffle between Clojure and
+Frege. For everything else, I would pick Haskell. But I've lost the burning
+desire to convince everyone else of the power of these tools.
+
+* Safety Score
+** Exceptions (checked, unchecked)
+** variable shadowing 
+* Type-saft Dispach Proposal
+Recently, I've learned the power of pattern matching and discriminated unions
+for clarifying the domain while also code that is easier to refactor. If these
+concepts are new to you, I suggest you check out some of my other posts about
+pattern matching before continuing:
+
+x* [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
+* Typing Saves You Time
+
+I used to hate type systems. As a junior programmer, I did most of my
+work in Perl and PHP, so working in C#/Java always felt so
+overwrought. In Java especially, one has to write out the type of the
+variable almost every time you use it, which explodes the amount of
+busywork the developer must do.
+
+Unit tests are a poor man's type system.
+
+There, I said it. You know why I think this? Becuase I just took (am
+taking?) over a legacy codebase. You know what makes that way easier?
+Typing.
+* DI Is a Hack
+
+Every codebase I have seen or heard of that uses dependency injection
+for all dependencies also performs strict unit testing. Why is that?
+What about unit testing and DI are so linked?
+
+You cannot have unit testing in Java/C# without dependency injection.
+
+If you have ever seen a codebase in Java/C# that has ten injected
+classes, right there, you have a codebase that does heavy unit
+testing. If you are deep into the unit testing culture, you will have
+been taught that it is a good design to use DI everywhere. Is it
+really? Do the contortions required to do DI make your code easier to
+use/reuse/refactor? Or do you do it because you have to? Can you think
+of a single time where DI made anything easier?
+
+The TDD proponents realized that you cannot reasonably perform unit
+testing without DI in Java/C#, and so they have argued that a
+completely dependency injected codebase is a good design. In reality,
+DI for unit testing is a hack because Java/C# are so ill-suited to
+unit testing.
+
+For example, how would we unit test a function that talks to the
+database in C# without a framework that requires mappings and global
+singletons? We would put an interface around the database connection,
+then pass it into the constructor through an optional parameter. Our
+test would then make another implementor of that interface, and pass
+it in when testing. This is par for the course in Java as well.
+
+``` csharp
+// DBConnection.cs
+public interface IDBConnection { }
+public class DBConnection : IDBConnection{ }
+
+// RepositoryFactory.cs
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using Helpers;
+
+namespace Repositories
+{
+	public class RepositoryFactory {
+		IDBConnection con;
+		public RepositoryFactory(IDBConnection con) {
+			this.con = con;
+		}
+		public RepositoryFactory() : this(new DBConnection()) { }
+        public void Insert(string sql) {
+            this.con.Execute(sql);
+        }
+	}
+}
+``` 
+
+Tests grow in maintenance difficulty with the size of the function
+being tested. Often this leads to a design with many small
+one-function classes. This is actually not a bad thing! Rather than
+having a single reason to change, these classes have a single reason
+to "test". Usually, such a design will have several classes in a row
+that each only calls the next. This "chain" of classes together are
+cohesive, but instead of being a single class together, they are all
+split apart. Such a functional design would normally be fine, except
+every function needs a twenty line wrapper of namespaces, imports,
+interfaces, and constructors.
+
+Comparatively, in languages like Javascript, Ruby, and Clojure,
+replacing a function for testing is easy! Every function does not need
+a twenty-line wrapper, instead we simply replace the function we want
+to "inject" with a new function. Here is an example in Javascript:
+
+``` javascript
+function Insert(sql) { getConnection().Execute(sql);}
+function getConnection() { return new DatabaseConnection(); }
+
+// "Mock" the getConnection function in a unit test
+getConnection = function() { return { Execute: function(sql) {}}};
+```
+
+I am now able to test my "Insert" function without it calling the real
+dependencies. My design can take whatever shape best fits the problem,
+
+
+without constraining itself to "what works for testing".
+* Optimizing for Crappy Interviews
+
+Have you noticed that there are so many different styles of
+interviews?
+
+Recently on /r/programming, there have been a rash of people
+complaining that interviews are terrible. My favorite was the
+commenter who claimed to make the typical FizzBuzz test a tiny bit
+harder by asking for a new word on prime numbers, and no using a
+library call! When others pointed out how hard that is, he was like
+"aren't primes just not evenly divisible by 2 or 3?"
+
+I saw that comment, and I knew I had a perfect example for the state
+of interviewing!
+* Dangerous Clojure Macros
+
+Clojure allows you to write macros that mutate the world.
+
+
+So what?
+
+
+I'll walk you through it. What is the result of this expression?
+
+``` clojure
+(let [x 1]
+  (let [x 4]
+    x)
+  x)
+```
+The result is 1, right? That was easy. How about this?
+
+``` clojure
+(defn addTen [x]
+  (+ 10 x))
+
+(let [z 1]
+  (addTen (inc z)))
+
+```
+The let returns 12. What does x look like inside addTen? It is bound to 2.
+
+
+What does this return?
+Clojure macros by default are "hygenic", which means they cannot mutate bindings.
+
+``` clojure
+(defmacro addTen [x]
+  `(let [z 100]
+     (+ 10 ~x)))
+(let [z 1]
+   (addTen (inc z)))
+;; => clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: Can't let qualified name: user/z,
+```
+
+Clojure prevents you from accidentally shadowing a value by throwing such an exception.
+This means that it is hygenic by default, but it is possible to "break out" and make it unhygenic.
+Do force a value to shadow another, you simply have to give it the prefix ~'
+Here is the same macro, only with z replaced by ~'z
+
+
+``` clojure
+(defmacro addTen [x]
+  `(let [~'z 100]
+     (+ 10 ~x)))
+
+(let [z 1]
+   (addTen (inc z)))
+```
+This returns 111.
+
+
+Here it is with the macro expanded:
+
+``` clojure
+(let [z 1]
+   (let [z 100]
+     (+ 10 (inc z))))
+```
+
+Now the 111 makes more sense.
+Unhygenic macros let you shadow bindings.
+In this case, we shadowed [z 1] with [z 100].
+
+
+Why would you ever want to do this?
+Lets look at a real example.
+
+
+I find prefix notation to be frustrating when I am writing a lot of arithmetic.
+
+``` clojure
+(- 1 (+ (/ 2 value) 1))
+```
+
+I constantly have to scan my eyes back and forth, and it makes it easy to loose track of an expression.
+I wanted a syntax that was similar to the threading macro, but where I could place the previous result at arbitraray locations.
+
+``` clojure
+(_> value (/ 2 _) (/ 10 _) (- _ 1))
+```
+This is much easier for my western eyes to read, it replaces the previous "inside out" style with a more natural left to right.
+To accomplish this syntax, we need a macro that can wrap every s-expression inside a single let binding using the previous value.
+Since Clojure allows rebinding a value inside a single let, we can have our macro output something like this:
+
+``` clojure
+(let [_ value 
+      _ (/ 2 _)
+      _ (/ 10 _)
+      _ (- _ 1)]
+  _)
+```
+Which, with unhygenic macros, is easy to do:
+
+``` clojure
+(defmacro _> [init & body]
+  `(let [~'_ ~init
+         ~@(mapcat (fn [x] `[~'_ ~x])
+                   body)]
+     ~'_))
+```
+This takes the initial value as init, and the "rest" as the body.
+For each element in the body, we bind its result to ~'_.
+* Lazy Lists
+I just read of an awesome way to create a lazy list!
+* Software Is Too Hard
+
+I think I have figured out why everyone hates everyone else's code.
+
+### Humans do not have the mental capacity to write good software. 
+
+"But wait, Steve, I am awesome at what I do! I know all the patterns,
+follow all the trends, and read all the blogs. Don't lump me in with
+the slackers, the architecture astronauts, the language enthusiasts!"
+
+I promise you I can find other equally good developers who will hate
+your code.
+
+As an industry, we all muddle along, and most of the time, we can
+produce more value than we consume. I personally know I have been
+profitable to my employers for a while now. This is a good thing, to
+be profitable. 
+
+We don't have be good at software to be profitable.
+
+Don't take it the wrong way, we get a lot done. We solve so many
+problems, and manage to produce so much good. No offense intended,
+but, let's be honest, how many of us are confident in everything we
+have written? Did it scale, was it easy to hand-off, was it tested,
+was it secure, did it come out in time? Chances are, no, it didn't.
+
+So, programming is too hard for humans. Now what? I think we need to
+start simplifying the craft. Accepting our limitations is the first
+step to working around them. The developer who doesn't trust their own
+abilites to build "good software" will take even greater care. The
+humble developer keeps up with good practices, keeps refining their
+understanding of what makes code "good" and keeps 
+* Proposal: Efficiency & Excellence Team
+
+Since v5 is getting larger and larger, I have felt a decrease in energy. Each
+new member to the team contributes to a perception of lower energy and say. I
+think we should start a practice of an Efficiency & Excellence team. This team
+will have rotating members, two new members each week. This team will only work
+on one thing for the week. They will be chosen at the start of the week and
+given a broad technical task to accomplish.
+
+Some examples are: a 10 minute V5 build. Halving the proxies generation (or
+removing the need for it). A better local check-in task. Removing Identifier
+throughout the system. Splitting Core and ORM classes into two projects. A 1
+hour entirely automated release process for all products. A small set of
+automated performance tests owned by v5.
+
+
+* Pop Culture Architecture
+// Knowing cool new things to signal your worth in an interview helps defend against job loss.
+
+// A good architect will make most developers unhappy. 
+// 
+// I've met many passionate and well-read developers. We work hard to "stay
+// current" by reading books and blogs, attending conferences (even paying for
+// ourselves), and learning new technologies. 
+// 
+// A great architect does all that, and they protect the codebase from the
+// developers who want to practice cool new things.
+// 
+// Why does the codebase need protecting? The developers are passionate and
+// well-read! They want to learn the fastest and best tools to do the job. Using
+// the newest tools only makes sense when they are the right tool for the job.
+// Often new tools only make sense on greenfield projects or project rewrites.
+// 
+// The business' goals and the developers' goals diverge as soon as the newest tool
+// isn't the right tool for the job.
+
+// The problem with pop culture architecture is that it often is about fashion, not
+// about practicality. The developer or architect selects a new architecture to get
+// a chance to learn it.
+// If you need one of the two main benefits so much , microservices might be worth the significant costs.
+
+// You have a problem when someone is afraid that a given architecture, pattern,
+// design, or language "isn't cool". As soon as an architecture is about "fashion",
+// it ceases to be about delivering business value. We as an industry have let
+// fashion drive our choices. We pick things simply because others are picking
+// them, even when they do not make sense.
+// ## The Role of the Architect
+// 
+// An architect should be the least swayed by the fashion of "Pop Culture
+// Architecture". I suspect they would scrutinize any architecture recommendation
+// that happens to be the subject of a recent Martin Fowler blog post. Therefore
+// the best architects design systems that are "unfashionable", "uncool", and
+// deeply unpopular with their development staff.
+
+
+* Code of Conduct for this Self Organizing Team 
+
+Self organizing teams are a complex topic. I believe they have very clear pros
+and cons. At my work, I manage a self organizing team which has a unique set of
+expectations.
+
+### Individual Expectations
+
+We expect each individual to work a strict 40 hour work week. You should
+confidently leave at eight hours sharp. Overtime in our office is not considered
+a virtue. The negative side-effects compound over the long term lose our
+business time and money. Overtime for the sake of "signaling to management" is
+not rewarded. You are to come in and work as hard as you can such that you are
+"done" at the end of an eight hour day and could perform no additional effort.
+In the rare event that overtime is required, it will be clearly stated and have
+clearly defined goals: e.g. solving a critical and time-sensitive customer
+issue. Your manager should know and approve of the overtime. In these
+circumstances it is expected that you will come in later the next day to make up
+for it.
+
+Each individual must be responsible for the quality and productivity of the
+development team. If a team member is consistently late, has poor hygiene, or is
+not performing their duties sufficiently, you should bring it up to them
+privately. If they continue, bring it up in a retrospective or let their manager
+know. If you see someone doing anything illegal or performing harassment,
+immediately let their manager know. Common sense should dictate when it is a
+"business issue" or a "legality issue".
+
+Each developer shares the responsibility for the quality of the entire codebase
+of the office. Teams move and reform fluidly - you might be maintaining a new
+codebase at any given time. Behaving as a good citizen of this office means
+always doing everything possible to have your code ready to hand off at a
+moments notice. Long branches, commented out code, failing tests, and broken
+builds all should be dealt with as the highest priority. Refactoring projects
+should be completed by the individual or group who "champions" it. Undertaking a
+multi-session refactoring is acceptable, but should have clear end goals.
+
+You should mentor every other developer in all areas technical, social, and
+collaborative. No one is exempt from the duty of gently correcting another.
+Everyone should take correction or suggestions seriously, regardless of their
+source. If the most junior developer corrects the most senior, the most senior
+must treat it seriously.
+
+You should behave in a manner fitting for a professional. Profanity, coarse
+joking, or sexual innuendo are commonly considered to be inappropriate behavior
+for an American professional. You should call out your teammates for such
+behavior with a firm comment immediately, e.g. "that is inappropriate for a
+professional."
+
+The more experienced the developer, the more they are expected to demonstrate
+these tenets. A less experienced developer is afforded more single-mindedness,
+but the most experienced are expected to weigh every option and lead by example
+in every way.
+
+Leadership is driven through consensus. If a developer wishes to make a change,
+they must build consensus with the team and get a majority vote. If a majority
+vote cannot be made, the onus is on the individual to modify their suggestion to
+make it more acceptable or drop the suggestion.
+
+### Development Team Expectations
+
+Retrospectives are one of the most powerful tools we have. Retrospectives are
+mandatory, as they are the primary way for the team to improve and communicate
+issues. If you do not approve of the format or the frequency, convince the team
+to make a change.
+
+Team formation and working agreements are decided on by the team, with the whole
+development staff providing insight. No new team may form without the consent of
+the development staff at large. All teams must have working agreements that
+adhere to the goals of: information sharing, rapid training, high code quality,
+low defect rates, automated regression, and regular automated builds and
+deployment.
+
+The "default" method for every team should be pair programming and TDD. These
+are not mandatory, but can be replaced with alternate working agreements if
+approved by the larger technical staff. Any deviations from the default should
+be documented and reviewed regularly.
+
+### Development Manager Expectations
+
+Primarily, the development manager is charged with ensuring a culture that
+attracts and enriches high quality talent. This can be accomplished though team
+empowerment, regular mentoring, and conflict resolution. Their goal is to build
+a team of individuals and trust them to perform with excellence.
+
+The manager should be consistently watching for cultural dividers who cause the
+teams to excessively fight or grow negative. These dividers should be given
+feedback with the goal of improvement or "managing out". Dividers often cause a
+toxic culture to form, which destroys morale.
+
+Development managers are the last stop when the team is unable to correct the
+behavior of an individual. They are to freely allow teams to reorganize and
+develop working agreements as long as they are in line with meeting the needs of
+the business.
+
+The development manager holds no technical authority over the development staff,
+nor handles prioritization and assignment of work. The work priorities are to be
+handled by the business experts. Work is assigned to the development team, which
+is expected to organize around those priorities.
+
+Development managers interact with recruiters and coordinate HR related
+functions and documentation. All work that infringes on the time of the
+development staff should be handled by the development manager. Time sheets,
+vacation tracking, interaction with recruiters, and project management should be
+kept from the development staff.
+* When to Use Clojure
+* Building A Career
+* Office Productivity
+* How to Best Teach Programming
+* Co-op Reading List
+** http://gitimmersion.com/
+** Clean Code
+** Code Complete
+** Art of Agile Development
+** 
