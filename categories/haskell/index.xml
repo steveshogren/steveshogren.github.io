@@ -6,8 +6,118 @@
     <description>Recent content in Haskell on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Mar 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Wrangling State In Clojure</title>
+      <link>http://deliberate-software.com/clojure-state/</link>
+      <pubDate>Tue, 29 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/clojure-state/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Immutable languages make application state an interesting concept.&lt;/p&gt;
+
+&lt;p&gt;In Clojure, you can deal with application state in two main ways. The first way
+is to pass the state around as parameters to your functions. An example of
+&lt;strong&gt;Pass As Parameter&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn delete! [db-con table id]
+  (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id]))
+
+;; valid-for-delete omitted
+
+(defn delete-user [db-con user-id]
+  (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id)
+    (delete! db-con &amp;quot;user&amp;quot; user-id)))
+
+(defn -main [&amp;amp; [connection-string user-id]]
+  (let [db-con (make-connection connection-string)]
+    (delete-user db-con user-id)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This requires every function that eventually accesses a database to also have
+the database connection. The trade-off is one of simplicity: it is easier to
+test and interact with code that takes all of its dependencies as parameters.&lt;/p&gt;
+
+&lt;p&gt;The alternative is to set a thread-safe value somewhere and give the underlying
+code access to it. In Clojure, the &lt;code&gt;atom&lt;/code&gt; primitive is the first choice for
+this. A common misconception is that Clojure prevents all mutation. The
+&lt;code&gt;atom&lt;/code&gt; primitive can be mutated, it just has to be done with a special
+&lt;code&gt;swap!&lt;/code&gt; function. Let&amp;rsquo;s call this: &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def db-con (atom nil))
+
+(defn delete! [table id]
+  (jdbc/delete! @db-con table [&amp;quot;id=?&amp;quot; id]))
+
+;; valid-for-delete omitted
+
+(defn delete-user [user-id]
+  (if (valid-for-delete &amp;quot;user&amp;quot; user-id)
+    (delete! &amp;quot;user&amp;quot; user-id)))
+
+(defn -main [&amp;amp; [connection-string user-id]]
+  (swap! db-con (fn [old] (make-connection connection-string)))
+  (delete-user user-id))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;atom&lt;/code&gt; allows us to not have to pass around the state. We mutate
+&lt;code&gt;db-con&lt;/code&gt; with the connection parameters before calling any database accessing
+functions. Unfortunately, this sets up an implicit dependency: &lt;code&gt;delete!&lt;/code&gt;
+will only work if the &lt;code&gt;db-con&lt;/code&gt; atom was setup beforehand.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Dependencies&lt;/th&gt;
+&lt;th&gt;Correctly Call Function&lt;/th&gt;
+&lt;th&gt;Adding New State&lt;/th&gt;
+&lt;th&gt;Best When&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pass As Parameter&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Explicit&lt;/td&gt;
+&lt;td&gt;Easier&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;State Values Change Frequently&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Implicit&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;Easier&lt;/td&gt;
+&lt;td&gt;State Values Change Rarely&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt; might look familiar, in a lot of other languages it
+is implemented with the Singleton Design Pattern. Often a Singleton class will
+act as the mutable shared location for storing state.&lt;/p&gt;
+
+&lt;p&gt;When adding new application state, I typically default to &lt;strong&gt;Pass As Parameter&lt;/strong&gt;
+as my first choice. When &lt;strong&gt;Pass As Parameter&lt;/strong&gt; grows costly, I fall back to
+&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;. &lt;strong&gt;Pass As Parameter&lt;/strong&gt; works best when the value
+changes regularly.&lt;/p&gt;
+
+&lt;p&gt;An exception would be something as ubiquitous as a database connection in a CRUD
+application. A CRUD application will typically need a database connection at
+every leaf node, and it rarely changes, so I will use &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;
+from the start.&lt;/p&gt;
+
+&lt;p&gt;With these two ways of passing application state, we are offered the flexibility
+to choose the best tool for the job.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Haskell is the Dark Souls of Programming</title>

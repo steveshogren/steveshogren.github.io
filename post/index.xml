@@ -6,8 +6,118 @@
     <description>Recent content in Posts on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Mar 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Mar 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Wrangling State In Clojure</title>
+      <link>http://deliberate-software.com/clojure-state/</link>
+      <pubDate>Tue, 29 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/clojure-state/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Immutable languages make application state an interesting concept.&lt;/p&gt;
+
+&lt;p&gt;In Clojure, you can deal with application state in two main ways. The first way
+is to pass the state around as parameters to your functions. An example of
+&lt;strong&gt;Pass As Parameter&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn delete! [db-con table id]
+  (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id]))
+
+;; valid-for-delete omitted
+
+(defn delete-user [db-con user-id]
+  (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id)
+    (delete! db-con &amp;quot;user&amp;quot; user-id)))
+
+(defn -main [&amp;amp; [connection-string user-id]]
+  (let [db-con (make-connection connection-string)]
+    (delete-user db-con user-id)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This requires every function that eventually accesses a database to also have
+the database connection. The trade-off is one of simplicity: it is easier to
+test and interact with code that takes all of its dependencies as parameters.&lt;/p&gt;
+
+&lt;p&gt;The alternative is to set a thread-safe value somewhere and give the underlying
+code access to it. In Clojure, the &lt;code&gt;atom&lt;/code&gt; primitive is the first choice for
+this. A common misconception is that Clojure prevents all mutation. The
+&lt;code&gt;atom&lt;/code&gt; primitive can be mutated, it just has to be done with a special
+&lt;code&gt;swap!&lt;/code&gt; function. Let&amp;rsquo;s call this: &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def db-con (atom nil))
+
+(defn delete! [table id]
+  (jdbc/delete! @db-con table [&amp;quot;id=?&amp;quot; id]))
+
+;; valid-for-delete omitted
+
+(defn delete-user [user-id]
+  (if (valid-for-delete &amp;quot;user&amp;quot; user-id)
+    (delete! &amp;quot;user&amp;quot; user-id)))
+
+(defn -main [&amp;amp; [connection-string user-id]]
+  (swap! db-con (fn [old] (make-connection connection-string)))
+  (delete-user user-id))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;atom&lt;/code&gt; allows us to not have to pass around the state. We mutate
+&lt;code&gt;db-con&lt;/code&gt; with the connection parameters before calling any database accessing
+functions. Unfortunately, this sets up an implicit dependency: &lt;code&gt;delete!&lt;/code&gt;
+will only work if the &lt;code&gt;db-con&lt;/code&gt; atom was setup beforehand.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Dependencies&lt;/th&gt;
+&lt;th&gt;Correctly Call Function&lt;/th&gt;
+&lt;th&gt;Adding New State&lt;/th&gt;
+&lt;th&gt;Best When&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pass As Parameter&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Explicit&lt;/td&gt;
+&lt;td&gt;Easier&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;State Values Change Frequently&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Implicit&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;Easier&lt;/td&gt;
+&lt;td&gt;State Values Change Rarely&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt; might look familiar, in a lot of other languages it
+is implemented with the Singleton Design Pattern. Often a Singleton class will
+act as the mutable shared location for storing state.&lt;/p&gt;
+
+&lt;p&gt;When adding new application state, I typically default to &lt;strong&gt;Pass As Parameter&lt;/strong&gt;
+as my first choice. When &lt;strong&gt;Pass As Parameter&lt;/strong&gt; grows costly, I fall back to
+&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;. &lt;strong&gt;Pass As Parameter&lt;/strong&gt; works best when the value
+changes regularly.&lt;/p&gt;
+
+&lt;p&gt;An exception would be something as ubiquitous as a database connection in a CRUD
+application. A CRUD application will typically need a database connection at
+every leaf node, and it rarely changes, so I will use &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;
+from the start.&lt;/p&gt;
+
+&lt;p&gt;With these two ways of passing application state, we are offered the flexibility
+to choose the best tool for the job.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>When Self-Organizing Teams Are Effective</title>
@@ -2052,116 +2162,6 @@ for political reasons.&lt;/p&gt;
 inferior tools. Once you start learning, you will always find yourself in a
 situation where you are required to use an inferior tool. For me, this has been
 one of the hardest things to face in my career.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Case Study: Superior Domain Modeling in F#</title>
-      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
-      <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
-      <description>&lt;p&gt;Domain modeling in F# is significantly easier and safer than with the
-traditional .NET languages. This is because of the increased safety of
-pattern matching and the expressiveness of discriminated unions. These
-concepts are not in C# or VB.NET, and therefore bring a new tool to
-the table.&lt;/p&gt;
-
-&lt;p&gt;To illustrate this, I found some old code I&amp;rsquo;d written to interact with
-a legacy system. The system uses many single enums on a record to keep
-track of statuses. When one changes, it can cause others to change as
-well.&lt;/p&gt;
-
-&lt;p&gt;Here is a typical function that combines two enums to recalculate a
-third.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;        public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
-        {
-            if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-                || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-                return PositionType.Held;
-            if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-                || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-                return PositionType.Posted;
-
-            return PositionType.Undefined;
-        }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With some regularity, new records are added to these types of enums,
-causing a dangerous search and update across the system fixing all the
-if/else or switch/case statements.&lt;/p&gt;
-
-&lt;p&gt;Right off the bat, pattern matching is a huge win here, taking a hard
-to comprehend function and making the domain concepts clear.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetPositionType = function
-    | Deliver, Principal | Return, Counterparty -&amp;gt; Held
-    | Return, Principal | Deliver, Counterparty -&amp;gt; Posted
-    | MovementType.Undefined, _ | _, ApplyToParty.Undefined -&amp;gt; PositionType.Undefined
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If we add a new status to any of these, we will get a compiler warning
-in every place letting us know. If that alone was the win, we&amp;rsquo;d be
-still be ahead by a lot. The domain is so clear here, I can print this
-code out and hand it to my BA to ensure the logic is correct.&lt;/p&gt;
-
-&lt;p&gt;Next though, this got me thinking. Why does this set of three enums
-have to be calculated? Why are they even separate? Ah, of course,
-right now they are stored in the database and ORM objects, each with a
-separate field and set of enum ids. Changing that would be costly.&lt;/p&gt;
-
-&lt;p&gt;What I want is a domain layer a level higher than the typical database
-ORM classes, something to convert my ORM classes into that will be
-able to do work in a safer way.&lt;/p&gt;
-
-&lt;p&gt;Rather than three enums that are supposed to change in lock step (but
-might get out of date), I really want a concept of the three combined
-and &amp;ldquo;frozen&amp;rdquo; together.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type Direction = 
-    | Held_Deliver_Principal
-    | Held_Return_Counterparty
-    | Posted_Return_Principal
-    | Posted_Deliver_Counterparty
-    
-let GetDirection = function
-   | Deliver, Principal  -&amp;gt; Held_Deliver_Principal
-   | Return, Counterparty -&amp;gt; Held_Return_Counterparty
-   | Return, Principal -&amp;gt; Posted_Return_Principal
-   | Deliver, Counterparty -&amp;gt; Posted_Deliver_Counterparty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now I have a combined Direction that merges the three concepts into
-one. It is impossible with this new merged type to have an invalid
-state across the three. Getting any of the types back out to convert
-into the ORM classes or do some work is as simple as another match:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetMovementTypeToSaveInORM = function
-   | Held_Deliver_Principal | Posted_Deliver_Counterparty -&amp;gt; Deliver
-   | Posted_Return_Principal | Held_Return_Counterparty -&amp;gt; Return
-
-let GetSendFn = function
-   | Held_Deliver_Principal | Posted_Return_Principal -&amp;gt; SendMessageToPrincipal
-   | Held_Return_Counterparty | Posted_Deliver_Counterparty -&amp;gt; SendMessageToCounterparty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;While it is possible to make an equivalent C# enum and combine these
-in a similar way, it is inherently unsafe (nothing to guarantee you
-covered every case) and therefore appropriately uncommon. The typical
-answer for safe polymorphic dispatch in C# is to use an interface and
-classes. Unfortunately, something still has to dispatch on that enum
-id, either inside a class or at the time of class instantiation. That
-is a vector for errors.&lt;/p&gt;
-
-&lt;p&gt;Because F# interops so well with C#, it is possible to build in a
-domain layer in F# immediately that calls down to your C# ORM
-classes. Converting from a set of dangerous C# enums into a
-constrained and safe F# discriminated union is easy and will simplify
-your domain to its essence.&lt;/p&gt;
-
-&lt;p&gt;For reasons like this, when I have to build something with a rich
-domain, I reach for F#.&lt;/p&gt;
 </description>
     </item>
     

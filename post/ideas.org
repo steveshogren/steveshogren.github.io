@@ -431,43 +431,44 @@ hour entirely automated release process for all products. A small set of
 automated performance tests owned by v5.
 
 
-* Pop Culture Architecture
-// Knowing cool new things to signal your worth in an interview helps defend against job loss.
+* You Don't Want An Architect
+Knowing cool new things to signal your worth in an interview helps defend against
+job loss.
 
-// A good architect will make most developers unhappy. 
-// 
-// I've met many passionate and well-read developers. We work hard to "stay
-// current" by reading books and blogs, attending conferences (even paying for
-// ourselves), and learning new technologies. 
-// 
-// A great architect does all that, and they protect the codebase from the
-// developers who want to practice cool new things.
-// 
-// Why does the codebase need protecting? The developers are passionate and
-// well-read! They want to learn the fastest and best tools to do the job. Using
-// the newest tools only makes sense when they are the right tool for the job.
-// Often new tools only make sense on greenfield projects or project rewrites.
-// 
-// The business' goals and the developers' goals diverge as soon as the newest tool
-// isn't the right tool for the job.
+A good architect will make most developers unhappy. 
 
-// The problem with pop culture architecture is that it often is about fashion, not
-// about practicality. The developer or architect selects a new architecture to get
-// a chance to learn it.
-// If you need one of the two main benefits so much , microservices might be worth the significant costs.
+I've met many passionate and well-read developers. We work hard to "stay
+current" by reading books and blogs, attending conferences (even paying for
+ourselves), and learning new technologies. 
 
-// You have a problem when someone is afraid that a given architecture, pattern,
-// design, or language "isn't cool". As soon as an architecture is about "fashion",
-// it ceases to be about delivering business value. We as an industry have let
-// fashion drive our choices. We pick things simply because others are picking
-// them, even when they do not make sense.
-// ## The Role of the Architect
-// 
-// An architect should be the least swayed by the fashion of "Pop Culture
-// Architecture". I suspect they would scrutinize any architecture recommendation
-// that happens to be the subject of a recent Martin Fowler blog post. Therefore
-// the best architects design systems that are "unfashionable", "uncool", and
-// deeply unpopular with their development staff.
+A great architect does all that, and they protect the codebase from the
+developers who want to practice cool new things.
+
+Why does the codebase need protecting? The developers are passionate and
+well-read! They want to learn the fastest and best tools to do the job. Using
+the newest tools only makes sense when they are the right tool for the job.
+Often new tools only make sense on greenfield projects or project rewrites.
+
+The business' goals and the developers' goals diverge as soon as the newest tool
+isn't the right tool for the job.
+
+The problem with pop culture architecture is that it often is about fashion, not
+about practicality. The developer or architect selects a new architecture to get
+a chance to learn it.
+If you need one of the two main benefits so much , microservices might be worth the significant costs.
+
+You have a problem when someone is afraid that a given architecture, pattern,
+design, or language "isn't cool". As soon as an architecture is about "fashion",
+it ceases to be about delivering business value. We as an industry have let
+fashion drive our choices. We pick things simply because others are picking
+them, even when they do not make sense.
+## The Role of the Architect
+
+An architect should be the least swayed by the fashion of "Pop Culture
+Architecture". I suspect they would scrutinize any architecture recommendation
+that happens to be the subject of a recent Martin Fowler blog post. Therefore
+the best architects design systems that are "unfashionable", "uncool", and
+deeply unpopular with their development staff.
 
 
 * Code of Conduct for this Self Organizing Team 
