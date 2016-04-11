@@ -600,17 +600,17 @@ well.&lt;/p&gt;
 &lt;p&gt;Here is a typical function that combines two enums to recalculate a
 third.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;        public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
-        {
-            if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-                || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-                return PositionType.Held;
-            if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-                || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-                return PositionType.Posted;
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
+{
+    if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+        || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+        return PositionType.Held;
+    if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
+        || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
+        return PositionType.Posted;
 
-            return PositionType.Undefined;
-        }
+    return PositionType.Undefined;
+}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;With some regularity, new records are added to these types of enums,

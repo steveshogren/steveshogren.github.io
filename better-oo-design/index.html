@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>SOLID-ER For Better OOP  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="SOLID-ER For Better OOP  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/better-oo-design/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2016-03-07T00:00:00Z" />
+<meta property="og:article:modified_time" content="2016-03-07T00:00:00Z" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="SOLID-ER For Better OOP" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/better-oo-design/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "SOLID-ER For Better OOP",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2016-03-07",
+    "description": "",
+    "wordCount":  887 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://deliberate-software.com/better-oo-design/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
+
+
+</head>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://deliberate-software.com/">Deliberate Software</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="text-center">
+  <h1 class="">DRAFT :: SOLID-ER For Better OOP
+</h1>
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-03-07">7 Mar, 2016</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 5 min
+  &middot; (887 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
+  
+
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
+    
+  <div class="content">
+    
+
+<p>The SOLID patterns are not enough to design a reusable and testable code base.
+Two additions can significantly improve your codebase.</p>
+
+<h2 id="terms:0dfbdcea5000bc0e2a150299cf5611d6">Terms</h2>
+
+<p>For this post, I will distinguish between <em>verb classes</em> and <em>noun classes</em>.
+Unit testing often drives us to separate classes into data structures (the
+nouns) or behavior classes, (the verbs).</p>
+
+<ul>
+<li><em>Noun class</em> - has fields and properties filled with data, perhaps from an ORM.
+
+<ul>
+<li>Example: A <code>Contact</code> class with a name, billing and shipping addresses,
+a birthday, and a credit card.</li>
+</ul></li>
+<li><em>Verb class</em> - has functions and methods. <em>Verb classes</em> might have fields or
+properties, but usually those only contain other <em>verb classes</em> that are
+needed to compose work.
+
+<ul>
+<li>Example: A <code>CustomerBiller</code> class that creates an invoice and sends it
+to an address. Only needs a billing and shipping address and an amount.</li>
+</ul></li>
+<li><em>Noun interface</em> - an interface put on a <em>noun class</em>. Used to allow multiple
+nouns to be passed to a single verb. A very common use-case in business
+applications.
+
+<ul>
+<li>Example: An <code>ICustomer</code> interface with a billing and shipping address
+only. Can be used by <code>Contact</code>, <code>Company</code>, <code>Government</code>,
+or any other entity that might like to buy something.</li>
+<li>Allows a verb to operate on many types of data</li>
+</ul></li>
+<li><em>Verb interface</em> - an interface put on a <em>verb class</em>. Allows polymorphic
+behavior. Less common than <em>noun interfaces</em>.
+
+<ul>
+<li>Example: An <code>IChargeCustomer</code> interface that allows different kinds of
+charging: one that generates invoices, one that charges credit cards, etc.</li>
+<li>Allows several types of verbs to be grouped together</li>
+</ul></li>
+</ul>
+
+<h2 id="solid-er:0dfbdcea5000bc0e2a150299cf5611d6">SOLID-ER</h2>
+
+<p>Two additions to SOLID will guide your codebase to be easier to reuse and test.</p>
+
+<ul>
+<li><strong>E - Extract Noun Interfaces</strong> - Don&rsquo;t pass around concrete nouns. Default to
+creating <em>noun interfaces</em> and passing them to <em>verb classes</em>. This inversion
+allows for easier reuse. Any data structure that &ldquo;fits&rdquo; can re-use that
+behavior. This is the soul of &ldquo;choose composition over inheritance&rdquo;.</li>
+<li><strong>R - Rely on Verb Functions Not Verb Interfaces</strong> - Replace Dependency
+Injected <em>verb interfaces</em> with function signatures, explained in the
+<a href="http://deliberate-software.com/simplemock-unit-test-mocking/">SimpleMock</a>
+guide. By relying on the function signature as the default unit of
+abstraction, we remove test-only interfaces. This allows the dependent code to
+have only the functions it needs, rather than everything from the interface.
+When you really need polymorphic behavior, use a <em>verb interface</em>. Only use
+<em>verb interfaces</em> for polymorphic behavior, not for unit test mocking.</li>
+</ul>
+
+<p>Here is an example of the &ldquo;SOLID-ER&rdquo; pattern:</p>
+
+<pre><code class="language-csharp">// Verb Class
+public class Notifier {
+    public void Broadcast(string type, Type from, int id) { /* Broadcast code here ...*/ }
+}
+// Noun Interface
+// E - Extract Noun Interfaces
+public interface ISalesLead {
+    boolean IsCustomer {get; set;}
+    DateTime ConversionDate {set;}
+    int Id {get;}
+    Type From {get;}
+}
+// Noun Class
+public class User : ISalesLead {
+    public int Id {get; private set;}
+    public boolean IsCustomer {get;set;}
+    public DateTime ConversionDate {get;set;}
+    public Type From {get {return typeof(User);}}
+
+    public User(int id, string name) { /* set fields..*/ }
+}
+
+// Verb Class
+public class SalesRepresentative {
+    // R - Rely on Verb Functions Not Verb Interfaces
+    internal Action&lt;string, Type, int&gt; broadcast = new Notifier().Broadcast;
+
+    // E - Extract Noun Interfaces
+    public void ConvertToCustomer(ISalesLead lead) {
+      if(lead.IsCustomer) {
+          return;
+      }
+      lead.IsCustomer = true;
+      lead.ConversionDate = DateTime.Now;
+      broadcast(&quot;CustomerConverted&quot;, lead.From, lead.Id);
+    }
+}
+</code></pre>
+
+<p>While this inversion of nouns and verbs seems counter to traditional OOP advice,
+it is actually a very object-oriented design. We use interfaces to allow
+polymorphic classes which are better suited to model a domain. In our example, a
+<code>User</code> should not know how to convert itself to a <code>Customer</code>. A
+<code>User</code> would not know they had to broadcast their updated status, or that
+the date is important to record. To prove it models the domain more effectively,
+notice how it even follows a more English pattern: &ldquo;tell the Sales
+Representative to convert this User&rdquo;. This is much closer than the typical:
+&ldquo;User convert yourself To Customer&rdquo;.</p>
+
+<p>Later, when we want to convert SalesContact, a Company, or a Government, we know
+what sort of interface is required to make them into a SalesLead that can be
+converted. By relying on the interface, we are able to restrict
+SalesRepresentative to only have access to the data necessary to convert.</p>
+
+<h1 id="case-study:0dfbdcea5000bc0e2a150299cf5611d6">Case Study</h1>
+
+<p>I recently examined a 1.3 million line codebase used to collect and track
+interest rates and payments. I found only four uses of <em>verb interfaces</em> for
+polymorphic behavior. On the other hand, there were hundreds of <em>noun
+interfaces</em> used to allow multiple shapes of data to be acted on by the same
+function.</p>
+
+<p>An obvious example is <code>IHaveIdentity</code></p>
+
+<pre><code class="language-csharp">public interface IHaveIdentity {
+    Guid Id {set;}
+    string Name {set;}
+}
+</code></pre>
+
+<p>This tiny, simple <em>noun interface</em> enables incredible re-use. I found the
+<code>IHaveIdentity</code> <em>noun interface</em> on many of our <em>noun classes</em>. It is used
+by dozens of <em>verb classes</em> throughout the codebase. Verbs like
+<code>MakeDropDownList</code>, <code>QueryById</code>, <code>QueryNamesMatching</code>, and
+<code>CreateAuditTrail</code>. The <em>verb classes</em> can be easily reused, because any new
+<em>noun class</em> that fits the <em>noun interface</em> will work automatically!</p>
+
+<h1 id="conclusion:0dfbdcea5000bc0e2a150299cf5611d6">Conclusion</h1>
+
+<p>The SOLID-ER patterns enable significant reuse of functionality. By defaulting
+to <em>noun interfaces</em>, you will find most of your <em>verb classes</em> can be re-used
+without any change. When you need actual polymorphic behavior, use a <em>verb
+interface</em>. For unit test behavior replacement, the
+<a href="http://deliberate-software.com/simplemock-unit-test-mocking/">SimpleMock</a>
+pattern makes for an easy way to keep your codebase clean and best model the
+domain.</p>
+
+  </div>
+</div>
+
+
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/pop-culture-architecture/" title="Avoid Pop Culture Architecture">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/self-organizing-teams/" title="When Self-Organizing Teams Are Effective">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
+<span class="col-md-3"></span>
+<img class="col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
+<span class="col-md-3"></span>
+<span class="col-md-12 centereded">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-sm-12">
+    Insights gathered while learning to deliberately craft software and burn bridges.
+</span>
+<h3 class="col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+
+<a class="col-sm-12" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-sm-12" id="name">Top Posts</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
+        
+        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
+        
+    </ul>
+</div>
+<h3 class="col-sm-12" id="name">Categories</h3>
+<div class="col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">9</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">5</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">9</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">26</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">26</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">8</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
+  
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
+
+
+
+
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+if (document.location.hostname.search("deliberate-software.com") !== -1) {
+  var _gaq=[['_setAccount','UA-46040901-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+}
+</script>
+
+
+  </body>
+</html>
+

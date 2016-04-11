@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clojurescript on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/clojurescript/</link>
+    <description>Recent content in Clojurescript on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/clojurescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using Angular2 in ClojureScript</title>
+      <link>http://deliberate-software.com/cljs-angular2/</link>
+      <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/cljs-angular2/</guid>
+      <description>
+
+&lt;p&gt;Getting ClojureScript to run Angular2 is not very difficult. Here is a sample
+project demonstrating a working Angular2 site using Figwheel for hot-reloading
+&lt;a href=&#34;https://github.com/steveshogren/angular2-cljs&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-install-luminus-cljs:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;1. Install Luminus +cljs&lt;/h3&gt;
+
+&lt;p&gt;First, setup a basic ClojureScript site using Luminus starter template from
+&lt;a href=&#34;http://www.luminusweb.net/docs&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lein new luminus cljs-angular2 +cljs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This builds a great basic starter project with ClojureScript and figwheel
+already running. The template uses Reagent and React, which are excellent, but
+we want Angular2!&lt;/p&gt;
+
+&lt;h3 id=&#34;2-replace-figwheel-site-loader:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;2. Replace Figwheel Site Loader&lt;/h3&gt;
+
+&lt;p&gt;Open the env/dev/cljs/dev.cljs file, which starts the site when running from
+development.&lt;/p&gt;
+
+&lt;p&gt;Replace the call to start a figwheel watcher with this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojurescript&#34;&gt;(defn reload []
+  (core/init!)
+  ((.. js/ng -platform -browser -bootstrap)
+   (.-AppComponent (.-app js/window))))
+
+(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
+                           :on-jsload reload)
+
+(core/init!)
+(defonce only-attach-listener-once
+  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot;
+                     (fn []
+                       ((.. js/ng -platform -browser -bootstrap)
+                        (.-AppComponent (core/get-app))))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The defonce will make sure I accidentally don&amp;rsquo;t attach the same event listener
+twice when re-evaluating files at the repl.&lt;/p&gt;
+
+&lt;h3 id=&#34;3-make-angular2-component:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;3. Make Angular2 Component&lt;/h3&gt;
+
+&lt;p&gt;Replace the src-cljs/cljs-angular2/core.cljs file with this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojurescript&#34;&gt;(ns cljs-angular2.core
+  (:require-macros [hiccups.core :as hiccups :refer [html]]))
+
+(defn get-app []
+   (or (.-app js/window)
+       (set! (.-app js/window) #js {})))
+
+(defn init! []
+  (let [app (get-app)
+        c (.Component (.-core js/ng)
+                      #js {:selector &amp;quot;my-app&amp;quot;
+                           :template (html [:div
+                                            [:h1 &amp;quot;My first Angular 2 app&amp;quot;]
+                                            [:div [:h2 &amp;quot;test&amp;quot;]]
+                                            [:div [:h3 &amp;quot;test2&amp;quot;]]])})
+        c (.Class c #js {:constructor (fn [])})]
+    (set! (.-AppComponent app) c)))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-add-angular2-dependencies:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;4. Add Angular2 Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Add a package.json file into resources/public/ and fill it with this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;angular2-quickstart&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;scripts&amp;quot;: {
+    &amp;quot;start&amp;quot;: &amp;quot;npm run lite&amp;quot;,
+    &amp;quot;lite&amp;quot;: &amp;quot;lite-server&amp;quot;
+  },
+  &amp;quot;license&amp;quot;: &amp;quot;ISC&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;angular2&amp;quot;: &amp;quot;2.0.0-beta.14&amp;quot;,
+    &amp;quot;es6-shim&amp;quot;: &amp;quot;^0.35.0&amp;quot;,
+    &amp;quot;reflect-metadata&amp;quot;: &amp;quot;0.1.2&amp;quot;,
+    &amp;quot;rxjs&amp;quot;: &amp;quot;5.0.0-beta.2&amp;quot;,
+    &amp;quot;zone.js&amp;quot;: &amp;quot;0.6.6&amp;quot;
+  },
+  &amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;concurrently&amp;quot;: &amp;quot;^2.0.0&amp;quot;,
+    &amp;quot;lite-server&amp;quot;: &amp;quot;^2.2.0&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now run &lt;code&gt;npm install&lt;/code&gt; from inside the resources/public directory.&lt;/p&gt;
+
+&lt;h3 id=&#34;5-add-hiccups:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;5. Add Hiccups&lt;/h3&gt;
+
+&lt;p&gt;Modify the project.clj in the root directory to include the &lt;code&gt;hiccups&lt;/code&gt;
+dependency so we don&amp;rsquo;t have to write nasty html strings:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;:dependencies [[hiccups &amp;quot;0.3.0&amp;quot;]
+               ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-add-dependencies-to-home-html:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;6. Add Dependencies To Home HTML&lt;/h3&gt;
+
+&lt;p&gt;Add the following to resources/templates/home.html before the line including
+&lt;code&gt;{% script &amp;quot;/js/app.js&amp;quot; %}&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;my-app&amp;gt;Loading...&amp;lt;/my-app&amp;gt;
+&amp;lt;script src=&amp;quot;node_modules/es6-shim/es6-shim.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;node_modules/angular2/es6/dev/src/testing/shims_for_IE.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+
+&amp;lt;script src=&amp;quot;node_modules/angular2/bundles/angular2-polyfills.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;node_modules/rxjs/bundles/Rx.umd.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;node_modules/angular2/bundles/angular2-all.umd.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;7-start-site:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;7. Start Site!&lt;/h3&gt;
+
+&lt;p&gt;Start the site with three tabs open running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lein run
+lein cljsbuild auto
+lein figwheel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;lein run&lt;/code&gt; command should emit a line showing the port number like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[2016-04-10 16:16:51,326][INFO][cljs-angular2.core] server started on port: 3000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just open your browser to &lt;code&gt;localhost:3000&lt;/code&gt; where 3000 is the port number
+from the &lt;code&gt;lein run&lt;/code&gt; command. Try to modify the core.cljs file to have a new
+template, and the site should automatically refresh with the new changes! If
+that doesn&amp;rsquo;t work, make sure you are running both the cljsbuild on auto and
+figwheel processes.&lt;/p&gt;
+
+&lt;p&gt;Easy as that!&lt;/p&gt;
+
+&lt;p&gt;If you get stuck, I checked in a working version &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is not an entire solution, you will need to build the site for production
+by modifying the prod.cljs file to also start the site, but without starting
+figwheel.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
