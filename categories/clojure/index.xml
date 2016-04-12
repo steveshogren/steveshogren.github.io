@@ -19,7 +19,7 @@
 
 &lt;p&gt;Getting ClojureScript to run Angular2 is not very difficult. Here is a sample
 project demonstrating a working Angular2 site using Figwheel for hot-reloading
-&lt;a href=&#34;https://github.com/steveshogren/angular2-cljs&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/commit/ae1a1abfe91a84cb5146931ff731885a2b1d5486&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;1-install-luminus-cljs:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;1. Install Luminus +cljs&lt;/h3&gt;
 
@@ -156,7 +156,7 @@ figwheel processes.&lt;/p&gt;
 
 &lt;p&gt;Easy as that!&lt;/p&gt;
 
-&lt;p&gt;If you get stuck, I checked in a working version &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you get stuck, I checked in a working version &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/commit/ae1a1abfe91a84cb5146931ff731885a2b1d5486&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
