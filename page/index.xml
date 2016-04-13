@@ -195,8 +195,8 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/post/</guid>
-      <description>&lt;h2 class=&#34;col-md-12 centereded&#34;&gt;New? Start Here!&lt;/h2&gt;
-&lt;div class=&#34;col-md-4&#34;&gt;
+      <description>&lt;!-- &lt;h2 class=&#34;col-md-12 centereded&#34;&gt;New? Start Here!&lt;/h2&gt; --&gt;
+&lt;!-- &lt;div class=&#34;col-md-4&#34;&gt;
     &lt;h3&gt;New Developers&lt;/h3&gt;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
         
@@ -249,7 +249,7 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     &lt;/ul&gt;
 &lt;/div&gt;
 
-
+ --&gt;
 &lt;h2 class=&#34;col-md-12 centereded&#34;&gt;All Posts&lt;/h2&gt;
 &lt;div class=&#34;col-md-12&#34;&gt;
 &lt;ul class=&#34;sidebar_ul&#34;&gt;
