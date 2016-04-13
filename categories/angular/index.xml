@@ -10,7 +10,7 @@
     <atom:link href="http://deliberate-software.com/categories/angular/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Hotswapping Angular2</title>
+      <title>Hot Loading Angular2 With State</title>
       <link>http://deliberate-software.com/figwheel-angular2/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
