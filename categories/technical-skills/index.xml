@@ -6,8 +6,86 @@
     <description>Recent content in Technical Skills on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hotswapping Angular2</title>
+      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt;
+I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping
+worked, but state was lost on each load. Tweaking the original demo allows for
+figwheel to swap in the template without losing client state.&lt;/p&gt;
+
+&lt;p&gt;Here is a demo of hotswapping with state preservation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hotswap.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;In this demo, we add three things to a list, then change the template that draws
+the list. The client state stays in the browser, while the template changes
+around it! Amazing!&lt;/p&gt;
+
+&lt;p&gt;To get this working, follow the steps in the
+&lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt; first post.&lt;/p&gt;
+
+&lt;p&gt;Replace the env/dev/cljs/dev.cljs contents with this simpler reloader:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn mount-component []
+  ((.. js/ng -platform -browser -bootstrap)
+   (.-AppComponent (.-app js/window))))
+
+(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
+                           :on-jsload mount-component)
+
+(defonce only-attach-listener-once
+  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot; mount-component))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now only re-mount the component on figwheel notification. The state is moved
+to an atom in the core namespace like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn get-app []
+   (or (.-app js/window)
+       (set! (.-app js/window) #js {})))
+
+;; keep state of the component in a defonce atom
+(defonce heroes (atom []))
+
+(let [app (get-app)
+      c (.Component (.-core js/ng)
+                    #js {:selector &amp;quot;my-app&amp;quot;
+                         :template (html [:div
+                                          [:h1 &amp;quot; Demo&amp;quot;]
+                                          [:div [:h2 &amp;quot;Hero List:&amp;quot;]]
+                                          &amp;quot;
+&amp;lt;input #newHero (keyup.enter)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot; &amp;gt;
+&amp;lt;button (click)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot;&amp;gt;Add&amp;lt;/button&amp;gt;
+&amp;lt;ul&amp;gt;&amp;lt;li *ngFor=\&amp;quot;#hero of heroes()\&amp;quot;&amp;gt;{{hero}}&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;
+&amp;quot;
+                                          ])})
+      c (.Class c #js {:constructor (fn [])
+                       :addHero (fn [hero]
+                                  (swap! heroes #(conj % hero)))
+                       :heroes (fn [] @heroes)
+                       })]
+  (set! (.-AppComponent app) c))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The site now will recompile and reload while preserving the state of the
+component. This pattern can be extended to allow certain state to be preserved
+while other state is reloaded. In this demo, the state in the &lt;code&gt;#newHero&lt;/code&gt;
+field is not preserved, while the &lt;code&gt;heroes&lt;/code&gt; list is.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t have a great story for using hiccups to generate the special angular
+tags like &lt;code&gt;*ngFor&lt;/code&gt;, &lt;code&gt;(click)&lt;/code&gt;, or &lt;code&gt;(keyup.enter)&lt;/code&gt;. For this demo, I
+left that html as just a raw string.&lt;/p&gt;
+
+&lt;p&gt;Check out the full working example on GitHub &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/5025e2983ab054c88717c89528b85c7f9aaea851&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Using Angular2 in ClojureScript</title>
@@ -2512,218 +2590,6 @@ effort to really master the craft is easy to spot and hard to
 fake. Most people want to work with those who think like them, and you
 cannot think like a master engineer only knowing one tool, so get
 started now, and have fun!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Inverted Polymorphism</title>
-      <link>http://deliberate-software.com/inversed-polymorphism/</link>
-      <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/inversed-polymorphism/</guid>
-      <description>&lt;p&gt;In my last post on the power of pattern matching, we saw how powerful
-the &lt;code&gt;match&lt;/code&gt; statement is in F#. Using &lt;code&gt;match&lt;/code&gt; allows the compiler to
-give us warnings for missing cases, no matter what the type.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an
-inversion of the usual OO way of polymorphism. Here is an example that
-is probably familiar to everyone: getting a database connection.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface IPaymentRepository {
-    IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
-}
-// InMemory.cs
-public class InMemory : IPaymentRepository {
-    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-        return Config.payments.Values;
-    }
-}
-// Postgres.cs
-public class Postgres : IPaymentRepository {
-    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-        throw new NotImplementedException();
-    }
-}
-// RepositoryFactory.cs
-public class RepositoryFactory {
-    public static IPaymentRepository GetPaymentRepo () {
-        if (Config.configuration[&amp;quot;useInMemory&amp;quot;] == &amp;quot;true&amp;quot;) {
-            return new InMemory();
-        } else {
-            return new Postgres();
-        }
-    }
-}
-
-// somewhere in the code...
-var repo = RepositoryFactory.GetPaymentRepo();
-var payments = repo.GetAll();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In our example here, we have two concrete implementers of the
-&lt;code&gt;IPaymentRepository&lt;/code&gt;, each one with their own implementations. This is
-a typical OO way to deal with polymorphism. Usually, &amp;ldquo;best practices&amp;rdquo;
-would put each of these classes in their own files.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look at how we would invert the polymorphism of the C# classes
-and interfaces to use pattern matching.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type PaymentRepository = 
-   | InMemory
-   | Postgres
-
-let GetAll = function
-    | InMemory -&amp;gt; Config.payments.Values;
-    | Postgres -&amp;gt; raise(NotImplementedException())
-        
-let GetPaymentRepo = 
-    match Config.configuration.[&amp;quot;useInMemory&amp;quot;] with
-        | &amp;quot;true&amp;quot; -&amp;gt; InMemory
-        | _ -&amp;gt; Postgres 
-
-// somewhere in the code ...
-let repo = Payments.GetPaymentRepo
-let payments = Payments.GetAll repo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notice how we separated our behavior from our types? The
-&lt;code&gt;PaymentRepository.InMemory&lt;/code&gt; and the &lt;code&gt;PaymentRepository.Postgres&lt;/code&gt; now
-are just empty types, much like an &lt;code&gt;Enum&lt;/code&gt;. We are still able to get
-polymorphic behavior from them, using &lt;code&gt;match&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;But why would we want to store our behavior separate from the type?&lt;/p&gt;
-
-&lt;p&gt;By storing the behavior separate from the type, changes that effect a
-single behavior (adding a new function, changing a function&amp;rsquo;s api,
-removing a function) are easier, because they are all grouped
-together. A change to the api of the &lt;code&gt;GetAll&lt;/code&gt; function is harder in
-the traditional OO interface structure, requiring modifying several
-files.&lt;/p&gt;
-
-&lt;p&gt;Similarly, a change requiring adding a new type is difficult in a
-pattern matching structure, as it will require finding every pattern
-match and adding in the additional case. Thankfully, the F# compiler
-checks both pattern matches and interfaces for us, letting us use the
-best tool for the job!&lt;/p&gt;
-
-&lt;p&gt;As to safety, adding a new type is easy with interfaces, but the
-developer is left without assistance to find all places the concrete
-classes are instantiated and add the new type. Neither compiler will
-offer any warnings for a new interface subclass. For pattern matching
-polymorphism, the compiler will warn that there are missing cases
-every place a change needs to be made. While harder to add a new type
-with pattern matching, it is safer.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Adding a Type&lt;/th&gt;
-&lt;th&gt;Modifying Behavior&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;OO Interfaces/Classes&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Easier / Less Safe&lt;/td&gt;
-&lt;td&gt;Harder / Safe&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Pattern Matching Types&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Harder / Safe&lt;/td&gt;
-&lt;td&gt;Easier / Safe&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;br /&gt;
-I almost always find myself modifying the functions of an
-interface more than I find myself adding new types. For that typical
-use case, pattern matching is probably the better choice.&lt;/p&gt;
-
-&lt;p&gt;Consider the change where we want to add a new function to the
-&lt;code&gt;IPaymentRepository&lt;/code&gt; interface and change the location of the in
-memory dictionary to be stored internally. In the interfaces and
-classes example, that requires editing &lt;em&gt;three separate files&lt;/em&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;// IPaymentRepostory.cs
-public interface IPaymentRepository {
-    IEnumerable&amp;lt;IPayment&amp;gt; GetAll ();
-    void Add(IPayment payment);
-}
-// InMemory.cs
-public class InMemory : IPaymentRepository {
-    public Dictionary&amp;lt;int, IPayment&amp;gt; payments = new Dictionary&amp;lt;int, IPayment&amp;gt;();
-    public void Add(IPayment payment) {
-        payments.Add(payment.GetId(),payment);
-    }
-    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-        return payments.Values;
-    }
-}
-// Postgres.cs
-public class Postgres : IPaymentRepository {
-    public void Add(IPayment payment) {
-        throw new NotImplementedException();
-    }
-    public IEnumerable&amp;lt;IPayment&amp;gt; GetAll (){
-        throw new NotImplementedException();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here is the change to add a new function in the pattern matching example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type PaymentRepository = 
-   | InMemory of Dictionary&amp;lt;int, IPayment&amp;gt;
-   | Postgres
-
-let Add db (payment:IPayment) = 
-    match db with
-        | InMemory payments -&amp;gt; payments.Add(payment.GetId(),payment);
-        | Postgres -&amp;gt; raise(NotImplementedException())
-
-let GetAll = function
-        | InMemory payments -&amp;gt; payments.Values;
-        | Postgres -&amp;gt; raise(NotImplementedException())
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In case you were concerned that these F# types do not have any state,
-they actually can have fields just like regular classes. Notice the
-&lt;code&gt;Dictionary&amp;lt;int, IPayment&amp;gt;&lt;/code&gt; next to the &lt;code&gt;InMemory&lt;/code&gt; type? That is a
-field! The new field does not need to be named until used in a pattern
-match, so the only time it is named is &lt;code&gt;payments&lt;/code&gt; inside the &lt;code&gt;Add&lt;/code&gt; and
-&lt;code&gt;GetAll&lt;/code&gt; functions after we pattern match &lt;code&gt;InMemory&lt;/code&gt;. In fact, if we
-didn&amp;rsquo;t add it in the pattern match, the compiler would give us a
-warning!&lt;/p&gt;
-
-&lt;p&gt;Between the options of traditional interfaces verses pattern matching,
-neither way is truly the best for every circumstance: each comes with
-a trade-off. I liken the trade-offs to the &amp;ldquo;grain of the
-data&amp;rdquo;. Whichever way your system is likely to change the most, that is
-the way you want to optimize your type. The good news is: in F# you
-can have a mix of both, and it is relatively easy to convert back and
-forth depending on how your system is changing the most.&lt;/p&gt;
-
-&lt;p&gt;Personally, I find F# pattern matching to be significantly easier to
-read. The same code in C# requires twice the lines in three separate
-files, which adds a complexity burden for no reason. The F# code is
-safer, smaller, and easier to modify than the C# equivalent.&lt;/p&gt;
-
-&lt;p&gt;If you write code in C# or VB.NET right now, you could add in a
-project in F# today. All three languages are callable from the other
-two, so you could start by breaking out a small library that uses
-these feature immediately. F# modules and classes are callable from C#
-just like any other DLL library. In my mind, this is what sets F#
-apart from other languages: it is more powerful and safe than C#, but
-with high performance and interoperability with existing C# libraries.&lt;/p&gt;
-
-&lt;p&gt;If you want additional reading on the topic of polymorphism, check out
-&lt;a href=&#34;http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-17.html#%_sec_2.4&#34;&gt;section 2.4&lt;/a&gt; in SICP.&lt;/p&gt;
-
-&lt;p&gt;Discussion in the HN &lt;a href=&#34;https://news.ycombinator.com/item?id=7763069&#34;&gt;comments&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

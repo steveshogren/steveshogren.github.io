@@ -6,8 +6,86 @@
     <description>Recent content in Clojure on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hotswapping Angular2</title>
+      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt;
+I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping
+worked, but state was lost on each load. Tweaking the original demo allows for
+figwheel to swap in the template without losing client state.&lt;/p&gt;
+
+&lt;p&gt;Here is a demo of hotswapping with state preservation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hotswap.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;In this demo, we add three things to a list, then change the template that draws
+the list. The client state stays in the browser, while the template changes
+around it! Amazing!&lt;/p&gt;
+
+&lt;p&gt;To get this working, follow the steps in the
+&lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt; first post.&lt;/p&gt;
+
+&lt;p&gt;Replace the env/dev/cljs/dev.cljs contents with this simpler reloader:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn mount-component []
+  ((.. js/ng -platform -browser -bootstrap)
+   (.-AppComponent (.-app js/window))))
+
+(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
+                           :on-jsload mount-component)
+
+(defonce only-attach-listener-once
+  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot; mount-component))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now only re-mount the component on figwheel notification. The state is moved
+to an atom in the core namespace like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn get-app []
+   (or (.-app js/window)
+       (set! (.-app js/window) #js {})))
+
+;; keep state of the component in a defonce atom
+(defonce heroes (atom []))
+
+(let [app (get-app)
+      c (.Component (.-core js/ng)
+                    #js {:selector &amp;quot;my-app&amp;quot;
+                         :template (html [:div
+                                          [:h1 &amp;quot; Demo&amp;quot;]
+                                          [:div [:h2 &amp;quot;Hero List:&amp;quot;]]
+                                          &amp;quot;
+&amp;lt;input #newHero (keyup.enter)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot; &amp;gt;
+&amp;lt;button (click)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot;&amp;gt;Add&amp;lt;/button&amp;gt;
+&amp;lt;ul&amp;gt;&amp;lt;li *ngFor=\&amp;quot;#hero of heroes()\&amp;quot;&amp;gt;{{hero}}&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;
+&amp;quot;
+                                          ])})
+      c (.Class c #js {:constructor (fn [])
+                       :addHero (fn [hero]
+                                  (swap! heroes #(conj % hero)))
+                       :heroes (fn [] @heroes)
+                       })]
+  (set! (.-AppComponent app) c))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The site now will recompile and reload while preserving the state of the
+component. This pattern can be extended to allow certain state to be preserved
+while other state is reloaded. In this demo, the state in the &lt;code&gt;#newHero&lt;/code&gt;
+field is not preserved, while the &lt;code&gt;heroes&lt;/code&gt; list is.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t have a great story for using hiccups to generate the special angular
+tags like &lt;code&gt;*ngFor&lt;/code&gt;, &lt;code&gt;(click)&lt;/code&gt;, or &lt;code&gt;(keyup.enter)&lt;/code&gt;. For this demo, I
+left that html as just a raw string.&lt;/p&gt;
+
+&lt;p&gt;Check out the full working example on GitHub &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/5025e2983ab054c88717c89528b85c7f9aaea851&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Using Angular2 in ClojureScript</title>

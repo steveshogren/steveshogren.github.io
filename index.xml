@@ -6,8 +6,86 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hotswapping Angular2</title>
+      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt;
+I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping
+worked, but state was lost on each load. Tweaking the original demo allows for
+figwheel to swap in the template without losing client state.&lt;/p&gt;
+
+&lt;p&gt;Here is a demo of hotswapping with state preservation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hotswap.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;In this demo, we add three things to a list, then change the template that draws
+the list. The client state stays in the browser, while the template changes
+around it! Amazing!&lt;/p&gt;
+
+&lt;p&gt;To get this working, follow the steps in the
+&lt;a href=&#34;http://deliberate-software/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt; first post.&lt;/p&gt;
+
+&lt;p&gt;Replace the env/dev/cljs/dev.cljs contents with this simpler reloader:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn mount-component []
+  ((.. js/ng -platform -browser -bootstrap)
+   (.-AppComponent (.-app js/window))))
+
+(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
+                           :on-jsload mount-component)
+
+(defonce only-attach-listener-once
+  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot; mount-component))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We now only re-mount the component on figwheel notification. The state is moved
+to an atom in the core namespace like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn get-app []
+   (or (.-app js/window)
+       (set! (.-app js/window) #js {})))
+
+;; keep state of the component in a defonce atom
+(defonce heroes (atom []))
+
+(let [app (get-app)
+      c (.Component (.-core js/ng)
+                    #js {:selector &amp;quot;my-app&amp;quot;
+                         :template (html [:div
+                                          [:h1 &amp;quot; Demo&amp;quot;]
+                                          [:div [:h2 &amp;quot;Hero List:&amp;quot;]]
+                                          &amp;quot;
+&amp;lt;input #newHero (keyup.enter)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot; &amp;gt;
+&amp;lt;button (click)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot;&amp;gt;Add&amp;lt;/button&amp;gt;
+&amp;lt;ul&amp;gt;&amp;lt;li *ngFor=\&amp;quot;#hero of heroes()\&amp;quot;&amp;gt;{{hero}}&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;
+&amp;quot;
+                                          ])})
+      c (.Class c #js {:constructor (fn [])
+                       :addHero (fn [hero]
+                                  (swap! heroes #(conj % hero)))
+                       :heroes (fn [] @heroes)
+                       })]
+  (set! (.-AppComponent app) c))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The site now will recompile and reload while preserving the state of the
+component. This pattern can be extended to allow certain state to be preserved
+while other state is reloaded. In this demo, the state in the &lt;code&gt;#newHero&lt;/code&gt;
+field is not preserved, while the &lt;code&gt;heroes&lt;/code&gt; list is.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t have a great story for using hiccups to generate the special angular
+tags like &lt;code&gt;*ngFor&lt;/code&gt;, &lt;code&gt;(click)&lt;/code&gt;, or &lt;code&gt;(keyup.enter)&lt;/code&gt;. For this demo, I
+left that html as just a raw string.&lt;/p&gt;
+
+&lt;p&gt;Check out the full working example on GitHub &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/5025e2983ab054c88717c89528b85c7f9aaea851&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Using Angular2 in ClojureScript</title>
@@ -2177,92 +2255,6 @@ been a major change, with major productivity benefits. I have noticed entire
 classes of defects disappearing. Additionally, because of the better compiler
 errors, the resulting codebases are much easier to refactor, which means a
 faster reaction to a changing domain.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Learning Lisp Was Hard</title>
-      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
-      <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
-      <description>
-
-&lt;p&gt;Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t
-get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience
-learning a Lisp.&lt;/p&gt;
-
-&lt;p&gt;When I set out to learn a Lisp, I expected it would be easy.&lt;/p&gt;
-
-&lt;p&gt;I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl,
-Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on
-how Lisp is his secret weapon, and figured I needed to get into this secret
-weapon stuff. My ego said, &amp;ldquo;since Paul is amazing, and I am too, I&amp;rsquo;ll be a
-natural!&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;I expected to tinker around with &amp;ldquo;Lisp&amp;rdquo; (I didn&amp;rsquo;t know there was more
-than one) and shortly master it (ship a website).&lt;/p&gt;
-
-&lt;p&gt;What happened instead took me a little longer&amp;hellip;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;05/11 - 06/11 ~15 Hrs Attempted &lt;em&gt;Land Of Lisp&lt;/em&gt; (gave up)&lt;/li&gt;
-&lt;li&gt;04/12 - 08/12 ~60 Hrs Rewrote a PHP side project in Clojure&lt;/li&gt;
-&lt;li&gt;08/12 - 08/12 ~5 Hrs Attempted &lt;em&gt;Let Over Lambda&lt;/em&gt; (gave up)&lt;/li&gt;
-&lt;li&gt;08/12 - 09/12 ~10 Hrs Read &lt;em&gt;Clojure Programming&lt;/em&gt; twice&lt;/li&gt;
-&lt;li&gt;09/12 - 12/12 ~30 Hrs Took &lt;em&gt;CS173 Programming Languages&lt;/em&gt; online at Brown University&lt;/li&gt;
-&lt;li&gt;05/13 - 07/13 ~50 Hrs Worked through &lt;em&gt;Let Over Lambda&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;05/13 - 07/14 ~250 Hrs Worked through &lt;em&gt;SICP&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;07/14 - Shipped production Clojure code&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This shows only the major events: books and large projects, but doesn&amp;rsquo;t show all
-the countless blogs, tutorials, and tiny projects that also filled in the gaps.&lt;/p&gt;
-
-&lt;p&gt;I think Lisps started to &amp;ldquo;click&amp;rdquo; for me around mid 2013, about two years after
-deciding that I&amp;rsquo;d &amp;ldquo;tinker around&amp;rdquo; for a bit before &amp;ldquo;mastering&amp;rdquo; it. I was
-approximately 170 hours in at that point. The book that finally made it all
-click was &lt;em&gt;Let Over Lambda&lt;/em&gt;, but it took me two attempts and almost a year of
-pre-learning to be able to understand enough to internalize the material.&lt;/p&gt;
-
-&lt;p&gt;All said and done, I spent approximately 420 hours between Scheme, Common Lisp,
-Racket, Typed Racket, and Clojure before I felt confident enough to suggest
-shipping Clojure at work. I don&amp;rsquo;t claim to be a fast learner at all, and I fully
-expect some people will snort with derision at how much time it took me - which
-is kind of the point of this post.&lt;/p&gt;
-
-&lt;p&gt;This timeline should show those who are struggling that what you are feeling is
-normal. Learning anything new is hard. The more &amp;ldquo;new&amp;rdquo; it is, the harder it will
-be. Clojure, macros, emacs, and a repl workflow are all very different from
-everything I was used to and significantly more powerful than I would&amp;rsquo;ve
-guessed. It took a long time for that to become normal, and for that power to
-sink in and become a tool I anticipated having.&lt;/p&gt;
-
-&lt;p&gt;If you are struggling and feel like a failure, understand &lt;em&gt;there is no wrong
-way&lt;/em&gt;. It might take you a long time of repeated exposure before the alien
-tooling starts to look familiar, and then comfortable. Maybe that book you are
-struggling with actually IS too advanced, so find an easier one, and circle back
-to the harder book later. Maybe, like me, you need some part of many different
-books, tutorials, side projects, and katas.&lt;/p&gt;
-
-&lt;p&gt;If you are struggling learning and in the Philly area, I am happy to meet up to
-chat. I am also happy to help over the wire as well. I understand how
-demoralizing the constant battle is to learn something new, especially when it
-feels like your ego is on the line and the whole internet is pressuring you to
-learn new things. Don&amp;rsquo;t give up, it&amp;rsquo;s not impossible.&lt;/p&gt;
-
-&lt;h1 id=&#34;was-it-worth-it:9faaa4d71d8cbfa8443b331acd2e9e5e&#34;&gt;Was it worth it?&lt;/h1&gt;
-
-&lt;p&gt;I can anticipate the follow up question: &amp;ldquo;was it worth it?&amp;rdquo; Absolutely yes. I
-now feel a fluid comfort with my current professional stack (C#, F#, Clojure,
-and JS) that previously I did not have. I am significantly more productive at
-programming, regardless of the language. Work that was previously challenging is
-now trivial, and work that was previously &amp;ldquo;impossible&amp;rdquo; now feels fun and
-challenging. Was it learning Lisp specifically that caused all those changes?
-Probably not, but I believe it was learning something far outside my normal
-comfort zone that made the difference. I think I would have had equivalent
-experiences had I invested that time learning Scala (the ML parts), Haskell,
-Idris, J, R, Forth, etc.&lt;/p&gt;
 </description>
     </item>
     

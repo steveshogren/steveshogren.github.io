@@ -255,6 +255,21 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
 &lt;ul class=&#34;sidebar_ul&#34;&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
+        &lt;a href=&#34;http://deliberate-software.com/figwheel-angular2/&#34;&gt;Hotswapping Angular2&lt;/a&gt;
+        &lt;span class=&#34;pull-right&#34;&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
+        
+        &lt;/span&gt;
+    &lt;/li&gt;
+    
+    &lt;li class=&#34;sidebar_li&#34;&gt;
         &lt;a href=&#34;http://deliberate-software.com/cljs-angular2/&#34;&gt;Using Angular2 in ClojureScript&lt;/a&gt;
         &lt;span class=&#34;pull-right&#34;&gt;
         
@@ -263,6 +278,8 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
             &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
         
             &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
         
         &lt;/span&gt;
     &lt;/li&gt;
