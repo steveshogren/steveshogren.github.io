@@ -174,12 +174,11 @@ the &lt;code&gt;Filename&lt;/code&gt; are able to call &lt;code&gt;ask&lt;/code&
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;Compared to the &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Clojure version&lt;/a&gt;
-of this chart, the Haskell one has no way to call a function &amp;ldquo;incorrectly&amp;rdquo;. All
-in-memory state is passed explicitly. It is still possible to pass as any
-parameter a value that is invalid. The explicit nature of Haskell parameters
-does not prevent passing a database connection string that does not exist, or a
-pointer to an incorrectly setup data structure.&lt;/p&gt;
+&lt;p&gt;Compared to &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Clojure&lt;/a&gt;, Haskell has no way to
+call a function &amp;ldquo;incorrectly&amp;rdquo;. All in-memory state is passed explicitly. It is
+still possible to pass as any parameter a value that is invalid. The explicit
+nature of Haskell parameters does not prevent passing a database connection
+string that does not exist, or a pointer to an incorrectly setup data structure.&lt;/p&gt;
 </description>
     </item>
     
