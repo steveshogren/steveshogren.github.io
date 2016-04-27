@@ -50,7 +50,7 @@
     },
     "datePublished": "2016-04-27",
     "description": "",
-    "wordCount":  768 
+    "wordCount":  873 
   }
 </script>
 
@@ -155,8 +155,8 @@
 
 
   <small>
-  &middot; Read in about 4 min
-  &middot; (768 Words)
+  &middot; Read in about 5 min
+  &middot; (873 Words)
 </small>
 
 
@@ -338,10 +338,22 @@ the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
 </table>
 
 <p>Compared to <a href="/clojure-state/">Clojure</a>, Haskell has no way to
-call a function &ldquo;incorrectly&rdquo;. All in-memory state is passed explicitly. It is
-still possible to pass as any parameter a value that is invalid. The explicit
-nature of Haskell parameters does not prevent passing a database connection
-string that does not exist, or a pointer to an incorrectly setup data structure.</p>
+call a function &ldquo;incorrectly&rdquo;. All in-memory state is passed explicitly.</p>
+
+<p>Haskell&rsquo;s type system prevents the programmer from forgetting state.
+Unfortunately, it is still possible to pass as any parameter a value that is
+invalid. The explicit nature of Haskell parameters does not prevent passing a
+database connection string that does not exist, or a pointer to an incorrectly
+setup data structure.</p>
+
+<p>Haskell is opinionated, and forces you to consider all the state up front before
+calling a function. While this makes it harder to forget about state, it also
+makes abstractions more leaky. Instead of relying on a function which may or may
+not use a database, you must know and pass the database connection.</p>
+
+<p>Even though I believe the Haskell type system makes abstractions more leaky, I
+prefer having to think up front about all my state. I find it makes the code
+more clear, and helps me control what functions have access to state.</p>
 
   </div>
 </div>

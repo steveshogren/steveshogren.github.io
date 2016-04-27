@@ -175,10 +175,22 @@ the &lt;code&gt;Filename&lt;/code&gt; are able to call &lt;code&gt;ask&lt;/code&
 &lt;/table&gt;
 
 &lt;p&gt;Compared to &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Clojure&lt;/a&gt;, Haskell has no way to
-call a function &amp;ldquo;incorrectly&amp;rdquo;. All in-memory state is passed explicitly. It is
-still possible to pass as any parameter a value that is invalid. The explicit
-nature of Haskell parameters does not prevent passing a database connection
-string that does not exist, or a pointer to an incorrectly setup data structure.&lt;/p&gt;
+call a function &amp;ldquo;incorrectly&amp;rdquo;. All in-memory state is passed explicitly.&lt;/p&gt;
+
+&lt;p&gt;Haskell&amp;rsquo;s type system prevents the programmer from forgetting state.
+Unfortunately, it is still possible to pass as any parameter a value that is
+invalid. The explicit nature of Haskell parameters does not prevent passing a
+database connection string that does not exist, or a pointer to an incorrectly
+setup data structure.&lt;/p&gt;
+
+&lt;p&gt;Haskell is opinionated, and forces you to consider all the state up front before
+calling a function. While this makes it harder to forget about state, it also
+makes abstractions more leaky. Instead of relying on a function which may or may
+not use a database, you must know and pass the database connection.&lt;/p&gt;
+
+&lt;p&gt;Even though I believe the Haskell type system makes abstractions more leaky, I
+prefer having to think up front about all my state. I find it makes the code
+more clear, and helps me control what functions have access to state.&lt;/p&gt;
 </description>
     </item>
     
