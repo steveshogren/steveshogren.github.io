@@ -6,8 +6,182 @@
     <description>Recent content in Haskell on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Wrangling State In Haskell</title>
+      <link>http://deliberate-software.com/haskell-state/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/haskell-state/</guid>
+      <description>&lt;p&gt;Part 2 of my series &amp;ldquo;Wrangling State&amp;rdquo;. Part 1
+&lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Wrangling State In Clojure&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Haskell is a pure language, so you can only deal with application state by
+passing parameters to functions. It is possible to pass parameters more
+conveniently, but ultimately, every parameter needs to be passed.&lt;/p&gt;
+
+&lt;p&gt;Here is a simple application for logging a timestamp to a file.&lt;/p&gt;
+
+&lt;p&gt;First, &lt;strong&gt;Pass As Parameter&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: Filename -&amp;gt; IO String
+loadFile fileName =
+  BS.unpack &amp;lt;$&amp;gt; Str.readFile fileName
+
+saveFile :: Filename -&amp;gt; String -&amp;gt; IO ()
+saveFile fileName contents = 
+  Str.writeFile fileName (BS.pack contents)
+
+clearFile :: Filename -&amp;gt; IO ()
+clearFile fileName = saveFile fileName &amp;quot;&amp;quot;
+
+appendToFile :: Filename -&amp;gt; String -&amp;gt; IO ()
+appendToFile fileName stuff = do
+    contents &amp;lt;- loadFile fileName
+    saveFile fileName (contents++stuff)
+
+main fileName &amp;quot;-c&amp;quot; = clearFile fileName
+main fileName &amp;quot;-log&amp;quot; = do
+  now &amp;lt;- getCurrentTime
+  appendToFile fileName ((show now)++ &amp;quot;\n&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We take in the file name and the command to perform, either to clear the file or
+to append a new timestamp. While simple, this gets cumbersome in a large
+application. Imagine passing a database connection through every single function
+that eventually calls the database.&lt;/p&gt;
+
+&lt;p&gt;Haskell can have implicit parameters that are not defined in the argument list.
+Sometimes this can improve legibility, other times it can worsen it. To use this
+feature, the function signature must contain the value missing. The parameter(s)
+must be the &amp;ldquo;last&amp;rdquo; parameter(s) to the function for this to work.&lt;/p&gt;
+
+&lt;p&gt;Here is the same code with &lt;strong&gt;Implicit Parameters&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: Filename -&amp;gt; IO String
+loadFile = (liftM BS.unpack) . Str.readFile
+
+saveFile :: String -&amp;gt; Filename -&amp;gt; IO ()
+saveFile contents fileName =
+  Str.writeFile fileName (BS.pack contents)
+
+clearFile :: Filename -&amp;gt; IO ()
+clearFile = saveFile &amp;quot;&amp;quot;
+
+appendToFile :: String -&amp;gt; Filename -&amp;gt; IO ()
+appendToFile stuff fileName = do
+    contents &amp;lt;- loadFile fileName
+    saveFile (contents++stuff) fileName
+
+main fileName &amp;quot;-c&amp;quot; = clearFile fileName
+main fileName &amp;quot;-log&amp;quot; = do
+  now &amp;lt;- getCurrentTime
+  appendToFile ((show now)++ &amp;quot;\n&amp;quot;) fileName
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not all usages of &lt;code&gt;Filename&lt;/code&gt; could be made implicit. We did use it in
+&lt;code&gt;loadFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt;. It does allow the &amp;ldquo;differences&amp;rdquo; to stand out
+more. For example, &lt;code&gt;clearFile&lt;/code&gt; is just a &lt;code&gt;saveFile&lt;/code&gt; with an empty string
+for the first parameter. We can see the differences clearly without the extra
+parameter adding noise.&lt;/p&gt;
+
+&lt;p&gt;We could not add it to &lt;code&gt;appendToFile&lt;/code&gt; because it uses the &lt;code&gt;Filename&lt;/code&gt;
+more than once, or &lt;code&gt;saveFile&lt;/code&gt; because it is not the &amp;ldquo;last&amp;rdquo; parameter to &lt;code&gt;Str.writeFile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lastly, it is possible to encode such values into the type. The type of the
+function itself can imply a value that can be retrieved. For example, the Reader
+type can be combined with the IO type using ReaderT.&lt;/p&gt;
+
+&lt;p&gt;Here is the code using the &lt;strong&gt;Reader Type&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: ReaderT Filename IO String
+loadFile = do
+  fileName &amp;lt;- ask
+  liftIO $ BS.unpack &amp;lt;$&amp;gt; Str.readFile fileName
+
+saveFile :: String -&amp;gt; ReaderT Filename IO ()
+saveFile contents = do
+  fileName &amp;lt;- ask
+  liftIO $ Str.writeFile fileName (BS.pack contents)
+
+clearFile :: ReaderT Filename IO ()
+clearFile = saveFile &amp;quot;&amp;quot;
+
+appendToFile :: String -&amp;gt; ReaderT Filename IO ()
+appendToFile stuff = do
+    contents &amp;lt;- loadFile
+    saveFile (contents++stuff)
+
+main fileName &amp;quot;-c&amp;quot; = runReaderT clearFile fileName
+main fileName &amp;quot;-log&amp;quot; = do
+  now &amp;lt;- getCurrentTime
+  runReaderT (appendToFile ((show now)++ &amp;quot;\n&amp;quot;)) fileName
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice now how &lt;code&gt;appendToFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt; have the signature:
+&lt;code&gt;ReaderT Filename IO ()&lt;/code&gt;, indicating that anything below them can &lt;code&gt;ask&lt;/code&gt;
+for the Filename, while still performing an &lt;code&gt;IO&lt;/code&gt; action. The &amp;ldquo;entry-point&amp;rdquo;
+calls in &lt;code&gt;main&lt;/code&gt; need to be initialized with the &lt;code&gt;runReaderT&lt;/code&gt; and the
+&lt;code&gt;Filename&lt;/code&gt; we want to pass.&lt;/p&gt;
+
+&lt;p&gt;For this case, the &lt;code&gt;ReaderT&lt;/code&gt; is substantially more readable. The &amp;ldquo;business
+value&amp;rdquo; functions &lt;code&gt;appendToFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt; do not have to define
+and pass the parameters needed for the lower level functions &lt;code&gt;saveFile&lt;/code&gt; and
+&lt;code&gt;loadFile&lt;/code&gt;. &lt;strong&gt;Reader Type&lt;/strong&gt; gives us the value of the &lt;strong&gt;Implicit
+Parameters&lt;/strong&gt; for legibility!&lt;/p&gt;
+
+&lt;p&gt;For something like a database connection that might be used pervasively, the
+&lt;strong&gt;Reader Type&lt;/strong&gt; is essential for legible code. The low level functions that need
+the &lt;code&gt;Filename&lt;/code&gt; are able to call &lt;code&gt;ask&lt;/code&gt; to retrieve it.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Dependencies&lt;/th&gt;
+&lt;th&gt;Complexity&lt;/th&gt;
+&lt;th&gt;Adding New State&lt;/th&gt;
+&lt;th&gt;Best When&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pass As Parameter&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Explicit&lt;/td&gt;
+&lt;td&gt;Less Complex&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;State only needed in a few functions&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Implicit Parameter&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Explicit&lt;/td&gt;
+&lt;td&gt;Less Complex&lt;/td&gt;
+&lt;td&gt;Harder&lt;/td&gt;
+&lt;td&gt;Functions can be made more readable&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Reader Type&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Explicit&lt;/td&gt;
+&lt;td&gt;More Complex&lt;/td&gt;
+&lt;td&gt;Easier&lt;/td&gt;
+&lt;td&gt;State needed throughout the application&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Compared to the &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Clojure version&lt;/a&gt;
+of this chart, the Haskell one has no way to call a function &amp;ldquo;incorrectly&amp;rdquo;. All
+in-memory state is passed explicitly. It is still possible to pass as any
+parameter a value that is invalid. The explicit nature of Haskell parameters
+does not prevent passing a database connection string that does not exist, or a
+pointer to an incorrectly setup data structure.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Haskell is the Dark Souls of Programming</title>

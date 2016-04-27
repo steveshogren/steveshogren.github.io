@@ -84,6 +84,12 @@
     /* font-weight: 400; */
     /* font-size: 18px; */
 }
+.imgcenter {
+    margin: 0 auto;
+}
+.navbar-default .navbar-brand {
+    color:black important!;
+}
 img {
     max-width: 100%;
 }

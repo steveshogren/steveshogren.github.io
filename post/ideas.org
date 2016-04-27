@@ -160,7 +160,7 @@ for clarifying the domain while also code that is easier to refactor. If these
 concepts are new to you, I suggest you check out some of my other posts about
 pattern matching before continuing:
 
-x* [Programming Language Safety Score](http://deliberate-software.com/programming-language-safety-algorithm/)
+x* [Programming Language Safety Score](/programming-language-safety-algorithm/)
 * Typing Saves You Time
 
 I used to hate type systems. As a junior programmer, I did most of my
