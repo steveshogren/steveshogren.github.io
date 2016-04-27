@@ -53,12 +53,12 @@ to append a new timestamp. While simple, this gets cumbersome in a large
 application. Imagine passing a database connection through every single function
 that eventually calls the database.&lt;/p&gt;
 
-&lt;p&gt;Haskell can have implicit parameters that are not defined in the argument list.
+&lt;p&gt;Haskell can have unnamed parameters that are not defined in the argument list.
 Sometimes this can improve legibility, other times it can worsen it. To use this
 feature, the function signature must contain the value missing. The parameter(s)
 must be the &amp;ldquo;last&amp;rdquo; parameter(s) to the function for this to work.&lt;/p&gt;
 
-&lt;p&gt;Here is the same code with &lt;strong&gt;Implicit Parameters&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Here is the same code with &lt;strong&gt;Unnamed Parameters&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: Filename -&amp;gt; IO String
 loadFile = (liftM BS.unpack) . Str.readFile
@@ -71,9 +71,7 @@ clearFile :: Filename -&amp;gt; IO ()
 clearFile = saveFile &amp;quot;&amp;quot;
 
 appendToFile :: String -&amp;gt; Filename -&amp;gt; IO ()
-appendToFile stuff fileName = do
-    contents &amp;lt;- loadFile fileName
-    saveFile (contents++stuff) fileName
+appendToFile stuff = (&amp;gt;&amp;gt;=) &amp;lt;$&amp;gt; loadFile &amp;lt;*&amp;gt; ((. (++stuff)) . (flip saveFile))
 
 main fileName &amp;quot;-c&amp;quot; = clearFile fileName
 main fileName &amp;quot;-log&amp;quot; = do
@@ -81,14 +79,14 @@ main fileName &amp;quot;-log&amp;quot; = do
   appendToFile ((show now)++ &amp;quot;\n&amp;quot;) fileName
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Not all usages of &lt;code&gt;Filename&lt;/code&gt; could be made implicit. We did use it in
+&lt;p&gt;Not all usages of &lt;code&gt;Filename&lt;/code&gt; can be easily unnamed. We did use it in
 &lt;code&gt;loadFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt;. It does allow the &amp;ldquo;differences&amp;rdquo; to stand out
 more. For example, &lt;code&gt;clearFile&lt;/code&gt; is just a &lt;code&gt;saveFile&lt;/code&gt; with an empty string
 for the first parameter. We can see the differences clearly without the extra
 parameter adding noise.&lt;/p&gt;
 
-&lt;p&gt;We could not add it to &lt;code&gt;appendToFile&lt;/code&gt; because it uses the &lt;code&gt;Filename&lt;/code&gt;
-more than once, or &lt;code&gt;saveFile&lt;/code&gt; because it is not the &amp;ldquo;last&amp;rdquo; parameter to &lt;code&gt;Str.writeFile&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We added it to &lt;code&gt;appendToFile&lt;/code&gt;, using point-free style. I find that it makes
+it much harder to scan and read.&lt;/p&gt;
 
 &lt;p&gt;Lastly, it is possible to encode such values into the type. The type of the
 function itself can imply a value that can be retrieved. For example, the Reader
@@ -129,7 +127,7 @@ calls in &lt;code&gt;main&lt;/code&gt; need to be initialized with the &lt;code&
 &lt;p&gt;For this case, the &lt;code&gt;ReaderT&lt;/code&gt; is substantially more readable. The &amp;ldquo;business
 value&amp;rdquo; functions &lt;code&gt;appendToFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt; do not have to define
 and pass the parameters needed for the lower level functions &lt;code&gt;saveFile&lt;/code&gt; and
-&lt;code&gt;loadFile&lt;/code&gt;. &lt;strong&gt;Reader Type&lt;/strong&gt; gives us the value of the &lt;strong&gt;Implicit
+&lt;code&gt;loadFile&lt;/code&gt;. &lt;strong&gt;Reader Type&lt;/strong&gt; gives us the value of the &lt;strong&gt;Unnamed
 Parameters&lt;/strong&gt; for legibility!&lt;/p&gt;
 
 &lt;p&gt;For something like a database connection that might be used pervasively, the
@@ -157,7 +155,7 @@ the &lt;code&gt;Filename&lt;/code&gt; are able to call &lt;code&gt;ask&lt;/code&
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Implicit Parameter&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Unnamed Parameter&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;Explicit&lt;/td&gt;
 &lt;td&gt;Less Complex&lt;/td&gt;
 &lt;td&gt;Harder&lt;/td&gt;
@@ -191,6 +189,9 @@ not use a database, you must know and pass the database connection.&lt;/p&gt;
 &lt;p&gt;Even though I believe the Haskell type system makes abstractions more leaky, I
 prefer having to think up front about all my state. I find it makes the code
 more clear, and helps me control what functions have access to state.&lt;/p&gt;
+
+&lt;p&gt;Edit: Thanks to &lt;a href=&#34;https://www.reddit.com/r/haskell/comments/4go5dr/wrangling_state_in_haskell/d2j9aqz&#34;&gt;/u/kccqzy&lt;/a&gt; on reddit for offering a way to make
+&lt;code&gt;appendToFile&lt;/code&gt; use point-free style.&lt;/p&gt;
 </description>
     </item>
     
