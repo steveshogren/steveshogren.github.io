@@ -6,8 +6,63 @@
     <description>Recent content in Emacs on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 May 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Editor Abstractions</title>
+      <link>http://deliberate-software.com/editor-abstractions/</link>
+      <pubDate>Mon, 23 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/editor-abstractions/</guid>
+      <description>&lt;p&gt;I was recently inspired by a comment from a respected coworker:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring
+suite like ReSharper.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I have pair-programmed with him for hundreds of hours of C# development. He is
+equally productive with both, that much I know. On some tasks he is less
+efficient than with ReSharper, on others he is more. To clarify, we use the
+superb VsVim inside Visual Studio, so he still relies on the built-in tools for
+&amp;ldquo;Auto-complete&amp;rdquo; and &amp;ldquo;Go to Definition&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The greatest benefit comes when we work in JavaScript, Haskell, or Clojure. His
+productivity doesn&amp;rsquo;t drop! &lt;strong&gt;His Vim and grep skills work just as effectively on
+any text.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The tools in our editors and IDE&amp;rsquo;s are concrete abstractions. If you have a good
+set of abstractions, you can use them to solve any problem. A well-designed
+abstraction composes well, and can be combined with others for new utility.&lt;/p&gt;
+
+&lt;p&gt;Consider the sequence abstractions. With only: &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, and
+&lt;code&gt;fold&lt;/code&gt;, you can transform any sequence of data into another shape. Mastering
+the three sequence abstractions empowers you to transform any data. The power comes
+from how easily they can be combined.&lt;/p&gt;
+
+&lt;p&gt;Editor abstractions are most powerful when they can be composed. You can
+replicate most of the functionality of a refactoring suite using basic,
+composable text-editing commands. Well-designed editor abstractions can be
+recorded, edited, and replayed to transform text in any way you need. While no
+replacement for semantic tools like &amp;ldquo;Language Errors&amp;rdquo;, &amp;ldquo;Go to Definition&amp;rdquo;, and
+&amp;ldquo;Auto-complete&amp;rdquo;, they are an easy replacement for most other refactorings.&lt;/p&gt;
+
+&lt;p&gt;If you work in multiple languages, composable text-editing commands are a much
+better abstraction than those provided by a refactoring suite. Refactoring
+suites often have dozens of bespoke commands that only work in certain contexts.
+Even the best of these suites are often constrained to a single language. &lt;strong&gt;If
+you ever work in more than one language, you will get the most value learning to
+rely on abstractions that are constant across all environments.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I find I get the most value with a Vim plugin inside whatever environment
+provides the best semantic tools for the language. When building an Android app,
+I use IDEAVim inside Android Studio. For C#: VsVim inside Visual Studio. For all
+other languages: Evil mode inside Emacs. Instead of hundreds of specialized
+commands and contexts, I rely on a few basic abstractions to achieve any text
+transformation I can imagine.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Emacs Project Tip</title>
