@@ -6,8 +6,106 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 May 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Modern Dependency Injection</title>
+      <link>http://deliberate-software.com/modern-di/</link>
+      <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/modern-di/</guid>
+      <description>
+
+&lt;p&gt;Dependency Injection can be greatly simplified while retaining all of its power.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a&#34;&gt;The Unnecessary Boilerplate&lt;/h3&gt;
+
+&lt;p&gt;Injection of an interface through the constructor is a common way to replace a
+dependency for unit-test mocking. Unfortunately, it is an extremely verbose
+pattern.&lt;/p&gt;
+
+&lt;p&gt;Look how much boilerplate is needed just to mock out a call to
+&lt;code&gt;DateTime.Now&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;readonly&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;14 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;15 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;16 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;17 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;18 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;19 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;20 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;21 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;22 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;23 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We learned to mock this way because Java did not have lambdas at the time the
+pattern was invented! Now that both Java and C# have lambdas, the existing DI
+pattern can be improved.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Unit Test Mocking&lt;/h3&gt;
+
+&lt;p&gt;Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
+removed!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;5 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;6 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;7 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Much better! The code is easier to read, understand, and &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;mock in a unit test&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-polymorphism:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Polymorphism&lt;/h3&gt;
+
+&lt;p&gt;If you still need to replace the function with another for polymorphic dispatch,
+use constructor injection of just the lambda. Be forewarned, you probably need
+this much less than you think!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you are heavily invested in unit-testing, you might find you need very little
+actual interface polymorphism. To see where you really use interface
+polymorphism, find the interfaces in your codebase only have a single concrete
+class in production. Each interface with a single concrete class is test-only
+boilerplate that can safely replaced with a lambda!&lt;/p&gt;
+
+&lt;p&gt;For more examples, &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;check out SimpleMock!&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Editor Abstractions</title>
@@ -1841,354 +1939,6 @@ complex to justify their use. Sometimes a mutable data structure is the best
 choice to solve your problem efficiently. The power of F# is that it gives us
 the ability to choose the best tool for the job: records for immutability,
 classes for mutability.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
-      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
-      <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
-      <description>
-
-&lt;p&gt;SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
-organize your testing code without mocking or complicated dependency injection.&lt;/p&gt;
-
-&lt;p&gt;SimpleMock works in any language with closures that can be passed around by
-reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
-Python. I&amp;rsquo;m sure you can think of others.&lt;/p&gt;
-
-&lt;h2 id=&#34;example:442bb35a3947650665613cec7b90f820&#34;&gt;Example:&lt;/h2&gt;
-
-&lt;p&gt;Here is a brief (if a bit silly) example of the final pattern:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class LineCounter {
-    internal Func&amp;lt;string, IEnumerable&amp;lt;string&amp;gt;&amp;gt; _readLines = File.ReadLines;
-
-    public string CountLines(string filename) {
-        return _readLines(filename).Count();
-    }
-}
-
-/// Test Code
-[TestCase]
-public void TestLineCounter () {
-    var sut = new LineCounter();
-    // &amp;quot;SimpleMock&amp;quot; of File.ReadLines
-    sut._readLines = (string x) =&amp;gt; new List&amp;lt;string&amp;gt;{&amp;quot;test&amp;quot;, &amp;quot;that&amp;quot;};
-
-    var result = sut.CountLines(&amp;quot;test&amp;quot;);
-
-    Assert.AreEqual(2, result);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;benefits:442bb35a3947650665613cec7b90f820&#34;&gt;Benefits&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Reduced boilerplate&lt;/li&gt;
-&lt;li&gt;Saves interfaces for real polymorphism&lt;/li&gt;
-&lt;li&gt;Simplifies test code&lt;/li&gt;
-&lt;li&gt;Reduces testing concerns in production code&lt;/li&gt;
-&lt;li&gt;Removes need for fragile IoC containers&lt;/li&gt;
-&lt;li&gt;Encourages better abstraction design&lt;/li&gt;
-&lt;li&gt;Can convert one class at a time!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The SimpleMock pattern promotes a better design of your abstractions and simpler
-tests. The pattern also reduces boilerplate and the pollution of your production
-code with testing concerns.&lt;/p&gt;
-
-&lt;p&gt;If you aren&amp;rsquo;t familiar with the normal pattern of unit test mocking using
-interfaces, dependency injection, and mock libraries, scroll down to &amp;ldquo;The
-Non-SimpleMock Way&amp;rdquo; at the end of the post.&lt;/p&gt;
-
-&lt;h2 id=&#34;simplemock-pattern:442bb35a3947650665613cec7b90f820&#34;&gt;SimpleMock Pattern&lt;/h2&gt;
-
-&lt;p&gt;The SimpleMock pattern is aptly named.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Replace Test-Only Interfaces With Functions&lt;/li&gt;
-&lt;li&gt;Define Dependencies Inline&lt;/li&gt;
-&lt;li&gt;Write Better Abstractions&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;step-one-replace-test-only-interfaces-with-functions:442bb35a3947650665613cec7b90f820&#34;&gt;Step One: Replace Test-Only Interfaces With Functions&lt;/h2&gt;
-
-&lt;p&gt;My examples are in C# because that is what I got paid to write today - it is
-freshest in memory. C# has an incredible ability to create and pass around
-lambdas and function references. Here is an example of using functions instead
-of interfaces.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class CurrentTime : ICurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
-    }
-}
-public class Translator {
-    private Func&amp;lt;DateTime&amp;gt; _getCurrentTime;
-
-    public Translator() : this(new CurrentTime().GetCurrentTime) {}
-
-    public Translator(Func&amp;lt;DateTime&amp;gt; getCurrentTime) {
-        this._getCurrentTime = getCurrentTime;
-    }
-
-    public string Translate(string input) {
-        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
-    }
-}
-
-/// Test Code
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var now = DateTime.Now;
-
-    var sut = new Translator(() =&amp;gt; now);
-
-    var result = sut.Translate(&amp;quot;test&amp;quot;);
-
-    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The test code is quite simple! No longer do we need the dependency on third
-party mocking libraries, or the relatively complicated setup logic. Instead we
-can simply inject the lambda at runtime, replacing that pointer. We didn&amp;rsquo;t need
-the whole interface, really we just needed the simple signature of the function.&lt;/p&gt;
-
-&lt;h2 id=&#34;step-2-define-dependencies-inline:442bb35a3947650665613cec7b90f820&#34;&gt;Step 2: Define Dependencies Inline&lt;/h2&gt;
-
-&lt;p&gt;We can take it even a step further. Why use constructor injection at all? Since
-all we really want is a single mutable dispatch table row, why not just make it
-that way?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class Translator {
-    internal Func&amp;lt;DateTime&amp;gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
-
-    public string Translate(string input) {
-        return string.Format(&amp;quot;{0}: {1}&amp;quot;, _getCurrentTime().ToString(), input);
-    }
-}
-
-/// Test Code
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var now = DateTime.Now;
-    var sut = new Translator();
-    sut._getCurrentTime = () =&amp;gt; now;
-
-    var result = sut.Translate(&amp;quot;test&amp;quot;);
-
-    Assert.AreEqual(now.ToString() + &amp;quot;: test&amp;quot;, result);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We&amp;rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
-&amp;ldquo;Go to definition&amp;rdquo; now takes me to the actual line with the actual called
-function. We&amp;rsquo;ve replaced a dependency on a class based interface with a function
-signature. The function signature &lt;em&gt;is&lt;/em&gt; the interface!&lt;/p&gt;
-
-&lt;p&gt;You probably noticed we have lost something with this final version. We have
-lost the ability to inject polymorphic behavior through the constructor. If you
-need it, simply go back to injecting the interface in the constructor or by
-passing it into the function itself. In practice, I have found this is needed
-very rarely, making the SimpleMock pattern a better tool to reach for first.&lt;/p&gt;
-
-&lt;h2 id=&#34;step-3-write-better-abstractions:442bb35a3947650665613cec7b90f820&#34;&gt;Step 3: Write Better Abstractions&lt;/h2&gt;
-
-&lt;p&gt;Lastly, SimpleMock actually promotes better designs. For example, a coworker was
-writing some tests today and ran into a complicated situation. Take the
-following sanitized code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
-    internal Action&amp;lt;Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
-    internal Action&amp;lt;Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
-
-    public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
-        ignoreElements(t1);
-        ignoreElements(t2);
-        removeIgnoredElements(t1);
-        removeIgnoredElements(t2);
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;How would you check that each section was called? Our naive solution was a
-complicated lambda with a &amp;ldquo;timesCalled&amp;rdquo; counter and an if statement to assert
-against each argument, but it turns nasty quickly:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;/// Nasty test code
-[TestCase]
-public void TestWorkDoer () {
-    var sut = new WorkDoer();
-
-    var ignoredCalledTimes = 0;
-    sut.ignoreElements = (t) =&amp;gt; {
-        ignoredCalledTimes++;
-        if (ignoredCalledTimes == 1) {
-            Assert.AreEqual(t1, t);
-        } else {
-            Assert.AreEqual(t2, t);
-        }
-    };
-    var removedCalledTimes = 0;
-    sut.removeIgnoredElements = (t) =&amp;gt; {
-        removedCalledTimes++;
-        if (removedCalledTimes == 1) {
-            Assert.AreEqual(t1, t);
-        } else {
-            Assert.AreEqual(t2, t);
-        }
-    };
-
-    var t1 = new Thing();
-    var t2 = new Thing();
-
-    var result = sut.IgnoreAndRemoveThings(t1, t2);
-    Assert.AreEqual(2, removedCalledTimes);
-    Assert.AreEqual(2, ignoredCalledTimes);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
-Conditionals?! In a test?! Unconscionable.&lt;/p&gt;
-
-&lt;p&gt;In situations like this, we have two easy options. Option one is to just use
-a third party mocking library, replacing the functions from inside the test
-code. This gives us access to all the sophisticated mocking tools available.&lt;/p&gt;
-
-&lt;p&gt;My preferred option is seeking to decomplect the production code by using better
-abstractions.&lt;/p&gt;
-
-&lt;p&gt;I have found that strong reliance of mocking libraries enables worse designs.
-Consider the code, what makes it so hard to test? Not knowing which element is
-called when, doing the same work on two parameters, and reference mutation all
-make this a poor abstraction. Why not simplify?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public class WorkDoer {
-    internal Func&amp;lt;Thing, Thing&amp;gt; ignoreElements = new ThingIgnorer().IgnoreElements;
-    internal Func&amp;lt;Thing, Thing&amp;gt; removeIgnoredElements = new ThingRemover().RemoveElements;
-
-    public List&amp;lt;Thing&amp;gt; IgnoreAndRemoveThings(List&amp;lt;Thing&amp;gt; ts) {
-        return ts.Select(t =&amp;gt; removeIgnoredElements(ignoreElements(t)));
-    }
-}
-
-/// Simpler test
-[TestCase]
-public void TestWorkDoer () {
-    var sut = new WorkDoer();
-    var expected = new Thing();
-    var ts = new List&amp;lt;Thing&amp;gt;{new Thing()};
-
-    sut.ignoreElements = (t) =&amp;gt; new Thing();
-
-    sut.removeIgnoredElements = (t) =&amp;gt; {
-        Assert.AreEqual(t, sut.ignoreElements(t));
-        return expected;
-    };
-
-    var result = sut.IgnoreAndRemoveThings(ts);
-
-    Assert.AreEqual(expected, result.First())
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Much better! Yes, we had to change a few signatures. We get the same work done,
-but now the code is actually a lot more useful. Our test code is comparable with
-anything you&amp;rsquo;d find using a mocking library. I am absolutely okay with using a
-mocking library when needed, but I always carefully consider my abstractions and
-design first.&lt;/p&gt;
-
-&lt;p&gt;If mocking libraries and IoC containers are the chainsaws of the testing world,
-then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
-for the job, and that is fine. But for most work around the yard, you can leave
-the chainsaw in the shed.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion:442bb35a3947650665613cec7b90f820&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;I’ve shown how you can really simplify your code with SimpleMock. The dispatch
-row is clear and easy to read. We have removed some third party mocking
-dependencies. You can remove a lot of the boilerplate &amp;ldquo;for making it more
-testable&amp;rdquo; from your code. The test code is greatly simplified, and injection a
-breeze. The result: much simpler code, just as easy to test.&lt;/p&gt;
-
-&lt;p&gt;Thanks to Shuwei Chen for helping me put this together!&lt;/p&gt;
-
-&lt;h2 id=&#34;the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;The Non-SimpleMock Way&lt;/h2&gt;
-
-&lt;p&gt;If you are familiar with unit test mocking with interfaces, this part is
-probably boring. Feel free to skip.&lt;/p&gt;
-
-&lt;p&gt;The traditional way of performing C# unit test mocking involves dependency
-injection and interface mocking using a mocking library. For dependency
-injection, it is common to use a tool like Ninject or hand-rolled constructor
-injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
-an example of a class and its testing code without any business logic.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface ICurrentTime {
-    DateTime GetCurrentTime();
-}
-
-public class CurrentTime : ICurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
-    }
-}
-
-public class Translator {
-    private readonly ICurrentTime ct;
-
-    public Translator() : this(new CurrentTime()) {}
-
-    public Translator(ICurrentTime currentTime) {
-        this.ct = currentTime;
-    }
-
-    public string Translate(string input) {
-        return string.Format(&amp;quot;{0}: {1}&amp;quot;, ct.GetCurrentTime().ToString(), input);
-    }
-}
-
-/// Test Code with Moq
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var rightNow = DateTime.Now;
-    var mock = new Mock&amp;lt;ICurrentTime&amp;gt;();
-
-    mock.Setup(a=&amp;gt;a.GetCurrentTime()).Returns(rightNow);
-
-    var sut = new Translator(mock.Object);
-
-    var result = sut.Translate(&amp;quot;test&amp;quot;);
-
-    Assert.AreEqual(rightNow.ToString() + &amp;quot;: test&amp;quot;, result);
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you&amp;rsquo;ve done much C# unit testing, this should look familiar. We want to
-inject some code that is potentially long-running or dynamic. We put that code
-into a class, add an interface, then inject that interface into the class we
-want to test. To test it, we mock the interface, creating a different concrete
-class at test runtime which implements that interface. We can setup that mock to
-respond with anything, which we use for assertions.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-s-wrong-with-the-non-simplemock-way:442bb35a3947650665613cec7b90f820&#34;&gt;What&amp;rsquo;s Wrong with the Non-SimpleMock Way?&lt;/h2&gt;
-
-&lt;p&gt;The first problem is we have created a whole interface just for testing.
-Interfaces are for polymorphism, but we don&amp;rsquo;t really need polymorphism for this
-class. We simply want to mock it. The constructor injection is also test code
-polluting our business logic.&lt;/p&gt;
-
-&lt;p&gt;What we have done is create a very small and primitive dispatch table. The
-table has one row: something that has a function with the signature of &lt;code&gt;() -&amp;gt; DateTime&lt;/code&gt; or, as it is known in C#: &lt;code&gt;Func&amp;lt;DateTime&amp;gt;&lt;/code&gt;.  We will need to make
-this primitive dispatch table for every single mock in every single class we
-wish to test. That&amp;rsquo;s a lot of boilerplate!&lt;/p&gt;
 </description>
     </item>
     

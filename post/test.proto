@@ -1,0 +1,24 @@
+using System;
+using FSharpLogic;
+using NUnit.Core;
+using NUnit.Framework;
+
+namespace testfsharp
+{
+    class MainClass : IMainClass
+    {
+        public void RunTestPath(String pathToTestLibrary)
+        {
+            m.Name = getEnum<NameType>(req.Name);
+            m.BusinessLine = (BusinessLine)getEnum(typeof(BusinessLine), req.BusinessLine);
+            m.MarginType = (MarginType)getEnum(typeof(MarginType), req.MarginType);
+            m.AllocationType = (AllocationType)getEnum(typeof(AllocationType), req.AllocationType);
+            m.AllocationCount = getNumber(req.AllocationCount);
+            m.Total = getNumber(req.Total);
+            m.Held = getNumber(req.Held);
+            m.Posted = getNumber(req.Posted);
+            m.CollateralType = (CollateralType)getEnum(typeof(CollateralType), req.CollateralType);
+            m.Property = (Property)getEnum(typeof(Property), req.Property);
+        }
+    }
+}

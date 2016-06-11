@@ -6,8 +6,106 @@
     <description>Recent content in Technical Skills on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 May 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Modern Dependency Injection</title>
+      <link>http://deliberate-software.com/modern-di/</link>
+      <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/modern-di/</guid>
+      <description>
+
+&lt;p&gt;Dependency Injection can be greatly simplified while retaining all of its power.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a&#34;&gt;The Unnecessary Boilerplate&lt;/h3&gt;
+
+&lt;p&gt;Injection of an interface through the constructor is a common way to replace a
+dependency for unit-test mocking. Unfortunately, it is an extremely verbose
+pattern.&lt;/p&gt;
+
+&lt;p&gt;Look how much boilerplate is needed just to mock out a call to
+&lt;code&gt;DateTime.Now&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;readonly&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;14 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;15 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;16 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;17 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;18 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;19 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;20 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;21 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;22 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;23 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We learned to mock this way because Java did not have lambdas at the time the
+pattern was invented! Now that both Java and C# have lambdas, the existing DI
+pattern can be improved.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Unit Test Mocking&lt;/h3&gt;
+
+&lt;p&gt;Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
+removed!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;5 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;6 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;7 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Much better! The code is easier to read, understand, and &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;mock in a unit test&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-polymorphism:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Polymorphism&lt;/h3&gt;
+
+&lt;p&gt;If you still need to replace the function with another for polymorphic dispatch,
+use constructor injection of just the lambda. Be forewarned, you probably need
+this much less than you think!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you are heavily invested in unit-testing, you might find you need very little
+actual interface polymorphism. To see where you really use interface
+polymorphism, find the interfaces in your codebase only have a single concrete
+class in production. Each interface with a single concrete class is test-only
+boilerplate that can safely replaced with a lambda!&lt;/p&gt;
+
+&lt;p&gt;For more examples, &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;check out SimpleMock!&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Editor Abstractions</title>
@@ -2305,107 +2403,6 @@ polymorphism, so you are free to choose the best representation for
 each type of data you have!&lt;/p&gt;
 
 &lt;p&gt;Happy F#-filled Festivities!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Emacs Project Tip</title>
-      <link>http://deliberate-software.com/emacs-project-tip/</link>
-      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/emacs-project-tip/</guid>
-      <description>&lt;p&gt;I recently have been working in a Clojure project which is made up of
-several microservices. While trying to build in a secure method for
-each service to be able to call the others, I&amp;rsquo;ve been in several
-different projects at the same time.&lt;/p&gt;
-
-&lt;p&gt;At least once I accidentally opened the wrong &amp;ldquo;handler.clj&amp;rdquo; buffer,
-and spent a few minutes adding a function that never worked. Since I
-hate doing things like this, I wanted a simple way to see what project
-I was currently viewing.&lt;/p&gt;
-
-&lt;p&gt;I started with a changing the title of the frame to show the whole
-path of the current buffer, like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/title.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;The code to change the title is simple, and the default in some of the
-pre-packaged emacs bundles:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-common-lisp&#34;&gt;(setq frame-title-format
-      &#39;((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 &amp;quot;%b&amp;quot;))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is fine, but still not great. The font is tiny and the important
-part: &amp;ldquo;octopress&amp;rdquo; is buried. I wanted something a little more fluid,
-so I could easily tell the different projects apart instantly. I came
-up with the idea to color the background faintly different based on
-the path of the file. Files with a path containing &amp;ldquo;octopress&amp;rdquo; might
-be different from those containing &amp;ldquo;.emacs&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Thankfully, &lt;code&gt;buffer-face-mode&lt;/code&gt; makes it easy to change a single
-property of a single buffer&amp;rsquo;s face without changing any other
-buffer. So long as you disable buffer-face-mode when closing emacs,
-your files will open with the correct coloring scheme, then have the
-new background overlaid.&lt;/p&gt;
-
-&lt;p&gt;While not perfect, this was the result.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/colors.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;The colors I choose are only faintly different, but just enough for me
-to tell instantly which is which.&lt;/p&gt;
-
-&lt;p&gt;The buffer colors are applied when opening a file, using these
-functions:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-common-lisp&#34;&gt;(defun my-buffer-face-mode-variable (color)
-  (interactive)
-  (setq buffer-face-mode-face (list :background color))
-  (buffer-face-mode 1))
-
-(defun my-set-theme-on-mode ()
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (cond
-    ;; add your own project/color mappings here
-     ((string-match &amp;quot;halcyon&amp;quot; file-name) (my-buffer-face-mode-variable &amp;quot;#00001A&amp;quot;))
-     ((string-match &amp;quot;dwarf&amp;quot; file-name) (my-buffer-face-mode-variable &amp;quot;#001A1A&amp;quot;))
-     ((string-match &amp;quot;nimbus&amp;quot; file-name) (my-buffer-face-mode-variable &amp;quot;black&amp;quot;))
-     (t &amp;quot;&amp;quot;))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To force them to run when opening a file, since I use helm, I set it
-to execute on exiting helm for any reason:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-common-lisp&#34;&gt;(add-hook &#39;helm-after-action-hook &#39;my-set-theme-on-mode)
-;; uncomment if not using helm
-;; (add-hook &#39;find-file-hook &#39;my-set-theme-on-mode)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lastly, to make sure emacs applies my normal theme and settings to a
-buffer when starting, I disable buffer-face-mode on all buffers before
-exiting.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-common-lisp&#34;&gt;(defun disable-all-buffer-face-mode ()
-  (interactive)
-  (let ((current (get-buffer (current-buffer))))
-    (-map (lambda (x) (progn (switch-to-buffer x)
-                             (buffer-face-mode 0))) (buffer-list))
-    (switch-to-buffer current 1)))
-
-(add-hook &#39;kill-emacs-hook &#39;disable-all-buffer-face-mode)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This block needs &lt;a href=&#34;https://github.com/magnars/dash.el&#34;&gt;dash.el&lt;/a&gt; to get
-the -map function.&lt;/p&gt;
-
-&lt;p&gt;While not the only solution, this seemed a simple and elegant way to
-quickly be reminded of your current project.&lt;/p&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
 </description>
     </item>
     

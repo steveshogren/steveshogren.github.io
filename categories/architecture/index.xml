@@ -6,8 +6,106 @@
     <description>Recent content in Architecture on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Modern Dependency Injection</title>
+      <link>http://deliberate-software.com/modern-di/</link>
+      <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/modern-di/</guid>
+      <description>
+
+&lt;p&gt;Dependency Injection can be greatly simplified while retaining all of its power.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a&#34;&gt;The Unnecessary Boilerplate&lt;/h3&gt;
+
+&lt;p&gt;Injection of an interface through the constructor is a common way to replace a
+dependency for unit-test mocking. Unfortunately, it is an extremely verbose
+pattern.&lt;/p&gt;
+
+&lt;p&gt;Look how much boilerplate is needed just to mock out a call to
+&lt;code&gt;DateTime.Now&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;readonly&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;14 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;15 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;16 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;17 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;18 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;19 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;20 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;21 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;22 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;23 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We learned to mock this way because Java did not have lambdas at the time the
+pattern was invented! Now that both Java and C# have lambdas, the existing DI
+pattern can be improved.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Unit Test Mocking&lt;/h3&gt;
+
+&lt;p&gt;Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
+removed!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;5 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;6 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;7 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Much better! The code is easier to read, understand, and &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;mock in a unit test&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-polymorphism:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Polymorphism&lt;/h3&gt;
+
+&lt;p&gt;If you still need to replace the function with another for polymorphic dispatch,
+use constructor injection of just the lambda. Be forewarned, you probably need
+this much less than you think!&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you are heavily invested in unit-testing, you might find you need very little
+actual interface polymorphism. To see where you really use interface
+polymorphism, find the interfaces in your codebase only have a single concrete
+class in production. Each interface with a single concrete class is test-only
+boilerplate that can safely replaced with a lambda!&lt;/p&gt;
+
+&lt;p&gt;For more examples, &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;check out SimpleMock!&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Avoid Pop Culture Architecture</title>

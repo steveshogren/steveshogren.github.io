@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Emacs Project Tip  &middot; Deliberate Software</title>
+  <title>Modern Dependency Injection  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,16 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Emacs Project Tip  &middot; Deliberate Software ">
+<meta property="og:title" content="Modern Dependency Injection  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
-<meta property="og:url" content="http://deliberate-software.com/emacs-project-tip/" />
+<meta property="og:url" content="http://deliberate-software.com/modern-di/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2014-12-06T00:00:00Z" />
-<meta property="og:article:modified_time" content="2014-12-06T00:00:00Z" />
+<meta property="og:article:published_time" content="2016-06-11T00:00:00Z" />
+<meta property="og:article:modified_time" content="2016-06-11T00:00:00Z" />
 
   
 
@@ -34,29 +34,29 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Emacs Project Tip" />
+<meta name="twitter:title" content="Modern Dependency Injection" />
 <meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://deliberate-software.com/emacs-project-tip/" />
+<meta name="twitter:url" content="http://deliberate-software.com/modern-di/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
   
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Emacs Project Tip",
+    "headline": "Modern Dependency Injection",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2014-12-06",
+    "datePublished": "2016-06-11",
     "description": "",
-    "wordCount":  438 
+    "wordCount":  371 
   }
 </script>
 
 
 
-<link rel="canonical" href="http://deliberate-software.com/emacs-project-tip/" />
+<link rel="canonical" href="http://deliberate-software.com/modern-di/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -141,7 +141,7 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
 <div class="text-center">
-  <h1 class="">Emacs Project Tip
+  <h1 class="">Modern Dependency Injection
 </h1>
 
   <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
@@ -150,13 +150,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2014-12-06">6 Dec, 2014</time>
+  <time datetime="2016-06-11">11 Jun, 2016</time>
 </small>
 
 
   <small>
-  &middot; Read in about 3 min
-  &middot; (438 Words)
+  &middot; Read in about 2 min
+  &middot; (371 Words)
 </small>
 
 
@@ -164,9 +164,13 @@
 <div class="margin-12">
   <i class="fa fa-tags"></i>
   
-  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
   
-  <a href="http://deliberate-software.com/categories/emacs" class="label label-default">emacs</a>
+  <a href="http://deliberate-software.com/categories/architecture" class="label label-default">architecture</a>
+  
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
+  
+  <a href="http://deliberate-software.com/categories/unit-testing" class="label label-default">unit-testing</a>
   
 
  </div>
@@ -178,98 +182,95 @@
             <div class="">
     
   <div class="content">
-    <p>I recently have been working in a Clojure project which is made up of
-several microservices. While trying to build in a secure method for
-each service to be able to call the others, I&rsquo;ve been in several
-different projects at the same time.</p>
+    
 
-<p>At least once I accidentally opened the wrong &ldquo;handler.clj&rdquo; buffer,
-and spent a few minutes adding a function that never worked. Since I
-hate doing things like this, I wanted a simple way to see what project
-I was currently viewing.</p>
+<p>Dependency Injection can be greatly simplified while retaining all of its power.</p>
 
-<p>I started with a changing the title of the frame to show the whole
-path of the current buffer, like this:</p>
+<h3 id="the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a">The Unnecessary Boilerplate</h3>
 
-<p><img src="/images/title.png"></img></p>
+<p>Injection of an interface through the constructor is a common way to replace a
+dependency for unit-test mocking. Unfortunately, it is an extremely verbose
+pattern.</p>
 
-<p>The code to change the title is simple, and the default in some of the
-pre-packaged emacs bundles:</p>
+<p>Look how much boilerplate is needed just to mock out a call to
+<code>DateTime.Now</code>:</p>
 
-<pre><code class="language-common-lisp">(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 &quot;%b&quot;))))
-</code></pre>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="hll"><span class="k">public</span> <span class="k">interface</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
+</span><span class="lineno"> 2 </span><span class="hll">    <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">();</span>
+</span><span class="lineno"> 3 </span><span class="hll"><span class="p">}</span>
+</span><span class="lineno"> 4 </span><span class="hll">
+</span><span class="lineno"> 5 </span><span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">CurrentTime</span> <span class="p">:</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
+</span><span class="lineno"> 6 </span><span class="hll">    <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="lineno"> 7 </span>        <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+<span class="lineno"> 8 </span><span class="hll">    <span class="p">}</span>
+</span><span class="lineno"> 9 </span><span class="hll"><span class="p">}</span>
+</span><span class="lineno">10 </span><span class="hll">
+</span><span class="lineno">11 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
+<span class="lineno">12 </span><span class="hll">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ICurrentTime</span> <span class="n">currentTime</span><span class="p">;</span>
+</span><span class="lineno">13 </span><span class="hll">
+</span><span class="lineno">14 </span><span class="hll">    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">CurrentTime</span><span class="p">())</span> <span class="p">{}</span>
+</span><span class="lineno">15 </span><span class="hll">
+</span><span class="lineno">16 </span><span class="hll">    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">(</span><span class="n">ICurrentTime</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="lineno">17 </span><span class="hll">        <span class="k">this</span><span class="p">.</span><span class="n">currentTime</span> <span class="p">=</span> <span class="n">currentTime</span><span class="p">;</span>
+</span><span class="lineno">18 </span><span class="hll">    <span class="p">}</span>
+</span><span class="lineno">19 </span><span class="hll">
+</span><span class="lineno">20 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">21 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">.</span><span class="n">GetCurrentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+<span class="lineno">22 </span>    <span class="p">}</span>
+<span class="lineno">23 </span><span class="p">}</span>
+</code></pre></div>
 
-<p>This is fine, but still not great. The font is tiny and the important
-part: &ldquo;octopress&rdquo; is buried. I wanted something a little more fluid,
-so I could easily tell the different projects apart instantly. I came
-up with the idea to color the background faintly different based on
-the path of the file. Files with a path containing &ldquo;octopress&rdquo; might
-be different from those containing &ldquo;.emacs&rdquo;.</p>
 
-<p>Thankfully, <code>buffer-face-mode</code> makes it easy to change a single
-property of a single buffer&rsquo;s face without changing any other
-buffer. So long as you disable buffer-face-mode when closing emacs,
-your files will open with the correct coloring scheme, then have the
-new background overlaid.</p>
+<p>We learned to mock this way because Java did not have lambdas at the time the
+pattern was invented! Now that both Java and C# have lambdas, the existing DI
+pattern can be improved.</p>
 
-<p>While not perfect, this was the result.</p>
+<h3 id="for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a">For Unit Test Mocking</h3>
 
-<p><img src="/images/colors.png"></img></p>
+<p>Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
+removed!</p>
 
-<p>The colors I choose are only faintly different, but just enough for me
-to tell instantly which is which.</p>
+<p><div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno">1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
+<span class="lineno">2 </span>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+<span class="lineno">3 </span>
+<span class="lineno">4 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">5 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+<span class="lineno">6 </span>    <span class="p">}</span>
+<span class="lineno">7 </span><span class="p">}</span>
+</code></pre></div>
+</p>
 
-<p>The buffer colors are applied when opening a file, using these
-functions:</p>
+<p>Much better! The code is easier to read, understand, and <a href="/simplemock-unit-test-mocking/">mock in a unit test</a>.</p>
 
-<pre><code class="language-common-lisp">(defun my-buffer-face-mode-variable (color)
-  (interactive)
-  (setq buffer-face-mode-face (list :background color))
-  (buffer-face-mode 1))
+<h3 id="for-polymorphism:c289f8e530077f15501b76fa92fff59a">For Polymorphism</h3>
 
-(defun my-set-theme-on-mode ()
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (cond
-    ;; add your own project/color mappings here
-     ((string-match &quot;halcyon&quot; file-name) (my-buffer-face-mode-variable &quot;#00001A&quot;))
-     ((string-match &quot;dwarf&quot; file-name) (my-buffer-face-mode-variable &quot;#001A1A&quot;))
-     ((string-match &quot;nimbus&quot; file-name) (my-buffer-face-mode-variable &quot;black&quot;))
-     (t &quot;&quot;))))
-</code></pre>
+<p>If you still need to replace the function with another for polymorphic dispatch,
+use constructor injection of just the lambda. Be forewarned, you probably need
+this much less than you think!</p>
 
-<p>To force them to run when opening a file, since I use helm, I set it
-to execute on exiting helm for any reason:</p>
+<p><div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
+<span class="lineno"> 2 </span>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span><span class="p">;</span>
+<span class="lineno"> 3 </span>
+<span class="lineno"> 4 </span>    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">)</span> <span class="p">{}</span>
+<span class="lineno"> 5 </span>
+<span class="lineno"> 6 </span>    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7 </span>        <span class="k">this</span><span class="p">.</span><span class="n">currentTime</span> <span class="p">=</span> <span class="n">currentTime</span><span class="p">;</span>
+<span class="lineno"> 8 </span>    <span class="p">}</span>
+<span class="lineno"> 9 </span>
+<span class="lineno">10 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
+<span class="lineno">12 </span>    <span class="p">}</span>
+<span class="lineno">13 </span><span class="p">}</span>
+</code></pre></div>
+</p>
 
-<pre><code class="language-common-lisp">(add-hook 'helm-after-action-hook 'my-set-theme-on-mode)
-;; uncomment if not using helm
-;; (add-hook 'find-file-hook 'my-set-theme-on-mode)
-</code></pre>
+<p>If you are heavily invested in unit-testing, you might find you need very little
+actual interface polymorphism. To see where you really use interface
+polymorphism, find the interfaces in your codebase only have a single concrete
+class in production. Each interface with a single concrete class is test-only
+boilerplate that can safely replaced with a lambda!</p>
 
-<p>Lastly, to make sure emacs applies my normal theme and settings to a
-buffer when starting, I disable buffer-face-mode on all buffers before
-exiting.</p>
-
-<pre><code class="language-common-lisp">(defun disable-all-buffer-face-mode ()
-  (interactive)
-  (let ((current (get-buffer (current-buffer))))
-    (-map (lambda (x) (progn (switch-to-buffer x)
-                             (buffer-face-mode 0))) (buffer-list))
-    (switch-to-buffer current 1)))
-
-(add-hook 'kill-emacs-hook 'disable-all-buffer-face-mode)
-</code></pre>
-
-<p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
-the -map function.</p>
-
-<p>While not the only solution, this seemed a simple and elegant way to
-quickly be reminded of your current project.</p>
-
-<p>Enjoy!</p>
+<p>For more examples, <a href="/simplemock-unit-test-mocking/">check out SimpleMock!</a></p>
 
   </div>
 </div>
@@ -287,18 +288,12 @@ quickly be reminded of your current project.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/skill-continuum/" title="Suggested Skill Progression">
+          <a href="http://deliberate-software.com/editor-abstractions/" title="Editor Abstractions">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/christmas-f-number-polymorphism/" title="Christmas F# Polymorphism">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   
