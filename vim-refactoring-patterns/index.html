@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Actionscript Unit Testing  &middot; Deliberate Software</title>
+  <title>Vim Refactoring Patterns  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,16 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Actionscript Unit Testing  &middot; Deliberate Software ">
+<meta property="og:title" content="Vim Refactoring Patterns  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
-<meta property="og:url" content="http://deliberate-software.com/actionscript-unit-testing/" />
+<meta property="og:url" content="http://deliberate-software.com/vim-refactoring-patterns/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2011-05-04T00:00:00Z" />
-<meta property="og:article:modified_time" content="2011-05-04T00:00:00Z" />
+<meta property="og:article:published_time" content="2016-06-22T00:00:00Z" />
+<meta property="og:article:modified_time" content="2016-06-22T00:00:00Z" />
 
   
 
@@ -34,29 +34,29 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Actionscript Unit Testing" />
+<meta name="twitter:title" content="Vim Refactoring Patterns" />
 <meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://deliberate-software.com/actionscript-unit-testing/" />
+<meta name="twitter:url" content="http://deliberate-software.com/vim-refactoring-patterns/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
   
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Actionscript Unit Testing",
+    "headline": "Vim Refactoring Patterns",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2011-05-04",
+    "datePublished": "2016-06-22",
     "description": "",
-    "wordCount":  230 
+    "wordCount":  990 
   }
 </script>
 
 
 
-<link rel="canonical" href="http://deliberate-software.com/actionscript-unit-testing/" />
+<link rel="canonical" href="http://deliberate-software.com/vim-refactoring-patterns/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -141,7 +141,7 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
 <div class="text-center">
-  <h1 class="">Actionscript Unit Testing
+  <h1 class="">Vim Refactoring Patterns
 </h1>
 
   <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
@@ -150,13 +150,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2011-05-04">4 May, 2011</time>
+  <time datetime="2016-06-22">22 Jun, 2016</time>
 </small>
 
 
   <small>
-  &middot; Read in about 2 min
-  &middot; (230 Words)
+  &middot; Read in about 5 min
+  &middot; (990 Words)
 </small>
 
 
@@ -164,9 +164,11 @@
 <div class="margin-12">
   <i class="fa fa-tags"></i>
   
-  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
   
-  <a href="http://deliberate-software.com/categories/unit-testing" class="label label-default">unit testing</a>
+  <a href="http://deliberate-software.com/categories/vim" class="label label-default">vim</a>
+  
+  <a href="http://deliberate-software.com/categories/refactoring" class="label label-default">refactoring</a>
   
 
  </div>
@@ -178,9 +180,191 @@
             <div class="">
     
   <div class="content">
-    <p>I am trying to test a project that is huge and many of the
-&quot;classes&quot; are only defined as linkages from the main monster
-fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with-flash-cs3-and-actionscript-3/" target="_blank">ASUnit Tutorial</a> and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &quot;exported linkage&quot; classes. I could not find anything about that online, I assume because developers who would want to write unit tests wouldn&#039;t rely on those exported linkage classes anyway.<p /> After waiting for a day or two and moving on, I asked the guy who maintains this project. His knee-jerk solution? Call the new AsUnitTestRunner() right in the first line of the constructor for the main fla&#039;s class. I was skeptical at best, but it worked! My guess is those exported linkages are imported into the project scope through some sort of implicit import on the constructor of the class tied to the .fla with the linkages. Sheesh.<p /> Obviously, we want to start defining those exported linkage classes as actual code, so we can run our tests without un-commenting the new AsUnitTestRunner() and then building the project, but it is a start in the right direction.</p>
+    
+
+<p>Editor macros are a secret weapon for editing text. While they are hard to
+learn, no other tool offers such broad speed and power for automating changes. A
+skilled macro wielder can make huge changes to a codebase with ease.</p>
+
+<p>Here are some inspirational patterns to demonstrate major structural
+refactorings using Vim macros and search/replace commands.</p>
+
+<!-- # Macro Saving -->
+
+<!-- When you build a complex macro and want to save it for later, just save it off -->
+
+<!-- to a file. Since a macro is just a list of commands to execute, you can copy and -->
+
+<!-- paste macros into registers just like text: -->
+
+<!-- * ```"qp``` - Paste the 'q' register contents -->
+
+<!-- * ```"qy``` - Insert selected text into the 'q' register -->
+
+<h1 id="reorder-a-list-of-numbers:1368fb58571a0f824354ae8f514a14fb">Reorder A List Of Numbers</h1>
+
+<p>A change left me with a file with unordered numbers. The numbers needed to be
+increasing, without changing the actual order of the lines. Macros are my first
+choice to accomplish a repeated action.</p>
+
+<p><img class="pull-left" src="/images/proto-macro-small.gif"></img>
+<div class="container-fluid">
+</div></p>
+
+<p>The commands:</p>
+
+<ul>
+<li><code>/;</code> - Search for &lsquo;;&rsquo;</li>
+<li><code>n</code>  - Go to next &lsquo;;&rsquo;</li>
+<li><code>qq</code> - Start macro in &lsquo;q&rsquo; register</li>
+<li><code>db</code> - Delete backwards</li>
+<li><code>N</code>  - Search for previous &lsquo;;&rsquo;</li>
+<li><code>yb</code> - Yank backwards</li>
+<li><code>n</code>  - Search for next &lsquo;;&rsquo;</li>
+<li><code>P</code>  - Paste backwards</li>
+<li><code>Ctrl+a</code> - Increment number</li>
+<li><code>n</code>  - Go to next &lsquo;;&rsquo;</li>
+<li><code>n</code>  - Go to next &lsquo;;&rsquo;</li>
+<li><code>q</code>  - Stop Recording macro</li>
+<li><code>33@q</code> - Replay 33 times the &lsquo;q&rsquo; macro</li>
+</ul>
+
+<p>This only took me a few seconds to type! I was able to run this across the whole
+file by replaying it the number of lines minus one. Because I saved it in the
+&lsquo;q&rsquo; register, I was able to keep it saved for the whole session, which involved
+refactoring several dozen similar files. I got to re-use the saved macro at
+least 20 more times in that three hour session!</p>
+
+<p>I don&rsquo;t think this macro is very complex. I would only leave it in the register
+for a single session, and remake it in the future if needed. But if I wanted to
+save it, running <code>&quot;qp</code> spits out: <code>dbNybnP^ann</code>.</p>
+
+<div class="container-fluid">
+</div>
+
+<h1 id="extract-interface-from-class:1368fb58571a0f824354ae8f514a14fb">Extract Interface From Class</h1>
+
+<p>Let&rsquo;s extract an interface from a class. A region-based search and replace is a
+great fit for this task. Since we are not matching or reordering several blocks
+of text, several search/replace steps work well. First, duplicate the whole
+class body to the top of the file. Delete all lines that are not the function
+signature lines. Remove all public keywords and add in semicolons on each line
+ending. Finish up with adding the interface name and adding it to the class.</p>
+
+<p><img class="pull-left" src="/images/interface-small.gif"></img>
+<div class="container-fluid">
+</div></p>
+
+<ul>
+<li><code>11,37t8</code> - Copy the class body to line 8</li>
+<li><code>10,35g!/public/d</code> - Delete every line not containing the word public from
+line 10 to 35</li>
+<li><code>10,12s/public//g</code> - Delete all the public keywords in lines 10-12</li>
+<li><code>10,12s/$/;/g</code> - End each line with a semi-colon</li>
+<li><code>:8</code> - Jump to line 8 (and add interface and name)</li>
+<li><code>:14</code> - Jump to line 14 (and add interface name)</li>
+</ul>
+
+<div class="container-fluid">
+</div>
+
+<h1 id="change-a-function-signature:1368fb58571a0f824354ae8f514a14fb">Change a Function Signature</h1>
+
+<p>Let&rsquo;s change a function signature to move a parameter into a generic and not
+have to cast. I want to change a line like this</p>
+
+<p><code>m.Name = (NameType)getEnum(typeof(NameType), req.Name);</code></p>
+
+<p>into this:</p>
+
+<p><code>m.Name = getEnum&lt;NameType&gt;(req.Name);</code></p>
+
+<p>Normally, this is a very manual task, requiring many edits.</p>
+
+<p>In this case, a search/replace is possible, but probably a lot more complex.
+We&rsquo;d have to identify and remove the <code>(NameType)</code>, locate the opening
+<code>(</code> of the parameter list, put in the <code>NameType</code> inside a pair of
+<code>&lt;&gt;</code>, then remove the first parameter and comma. A macro record/playback
+fits this task easily.</p>
+
+<p>We perform those steps above, but use the f/F commands to find markers in the
+line. This allows the playback to work on any line with the same markers.</p>
+
+<p><img src="/images/generic2.gif"></img>
+<div class="container-fluid">
+</div></p>
+
+<ul>
+<li><code>/getEnum</code> - Search for <code>getEnum</code></li>
+<li><code>qq</code> - Start macro in <code>q</code></li>
+<li><code>F(</code><code>- Backwards find</code><code>(</code>``</li>
+<li><code>da(</code><code>- Delete whole block in</code><code>()</code>``</li>
+<li><code>f(</code> - Find next <code>(</code></li>
+<li><code>P</code> - Paste backwards one character</li>
+<li><code>r&gt;</code> - Replace character with <code>&gt;</code></li>
+<li><code>F(</code> - Backwards find <code>(</code></li>
+<li><code>r&lt;</code> - Replace character with <code>&lt;</code></li>
+<li><code>f(</code> - Find next <code>(</code></li>
+<li><code>l</code> - Left one character</li>
+<li><code>df</code> - Delete up to and including next space</li>
+<li><code>n</code> - Search next <code>getEnum</code></li>
+<li><code>q</code> - Stop macro recording</li>
+<li><code>5@q</code> - Replay macro 5 times</li>
+</ul>
+
+<div class="container-fluid">
+</div>
+
+<h1 id="update-sql-query-fields:1368fb58571a0f824354ae8f514a14fb">Update SQL Query Fields</h1>
+
+<p>I needed to replace the names in a set of sql queries to sanitize some data to
+hand off to a customer. I grabbed a set of
+<a href="http://www.dimfuture.net/starwars/random/generate.php">Star Wars names</a> and
+copied it to my sql file. They were tab AND newline separated.</p>
+
+<p><img src="/images/rename.gif"></img>
+<div class="container-fluid">
+</div></p>
+
+<ul>
+<li><code>:1,26s/\t//g</code> - Replace tabs with newlines</li>
+<li><code>:1,100s/^\W*//g</code> - Delete leading whitespace</li>
+<li><code>:1,100s/\W*$//g</code> - Delete trailing whitespace</li>
+<li><code>:101</code> - Jump to line 101</li>
+<li><code>qq</code> - Start macro in <code>q</code> register</li>
+<li><code>:-100</code> - Jump 100 lines up</li>
+<li><code>2yw</code> - Yank (copy) two words</li>
+<li><code>:+100</code> - Jump down 100 lines</li>
+<li><code>f)</code> - Jump to next <code>)</code></li>
+<li><code>f'</code> - Jump to next <code>'</code></li>
+<li><code>l</code> - Move right</li>
+<li><code>vi'</code> - Select text in quotes</li>
+<li><code>p</code> - Paste clipboard</li>
+<li><code>:+1</code> - Jump down one line</li>
+<li><code>q</code> - End macro</li>
+<li><code>99@q</code> - Replay macro 99 times</li>
+</ul>
+
+<h1 id="conclusion:1368fb58571a0f824354ae8f514a14fb">Conclusion</h1>
+
+<p>I typically use a macro when a search/replace would require using several
+groups. I use relative line jumps (<code>:+1</code>) and liberal uses of the search
+(<code>/?</code> and <code>nN</code>) and find (<code>fF</code>) commands for navigating. The search
+and find commands let my macro work the same on many different shapes of lines.
+I also end each macro with a step for finding the &ldquo;next&rdquo; line to operate on. By
+ensuring each iteration finishes by going to the &ldquo;next&rdquo; line, I can repeat the
+command with the built-in command repeat without manually executing each one.</p>
+
+<p>Learning how to record and playback macros is a complex skill. With practice, it
+becomes second-nature. My muscle memory grows stronger with each new macro.
+Several of these I wrote without a mistake, almost as fast as I can type.</p>
+
+<p>Like any other skill, the first few dozen times you write a macro it won&rsquo;t work
+right, or will mangle the text. That is okay! If you are setting out to learn
+macros, allow yourself to be slow while you master the skill. Touch-typing can
+be many times faster than hand-writing or hunt-and-peck, but learning takes a
+long time. Macros can save you huge amounts of time, but you have to allow
+yourself to be slow while you master the skill.</p>
 
   </div>
 </div>
@@ -198,18 +382,12 @@ fla. I followed <a href="http://marstonstudio.com/2007/07/28/asunit-testing-with
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/active-record-pattern-testing/" title="Active Record Pattern Testing">
+          <a href="http://deliberate-software.com/modern-di/" title="Modern Dependency Injection">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/using-named-parameters/" title="Using Named Parameters">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   

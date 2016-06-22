@@ -6,8 +6,202 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Vim Refactoring Patterns</title>
+      <link>http://deliberate-software.com/vim-refactoring-patterns/</link>
+      <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
+      <description>
+
+&lt;p&gt;Editor macros are a secret weapon for editing text. While they are hard to
+learn, no other tool offers such broad speed and power for automating changes. A
+skilled macro wielder can make huge changes to a codebase with ease.&lt;/p&gt;
+
+&lt;p&gt;Here are some inspirational patterns to demonstrate major structural
+refactorings using Vim macros and search/replace commands.&lt;/p&gt;
+
+&lt;!-- # Macro Saving --&gt;
+
+&lt;!-- When you build a complex macro and want to save it for later, just save it off --&gt;
+
+&lt;!-- to a file. Since a macro is just a list of commands to execute, you can copy and --&gt;
+
+&lt;!-- paste macros into registers just like text: --&gt;
+
+&lt;!-- * ```&#34;qp``` - Paste the &#39;q&#39; register contents --&gt;
+
+&lt;!-- * ```&#34;qy``` - Insert selected text into the &#39;q&#39; register --&gt;
+
+&lt;h1 id=&#34;reorder-a-list-of-numbers:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Reorder A List Of Numbers&lt;/h1&gt;
+
+&lt;p&gt;A change left me with a file with unordered numbers. The numbers needed to be
+increasing, without changing the actual order of the lines. Macros are my first
+choice to accomplish a repeated action.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/proto-macro-small.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The commands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/;&lt;/code&gt; - Search for &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &amp;lsquo;q&amp;rsquo; register&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;db&lt;/code&gt; - Delete backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;N&lt;/code&gt;  - Search for previous &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yb&lt;/code&gt; - Yank backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Search for next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;  - Paste backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+a&lt;/code&gt; - Increment number&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt;  - Stop Recording macro&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;33@q&lt;/code&gt; - Replay 33 times the &amp;lsquo;q&amp;rsquo; macro&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This only took me a few seconds to type! I was able to run this across the whole
+file by replaying it the number of lines minus one. Because I saved it in the
+&amp;lsquo;q&amp;rsquo; register, I was able to keep it saved for the whole session, which involved
+refactoring several dozen similar files. I got to re-use the saved macro at
+least 20 more times in that three hour session!&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t think this macro is very complex. I would only leave it in the register
+for a single session, and remake it in the future if needed. But if I wanted to
+save it, running &lt;code&gt;&amp;quot;qp&lt;/code&gt; spits out: &lt;code&gt;dbNybnP^ann&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;extract-interface-from-class:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Extract Interface From Class&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s extract an interface from a class. A region-based search and replace is a
+great fit for this task. Since we are not matching or reordering several blocks
+of text, several search/replace steps work well. First, duplicate the whole
+class body to the top of the file. Delete all lines that are not the function
+signature lines. Remove all public keywords and add in semicolons on each line
+ending. Finish up with adding the interface name and adding it to the class.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/interface-small.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;11,37t8&lt;/code&gt; - Copy the class body to line 8&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,35g!/public/d&lt;/code&gt; - Delete every line not containing the word public from
+line 10 to 35&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,12s/public//g&lt;/code&gt; - Delete all the public keywords in lines 10-12&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,12s/$/;/g&lt;/code&gt; - End each line with a semi-colon&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:8&lt;/code&gt; - Jump to line 8 (and add interface and name)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:14&lt;/code&gt; - Jump to line 14 (and add interface name)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;change-a-function-signature:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Change a Function Signature&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s change a function signature to move a parameter into a generic and not
+have to cast. I want to change a line like this&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;m.Name = (NameType)getEnum(typeof(NameType), req.Name);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;into this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;m.Name = getEnum&amp;lt;NameType&amp;gt;(req.Name);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Normally, this is a very manual task, requiring many edits.&lt;/p&gt;
+
+&lt;p&gt;In this case, a search/replace is possible, but probably a lot more complex.
+We&amp;rsquo;d have to identify and remove the &lt;code&gt;(NameType)&lt;/code&gt;, locate the opening
+&lt;code&gt;(&lt;/code&gt; of the parameter list, put in the &lt;code&gt;NameType&lt;/code&gt; inside a pair of
+&lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;, then remove the first parameter and comma. A macro record/playback
+fits this task easily.&lt;/p&gt;
+
+&lt;p&gt;We perform those steps above, but use the f/F commands to find markers in the
+line. This allows the playback to work on any line with the same markers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/generic2.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/getEnum&lt;/code&gt; - Search for &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F(&lt;/code&gt;&lt;code&gt;- Backwards find&lt;/code&gt;&lt;code&gt;(&lt;/code&gt;``&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;da(&lt;/code&gt;&lt;code&gt;- Delete whole block in&lt;/code&gt;&lt;code&gt;()&lt;/code&gt;``&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; - Paste backwards one character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r&amp;gt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F(&lt;/code&gt; - Backwards find &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r&amp;lt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Left one character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df&lt;/code&gt; - Delete up to and including next space&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt; - Search next &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - Stop macro recording&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5@q&lt;/code&gt; - Replay macro 5 times&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;update-sql-query-fields:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Update SQL Query Fields&lt;/h1&gt;
+
+&lt;p&gt;I needed to replace the names in a set of sql queries to sanitize some data to
+hand off to a customer. I grabbed a set of
+&lt;a href=&#34;http://www.dimfuture.net/starwars/random/generate.php&#34;&gt;Star Wars names&lt;/a&gt; and
+copied it to my sql file. They were tab AND newline separated.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rename.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;:1,26s/\t//g&lt;/code&gt; - Replace tabs with newlines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:1,100s/^\W*//g&lt;/code&gt; - Delete leading whitespace&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:1,100s/\W*$//g&lt;/code&gt; - Delete trailing whitespace&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:101&lt;/code&gt; - Jump to line 101&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt; register&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:-100&lt;/code&gt; - Jump 100 lines up&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2yw&lt;/code&gt; - Yank (copy) two words&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:+100&lt;/code&gt; - Jump down 100 lines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f)&lt;/code&gt; - Jump to next &lt;code&gt;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f&#39;&lt;/code&gt; - Jump to next &lt;code&gt;&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Move right&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vi&#39;&lt;/code&gt; - Select text in quotes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt; - Paste clipboard&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:+1&lt;/code&gt; - Jump down one line&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - End macro&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;99@q&lt;/code&gt; - Replay macro 99 times&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;conclusion:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;I typically use a macro when a search/replace would require using several
+groups. I use relative line jumps (&lt;code&gt;:+1&lt;/code&gt;) and liberal uses of the search
+(&lt;code&gt;/?&lt;/code&gt; and &lt;code&gt;nN&lt;/code&gt;) and find (&lt;code&gt;fF&lt;/code&gt;) commands for navigating. The search
+and find commands let my macro work the same on many different shapes of lines.
+I also end each macro with a step for finding the &amp;ldquo;next&amp;rdquo; line to operate on. By
+ensuring each iteration finishes by going to the &amp;ldquo;next&amp;rdquo; line, I can repeat the
+command with the built-in command repeat without manually executing each one.&lt;/p&gt;
+
+&lt;p&gt;Learning how to record and playback macros is a complex skill. With practice, it
+becomes second-nature. My muscle memory grows stronger with each new macro.
+Several of these I wrote without a mistake, almost as fast as I can type.&lt;/p&gt;
+
+&lt;p&gt;Like any other skill, the first few dozen times you write a macro it won&amp;rsquo;t work
+right, or will mangle the text. That is okay! If you are setting out to learn
+macros, allow yourself to be slow while you master the skill. Touch-typing can
+be many times faster than hand-writing or hunt-and-peck, but learning takes a
+long time. Macros can save you huge amounts of time, but you have to allow
+yourself to be slow while you master the skill.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Modern Dependency Injection</title>
@@ -1800,145 +1994,6 @@ make others feel small? You can break the cycle.&lt;/p&gt;
 
 &lt;p&gt;(All these great ideas, but no one is listening? Check out my
 book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>F# Unit Testing With SimpleMock</title>
-      <link>http://deliberate-software.com/f-number-unit-testing/</link>
-      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
-      <description>
-
-&lt;p&gt;If you are considering using F#, you might be curious how to handle unit test
-mocking, especially if you want to use both modules and classes. In a language
-like C# or Java, the common method is to a DI container or handmade constructor
-injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a
-real dependency with a test-only replacement.&lt;/p&gt;
-
-&lt;p&gt;I previously posted an example that shows a much simpler way to inject
-dependencies called the &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock pattern&lt;/a&gt;. The SimpleMock pattern can also be
-used in F#, even if you are only using modules.&lt;/p&gt;
-
-&lt;h2 id=&#34;simplemock-in-f-modules:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;SimpleMock in F# Modules&lt;/h2&gt;
-
-&lt;p&gt;We will assume you are mocking inside a module and not a class. Mocking inside
-an F# class would look much the same as it does in C#, which we showed in the
-SimpleMock post. Here is a sample program that does some work and persists the
-results.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave x y =
-  let sum = x + y
-  DBModule.saveSum sum
-  sum
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To apply the SimpleMock pattern, we can use argument currying by adding a simple
-function wrapper.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let addAndSave&#39; saveSum x y = 
-  let sum = x + y
-  saveSum sum
-  sum
-let addAndSave = addAndSave&#39; DBModule.saveSum
-
-// Test code
-let addAndSave_Test =
-  let calledVar = ref 0
-  let result = addAndSave&#39; (fun sum -&amp;gt; calledVar := sum) 1 2
-  Assert.AreEqual(3, result)
-  Assert.AreEqual(3, !calledVar)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We started by renaming the &lt;code&gt;addAndSave&lt;/code&gt; function with a trailing &lt;code&gt;&#39;&lt;/code&gt;. We
-created a new &lt;code&gt;addAndSave&lt;/code&gt; that calls &lt;code&gt;addAndSave&#39;&lt;/code&gt; with the correct
-dependency for the first argument, leaving the rest of the arguments to be
-called later. Currying is what allows this ability. The new &lt;code&gt;addAndSave&lt;/code&gt;
-function only needs the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; parameters. At test time, we called &lt;code&gt;addAndSave&#39;&lt;/code&gt;, passing in the needed dependency, but using a lambda as the
-&amp;ldquo;fake&amp;rdquo;. The injection is as close to the dependency use as possible!&lt;/p&gt;
-
-&lt;h2 id=&#34;bonus-simplemock-fake-helper:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Bonus: SimpleMock Fake Helper&lt;/h2&gt;
-
-&lt;p&gt;The earlier replacement for DBModule.saveSum is a bit complex, and it does not
-show us how many times the fake was called. We can easily make a helper that
-takes parameters and returns them when called, along withe count of times it was
-called.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults() =
-  member val timesCalled = 0 with get,set
-  member val args: obj list = [] with get,set
-
-let makeFake_OneArg () =
-  let results = new TestFakeResults()
-  let fake = (fun p1 -&amp;gt;
-                  results.args &amp;lt;- p1 :: results.args
-                  results.timesCalled &amp;lt;- results.timesCalled + 1
-                  ())
-  (fake, results)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above code might be hard to comprehend at first! We have made a generic
-helper that can create any single argument fake we need. We return a tuple,
-containing the fake lambda and an instance of &lt;code&gt;TestFakeResults&lt;/code&gt;. The fake
-lambda will populate the &lt;code&gt;TestFakeResults&lt;/code&gt;, which we can access in the test
-via the second arg of the tuple.&lt;/p&gt;
-
-&lt;p&gt;We can now re-write the previous test using &lt;code&gt;makeFake_OneArg&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;// Test code
-let addAndSave_Test =
-  let (fakeSave, fakeSaveCalling) = makeFake_OneArg()
-  let result = addAndSave&#39; fakeSave 1 2
-  Assert.AreEqual(3, result)
-  Assert.AreEqual(3, fakeSaveCalling.args.[0])
-  Assert.AreEqual(1, fakeSaveCalling.timesCalled)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The TestFakeResults can return information about the way it was called,
-including the list of all arguments. If we felt we needed the extra
-expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
-TestFakeResults and its constructor are not essential to the pattern. The most
-important part is learning to unit test in F# with confidence.&lt;/p&gt;
-
-&lt;h1 id=&#34;double-bonus-when-to-use-a-class-instead-of-a-record:43b10499a7e4c1aeb47d57d551a820fe&#34;&gt;Double Bonus: When to Use a Class Instead of a Record&lt;/h1&gt;
-
-&lt;p&gt;When I first wrote this post, I used a record instead of a class for the &lt;code&gt;TestFakeResults&lt;/code&gt; type. If you have been bitten by the functional programming bug,
-you might have wondered at my usage of a mutable class. Here are two alternates
-of &lt;code&gt;makeFake_OneArg&lt;/code&gt; which use records. You can probably see why I switched to a class:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type TestFakeResults = {timesCalled:int, args obj list}
-
-// Using Record Alternate 1
-let makeFake_OneArg_RecordAlternate1 () = 
-  let t = ref 0
-  let a : obj list ref = ref []
-  let fake = (fun p1 -&amp;gt;
-                  a := p1 :: !a
-                  t := !t + 1
-                  ())
-  (fake, (fun () -&amp;gt;
-                {TestFakeRecord.timesCalled = !t;
-                 args = !a}))
-
-// Using Record Alternate 2
-let makeFake_OneArg_RecordAlternate2 () = 
-  let result = ref {TestFakeRecord.timesCalled = 0; args = []}
-  let fake = (fun p1 -&amp;gt;
-              result := {timesCalled = (!result).timesCalled + 1;
-                         args = p1 :: (!result).args}
-              ())
-  (fake, (fun () -&amp;gt; !result))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The only way to use a record is to delay its construction via a lambda which
-must be executed by the test code. Both are complex: what we need is a mutable
-data structure which we can access via a reference. A record is not that. We can
-approximate it using tricks, but ultimately I find both alternatives to be too
-complex to justify their use. Sometimes a mutable data structure is the best
-choice to solve your problem efficiently. The power of F# is that it gives us
-the ability to choose the best tool for the job: records for immutability,
-classes for mutability.&lt;/p&gt;
 </description>
     </item>
     

@@ -6,8 +6,202 @@
     <description>Recent content in Technical Skills on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Vim Refactoring Patterns</title>
+      <link>http://deliberate-software.com/vim-refactoring-patterns/</link>
+      <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
+      <description>
+
+&lt;p&gt;Editor macros are a secret weapon for editing text. While they are hard to
+learn, no other tool offers such broad speed and power for automating changes. A
+skilled macro wielder can make huge changes to a codebase with ease.&lt;/p&gt;
+
+&lt;p&gt;Here are some inspirational patterns to demonstrate major structural
+refactorings using Vim macros and search/replace commands.&lt;/p&gt;
+
+&lt;!-- # Macro Saving --&gt;
+
+&lt;!-- When you build a complex macro and want to save it for later, just save it off --&gt;
+
+&lt;!-- to a file. Since a macro is just a list of commands to execute, you can copy and --&gt;
+
+&lt;!-- paste macros into registers just like text: --&gt;
+
+&lt;!-- * ```&#34;qp``` - Paste the &#39;q&#39; register contents --&gt;
+
+&lt;!-- * ```&#34;qy``` - Insert selected text into the &#39;q&#39; register --&gt;
+
+&lt;h1 id=&#34;reorder-a-list-of-numbers:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Reorder A List Of Numbers&lt;/h1&gt;
+
+&lt;p&gt;A change left me with a file with unordered numbers. The numbers needed to be
+increasing, without changing the actual order of the lines. Macros are my first
+choice to accomplish a repeated action.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/proto-macro-small.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;The commands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/;&lt;/code&gt; - Search for &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &amp;lsquo;q&amp;rsquo; register&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;db&lt;/code&gt; - Delete backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;N&lt;/code&gt;  - Search for previous &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yb&lt;/code&gt; - Yank backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Search for next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt;  - Paste backwards&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+a&lt;/code&gt; - Increment number&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt;  - Stop Recording macro&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;33@q&lt;/code&gt; - Replay 33 times the &amp;lsquo;q&amp;rsquo; macro&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This only took me a few seconds to type! I was able to run this across the whole
+file by replaying it the number of lines minus one. Because I saved it in the
+&amp;lsquo;q&amp;rsquo; register, I was able to keep it saved for the whole session, which involved
+refactoring several dozen similar files. I got to re-use the saved macro at
+least 20 more times in that three hour session!&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t think this macro is very complex. I would only leave it in the register
+for a single session, and remake it in the future if needed. But if I wanted to
+save it, running &lt;code&gt;&amp;quot;qp&lt;/code&gt; spits out: &lt;code&gt;dbNybnP^ann&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;extract-interface-from-class:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Extract Interface From Class&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s extract an interface from a class. A region-based search and replace is a
+great fit for this task. Since we are not matching or reordering several blocks
+of text, several search/replace steps work well. First, duplicate the whole
+class body to the top of the file. Delete all lines that are not the function
+signature lines. Remove all public keywords and add in semicolons on each line
+ending. Finish up with adding the interface name and adding it to the class.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/interface-small.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;11,37t8&lt;/code&gt; - Copy the class body to line 8&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,35g!/public/d&lt;/code&gt; - Delete every line not containing the word public from
+line 10 to 35&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,12s/public//g&lt;/code&gt; - Delete all the public keywords in lines 10-12&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;10,12s/$/;/g&lt;/code&gt; - End each line with a semi-colon&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:8&lt;/code&gt; - Jump to line 8 (and add interface and name)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:14&lt;/code&gt; - Jump to line 14 (and add interface name)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;change-a-function-signature:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Change a Function Signature&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s change a function signature to move a parameter into a generic and not
+have to cast. I want to change a line like this&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;m.Name = (NameType)getEnum(typeof(NameType), req.Name);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;into this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;m.Name = getEnum&amp;lt;NameType&amp;gt;(req.Name);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Normally, this is a very manual task, requiring many edits.&lt;/p&gt;
+
+&lt;p&gt;In this case, a search/replace is possible, but probably a lot more complex.
+We&amp;rsquo;d have to identify and remove the &lt;code&gt;(NameType)&lt;/code&gt;, locate the opening
+&lt;code&gt;(&lt;/code&gt; of the parameter list, put in the &lt;code&gt;NameType&lt;/code&gt; inside a pair of
+&lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;, then remove the first parameter and comma. A macro record/playback
+fits this task easily.&lt;/p&gt;
+
+&lt;p&gt;We perform those steps above, but use the f/F commands to find markers in the
+line. This allows the playback to work on any line with the same markers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/generic2.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/getEnum&lt;/code&gt; - Search for &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F(&lt;/code&gt;&lt;code&gt;- Backwards find&lt;/code&gt;&lt;code&gt;(&lt;/code&gt;``&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;da(&lt;/code&gt;&lt;code&gt;- Delete whole block in&lt;/code&gt;&lt;code&gt;()&lt;/code&gt;``&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;P&lt;/code&gt; - Paste backwards one character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r&amp;gt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;F(&lt;/code&gt; - Backwards find &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;r&amp;lt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Left one character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df&lt;/code&gt; - Delete up to and including next space&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt; - Search next &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - Stop macro recording&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5@q&lt;/code&gt; - Replay macro 5 times&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;update-sql-query-fields:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Update SQL Query Fields&lt;/h1&gt;
+
+&lt;p&gt;I needed to replace the names in a set of sql queries to sanitize some data to
+hand off to a customer. I grabbed a set of
+&lt;a href=&#34;http://www.dimfuture.net/starwars/random/generate.php&#34;&gt;Star Wars names&lt;/a&gt; and
+copied it to my sql file. They were tab AND newline separated.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rename.gif&#34;&gt;&lt;/img&gt;
+&lt;div class=&#34;container-fluid&#34;&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;:1,26s/\t//g&lt;/code&gt; - Replace tabs with newlines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:1,100s/^\W*//g&lt;/code&gt; - Delete leading whitespace&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:1,100s/\W*$//g&lt;/code&gt; - Delete trailing whitespace&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:101&lt;/code&gt; - Jump to line 101&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt; register&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:-100&lt;/code&gt; - Jump 100 lines up&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;2yw&lt;/code&gt; - Yank (copy) two words&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:+100&lt;/code&gt; - Jump down 100 lines&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f)&lt;/code&gt; - Jump to next &lt;code&gt;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f&#39;&lt;/code&gt; - Jump to next &lt;code&gt;&#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Move right&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vi&#39;&lt;/code&gt; - Select text in quotes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt; - Paste clipboard&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;:+1&lt;/code&gt; - Jump down one line&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - End macro&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;99@q&lt;/code&gt; - Replay macro 99 times&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;conclusion:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;I typically use a macro when a search/replace would require using several
+groups. I use relative line jumps (&lt;code&gt;:+1&lt;/code&gt;) and liberal uses of the search
+(&lt;code&gt;/?&lt;/code&gt; and &lt;code&gt;nN&lt;/code&gt;) and find (&lt;code&gt;fF&lt;/code&gt;) commands for navigating. The search
+and find commands let my macro work the same on many different shapes of lines.
+I also end each macro with a step for finding the &amp;ldquo;next&amp;rdquo; line to operate on. By
+ensuring each iteration finishes by going to the &amp;ldquo;next&amp;rdquo; line, I can repeat the
+command with the built-in command repeat without manually executing each one.&lt;/p&gt;
+
+&lt;p&gt;Learning how to record and playback macros is a complex skill. With practice, it
+becomes second-nature. My muscle memory grows stronger with each new macro.
+Several of these I wrote without a mistake, almost as fast as I can type.&lt;/p&gt;
+
+&lt;p&gt;Like any other skill, the first few dozen times you write a macro it won&amp;rsquo;t work
+right, or will mangle the text. That is okay! If you are setting out to learn
+macros, allow yourself to be slow while you master the skill. Touch-typing can
+be many times faster than hand-writing or hunt-and-peck, but learning takes a
+long time. Macros can save you huge amounts of time, but you have to allow
+yourself to be slow while you master the skill.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Modern Dependency Injection</title>
@@ -2303,106 +2497,6 @@ primitive safety is still a huge win.&lt;/p&gt;
 even from languages like F# and Haskell. While Clojure is a bit more
 wordy than the ML family, and not as type safe, the simplicity of
 these features keep me coming back for more!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Christmas F# Polymorphism</title>
-      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
-      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
-      <description>&lt;p&gt;One of my favorite things about F# is how it lets you choose how you want
-to align your data.&lt;/p&gt;
-
-&lt;p&gt;In the previous posts highlighting on
-&lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;pattern matching&lt;/a&gt;
-and
-&lt;a href=&#34;http://deliberate-software.com/inversed-polymorphism/&#34;&gt;inverted polymorphism&lt;/a&gt;
-we covered how pattern matching in F# is safer than &lt;code&gt;if&lt;/code&gt;
-statements and can replace classes and interfaces for polymorphism. If
-you are unfamiliar with these concepts, you might want to skim those
-first.&lt;/p&gt;
-
-&lt;p&gt;Today, for the 6th day of the
-&lt;a href=&#34;https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/&#34;&gt;F# Advent Calendar&lt;/a&gt;
-I wanted to highlight F#&amp;rsquo;s flexibility in solving the
-&amp;ldquo;&lt;a href=&#34;http://c2.com/cgi/wiki?ExpressionProblem&#34;&gt;expression problem&lt;/a&gt;&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s show the two alternatives, first here is one with interfaces:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees = 
-    abstract member Cost : int -&amp;gt; int
-    abstract member Colors : unit -&amp;gt; string list
-    
-type PlasticTree() =
-    interface IChristmasTrees with
-        member this.Cost(jolly_factor) = (100 * jolly_factor) / 2
-        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
-        
-type LiveTree() =
-    let HEAD_ACHE = 15
-    interface IChristmasTrees with
-        member this.Cost(jolly_factor) = (jolly_factor + 10) * HEAD_ACHE
-        member this.Colors() = [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now the same functionality using pattern matching and discriminated unions.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type IChristmasTrees2 =
-  | PlasticTree
-  | LiveTree
-
-let colors = function
-  | PlasticTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;silver&amp;quot;]
-  | LiveTree -&amp;gt; [&amp;quot;green&amp;quot;;&amp;quot;brown&amp;quot;]
-
-let cost tree jolly_factor =
-  match tree with
-    | PlasticTree -&amp;gt; (100 * jolly_factor) / 2
-    | LiveTree -&amp;gt;
-      let HEAD_ACHE = 15
-      (jolly_factor + 10) * HEAD_ACHE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What changes if we want to add a new type of tree? In the class-based
-example, adding a new type is quite simple, you only need to edit one
-place to find all the definitions regarding the new type.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;In the pattern matching example, adding a new type requires editing
-every single place you created a function that matches on the
-type.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/new-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Thankfully, in both cases the compiler gives warnings about missing
-functions or matches, so both are equally &amp;ldquo;safe&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;What about changing an existing function or adding a new function? We
-now see the opposite behavior. Classes become harder to edit, because
-the functions are spread across multiple classes.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-interfaces.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;A pattern matching system is now the easier to modify, each function
-only lives in one place.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/change-pattern-matching.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;And that is the expression problem! The best thing about F# is that
-you get to pick which one is better for each type of data! If you know
-a certain type will need new behavior often, but rarely need new
-types, use pattern matching. If you know there is a static set of
-functions for a set of types, but the type list changes often, maybe
-the traditional interfaces and classes makes the most sense.&lt;/p&gt;
-
-&lt;p&gt;There is no reason not to mix and match the two ways to handle
-polymorphism, so you are free to choose the best representation for
-each type of data you have!&lt;/p&gt;
-
-&lt;p&gt;Happy F#-filled Festivities!&lt;/p&gt;
 </description>
     </item>
     
