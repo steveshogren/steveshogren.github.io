@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="description" content="" />
+<meta name="description" content="Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern." />
 
 <meta name="keywords" content="">
 
@@ -24,7 +24,7 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
+<meta property="og:description" content="Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern."/>
 <meta property="og:article:published_time" content="2016-06-11T00:00:00Z" />
 <meta property="og:article:modified_time" content="2016-06-11T00:00:00Z" />
 
@@ -35,7 +35,7 @@
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
 <meta name="twitter:title" content="Modern Dependency Injection" />
-<meta name="twitter:description" content="" />
+<meta name="twitter:description" content="Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern." />
 <meta name="twitter:url" content="http://deliberate-software.com/modern-di/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
   
@@ -49,7 +49,7 @@
       "name": "http://profiles.google.com/+?rel=author"
     },
     "datePublished": "2016-06-11",
-    "description": "",
+    "description": "Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.",
     "wordCount":  371 
   }
 </script>
@@ -79,6 +79,7 @@
 
 <link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
 <link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/github-calendar.css">
 
 
   <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
@@ -140,9 +141,14 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
+   
+      <img src="http://deliberate-software.com//images/weave.jpeg" class="article-banner imgcenter center-block">
+   
+
 <div class="text-center">
-  <h1 class="">Modern Dependency Injection
+  <h1 class="centereded">MODERN DEPENDENCY INJECTION
 </h1>
+
 
   <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -316,40 +322,52 @@ boilerplate that can safely replaced with a lambda!</p>
 
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <h3 class="serif col-sm-12 centereded" id="name">Steve Shogren</h3>
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
-<img class="col-xs-6 col-sm-4 col-md-6 border" id="avatar" src="http://deliberate-software.com//images/me_updated3.png" />
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
-<span class="col-xs-12 col-sm-12 col-md-12 centereded">
-  <a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+
+
+
+<span class="col-xs-12 col-sm-12 col-md-12">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </span>
 <span class="col-xs-12 col-sm-12">
-    Insights gathered while learning to deliberately craft software.
+    software developer, manager, author, speaker
 </span>
-<h3 class="col-xs-12 col-sm-12 centereded" id="name">Too many great ideas? Check out my new book!</h3>
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
 
-<a class="col-xs-12 col-sm-12 centereded" href="https://leanpub.com/convincingcoworkers">
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/convincingcoworkers">
     <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
-<h3 class="col-xs-12 col-sm-12" id="name">Top Posts</h3>
+<span class="col-xs-3 col-sm-4 col-md-3"></span>
+<span class="col-xs-3 col-sm-4 col-md-3"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="serif col-xs-12 col-sm-12" id="name">POSTS FOR:</h3>
 <div class="col-xs-12 col-sm-12">
     <ul class="sidebar_ul">
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
-        
+        <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+        <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
     </ul>
 </div>
-<h3 class="col-xs-12 col-sm-12" id="name">Categories</h3>
+<h3 class="serif col-xs-12 col-sm-12" id="name">CATEGORIES</h3>
 <div class="col-xs-12 col-sm-12">
     <ul class="sidebar_ul">
         
@@ -447,6 +465,7 @@ boilerplate that can safely replaced with a lambda!</p>
 
     <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
 <script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
+<script src="http://deliberate-software.com/js/github-calendar.js"></script>
 
 
 
@@ -465,6 +484,10 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 }
 </script>
 
+
+<script>
+    GitHubCalendar(".calendar", "steveshogren", {global_stats:false});
+</script>
 
   </body>
 </html>

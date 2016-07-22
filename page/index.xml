@@ -92,13 +92,31 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/philosophy/</guid>
-      <description>&lt;h1 class=&#34;centereded&#34;&gt;Hi, I am Steve Shogren!&lt;/h1&gt;
+      <description>&lt;div class=&#34;col-md-6&#34;&gt;
+&lt;h1 class=&#34;centereded&#34;&gt;Hi, I am Steve Shogren!&lt;/h1&gt;
   &lt;p class=&#34;centereded&#34;&gt;
-    I am a developer who has met needs in the financial, education, and
-    publishing industries. I build self-organizing teams and empower
-    them to achieve tremendous business value.
-      &lt;/p&gt;
+    I am a developer and manager who has met needs in the financial, education,
+    and publishing industries. I build self-organizing teams and empower them to
+    achieve tremendous business value.
+  &lt;/p&gt;
+  &lt;p class=&#34;centereded&#34;&gt;Effective practice requires discipline. I strive to
+  improve my techincal skills with daily challenges. I use my GitHub
+  contributions as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+  &lt;img class=&#34;border&#34; id=&#34;avatar&#34; src=&#34;http://deliberate-software.com//images/me_updated3.png&#34; /&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;col-md-12 calendar&#34;&gt;
+    
+    Loading the data just for you.
+&lt;/div&gt;
+
+
 &lt;div class=&#34;col-md-12&#34;&gt;
+  &lt;h1 class=&#34;centereded&#34;&gt;My Philosophy&lt;/h1&gt;
 &lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Strategic&lt;/h2&gt;
 &lt;div class=&#34;col-md-12&#34;&gt;
     &lt;div class=&#34;col-md-12&#34;&gt;
@@ -196,19 +214,93 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     
     <item>
       <title>Writings</title>
+      <link>http://deliberate-software.com/page/focused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/page/focused/</guid>
+      <description>&lt;h2 class=&#34;col-md-12 centereded&#34;&gt;Targeted Posts&lt;/h2&gt;
+&lt;div class=&#34;col-md-12&#34;&gt;
+    &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
+    &lt;h3&gt;Top Posts&lt;/h3&gt;
+    &lt;ul class=&#34;sidebar_ul&#34;&gt;
+      
+      &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/&#34;&gt;Haskell is the Dark Souls of Programming&lt;/a&gt;&lt;/li&gt;
+      
+      &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;Interview Humiliation&lt;/a&gt;&lt;/li&gt;
+      
+      &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/&#34;&gt;Six Unusual Reasons why Clojure is a Delight&lt;/a&gt;&lt;/li&gt;
+      
+      &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;Pattern Matching - Making the Compiler Work For You&lt;/a&gt;&lt;/li&gt;
+      
+      &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/ego-driven-development/&#34;&gt;Ego Driven Development&lt;/a&gt;&lt;/li&gt;
+      
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
+    &lt;h3&gt;New Developers&lt;/h3&gt;
+    &lt;ul class=&#34;sidebar_ul&#34;&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/learning-lisp-was-hard/&#34;&gt;Learning Lisp Was Hard&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/skill-continuum/&#34;&gt;Suggested Skill Progression&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/next-book/&#34;&gt;What Book Should I Read Next?&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/501-developer/&#34;&gt;You Should Go Home at 5:01&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/new-job-todo-list/&#34;&gt;How to Suck Less at Your New Job&lt;/a&gt;&lt;/li&gt;
+        
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
+    &lt;h3&gt;Seasoned Developers&lt;/h3&gt;
+    &lt;ul class=&#34;sidebar_ul&#34;&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/pop-culture-architecture/&#34;&gt;Avoid Pop Culture Architecture&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/&#34;&gt;Haskell is the Dark Souls of Programming&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock: Language Agnostic Unit Test Mocking&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/safety-rank-part-2/&#34;&gt;Programming Language Safety Score Mark 2&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;Pattern Matching - Making the Compiler Work For You&lt;/a&gt;&lt;/li&gt;
+        
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
+    &lt;h3&gt;Managers / Tech Leads&lt;/h3&gt;
+    &lt;ul class=&#34;sidebar_ul&#34;&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;When Self-Organizing Teams Are Effective&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/compassionate-interviewing/&#34;&gt;Designing A Compassionate Interview For A High Performing Individual&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/&#34;&gt;Daily Meditation Improves Technical Leadership&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;Interview Humiliation&lt;/a&gt;&lt;/li&gt;
+        
+        &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/ego-driven-development/&#34;&gt;Ego Driven Development&lt;/a&gt;&lt;/li&gt;
+        
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Writings</title>
       <link>http://deliberate-software.com/page/post/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/post/</guid>
-      <description>&lt;!-- &lt;h2 class=&#34;col-md-12 centereded&#34;&gt;New? Start Here!&lt;/h2&gt; --&gt;
-&lt;!-- &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
-    &lt;h3&gt;Newest Posts&lt;/h3&gt;
-    &lt;ul class=&#34;sidebar_ul&#34;&gt;
-        
- --&gt;
-&lt;h2 class=&#34;col-md-12 centereded&#34;&gt;All Posts&lt;/h2&gt;
+      <description>&lt;h2 class=&#34;col-md-12 centereded&#34;&gt;All Posts&lt;/h2&gt;
 &lt;div class=&#34;col-md-12&#34;&gt;
-&lt;ul class=&#34;sidebar_ul&#34;&gt;
+
+    &lt;ul class=&#34;sidebar_ul&#34;&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
         &lt;a href=&#34;http://deliberate-software.com/vim-refactoring-patterns/&#34;&gt;Vim Refactoring Patterns&lt;/a&gt;
