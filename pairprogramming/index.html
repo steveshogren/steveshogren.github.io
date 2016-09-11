@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Promiscuous Pairing  &middot; Deliberate Software</title>
+  <title>When Pair-Programming Works  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,7 +17,7 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Promiscuous Pairing  &middot; Deliberate Software ">
+<meta property="og:title" content="When Pair-Programming Works  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
 <meta property="og:url" content="http://deliberate-software.com/pairprogramming/" />
 <meta property="og:locale" content="en-us">
@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Promiscuous Pairing" />
+<meta name="twitter:title" content="When Pair-Programming Works" />
 <meta name="twitter:description" content="" />
 <meta name="twitter:url" content="http://deliberate-software.com/pairprogramming/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
@@ -43,14 +43,14 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Promiscuous Pairing",
+    "headline": "When Pair-Programming Works",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
     "datePublished": "2016-07-22",
     "description": "",
-    "wordCount":  1014 
+    "wordCount":  1095 
   }
 </script>
 
@@ -142,11 +142,11 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
    
-      <img src="http://deliberate-software.com//images/pair.jpeg" class="article-banner imgcenter center-block">
+      <img src="http://deliberate-software.com//images/pairing.jpeg" class="article-banner imgcenter center-block">
    
 
 <div class="text-center">
-  <h1 class="centereded">PROMISCUOUS PAIRING
+  <h1 class="centereded">WHEN PAIR-PROGRAMMING WORKS
 </h1>
 
 
@@ -161,8 +161,8 @@
 
 
   <small>
-  &middot; Read in about 5 min
-  &middot; (1014 Words)
+  &middot; Read in about 6 min
+  &middot; (1095 Words)
 </small>
 
 
@@ -185,13 +185,6 @@
     
   <div class="content">
     
-
-<p>Let me start with a disclaimer: solutions are only valuable if they solve a
-problem. Please don&rsquo;t use this post to browbeat your colleagues. Programming
-productivity hasn&rsquo;t yet been scientifically measured. Therefore <strong>every</strong>
-process, language, or paradigm is recommended on personal preference or &ldquo;gut
-feeling&rdquo;. I will lay out my preferences and &ldquo;gut feelings&rdquo;, but do not mistake
-them for rigorous claims of productivity.</p>
 
 <p>My current team has pair-programmed and followed strict TDD on a single codebase
 for over ten years. The practices started from reading the literature on Extreme
@@ -217,14 +210,18 @@ refactorings.</p>
 
 <ul>
 <li>No siloed information or &ldquo;I don&rsquo;t touch that section&rdquo; areas</li>
-<li>The team ends up adopting a consistent set of styles, tools, shortcuts, workflow</li>
+<li>The team must adopt a consistent set of styles, tools, shortcuts, workflow</li>
 <li>Developers can take vacation whenever they please</li>
 <li>Training is built in to the process from day one</li>
 <li>Developers quitting doesn&rsquo;t throw the team into disarray</li>
-<li>Productivity is fairly stable across years</li>
-<li>Protected time every day for research, refactoring, and tech debt</li>
+<li>Productivity is fairly stable across decades</li>
+<li>Protected time every day for research, refactoring, and technical debt</li>
 <li>Frequent rotation gives a natural cadence for fixing broken CI builds</li>
-<li>Many of us spend a lot less time puttering around on Reddit, HN, etc</li>
+<li>I personally spend a lot less time puttering around on Reddit, HN, etc (I&rsquo;m
+sure that is true for others)</li>
+<li>Pairs have much more courage and stamina to aggressively pay down technical
+debt. Even the most mind-numbing technical debt isn&rsquo;t so bad if you know you
+are rotating off in two hours.</li>
 <li>Interruptions are much less disruptive, typically only one or two minutes to
 get back into &ldquo;flow&rdquo;</li>
 </ul>
@@ -235,7 +232,6 @@ get back into &ldquo;flow&rdquo;</li>
 <li>Huge system &ldquo;owned by everyone&rdquo; is a lot for new developers to handle - training takes a long time</li>
 <li>Juggling tasks can be complex (e.g. what gets put on hold when not at full capacity)</li>
 <li>Support issues get passed around from pair to pair</li>
-<li>Some developers feel pairing is demeaning, disrespectful, or beneath them</li>
 <li>General feeling you are &ldquo;not important&rdquo; to the team</li>
 </ul>
 
@@ -245,11 +241,15 @@ get back into &ldquo;flow&rdquo;</li>
 <li>Pairing is polarizing
 
 <ul>
-<li><strong>-</strong> Hiring is slow: many developers hate pairing</li>
+<li><strong>-</strong> Hiring is slow: many developers hate pairing
+
+<ul>
+<li>Some developers we&rsquo;ve interviewed unfortunately feel pairing is demeaning, disrespectful, or beneath them</li>
+</ul></li>
 <li><strong>-</strong> Poor new hire retention
 
 <ul>
-<li>Some love the <em>idea</em> of pairing, not the <em>practice</em> of pairing; they discover that and leave</li>
+<li>Some developers love the <em>idea</em> of pairing, not the <em>practice</em> of pairing; they often leave when they discover that distinction</li>
 </ul></li>
 <li><strong>+</strong> Low employee churn: those that love pairing stick around far longer than industry average</li>
 </ul></li>
@@ -268,9 +268,18 @@ get back into &ldquo;flow&rdquo;</li>
 </ul></li>
 </ul>
 
-<p>We&rsquo;ve found this set of trade-offs works very well with our team. The team is
-ten developers all doing active development on a 3.4 million line enterprise
-application. Our team has a wide set of skills and skill ranges.</p>
+<p>We&rsquo;ve found this set of trade-offs works very well with our team. The ten of us
+are all doing active development on a 3.4 million-line enterprise banking
+application. Quality and the ability to quickly conform to new regulations are
+of paramount importance. The team regularly has a discussion as to whether we
+should keep or abandon the policy of enforced pairing, and the consensus thus
+far remains to keep it.</p>
+
+<p>We plan to be around for at least the next decade. Our team requires a workflow
+that allows for the rapid development of high-quality features while keeping the
+team stress-free and happy with their work. Since we plan on a decade scale, our
+development process must take into account the importance of long-term
+happiness, training, and the courage to aggressively pay down technical debt.</p>
 
 <h2 id="how-to-get-started:bd97cfb3b628f77ac97d1d5cdf96fc97">How To Get Started</h2>
 
@@ -280,18 +289,18 @@ application. Our team has a wide set of skills and skill ranges.</p>
 <li><p>The whole team has to love pairing and want to adopt it</p>
 
 <p>If even a minority of developers hates pairing, it will be tortuous to force
-them to do it. In our experience, &gt;80% of developer hate pairing. It would
-be better to split the team and codebase. Forcing even a single developer to
-pair can be disastrous for morale and productivity. No one wants to pair
-with someone who is sullen and bitter. When pairing, misery cannot be
-hidden.</p></li>
+them to do it. In our experience, &gt;80% of developers hate pairing. If some
+members are not interested, it would be better to split the team and
+codebase. Forcing even a single developer to pair can be disastrous for
+morale and productivity. No one wants to pair with someone who is sullen and
+bitter. When pairing, misery cannot be hidden.</p></li>
 
 <li><p>Management has to accept not having assigned tasks</p>
 
-<p>Assigning tasks reduces the beneficial effects of pair switching. Typically
-the assigned developer ends up &ldquo;doing all the work with an observer&rdquo;. This
-is much less effective. The &ldquo;observer&rdquo; ends up tuning out, since the
-assignee &ldquo;probably has it figured out&rdquo;.</p></li>
+<p>Assigning tasks reduces the beneficial effects of pair switching. The
+assigned developer ends up &ldquo;doing all the work with an observer&rdquo;. This is
+much less effective. The &ldquo;observer&rdquo; ends up tuning out, since the assignee
+&ldquo;probably already has it figured out&rdquo;.</p></li>
 
 <li><p>Proficiency at pairing is a discrete skill</p>
 
