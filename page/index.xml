@@ -100,8 +100,7 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     achieve tremendous business value.
   &lt;/p&gt;
   &lt;p class=&#34;centereded&#34;&gt;Effective practice requires discipline. I strive to
-  improve my techincal skills with daily challenges. I use my GitHub
-  contributions as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
+  improve my techincal skills with daily challenges. I use my &lt;a href=&#34;https://www.github.com/steveshogren&#34;&gt;GitHub contributions&lt;/a&gt; as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;col-md-3&#34;&gt;
 &lt;/div&gt;
@@ -109,10 +108,7 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
   &lt;img class=&#34;border&#34; id=&#34;avatar&#34; src=&#34;http://deliberate-software.com//images/me_updated3.png&#34; /&gt;
 &lt;/div&gt;
 
-&lt;div class=&#34;col-md-12 calendar&#34;&gt;
-    
-    Loading the data just for you.
-&lt;/div&gt;
+
 
 
 &lt;div class=&#34;col-md-12&#34;&gt;
