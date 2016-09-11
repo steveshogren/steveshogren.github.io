@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Editor Abstractions: Why Examine Them  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Editor Abstractions: Why Examine Them  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/editor-abstraction-types/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2016-05-09T00:00:00Z" />
+<meta property="og:article:modified_time" content="2016-05-09T00:00:00Z" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Editor Abstractions: Why Examine Them" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/editor-abstraction-types/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Editor Abstractions: Why Examine Them",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2016-05-09",
+    "description": "",
+    "wordCount":  685 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://deliberate-software.com/editor-abstraction-types/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/github-calendar.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
+
+
+</head>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://deliberate-software.com/">Deliberate Software</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/philosophy"
+             title="About me">
+            
+            About Me
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            
+<div class="text-center">
+  <h1 class="centereded">DRAFT :: EDITOR ABSTRACTIONS: WHY EXAMINE THEM
+</h1>
+
+
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-05-09">9 May, 2016</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 4 min
+  &middot; (685 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/emacs" class="label label-default">emacs</a>
+  
+
+ </div>
+<br>
+</div>
+
+</div>
+
+            <div class="">
+    
+  <div class="content">
+    
+
+<p>Not all editing tools are created equal.</p>
+
+<blockquote>
+<p>Combining several simple ideas into one compound one, and thus all complex
+ideas are made - John Locke, An Essay Concerning Human Understanding (1690)</p>
+</blockquote>
+
+<p>While many words have been spent on the Holy Editor Flame Wars, I&rsquo;ve read very
+little that attempts to categorize <em>what they actually do</em>. Likewise, everyone
+pays homage to the concept of using the &ldquo;best tool for the job&rdquo;, but most have
+no idea what tools are provided or when each tool would be best.</p>
+
+<!-- If every concrete sequence had its own bespoke functions, we would find them -->
+
+<!-- much more difficult to use. Imagine if only Lists could be used in a -->
+
+<!-- ```foreach```, and Dictionaries needed to be ```for-every``` while Array needed -->
+
+<!-- a ```for``` loop. We would find them much harder to use. Moving code from one -->
+
+<!-- data structure to another would be a massive undertaking. _This is what IDE's do -->
+
+<!-- The three major sequence abstractions are far superior to dozens of specialized -->
+
+<!-- functions. They are also superior to the overly generic function ```foreach```. -->
+
+<!-- The ```foreach``` function is weak because it is too generic. The a they -->
+
+<!-- abstract away the details needed to make ```foreach``` work. The three are easy -->
+
+<!-- to learn, simple to combine, and allow for endless reuse. -->
+
+<p>Our editors also provide abstractions. I classify them into two main categories:</p>
+
+<ol>
+<li>Semantic Tools</li>
+<li>Syntactic Tools</li>
+</ol>
+
+<hr />
+
+<!-- Every additional editor abstraction is a new mental tax. -->
+
+<h2 id="semantic-tools:546df42f19e73dc1aaa873cd03d82625">Semantic Tools</h2>
+
+<p>Five abstractions make up the &ldquo;Holy Grail&rdquo; of Semantic Tools. If we had nothing
+else but these, we would be at the pinnacle of power. The Big Five make a huge
+program much more manageable.</p>
+
+<ul>
+<li><strong>Extract Interface</strong> -</li>
+<li><strong>Extract Class</strong> -</li>
+<li><strong>Implement Interface</strong> -</li>
+<li><strong>In-line Method</strong> -</li>
+<li><strong>Extract Method</strong> -</li>
+<li><strong>In-line Variable</strong> -</li>
+<li><strong>Extract Variable</strong> -</li>
+<li><strong>Operate On Every Calling Line</strong> -</li>
+<li><strong>Cut/Copy/Paste Expression</strong> -</li>
+
+<li><p><strong>Remove Outer Wrapping</strong> -</p></li>
+
+<li><p><strong>Language Errors</strong> - Highlight code that violates the rules of the language</p></li>
+
+<li><p><strong>Find All References</strong> - See a list of all usages of a field, function, or class</p></li>
+
+<li><p><strong>Rename Symbol</strong> - Rename the current field, function, or class</p></li>
+
+<li><p><strong>Auto-complete</strong> - Show a list of possible symbols to complete section</p></li>
+
+<li><p><strong>Go To Definition</strong> - Move editor to the symbol&rsquo;s defined location</p></li>
+</ul>
+
+<p>The Big Five are just different ways of interacting with the AST of the
+codebase. Unfortunately, building a correct AST before run-time is only possible
+in certain languages. Building an always-accurate AST is impossible in
+weakly-typed, dynamic languages (or those with unhygienic macros).</p>
+
+<p>How impossible? Time for a fun story. My first encounter with the AST problem
+came when my boss asked me to rename all uses of <code>Contact.Id</code> to
+<code>Contact.ContactId</code> in a big PHP project. I renamed all I could find using
+sed and grep. I went to run the program, and encountered hundreds of run-time
+errors. What did I miss? Someone had stored a string in the database containing
+&ldquo;Id&rdquo;, which was read out and combined with PHP magic to access the <code>Id</code>
+field on my class! No refactoring tool could have possibly detected that. That
+sort of flexibility makes it impossible to build a correct AST.</p>
+
+<p>Even the flagship refactoring languages like Java and C# still have a version of
+this problem. Sharing dlls or jars breaks semantic tools. A <strong>Rename Symbol</strong>
+will only detect and modify usages in the current open project, not every
+consumer. Reflection similarly breaks semantic tools. Depending on your
+practices, this ranges from a minor nuisance to a major problem.</p>
+
+<p><!-- In the last decade, several IDE's have added plugins that can build an AST from -->
+  <!-- PHP, Python, Ruby, JavaScript, Clojure, etc. While incomplete by nature, these -->
+  <!-- at least provide some modest functionality. -->
+<!-- While I would never want to take over a huge codebase without the Big Four, I have lately come to rely on them less and less. --></p>
+
+<p>IDE&rsquo;s have a lot of refactorings they provide other than the Big Four. However
+most of these refactorings are syntactic, not semantic.</p>
+
+<h2 id="syntactic-tools:546df42f19e73dc1aaa873cd03d82625">Syntactic Tools</h2>
+
+<p>A syntactic tool does not require an AST to work. Consider <strong>Extract
+Interface</strong>. It takes a class and generates an interface next to the class
+containing all the public functions from the class. The refactoring does not
+require an AST to work, it can be easily achieved by combining several text
+commands.</p>
+
+<p>Any syntactic refactoring can be replaced with a text macro or regular
+expression. Here is where we see the power of good abstractions. Where a
+refactoring suite may provide dozens or hundreds of specialized commands that
+only work in a single language, a few good text abstractions compose endlessly.</p>
+
+<h2 id="text-abstractions:546df42f19e73dc1aaa873cd03d82625">Text Abstractions</h2>
+
+<ul>
+<li><strong>Edit</strong>
+
+<ul>
+<li><strong>Change</strong> - Change a piece of text with another</li>
+<li><strong>Replace</strong> - Replace a character</li>
+<li><strong>Insert</strong> - Insert text</li>
+<li><strong>Delete</strong> - Delete text</li>
+<li><strong>Copy</strong> - Copy text</li>
+</ul></li>
+<li><strong>Motion</strong>
+
+<ul>
+<li><strong>(Forward|Back) By (Letter|Word|Line|Sentence|Paragraph)</strong> - Move cursor by
+specified delimiter</li>
+<li><strong>Range</strong> - Operate on a range of lines or search criteria</li>
+</ul></li>
+<li><strong>Repeat</strong> - Repeat last command</li>
+<li><strong>Search</strong> - Find instances of text
+
+<ul>
+<li><strong>Replace</strong> - Replace with alternate text</li>
+<li><strong>Operate</strong> - Perform action on line containing text</li>
+<li><strong>Delete</strong> - Delete line containing text</li>
+</ul></li>
+<li><strong>Record|Playback</strong> - Record and save actions, replaying them when needed</li>
+</ul>
+
+<p>A skilled user of these basic abstractions can solve any syntactic refactoring
+in only a few steps. They can invent new refactorings, solving any text
+manipulation they need.</p>
+
+<!-- | |  | Correctly Call Function | Adding New State | Best When | -->
+
+<!-- |------------- |-------------- | ------------ | ------------- | ------------- | -->
+
+<!-- |**Semantic Tools** | Explicit |  Easier  | Harder | State Values Change Frequently -->
+
+<!-- |**Syntactic Tools** | Implicit |  Harder  |  Easier | State Values Change Rarely -->
+
+<!-- |**Text Abstractions** | Implicit |  Harder  |  Easier | State Values Change Rarely -->
+
+<!-- The more I watch Patrick work, the more I realize how much mental and muscle -->
+
+<!-- memory I have built up around "Visual Studio"-only abstractions. -->
+
+<!-- Our editing tools are also abstractions. We memorize commands to perform -->
+
+<!-- actions, disregarding the underlying implementation. -->
+
+<!-- I have found that if you have a good set of abstractions for editing code, you -->
+
+<!-- can be very productive across lots of languages and frameworks. -->
+
+  </div>
+</div>
+
+
+            <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/why-emacs/" title="Why Emacs">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/patterns/" title="Design Pattern Dangers">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+
+
+
+<span class="col-xs-12 col-sm-12 col-md-12">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-xs-12 col-sm-12">
+    software developer, manager, author, speaker
+</span>
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
+
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/convincingcoworkers">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<span class="col-xs-3 col-sm-4 col-md-3"></span>
+<span class="col-xs-3 col-sm-4 col-md-3"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="serif col-xs-12 col-sm-12" id="name">POSTS FOR:</h3>
+<div class="col-xs-12 col-sm-12">
+    <ul class="sidebar_ul">
+        <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+        <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
+    </ul>
+</div>
+<h3 class="serif col-xs-12 col-sm-12" id="name">CATEGORIES</h3>
+<div class="col-xs-12 col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/angular">angular</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">5</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">13</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">9</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">27</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/refactoring">refactoring</a> <span class="badge">1</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">38</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">11</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/vim">vim</a> <span class="badge">2</span>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+    </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
+  
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
+<script src="http://deliberate-software.com/js/github-calendar.js"></script>
+
+
+
+
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+if (document.location.hostname.search("deliberate-software.com") !== -1) {
+  var _gaq=[['_setAccount','UA-46040901-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+}
+</script>
+
+
+<script>
+    GitHubCalendar(".calendar", "steveshogren", {global_stats:false});
+</script>
+
+  </body>
+</html>
+

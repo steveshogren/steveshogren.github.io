@@ -169,3 +169,6 @@ body > .container {
     overflow: hidden;
     background-position: center;
 }
+.lead {
+    float:right;
+}

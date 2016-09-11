@@ -303,6 +303,17 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
+        &lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;Promiscuous Pairing&lt;/a&gt;
+        &lt;span class=&#34;pull-right&#34;&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit-testing&lt;/a&gt;
+        
+        &lt;/span&gt;
+    &lt;/li&gt;
+    
+    &lt;li class=&#34;sidebar_li&#34;&gt;
         &lt;a href=&#34;http://deliberate-software.com/vim-refactoring-patterns/&#34;&gt;Vim Refactoring Patterns&lt;/a&gt;
         &lt;span class=&#34;pull-right&#34;&gt;
         

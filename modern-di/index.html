@@ -50,7 +50,7 @@
     },
     "datePublished": "2016-06-11",
     "description": "Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.",
-    "wordCount":  371 
+    "wordCount":  328 
   }
 </script>
 
@@ -162,7 +162,7 @@
 
   <small>
   &middot; Read in about 2 min
-  &middot; (371 Words)
+  &middot; (328 Words)
 </small>
 
 
@@ -201,30 +201,30 @@ pattern.</p>
 <p>Look how much boilerplate is needed just to mock out a call to
 <code>DateTime.Now</code>:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="hll"><span class="k">public</span> <span class="k">interface</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
-</span><span class="lineno"> 2 </span><span class="hll">    <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">();</span>
-</span><span class="lineno"> 3 </span><span class="hll"><span class="p">}</span>
-</span><span class="lineno"> 4 </span><span class="hll">
-</span><span class="lineno"> 5 </span><span class="hll"><span class="k">public</span> <span class="k">class</span> <span class="nc">CurrentTime</span> <span class="p">:</span> <span class="n">ICurrentTime</span> <span class="p">{</span>
-</span><span class="lineno"> 6 </span><span class="hll">    <span class="k">public</span> <span class="n">DateTime</span> <span class="nf">GetCurrentTime</span><span class="p">()</span> <span class="p">{</span>
-</span><span class="lineno"> 7 </span>        <span class="k">return</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
-<span class="lineno"> 8 </span><span class="hll">    <span class="p">}</span>
-</span><span class="lineno"> 9 </span><span class="hll"><span class="p">}</span>
-</span><span class="lineno">10 </span><span class="hll">
-</span><span class="lineno">11 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
-<span class="lineno">12 </span><span class="hll">    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ICurrentTime</span> <span class="n">currentTime</span><span class="p">;</span>
-</span><span class="lineno">13 </span><span class="hll">
-</span><span class="lineno">14 </span><span class="hll">    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="k">new</span> <span class="n">CurrentTime</span><span class="p">())</span> <span class="p">{}</span>
-</span><span class="lineno">15 </span><span class="hll">
-</span><span class="lineno">16 </span><span class="hll">    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">(</span><span class="n">ICurrentTime</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="lineno">17 </span><span class="hll">        <span class="k">this</span><span class="p">.</span><span class="n">currentTime</span> <span class="p">=</span> <span class="n">currentTime</span><span class="p">;</span>
-</span><span class="lineno">18 </span><span class="hll">    <span class="p">}</span>
-</span><span class="lineno">19 </span><span class="hll">
-</span><span class="lineno">20 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">21 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">.</span><span class="n">GetCurrentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
-<span class="lineno">22 </span>    <span class="p">}</span>
-<span class="lineno">23 </span><span class="p">}</span>
-</code></pre></div>
+
+public interface ICurrentTime {
+    DateTime GetCurrentTime();
+}
+
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now;
+    }
+}
+
+public class Formatter {
+    private readonly ICurrentTime currentTime;
+
+    public Formatter() : this(new CurrentTime()) {}
+
+    public Formatter(ICurrentTime currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public string Format(string input) {
+        return string.Format("{0}: {1}", currentTime.GetCurrentTime().ToString(), input);
+    }
+}
 
 
 <p>We learned to mock this way because Java did not have lambdas at the time the
@@ -236,15 +236,15 @@ pattern can be improved.</p>
 <p>Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
 removed!</p>
 
-<p><div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno">1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
-<span class="lineno">2 </span>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span> <span class="p">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
-<span class="lineno">3 </span>
-<span class="lineno">4 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">5 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
-<span class="lineno">6 </span>    <span class="p">}</span>
-<span class="lineno">7 </span><span class="p">}</span>
-</code></pre></div>
-</p>
+
+public class Formatter {
+    internal Func<DateTime> currentTime = () => DateTime.Now;
+
+    public string Format(string input) {
+        return string.Format("{0}: {1}", currentTime().ToString(), input);
+    }
+}
+
 
 <p>Much better! The code is easier to read, understand, and <a href="/simplemock-unit-test-mocking/">mock in a unit test</a>.</p>
 
@@ -254,20 +254,20 @@ removed!</p>
 use constructor injection of just the lambda. Be forewarned, you probably need
 this much less than you think!</p>
 
-<p><div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
-<span class="lineno"> 2 </span>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span><span class="p">;</span>
-<span class="lineno"> 3 </span>
-<span class="lineno"> 4 </span>    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">)</span> <span class="p">{}</span>
-<span class="lineno"> 5 </span>
-<span class="lineno"> 6 </span>    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 7 </span>        <span class="k">this</span><span class="p">.</span><span class="n">currentTime</span> <span class="p">=</span> <span class="n">currentTime</span><span class="p">;</span>
-<span class="lineno"> 8 </span>    <span class="p">}</span>
-<span class="lineno"> 9 </span>
-<span class="lineno">10 </span>    <span class="k">public</span> <span class="kt">string</span> <span class="nf">Format</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">11 </span>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;{0}: {1}&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">().</span><span class="n">ToString</span><span class="p">(),</span> <span class="n">input</span><span class="p">);</span>
-<span class="lineno">12 </span>    <span class="p">}</span>
-<span class="lineno">13 </span><span class="p">}</span>
-</code></pre></div>
+<p>
+public class Formatter {
+    internal Func<DateTime> currentTime;
+
+    public Formatter() : this(() => DateTime.Now) {}
+
+    public Formatter(Func<DateTime> currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public string Format(string input) {
+        return string.Format("{0}: {1}", currentTime().ToString(), input);
+    }
+}
 </p>
 
 <p>If you are heavily invested in unit-testing, you might find you need very little
@@ -420,11 +420,11 @@ boilerplate that can safely replaced with a lambda!</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">29</span>
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">30</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">8</span>
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">9</span>
         </li>
         
         <li class="sidebar_li">

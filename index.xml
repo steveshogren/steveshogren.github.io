@@ -6,8 +6,165 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 Jul 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Promiscuous Pairing</title>
+      <link>http://deliberate-software.com/pairprogramming/</link>
+      <pubDate>Fri, 22 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <description>
+
+&lt;p&gt;Let me start with a disclaimer: solutions are only valuable if they solve a
+problem. Please don&amp;rsquo;t use this post to browbeat your colleagues. Programming
+productivity hasn&amp;rsquo;t yet been scientifically measured. Therefore &lt;strong&gt;every&lt;/strong&gt;
+process, language, or paradigm is recommended on personal preference or &amp;ldquo;gut
+feeling&amp;rdquo;. I will lay out my preferences and &amp;ldquo;gut feelings&amp;rdquo;, but do not mistake
+them for rigorous claims of productivity.&lt;/p&gt;
+
+&lt;p&gt;My current team has pair-programmed and followed strict TDD on a single codebase
+for over ten years. The practices started from reading the literature on Extreme
+Programming, which resonated with both the developers and leadership. As the
+team changed, we continued to follow the practices.&lt;/p&gt;
+
+&lt;p&gt;In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;&amp;ldquo;Promiscuous Pairing&amp;rdquo;&lt;/a&gt;. We
+switch pairs in short intervals: 180 minutes is our current preference.&lt;/p&gt;
+
+&lt;p&gt;The pairing sessions start at 8:45AM and 1:00PM with the typical five-minute
+stand-up. People report on any data that the rest of the team needs to hear,
+including noteworthy technical details. Afterwards, the developers crowd around
+a board with the current tasks in progress. We randomize the pairs, then each
+pair decides what to work on from the current tasks.&lt;/p&gt;
+
+&lt;p&gt;If a developer wants to not pair for a session, they go &amp;ldquo;odd&amp;rdquo;. We have a working
+agreement that no production code can be written while odd. The odd person works
+on automated testing, answering questions, researching technical debt,
+investigating root causes of bugs, and authoring throwaway &amp;ldquo;spikes&amp;rdquo; for major
+refactorings.&lt;/p&gt;
+
+&lt;h2 id=&#34;pros:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Pros&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No siloed information or &amp;ldquo;I don&amp;rsquo;t touch that section&amp;rdquo; areas&lt;/li&gt;
+&lt;li&gt;The team ends up adopting a consistent set of styles, tools, shortcuts, workflow&lt;/li&gt;
+&lt;li&gt;Developers can take vacation whenever they please&lt;/li&gt;
+&lt;li&gt;Training is built in to the process from day one&lt;/li&gt;
+&lt;li&gt;Developers quitting doesn&amp;rsquo;t throw the team into disarray&lt;/li&gt;
+&lt;li&gt;Productivity is fairly stable across years&lt;/li&gt;
+&lt;li&gt;Protected time every day for research, refactoring, and tech debt&lt;/li&gt;
+&lt;li&gt;Frequent rotation gives a natural cadence for fixing broken CI builds&lt;/li&gt;
+&lt;li&gt;Many of us spend a lot less time puttering around on Reddit, HN, etc&lt;/li&gt;
+&lt;li&gt;Interruptions are much less disruptive, typically only one or two minutes to
+get back into &amp;ldquo;flow&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cons:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Cons&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Huge system &amp;ldquo;owned by everyone&amp;rdquo; is a lot for new developers to handle - training takes a long time&lt;/li&gt;
+&lt;li&gt;Juggling tasks can be complex (e.g. what gets put on hold when not at full capacity)&lt;/li&gt;
+&lt;li&gt;Support issues get passed around from pair to pair&lt;/li&gt;
+&lt;li&gt;Some developers feel pairing is demeaning, disrespectful, or beneath them&lt;/li&gt;
+&lt;li&gt;General feeling you are &amp;ldquo;not important&amp;rdquo; to the team&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;partly-good-partly-bad:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Partly Good, Partly Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Pairing is polarizing
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Hiring is slow: many developers hate pairing&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Poor new hire retention
+
+&lt;ul&gt;
+&lt;li&gt;Some love the &lt;em&gt;idea&lt;/em&gt; of pairing, not the &lt;em&gt;practice&lt;/em&gt; of pairing; they discover that and leave&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Low employee churn: those that love pairing stick around far longer than industry average&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;No task ownership
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Less emotional reward when completing a task&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Less in-fighting about typical &amp;lsquo;code-ownership&amp;rsquo; bike-shed issues&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; No one cares if a task is rejected by QA&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Rapid pair-switching can cause design churn on a task
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Tasks can take longer to complete&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Tough tasks get prototyped several times and seen by whole team&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We&amp;rsquo;ve found this set of trade-offs works very well with our team. The team is
+ten developers all doing active development on a 3.4 million line enterprise
+application. Our team has a wide set of skills and skill ranges.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-get-started:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;How To Get Started&lt;/h2&gt;
+
+&lt;p&gt;This system works best with a given a set of preconditions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The whole team has to love pairing and want to adopt it&lt;/p&gt;
+
+&lt;p&gt;If even a minority of developers hates pairing, it will be tortuous to force
+them to do it. In our experience, &amp;gt;80% of developer hate pairing. It would
+be better to split the team and codebase. Forcing even a single developer to
+pair can be disastrous for morale and productivity. No one wants to pair
+with someone who is sullen and bitter. When pairing, misery cannot be
+hidden.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Management has to accept not having assigned tasks&lt;/p&gt;
+
+&lt;p&gt;Assigning tasks reduces the beneficial effects of pair switching. Typically
+the assigned developer ends up &amp;ldquo;doing all the work with an observer&amp;rdquo;. This
+is much less effective. The &amp;ldquo;observer&amp;rdquo; ends up tuning out, since the
+assignee &amp;ldquo;probably has it figured out&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Proficiency at pairing is a discrete skill&lt;/p&gt;
+
+&lt;p&gt;Many seasoned developers find themselves awkward and uncomfortable when
+pairing for the first few months. Pairing cannot be assessed in any
+meaningful way by just &amp;ldquo;trying it for a week&amp;rdquo; anymore than typing can be
+assessed over hand-writing in just a week. Feelings of discomfort and
+awkwardness in the first few months are completely normal and should not be
+the criteria used to decide to continue the practice.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Let any pair make any decision&lt;/p&gt;
+
+&lt;p&gt;Any pair should be authorized to make any decision to implement their
+current task. They must however be ready to have that decision undone or
+changed if the next pair finds it was too large, a poor design, out of
+scope, etc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Accept that others are better than you&lt;/p&gt;
+
+&lt;p&gt;When trying out pairing, productivity doesn&amp;rsquo;t have to drop! Many developers
+at first are uncomfortable by the rapid speed. The law of averages says half
+the developers on the team will find their pair going much faster than they
+are used to! These feelings of inadequacy often lead to developers wanting
+to discontinue the practice. Over time, everyone realizes that it is okay to
+not be the fastest, and instead take self-worth in what skills they do
+bring. Maybe they are not the fastest, but they are good at catching little
+details, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As a development system, this absolutely cannot be handed down from management.
+It has to be implemented &amp;ldquo;by the people and for the people&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;We have seen promiscuous pairing completely change our organization. As a team,
+we accomplish far more than we would otherwise. We are able to tackle new
+systems, languages, and tools with ease. When someone learns a new valuable
+technique, it spreads organically through the team.&lt;/p&gt;
+
+&lt;p&gt;Feel free to tweet at me if you have any questions or clarifications!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Vim Refactoring Patterns</title>
@@ -222,30 +379,30 @@ pattern.&lt;/p&gt;
 &lt;p&gt;Look how much boilerplate is needed just to mock out a call to
 &lt;code&gt;DateTime.Now&lt;/code&gt;:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;readonly&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;14 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;15 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;16 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;17 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;18 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;19 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;20 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;21 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;22 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;23 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+public interface ICurrentTime {
+    DateTime GetCurrentTime();
+}
+
+public class CurrentTime : ICurrentTime {
+    public DateTime GetCurrentTime() {
+        return DateTime.Now;
+    }
+}
+
+public class Formatter {
+    private readonly ICurrentTime currentTime;
+
+    public Formatter() : this(new CurrentTime()) {}
+
+    public Formatter(ICurrentTime currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public string Format(string input) {
+        return string.Format(&#34;{0}: {1}&#34;, currentTime.GetCurrentTime().ToString(), input);
+    }
+}
 
 
 &lt;p&gt;We learned to mock this way because Java did not have lambdas at the time the
@@ -257,15 +414,15 @@ pattern can be improved.&lt;/p&gt;
 &lt;p&gt;Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
 removed!&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;3 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;5 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;6 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;7 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
+
+public class Formatter {
+    internal Func&lt;DateTime&gt; currentTime = () =&gt; DateTime.Now;
+
+    public string Format(string input) {
+        return string.Format(&#34;{0}: {1}&#34;, currentTime().ToString(), input);
+    }
+}
+
 
 &lt;p&gt;Much better! The code is easier to read, understand, and &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;mock in a unit test&lt;/a&gt;.&lt;/p&gt;
 
@@ -275,20 +432,20 @@ removed!&lt;/p&gt;
 use constructor injection of just the lambda. Be forewarned, you probably need
 this much less than you think!&lt;/p&gt;
 
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;
+public class Formatter {
+    internal Func&lt;DateTime&gt; currentTime;
+
+    public Formatter() : this(() =&gt; DateTime.Now) {}
+
+    public Formatter(Func&lt;DateTime&gt; currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public string Format(string input) {
+        return string.Format(&#34;{0}: {1}&#34;, currentTime().ToString(), input);
+    }
+}
 &lt;/p&gt;
 
 &lt;p&gt;If you are heavily invested in unit-testing, you might find you need very little
@@ -1802,198 +1959,6 @@ leadership, creativity, and focus!&lt;/p&gt;
       <guid>http://deliberate-software.com/teaching-clojure/</guid>
       <description>&lt;p&gt;My talk at Conj 2015, enjoy!
 &lt;a href=&#34;https://www.youtube.com/watch?v=BsLiPt90HDo&#34;&gt;Teaching Clojure&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Interview Humiliation</title>
-      <link>http://deliberate-software.com/on-defeat/</link>
-      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/on-defeat/</guid>
-      <description>
-
-&lt;p&gt;(All these great ideas, but no one is listening? Check out my
-book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;One day, I went into an interview, and I was humiliated.&lt;/p&gt;
-
-&lt;h3 id=&#34;the-setup:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The Setup&lt;/h3&gt;
-
-&lt;p&gt;I used to think very highly of myself. This was early on in the Test Driven
-Development (TDD) craze, and I was one of the best I knew at it. I knew
-interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all
-the tricks from some very smart people, and my confidence was high. Not only
-that, but I&amp;rsquo;d just finished at work the restoration of an abandoned legacy
-codebase to a bug-free, fully tested state completely on my own.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d shipped Java, PHP, Perl, C#, and VB.NET, and I hadn&amp;rsquo;t been programming more
-than a couple years. My first job, they&amp;rsquo;d made me a team lead over some very
-senior developers within a year of my hire date. I was learning Clojure and
-Common Lisp, and had just shipped an Android game I made entirely alone
-(including the 2D physics engine).&lt;/p&gt;
-
-&lt;p&gt;I thought I was incredible. Yet, due to an overwhelming sense of Imposter
-Syndrome, I keenly knew that there were things I didn&amp;rsquo;t know. I&amp;rsquo;m mostly self
-taught, so a lot of common CS concepts felt alien. I was waking up before work
-and teaching myself algorithms, lisps, and math.&lt;/p&gt;
-
-&lt;p&gt;Enter Company A.&lt;/p&gt;
-
-&lt;p&gt;I flew through the phone screen &amp;ldquo;this is the best phone screen we&amp;rsquo;ve seen!&amp;rdquo; Of
-course it is. &amp;ldquo;Your resume is very impressive.&amp;rdquo; Oh, I know!&lt;/p&gt;
-
-&lt;p&gt;I get to the on-site interview.&lt;/p&gt;
-
-&lt;h3 id=&#34;the-on-site:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;The On-Site&lt;/h3&gt;
-
-&lt;p&gt;I hadn&amp;rsquo;t been thoughtful enough to ask what to wear, so I wore a suit. I was
-asked to present a project I&amp;rsquo;d worked on, and I picked my recently shipped
-physics game that was up on Google Play. I walked into the reception area a few
-minutes early.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;You are 25 minutes late.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What?! I explain that I have the email saying 9:30! No matter, &amp;ldquo;hurry, they are
-waiting!&amp;rdquo; Maybe I can salvage this. I walk into a conference room with a dozen
-people sitting around a table looking bored and pissed.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;Let&#39;s see your presentation.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I start to open up my laptop. Meanwhile, they start to joke around to each other:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, wow, Linux, what is this, 2003? I&#39;d hoped I&#39;d never have to see the
-grub boot screen again! Can&#39;t you afford a real machine?&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I try to joke back while multitasking with my laptop. They only have the Mac
-projector cable. No adapter. I&amp;rsquo;d thought ahead, and handed one of the developers
-a thumb drive with the presentation and code. The interviewers are joking and
-laughing to each other at my choice of clothes.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;A suit, classic, where are you interviewing after this, a sales job?&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I roll with it, make some joke about &amp;ldquo;styling&amp;rdquo;. I start presenting about the 2D
-physics engine I&amp;rsquo;d written as a learning project for my game. One of the most
-interesting parts to me was how I&amp;rsquo;d first written it without any unit testing,
-following just Clean Code practices. I then re-wrote it using heavy TDD. The
-design turned out very different both times, which I thought was interesting to
-see how TDD had influenced the design.&lt;/p&gt;
-
-&lt;p&gt;About five minutes in, I am cut off:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;This presentation is bullshit. You have no evidence, nothing valuable to
-show, just spurious subjective opinions. You&#39;ve put up a straw man and now
-are trying to knock it down assuming we are idiots. I&#39;ve seen enough.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;At this point, it has been barely 15 minutes since I walked in. I remain calm
-and professional, and start to address the raised concerns. I play the
-meta-game, wondering if perhaps this is a test to see how I&amp;rsquo;ll react when
-questioned and embarrassed. Even if this wasn&amp;rsquo;t a test, I was determined to be
-at my most professional and finish with my head held high.&lt;/p&gt;
-
-&lt;p&gt;Five developers walk out before I can finish my first sentence. One of the
-remaining six interviewers looks embarrassed and asks if I could live code them
-a web scraper in any language instead of the presentation. I turn my laptop
-around (still no projector) and ask if PHP is acceptable. They are a Python
-shop, and PHP is the closest to what they use that I am comfortable using when
-this nervous.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;PHP? Gross. I suppose if it is all you know...&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Unfortunately, I&amp;rsquo;ve got so much adrenaline in me that it takes me a few tries to
-log in. I get on a roll after five minutes, and write the scraper. They throw me
-a few more requirements, and within a half hour I&amp;rsquo;ve written stories for and
-completed them all. At least two of the interviewers seem quite impressed.
-Someone looks at their watch, &amp;ldquo;well, that&amp;rsquo;s all the stories we have, I guess
-let&amp;rsquo;s break for lunch.&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;Lunch is a 35 minute walk up a hill in humid 93F weather, and I am wearing a
-suit and dress shoes. When we get back from lunch I am hot, tired, and
-foot-sore. I distinctly remember my feet blistering inside my sweat-soaked
-patent leather shoes. I am called into the conference room again. At this point,
-I am genuinely curious if this is some sort of extreme patience/calmness test,
-or if I am being filmed for a reality show. No such luck.&lt;/p&gt;
-
-&lt;p&gt;At the head of the table is the developer who &amp;ldquo;called me out&amp;rdquo; for my
-presentation. Apparently my lunch mates were supposed to only take an hour, we
-took almost 90 minutes. He looks at me, rolls his eyes, and asks in the most
-sarcastic tone I have ever heard:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;So, got any questions for me?&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I ask a few normal questions, meanwhile he is constantly checking his watch and
-rolling his eyes. He answers briefly and rudely. I thank him for his time, and
-ask him if there is more. He laughs.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;quot;Oh, we are done here.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I am shown to the door.&lt;/p&gt;
-
-&lt;p&gt;I sit in the car for a half hour, wondering what just happened. I look over to
-the passenger seat piled high with text books I have been studying, books on
-language design, compilers, algorithms, physics engines, TDD, and productivity.&lt;/p&gt;
-
-&lt;p&gt;I was asked none of it. I threw up from stress out the car door into their
-parking lot.&lt;/p&gt;
-
-&lt;h3 id=&#34;aftermath:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Aftermath&lt;/h3&gt;
-
-&lt;p&gt;I found out later their recruiter had given me and many other candidates the
-wrong time. She was fired shortly after.&lt;/p&gt;
-
-&lt;p&gt;I never found out if I had done something to make everyone so angry. I now
-suspect that they were massively turned off by a host of things. Polyglot
-programming, practicing TDD, the suit, the not Mac, the late arrival, and a bad
-presentation probably all contributed to an immediate disqualification. I
-rationally realize they were terrible and treated me terribly, but the
-embarrassment is still there. I suspect my presentation was terrible from the
-get go: that they were expecting some rock-star and instead got me.&lt;/p&gt;
-
-&lt;p&gt;A number of times I have woken up in a cold sweat having dreamt about that
-interview. In the large scheme of things, a bad interview is such a small thing,
-but fear is fear. I still to this day wonder what I did wrong. Was I arrogant,
-cocky, insufferable? Did my ego cause them to treat me that way, or was it all
-them? What could I have done differently? I was only in there for a few minutes!&lt;/p&gt;
-
-&lt;p&gt;Few events in my professional life have shaped me as much as that interview. I
-have turned it into a forge for my talent, the anvil on which I beat my pride.
-When I don&amp;rsquo;t know something, I am more willing to shrug and laugh it off, all
-while learning as fast as I can. When I am humiliated professionally, I know
-I&amp;rsquo;ve come through worse and thrived.&lt;/p&gt;
-
-&lt;h3 id=&#34;break-the-cycle:b9c1bea9b4cd584af96fb286bdd6cbd2&#34;&gt;Break The Cycle&lt;/h3&gt;
-
-&lt;p&gt;This story fills me with an overwhelming desire to never continue the cycle of
-abuse. I strive every interview to try to respectfully work with the candidate,
-and never humiliate them. I want every person I interview to leave feeling loved
-as a human and respected, even if they are completely incapable to perform the
-duties of the job.&lt;/p&gt;
-
-&lt;p&gt;When I ask a question, if they struggle, we work it out together. When I ask for
-code, we write it together, even if that means I have to do all the work. I can
-make myself their servant, while still assessing their skill with accuracy and
-dispassion. Those with the skill will show it, and those without will not feel
-humiliated. I let them interview me, and if that means they want me to go up to
-the whiteboard and struggle through a merge sort, so be it. In this way, I push
-back against the interview culture that normalizes degradation and humiliation.&lt;/p&gt;
-
-&lt;p&gt;If you are interviewing others, take a serious look at your practices. Would a
-failed candidate feel humiliated and disrespected? What will they tell their
-coworkers and friends at meetups about your company? Will they talk about
-feeling respected, and how they hope to get the chance to work with you one day?
-Or will they talk of a group of self-righteous jerks who abuse their power to
-make others feel small? You can break the cycle.&lt;/p&gt;
-
-&lt;p&gt;(All these great ideas, but no one is listening? Check out my
-book: &lt;a href=&#34;https://leanpub.com/convincingcoworkers&#34;&gt;Convincing Coworkers&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
