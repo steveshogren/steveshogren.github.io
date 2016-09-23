@@ -17,6 +17,8 @@
       <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
       <description>
 
+&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
+
 &lt;p&gt;Editor macros are a secret weapon for editing text. While they are hard to
 learn, no other tool offers such broad speed and power for automating changes. A
 skilled macro wielder can make huge changes to a codebase with ease.&lt;/p&gt;
@@ -200,6 +202,8 @@ macros, allow yourself to be slow while you master the skill. Touch-typing can
 be many times faster than hand-writing or hunt-and-peck, but learning takes a
 long time. Macros can save you huge amounts of time, but you have to allow
 yourself to be slow while you master the skill.&lt;/p&gt;
+
+&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
@@ -209,7 +213,9 @@ yourself to be slow while you master the skill.&lt;/p&gt;
       <pubDate>Mon, 23 May 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/editor-abstractions/</guid>
-      <description>&lt;p&gt;I was recently inspired by a comment from a respected coworker:&lt;/p&gt;
+      <description>&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;I was recently inspired by a comment from a respected coworker:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring
@@ -255,6 +261,8 @@ I use IDEAVim inside Android Studio. For C#: VsVim inside Visual Studio. For all
 other languages: Evil mode inside Emacs. Instead of hundreds of specialized
 commands and contexts, I rely on a few basic abstractions to achieve any text
 transformation I can imagine.&lt;/p&gt;
+
+&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     

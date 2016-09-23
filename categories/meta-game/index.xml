@@ -960,9 +960,10 @@ one of the hardest things to face in my career.&lt;/p&gt;
       <guid>http://deliberate-software.com/skill-continuum/</guid>
       <description>
 
-&lt;blockquote&gt;
-&lt;p&gt;Learning Vim is a waste of time; I can prove it! - Anonymous&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; Learning Vim is a waste of time; I can prove it! - Anonymous
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I recently had a gentle discussion with a new teammate about whether
 or not they should learn to use Vim. My team uses a Vim emulator
@@ -1172,6 +1173,8 @@ with little distraction, free to think deeply.&lt;/p&gt;
 &lt;li&gt;Learning new languages and frameworks - &lt;a href=&#34;http://norvig.com/21-days.html&#34;&gt;Teach Yourself Programming in Ten Years&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Automating tasks &lt;a href=&#34;http://www.stuartellis.eu/articles/rake/&#34;&gt;Rake to Automate Tasks&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
