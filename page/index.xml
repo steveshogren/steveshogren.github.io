@@ -87,174 +87,62 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     </item>
     
     <item>
-      <title>My Philosophy</title>
-      <link>http://deliberate-software.com/page/philosophy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/page/philosophy/</guid>
-      <description>&lt;div class=&#34;col-md-6&#34;&gt;
-&lt;h1 class=&#34;centereded&#34;&gt;Hi, I am Steve Shogren!&lt;/h1&gt;
-  &lt;p class=&#34;centereded&#34;&gt;
-    I am a developer and manager who has met needs in the financial, education,
-    and publishing industries. I build self-organizing teams and empower them to
-    achieve tremendous business value.
-  &lt;/p&gt;
-  &lt;p class=&#34;centereded&#34;&gt;Effective practice requires discipline. I strive to
-  improve my techincal skills with daily challenges. I use my &lt;a href=&#34;https://www.github.com/steveshogren&#34;&gt;GitHub contributions&lt;/a&gt; as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;col-md-3&#34;&gt;
-&lt;/div&gt;
-&lt;div class=&#34;col-md-3&#34;&gt;
-  &lt;img class=&#34;border&#34; id=&#34;avatar&#34; src=&#34;http://deliberate-software.com//images/me_updated3.png&#34; /&gt;
-&lt;/div&gt;
-
-
-
-
-&lt;div class=&#34;col-md-12&#34;&gt;
-  &lt;h1 class=&#34;centereded&#34;&gt;My Philosophy&lt;/h1&gt;
-&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Strategic&lt;/h2&gt;
-&lt;div class=&#34;col-md-12&#34;&gt;
-    &lt;div class=&#34;col-md-12&#34;&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Small, Self-Organizing Teams
-            &lt;/h3&gt;
-            &lt;p&gt;
-                When carefully mentored, a self-organizing team
-                accomplishes the most business value.
-            &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Servant Leadership
-            &lt;/h3&gt;
-            &lt;p&gt;
-                Empowering and trusting your team increases intrinsic
-                motivation, engagement, and productivity.
-            &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Measurable Business Value
-            &lt;/h3&gt;
-            &lt;p&gt;
-                Tracking business goals ensures the highest value work
-                is accomplished first.
-            &lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&#34;col-md-12&#34;&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Growth Mindset
-            &lt;/h3&gt;
-            &lt;p&gt;
-                Everyone and everything can be improved. Nothing is sacred.
-            &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Deliberate Software
-            &lt;/h3&gt;
-            &lt;p&gt;
-                Disciplined practice prevents common mistakes.
-            &lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-            &lt;h3&gt;
-                Sharpest Tools
-            &lt;/h3&gt;
-            &lt;p&gt;
-                Allowing teams to choose the best tools produces the
-                most value.
-            &lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Tactical&lt;/h2&gt;
-&lt;div class=&#34;col-md-12&#34;&gt;
-    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-        &lt;h3&gt;
-            Pair Programming
-        &lt;/h3&gt;
-        &lt;p&gt;
-            No other practice improves the whole team like pair
-            programming. Prevents skill gaps and knowledge silos.
-        &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-        &lt;h3&gt;
-            Automated Testing
-        &lt;/h3&gt;
-        &lt;p&gt;
-            REPL-driven development, unit testing, and test-driven
-            development enable rapid crafting of high-quality systems.
-        &lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
-        &lt;h3&gt;
-            Continuous Integration
-        &lt;/h3&gt;
-        &lt;p&gt;
-            Scaling your team is only possible with accountability, and
-            CI is an excellent way to ensure accountability.
-        &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Training</title>
+      <title>Learn To Program</title>
       <link>http://deliberate-software.com/page/training/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/training/</guid>
       <description>
 
-&lt;h1 class=&#34;centereded&#34;&gt;Learning To Program&lt;/h1&gt;
+&lt;div class=&#34;container&#34;&gt;
+&lt;div class=&#34;col-md-9&#34;&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&#34;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&#34;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&#34;myth-i-need-a-degree-six-months-of-bootcamp:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need a Degree/Six Months of Bootcamp&lt;/h3&gt;
+&lt;p&gt;
+If you want to become a full-time developer, it can be intimidating to know
+where to start! Many people get stuck after finishing an online course. We want
+to provide free guidance for anyone who wants to learn enough to get a full-time
+job.
+&lt;/p&gt;
 
-&lt;p&gt;Anyone with desire and drive can learn to program in their spare time. You can
-get a full-time programming job without any schooling or credentials. All you
-you need is hard work, practice, and some basic guidance!&lt;/p&gt;
+&lt;h1&gt;Success Stories&lt;/h1&gt;
 
-&lt;h3 id=&#34;myth-i-need-expensive-books-software:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need Expensive Books/Software&lt;/h3&gt;
+&lt;p&gt;
+We have used this course with several people to help them break into full-time
+software developer jobs. 
+&lt;/p&gt;
 
-&lt;p&gt;I have trained many people from zero to full-time programmers. We only used free
-resources to teach them everything they needed. They used free tools like
-Notepad++, Vim, Intellij Community, and Visual Studio Express.&lt;/p&gt;
+&lt;div class=&#34;container&#34;&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+    &lt;h3&gt;Ariel S.&lt;/h3&gt;
+    &lt;p&gt;Ariel graduated with a degree in music and no technical experience.
+Within eight months she was working as an automated tester, and now manages a
+team of automated testers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+    &lt;h3&gt;Rachel B.&lt;/h3&gt;
+    &lt;p&gt;Rachel was working as a baker when we started together. After nine
+months of hard work she had her first full-time development job.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+    &lt;h3&gt;Ben S.&lt;/h3&gt;
+    &lt;p&gt;Ben had a B.A. degree and one basic programming class in high-school.
+He worked hard and had a full-time development job in six months. He now has
+worked in both front-end and back-end development.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&#34;myth-i-need-a-fancy-new-computer:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need a Fancy New Computer&lt;/h3&gt;
+&lt;h1&gt;The Course&lt;/h1&gt;
 
-&lt;p&gt;You can learn everything you need with just an old computer and the internet! If
-it can reliably run notepad and a web browser, it will do just fine. I have been
-a professional developer for almost a decade, and I learned much of what I know
-on an old Acer Aspire One netbook. It barely ran three tabs on Chrome, but it
-got the job done!&lt;/p&gt;
+&lt;p&gt;There is no secret for learning how to program: just hard work! Here is the
+up-to-date course we use.&lt;/p&gt;
 
-&lt;h3 id=&#34;myth-i-need-to-pick-the-right-language-now:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need to Pick the Right Language Now!&lt;/h3&gt;
+&lt;h3 id=&#34;step-1-basic-syntax-and-git:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 1 - Basic Syntax And Git&lt;/h3&gt;
 
-&lt;p&gt;The first language you learn should not be your last! Ideally, you should learn
-two or three languages before getting your first job. Something about switching
-languages is very effective for training developers. Having a few under your
-belt gives you a breadth of understanding that helps you learn new concepts
-faster.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-course:6493d41e298135faa05bc270a80fc0e4&#34;&gt;The Course:&lt;/h2&gt;
-
-&lt;h3 id=&#34;step-1-basic-syntax:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 1 - Basic Syntax&lt;/h3&gt;
-
-&lt;p&gt;Several fantastic resources exist for getting the basics of programming
+&lt;p&gt;Several fantastic resources exist for learning the basics of programming
 language syntax. I recommend at least one of the following, preferably both:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -271,12 +159,14 @@ complete an exercise, commit your work.&lt;/p&gt;
 &lt;p&gt;Commit early, commit often&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Make sure you push your changes as often as possible (at least hourly), so if
-your computer ever dies, everything is backed up. This will have the side-effect
-of giving you an online portfolio of all the work you do. Every new language,
-book, or project you start, make a new github repository! By the end of this
-course, you will have at several repositories of projects and book homework.
-This will be very effective in showing your progress to potential employers.&lt;/p&gt;
+&lt;p&gt;Make sure you push your changes as often as possible (at least hourly). If your
+computer ever dies, everything you pushed is backed up. This will have the
+side-effect of giving you an online portfolio of all the work you do.&lt;/p&gt;
+
+&lt;p&gt;Make a new github repository for every new language, book, or project you start.
+By the end of this course, you will have at several repositories of projects and
+book homework. This will be very effective in showing your progress to potential
+employers.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-2-basic-tools:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 2 - Basic Tools&lt;/h3&gt;
 
@@ -314,7 +204,7 @@ recommend KataTennis, KataRomanNumerals, and KataBowling.&lt;/p&gt;
 
 &lt;p&gt;For the rest of the course, we recommend you do thirty minutes of kata practice
 every time you sit down. Redo the same kata multiple times, until you can do it
-effortlessly in Python or Javascript.&lt;/p&gt;
+effortlessly in both Python and Javascript.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-3-basic-semantics:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 3 - Basic Semantics&lt;/h3&gt;
 
@@ -449,28 +339,224 @@ to see a project bigger than a simple Kata.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-7-algorithm-and-interview-practice:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 7 - Algorithm and Interview Practice&lt;/h3&gt;
 
+&lt;p&gt;At this point we introduce the first non-free material.&lt;/p&gt;
+
 &lt;p&gt;Purchase the book
 &lt;a href=&#34;https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850&#34;&gt;Cracking the Coding Interview&lt;/a&gt;
 and do all the problems in chapters 1-9 in your &amp;ldquo;first job&amp;rdquo; language. If you
-have time, finish all the problems in the whole book. You will find these are
-significantly easier if you use TDD. TDD is supremely effective for algorithmic
-work like the problems presented in this book. While it may seem slower to write
-tests, it truly is faster as you only have to write them once!&lt;/p&gt;
+have time, finish all the problems in the whole book. You will find most of the
+problems are significantly easier if you use TDD. TDD can be very effective for
+algorithmic work like the problems presented in this book. While it may seem
+slower to write tests, you only have to write them once!&lt;/p&gt;
+
+&lt;p&gt;If you want to use only free materials, you can instead work through the
+material on &lt;a href=&#34;http://www.programmerinterview.com/&#34;&gt;ProgrammerInterview.com&lt;/a&gt;. Do
+&amp;ldquo;Design Patterns&amp;rdquo;, &amp;ldquo;Data Structures&amp;rdquo;, and if it is there, the section on your
+language of choice.&lt;/p&gt;
 
 &lt;p&gt;Every couple of problems, take a break and complete another kata using TDD. You
 should be able to complete something like KataTennis in about 30 minutes from
-scratch using TDD. You should be able to also complete any kata using any of the
-following different languages: Javascript, Scheme, Python, and whatever you
-chose to build your small project. Do each kata at least a couple times, until
-it feels fluid and natural. These will help you learn that new language quickly.&lt;/p&gt;
+scratch using TDD. Do each kata at least a couple times, until it feels fluid
+and natural. These will help you learn that new language quickly.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-8-start-interviewing:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 8 - Start Interviewing&lt;/h3&gt;
 
 &lt;p&gt;At this point, you&amp;rsquo;ll be able to pass an entry-level developer interview with a
 very decent success rate. You&amp;rsquo;ll be well versed in the basics of object-oriented
 programming, functional programming, data structures, algorithms, and unit
-testing. You&amp;rsquo;ll have a good grasp of several different programming languages,
-and have a portfolio of code and projects to discuss.&lt;/p&gt;
+testing. You&amp;rsquo;ll have a good grasp of the basics of several different programming
+languages, and have a portfolio of code and projects to discuss.&lt;/p&gt;
+
+&lt;h1 class=&#34;centereded&#34;&gt;Myths&lt;/h1&gt;
+
+&lt;h3 id=&#34;myth-i-need-a-degree-six-months-of-bootcamp:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need a Degree/Six Months of Bootcamp&lt;/h3&gt;
+
+&lt;p&gt;Anyone with desire and drive can learn to program in their spare time. You can
+get a full-time programming job without any schooling or credentials. All you
+you need is hard work, practice, and some basic guidance!&lt;/p&gt;
+
+&lt;h3 id=&#34;myth-i-need-expensive-books-software:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need Expensive Books/Software&lt;/h3&gt;
+
+&lt;p&gt;I have trained many people from zero to full-time programmers. We only used free
+resources to teach them everything they needed. They used free tools like
+Notepad++, Vim, Intellij Community, and Visual Studio Express.&lt;/p&gt;
+
+&lt;h3 id=&#34;myth-i-need-a-fancy-new-computer:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need a Fancy New Computer&lt;/h3&gt;
+
+&lt;p&gt;You can learn everything you need with just an old computer and the internet! If
+it can reliably run notepad and a web browser, it will do just fine. I have been
+a professional developer for almost a decade, and I learned much of what I know
+on an old Acer Aspire One netbook. It barely ran three tabs on Chrome, but it
+got the job done!&lt;/p&gt;
+
+&lt;h3 id=&#34;myth-i-need-to-pick-the-right-language-now:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need to Pick the Right Language Now!&lt;/h3&gt;
+
+&lt;p&gt;The first language you learn should not be your last! Ideally, you will learn
+the basics of two or three languages before getting your first job. Learning
+several different languages is very effective for training developers. Having a
+few under your belt gives you a breadth of understanding that helps you learn
+new concepts faster.&lt;/p&gt;
+
+&lt;p&gt;&lt;/div&gt;
+  &lt;div class=&#34;col-md-3&#34;&gt;
+&lt;h1 &gt;Train With Us&lt;/h1&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;p&gt;
+We offer one-one-one pair-programming and mentorship. Work through katas, get
+feedback through code-review, and practice interview questions together.
+&lt;/p&gt;
+&lt;p&gt;
+Our team of three instructors has over twenty-five years of expertise building
+software solutions. Each of us has years of experience in training and
+pair-programming.
+&lt;/p&gt;
+&lt;p&gt;
+We can instruct in the following languages:
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Perl&lt;/li&gt;
+&lt;LI&gt;PHP&lt;/LI&gt;
+&lt;li&gt;Go&lt;/li&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;li&gt;Android Java&lt;/li&gt;
+&lt;li&gt;C#&lt;/li&gt;
+&lt;li&gt;F#&lt;/li&gt;
+&lt;li&gt;R&lt;/li&gt;
+&lt;li&gt;Javascript&lt;/li&gt;
+&lt;li&gt;Typescript&lt;/li&gt;
+&lt;li&gt;Haskell&lt;/li&gt;
+&lt;li&gt;Common Lisp&lt;/li&gt;
+&lt;li&gt;Racket&lt;/li&gt;
+&lt;li&gt;Scheme&lt;/li&gt;
+&lt;li&gt;Clojure&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Our training is $20/hour. Contact us through &lt;a href=&#34;http://twitter.com/steveshogren&#34;&gt;Twitter&lt;/a&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My Philosophy</title>
+      <link>http://deliberate-software.com/page/philosophy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/page/philosophy/</guid>
+      <description>&lt;div class=&#34;col-md-6&#34;&gt;
+&lt;h1 class=&#34;centereded&#34;&gt;Hi, I am Steve Shogren!&lt;/h1&gt;
+  &lt;p class=&#34;centereded&#34;&gt;
+    I am a developer and manager who has met needs in the financial, education,
+    and publishing industries. I build self-organizing teams and empower them to
+    achieve tremendous business value.
+  &lt;/p&gt;
+  &lt;p class=&#34;centereded&#34;&gt;Effective practice requires discipline. I strive to
+  improve my techincal skills with daily challenges. I use my &lt;a href=&#34;https://www.github.com/steveshogren&#34;&gt;GitHub contributions&lt;/a&gt; as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-3&#34;&gt;
+  &lt;img class=&#34;border&#34; id=&#34;avatar&#34; src=&#34;http://deliberate-software.com//images/me_updated3.png&#34; /&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;div class=&#34;col-md-12&#34;&gt;
+  &lt;h1 class=&#34;centereded&#34;&gt;My Philosophy&lt;/h1&gt;
+&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Strategic&lt;/h2&gt;
+&lt;div class=&#34;col-md-12&#34;&gt;
+    &lt;div class=&#34;col-md-12&#34;&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Small, Self-Organizing Teams
+            &lt;/h3&gt;
+            &lt;p&gt;
+                When carefully mentored, a self-organizing team
+                accomplishes the most business value.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Servant Leadership
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Empowering and trusting your team increases intrinsic
+                motivation, engagement, and productivity.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Measurable Business Value
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Tracking business goals ensures the highest value work
+                is accomplished first.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-12&#34;&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Growth Mindset
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Everyone and everything can be improved. Nothing is sacred.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Deliberate Software
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Disciplined practice prevents common mistakes.
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+            &lt;h3&gt;
+                Sharpest Tools
+            &lt;/h3&gt;
+            &lt;p&gt;
+                Allowing teams to choose the best tools produces the
+                most value.
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 class=&#34;col-md-12 centereded underline&#34;&gt;Tactical&lt;/h2&gt;
+&lt;div class=&#34;col-md-12&#34;&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Pair Programming
+        &lt;/h3&gt;
+        &lt;p&gt;
+            No other practice improves the whole team like pair
+            programming. Prevents skill gaps and knowledge silos.
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Automated Testing
+        &lt;/h3&gt;
+        &lt;p&gt;
+            REPL-driven development, unit testing, and test-driven
+            development enable rapid crafting of high-quality systems.
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;col-md-4 centereded&#34;&gt;
+        &lt;h3&gt;
+            Continuous Integration
+        &lt;/h3&gt;
+        &lt;p&gt;
+            Scaling your team is only possible with accountability, and
+            CI is an excellent way to ensure accountability.
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
 </description>
     </item>
     
