@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Better OOP  &middot; Deliberate Software</title>
+  <title>Increased Reuse in Object-Oriented Programs  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,7 +17,7 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Better OOP  &middot; Deliberate Software ">
+<meta property="og:title" content="Increased Reuse in Object-Oriented Programs  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
 <meta property="og:url" content="http://deliberate-software.com/better-oo-design/" />
 <meta property="og:locale" content="en-us">
@@ -25,8 +25,8 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-06-17T00:00:00Z" />
-<meta property="og:article:modified_time" content="2016-06-17T00:00:00Z" />
+<meta property="og:article:published_time" content="2016-10-31T00:00:00Z" />
+<meta property="og:article:modified_time" content="2016-10-31T00:00:00Z" />
 
   
 
@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Better OOP" />
+<meta name="twitter:title" content="Increased Reuse in Object-Oriented Programs" />
 <meta name="twitter:description" content="" />
 <meta name="twitter:url" content="http://deliberate-software.com/better-oo-design/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
@@ -43,14 +43,14 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Better OOP",
+    "headline": "Increased Reuse in Object-Oriented Programs",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2016-06-17",
+    "datePublished": "2016-10-31",
     "description": "",
-    "wordCount":  863 
+    "wordCount":  968 
   }
 </script>
 
@@ -68,6 +68,8 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
 
 
 
@@ -140,7 +142,7 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
 <div class="text-center">
-  <h1 class="centereded">DRAFT :: BETTER OOP
+  <h1 class="centereded">INCREASED REUSE IN OBJECT-ORIENTED PROGRAMS
 </h1>
 
 
@@ -150,13 +152,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2016-06-17">17 Jun, 2016</time>
+  <time datetime="2016-10-31">31 Oct, 2016</time>
 </small>
 
 
   <small>
   &middot; Read in about 5 min
-  &middot; (863 Words)
+  &middot; (968 Words)
 </small>
 
 
@@ -183,6 +185,16 @@
 <p>The SOLID patterns are not enough to design a reusable and testable code base.
 Two concrete additions can significantly improve your codebase, while
 maintaining the SOLID principals.</p>
+
+<p>The suggestions here do not run counter to traditional SOLID designs, they
+enhance them. SOLID is a fine place to start, but it lacks a critical half of
+good design: polymorphic data. We&rsquo;ve found polymorphic data is far more common
+than polymorphic behavior, so programs designed without that concept often are
+far larger than they need to be.</p>
+
+<blockquote>
+<p>Appropriate application of these concepts will reduce code and allow for easier unit testing</p>
+</blockquote>
 
 <h2 id="terms:0dfbdcea5000bc0e2a150299cf5611d6">Terms</h2>
 
@@ -243,7 +255,7 @@ When you really need polymorphic behavior, use a verb interface. Only use
 verb interfaces for polymorphic behavior, not for unit test mocking.</li>
 </ul>
 
-<p>Here is an example of the patterns:</p>
+<p>Here is an example of the patterns in C#, but it also works in Java:</p>
 
 <pre><code class="language-csharp">// Verb Class
 public class Notifier {
@@ -251,16 +263,16 @@ public class Notifier {
 }
 
 // Noun Interface
-public interface ISalesLead {
+public interface SalesLead {
     boolean IsCustomer {get; set;}
     DateTime ConversionDate {set;}
     int Id {get;}
     Type From {get;}
 }
 
-public class User : ISalesLead { /* User code here ... */ }
-public class Company : ISalesLead { /* Contact code here ... */ }
-public class Government : ISalesLead { /* Government code here ... */ }
+public class User : SalesLead { /* User code here ... */ }
+public class Company : SalesLead { /* Contact code here ... */ }
+public class Government : SalesLead { /* Government code here ... */ }
 
 // Verb Class
 public class SalesRepresentative {
@@ -268,7 +280,7 @@ public class SalesRepresentative {
     internal Action&lt;string, Type, int&gt; broadcast = new Notifier().Broadcast;
 
     // Extract Noun Interfaces
-    public void ConvertToCustomer(ISalesLead lead) {
+    public void ConvertToCustomer(SalesLead lead) {
       if(lead.IsCustomer) {
           return;
       }
@@ -280,8 +292,8 @@ public class SalesRepresentative {
 </code></pre>
 
 <p>While this inversion of nouns and verbs seems counter to traditional OOP advice,
-it is actually a very object-oriented design. We use interfaces to allow
-polymorphic classes which are better suited to model a domain.</p>
+it is actually a very object-oriented design. Noun Interfaces allow for
+polymorphic nouns. Polymorphic nouns allow are better suited to model a domain.</p>
 
 <p>In our example, a <code>User</code> should not know how to convert itself to a
 <code>Customer</code>. A <code>User</code> would not know they had to broadcast their updated
@@ -312,11 +324,13 @@ same function.</p>
 </code></pre>
 
 <p>This tiny, simple noun interface enables incredible re-use. We found the
-<code>IHaveIdentity</code> noun interface on many of our noun classes. It is used
-by hundreds of verb classes throughout the codebase. Verbs like
+<code>IHaveIdentity</code> noun interface on many of our noun classes. It is used by
+hundreds of verb classes throughout the codebase. Verbs like
 <code>MakeDropDownList</code>, <code>QueryById</code>, <code>QueryNamesMatching</code>, and
-<code>CreateAuditTrail</code>. The verb classes can be easily reused, because any new
-noun class that fits the noun interface will work automatically!</p>
+<code>CreateAuditTrail</code>. Those verb classes were easily reused, because any new
+noun class that fits the noun interface works automatically! If we had tried to
+put interfaces on those verbs, we&rsquo;d have a lot of classes with no behavior other
+than just delegating to another class.</p>
 
 <h1 id="conclusion:0dfbdcea5000bc0e2a150299cf5611d6">Conclusion</h1>
 
@@ -343,18 +357,12 @@ keep your codebase clean and best model the domain.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/modern-di/" title="Modern Dependency Injection">
+          <a href="http://deliberate-software.com/pairprogramming/" title="Ten Years of Pair Programming">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/vim-refactoring-patterns/" title="Vim Refactoring Patterns">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   
@@ -382,15 +390,19 @@ keep your codebase clean and best model the domain.</p>
 <span class="col-xs-12 col-sm-12">
     software developer, manager, author, speaker
 </span>
-<h3 class="col-xs-12 col-sm-12" id="name"></h3>
+<h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
 <a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/convincingcoworkers">
     <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
+</a>
+
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
 
 
 
@@ -425,23 +437,23 @@ keep your codebase clean and best model the domain.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/architecture">architecture</a> <span class="badge">5</span>
+            <a href="/categories/architecture">architecture</a> <span class="badge">4</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/clojure">clojure</a> <span class="badge">13</span>
+            <a href="/categories/clojure">clojure</a> <span class="badge">11</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">4</span>
+            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">2</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/csharp">csharp</a> <span class="badge">7</span>
+            <a href="/categories/csharp">csharp</a> <span class="badge">6</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/emacs">emacs</a> <span class="badge">4</span>
+            <a href="/categories/emacs">emacs</a> <span class="badge">3</span>
         </li>
         
         <li class="sidebar_li">
@@ -457,11 +469,11 @@ keep your codebase clean and best model the domain.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/management">management</a> <span class="badge">9</span>
+            <a href="/categories/management">management</a> <span class="badge">10</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/meta-game">meta-game</a> <span class="badge">27</span>
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">25</span>
         </li>
         
         <li class="sidebar_li">
@@ -469,11 +481,11 @@ keep your codebase clean and best model the domain.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">38</span>
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">30</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">11</span>
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">9</span>
         </li>
         
         <li class="sidebar_li">
@@ -534,9 +546,7 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 </script>
 
 
-<script>
-    GitHubCalendar(".calendar", "steveshogren", {global_stats:false});
-</script>
+
 
   </body>
 </html>

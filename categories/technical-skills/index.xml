@@ -6,8 +6,177 @@
     <description>Recent content in Technical Skills on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Oct 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Increased Reuse in Object-Oriented Programs</title>
+      <link>http://deliberate-software.com/better-oo-design/</link>
+      <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/better-oo-design/</guid>
+      <description>
+
+&lt;p&gt;The SOLID patterns are not enough to design a reusable and testable code base.
+Two concrete additions can significantly improve your codebase, while
+maintaining the SOLID principals.&lt;/p&gt;
+
+&lt;p&gt;The suggestions here do not run counter to traditional SOLID designs, they
+enhance them. SOLID is a fine place to start, but it lacks a critical half of
+good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common
+than polymorphic behavior, so programs designed without that concept often are
+far larger than they need to be.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Appropriate application of these concepts will reduce code and allow for easier unit testing&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;terms:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Terms&lt;/h2&gt;
+
+&lt;p&gt;For this post, let&amp;rsquo;s distinguish between &lt;em&gt;verb classes&lt;/em&gt; and &lt;em&gt;noun classes&lt;/em&gt;. Unit
+testing often drives us to separate classes into data structures (the nouns) or
+behavior classes, (the verbs).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Noun class&lt;/strong&gt; - has fields and properties filled with data, perhaps from an ORM.
+
+&lt;ul&gt;
+&lt;li&gt;Example: A &lt;code&gt;Contact&lt;/code&gt; class with a name, billing and shipping addresses,
+a birthday, and a credit card.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Verb class&lt;/strong&gt; - has functions and methods. Verb classes might have fields or
+properties, but usually those only contain other verb classes that are
+needed to compose work.
+
+&lt;ul&gt;
+&lt;li&gt;Example: A &lt;code&gt;CustomerBiller&lt;/code&gt; class that creates an invoice and sends it
+to an address. Only needs a billing and shipping address and an amount.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Noun interface&lt;/strong&gt; - an interface put on a noun class. Used to allow multiple
+nouns to be passed to a single verb. A very common use-case in business
+applications.
+
+&lt;ul&gt;
+&lt;li&gt;Example: &lt;code&gt;ICustomer&lt;/code&gt; interface with a billing and shipping address
+only. Can be used by &lt;code&gt;Contact&lt;/code&gt;, &lt;code&gt;Company&lt;/code&gt;, &lt;code&gt;Government&lt;/code&gt;,
+or any other entity that might like to buy something.&lt;/li&gt;
+&lt;li&gt;Allows a verb to operate on many types of data&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Verb interface&lt;/strong&gt; - an interface put on a verb class. Allows polymorphic
+behavior. Less common than noun interfaces.
+
+&lt;ul&gt;
+&lt;li&gt;Example: &lt;code&gt;IChargeCustomer&lt;/code&gt; interface that allows different kinds of
+charging: one that generates invoices, one that charges credit cards, etc.&lt;/li&gt;
+&lt;li&gt;Allows several types of verbs to be grouped together&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;two-suggestions:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Two Suggestions&lt;/h2&gt;
+
+&lt;p&gt;Two suggestions will guide your codebase to be easier to reuse and test.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Extract Noun Interfaces&lt;/strong&gt; - Work to determine any missing noun interfaces.
+This inversion allows for easier reuse. Any data structure that &amp;ldquo;fits&amp;rdquo; can
+re-use that behavior.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rely on Verb Functions Not Verb Interfaces&lt;/strong&gt; - Replace Dependency
+Injected verb interfaces with function signatures, explained in the
+&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt;
+guide. By relying on the function signature as the default unit of
+abstraction, we remove test-only interfaces. This allows the dependent code to
+have only the functions it needs, rather than everything from the interface.
+When you really need polymorphic behavior, use a verb interface. Only use
+verb interfaces for polymorphic behavior, not for unit test mocking.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is an example of the patterns in C#, but it also works in Java:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;// Verb Class
+public class Notifier {
+    public void Broadcast(string type, Type from, int id) { /* Broadcast code here ...*/ }
+}
+
+// Noun Interface
+public interface SalesLead {
+    boolean IsCustomer {get; set;}
+    DateTime ConversionDate {set;}
+    int Id {get;}
+    Type From {get;}
+}
+
+public class User : SalesLead { /* User code here ... */ }
+public class Company : SalesLead { /* Contact code here ... */ }
+public class Government : SalesLead { /* Government code here ... */ }
+
+// Verb Class
+public class SalesRepresentative {
+    // Rely on Verb Functions Not Verb Interfaces
+    internal Action&amp;lt;string, Type, int&amp;gt; broadcast = new Notifier().Broadcast;
+
+    // Extract Noun Interfaces
+    public void ConvertToCustomer(SalesLead lead) {
+      if(lead.IsCustomer) {
+          return;
+      }
+      lead.IsCustomer = true;
+      lead.ConversionDate = DateTime.Now;
+      broadcast(&amp;quot;CustomerConverted&amp;quot;, lead.From, lead.Id);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While this inversion of nouns and verbs seems counter to traditional OOP advice,
+it is actually a very object-oriented design. Noun Interfaces allow for
+polymorphic nouns. Polymorphic nouns allow are better suited to model a domain.&lt;/p&gt;
+
+&lt;p&gt;In our example, a &lt;code&gt;User&lt;/code&gt; should not know how to convert itself to a
+&lt;code&gt;Customer&lt;/code&gt;. A &lt;code&gt;User&lt;/code&gt; would not know they had to broadcast their updated
+status, or that the date is important to record. To prove it models the domain
+more effectively, notice how it even follows a more English pattern: &amp;ldquo;tell the
+Sales Representative to convert this User&amp;rdquo;. This is much closer than the
+typical: &amp;ldquo;User convert yourself To Customer&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Later, when we want to convert an Employee, a Company, or a Government, we know
+what sort of interface is required to make them into a SalesLead that can be
+converted. By relying on the interface, we are able to restrict
+SalesRepresentative to only have access to the data necessary to convert.&lt;/p&gt;
+
+&lt;h1 id=&#34;case-study:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Case Study&lt;/h1&gt;
+
+&lt;p&gt;We recently examined a 1.3 million line codebase used to collect and track
+interest rates and payments from a user. We found only four uses of verb
+interfaces for polymorphic behavior. On the other hand, there were hundreds of
+noun interfaces used to allow multiple shapes of data to be acted on by the
+same function.&lt;/p&gt;
+
+&lt;p&gt;An obvious example is &lt;code&gt;IHaveIdentity&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface IHaveIdentity {
+    Guid Id {get;}
+    string Name {get;}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This tiny, simple noun interface enables incredible re-use. We found the
+&lt;code&gt;IHaveIdentity&lt;/code&gt; noun interface on many of our noun classes. It is used by
+hundreds of verb classes throughout the codebase. Verbs like
+&lt;code&gt;MakeDropDownList&lt;/code&gt;, &lt;code&gt;QueryById&lt;/code&gt;, &lt;code&gt;QueryNamesMatching&lt;/code&gt;, and
+&lt;code&gt;CreateAuditTrail&lt;/code&gt;. Those verb classes were easily reused, because any new
+noun class that fits the noun interface works automatically! If we had tried to
+put interfaces on those verbs, we&amp;rsquo;d have a lot of classes with no behavior other
+than just delegating to another class.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;These patterns enable significant reuse of functionality. By defaulting to noun
+interfaces, you will find most of your verb classes can be re-used without any
+change. When you need actual polymorphic behavior, use a verb interface. For the
+more common case of unit test behavior replacement, the
+&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt; pattern makes for an easy way to
+keep your codebase clean and best model the domain.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Vim Refactoring Patterns</title>
@@ -2281,230 +2450,6 @@ Code: {{ enforcedNice(selectedLang[check.key].enforced)  }}
 &lt;p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Six Unusual Reasons why Clojure is a Delight</title>
-      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
-      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
-      <description>
-
-&lt;p&gt;Clojure is a delightful language, and here are six uncommonly
-discussed reasons why.&lt;/p&gt;
-
-&lt;h2 id=&#34;1-dead-simple-unit-test-mocking:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;1 - Dead Simple Unit Test Mocking&lt;/h2&gt;
-
-&lt;p&gt;Clojure is the easiest language to unit test I have ever
-seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple
-replacement of the function definition. No extraneous interfaces, no
-dependency injection, no mocking framework.  The built-in function &lt;code&gt;with-redefs&lt;/code&gt;
-will replace any function in any library or
-namespace with a new definition.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn next-id [connection]
-  (+ 1 (get-current-id connection)))
-
-(testing &amp;quot;next-id&amp;quot;
-  ;; bind get-current-id to a lambda that always returns 4 
-  (with-redefs [get-current-id (fn [_] 4)]
-    (is (= 5 (next-id nil)))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We &amp;ldquo;mock&amp;rdquo; the &lt;code&gt;get-current-id&lt;/code&gt; function to always return 4 inside
-the scope of &lt;code&gt;with-redefs&lt;/code&gt;. Couldn&amp;rsquo;t be more simple! The binding
-only is in scope for code inside and called by the s-expression of the
-with-redefs, so no need to unbind it after the test.&lt;/p&gt;
-
-&lt;h2 id=&#34;2-amazing-editing:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;2 - Amazing Editing&lt;/h2&gt;
-
-&lt;p&gt;Many arguments have been made over those contentious
-parentheses. While the most powerful use of s-expressions is to easily
-allow macros, for the day to day, s-expressions have a very important
-use: amazing editing!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;With ParEdit (available in most editors), it is trivial to select,
-move, replace, grow, or shrink any s-expression, string, map, or
-list. &lt;a href=&#34;http://danmidwood.com/content/2014/11/21/animated-paredit.html&#34;&gt;This animated guide&lt;/a&gt;
-shows excellent examples of ParEdit that are too
-complex to explain here.&lt;/p&gt;
-
-&lt;p&gt;Languages that don&amp;rsquo;t have a surrounding delimiter for expressions
-leave you jumping around with the mouse and arrow keys a whole lot more.
-Because it is so much easier to write a parser to select &lt;code&gt;(add 1 2)&lt;/code&gt;
-than it is for &lt;code&gt;add(1, 2)&lt;/code&gt;, the tooling can be so much better.&lt;/p&gt;
-
-&lt;p&gt;No local editing tool I have seen comes close to Vim with ParEdit for
-effective editing.&lt;/p&gt;
-
-&lt;h2 id=&#34;3-live-attached-repl:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;3 - Live Attached Repl&lt;/h2&gt;
-
-&lt;p&gt;Developing in Clojure against a running version of the program is a
-huge bonus for development speed. While possible to get similar
-behavior with an attached debugger in other languages, the fluidity of
-an always-on live attached repl is incredible. At any point, it is
-possible to run and rerun any given expression to see the
-results. More than once, I have seen an exception caused by calling a
-certain function. I trace that function to see the exact inputs that
-cause the exception, and am able to quickly run every line of the
-offending function to see the source.&lt;/p&gt;
-
-&lt;p&gt;If a debugger sheds light on a single line at a time when running an
-application, a live attached repl sheds light on the entire
-application.&lt;/p&gt;
-
-&lt;h2 id=&#34;4-no-fuss-polymorphism:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;4 - No-fuss Polymorphism&lt;/h2&gt;
-
-&lt;p&gt;One of the best claims about &amp;ldquo;traditional&amp;rdquo; Java OO is
-polymorphism. The ability to make an interface with concrete classes
-gives the powerful ability to replace behavior dynamically. The
-trouble is, Java&amp;rsquo;s polymorphic dynamic dispatch is single dispatch - the
-decision of which method to call is limited to a single thing: the
-type of the callee. If this was the only type of dynamic dispatch you
-ever knew of, it might be hard for you to consciously realize it was
-ever a limitation, especially if you&amp;rsquo;ve never seen examples of
-multiple dispatch.&lt;/p&gt;
-
-&lt;p&gt;While most of the time, in any language with first class functions, it
-is possible to achieve a similar effect by passing functions, it is
-also possible to get a similar value with something called multimethods.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti speak :animal)
-(defmethod speak :dog [this] (str &amp;quot;woof says &amp;quot; (:name this)))
-(defmethod speak :cat [this] (str &amp;quot;mow says &amp;quot; (:name this)))
-
-(speak {:animal :dog :id 1 :name &amp;quot;Spike&amp;quot;})
-;; =&amp;gt; &amp;quot;woof says Spike&amp;quot;
-(speak {:animal :cat :id 2 :name &amp;quot;Mr Cat&amp;quot;})
-;; =&amp;gt; &amp;quot;mow says Mr Cat&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In this example, we use the &lt;code&gt;:animal&lt;/code&gt; keyword to be the &amp;ldquo;route&amp;rdquo; function,
-and the two methods fill in two of the possible concrete types. We are
-not limited to just a keyword, we can dispatch on anything on the
-passed map, for example, the oddness of the id:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti odds? (comp odd? :id))
-(defmethod odds? true [d] &amp;quot;odd id&amp;quot;)
-(defmethod odds? false [c] &amp;quot;even id&amp;quot;)
-
-(odds? {:animal :dog :id 1 :name &amp;quot;Spike&amp;quot;})
-;; =&amp;gt; &amp;quot;odd id&amp;quot;
-(odds? {:animal :cat :id 2 :name &amp;quot;Mr Cat&amp;quot;})
-;; =&amp;gt; &amp;quot;even id&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;While both examples are a bit silly, they should demonstrate the power
-of simple polymorphism. But you might think, what about inheritance?
-Multimethods allow that too!&lt;/p&gt;
-
-&lt;h2 id=&#34;5-simple-multiple-inheritance:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;5 - Simple Multiple Inheritance&lt;/h2&gt;
-
-&lt;p&gt;We don&amp;rsquo;t build inheritance on a single type, but on a hierarchy of
-keywords. Those can be dispatched on just like any other
-keyword. First, an example hierarchy of keywords using the built-in
-functions &lt;code&gt;derive&lt;/code&gt; and &lt;code&gt;isa?&lt;/code&gt;. These &lt;code&gt;::&lt;/code&gt; keywords are
-namespaced, which prevents collisions.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(derive ::cat ::mammal)
-(derive ::dog ::mammal)
-(derive ::dog ::hairy)
-(derive ::poodle ::dog)
-
-(isa? ::poodle ::dog)
-;; =&amp;gt; true
-(isa? ::poodle ::mammal)
-;; =&amp;gt; true
-(isa? ::poodle ::hairy)
-;; =&amp;gt; true
-(isa? ::poodle ::cat)
-;; =&amp;gt; false
-(isa? ::mammal ::hairy)
-;; =&amp;gt; false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A &lt;code&gt;::dog&lt;/code&gt; is-a &lt;code&gt;::mammal&lt;/code&gt; and is-a &lt;code&gt;::hairy&lt;/code&gt;, the
-classical diamond problem (without the common ancestor, which is
-possible, but unneeded for the example).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defmulti speak :animal)
-(defmethod speak ::poodle [d] &amp;quot;chirps&amp;quot;)
-(defmethod speak ::mammal [c] &amp;quot;breathes&amp;quot;)
-
-(speak {:animal ::poodle :id 1 :name &amp;quot;Spike&amp;quot;})
-;; =&amp;gt; &amp;quot;chirps&amp;quot;
-(speak {:animal ::dog :id 2 :name &amp;quot;Mr Dog&amp;quot;})
-;; =&amp;gt; &amp;quot;breathes&amp;quot;
-
-(defmulti shave :animal)
-(defmethod shave ::poodle [d] &amp;quot;shivers&amp;quot;)
-(defmethod shave ::hairy [c] &amp;quot;stuggles&amp;quot;)
-(defmethod shave ::mammal [c] &amp;quot;maybe cant be shaved!&amp;quot;)
-(prefer-method shave ::hairy ::mammal)
-
-(shave {:animal ::poodle :id 1 :name &amp;quot;Spike&amp;quot;})
-;; =&amp;gt; &amp;quot;shivers&amp;quot;
-(shave {:animal ::dog :id 2 :name &amp;quot;Rufs&amp;quot;})
-;; =&amp;gt; &amp;quot;stuggles&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We can see the &lt;code&gt;::dog&lt;/code&gt; keyword doesn&amp;rsquo;t have an explicit speak or shave
-implementation, which is fine, because it will then use the &amp;ldquo;preferred&amp;rdquo;
-parent implementation, which returns &amp;ldquo;breathes&amp;rdquo; for speak or
-&amp;ldquo;struggles&amp;rdquo; for shave. Since we can have a keyword be the child of
-multiple parents, we get a multiple inherited behavior, where the
-preferred match is the one returned.&lt;/p&gt;
-
-&lt;p&gt;This is possible because the default equality check of multimethod is
-the &lt;code&gt;isa?&lt;/code&gt; function. Because of this, uses of multimethod
-hierarchies can have inherited behavior for complex structures.&lt;/p&gt;
-
-&lt;h2 id=&#34;6-mostly-monadic:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;6 - Mostly Monadic&lt;/h2&gt;
-
-&lt;p&gt;Languages like Haskell and F# have tools like the maybe monad that add
-safety to operations. For example, using the maybe monad can
-completely prevent null reference exceptions by making you ensure you
-&amp;ldquo;unpack&amp;rdquo; the value every time.&lt;/p&gt;
-
-&lt;p&gt;How does Clojure address this? In a typical Clojure way, which gives
-80% of the value for 20% of the effort, Clojure has a great
-relationship with empty lists and nil. Rather than wrapping every
-value that is nullable in a type, Clojure&amp;rsquo;s default functions all
-&lt;em&gt;mostly&lt;/em&gt; deal with nil and empty without throwing exceptions. For
-example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(get {:id 5} :id)
-;; =&amp;gt; 5
-(get nil :id)
-;; =&amp;gt; nil
-
-(first [3 2 1])
-;; =&amp;gt; 3
-(first nil)
-;; =&amp;gt; nil
-(count nil)
-;; =&amp;gt; 0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This allows functions to be chained without fear that along the way a
-nil will get returned.&lt;/p&gt;
-
-&lt;p&gt;Since most of the core functions are &amp;ldquo;smart&amp;rdquo; about nil, you gain much
-of the value and safety of monads without most of the
-hassle. Ultimately, a more rich type system would allow for custom
-types which can be domain specific, but in day-to-day working,
-primitive safety is still a huge win.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion:8b20eb90a7bf5bd93e271e1b65cf0feb&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;These are a few simple features that keep me coming back to Clojure,
-even from languages like F# and Haskell. While Clojure is a bit more
-wordy than the ML family, and not as type safe, the simplicity of
-these features keep me coming back for more!&lt;/p&gt;
 </description>
     </item>
     

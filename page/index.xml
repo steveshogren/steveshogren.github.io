@@ -87,7 +87,7 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
     </item>
     
     <item>
-      <title>Learn To Program</title>
+      <title>Learn To Program For Free</title>
       <link>http://deliberate-software.com/page/training/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -101,14 +101,11 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
 &lt;p&gt;&#34;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&#34;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;
-If you want to become a full-time developer, it can be intimidating to know
-where to start! Many people get stuck after finishing an online course. We want
-to provide free guidance for anyone who wants to learn enough to get a full-time
-job.
-&lt;/p&gt;
+&lt;p&gt; Breaking into a new career can be intimidating! Many people get stuck after
+finishing an online course like CodeAcademy. We want to provide free guidance
+necessary to get that dream job. &lt;/p&gt;
 
-&lt;h1&gt;Success Stories&lt;/h1&gt;
+&lt;h2&gt;Success Stories&lt;/h2&gt;
 
 &lt;p&gt;
 We have used this course with several people to help them break into full-time
@@ -116,61 +113,71 @@ software developer jobs.
 &lt;/p&gt;
 
 &lt;div class=&#34;col-md-4&#34;&gt;
+    &lt;h3&gt;Rachel B.&lt;/h3&gt;
+    &lt;p&gt;Rachel was working as a baker when we started together. After nine
+months working this course she had her first full-time development job.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;col-md-4&#34;&gt;
     &lt;h3&gt;Ariel S.&lt;/h3&gt;
     &lt;p&gt;Ariel graduated with a degree in music and no technical experience.
 Within eight months she was working as an automated tester, and now manages a
 team of automated testers.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;col-md-4&#34;&gt;
-    &lt;h3&gt;Rachel B.&lt;/h3&gt;
-    &lt;p&gt;Rachel was working as a baker when we started together. After nine
-months of hard work she had her first full-time development job.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;col-md-4&#34;&gt;
     &lt;h3&gt;Ben S.&lt;/h3&gt;
     &lt;p&gt;Ben had a B.A. degree and one basic programming class in high-school.
-He worked hard and had a full-time development job in six months. He now has
+He followed this program and had a full-time development job in six months. He now has
 worked in both front-end and back-end development.&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;h1&gt;The Course&lt;/h1&gt;
+&lt;h2&gt;The Free Course&lt;/h2&gt;
 
-&lt;p&gt;There is no secret for learning how to program: just hard work! Here is the
-up-to-date course we use.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are no shortcuts to learn how to program: just hard work!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The course is broken into sections. Each section builds on the skills in the
+previous sections, so &lt;em&gt;don&amp;rsquo;t skip around&lt;/em&gt;. This is designed to teach the basic
+skills needed to get an entry-level development job.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-1-basic-syntax-and-git:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 1 - Basic Syntax And Git&lt;/h3&gt;
 
-&lt;p&gt;Several fantastic resources exist for learning the basics of programming
-language syntax. I recommend at least one of the following, preferably both:&lt;/p&gt;
+&lt;p&gt;If you are already not familiar with any programming languages, then complete
+both of these:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.codecademy.com/learn/javascript&#34;&gt;CodeAcademy Javascript module&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://learnpythonthehardway.org/&#34;&gt;Learn Python the Hard Way&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;You will also need to sign up for &lt;a href=&#34;www.github.com&#34;&gt;GitHub&lt;/a&gt; and work through
-their tutorial for setting up git on your workstation. Make a repository for the
-code from &amp;ldquo;Learn Python the Hard Way&amp;rdquo;. Every time you get something working, or
-complete an exercise, commit your work.&lt;/p&gt;
+&lt;p&gt;You will also need to sign up for &lt;a href=&#34;http://www.github.com&#34;&gt;GitHub&lt;/a&gt; and work
+through their tutorial to set up git on your computer. Make a repository for the
+code from &amp;ldquo;Learn Python the Hard Way&amp;rdquo;. Commit and push your work every time you
+get something working or complete an exercise.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Commit early, commit often&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Make sure you push your changes as often as possible (at least hourly). If your
-computer ever dies, everything you pushed is backed up. This will have the
-side-effect of giving you an online portfolio of all the work you do.&lt;/p&gt;
+computer ever dies, you will have lost no more than an hour or two of work,
+because everything is backed up. This will have the side-effect of giving you an
+online portfolio of all the work you do.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Immediately commit and push any code you want to keep safe&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Make a new github repository for every new language, book, or project you start.
 By the end of this course, you will have at several repositories of projects and
 book homework. This will be very effective in showing your progress to potential
 employers.&lt;/p&gt;
 
-&lt;h3 id=&#34;step-2-basic-tools:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 2 - Basic Tools&lt;/h3&gt;
+&lt;h3 id=&#34;step-2-powerful-tools:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 2 - Powerful Tools&lt;/h3&gt;
 
-&lt;p&gt;You need to invest in some skills to make your learning faster. You should learn
-how to do something called Test Driven Development. Read through the wikipedia
-page on
+&lt;p&gt;Knowing the best tools for the job will accelerate your learning. Before we get
+too far, you need to invest in some skills to make your learning faster. One of
+the fastest tools we know is called
 &lt;a href=&#34;https://en.wikipedia.org/wiki/Test-driven_development&#34;&gt;Test-driven development&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Read and work through the following post where they show you how to write
@@ -200,18 +207,17 @@ test failure. You can delete the failing test, because it is nonsensical.&lt;/p&
 &lt;a href=&#34;http://codingdojo.org/cgi-bin/index.pl?KataCatalogue&#34;&gt;Kata Catalog&lt;/a&gt;. We
 recommend KataTennis, KataRomanNumerals, and KataBowling.&lt;/p&gt;
 
-&lt;p&gt;For the rest of the course, we recommend you do thirty minutes of kata practice
-every time you sit down. Redo the same kata multiple times, until you can do it
-effortlessly in both Python and Javascript.&lt;/p&gt;
+&lt;p&gt;For the rest of the course, we recommend you do &lt;strong&gt;thirty minutes of kata practice
+every day&lt;/strong&gt;. Redo the same kata multiple times, until you can do it effortlessly
+in both Python and Javascript.&lt;/p&gt;
 
-&lt;h3 id=&#34;step-3-basic-semantics:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 3 - Basic Semantics&lt;/h3&gt;
+&lt;h3 id=&#34;step-3-concrete-foundations:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 3 - Concrete Foundations&lt;/h3&gt;
 
 &lt;p&gt;Armed with the power of TDD and regular kata practice, you need to invest in
 some foundations. These concepts can be a little slow to learn, but they are
-incredibly valuable. To best learn these foundations, we recommend reading and
-completing the exercises of the first three chapters of the textbook
-&lt;a href=&#34;https://mitpress.mit.edu/sicp/full-text/book/book.html&#34;&gt;Structure and Interpretation of Computer Programs&lt;/a&gt;,
-also known as &amp;ldquo;SICP&amp;rdquo;.&lt;/p&gt;
+incredibly valuable. We recommend reading and completing the exercises of the
+first three chapters of the textbook
+&lt;a href=&#34;https://mitpress.mit.edu/sicp/full-text/book/book.html&#34;&gt;Structure and Interpretation of Computer Programs (SICP)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;SICP will help you build a mastery of basic algorithms and data structures,
 which are essential for interviewing practice. Complete the exercises in MIT
@@ -239,39 +245,45 @@ it.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-4-pick-a-language:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 4 - Pick A Language&lt;/h3&gt;
 
-&lt;p&gt;When you have finished the homework in the first three chapters of SICP, you
-will want to select a programming language to get that first job. Any language
-in the &lt;a href=&#34;http://www.tiobe.com/tiobe-index/&#34;&gt;Tiobe top ten&lt;/a&gt; will do.&lt;/p&gt;
+&lt;p&gt;Almost every new programmer feels significant pressure to pick the &amp;ldquo;right
+language&amp;rdquo;. When you have finished the homework in the first three chapters of
+SICP, you will want to select a programming language to get that first job. Any
+language in the &lt;a href=&#34;http://www.tiobe.com/tiobe-index/&#34;&gt;Tiobe top ten&lt;/a&gt; will do just
+fine.&lt;/p&gt;
 
 &lt;p&gt;Many skills of the different software development areas are easily learned, so
 what matters most are the intangibles of the job environment. Do you want to be
 able to go home every day at 5pm? You might want steer clear of video games or
 start-ups. Does the business matter to you? How important is an extra 10-15%
 more pay if the work is otherwise boring? Many boring big-business Java jobs
-make good pay with short hours. You&amp;rsquo;ll want to ask yourself these questions when
-thinking about what domain you want to get into.&lt;/p&gt;
+make good pay with short hours. Many game jobs are rewarding in other ways, as
+you take pride in seeing a product unfold. You&amp;rsquo;ll want to ask yourself these
+questions when thinking about what domain you want to get into.&lt;/p&gt;
 
 &lt;p&gt;Here are some wild generalizations of how different languages are used in the
 industry:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Java or C# are typical for business-oriented big-company jobs&lt;/li&gt;
-&lt;li&gt;Ruby or NodeJS are common in Silicon Valley start-up jobs&lt;/li&gt;
+&lt;li&gt;Java (and some C#) are typical for business-oriented big-company jobs&lt;/li&gt;
+&lt;li&gt;Ruby (and some NodeJS) are common in Silicon Valley start-up jobs&lt;/li&gt;
 &lt;li&gt;Javascript is mandatory for web front-end jobs&lt;/li&gt;
-&lt;li&gt;C++ or C# Unity for most video game jobs&lt;/li&gt;
-&lt;li&gt;Assembly or C for embedded hardware jobs&lt;/li&gt;
+&lt;li&gt;C++ (and some C# Unity) are used for most video game jobs&lt;/li&gt;
+&lt;li&gt;Assembly and C for embedded hardware jobs (more difficult without an
+electrical engineering degree)&lt;/li&gt;
 &lt;li&gt;R or Python for data science or numerical analysis jobs (I wouldn&amp;rsquo;t attempt
-these without a math degree or equivalent)&lt;/li&gt;
+these without an advanced math degree or equivalent)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Take some time to research what people say about these different types of job
 environments, and remember these are just generalizations. Java is used for many
 Android mobile games. People run start-ups in every possible language. Some
 mega-companies have huge Perl desktop applications. As a rule, every language
-can and has been used for every type of application. But if, for example, you
-really want to work in web development, do you want to limit yourself to the one
-company that forces VB6 into the browser, or the tens of thousands that just use
-plain Javascript?&lt;/p&gt;
+can and has been used for every type of application.&lt;/p&gt;
+
+&lt;p&gt;You will have an easier time finding a job if you pick a language is commonly
+used for that domain. For example, you really want to work in web development,
+do you want to limit yourself to the one company that forces VB6 into the
+browser, or the tens of thousands that just use plain Javascript?&lt;/p&gt;
 
 &lt;p&gt;Look around the job boards for languages used in your current location. If you
 want to get a job in Chicago, get a quick count of how many jobs for each
@@ -284,17 +296,28 @@ developers are able to switch languages several times in their careers. This
 language just has to get you that first job.&lt;/p&gt;
 
 &lt;p&gt;If I was picking a good &amp;ldquo;first job&amp;rdquo; language in late 2016, I&amp;rsquo;d pick one of:
-Java, C#, NodeJS, PHP, Python, C++, C, or Ruby. I&amp;rsquo;d likely settle on Java and/or
-front-end Javascript for a combination of practicality and breadth of jobs.
-Remember you can always switch languages and jobs after a few years!&lt;/p&gt;
+Java, C#, NodeJS, PHP, Python, C++, C, or Ruby. I&amp;rsquo;d likely settle on either Java
+or Ruby for a combination of practicality and breadth of jobs. If I lived in a
+place with more Ruby jobs than Java, I&amp;rsquo;d pick Ruby. I would also learn the
+basics of front-end Javascript so I could get into most web jobs. Remember you
+can always switch languages and jobs after a few years!&lt;/p&gt;
 
 &lt;h3 id=&#34;step-5-regularly-go-to-meetups:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 5 - Regularly Go to Meetups&lt;/h3&gt;
 
-&lt;p&gt;When you pick a language, use a site like &lt;a href=&#34;www.meetup.com&#34;&gt;Meetup.com&lt;/a&gt; to find
-local meetups and user groups about that language. In most major cities there
-are typically several free meetups every single day around programming,
-languages, and technology. Most even have free food and door prizes! Find the
-local meetups for your language, and attend every single session.&lt;/p&gt;
+&lt;p&gt;The more people you know in the industry, the more potential contacts you will
+have for finding a great job. A person with less skills and good contacts
+sometimes gets the better job.&lt;/p&gt;
+
+&lt;p&gt;Use a site like &lt;a href=&#34;www.meetup.com&#34;&gt;Meetup.com&lt;/a&gt; to find local meetups and user
+groups in your chosen language. In most major cities there are typically several
+free meetups every single day around programming, languages, and technology.
+Most even have free food and door prizes! Find the local meetups for your
+language, and attend every single session. Go to a minimum of one meetup per
+week.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Who&lt;/strong&gt; you know can be more important than &lt;strong&gt;what&lt;/strong&gt; you know&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;If you are in a more remote location, the meetups might be less specific.
 Instead of a meetup just for PHP, you might have to settle for one just about
@@ -320,37 +343,36 @@ before you start.&lt;/p&gt;
 
 &lt;p&gt;You will want to list out all the things you will need. Perhaps you need a way
 to run a web site, or build an Android game. Maybe you need to store data in a
-file or database. Use the internet to around for tutorials for the simplest
-way to get those tools up and running. For almost any topic, many excellent
-tutorials exist that can guide you to a starting application.&lt;/p&gt;
+file or database. Search the internet for tutorials to get those tools up and
+running. For almost any topic, many excellent tutorials exist that can guide you
+to a starting application.&lt;/p&gt;
 
-&lt;p&gt;Keep a running list of questions, and spend some time each session searching
-for answers. Almost any question you have has been answered on forums, Stack
+&lt;p&gt;Keep a list of questions, and spend some time each session searching for
+answers. Almost any question you have has been answered on forums, Stack
 Overflow, and blogs. If you have Internet, you can teach yourself to build
 almost any sort of programming project.&lt;/p&gt;
 
 &lt;p&gt;Work on this until you have finished enough that you have answered most of your
-own questions and implemented most of your own features. The purpose of this
-exercise is two-fold. It provides you with a list of questions to teach you how
-to research, and the motivation to research them! Second, it gives you a chance
-to see a project bigger than a simple Kata.&lt;/p&gt;
+own questions and implemented most of your own features. A small project
+provides you with a list of questions, and the motivation to learn how to
+research them. Second, a small project teaches you important details and
+technologies you would otherwise miss in katas.&lt;/p&gt;
 
 &lt;h3 id=&#34;step-7-algorithm-and-interview-practice:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 7 - Algorithm and Interview Practice&lt;/h3&gt;
 
-&lt;p&gt;At this point we introduce the first non-free material.&lt;/p&gt;
+&lt;p&gt;At this point we introduce the first non-free material. If you want to use only
+free materials, you can instead work through the questions on
+&lt;a href=&#34;http://www.programmerinterview.com/&#34;&gt;ProgrammerInterview.com&lt;/a&gt;. Do &amp;ldquo;Design
+Patterns&amp;rdquo;, &amp;ldquo;Data Structures&amp;rdquo;, and if it is there, the section on your language
+of choice. Search the internet for interview questions and study them.&lt;/p&gt;
 
-&lt;p&gt;Purchase the book
+&lt;p&gt;If you can afford it, purchase the book
 &lt;a href=&#34;https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850&#34;&gt;Cracking the Coding Interview&lt;/a&gt;
 and do all the problems in chapters 1-9 in your &amp;ldquo;first job&amp;rdquo; language. If you
 have time, finish all the problems in the whole book. You will find most of the
 problems are significantly easier if you use TDD. TDD can be very effective for
 algorithmic work like the problems presented in this book. While it may seem
 slower to write tests, you only have to write them once!&lt;/p&gt;
-
-&lt;p&gt;If you want to use only free materials, you can instead work through the
-material on &lt;a href=&#34;http://www.programmerinterview.com/&#34;&gt;ProgrammerInterview.com&lt;/a&gt;. Do
-&amp;ldquo;Design Patterns&amp;rdquo;, &amp;ldquo;Data Structures&amp;rdquo;, and if it is there, the section on your
-language of choice.&lt;/p&gt;
 
 &lt;p&gt;Every couple of problems, take a break and complete another kata using TDD. You
 should be able to complete something like KataTennis in about 30 minutes from
@@ -360,12 +382,12 @@ and natural. These will help you learn that new language quickly.&lt;/p&gt;
 &lt;h3 id=&#34;step-8-start-interviewing:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Step 8 - Start Interviewing&lt;/h3&gt;
 
 &lt;p&gt;At this point, you&amp;rsquo;ll be able to pass an entry-level developer interview with a
-very decent success rate. You&amp;rsquo;ll be well versed in the basics of object-oriented
+very decent success rate! You&amp;rsquo;ll be well versed in the basics of object-oriented
 programming, functional programming, data structures, algorithms, and unit
 testing. You&amp;rsquo;ll have a good grasp of the basics of several different programming
 languages, and have a portfolio of code and projects to discuss.&lt;/p&gt;
 
-&lt;h1 class=&#34;centereded&#34;&gt;Myths&lt;/h1&gt;
+&lt;h2 class=&#34;centereded&#34;&gt;Myths&lt;/h2&gt;
 
 &lt;h3 id=&#34;myth-i-need-a-degree-six-months-of-bootcamp:6493d41e298135faa05bc270a80fc0e4&#34;&gt;Myth: I Need a Degree/Six Months of Bootcamp&lt;/h3&gt;
 
@@ -396,43 +418,41 @@ few under your belt gives you a breadth of understanding that helps you learn
 new concepts faster.&lt;/p&gt;
 
 &lt;p&gt;&lt;/div&gt;
-  &lt;div class=&#34;col-md-3&#34;&gt;
-&lt;h1 &gt;Train With Us&lt;/h1&gt;&lt;/p&gt;
+  &lt;div class=&#34;col-md-3 sidebarcolor&#34;&gt;
+&lt;h2 class=&#34;centered serif&#34;&gt;Train With Us&lt;/h2&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;p&gt;
 We offer one-one-one pair-programming and mentorship. Work through katas, get
 feedback through code-review, and practice interview questions together.
 &lt;/p&gt;
 &lt;p&gt;
-Our team of three instructors has over twenty-five years of expertise building
-software solutions. Each of us has years of experience in training and
+Our team of three instructors has over thirty years of expertise building
+software solutions. We each have over seven years of experience in training and
 pair-programming.
 &lt;/p&gt;
 &lt;p&gt;
-We can instruct in the following languages:
+We can pair and offer instruction in the following languages:
 &lt;ul&gt;
 &lt;li&gt;Ruby&lt;/li&gt;
-&lt;li&gt;Python&lt;/li&gt;
-&lt;li&gt;Perl&lt;/li&gt;
-&lt;LI&gt;PHP&lt;/LI&gt;
-&lt;li&gt;Go&lt;/li&gt;
-&lt;li&gt;Java&lt;/li&gt;
-&lt;li&gt;Android Java&lt;/li&gt;
 &lt;li&gt;C#&lt;/li&gt;
-&lt;li&gt;F#&lt;/li&gt;
-&lt;li&gt;R&lt;/li&gt;
 &lt;li&gt;Javascript&lt;/li&gt;
 &lt;li&gt;Typescript&lt;/li&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;li&gt;Android Java&lt;/li&gt;
+&lt;li&gt;F#&lt;/li&gt;
 &lt;li&gt;Haskell&lt;/li&gt;
 &lt;li&gt;Common Lisp&lt;/li&gt;
 &lt;li&gt;Racket&lt;/li&gt;
 &lt;li&gt;Scheme&lt;/li&gt;
 &lt;li&gt;Clojure&lt;/li&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Perl&lt;/li&gt;
+&lt;li&gt;PHP&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
 
-&lt;p&gt;Our training is $20/hour. Contact us through &lt;a href=&#34;http://twitter.com/steveshogren&#34;&gt;Twitter&lt;/a&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Our training is $20/hour. Contact us through Steve&amp;rsquo;s &lt;a href=&#34;http://twitter.com/steveshogren&#34;&gt;Twitter&lt;/a&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -647,6 +667,17 @@ We can instruct in the following languages:
 &lt;div class=&#34;col-md-12&#34;&gt;
 
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
+    
+    &lt;li class=&#34;sidebar_li&#34;&gt;
+        &lt;a href=&#34;http://deliberate-software.com/better-oo-design/&#34;&gt;Increased Reuse in Object-Oriented Programs&lt;/a&gt;
+        &lt;span class=&#34;pull-right&#34;&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+        
+        &lt;/span&gt;
+    &lt;/li&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
         &lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;Ten Years of Pair Programming&lt;/a&gt;
