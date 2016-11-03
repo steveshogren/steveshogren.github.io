@@ -669,12 +669,16 @@ We can pair and offer instruction in the following languages:
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
     
     &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/better-oo-design/&#34;&gt;Increased Reuse in Object-Oriented Programs&lt;/a&gt;
+        &lt;a href=&#34;http://deliberate-software.com/better-oo-design/&#34;&gt;OO-Design Part 1: Increased Reuse in Object-Oriented Programs&lt;/a&gt;
         &lt;span class=&#34;pull-right&#34;&gt;
         
             &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
         
             &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/java&#34; class=&#34;label label-default&#34;&gt;java&lt;/a&gt;
+        
+            &lt;a href=&#34;http://deliberate-software.com/categories/oo-design&#34; class=&#34;label label-default&#34;&gt;oo-design&lt;/a&gt;
         
         &lt;/span&gt;
     &lt;/li&gt;

@@ -10,12 +10,14 @@
     <atom:link href="http://deliberate-software.com/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Increased Reuse in Object-Oriented Programs</title>
+      <title>OO-Design Part 1: Increased Reuse in Object-Oriented Programs</title>
       <link>http://deliberate-software.com/better-oo-design/</link>
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/better-oo-design/</guid>
       <description>
+
+&lt;p&gt;Part 1 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;The SOLID patterns are not enough to design a reusable and testable code base.
 Two concrete additions can significantly improve your codebase, while
@@ -72,7 +74,7 @@ charging: one that generates invoices, one that charges credit cards, etc.&lt;/l
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;two-suggestions:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Two Suggestions&lt;/h2&gt;
+&lt;h2 id=&#34;two-changes:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Two Changes&lt;/h2&gt;
 
 &lt;p&gt;Two suggestions will guide your codebase to be easier to reuse and test.&lt;/p&gt;
 
@@ -175,6 +177,8 @@ change. When you need actual polymorphic behavior, use a verb interface. For the
 more common case of unit test behavior replacement, the
 &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt; pattern makes for an easy way to
 keep your codebase clean and best model the domain.&lt;/p&gt;
+
+&lt;p&gt;Next in the series: &lt;a href=&#34;http://deliberate-software.com/anemic-domain-model/&#34;&gt;OO-Design Part 2: Anemic Domain Models Are Healthy&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
