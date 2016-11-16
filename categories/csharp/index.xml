@@ -6,8 +6,88 @@
     <description>Recent content in Csharp on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Oct 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Nov 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
+      <link>http://deliberate-software.com/anemic-domain-model/</link>
+      <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/anemic-domain-model/</guid>
+      <description>
+
+&lt;p&gt;Part 2 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven
+Design. Martin Fowler goes so far as to term the alternative a
+&lt;a href=&#34;http://www.martinfowler.com/bliki/AnemicDomainModel.html&#34;&gt;&amp;ldquo;rich domain model&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A rich domain model makes perfect sense until you attempt to write your first
+unit test. You discover that rich domain models are very hard to test. Not only
+that, but most examples of unit-testing use Anemic Domain Models! Do you really
+have to pick between good testing and good design?&lt;/p&gt;
+
+&lt;h2 id=&#34;let-s-talk-about-purity:2fa9b95203cb46cce1debbec40ac0550&#34;&gt;Let&amp;rsquo;s Talk About Purity&lt;/h2&gt;
+
+&lt;p&gt;Functions are considered &lt;strong&gt;pure&lt;/strong&gt; if they produce the same output when given the
+same input. Addition is a pure function. We expect &lt;code&gt;add(1,1)&lt;/code&gt; will always
+produce &lt;code&gt;2&lt;/code&gt;. Pure functions are the easiest to test. The more logic you have
+in pure functions, the easier your code is to test.&lt;/p&gt;
+
+&lt;p&gt;Consider which of the following is easier to test. A &lt;strong&gt;pure function&lt;/strong&gt; with the
+signature:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;GameState movePlayerNorth(GameState g)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or an &lt;strong&gt;impure function&lt;/strong&gt; with the signature:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;void movePlayerNorth()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first function has explicit inputs and outputs. The second function has
+implicit, hidden state. While the &lt;code&gt;void&lt;/code&gt; function is easier to &lt;em&gt;call&lt;/em&gt;, it
+impurity makes it much harder to &lt;em&gt;test&lt;/em&gt;. Testing a impure function requires
+implicit state to be setup before each test. Since GameState is encapsulated,
+you would need to either expose it (breaking encapsulation) or call dozens of
+methods to get it into the correct state for your test!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Encapsulation is &lt;del&gt;a rich domain model&lt;/del&gt; &lt;strong&gt;impure&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The point of encapsulation is to hide state from the caller; it is impure by
+definition. Impure functions require global or class-level state to operate.&lt;/p&gt;
+
+&lt;p&gt;Pure functions have been maligned as a bad design. Purity has been given nasty
+sounding names like &amp;ldquo;anemic domain model&amp;rdquo; or &amp;ldquo;exposed state&amp;rdquo;. In reality, there
+is nothing wrong with pure programming, it produces good designs that are easy
+to understand and test.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Purity is a good design!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We should strive for purity as much as possible. In most languages, purity is an
+ideal to strive for, not a goal that can ever be fully achieved. Language
+features like exceptions and null will always prevent complete purity.&lt;/p&gt;
+
+&lt;p&gt;Purity in object-oriented languages is always on a continuum. Most codebases
+have a variety of functions: some pure, some impure. On the one side you have
+rich domain models with completely encapsulated state and void methods. On the
+other side you have easily-tested code with pure functions and separate data
+structures.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Encapsulation (Impure) |------------------------| Pure functions
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need or desire testability, strive to put as much logic as possible
+inside pure functions. Avoid encapsulated state: put all state in data
+structures with all public fields. Strive to make your codebase as pure as
+possible.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>OO-Design Part 1: Increasing Reuse With Noun Interfaces</title>
@@ -277,86 +357,6 @@ class in production. Each interface with a single concrete class is test-only
 boilerplate that can safely replaced with a lambda!&lt;/p&gt;
 
 &lt;p&gt;For more examples, &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;check out SimpleMock!&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
-      <link>http://deliberate-software.com/anemic-domain-model/</link>
-      <pubDate>Fri, 22 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/anemic-domain-model/</guid>
-      <description>
-
-&lt;p&gt;Part 2 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven
-Design. Martin Fowler goes so far as to term the alternative a
-&lt;a href=&#34;http://www.martinfowler.com/bliki/AnemicDomainModel.html&#34;&gt;&amp;ldquo;rich domain model&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A rich domain model makes perfect sense until you attempt to write your first
-unit test. You discover that rich domain models are very hard to test. Not only
-that, but most examples of unit-testing use Anemic Domain Models! Do you really
-have to pick between good testing and good design?&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-talk-about-purity:2fa9b95203cb46cce1debbec40ac0550&#34;&gt;Let&amp;rsquo;s Talk About Purity&lt;/h2&gt;
-
-&lt;p&gt;Functions are considered &lt;strong&gt;pure&lt;/strong&gt; if they produce the same output when given the
-same input. Addition is a pure function. We expect &lt;code&gt;add(1,1)&lt;/code&gt; will always
-produce &lt;code&gt;2&lt;/code&gt;. Pure functions are the easiest to test. The more logic you have
-in pure functions, the easier your code is to test.&lt;/p&gt;
-
-&lt;p&gt;Consider which of the following is easier to test. A &lt;strong&gt;pure function&lt;/strong&gt; with the
-signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;GameState movePlayerNorth(GameState g)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or an &lt;strong&gt;impure function&lt;/strong&gt; with the signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;void movePlayerNorth()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The first function has explicit inputs and outputs. The second function has
-implicit, hidden state. While the &lt;code&gt;void&lt;/code&gt; function is easier to &lt;em&gt;call&lt;/em&gt;, it
-impurity makes it much harder to &lt;em&gt;test&lt;/em&gt;. Testing a impure function requires
-implicit state to be setup before each test. Since GameState is encapsulated,
-you would need to either expose it (breaking encapsulation) or call dozens of
-methods to get it into the correct state for your test!&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Encapsulation is &lt;del&gt;a rich domain model&lt;/del&gt; &lt;strong&gt;impure&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The point of encapsulation is to hide state from the caller; it is impure by
-definition. Impure functions require global or class-level state to operate.&lt;/p&gt;
-
-&lt;p&gt;Pure functions have been maligned as a bad design. Purity has been given nasty
-sounding names like &amp;ldquo;anemic domain model&amp;rdquo; or &amp;ldquo;exposed state&amp;rdquo;. In reality, there
-is nothing wrong with pure programming, it produces good designs that are easy
-to understand and test.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Purity is a good design!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We should strive for purity as much as possible. In most languages, purity is an
-ideal to strive for, not a goal that can ever be fully achieved. Language
-features like exceptions and null will always prevent complete purity.&lt;/p&gt;
-
-&lt;p&gt;Purity in object-oriented languages is always on a continuum. Most codebases
-have a variety of functions: some pure, some impure. On the one side you have
-rich domain models with completely encapsulated state and void methods. On the
-other side you have easily-tested code with pure functions and separate data
-structures.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Encapsulation (Impure) |------------------------| Pure functions
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you need or desire testability, strive to put as much logic as possible
-inside pure functions. Avoid encapsulated state: put all state in data
-structures with all public fields. Strive to make your codebase as pure as
-possible.&lt;/p&gt;
 </description>
     </item>
     
