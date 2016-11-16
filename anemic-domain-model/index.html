@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Anemic Domain Models Are Healthy  &middot; Deliberate Software</title>
+  <title>OO-Design Part 2: Anemic Domain Models Are Healthy  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,7 +17,7 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Anemic Domain Models Are Healthy  &middot; Deliberate Software ">
+<meta property="og:title" content="OO-Design Part 2: Anemic Domain Models Are Healthy  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
 <meta property="og:url" content="http://deliberate-software.com/anemic-domain-model/" />
 <meta property="og:locale" content="en-us">
@@ -34,7 +34,7 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Anemic Domain Models Are Healthy" />
+<meta name="twitter:title" content="OO-Design Part 2: Anemic Domain Models Are Healthy" />
 <meta name="twitter:description" content="" />
 <meta name="twitter:url" content="http://deliberate-software.com/anemic-domain-model/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
@@ -43,14 +43,14 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Anemic Domain Models Are Healthy",
+    "headline": "OO-Design Part 2: Anemic Domain Models Are Healthy",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
     "datePublished": "2016-04-22",
     "description": "",
-    "wordCount":  223 
+    "wordCount":  450 
   }
 </script>
 
@@ -68,6 +68,8 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
 
 
 
@@ -140,7 +142,7 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
             
 <div class="text-center">
-  <h1 class="centereded">DRAFT :: ANEMIC DOMAIN MODELS ARE HEALTHY
+  <h1 class="centereded">OO-DESIGN PART 2: ANEMIC DOMAIN MODELS ARE HEALTHY
 </h1>
 
 
@@ -155,8 +157,8 @@
 
 
   <small>
-  &middot; Read in about 2 min
-  &middot; (223 Words)
+  &middot; Read in about 3 min
+  &middot; (450 Words)
 </small>
 
 
@@ -165,6 +167,12 @@
   <i class="fa fa-tags"></i>
   
   <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
+  
+  <a href="http://deliberate-software.com/categories/java" class="label label-default">java</a>
+  
+  <a href="http://deliberate-software.com/categories/oo-design" class="label label-default">oo-design</a>
   
 
  </div>
@@ -176,36 +184,77 @@
             <div class="">
     
   <div class="content">
-    <p>The &ldquo;Anemic Domain Model&rdquo; is often quoted as being an anti-pattern in
-Domain-Driven Design. Martin Fowler goes so far as to term the alternative a
+    
+
+<p>Part 2 of the series <a href="/categories/oo-design/">OO-Design</a></p>
+
+<p>The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven
+Design. Martin Fowler goes so far as to term the alternative a
 <a href="http://www.martinfowler.com/bliki/AnemicDomainModel.html">&ldquo;rich domain model&rdquo;</a>.</p>
 
-<p>Unfortunately, in a language like Java or C#, an &ldquo;Anemic Domain Model&rdquo; is one of
-the best ways to unit test your code!</p>
+<p>A rich domain model makes perfect sense until you attempt to write your first
+unit test. You discover that rich domain models are very hard to test. Not only
+that, but most examples of unit-testing use Anemic Domain Models! Do you really
+have to pick between good testing and good design?</p>
 
-<p>Which is easier to test? A function with the signature:</p>
+<h2 id="let-s-talk-about-purity:2fa9b95203cb46cce1debbec40ac0550">Let&rsquo;s Talk About Purity</h2>
 
-<p><code>GameState movePlayerNorth(GameState g)</code></p>
+<p>Functions are considered <strong>pure</strong> if they produce the same output when given the
+same input. Addition is a pure function. We expect <code>add(1,1)</code> will always
+produce <code>2</code>. Pure functions are the easiest to test. The more logic you have
+in pure functions, the easier your code is to test.</p>
 
-<p>or a function with the signature:</p>
+<p>Consider which of the following is easier to test. A <strong>pure function</strong> with the
+signature:</p>
 
-<p><code>void movePlayerNorth()</code></p>
+<pre><code class="language-java">GameState movePlayerNorth(GameState g)
+</code></pre>
 
-<p>One has explicit inputs and outputs. The other has implicit and hidden state and
-no return. While the <code>void</code> function is easier to <em>call</em>, it is much harder
-to test. To test the <code>void</code> function, we have to expose the internal
-<code>GameState</code> in some other way that breaks encapsulation.</p>
+<p>or an <strong>impure function</strong> with the signature:</p>
 
-<p>The idea of a rich domain model is not inherently bad, but it makes unit-testing
-so much harder. Object-oriented design is a continuum. On the one end, you have
-the rich domain models with lots of encapsulated state and void methods, and on
-the other you have easily-tested SOLID with lots of functions with no
-encapsulated state.</p>
+<pre><code class="language-java">void movePlayerNorth()
+</code></pre>
 
-<p>If you need testability, choose the SOLID patterns with small stateless
-functions. Don&rsquo;t encapsulate state, put it in a data structure with all public
-fields and pass it to functions. If you don&rsquo;t need to be able to test, choose
-the rich domain model patterns.</p>
+<p>The first function has explicit inputs and outputs. The second function has
+implicit, hidden state. While the <code>void</code> function is easier to <em>call</em>, it
+impurity makes it much harder to <em>test</em>. Testing a impure function requires
+implicit state to be setup before each test. Since GameState is encapsulated,
+you would need to either expose it (breaking encapsulation) or call dozens of
+methods to get it into the correct state for your test!</p>
+
+<blockquote>
+<p>Encapsulation is <del>a rich domain model</del> <strong>impure</strong>.</p>
+</blockquote>
+
+<p>The point of encapsulation is to hide state from the caller; it is impure by
+definition. Impure functions require global or class-level state to operate.</p>
+
+<p>Pure functions have been maligned as a bad design. Purity has been given nasty
+sounding names like &ldquo;anemic domain model&rdquo; or &ldquo;exposed state&rdquo;. In reality, there
+is nothing wrong with pure programming, it produces good designs that are easy
+to understand and test.</p>
+
+<blockquote>
+<p>Purity is a good design!</p>
+</blockquote>
+
+<p>We should strive for purity as much as possible. In most languages, purity is an
+ideal to strive for, not a goal that can ever be fully achieved. Language
+features like exceptions and null will always prevent complete purity.</p>
+
+<p>Purity in object-oriented languages is always on a continuum. Most codebases
+have a variety of functions: some pure, some impure. On the one side you have
+rich domain models with completely encapsulated state and void methods. On the
+other side you have easily-tested code with pure functions and separate data
+structures.</p>
+
+<pre><code class="language-java">Encapsulation (Impure) |------------------------| Pure functions
+</code></pre>
+
+<p>If you need or desire testability, strive to put as much logic as possible
+inside pure functions. Avoid encapsulated state: put all state in data
+structures with all public fields. Strive to make your codebase as pure as
+possible.</p>
 
   </div>
 </div>
@@ -223,7 +272,7 @@ the rich domain model patterns.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/offer-negotiation/" title="Offer Negotiation">
+          <a href="http://deliberate-software.com/figwheel-angular2/" title="Hot Loading Angular2 With State">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
@@ -262,15 +311,19 @@ the rich domain model patterns.</p>
 <span class="col-xs-12 col-sm-12">
     software developer, manager, author, speaker
 </span>
-<h3 class="col-xs-12 col-sm-12" id="name"></h3>
+<h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/convincingcoworkers">
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
     <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
-<span class="col-xs-3 col-sm-4 col-md-3"></span>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
+</a>
+
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
 
 
 
@@ -305,15 +358,15 @@ the rich domain model patterns.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/architecture">architecture</a> <span class="badge">5</span>
+            <a href="/categories/architecture">architecture</a> <span class="badge">4</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/clojure">clojure</a> <span class="badge">13</span>
+            <a href="/categories/clojure">clojure</a> <span class="badge">11</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">4</span>
+            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">2</span>
         </li>
         
         <li class="sidebar_li">
@@ -321,7 +374,7 @@ the rich domain model patterns.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/emacs">emacs</a> <span class="badge">4</span>
+            <a href="/categories/emacs">emacs</a> <span class="badge">3</span>
         </li>
         
         <li class="sidebar_li">
@@ -337,11 +390,19 @@ the rich domain model patterns.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/management">management</a> <span class="badge">9</span>
+            <a href="/categories/java">java</a> <span class="badge">2</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/meta-game">meta-game</a> <span class="badge">27</span>
+            <a href="/categories/management">management</a> <span class="badge">10</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">25</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/oo-design">oo-design</a> <span class="badge">2</span>
         </li>
         
         <li class="sidebar_li">
@@ -349,11 +410,11 @@ the rich domain model patterns.</p>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">38</span>
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">31</span>
         </li>
         
         <li class="sidebar_li">
-            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">11</span>
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">9</span>
         </li>
         
         <li class="sidebar_li">
@@ -414,9 +475,7 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 </script>
 
 
-<script>
-    GitHubCalendar(".calendar", "steveshogren", {global_stats:false});
-</script>
+
 
   </body>
 </html>
