@@ -139,18 +139,22 @@
 </header>
 
 
+
+<div class="centereded btn-primary btn-lg pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-            
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
 <div class="text-center">
-  <h1 class="centereded">ACTIVE RECORD PATTERN TESTING
+  <h1 class="centereded">Active Record Pattern Testing
 </h1>
 
 
-  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+  
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
@@ -177,7 +181,7 @@
 
 </div>
 
-            <div class="">
+      <div class="">
     
   <div class="content">
     <p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
@@ -186,7 +190,7 @@
 </div>
 
 
-            <footer>
+      <footer>
   <div class="centereded">
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -218,9 +222,9 @@
 
 </footer>
 
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
 
 
 
@@ -234,13 +238,14 @@
 <h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
-    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
 </a>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
-    <img class="book" src="/images/vim.jpg"></img>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
@@ -344,8 +349,42 @@
     </ul>
 </div>
 
-        </div>
+<script type="text/javascript">
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  
+  while (0 !== currentIndex) {
+
+    
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with"
+ ];
+x=document.getElementsByClassName('thevimlink');
+for(var i = 0; i < x.length; i++){
+  x[i].innerText = shuffle(linkTexts)[0];
+}
+</script>
+
     </div>
+  </div>
 </div>
       <footer class="footer">
     <div class="container hidden-print">
@@ -355,7 +394,7 @@
   <a class="toplink" href="#">back to top</a>
 </div>
 <div class="pull-right">
-  
+
 </div>
 
         </div>
@@ -399,4 +438,5 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 
   </body>
 </html>
+
 

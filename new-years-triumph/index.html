@@ -139,18 +139,22 @@
 </header>
 
 
+
+<div class="centereded btn-primary btn-lg pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-            
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
 <div class="text-center">
-  <h1 class="centereded">NEW YEARS ANDROID TRIUMPH
+  <h1 class="centereded">New Years Android Triumph
 </h1>
 
 
-  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+  
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
@@ -177,7 +181,7 @@
 
 </div>
 
-            <div class="">
+      <div class="">
     
   <div class="content">
     <p>December 1st, I made myself a New Year's resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.<p />The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours. I basically had a "buggy beta" by Wednesday morning, and all the problems remaining were ones I didn't know how to solve or hide, and while all the graphics where there, I could barely stand to look at them. I felt like I was spinning my wheels with no progress. My friend Dan tried to talk me down, pointing out with some clarity that there was no gun to my head, and I was doing this for myself, so I could stop any time. Amusingly enough, that was exactly what I needed to hear. I was doing this for myself, to better myself, to learn more discipline. I wanted to stretch my abilities to the limits. So, I pushed through. I found a book that showed me how to fix my problems, and I didn't stop until every bug I could find was fixed, and everything my poor family pointed out (I made them each play it like a dozen different times) was smoothed.<p />  And last night, after about a hundred hours of total work this month, I slid under the wire with roughly two hours to spare. The game is not in the market YET, because at the end of it all, I concluded I would rather spend the few dozen more hours to convert it to OpenGL ES, and add in a few neat things I was unable to do using the Android canvas, but for a v1, I am immensely proud of the whole experience.<p />I can say, unequivocally; WHEW. <p />This challenge was a fantastic learning experience, and I had several great reminders of what my dad always told me growing up: <strong>just work smarter, son, not harder</strong>.</p>
@@ -186,7 +190,7 @@
 </div>
 
 
-            <footer>
+      <footer>
   <div class="centereded">
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -224,9 +228,9 @@
 
 </footer>
 
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
 
 
 
@@ -240,13 +244,14 @@
 <h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
-    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
 </a>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
-    <img class="book" src="/images/vim.jpg"></img>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
@@ -350,8 +355,42 @@
     </ul>
 </div>
 
-        </div>
+<script type="text/javascript">
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  
+  while (0 !== currentIndex) {
+
+    
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with"
+ ];
+x=document.getElementsByClassName('thevimlink');
+for(var i = 0; i < x.length; i++){
+  x[i].innerText = shuffle(linkTexts)[0];
+}
+</script>
+
     </div>
+  </div>
 </div>
       <footer class="footer">
     <div class="container hidden-print">
@@ -361,7 +400,7 @@
   <a class="toplink" href="#">back to top</a>
 </div>
 <div class="pull-right">
-  
+
 </div>
 
         </div>
@@ -405,4 +444,5 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 
   </body>
 </html>
+
 

@@ -139,18 +139,22 @@
 </header>
 
 
+
+<div class="centereded btn-primary btn-lg pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-            
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
 <div class="text-center">
-  <h1 class="centereded">WHY I CAN&#39;T PICK A LANGUAGE
+  <h1 class="centereded">Why I Can&#39;t Pick A Language
 </h1>
 
 
-  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+  
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
@@ -177,7 +181,7 @@
 
 </div>
 
-            <div class="">
+      <div class="">
     
   <div class="content">
     <p>I can't get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts out so I can get back to work.<p />I got a call from a recruiter the other day trying to get me to come interview at this job. Right now I am working in VB.NET and Actionscript. Until this job, I was always working in open-source languages: Perl, PHP, and some Java. This is my first real divergence from that pattern, and of course it is in two languages that are, to say the least, not very popular with the open source crowd. This gets me wondering, "what if when I decide to move on, all the fun jobs look down their noses at me for working in unpopular languages?".<p /> To be fair, I still program quite a bit outside work in my favorite languages, and that is all well and good.<p />For some reason though, that recruiter really got under my skin. I keep asking myself questions like, "is spending time right now making a Java game for the Android a good choice long term?" or, "should I spend any more time learning Python with Django, or just get more invested in Javascript and node.js?".<p /> These are not questions I want to be asking myself. <p />So, I sit down to think about it and get it out of my system. What kind of programmer do I want to be in 5 years? I know without a moment's hesitation. <p /> <strong>I want to be the kind of programmer who is not tied to any one language or platform, but is instantly effective and rapidly excellent in </strong><strong><em>every</em> language and platform. </strong><p />Right now, I am learning Common Lisp. Why? To learn better functional programming. Why do I play with Javascript? To be better at client-side web programming. PHP/Python? Server-side web programming. *.NET? Compiled, versioned programming. Android games? For fun! Why do I all this? Because the programmer I want to be is not constrained to his language/platform<em> at all</em>. The programmer I want to be programs at a level <em>over the language</em>.&nbsp;</p>
@@ -186,7 +190,7 @@
 </div>
 
 
-            <footer>
+      <footer>
   <div class="centereded">
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -224,9 +228,9 @@
 
 </footer>
 
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
 
 
 
@@ -240,13 +244,14 @@
 <h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
-    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
 </a>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
-    <img class="book" src="/images/vim.jpg"></img>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
@@ -350,8 +355,42 @@
     </ul>
 </div>
 
-        </div>
+<script type="text/javascript">
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  
+  while (0 !== currentIndex) {
+
+    
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with"
+ ];
+x=document.getElementsByClassName('thevimlink');
+for(var i = 0; i < x.length; i++){
+  x[i].innerText = shuffle(linkTexts)[0];
+}
+</script>
+
     </div>
+  </div>
 </div>
       <footer class="footer">
     <div class="container hidden-print">
@@ -361,7 +400,7 @@
   <a class="toplink" href="#">back to top</a>
 </div>
 <div class="pull-right">
-  
+
 </div>
 
         </div>
@@ -405,4 +444,5 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 
   </body>
 </html>
+
 

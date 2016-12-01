@@ -4,6 +4,10 @@
     background-color: #ADD8E6;
 }
 
+.icon-bar {
+    background-color: black !important ;
+}
+
 /* #name { */
 /*     font-family: "PT Serif","Georgia","Helvetica Neue",Arial,sans-serif; */
 /* } */
@@ -17,9 +21,18 @@
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
     margin-bottom: 0px;
+    padding-bottom: 25px !important;
 }
 .homecontainer {
     padding-top: 0px !important;
+}
+
+.pagetopbookbar {
+    padding:46px 0px 1px 0px;
+}
+
+.homebookbar {
+    padding: 1px 0px 1px 0px;
 }
 
 .border {
@@ -144,8 +157,8 @@ body {
     background-color: #f5f5f5;
 }
 
-body > .container {
-    padding: 60px 15px 0;
+.containerwithgap {
+     padding: 45px 15px 0;
 }
 
 .nopadding {

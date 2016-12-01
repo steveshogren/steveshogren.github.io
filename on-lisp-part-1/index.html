@@ -139,18 +139,22 @@
 </header>
 
 
+
+<div class="centereded btn-primary btn-lg pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-            
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
 <div class="text-center">
-  <h1 class="centereded">WHY LISP
+  <h1 class="centereded">Why Lisp
 </h1>
 
 
-  <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+  
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
@@ -177,7 +181,7 @@
 
 </div>
 
-            <div class="">
+      <div class="">
     
   <div class="content">
     <p>I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering <a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a> from JetBrains. When I heard about <a href="http://landoflisp.com/">Land of Lisp</a>, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.<p /> And through it all, I never had even the slightest inkling of why <a href="http://thecleancoder.blogspot.com/2010/08/why-clojure.html">everyone</a> says you <a href="http://xahlee.org/UnixResource_dir/writ/wl_lisp.html">should </a>learn <a href="http://norvig.com/21-days.html">lisp</a>. <a href="http://bc.tech.coop/blog/040314.html">These guys too</a>. <p /> What is the deal? Surely, I am using it wrong. Everyone who learns it raves, and yet after using it off and on for several years, all I see is just another language, with a steeper learning curve from the non-C, non-VB syntax.<p /> Then, last week, <a href="http://www.defmacro.org/ramblings/lisp.html">this</a> article came across my browser.<p />I read just the first quarter, and there was a riot in my brain.</p>
@@ -186,7 +190,7 @@
 </div>
 
 
-            <footer>
+      <footer>
   <div class="centereded">
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -224,9 +228,9 @@
 
 </footer>
 
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-            <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
 
 
 
@@ -240,13 +244,14 @@
 <h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
-    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
 </a>
 
 
-<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
-    <img class="book" src="/images/vim.jpg"></img>
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
@@ -350,8 +355,42 @@
     </ul>
 </div>
 
-        </div>
+<script type="text/javascript">
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  
+  while (0 !== currentIndex) {
+
+    
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with"
+ ];
+x=document.getElementsByClassName('thevimlink');
+for(var i = 0; i < x.length; i++){
+  x[i].innerText = shuffle(linkTexts)[0];
+}
+</script>
+
     </div>
+  </div>
 </div>
       <footer class="footer">
     <div class="container hidden-print">
@@ -361,7 +400,7 @@
   <a class="toplink" href="#">back to top</a>
 </div>
 <div class="pull-right">
-  
+
 </div>
 
         </div>
@@ -405,4 +444,5 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 
   </body>
 </html>
+
 
