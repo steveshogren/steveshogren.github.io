@@ -6,8 +6,88 @@
     <description>Recent content in Technical Skills on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Nov 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coq: Day 1</title>
+      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <description>
+
+&lt;p&gt;Day one working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;.
+Since I like to rant, and rant&amp;rsquo;s help me learn, COMMENCE RANT.&lt;/p&gt;
+
+&lt;h2 id=&#34;precise-syntax:d783984b511a831eab41153f3c57c2bb&#34;&gt;Precise Syntax&lt;/h2&gt;
+
+&lt;p&gt;I copied a sample from the book by hand, but it always caused Company-Coq to go
+into an &lt;strong&gt;infinite loop&lt;/strong&gt;. I copied it again. Same deal.&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But
+alas, it still fails.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Where the heck is it? I am losing my mind for 20 minutes looking back and forth
+trying to figure out what I am missing. I seek the advice of a friend, he
+suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb&#34;&gt;It fails on one line.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;wait:d783984b511a831eab41153f3c57c2bb&#34;&gt;Wait.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;thats:d783984b511a831eab41153f3c57c2bb&#34;&gt;Thats&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;but:d783984b511a831eab41153f3c57c2bb&#34;&gt;But&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;no:d783984b511a831eab41153f3c57c2bb&#34;&gt;NO!!!!!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb&#34;&gt;Coq is WHITE-SPACE SENSITIVE?!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/angry.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;YEP! I add that space in, and it works fine!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
@@ -78,9 +158,6 @@ have a variety of functions: some pure, some impure. On the one side you have
 rich domain models with completely encapsulated state and void methods. On the
 other side you have easily-tested code with pure functions and separate data
 structures.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Encapsulation (Impure) |------------------------| Pure functions
-&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you need or desire testability, strive to put as much logic as possible
 inside pure functions. Avoid encapsulated state: put all state in data
@@ -2216,116 +2293,6 @@ it along with a thanks on the page.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Case Study: Superior Domain Modeling in F#</title>
-      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
-      <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
-      <description>&lt;p&gt;Domain modeling in F# is significantly easier and safer than with the
-traditional .NET languages. This is because of the increased safety of
-pattern matching and the expressiveness of discriminated unions. These
-concepts are not in C# or VB.NET, and therefore bring a new tool to
-the table.&lt;/p&gt;
-
-&lt;p&gt;To illustrate this, I found some old code I&amp;rsquo;d written to interact with
-a legacy system. The system uses many single enums on a record to keep
-track of statuses. When one changes, it can cause others to change as
-well.&lt;/p&gt;
-
-&lt;p&gt;Here is a typical function that combines two enums to recalculate a
-third.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public static PositionType GetPositionType (MovementType movementType, ApplyToParty applyToParty)
-{
-    if ((movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-        || (movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-        return PositionType.Held;
-    if ((movementType == MovementType.Return &amp;amp;&amp;amp; applyToParty == ApplyToParty.Principal)
-        || (movementType == MovementType.Deliver &amp;amp;&amp;amp; applyToParty == ApplyToParty.Counterparty))
-        return PositionType.Posted;
-
-    return PositionType.Undefined;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With some regularity, new records are added to these types of enums,
-causing a dangerous search and update across the system fixing all the
-if/else or switch/case statements.&lt;/p&gt;
-
-&lt;p&gt;Right off the bat, pattern matching is a huge win here, taking a hard
-to comprehend function and making the domain concepts clear.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetPositionType = function
-    | Deliver, Principal | Return, Counterparty -&amp;gt; Held
-    | Return, Principal | Deliver, Counterparty -&amp;gt; Posted
-    | MovementType.Undefined, _ | _, ApplyToParty.Undefined -&amp;gt; PositionType.Undefined
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If we add a new status to any of these, we will get a compiler warning
-in every place letting us know. If that alone was the win, we&amp;rsquo;d be
-still be ahead by a lot. The domain is so clear here, I can print this
-code out and hand it to my BA to ensure the logic is correct.&lt;/p&gt;
-
-&lt;p&gt;Next though, this got me thinking. Why does this set of three enums
-have to be calculated? Why are they even separate? Ah, of course,
-right now they are stored in the database and ORM objects, each with a
-separate field and set of enum ids. Changing that would be costly.&lt;/p&gt;
-
-&lt;p&gt;What I want is a domain layer a level higher than the typical database
-ORM classes, something to convert my ORM classes into that will be
-able to do work in a safer way.&lt;/p&gt;
-
-&lt;p&gt;Rather than three enums that are supposed to change in lock step (but
-might get out of date), I really want a concept of the three combined
-and &amp;ldquo;frozen&amp;rdquo; together.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;type Direction = 
-    | Held_Deliver_Principal
-    | Held_Return_Counterparty
-    | Posted_Return_Principal
-    | Posted_Deliver_Counterparty
-    
-let GetDirection = function
-   | Deliver, Principal  -&amp;gt; Held_Deliver_Principal
-   | Return, Counterparty -&amp;gt; Held_Return_Counterparty
-   | Return, Principal -&amp;gt; Posted_Return_Principal
-   | Deliver, Counterparty -&amp;gt; Posted_Deliver_Counterparty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now I have a combined Direction that merges the three concepts into
-one. It is impossible with this new merged type to have an invalid
-state across the three. Getting any of the types back out to convert
-into the ORM classes or do some work is as simple as another match:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-fsharp&#34;&gt;let GetMovementTypeToSaveInORM = function
-   | Held_Deliver_Principal | Posted_Deliver_Counterparty -&amp;gt; Deliver
-   | Posted_Return_Principal | Held_Return_Counterparty -&amp;gt; Return
-
-let GetSendFn = function
-   | Held_Deliver_Principal | Posted_Return_Principal -&amp;gt; SendMessageToPrincipal
-   | Held_Return_Counterparty | Posted_Deliver_Counterparty -&amp;gt; SendMessageToCounterparty
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;While it is possible to make an equivalent C# enum and combine these
-in a similar way, it is inherently unsafe (nothing to guarantee you
-covered every case) and therefore appropriately uncommon. The typical
-answer for safe polymorphic dispatch in C# is to use an interface and
-classes. Unfortunately, something still has to dispatch on that enum
-id, either inside a class or at the time of class instantiation. That
-is a vector for errors.&lt;/p&gt;
-
-&lt;p&gt;Because F# interops so well with C#, it is possible to build in a
-domain layer in F# immediately that calls down to your C# ORM
-classes. Converting from a set of dangerous C# enums into a
-constrained and safe F# discriminated union is easy and will simplify
-your domain to its essence.&lt;/p&gt;
-
-&lt;p&gt;For reasons like this, when I have to build something with a rich
-domain, I reach for F#.&lt;/p&gt;
 </description>
     </item>
     

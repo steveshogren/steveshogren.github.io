@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Coq: Day 1  &middot; Deliberate Software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Coq: Day 1  &middot; Deliberate Software ">
+<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:url" content="http://deliberate-software.com/coq-frustrations/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2017-02-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-02-01T00:00:00Z" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@steveshogren" />
+<meta name="twitter:creator" content="@steveshogren" />
+<meta name="twitter:title" content="Coq: Day 1" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="http://deliberate-software.com/coq-frustrations/" />
+<meta name="twitter:domain" content="http://deliberate-software.com/">
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Coq: Day 1",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-02-01",
+    "description": "",
+    "wordCount":  202 
+  }
+</script>
+
+
+
+<link rel="canonical" href="http://deliberate-software.com/coq-frustrations/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.15" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
+
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/github-calendar.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
+
+
+</head>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://deliberate-software.com/">Deliberate Software</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            Favorite Books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/philosophy"
+             title="About me">
+            
+            About Me
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            All Posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+</header>
+
+
+
+<div class="centereded btn-primary btn-lg pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
+<div class="text-center">
+  <h1 class="centereded">Coq: Day 1
+</h1>
+
+
+  
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2017-02-01">1 Feb, 2017</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 1 min
+  &middot; (202 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/coq" class="label label-default">coq</a>
+  
+
+ </div>
+<br>
+</div>
+
+</div>
+
+      <div class="">
+    
+  <div class="content">
+    
+
+<p>Day one working through
+<a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>.
+Since I like to rant, and rant&rsquo;s help me learn, COMMENCE RANT.</p>
+
+<h2 id="precise-syntax:d783984b511a831eab41153f3c57c2bb">Precise Syntax</h2>
+
+<p>I copied a sample from the book by hand, but it always caused Company-Coq to go
+into an <strong>infinite loop</strong>. I copied it again. Same deal.</p>
+
+<p>This isn&rsquo;t my first rodeo, I&rsquo;ve seen all sorts of syntax rules and such. But
+alas, it still fails.</p>
+
+<pre><code class="language-coq">Theorem andb_commutative' : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+Qed.
+</code></pre>
+
+<p><img src="/images/upset.jpg"></img></p>
+
+<p>Where the heck is it? I am losing my mind for 20 minutes looking back and forth
+trying to figure out what I am missing. I seek the advice of a friend, he
+suggests stepping line-by-line with <code>C-cC-n</code>.</p>
+
+<h2 id="it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb">It fails on one line.</h2>
+
+<p><img src="/images/coq-space1.png"></img></p>
+
+<h2 id="wait:d783984b511a831eab41153f3c57c2bb">Wait.</h2>
+
+<p><img src="/images/coq-space2.png"></img></p>
+
+<h2 id="thats:d783984b511a831eab41153f3c57c2bb">Thats&hellip;</h2>
+
+<p><img src="/images/coq-space3.png"></img></p>
+
+<h2 id="but:d783984b511a831eab41153f3c57c2bb">But&hellip;</h2>
+
+<p><img src="/images/coq-space4.png"></img></p>
+
+<h2 id="no:d783984b511a831eab41153f3c57c2bb">NO!!!!!</h2>
+
+<p><img src="/images/coq-space5.png"></img></p>
+
+<h2 id="coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb">Coq is WHITE-SPACE SENSITIVE?!</h2>
+
+<p><img src="/images/angry.jpg"></img></p>
+
+<p>YEP! I add that space in, and it works fine!</p>
+
+<pre><code class="language-coq">Theorem andb_commutative' : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+</code></pre>
+
+<p><img src="/images/facepalm.jpg"></img></p>
+
+  </div>
+</div>
+
+
+      <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/anemic-domain-model/" title="OO-Design Part 2: Anemic Domain Models Are Healthy">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+    </ul> </nav>
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
+
+
+
+<span class="col-xs-12 col-sm-12 col-md-12">
+<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</span>
+<span class="col-xs-12 col-sm-12">
+    software developer, manager, author, speaker
+</span>
+<h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
+
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+    <img class="book" src="/images/vim.jpg"></img>
+</a>
+
+
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class="serif col-xs-12 col-sm-12" id="name">POSTS FOR:</h3>
+<div class="col-xs-12 col-sm-12">
+    <ul class="sidebar_ul">
+        <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
+        <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+        <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
+    </ul>
+</div>
+<h3 class="serif col-xs-12 col-sm-12" id="name">CATEGORIES</h3>
+<div class="col-xs-12 col-sm-12">
+    <ul class="sidebar_ul">
+        
+        <li class="sidebar_li">
+            <a href="/categories/angular">angular</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/architecture">architecture</a> <span class="badge">4</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojure">clojure</a> <span class="badge">11</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/coq">coq</a> <span class="badge">1</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/csharp">csharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/emacs">emacs</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/haskell">haskell</a> <span class="badge">3</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/java">java</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/management">management</a> <span class="badge">10</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/meta-game">meta-game</a> <span class="badge">25</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/oo-design">oo-design</a> <span class="badge">2</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/refactoring">refactoring</a> <span class="badge">1</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">32</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">9</span>
+        </li>
+        
+        <li class="sidebar_li">
+            <a href="/categories/vim">vim</a> <span class="badge">2</span>
+        </li>
+        
+    </ul>
+</div>
+
+<script type="text/javascript">
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  
+  while (0 !== currentIndex) {
+
+    
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with"
+ ];
+x=document.getElementsByClassName('thevimlink');
+for(var i = 0; i < x.length; i++){
+  x[i].innerText = shuffle(linkTexts)[0];
+}
+</script>
+
+    </div>
+  </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  <a class="toplink" href="#">back to top</a>
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
+<script src="http://deliberate-software.com/js/github-calendar.js"></script>
+
+
+
+
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+if (document.location.hostname.search("deliberate-software.com") !== -1) {
+  var _gaq=[['_setAccount','UA-46040901-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+}
+</script>
+
+
+
+
+  </body>
+</html>
+
+

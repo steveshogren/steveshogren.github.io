@@ -6,8 +6,88 @@
     <description>Recent content in Posts on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Nov 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coq: Day 1</title>
+      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <description>
+
+&lt;p&gt;Day one working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;.
+Since I like to rant, and rant&amp;rsquo;s help me learn, COMMENCE RANT.&lt;/p&gt;
+
+&lt;h2 id=&#34;precise-syntax:d783984b511a831eab41153f3c57c2bb&#34;&gt;Precise Syntax&lt;/h2&gt;
+
+&lt;p&gt;I copied a sample from the book by hand, but it always caused Company-Coq to go
+into an &lt;strong&gt;infinite loop&lt;/strong&gt;. I copied it again. Same deal.&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But
+alas, it still fails.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Where the heck is it? I am losing my mind for 20 minutes looking back and forth
+trying to figure out what I am missing. I seek the advice of a friend, he
+suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb&#34;&gt;It fails on one line.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;wait:d783984b511a831eab41153f3c57c2bb&#34;&gt;Wait.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;thats:d783984b511a831eab41153f3c57c2bb&#34;&gt;Thats&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;but:d783984b511a831eab41153f3c57c2bb&#34;&gt;But&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;no:d783984b511a831eab41153f3c57c2bb&#34;&gt;NO!!!!!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb&#34;&gt;Coq is WHITE-SPACE SENSITIVE?!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/angry.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;YEP! I add that space in, and it works fine!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
@@ -78,9 +158,6 @@ have a variety of functions: some pure, some impure. On the one side you have
 rich domain models with completely encapsulated state and void methods. On the
 other side you have easily-tested code with pure functions and separate data
 structures.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Encapsulation (Impure) |------------------------| Pure functions
-&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you need or desire testability, strive to put as much logic as possible
 inside pure functions. Avoid encapsulated state: put all state in data
@@ -1922,187 +1999,6 @@ release.&lt;/li&gt;
 
 &lt;p&gt;With these tools you can fight Development Disappointment Disorder. You can
 start to celebrate what you do accomplish. &lt;strong&gt;A team that is energized and motivated will accomplish more.&lt;/strong&gt; The team that celebrates their work will strive for more.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Designing A Compassionate Interview For A High Performing Individual</title>
-      <link>http://deliberate-software.com/compassionate-interviewing/</link>
-      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/compassionate-interviewing/</guid>
-      <description>
-
-&lt;p&gt;After my post &lt;a href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;Interview Humiliation&lt;/a&gt;, a number of
-people have asked me how I interview compassionately. I strive to make my interviews as
-stress-free and respectful as possible while still rendering a yes/no at the end.&lt;/p&gt;
-
-&lt;p&gt;Any good interview process needs to start with goals:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Respect the candidate&amp;rsquo;s time&lt;/li&gt;
-&lt;li&gt;Make the candidate comfortable&lt;/li&gt;
-&lt;li&gt;Under-skilled candidates should feel no shame&lt;/li&gt;
-&lt;li&gt;Both passing and failing candidates should want to tell their friends to
-apply&lt;/li&gt;
-&lt;li&gt;We should render the same decision if the interview is repeated multiple
-times (with different exercises each time)&lt;/li&gt;
-&lt;li&gt;The candidate should know the process in advance and not be able to earn a
-pass through short term &amp;ldquo;cramming&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;The candidate should feel we are all working collaboratively, instead of us
-against them&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;the-ideal-candidate:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;The Ideal Candidate&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/whiteboards2.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;We want to hire for high-level skills. Fast learning, strategic thinking, good
-design, and emotional intelligence are more important than rote memorization. We
-care more about &amp;ldquo;ability to grow&amp;rdquo; than &amp;ldquo;current skills&amp;rdquo;. Our job does not
-involve whiteboard coding, puzzle questions, or anything that can be discovered
-with a decent IDE, so those are left out.&lt;/p&gt;
-
-&lt;p&gt;We care a lot about &amp;ldquo;no jerks&amp;rdquo;. We want our workplace to be fun, relaxing, and
-supportive. We want candidates who are comfortable being wrong and corrected
-regularly, and who can correct others politely.&lt;/p&gt;
-
-&lt;p&gt;We do not care about any question that could be easily be answered by Google. If
-an internet search can easily answer the question, it is pointless to care if
-the human in front of me happens to know it. Given the search revolution of the
-last decade, the value of memorized facts falls to almost zero. Facts as a proxy
-for actual job skill probably used to be accurate until the internet allowed
-every interview question to become public record.&lt;/p&gt;
-
-&lt;h2 id=&#34;scoring:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Scoring&lt;/h2&gt;
-
-&lt;p&gt;I hope someone one day invents a perfect productivity score! For now, counting
-bugs, features, correct answers, etc, are all proxies that poorly represent
-actual productivity. If those actually worked, why don&amp;rsquo;t we use them for raises,
-bonuses, and reviews? Because. They. Do. Not. Work.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Counting bugs, features, correct answers, etc, are all proxies that poorly
-represent actual productivity&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A well-designed rubric &lt;em&gt;can&lt;/em&gt; work. A rubric is a way of measuring the
-&amp;ldquo;un-measurable&amp;rdquo;. You probably have seen them in year-end reviews. A grid with
-categories on one side, and a 1-5 score with a paragraph explanation for each.
-We only score what has to be explained with a description from the interviewers.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;How was the candidate&amp;rsquo;s communication skills?&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;They misunderstood me only a few times, and I only had trouble understanding
-them once or twice. The watchers all felt like the communication was pretty
-good. They were definitely above average: &amp;frac34;.&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;How about design skills?&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;They were able to clearly design every abstraction. They deeply understood
-passing functions as values, see how this takes a function for polymorphism?
-We prodded a bit, and they were able to give a couple other ways to achieve
-the same behavior. We all agreed it was best the way it was. All said, they
-did most of the heavy lifting for this whole project, and it is superbly
-designed: 4/4&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;our-process:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Our Process&lt;/h2&gt;
-
-&lt;p&gt;To &amp;ldquo;level-set&amp;rdquo; our expectations, we had several of our developers at different
-levels perform the interview live in front of the team. We made them use various
-languages and exercises they had never seen before. This &amp;ldquo;level-setting&amp;rdquo; helped
-us to see how known good developers perform when way out of their element and
-uncomfortable.&lt;/p&gt;
-
-&lt;p&gt;All interviews are assigned to developers randomly, and all are expected to
-participate. The candidate should have two developers around at all time, to
-prevent bias by any individual. One pairs while the others rotate watching
-silently. The watchers are expected to stay quiet, to prevent confusion.&lt;/p&gt;
-
-&lt;p&gt;Before the first interview, the candidate is sent something very much like this
-document. We think there is no way someone could &amp;ldquo;fake us out&amp;rdquo; on any criteria.
-The things we look for take years of practice to cultivate, so &amp;ldquo;cramming&amp;rdquo; should
-not help much (if at all). The one exception to that is if they have never heard
-of Test Driven Development, we do recommend they Google it for a few minutes, as
-prior knowledge helps smooth the phone screen considerably.&lt;/p&gt;
-
-&lt;h3 id=&#34;phone-screen:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Phone Screen&lt;/h3&gt;
-
-&lt;p&gt;We pair program over the internet using a shared programming environment called
-&lt;a href=&#34;c9.io&#34;&gt;Cloud9&lt;/a&gt;. We (currently) have projects set up for Java, JavaScript,
-Python, Ruby, and C#. The candidate may choose their desired language. We then
-pair program using Test Driven Development to build out a well defined exercise.
-The candidate may entirely verbally &amp;ldquo;navigate&amp;rdquo;, while one of our programmers
-entirely &amp;ldquo;drives&amp;rdquo; and types out the code. This is acceptable.&lt;/p&gt;
-
-&lt;p&gt;If the candidate has never seen any of those languages, Google or asking the
-interviewer is totally fair game, and does not count against them. If the
-candidate has completely no idea, the interviewer is expected to politely
-complete the task while keeping the candidate engaged.&lt;/p&gt;
-
-&lt;p&gt;The phone screen is under an hour, with 30 minutes for the pair programming.
-The remaining time is for questions about our office. We let them drive the
-second half of the interview, asking us questions about what our team and
-process is like. We attempt to answer clearly and honestly, both good and bad.&lt;/p&gt;
-
-&lt;h3 id=&#34;in-person:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;In-Person&lt;/h3&gt;
-
-&lt;p&gt;The in-person interview is from 9:30 to 3:00. We are not thrilled with how much
-time it takes and would like to shorten it, but so far have no superior
-alternatives.&lt;/p&gt;
-
-&lt;p&gt;At the start of the day, we spend 30 minutes chatting and asking questions back
-and forth. Our questions are meant to tell us about the candidate&amp;rsquo;s background
-and &amp;ldquo;programming philosophy&amp;rdquo;: books read, favorite languages, interesting
-projects they&amp;rsquo;ve worked on, etc. We allow them as many questions as they would
-like.&lt;/p&gt;
-
-&lt;p&gt;The rest of the day is very much like a &amp;ldquo;typical day at work&amp;rdquo;, but with
-programming exercises instead of production code. We pair program on the
-exercises, following the same flow from the phone screen. The exercises have no
-&amp;ldquo;tricks&amp;rdquo;, they are reasonably straightforward and don&amp;rsquo;t require any prior domain
-or CS theory knowledge. Throughout the day, the candidate is free to get food,
-drinks, and run to the restroom.&lt;/p&gt;
-
-&lt;p&gt;The developer who is pairing has a primary role of making the candidate feel
-comfortable and accomplish any effort with a 50/50 split of effort. If the
-candidate really is struggling, the developer is expected to keep working with
-the candidate, even to the point of doing the hard parts and giving them the
-easy parts. A completely unskilled candidate will see their pair doing all the
-work with a smile and politely asking for &amp;ldquo;help&amp;rdquo; with variable names and such.&lt;/p&gt;
-
-&lt;p&gt;The developer pair is also expected to give the candidate some time to think
-if they are lost. The candidate at the end of the interview should feel like
-they have a complete understanding of what happened. The exercises are
-designed to be &amp;ldquo;too much to finish&amp;rdquo;, and as such finishing the exercises is
-not a success criteria as much as working well together and writing
-maintainable code.&lt;/p&gt;
-
-&lt;p&gt;We feel this gives us a highly accurate understanding of a candidate&amp;rsquo;s skill,
-while still putting them at ease. Many times we&amp;rsquo;ve seen a terrified candidate
-light up fifteen minutes into a pairing session while watching their developer
-pair do most of the work. Something about seeing code written &amp;ldquo;activates&amp;rdquo; even
-the most nervous candidate. All the thoughts of nerves turn into a concrete
-&amp;ldquo;oh, wait, I know what he just did, and I&amp;rsquo;ve got an opinion on that!&amp;rdquo;&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion:cf61b2cfb55395d828ffadc28b2a9a0d&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;We like this process because it is exactly what our job is like. We pair program
-for a lot of work, and the interview is meant to give candidates a sample of
-that. No one should show up for their first day of work and say, &amp;ldquo;wait, I
-actually hate pair programming.&amp;rdquo; By thinking through our goals and an &amp;ldquo;ideal
-candidate&amp;rdquo;, we were able to design a process that meets those goals.&lt;/p&gt;
-
-&lt;p&gt;I recommend you take an hour to write out your goals and needs. Then see how
-your interview process matches. Are you looking for a &amp;ldquo;human Google&amp;rdquo;? Does your
-job involve whiteboard coding? Would telling the candidate the exact process in
-advance with all the questions let them game the system? Because every single
-interview question I&amp;rsquo;ve seen is up on Google to be found and memorized on easy
-to read lists. How much time does your process take? Could it be shortened? Does
-it require the candidate to spend a lot of time at home? You might be surprised
-at what you find!&lt;/p&gt;
 </description>
     </item>
     

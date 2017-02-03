@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coq on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/coq/</link>
+    <description>Recent content in Coq on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/coq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coq: Day 1</title>
+      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <description>
+
+&lt;p&gt;Day one working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;.
+Since I like to rant, and rant&amp;rsquo;s help me learn, COMMENCE RANT.&lt;/p&gt;
+
+&lt;h2 id=&#34;precise-syntax:d783984b511a831eab41153f3c57c2bb&#34;&gt;Precise Syntax&lt;/h2&gt;
+
+&lt;p&gt;I copied a sample from the book by hand, but it always caused Company-Coq to go
+into an &lt;strong&gt;infinite loop&lt;/strong&gt;. I copied it again. Same deal.&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But
+alas, it still fails.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Where the heck is it? I am losing my mind for 20 minutes looking back and forth
+trying to figure out what I am missing. I seek the advice of a friend, he
+suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb&#34;&gt;It fails on one line.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;wait:d783984b511a831eab41153f3c57c2bb&#34;&gt;Wait.&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;thats:d783984b511a831eab41153f3c57c2bb&#34;&gt;Thats&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;but:d783984b511a831eab41153f3c57c2bb&#34;&gt;But&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;no:d783984b511a831eab41153f3c57c2bb&#34;&gt;NO!!!!!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb&#34;&gt;Coq is WHITE-SPACE SENSITIVE?!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/angry.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;YEP! I add that space in, and it works fine!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
