@@ -47,6 +47,7 @@
     padding: 0;
     max-width:100%;
 }
+.subscript{font-size:xx-small; vertical-align:bottom;}
 
 .underline {
     border-bottom: 1px solid black;
