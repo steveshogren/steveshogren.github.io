@@ -53,10 +53,10 @@ with Coq. Since I like to rant, and I love
 
 &lt;h1 id=&#34;nope:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;NOPE&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hopeless.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Error: Found no subterm matching &amp;quot;n + S ?252&amp;quot; in the current goal.
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hopeless.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;p&gt;Why is it: &lt;code&gt;n + S ?252&lt;/code&gt; the hypothesis clearly has &lt;code&gt;n + S m&lt;/code&gt;! Where did
 &lt;code&gt;m&lt;/code&gt; go? Am I losing my marbles?&lt;/p&gt;
