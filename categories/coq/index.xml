@@ -6,11 +6,99 @@
     <description>Recent content in Coq on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/coq/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Coq: Day 1</title>
+      <title>Darkest Proof: Day 2</title>
+      <link>http://deliberate-software.com/coq-day2/</link>
+      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-day2/</guid>
+      <description>
+
+&lt;p&gt;Day two working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
+with Coq. Since I like to rant, and I love
+&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;naming:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;Naming&lt;/h2&gt;
+
+&lt;p&gt;While trying to understand how &lt;code&gt;rewrite&lt;/code&gt; works, I come across an obvious use-case:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adding_n_Sm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; 
+  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
+  &lt;span class=&#34;k&#34;&gt;induction&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;rewrite&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At this point, in current scope I have:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subgoals&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subgoal&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;90&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;---------------&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Looks obvious enough. I &lt;em&gt;should&lt;/em&gt; be able to substitute the &lt;code&gt;n + S m&lt;/code&gt; with &lt;code&gt;S (n + m)&lt;/code&gt; in my goal using &lt;code&gt;rewrite &amp;lt;- IHn&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;nope:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;NOPE&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hopeless.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Error: Found no subterm matching &amp;quot;n + S ?252&amp;quot; in the current goal.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Why is it: &lt;code&gt;n + S ?252&lt;/code&gt; the hypothesis clearly has &lt;code&gt;n + S m&lt;/code&gt;! Where did
+&lt;code&gt;m&lt;/code&gt; go? Am I losing my marbles?&lt;/p&gt;
+
+&lt;p&gt;After searching around, I come across an old thread with someone getting the
+same error. The reply post says&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The strange-looking &amp;ldquo;?738&amp;rdquo; means any term to be instantiated&amp;hellip; Besides,
+rewrite cannot rewrite under a &amp;ldquo;forall&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Is &lt;code&gt;m&lt;/code&gt; not defined? But it was up there in scope, right? Well my current scope
+&lt;em&gt;did&lt;/em&gt; look like: &lt;code&gt;IHn : forall m : nat, n + S m = S (n + m)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Oh, that &lt;em&gt;does&lt;/em&gt; say &lt;code&gt;forall m&lt;/code&gt;, how to make it just for that one &lt;code&gt;m&lt;/code&gt;? Well &lt;code&gt;n&lt;/code&gt;
+isn&amp;rsquo;t &lt;code&gt;forall&lt;/code&gt;, perhaps &lt;code&gt;intros&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adding_n_Sm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; 
+  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;hll&#34;&gt;  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;induction&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;rewrite&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/critforward.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;success:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;SUCCESS&lt;/h1&gt;
+
+&lt;p&gt;I&amp;hellip;. I &amp;hellip;. don&amp;rsquo;t know what is happening.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;(Artwork lovingly pulled from: &lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;
+Please don&amp;rsquo;t sue me!)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Darkest Proof: Day 1</title>
       <link>http://deliberate-software.com/coq-frustrations/</link>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
@@ -18,8 +106,11 @@
       <description>
 
 &lt;p&gt;Day one working through
-&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;.
-Since I like to rant, and rant&amp;rsquo;s help me learn, COMMENCE RANT.&lt;/p&gt;
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
+with Coq. Since I like to rant, and I love
+&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;precise-syntax:d783984b511a831eab41153f3c57c2bb&#34;&gt;Precise Syntax&lt;/h2&gt;
 
@@ -29,17 +120,18 @@ into an &lt;strong&gt;infinite loop&lt;/strong&gt;. I copied it again. Same deal
 &lt;p&gt;This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But
 alas, it still fails.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
-Proof.
-  intros b c. destruct b.
-  { destruct c.
-    { reflexivity.}
-    { reflexivity.} }
-  { destruct c.
-    { reflexivity.}
-    { reflexivity.} }
-Qed.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb_commutative&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;Qed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 &lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 
@@ -73,17 +165,18 @@ suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;YEP! I add that space in, and it works fine!&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Theorem andb_commutative&#39; : forall b c, andb b c = andb c b.
-Proof.
-  intros b c. destruct b.
-  { destruct c.
-    { reflexivity. }
-    { reflexivity. } }
-  { destruct c.
-    { reflexivity. }
-    { reflexivity. } }
-Qed.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb_commutative&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Qed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 </description>

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Darkest Proof: Day 1  &middot; Deliberate Software</title>
+  <title>Darkest Proof: Day 2  &middot; Deliberate Software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,16 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Darkest Proof: Day 1  &middot; Deliberate Software ">
+<meta property="og:title" content="Darkest Proof: Day 2  &middot; Deliberate Software ">
 <meta property="og:site_name" content="Deliberate Software"/>
-<meta property="og:url" content="http://deliberate-software.com/coq-frustrations/" />
+<meta property="og:url" content="http://deliberate-software.com/coq-day2/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2017-02-01T00:00:00Z" />
-<meta property="og:article:modified_time" content="2017-02-01T00:00:00Z" />
+<meta property="og:article:published_time" content="2017-02-07T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-02-07T00:00:00Z" />
 
   
 
@@ -34,29 +34,29 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@steveshogren" />
 <meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Darkest Proof: Day 1" />
+<meta name="twitter:title" content="Darkest Proof: Day 2" />
 <meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://deliberate-software.com/coq-frustrations/" />
+<meta name="twitter:url" content="http://deliberate-software.com/coq-day2/" />
 <meta name="twitter:domain" content="http://deliberate-software.com/">
   
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Darkest Proof: Day 1",
+    "headline": "Darkest Proof: Day 2",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2017-02-01",
+    "datePublished": "2017-02-07",
     "description": "",
-    "wordCount":  206 
+    "wordCount":  314 
   }
 </script>
 
 
 
-<link rel="canonical" href="http://deliberate-software.com/coq-frustrations/" />
+<link rel="canonical" href="http://deliberate-software.com/coq-day2/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -148,7 +148,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
 <div class="text-center">
-  <h1 class="centereded">Darkest Proof: Day 1
+  <h1 class="centereded">Darkest Proof: Day 2
 </h1>
 
 
@@ -156,13 +156,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2017-02-01">1 Feb, 2017</time>
+  <time datetime="2017-02-07">7 Feb, 2017</time>
 </small>
 
 
   <small>
-  &middot; Read in about 1 min
-  &middot; (206 Words)
+  &middot; Read in about 2 min
+  &middot; (314 Words)
 </small>
 
 
@@ -186,80 +186,83 @@
   <div class="content">
     
 
-<p>Day one working through
+<p>Day two working through
 <a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>
 with Coq. Since I like to rant, and I love
 <a href="http://www.darkestdungeon.com/">Darkest Dungeon</a>, ENTER THE DARKEST PROOF.</p>
 
 <p><img src="/images/ruinhascome.png"></img></p>
 
-<h2 id="precise-syntax:d783984b511a831eab41153f3c57c2bb">Precise Syntax</h2>
+<h2 id="naming:d16f8abdbdc51dc271acf8e6a41121b7">Naming</h2>
 
-<p>I copied a sample from the book by hand, but it always caused Company-Coq to go
-into an <strong>infinite loop</strong>. I copied it again. Same deal.</p>
+<p>While trying to understand how <code>rewrite</code> works, I come across an obvious use-case:</p>
 
-<p>This isn&rsquo;t my first rodeo, I&rsquo;ve seen all sorts of syntax rules and such. But
-alas, it still fails.</p>
-
-<div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
+<div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">adding_n_Sm</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> 
+  <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span>
 <span class="kn">Proof</span><span class="o">.</span>
-  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
-<span class="kn">Qed</span><span class="o">.</span>
+  <span class="k">intros</span> <span class="n">n</span><span class="o">.</span> 
+  <span class="k">induction</span> <span class="n">n</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="k">rewrite</span> <span class="o">&lt;-</span> <span class="n">IHn</span><span class="o">.</span> 
 </code></pre></div>
 
 
-<p><img src="/images/upset.jpg"></img></p>
+<p>At this point, in current scope I have:</p>
 
-<p>Where the heck is it? I am losing my mind for 20 minutes looking back and forth
-trying to figure out what I am missing. I seek the advice of a friend, he
-suggests stepping line-by-line with <code>C-cC-n</code>.</p>
+<div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="mi">1</span> <span class="n">subgoals</span><span class="o">,</span> <span class="n">subgoal</span> <span class="mi">1</span> <span class="o">(</span><span class="n">ID</span> <span class="mi">90</span><span class="o">)</span>
+  <span class="n">n</span> <span class="o">:</span> <span class="kt">nat</span>
+  <span class="n">IHn</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">---------------</span>
+  <span class="k">forall</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> <span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span><span class="o">)</span> <span class="o">=</span> <span class="n">S</span> <span class="o">(</span><span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">))</span>
+</code></pre></div>
 
-<h2 id="it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb">It fails on one line.</h2>
 
-<p><img src="/images/coq-space1.png"></img></p>
+<p>Looks obvious enough. I <em>should</em> be able to substitute the <code>n + S m</code> with <code>S (n + m)</code> in my goal using <code>rewrite &lt;- IHn</code>.</p>
 
-<h2 id="wait:d783984b511a831eab41153f3c57c2bb">Wait.</h2>
+<h1 id="nope:d16f8abdbdc51dc271acf8e6a41121b7">NOPE</h1>
 
-<p><img src="/images/coq-space2.png"></img></p>
+<p><img src="/images/hopeless.jpg"></img></p>
 
-<h2 id="thats:d783984b511a831eab41153f3c57c2bb">Thats&hellip;</h2>
+<pre><code class="language-coq">Error: Found no subterm matching &quot;n + S ?252&quot; in the current goal.
+</code></pre>
 
-<p><img src="/images/coq-space3.png"></img></p>
+<p>Why is it: <code>n + S ?252</code> the hypothesis clearly has <code>n + S m</code>! Where did
+<code>m</code> go? Am I losing my marbles?</p>
 
-<h2 id="but:d783984b511a831eab41153f3c57c2bb">But&hellip;</h2>
+<p>After searching around, I come across an old thread with someone getting the
+same error. The reply post says</p>
 
-<p><img src="/images/coq-space4.png"></img></p>
+<blockquote>
+<p>The strange-looking &ldquo;?738&rdquo; means any term to be instantiated&hellip; Besides,
+rewrite cannot rewrite under a &ldquo;forall&rdquo;.</p>
+</blockquote>
 
-<h2 id="no:d783984b511a831eab41153f3c57c2bb">NO!!!!!</h2>
+<p>Is <code>m</code> not defined? But it was up there in scope, right? Well my current scope
+<em>did</em> look like: <code>IHn : forall m : nat, n + S m = S (n + m)</code></p>
 
-<p><img src="/images/coq-space5.png"></img></p>
+<p>Oh, that <em>does</em> say <code>forall m</code>, how to make it just for that one <code>m</code>? Well <code>n</code>
+isn&rsquo;t <code>forall</code>, perhaps <code>intros</code>?</p>
 
-<h2 id="coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb">Coq is WHITE-SPACE SENSITIVE?!</h2>
-
-<p><img src="/images/angry.jpg"></img></p>
-
-<p>YEP! I add that space in, and it works fine!</p>
-
-<p><div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
+<p><div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">adding_n_Sm</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> 
+  <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span>
 <span class="kn">Proof</span><span class="o">.</span>
-  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-<span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
-</span><span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
-</span>  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-<span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
-</span><span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
-</span><span class="kn">Qed</span><span class="o">.</span>
+<span class="hll">  <span class="k">intros</span> <span class="n">n</span> <span class="n">m</span><span class="o">.</span>
+</span>  <span class="k">induction</span> <span class="n">n</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="k">rewrite</span> <span class="o">&lt;-</span> <span class="n">IHn</span><span class="o">.</span> 
 </code></pre></div>
 </p>
 
+<p><img src="/images/critforward.jpg"></img></p>
+
+<h1 id="success:d16f8abdbdc51dc271acf8e6a41121b7">SUCCESS</h1>
+
+<p>I&hellip;. I &hellip;. don&rsquo;t know what is happening.</p>
+
 <p><img src="/images/facepalm.jpg"></img></p>
+
+<p>(Artwork lovingly pulled from: <a href="http://www.darkestdungeon.com/">Darkest Dungeon</a>
+Please don&rsquo;t sue me!)</p>
 
   </div>
 </div>
@@ -277,18 +280,12 @@ suggests stepping line-by-line with <code>C-cC-n</code>.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/anemic-domain-model/" title="OO-Design Part 2: Anemic Domain Models Are Healthy">
+          <a href="http://deliberate-software.com/coq-frustrations/" title="Darkest Proof: Day 1">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/coq-day2/" title="Darkest Proof: Day 2">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   
