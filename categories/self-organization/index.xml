@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Self Organization on Deliberate Software</title>
+    <link>http://deliberate-software.com/categories/self-organization/</link>
+    <description>Recent content in Self Organization on Deliberate Software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://deliberate-software.com/categories/self-organization/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What Keeps a Self-Organizing Team From Falling Apart</title>
+      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <description>
+
+&lt;p&gt;My team has a decade of experience applying
+&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;self-organizing teams&lt;/a&gt; and
+&lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;pair-programming&lt;/a&gt; to reduce wasted productivity in an
+enterprise banking application.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-benefits:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;The Benefits&lt;/h2&gt;
+
+&lt;h3 id=&#34;no-technical-lead:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;No Technical Lead&lt;/h3&gt;
+
+&lt;p&gt;Our self-organizing practices eliminate the need for a technical lead who
+assigns and follows up on work. No work is assigned to any individual.&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-empowerment:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Individual Empowerment&lt;/h3&gt;
+
+&lt;p&gt;Developers are free to remove pain points as needed, so most have a strong sense
+of ownership. Team members feel empowered to champion for broad changes to the
+codebase.&lt;/p&gt;
+
+&lt;h3 id=&#34;few-meetings:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Few Meetings&lt;/h3&gt;
+
+&lt;p&gt;Without the need for significant process or oversight, the team has very few
+meetings a week. In a survey of the last several months, the average team member
+had less than &lt;strong&gt;three hours of meetings a week.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;how-does-this-work:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;How does this work?&lt;/h2&gt;
+
+&lt;p&gt;As amazing as it all sounds, what prevents this process from falling into
+anarchy? How has this been working for us for over ten years with very little
+oversight? The team has completely changed three times (roughly a 3.6 year
+average turnaround) so it can&amp;rsquo;t only be about &amp;ldquo;the right people&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;self-correction-while-maintaining-trust:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Self-Correction While Maintaining Trust&lt;/h3&gt;
+
+&lt;p&gt;The author of
+&lt;a href=&#34;http://www.reinventingorganizations.com/&#34;&gt;Reinventing Organizations&lt;/a&gt; talks
+about the concept of &amp;ldquo;self-correction&amp;rdquo; that allows self-organizing teams to
+adapt without writing a thick rule-book of policies. Healthy, self-organizing
+teams build a &lt;strong&gt;simple system that self-corrects&lt;/strong&gt; instead of adding new
+policies when trust is abused. Rather than trying to design the perfect
+rule-book, they let individuals grow into trusted, intelligent agents who are
+expected to learn and improve.&lt;/p&gt;
+
+&lt;p&gt;The author suggests that three things are needed for self-correcting teams:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;A shared understanding of what’s healthy&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Information&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A forum for conversation to trigger self-corrective action&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;our-process:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Our Process&lt;/h2&gt;
+
+&lt;p&gt;Our process has several examples of self-correction, and several places we are
+still sorting out how to best self-correct. We currently apply these
+democratically-elected practices:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Full-time pair-programming on all production code&lt;/li&gt;
+&lt;li&gt;No work is assigned to any individual or pair&lt;/li&gt;
+&lt;li&gt;Any pair can make any technical decision&lt;/li&gt;
+&lt;li&gt;Pairs are shuffled randomly twice a day&lt;/li&gt;
+&lt;li&gt;Everyone participates in a five-minute status update twice a day&lt;/li&gt;
+&lt;li&gt;Weekly &amp;ldquo;retrospective&amp;rdquo; is held to reflect and make changes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;example-any-pair-can-make-any-technical-decision:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Any pair can make any technical decision&lt;/h3&gt;
+
+&lt;p&gt;Consider the practice that &amp;ldquo;any pair can make any technical decision.&amp;rdquo; The
+&lt;strong&gt;information&lt;/strong&gt; comes when the pairs switch every half-day. Bob and Sally might
+think designing the module one way is a good idea in the morning, but Sally and
+Jane might see things with a fresh perspective in the afternoon. The information
+spreads organically every four hours as a fresh set of eyes gets to see the
+work. The &lt;strong&gt;forum for self-corrective action&lt;/strong&gt; happens when the new pair
+discusses the previous session&amp;rsquo;s decisions.&lt;/p&gt;
+
+&lt;p&gt;If a pair makes a technical decision that isn&amp;rsquo;t ideal, the next pair will have
+the opportunity to choose to continue down that path or adjust the code to a
+better solution. To prevent significant rework, we meet once a week for under an
+hour to chat about the upcoming week&amp;rsquo;s features and get a rough idea of the
+direction the team wants to go.&lt;/p&gt;
+
+&lt;p&gt;In practice, rework happens only occasionally as everyone strives to produce the
+best designs they can. No one wants to see their work undone because of a missed
+requirement or poor design, which prompts a healthy desire to do one&amp;rsquo;s best.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-work-isn-t-assigned:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Work Isn&amp;rsquo;t Assigned&lt;/h3&gt;
+
+&lt;p&gt;Work isn&amp;rsquo;t assigned to pairs or individuals. The &lt;strong&gt;shared understanding&lt;/strong&gt; is
+that the most valuable thing for the business is for pairs to work through the
+priority queue of enhancements and technical debt. We promote &lt;strong&gt;information&lt;/strong&gt;
+with a twice daily status update of what each pair accomplished. We have a
+retrospective &lt;strong&gt;forum&lt;/strong&gt; once a week to discuss what is healthy and prompt
+self-corrective action.&lt;/p&gt;
+
+&lt;p&gt;In practice, pairs rarely &amp;ldquo;go rogue&amp;rdquo;. Only occasionally in the last few years
+has it happened, and the issues have been resolved through the weekly
+retrospective. A recent example comes from a pair who semi-secretly stayed on an
+interesting feature for over a week instead of rotating as agreed. Several other
+team-members felt like they&amp;rsquo;d missed out on getting to build it and brought up
+their feelings in the weekly forum. It turned out there was a legitimate benefit
+to the pair&amp;rsquo;s decision to stay on the feature for so long. The conclusion was
+the pair would&amp;rsquo;ve gotten a lot more support if they&amp;rsquo;d been upfront with the team
+with what they saw and their decision to stay on the project for longer than
+usual.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Some simple communication would&amp;rsquo;ve saved everyone some hassle&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Rather than adding a new policy to the rule-book, the whole team got a reminder
+on two great lessons. First, nothing is as simple as it seems. Second, a pinch
+of communication prevents a pound of hassle.&lt;/p&gt;
+
+&lt;h3 id=&#34;application-no-you-don-t-need-to-do-pair-programming-fulltime:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Application (No, you don&amp;rsquo;t need to do pair-programming fulltime!)&lt;/h3&gt;
+
+&lt;p&gt;Self-correction and self-organization is on a continuum. The more your team
+grows to self-correct, the more benefits you gain.&lt;/p&gt;
+
+&lt;p&gt;Not every team should have the same practices for self-correction. Our specific
+practices of pair-programming, rotating, and pair-empowerment are not magic:
+they are just good examples of applied self-correction. We have found
+pair-programming and pair switching to work well for us, but there are infinite
+ways to grow a system that self-corrects.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Trust, but verify.&amp;rdquo; - Russian proverb&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Self-correcting practices allow individuals to perform at their best with fewer
+rule books, fewer meetings, fewer bottlenecks, and less oversight. Individuals
+are trusted to perform their best, and the team is provided with a way to
+discuss improvements. A self-correcting team will find individuals empowered to
+improve the business in incredible ways.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ten Years of Pair Programming</title>
+      <link>http://deliberate-software.com/pairprogramming/</link>
+      <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <description>
+
+&lt;p&gt;My current team has pair-programmed and followed strict TDD on a single codebase
+for over ten years. The practices started from reading the literature on Extreme
+Programming, which resonated with both the developers and leadership. As the
+team changed, we continued to follow the practices.&lt;/p&gt;
+
+&lt;p&gt;In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;&amp;ldquo;Promiscuous Pairing&amp;rdquo;&lt;/a&gt;. We
+switch pairs in short intervals: 180 minutes is our current preference.&lt;/p&gt;
+
+&lt;p&gt;The pairing sessions start at 8:45AM and 1:00PM with the typical five-minute
+stand-up. People report on any data that the rest of the team needs to hear,
+including noteworthy technical details. Afterwards, the developers crowd around
+a board with the current tasks in progress. We randomize the pairs, then each
+pair decides what to work on from the current tasks.&lt;/p&gt;
+
+&lt;p&gt;If a developer wants to not pair for a session, they go &amp;ldquo;odd&amp;rdquo;. We have a working
+agreement that no production code can be written while odd. The odd person works
+on automated testing, answering questions, researching technical debt,
+investigating root causes of bugs, and authoring throwaway &amp;ldquo;spikes&amp;rdquo; for major
+refactorings.&lt;/p&gt;
+
+&lt;h2 id=&#34;pros:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Pros&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No siloed information or &amp;ldquo;I don&amp;rsquo;t touch that section&amp;rdquo; areas&lt;/li&gt;
+&lt;li&gt;The team must adopt a consistent set of styles, tools, shortcuts, workflow&lt;/li&gt;
+&lt;li&gt;Developers can take vacation whenever they please&lt;/li&gt;
+&lt;li&gt;Training is built in to the process from day one&lt;/li&gt;
+&lt;li&gt;Developers quitting doesn&amp;rsquo;t throw the team into disarray&lt;/li&gt;
+&lt;li&gt;Productivity is fairly stable across decades&lt;/li&gt;
+&lt;li&gt;Protected time every day for research, refactoring, and technical debt&lt;/li&gt;
+&lt;li&gt;Frequent rotation gives a natural cadence for fixing broken CI builds&lt;/li&gt;
+&lt;li&gt;I personally spend a lot less time puttering around on Reddit, HN, etc (I&amp;rsquo;m
+sure that is true for others)&lt;/li&gt;
+&lt;li&gt;Pairs have much more courage and stamina to aggressively pay down technical
+debt. Even the most mind-numbing technical debt isn&amp;rsquo;t so bad if you know you
+are rotating off in two hours.&lt;/li&gt;
+&lt;li&gt;Interruptions are much less disruptive, typically only one or two minutes to
+get back into &amp;ldquo;flow&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cons:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Cons&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Huge system &amp;ldquo;owned by everyone&amp;rdquo; is a lot for new developers to handle - training takes a long time&lt;/li&gt;
+&lt;li&gt;Juggling tasks can be complex (e.g. what gets put on hold when not at full capacity)&lt;/li&gt;
+&lt;li&gt;Support issues get passed around from pair to pair&lt;/li&gt;
+&lt;li&gt;General feeling you are &amp;ldquo;not important&amp;rdquo; to the team&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;partly-good-partly-bad:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Partly Good, Partly Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Pairing is polarizing
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Hiring is slow: many developers hate pairing
+
+&lt;ul&gt;
+&lt;li&gt;Some developers we&amp;rsquo;ve interviewed unfortunately feel pairing is demeaning, disrespectful, or beneath them&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Poor new hire retention
+
+&lt;ul&gt;
+&lt;li&gt;Some developers love the &lt;em&gt;idea&lt;/em&gt; of pairing, not the &lt;em&gt;practice&lt;/em&gt; of pairing; they often leave when they discover that distinction&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Low employee churn: those that love pairing stick around far longer than industry average&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;No task ownership
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Less emotional reward when completing a task&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Less in-fighting about typical &amp;lsquo;code-ownership&amp;rsquo; bike-shed issues&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; No one cares if a task is rejected by QA&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Rapid pair-switching can cause design churn on a task
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Tasks can take longer to complete&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Tough tasks get prototyped several times and seen by whole team&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We&amp;rsquo;ve found this set of trade-offs works very well with our team. The ten of us
+are all doing active development on a 3.4 million-line enterprise banking
+application. Quality and the ability to quickly conform to new regulations are
+of paramount importance. The team regularly has a discussion as to whether we
+should keep or abandon the policy of enforced pairing, and the consensus thus
+far remains to keep it.&lt;/p&gt;
+
+&lt;p&gt;We plan to be around for at least the next decade. Our team requires a workflow
+that allows for the rapid development of high-quality features while keeping the
+team stress-free and happy with their work. Since we plan on a decade scale, our
+development process must take into account the importance of long-term
+happiness, training, and the courage to aggressively pay down technical debt.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-get-started:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;How To Get Started&lt;/h2&gt;
+
+&lt;p&gt;This system works best with a given a set of preconditions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The whole team has to love pairing and want to adopt it&lt;/p&gt;
+
+&lt;p&gt;If even a minority of developers hates pairing, it will be tortuous to force
+them to do it. In our experience, &amp;gt;80% of developers hate pairing. If some
+members are not interested, it would be better to split the team and
+codebase. Forcing even a single developer to pair can be disastrous for
+morale and productivity. No one wants to pair with someone who is sullen and
+bitter. When pairing, misery cannot be hidden.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Management has to accept not having assigned tasks&lt;/p&gt;
+
+&lt;p&gt;Assigning tasks reduces the beneficial effects of pair switching. The
+assigned developer ends up &amp;ldquo;doing all the work with an observer&amp;rdquo;. This is
+much less effective. The &amp;ldquo;observer&amp;rdquo; ends up tuning out, since the assignee
+&amp;ldquo;probably already has it figured out&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Proficiency at pairing is a discrete skill&lt;/p&gt;
+
+&lt;p&gt;Many seasoned developers find themselves awkward and uncomfortable when
+pairing for the first few months. Pairing cannot be assessed in any
+meaningful way by just &amp;ldquo;trying it for a week&amp;rdquo; anymore than typing can be
+assessed over hand-writing in just a week. Feelings of discomfort and
+awkwardness in the first few months are completely normal and should not be
+the criteria used to decide to continue the practice.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Let any pair make any decision&lt;/p&gt;
+
+&lt;p&gt;Any pair should be authorized to make any decision to implement their
+current task. They must however be ready to have that decision undone or
+changed if the next pair finds it was too large, a poor design, out of
+scope, etc.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Accept that others are better than you&lt;/p&gt;
+
+&lt;p&gt;When trying out pairing, productivity doesn&amp;rsquo;t have to drop! Many developers
+at first are uncomfortable by the rapid speed. The law of averages says half
+the developers on the team will find their pair going much faster than they
+are used to! These feelings of inadequacy often lead to developers wanting
+to discontinue the practice. Over time, everyone realizes that it is okay to
+not be the fastest, and instead take self-worth in what skills they do
+bring. Maybe they are not the fastest, but they are good at catching little
+details, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As a development system, this absolutely cannot be handed down from management.
+It has to be implemented &amp;ldquo;by the people and for the people&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;We have seen promiscuous pairing completely change our organization. As a team,
+we accomplish far more than we would otherwise. We are able to tackle new
+systems, languages, and tools with ease. When someone learns a new valuable
+technique, it spreads organically through the team.&lt;/p&gt;
+
+&lt;p&gt;Feel free to tweet at me if you have any questions or clarifications!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>When Self-Organizing Teams Are Effective</title>
+      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <description>
+
+&lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
+high-quality professionals.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-a-self-organizing-team:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;What Is A Self-Organizing Team?&lt;/h2&gt;
+
+&lt;p&gt;I have managed several self-organizing teams over the last few years. They are
+expected to follow these tenets:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The whole team organizes themselves to best meet the business needs&lt;/li&gt;
+&lt;li&gt;Each team chooses their practices and working agreements&lt;/li&gt;
+&lt;li&gt;All technical and organizational decisions are driven through consensus&lt;/li&gt;
+&lt;li&gt;Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;All staff participates in a culture of high-quality development&lt;/li&gt;
+&lt;li&gt;Systems and practices are designed to maintain the greatest productivity across
+the next decade&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;when-it-works-well:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;When It Works Well&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Small teams&lt;/li&gt;
+&lt;li&gt;Highly skilled workers&lt;/li&gt;
+&lt;li&gt;Need for high-quality software&lt;/li&gt;
+&lt;li&gt;Business need for continuous and stable productivity for 5+ years&lt;/li&gt;
+&lt;li&gt;Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Self-organizing teams work best when most people on your team are eager to do
+more, be more, and learn more. A team of such developers will find a single
+leader to be a bottleneck. Running every idea past a single decision maker will
+impair their abilities to grow and gain critical thinking skills.&lt;/p&gt;
+
+&lt;h2 id=&#34;case-study:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Case Study&lt;/h2&gt;
+
+&lt;p&gt;I currently lead a self-organizing team of ten developers. We alone actively
+develop in a 4.6 million line codebase. The codebase is over 10 years old, and
+the entire team has turned over twice since the project started. This is no
+maintenance project, this quarter we converted the main calculation engine
+(~600KLOC) to allow calculations to be parallelized across dozens of nodes for a
+substantial increase in throughput.&lt;/p&gt;
+
+&lt;p&gt;Our team has recently been recognized as producing the most business value with
+the highest quality across our +700 person software company. Our CEO and SVP of
+Product have highlighted our recent accolades. I am certain this was only
+possible because of the intrinsic motivation of our staff caused by
+self-organization.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We actively develop in a 10 year old codebase sized at ~460KLOC per developer&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When deciding on working agreements, the original team voted on strict
+pair-programming, frequent pair switches
+(&lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;promiscuous pairing&lt;/a&gt;),
+and test-driven development. Each subsequent iteration of the team has continued
+to vote for these agreements. We believe that it is one of the easiest ways to
+keep a team capable in such an enormous codebase. Randomized pairing and 2-8
+hour switching prevents siloing of knowledge.&lt;/p&gt;
+
+&lt;p&gt;In any other company, our least experienced developers would be team leads and
+architects; and our most experienced developers would be CTO&amp;rsquo;s. They&amp;rsquo;ve gotten
+this experience by living it. In case you think we&amp;rsquo;ve hired a team of seasoned
+graybeards, our average developer only has six years of experience.&lt;/p&gt;
+
+&lt;p&gt;Each member of our team is responsible for &amp;ldquo;being the lead&amp;rdquo; in certain ways. The
+individual&amp;rsquo;s own interests guide them to develop expertise in subjects. By being
+an expert, others listen to them, so they often have an attentive audience when
+speaking on their specialties. This positive feedback loop encourages additional
+research.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-start:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;How to Start&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; The most important way to build such a team is to allow them to fail&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The team must be allowed to face the consequences of their actions in a safe
+space. If a refactoring project goes badly, the team should have the individual
+clean up their mess. When someone is spending time on a project that doesn&amp;rsquo;t
+align with the goals of the business, the team should speak with them. When a
+developer successfully campaigns for a change that increases productivity, it
+should be celebrated. In all cases, strive to have your office be a safe place
+to fail.&lt;/p&gt;
+
+&lt;p&gt;Every time someone in authority demands the team do something different, it
+reduces the intrinsic motivation of the team. Each demand teaches the team
+members that they don&amp;rsquo;t have to be responsible, someone else will take care of
+the &amp;ldquo;important&amp;rdquo; things for them. Treat such demands with the utmost care, only
+making demands extremely infrequently.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Fewer demands allows for greater intrinsic motivation&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A self-organizing team is very much like a democracy. The team is expected and
+entrusted to organize around the needs of the business. Decisions should be made
+by consensus. Very rarely should an &amp;ldquo;override&amp;rdquo; be needed from management.&lt;/p&gt;
+
+&lt;h1 id=&#34;conclusion:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Self-organizing teams are one of the most effective ways to manage a
+high-performing group. The team benefits from the best aspects of each member.
+Team members &amp;ldquo;grow up&amp;rdquo; quickly, as they are exposed to others around them who
+behave like trusted professionals. Each developer becomes intrinsically
+motivated, outperforming their peers in similar command and control teams.&lt;/p&gt;
+
+&lt;h1 id=&#34;replies:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Replies&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://lobste.rs/u/petergao&#34;&gt;PeterGao&lt;/a&gt; on lobste.rs
+&lt;a href=&#34;https://lobste.rs/s/1fhkxo/when_self-organizing_teams_are_effective/comments/e3niex#c_e3niex&#34;&gt;pointed out&lt;/a&gt;
+that undergrad school projects often see everyone grouping by skill, with all
+the best in a group together. I too have had bad luck with undergrad CS school
+projects, especially since at the time I was a C-performer. School projects mix
+a fairly homogeneous group of immature students with a subtly different goal:
+“pick a few other people, your work will be compared to everyone else’s”.
+Self-selected grouping by skill makes sense, it’s effectively a competition. One
+of the recommended alterations for group projects is “your grade is the average
+grade of all the group projects”. Suddenly, you won’t see those teams separating
+by skill. Instead students will organize with a team mix as even as possible,
+with cross-communication (and likely rotation) happening to ensure high quality
+across all the projects. Bam, now you’ve got my office ;)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

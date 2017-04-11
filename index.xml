@@ -6,8 +6,152 @@
     <description>Recent content on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What Keeps a Self-Organizing Team From Falling Apart</title>
+      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <description>
+
+&lt;p&gt;My team has a decade of experience applying
+&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;self-organizing teams&lt;/a&gt; and
+&lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;pair-programming&lt;/a&gt; to reduce wasted productivity in an
+enterprise banking application.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-benefits:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;The Benefits&lt;/h2&gt;
+
+&lt;h3 id=&#34;no-technical-lead:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;No Technical Lead&lt;/h3&gt;
+
+&lt;p&gt;Our self-organizing practices eliminate the need for a technical lead who
+assigns and follows up on work. No work is assigned to any individual.&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-empowerment:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Individual Empowerment&lt;/h3&gt;
+
+&lt;p&gt;Developers are free to remove pain points as needed, so most have a strong sense
+of ownership. Team members feel empowered to champion for broad changes to the
+codebase.&lt;/p&gt;
+
+&lt;h3 id=&#34;few-meetings:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Few Meetings&lt;/h3&gt;
+
+&lt;p&gt;Without the need for significant process or oversight, the team has very few
+meetings a week. In a survey of the last several months, the average team member
+had less than &lt;strong&gt;three hours of meetings a week.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;how-does-this-work:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;How does this work?&lt;/h2&gt;
+
+&lt;p&gt;As amazing as it all sounds, what prevents this process from falling into
+anarchy? How has this been working for us for over ten years with very little
+oversight? The team has completely changed three times (roughly a 3.6 year
+average turnaround) so it can&amp;rsquo;t only be about &amp;ldquo;the right people&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;self-correction-while-maintaining-trust:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Self-Correction While Maintaining Trust&lt;/h3&gt;
+
+&lt;p&gt;The author of
+&lt;a href=&#34;http://www.reinventingorganizations.com/&#34;&gt;Reinventing Organizations&lt;/a&gt; talks
+about the concept of &amp;ldquo;self-correction&amp;rdquo; that allows self-organizing teams to
+adapt without writing a thick rule-book of policies. Healthy, self-organizing
+teams build a &lt;strong&gt;simple system that self-corrects&lt;/strong&gt; instead of adding new
+policies when trust is abused. Rather than trying to design the perfect
+rule-book, they let individuals grow into trusted, intelligent agents who are
+expected to learn and improve.&lt;/p&gt;
+
+&lt;p&gt;The author suggests that three things are needed for self-correcting teams:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;A shared understanding of what’s healthy&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Information&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A forum for conversation to trigger self-corrective action&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;our-process:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Our Process&lt;/h2&gt;
+
+&lt;p&gt;Our process has several examples of self-correction, and several places we are
+still sorting out how to best self-correct. We currently apply these
+democratically-elected practices:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Full-time pair-programming on all production code&lt;/li&gt;
+&lt;li&gt;No work is assigned to any individual or pair&lt;/li&gt;
+&lt;li&gt;Any pair can make any technical decision&lt;/li&gt;
+&lt;li&gt;Pairs are shuffled randomly twice a day&lt;/li&gt;
+&lt;li&gt;Everyone participates in a five-minute status update twice a day&lt;/li&gt;
+&lt;li&gt;Weekly &amp;ldquo;retrospective&amp;rdquo; is held to reflect and make changes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;example-any-pair-can-make-any-technical-decision:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Any pair can make any technical decision&lt;/h3&gt;
+
+&lt;p&gt;Consider the practice that &amp;ldquo;any pair can make any technical decision.&amp;rdquo; The
+&lt;strong&gt;information&lt;/strong&gt; comes when the pairs switch every half-day. Bob and Sally might
+think designing the module one way is a good idea in the morning, but Sally and
+Jane might see things with a fresh perspective in the afternoon. The information
+spreads organically every four hours as a fresh set of eyes gets to see the
+work. The &lt;strong&gt;forum for self-corrective action&lt;/strong&gt; happens when the new pair
+discusses the previous session&amp;rsquo;s decisions.&lt;/p&gt;
+
+&lt;p&gt;If a pair makes a technical decision that isn&amp;rsquo;t ideal, the next pair will have
+the opportunity to choose to continue down that path or adjust the code to a
+better solution. To prevent significant rework, we meet once a week for under an
+hour to chat about the upcoming week&amp;rsquo;s features and get a rough idea of the
+direction the team wants to go.&lt;/p&gt;
+
+&lt;p&gt;In practice, rework happens only occasionally as everyone strives to produce the
+best designs they can. No one wants to see their work undone because of a missed
+requirement or poor design, which prompts a healthy desire to do one&amp;rsquo;s best.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-work-isn-t-assigned:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Work Isn&amp;rsquo;t Assigned&lt;/h3&gt;
+
+&lt;p&gt;Work isn&amp;rsquo;t assigned to pairs or individuals. The &lt;strong&gt;shared understanding&lt;/strong&gt; is
+that the most valuable thing for the business is for pairs to work through the
+priority queue of enhancements and technical debt. We promote &lt;strong&gt;information&lt;/strong&gt;
+with a twice daily status update of what each pair accomplished. We have a
+retrospective &lt;strong&gt;forum&lt;/strong&gt; once a week to discuss what is healthy and prompt
+self-corrective action.&lt;/p&gt;
+
+&lt;p&gt;In practice, pairs rarely &amp;ldquo;go rogue&amp;rdquo;. Only occasionally in the last few years
+has it happened, and the issues have been resolved through the weekly
+retrospective. A recent example comes from a pair who semi-secretly stayed on an
+interesting feature for over a week instead of rotating as agreed. Several other
+team-members felt like they&amp;rsquo;d missed out on getting to build it and brought up
+their feelings in the weekly forum. It turned out there was a legitimate benefit
+to the pair&amp;rsquo;s decision to stay on the feature for so long. The conclusion was
+the pair would&amp;rsquo;ve gotten a lot more support if they&amp;rsquo;d been upfront with the team
+with what they saw and their decision to stay on the project for longer than
+usual.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Some simple communication would&amp;rsquo;ve saved everyone some hassle&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Rather than adding a new policy to the rule-book, the whole team got a reminder
+on two great lessons. First, nothing is as simple as it seems. Second, a pinch
+of communication prevents a pound of hassle.&lt;/p&gt;
+
+&lt;h3 id=&#34;application-no-you-don-t-need-to-do-pair-programming-fulltime:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Application (No, you don&amp;rsquo;t need to do pair-programming fulltime!)&lt;/h3&gt;
+
+&lt;p&gt;Self-correction and self-organization is on a continuum. The more your team
+grows to self-correct, the more benefits you gain.&lt;/p&gt;
+
+&lt;p&gt;Not every team should have the same practices for self-correction. Our specific
+practices of pair-programming, rotating, and pair-empowerment are not magic:
+they are just good examples of applied self-correction. We have found
+pair-programming and pair switching to work well for us, but there are infinite
+ways to grow a system that self-corrects.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Trust, but verify.&amp;rdquo; - Russian proverb&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Self-correcting practices allow individuals to perform at their best with fewer
+rule books, fewer meetings, fewer bottlenecks, and less oversight. Individuals
+are trusted to perform their best, and the team is provided with a way to
+discuss improvements. A self-correcting team will find individuals empowered to
+improve the business in incredible ways.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Darkest Proof: Day 2</title>
@@ -1485,10 +1629,6 @@ to choose the best tool for the job.&lt;/p&gt;
       <guid>http://deliberate-software.com/self-organizing-teams/</guid>
       <description>
 
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Great, now instead of programmers, we are politicians&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
 &lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
 high-quality professionals.&lt;/p&gt;
 
@@ -1669,315 +1809,6 @@ meet the demand.&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;Carefully consider your architecture decisions. Do not allow fashion to dictate
 your choices. Take pride in selecting the appropriate architecture for the
 project, no matter how unpopular.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Haskell is the Dark Souls of Programming</title>
-      <link>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
-      <pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
-      <description>
-
-&lt;p&gt;Please don&amp;rsquo;t hit me, Haskell does a great job of that already.&lt;/p&gt;
-
-&lt;p&gt;I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable
-lore, a great &lt;del&gt;combat&lt;/del&gt; type system, a cliff-wall difficulty curve, and
-unending punishment.&lt;/p&gt;
-
-&lt;p&gt;I want to collect some statistics from the GitHub API.&lt;/p&gt;
-
-&lt;h3 id=&#34;step-one-stack:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step One - Stack&lt;/h3&gt;
-
-&lt;p&gt;I download stack and start a project:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats
-Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ ... 
- ......
-All done.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So far so good. Does it work?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  &amp;gt; stack build &amp;amp;&amp;amp; stack exec -- github-stats-exe 
-   github-stats-0.1.0.0: configure
-   ..... 
-   Registering github-stats-0.1.0.0...
-   someFunc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Awww yisss. This is going to be so easy!&lt;/p&gt;
-
-&lt;h3 id=&#34;step-two-https-get-request:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step Two - HTTPS GET Request&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/tomb_of_the_giants.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Now I need to query the GitHub API. Not my first time to the rodeo, I generate a
-personal access token from GitHub and copy it to a local file. What query should
-I run first? How about the count for all ASM tetris repositories? Poking around
-the &lt;a href=&#34;https://developer.github.com/v3/search/#search-repositories&#34;&gt;docs&lt;/a&gt; comes up
-with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET https://api.github.com/search/repositories?q=tetris+language:assembly&amp;amp;sort=stars&amp;amp;order=desc
-User-Agent: steveshogren
-Authorization: token PUT_TOKEN_HERE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;{.. &amp;ldquo;total_count&amp;rdquo;: 354}&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Easy life. Now how do you GET a resource in Haskell? Ah,
-&lt;a href=&#34;https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html&#34;&gt;Network.HTTP&lt;/a&gt;!
-I copy the front page sample into &lt;code&gt;src/Lib.hs&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;module Lib
-    ( someFunc
-    ) where
-
-x = simpleHTTP (getRequest &amp;quot;https://www.github.com/&amp;quot;) &amp;gt;&amp;gt;= fmap (take 100) . getResponseBody
-
-someFunc :: IO ()
-someFunc = 
-   print x
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So simple! This is why laugh at my NodeJS loving friends!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; stack build
-src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
-src/Lib.hs:5:17: Not in scope: ‘getRequest’
-src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
-Compilation failed.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Doesn&amp;rsquo;t compile. Durp, hackage is a package library, I need to add this to my
-cabal. What is the name of the package? HTTP-4000? HTTP-4000.3.2? Nothing in
-hackage seems to indicate what goes into the cabal file. I discover it is just
-HTTP through trial and error. I update my cabal file&amp;hellip; in all three
-build-depends&amp;hellip;?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  build-depends:       base &amp;gt;= 4.7 &amp;amp;&amp;amp; &amp;lt; 5
-                       , HTTP
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hrm, same error.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt; stack build
-src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
-src/Lib.hs:5:17: Not in scope: ‘getRequest’
-src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
-Compilation failed.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Oh, durp, I&amp;rsquo;d need an import. (WHY ISN&amp;rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
-doesn&amp;rsquo;t work, I need &lt;code&gt;putStrLn&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Network.HTTP
-
-x = simpleHTTP (getRequest &amp;quot;https://www.github.com/&amp;quot;) &amp;gt;&amp;gt;= fmap (take 100) . getResponseBody
-
-someFunc :: IO ()
-someFunc = x &amp;gt;&amp;gt;= putStrLn
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here goes!!!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; &amp;gt; stack build &amp;amp;&amp;amp; stack exec -- github-stats-exe
-github-stats-exe: user error (https not supported)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;NOTE: This package only supports HTTP;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/nope_better.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;When &lt;del&gt;playing Dark Souls&lt;/del&gt;programming Haskell, sometimes the best move
-is to run away. I search again. &lt;code&gt;haskell https request&lt;/code&gt; returns
-&amp;ldquo;http-conduit&amp;rdquo; as the best choice. After adding http-conduit to my cabal, I come
-up with this beast without any surprises:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;query :: IO String
-query = do
-    initReq &amp;lt;- parseUrl &amp;quot;https://api.github.com/search/repositories&amp;quot;
-    let r = initReq
-                   { method = &amp;quot;GET&amp;quot;
-                    , requestHeaders = [(hUserAgent, &amp;quot;steveshogren&amp;quot;)
-                                      , (hAuthorization, &amp;quot;token PUT_TOKEN_HERE&amp;quot;)]}
-    let request = setQueryString [(&amp;quot;q&amp;quot;, Just &amp;quot;tetris+language:assembly&amp;quot;)
-                                 ,(&amp;quot;order&amp;quot;, Just &amp;quot;desc&amp;quot;)
-                                 ,(&amp;quot;sort&amp;quot;, Just &amp;quot;stars&amp;quot;)] r
-    manager &amp;lt;- newManager tlsManagerSettings
-    res &amp;lt;- httpLbs request manager
-    return . show . responseBody $ res
-
-someFunc :: IO ()
-someFunc = do
-   query &amp;gt;&amp;gt;= putStrLn
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Huzzah! Results! I&amp;rsquo;m getting back a monster string of json data.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;\&amp;ldquo;{\\&amp;ldquo;total_count\\&amp;rdquo;:66, &amp;hellip;.}\&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/praisethesun.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;step-three-parsing-json:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Step Three - Parsing JSON&lt;/h3&gt;
-
-&lt;p&gt;Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
-use Aeson and get the total_count value from the return, I needed the following
-additions:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
-
-import GHC.Generics
-import Data.Aeson
-
-data ResultCount = ResultCount {
-  total_count :: Int }
-  deriving (Generic, Show)
-
-instance ToJSON ResultCount
-instance FromJSON ResultCount
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ResultCount allows me to use &lt;code&gt;decode&lt;/code&gt; from aeson instead of &lt;code&gt;show&lt;/code&gt; to
-parse the &amp;ldquo;total_count&amp;rdquo; from the JSON response into an Int. Sure enough, it
-does!&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
-module Lib
-    ( someFunc
-    ) where
-
-import Control.Monad
-import Network
-import Network.HTTP.Conduit
-import Network.HTTP.Types.Header
-import GHC.Generics
-import Data.Aeson
-
-data ResultCount = ResultCount {
-  total_count :: Int }
-  deriving (Generic, Show)
-
-instance ToJSON ResultCount
-instance FromJSON ResultCount
-
-query :: IO (Maybe Int)
-query = do
-    initReq &amp;lt;- parseUrl &amp;quot;https://api.github.com/search/repositories&amp;quot;
-    let r = initReq
-                   { method = &amp;quot;GET&amp;quot;
-                    , requestHeaders = [(hUserAgent, &amp;quot;steveshogren&amp;quot;)
-                                      , (hAuthorization, &amp;quot;token PUT_TOKEN_HERE&amp;quot;)]}
-    let request = setQueryString [(&amp;quot;q&amp;quot;, Just &amp;quot;tetris+language:assembly&amp;quot;)
-                                 ,(&amp;quot;order&amp;quot;, Just &amp;quot;desc&amp;quot;)
-                                 ,(&amp;quot;sort&amp;quot;, Just &amp;quot;stars&amp;quot;)] r
-    manager &amp;lt;- newManager tlsManagerSettings
-    res &amp;lt;- httpLbs request manager
-    return . liftM total_count . decode . responseBody $ res
-
-someFunc :: IO ()
-someFunc = query &amp;gt;&amp;gt;= print
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Puts out: &lt;code&gt;Just 66&lt;/code&gt;. Success! Wait. 66 isn&amp;rsquo;t the same count I got when
-running from the browser. Check again. Sure enough, browser comes up with a
-totally different count.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/come_at_me_bro.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Maybe the query request isn&amp;rsquo;t correct? Adding a &lt;code&gt;print request&lt;/code&gt; on line 31
-after building the request shows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;Request {
-  host                 = &amp;quot;api.github.com&amp;quot;
-  port                 = 443
-  secure               = True
-  requestHeaders       = [(&amp;quot;User-Agent&amp;quot;,&amp;quot;steveshogren&amp;quot;),(&amp;quot;Authorization&amp;quot;,&amp;quot;token PUT_TOKEN_HERE&amp;quot;)]
-  path                 = &amp;quot;/search/repositories&amp;quot;
-  queryString          = &amp;quot;?q=tetris%2Blanguage%3Aassembly&amp;amp;order=desc&amp;amp;sort=stars&amp;quot;
-  method               = &amp;quot;GET&amp;quot;
-  proxy                = Nothing
-  rawBody              = False
-  redirectCount        = 10
-  responseTimeout      = Just (-3425)
-  requestVersion       = HTTP/1.1
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The queryString isn&amp;rsquo;t right! It encoded my &lt;code&gt;+&lt;/code&gt; and &lt;code&gt;:&lt;/code&gt;! After an hour of
-reading through docs and researching URL encoding specs, it dawns on me. &lt;code&gt;+&lt;/code&gt;
-is an encoded whitespace.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;No face-palm gif could ever represent the shear magnitude of my current
-emotions&amp;hellip; You&amp;rsquo;ll have to use your imagination&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I change my query to &lt;code&gt;&amp;quot;tetris language:assembly&amp;quot;&lt;/code&gt; and the right
-count comes back! &lt;code&gt;Just 354&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;I finally have something that correctly fetches a count of repositories from
-GitHub and parses it into an Int. After over four hours of &lt;del&gt;Dark
-Souls&lt;/del&gt;Haskell punishment, we deserve to enjoy a bonfire!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/solaire_sitting.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;edit-bonus-round:6807ae504e3906e54fafcf1fb117cd62&#34;&gt;Edit: Bonus Round!&lt;/h2&gt;
-
-&lt;p&gt;Thanks to
-&lt;a href=&#34;http://bitemyapp.com/posts/2016-02-06-haskell-is-not-trivial-not-unfair.html&#34;&gt;Chris Allen&lt;/a&gt;
-and
-&lt;a href=&#34;https://www.reddit.com/r/programming/comments/44hdl6/haskell_is_the_dark_souls_of_programming/czqaxfu&#34;&gt;/u/JeanParker&lt;/a&gt;
-for pointing me towards &lt;a href=&#34;http://www.serpentine.com/wreq/&#34;&gt;wreq&lt;/a&gt;, which weirdly
-didn&amp;rsquo;t come up when I looked around for libs yesterday. Yep, it was 6th on the
-Google when searching for &lt;code&gt;haskell https get&lt;/code&gt;. &lt;code&gt;Network.HTTP&lt;/code&gt; is the
-top three results, and that doesn&amp;rsquo;t even &lt;em&gt;do&lt;/em&gt; https.&lt;/p&gt;
-
-&lt;p&gt;¯\&lt;em&gt;(ツ)&lt;/em&gt;/¯&lt;/p&gt;
-
-&lt;p&gt;Armed with their helpful suggestions, I knocked this out this morning.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import Network.Wreq
-import Control.Lens
-import Data.Aeson
-import Data.Aeson.Lens
-import qualified Data.Text as T
-import qualified Data.ByteString.Char8 as BS
-
-opts :: String -&amp;gt; String -&amp;gt; Options
-opts lang token = defaults &amp;amp; param &amp;quot;q&amp;quot; .~ [T.pack $ &amp;quot;tetris language:&amp;quot; ++ lang]
-                        &amp;amp; param &amp;quot;order&amp;quot; .~ [&amp;quot;desc&amp;quot;]
-                        &amp;amp; param &amp;quot;sort&amp;quot; .~ [&amp;quot;stars&amp;quot;]
-                        &amp;amp; header &amp;quot;Authorization&amp;quot; .~ [BS.pack $ &amp;quot;token &amp;quot; ++ token]
-
-query lang = do
-    token &amp;lt;- readFile &amp;quot;token&amp;quot;
-    r &amp;lt;- getWith (opts lang token) &amp;quot;https://api.github.com/search/repositories&amp;quot;
-    return $ r ^? responseBody . key &amp;quot;total_count&amp;quot; . _Number
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;MUCH better. This includes reading my token from file called &amp;ldquo;token&amp;rdquo; so I don&amp;rsquo;t
-accidentally commit it. Also includes building up the different query options
-based on inputs, which was the next step. Thanks y&amp;rsquo;all.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/solaire_idle.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Pixel gifs sourced from
-&lt;a href=&#34;http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls&#34;&gt;zedotagger&lt;/a&gt; on
-deviantart, thanks zedotagger!&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     

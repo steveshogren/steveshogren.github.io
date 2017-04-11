@@ -6,8 +6,152 @@
     <description>Recent content in Meta Game on Deliberate Software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Mar 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/meta-game/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What Keeps a Self-Organizing Team From Falling Apart</title>
+      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <pubDate>Mon, 20 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <description>
+
+&lt;p&gt;My team has a decade of experience applying
+&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;self-organizing teams&lt;/a&gt; and
+&lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;pair-programming&lt;/a&gt; to reduce wasted productivity in an
+enterprise banking application.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-benefits:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;The Benefits&lt;/h2&gt;
+
+&lt;h3 id=&#34;no-technical-lead:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;No Technical Lead&lt;/h3&gt;
+
+&lt;p&gt;Our self-organizing practices eliminate the need for a technical lead who
+assigns and follows up on work. No work is assigned to any individual.&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-empowerment:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Individual Empowerment&lt;/h3&gt;
+
+&lt;p&gt;Developers are free to remove pain points as needed, so most have a strong sense
+of ownership. Team members feel empowered to champion for broad changes to the
+codebase.&lt;/p&gt;
+
+&lt;h3 id=&#34;few-meetings:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Few Meetings&lt;/h3&gt;
+
+&lt;p&gt;Without the need for significant process or oversight, the team has very few
+meetings a week. In a survey of the last several months, the average team member
+had less than &lt;strong&gt;three hours of meetings a week.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;how-does-this-work:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;How does this work?&lt;/h2&gt;
+
+&lt;p&gt;As amazing as it all sounds, what prevents this process from falling into
+anarchy? How has this been working for us for over ten years with very little
+oversight? The team has completely changed three times (roughly a 3.6 year
+average turnaround) so it can&amp;rsquo;t only be about &amp;ldquo;the right people&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;self-correction-while-maintaining-trust:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Self-Correction While Maintaining Trust&lt;/h3&gt;
+
+&lt;p&gt;The author of
+&lt;a href=&#34;http://www.reinventingorganizations.com/&#34;&gt;Reinventing Organizations&lt;/a&gt; talks
+about the concept of &amp;ldquo;self-correction&amp;rdquo; that allows self-organizing teams to
+adapt without writing a thick rule-book of policies. Healthy, self-organizing
+teams build a &lt;strong&gt;simple system that self-corrects&lt;/strong&gt; instead of adding new
+policies when trust is abused. Rather than trying to design the perfect
+rule-book, they let individuals grow into trusted, intelligent agents who are
+expected to learn and improve.&lt;/p&gt;
+
+&lt;p&gt;The author suggests that three things are needed for self-correcting teams:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;A shared understanding of what’s healthy&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Information&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A forum for conversation to trigger self-corrective action&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;our-process:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Our Process&lt;/h2&gt;
+
+&lt;p&gt;Our process has several examples of self-correction, and several places we are
+still sorting out how to best self-correct. We currently apply these
+democratically-elected practices:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Full-time pair-programming on all production code&lt;/li&gt;
+&lt;li&gt;No work is assigned to any individual or pair&lt;/li&gt;
+&lt;li&gt;Any pair can make any technical decision&lt;/li&gt;
+&lt;li&gt;Pairs are shuffled randomly twice a day&lt;/li&gt;
+&lt;li&gt;Everyone participates in a five-minute status update twice a day&lt;/li&gt;
+&lt;li&gt;Weekly &amp;ldquo;retrospective&amp;rdquo; is held to reflect and make changes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;example-any-pair-can-make-any-technical-decision:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Any pair can make any technical decision&lt;/h3&gt;
+
+&lt;p&gt;Consider the practice that &amp;ldquo;any pair can make any technical decision.&amp;rdquo; The
+&lt;strong&gt;information&lt;/strong&gt; comes when the pairs switch every half-day. Bob and Sally might
+think designing the module one way is a good idea in the morning, but Sally and
+Jane might see things with a fresh perspective in the afternoon. The information
+spreads organically every four hours as a fresh set of eyes gets to see the
+work. The &lt;strong&gt;forum for self-corrective action&lt;/strong&gt; happens when the new pair
+discusses the previous session&amp;rsquo;s decisions.&lt;/p&gt;
+
+&lt;p&gt;If a pair makes a technical decision that isn&amp;rsquo;t ideal, the next pair will have
+the opportunity to choose to continue down that path or adjust the code to a
+better solution. To prevent significant rework, we meet once a week for under an
+hour to chat about the upcoming week&amp;rsquo;s features and get a rough idea of the
+direction the team wants to go.&lt;/p&gt;
+
+&lt;p&gt;In practice, rework happens only occasionally as everyone strives to produce the
+best designs they can. No one wants to see their work undone because of a missed
+requirement or poor design, which prompts a healthy desire to do one&amp;rsquo;s best.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-work-isn-t-assigned:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Work Isn&amp;rsquo;t Assigned&lt;/h3&gt;
+
+&lt;p&gt;Work isn&amp;rsquo;t assigned to pairs or individuals. The &lt;strong&gt;shared understanding&lt;/strong&gt; is
+that the most valuable thing for the business is for pairs to work through the
+priority queue of enhancements and technical debt. We promote &lt;strong&gt;information&lt;/strong&gt;
+with a twice daily status update of what each pair accomplished. We have a
+retrospective &lt;strong&gt;forum&lt;/strong&gt; once a week to discuss what is healthy and prompt
+self-corrective action.&lt;/p&gt;
+
+&lt;p&gt;In practice, pairs rarely &amp;ldquo;go rogue&amp;rdquo;. Only occasionally in the last few years
+has it happened, and the issues have been resolved through the weekly
+retrospective. A recent example comes from a pair who semi-secretly stayed on an
+interesting feature for over a week instead of rotating as agreed. Several other
+team-members felt like they&amp;rsquo;d missed out on getting to build it and brought up
+their feelings in the weekly forum. It turned out there was a legitimate benefit
+to the pair&amp;rsquo;s decision to stay on the feature for so long. The conclusion was
+the pair would&amp;rsquo;ve gotten a lot more support if they&amp;rsquo;d been upfront with the team
+with what they saw and their decision to stay on the project for longer than
+usual.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Some simple communication would&amp;rsquo;ve saved everyone some hassle&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Rather than adding a new policy to the rule-book, the whole team got a reminder
+on two great lessons. First, nothing is as simple as it seems. Second, a pinch
+of communication prevents a pound of hassle.&lt;/p&gt;
+
+&lt;h3 id=&#34;application-no-you-don-t-need-to-do-pair-programming-fulltime:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Application (No, you don&amp;rsquo;t need to do pair-programming fulltime!)&lt;/h3&gt;
+
+&lt;p&gt;Self-correction and self-organization is on a continuum. The more your team
+grows to self-correct, the more benefits you gain.&lt;/p&gt;
+
+&lt;p&gt;Not every team should have the same practices for self-correction. Our specific
+practices of pair-programming, rotating, and pair-empowerment are not magic:
+they are just good examples of applied self-correction. We have found
+pair-programming and pair switching to work well for us, but there are infinite
+ways to grow a system that self-corrects.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Trust, but verify.&amp;rdquo; - Russian proverb&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Self-correcting practices allow individuals to perform at their best with fewer
+rule books, fewer meetings, fewer bottlenecks, and less oversight. Individuals
+are trusted to perform their best, and the team is provided with a way to
+discuss improvements. A self-correcting team will find individuals empowered to
+improve the business in incredible ways.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>When Self-Organizing Teams Are Effective</title>
@@ -16,10 +160,6 @@
       
       <guid>http://deliberate-software.com/self-organizing-teams/</guid>
       <description>
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Great, now instead of programmers, we are politicians&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
 high-quality professionals.&lt;/p&gt;
@@ -1589,62 +1729,6 @@ strategies.&lt;/p&gt;
 &lt;p dir=&#34;ltr&#34;&gt;We hadn’t considered the terms on that technical debt. The principal was high: paying it cost weeks of nonstop effort. What about the interest? At best, it was tiny, fractions of a percent of the time it took to pay it off. How long will it take us to make that time back? Five years? Ten?&lt;/p&gt;
 &lt;p dir=&#34;ltr&#34;&gt;Now consider another common refactoring: renaming a private function. What does it cost to fix a badly named local function? Practically nothing, just a few keystrokes. What does it cost to leave it undone? You have to look at that bad function definition each time you work in that file. Leaving the technical debt would cost more than paying it down. Why wouldn’t you immediately pay down such a debt?&lt;/p&gt;
 &lt;p dir=&#34;ltr&#34;&gt;Clearly, this is not an exact science, but our refactorings will take on a very critical dimension when we add interest to the technical debt metaphor. I now evaluate any refactoring effort that would take longer than a few minutes in this mindset, thinking critically about what I do and why. I keep my big technical debt chores in a list prioritized by interest (regardless of the principal), so there is never any doubt what my next task should be.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How To Escape From {programming_language}</title>
-      <link>http://deliberate-software.com/how-to-escape-from-programming_language/</link>
-      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/how-to-escape-from-programming_language/</guid>
-      <description>&lt;p&gt;As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of javascript libraries alone is increasing at a furious pace: Angular, Backbone, Node, Ember, Knockout, Knockback, Meteor, etc, etc, etc. Who has a chance at keeping up? While having so many options is also beneficial, it makes it more and more challenging for a single developer to stay relevant.
-&lt;br /&gt;
-&lt;br /&gt;
-You are a good programmer. No, you are a great programmer. But, you are stuck in one development stack. You want to diversify your knowledge, experience, and skill set, but your resume reads like a one-act play. Chances are, you didn&amp;rsquo;t deliberately choose to work in this stack. At the start of your career, the first job you landed was probably the best you could find. Several years have gone by, and you are beginning to realize that the development world is moving on.
-&lt;br /&gt;
-&lt;br /&gt;
-Maybe you have already tried, having gone to a few interviews. Nevertheless, you’re still as stuck as when you started, because many of the cool shops are still figuring out how to do good hiring in this new, fast-changing paradigm. They want developers who already have experience in their stack, but they haven&amp;rsquo;t realized that filtering for previous experience is only one heuristic for finding good talent. So, what are your options?
-&lt;br /&gt;
-&lt;br /&gt;
-Here is how to escape from your language. Like all the best advice, it is simple, yet profound. It consists of the following three steps:
-&lt;br /&gt;
-&lt;br /&gt;
-1. Pick a new stack.&lt;br /&gt;
- 2. Learn it.&lt;br /&gt;
- 3. Build a network.
-&lt;br /&gt;
-&lt;br /&gt;
-Picking a stack is not an easy thing to do, but I have good news for you: once you master these steps, you won&amp;rsquo;t ever be stuck again. No matter which one you pick, when the time comes, you will be able to quickly move way ahead of the pack. Don’t worry about trying to pick the one that will last your whole career, since, (and this may come as a shock to you) it probably won&amp;rsquo;t last you a decade! That&amp;rsquo;s why we should love software development, for the fast pace! If you want a job that never changes, go be a &lt;del&gt;librarian&lt;/del&gt; &lt;del&gt;doctor&lt;/del&gt; &lt;del&gt;lawyer&lt;/del&gt; gardener.
-&lt;br /&gt;
-&lt;br /&gt;
-Which language should you pick? You have two big categories to choose from that I suggest:
-&lt;ul&gt;
-    &lt;li dir=&#34;ltr&#34;&gt;The popular&lt;/li&gt;
-    &lt;li dir=&#34;ltr&#34;&gt;The exotic&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
-The popular languages have significantly more, and a greater variety of jobs. On the down side, you also have more competition from other developers, and most of them have been using that language since before they were born. To stand out here, you need something to differentiate yourself from the other candidates: a unique perspective, skill in another programming paradigm, an ability to quickly learn new things, rapidly change contexts, etc. Figure out what your unique contributions are, and communicate them clearly.
-&lt;br /&gt;
-&lt;br /&gt;
-Alternatively, on the exotic route, you pick an up-and-coming language, the new hotness, as it were. Because it is so new, there are much fewer jobs in this language, and less long-term stability. Consequently, there are also much fewer experienced developers. Savvy companies using this language will hire interested developers, despite them lacking any experience with it. (All your hard work in step two will really pay off here.)
-&lt;br /&gt;
-&lt;br /&gt;
-Having chosen a language, now it’s time to learn it! Fill your github with work in that language.
- Read some books on it. Look for ways to use it at your current job. If your situation allows, start a big side project in it. You don&amp;rsquo;t HAVE to open-source the code on github, but this certainly helps to publicize your learning. Companies seek prior job experience to avoid having to pay to train you; well then, beat them to the punch by already knowing it!
-&lt;br /&gt;
-&lt;br /&gt;
-To build your network, go to meetups and get involved in them. I cannot emphasize this enough.
- Stick out your hand and introduce yourself. Make connections with the people you meet. Learn about the tools people use at their work. You will begin to think like a developer in that stack as you’re exposed to new concepts. Soon enough, you will develop a sense of what companies are hiring and who would give you a recommendation at their company.
-&lt;br /&gt;
-&lt;br /&gt;
-Mind your attitude when interviewing. Resist the urge to cynically compare and contrast the old and new stacks. I have interviewed too many candidates who could not stop talking about how great their old language is, or how “these new hipster languages are just a fad”. While you are certainly always entitled to your opinion, (who knows, you may even be right!), carrying on like this in an interview setting never leaves a good impression.
-&lt;br /&gt;
-&lt;br /&gt;
-Perhaps you’re thinking that this is just too much effort. Just like everything in life, choosing not to move is also a valid move. I like to call it &amp;ldquo;riding into the sunset&amp;rdquo;. In this option, you never leave your language, ever. Though this may feel like the safer choice right now, it carries its own risks. If you hate maintenance projects, you need to learn to love them, because they are going to be your bread and butter. But, you will be competing for these projects with all the other sunsetters, and there are going to be a lot of them. From what I have heard, however, once you have reached the point where there are more maintenance jobs than there are remaining developers, you really do get to write your own ticket, but this can take decades. My great uncle did this, and he managed to stay employed in COBOL till he retired.
-&lt;br /&gt;
-&lt;br /&gt;
-While escaping from your stack requires effort, by following the steps you can achieve it in just a few hours a week. So, get out there and do it!&lt;/p&gt;
 </description>
     </item>
     
