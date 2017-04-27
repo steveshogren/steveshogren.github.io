@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pages on Deliberate Software</title>
+    <title>Pages on deliberate software</title>
     <link>http://deliberate-software.com/page/</link>
-    <description>Recent content in Pages on Deliberate Software</description>
+    <description>Recent content in Pages on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="http://deliberate-software.com/page/index.xml" rel="self" type="application/rss+xml" />
@@ -14,7 +14,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/books/</guid>
-      <description>&lt;p&gt;For how I pick what books to prioritize, check out my post &lt;a class=&#34;homelink&#34;
+      <description>&lt;h1 class=&#34;centereded&#34;&gt;Books That Shape My Thinking&lt;/h1&gt;
+
+&lt;p&gt;For how I pick what books to prioritize, check out my post &lt;a class=&#34;homelink&#34;
 href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;b&gt;Bold&lt;/b&gt; are my highest recommendations.&lt;/p&gt;
@@ -94,8 +96,11 @@ href=&#34;/next-book&#34;&gt;&amp;ldquo;What Book Should I Read Next?&amp;rdquo;
       <guid>http://deliberate-software.com/page/training/</guid>
       <description>
 
+&lt;h2 class=&#34;centereded&#34;&gt;A path to full-time software development&lt;/h2&gt;
+
 &lt;div class=&#34;container&#34;&gt;
 &lt;div class=&#34;col-md-9&#34;&gt;
+
 
 &lt;blockquote&gt;
 &lt;p&gt;&#34;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&#34;&lt;/p&gt;
@@ -419,7 +424,7 @@ new concepts faster.&lt;/p&gt;
 
 &lt;p&gt;&lt;/div&gt;
   &lt;div class=&#34;col-md-3 sidebarcolor&#34;&gt;
-&lt;h2 class=&#34;centered serif&#34;&gt;Train With Us&lt;/h2&gt;&lt;/p&gt;
+&lt;h2 class=&#34;centered&#34;&gt;Train With Us&lt;/h2&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;p&gt;
 We offer one-one-one pair-programming and mentorship. Work through katas, get
@@ -462,20 +467,13 @@ We can pair and offer instruction in the following languages:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/philosophy/</guid>
-      <description>&lt;div class=&#34;col-md-6&#34;&gt;
+      <description>&lt;div class=&#34;col-md-12&#34;&gt;
 &lt;h1 class=&#34;centereded&#34;&gt;Hi, I am Steve Shogren!&lt;/h1&gt;
   &lt;p class=&#34;centereded&#34;&gt;
     I am a developer and manager who has met needs in the financial, education,
-    and publishing industries. I build self-organizing teams and empower them to
+    and publishing industries. I grow self-organizing teams and empower them to
     achieve tremendous business value.
   &lt;/p&gt;
-  &lt;p class=&#34;centereded&#34;&gt;Effective practice requires discipline. I strive to
-  improve my techincal skills with daily challenges. I use my &lt;a href=&#34;https://www.github.com/steveshogren&#34;&gt;GitHub contributions&lt;/a&gt; as a reminder to &#34;not break the chain&#34;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;col-md-3&#34;&gt;
-&lt;/div&gt;
-&lt;div class=&#34;col-md-3&#34;&gt;
-  &lt;img class=&#34;border&#34; id=&#34;avatar&#34; src=&#34;http://deliberate-software.com//images/me_updated3.png&#34; /&gt;
 &lt;/div&gt;
 
 
@@ -587,7 +585,7 @@ We can pair and offer instruction in the following languages:
       <description>&lt;h2 class=&#34;col-md-12 centereded&#34;&gt;Targeted Posts&lt;/h2&gt;
 &lt;div class=&#34;col-md-12&#34;&gt;
     &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
-    &lt;h3&gt;Top Posts&lt;/h3&gt;
+    &lt;h3&gt;top&lt;/h3&gt;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
       
       &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/&#34;&gt;Haskell is the Dark Souls of Programming&lt;/a&gt;&lt;/li&gt;
@@ -603,7 +601,7 @@ We can pair and offer instruction in the following languages:
     &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
-    &lt;h3&gt;New Developers&lt;/h3&gt;
+    &lt;h3&gt;new developers&lt;/h3&gt;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
         
         &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/learning-lisp-was-hard/&#34;&gt;Learning Lisp Was Hard&lt;/a&gt;&lt;/li&gt;
@@ -619,7 +617,7 @@ We can pair and offer instruction in the following languages:
     &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
-    &lt;h3&gt;Seasoned Developers&lt;/h3&gt;
+    &lt;h3&gt;seasoned developers&lt;/h3&gt;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
         
         &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/pop-culture-architecture/&#34;&gt;Avoid Pop Culture Architecture&lt;/a&gt;&lt;/li&gt;
@@ -635,7 +633,7 @@ We can pair and offer instruction in the following languages:
     &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class=&#34;col-sm-6 col-md-6&#34;&gt;
-    &lt;h3&gt;Managers / Tech Leads&lt;/h3&gt;
+    &lt;h3&gt;managers&lt;/h3&gt;
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
         
         &lt;li class=&#34;sidebar_li&#34;&gt;&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;When Self-Organizing Teams Are Effective&lt;/a&gt;&lt;/li&gt;
@@ -667,677 +665,865 @@ We can pair and offer instruction in the following languages:
 &lt;div class=&#34;col-md-12&#34;&gt;
 
     &lt;ul class=&#34;sidebar_ul&#34;&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/self-organizing-balance/&#34;&gt;What Keeps a Self-Organizing Team From Falling Apart&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/coq-day2/&#34;&gt;Darkest Proof: Day 2&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/coq&#34; class=&#34;label label-default&#34;&gt;coq&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/coq-frustrations/&#34;&gt;Darkest Proof: Day 1&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/coq&#34; class=&#34;label label-default&#34;&gt;coq&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/anemic-domain-model/&#34;&gt;OO-Design Part 2: Anemic Domain Models Are Healthy&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/java&#34; class=&#34;label label-default&#34;&gt;java&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/oo-design&#34; class=&#34;label label-default&#34;&gt;oo-design&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/better-oo-design/&#34;&gt;OO-Design Part 1: Increasing Reuse With Noun Interfaces&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/java&#34; class=&#34;label label-default&#34;&gt;java&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/oo-design&#34; class=&#34;label label-default&#34;&gt;oo-design&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;Ten Years of Pair Programming&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit-testing&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/vim-refactoring-patterns/&#34;&gt;Vim Refactoring Patterns&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/vim&#34; class=&#34;label label-default&#34;&gt;vim&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/refactoring&#34; class=&#34;label label-default&#34;&gt;refactoring&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/modern-di/&#34;&gt;Modern Dependency Injection&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit-testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/editor-abstractions/&#34;&gt;Editor Abstractions&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/vim&#34; class=&#34;label label-default&#34;&gt;vim&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/haskell-state/&#34;&gt;Wrangling State In Haskell&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/figwheel-angular2/&#34;&gt;Hot Loading Angular2 With State&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/cljs-angular2/&#34;&gt;Using Angular2 in ClojureScript&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Wrangling State In Clojure&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;When Self-Organizing Teams Are Effective&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/pop-culture-architecture/&#34;&gt;Avoid Pop Culture Architecture&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/&#34;&gt;Haskell is the Dark Souls of Programming&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/development-disappointment-disorder/&#34;&gt;Development Disappointment Disorder&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/compassionate-interviewing/&#34;&gt;Designing A Compassionate Interview For A High Performing Individual&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/&#34;&gt;Daily Meditation Improves Technical Leadership&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/teaching-clojure/&#34;&gt;Conj Talk: Teaching Clojure at IBM&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;Interview Humiliation&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/interviews&#34; class=&#34;label label-default&#34;&gt;interviews&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/f-number-unit-testing/&#34;&gt;F# Unit Testing With SimpleMock&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock: Language Agnostic Unit Test Mocking&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/safety-rank-part-2/&#34;&gt;Programming Language Safety Score Mark 2&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/language-versions/&#34;&gt;Language Versions&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/learning-lisp-was-hard/&#34;&gt;Learning Lisp Was Hard&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/superiority-fatigue/&#34;&gt;Superiority Fatigue&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/pattern-matching-case-study/&#34;&gt;Case Study: Superior Domain Modeling in F#&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/programming-language-safety-algorithm/&#34;&gt;Programming Language Safety Ranking&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/&#34;&gt;Six Unusual Reasons why Clojure is a Delight&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;Unit Testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/christmas-f-number-polymorphism/&#34;&gt;Christmas F# Polymorphism&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/emacs-project-tip/&#34;&gt;Emacs Project Tip&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/skill-continuum/&#34;&gt;Suggested Skill Progression&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/next-book/&#34;&gt;What Book Should I Read Next?&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/inversed-polymorphism/&#34;&gt;Inverted Polymorphism&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;Pattern Matching - Making the Compiler Work For You&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/learn-to-database/&#34;&gt;Learn To Database&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/501-developer/&#34;&gt;You Should Go Home at 5:01&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/intro-to-macros/&#34;&gt;Intro To Macros&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/clojure-debugger/&#34;&gt;Clojure Debugger&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/refactoring-not-free/&#34;&gt;Sorry, but Refactorings Are Not Free (Technical Debt Interest)&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/how-to-escape-from-programming_language/&#34;&gt;How To Escape From {programming_language}&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/new-job-todo-list/&#34;&gt;How to Suck Less at Your New Job&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/ego-driven-development/&#34;&gt;Ego Driven Development&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/end-to-end-web-service-testing/&#34;&gt;End To End Web Service Testing&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/learn-that-new-programming-language-the-start/&#34;&gt;Learn That New Programming Language The Start-Up Way&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/on-developer-certifications/&#34;&gt;On Developer Certifications&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/interviews&#34; class=&#34;label label-default&#34;&gt;interviews&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/quality-is-future-speed/&#34;&gt;Quality Is Future Speed&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/new-years-triumph/&#34;&gt;New Years Android Triumph&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/&#34;&gt;Why I Can&amp;#39;t Pick A Language&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/&#34;&gt;Testing Is To Programming What Math Is To Engineering&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/the-endless-debate/&#34;&gt;Emacs/VIm The Endless Debate&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/lisp-repl/&#34;&gt;Lisp REPL&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/dont-mock-concrete-classes/&#34;&gt;Dont Mock Concrete Classes&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;Unit Testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/on-lisp-part-1/&#34;&gt;Why Lisp&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/using-named-parameters/&#34;&gt;Using Named Parameters&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/actionscript-unit-testing/&#34;&gt;Actionscript Unit Testing&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
-    &lt;li class=&#34;sidebar_li&#34;&gt;
-        &lt;a href=&#34;http://deliberate-software.com/active-record-pattern-testing/&#34;&gt;Active Record Pattern Testing&lt;/a&gt;
-        &lt;span class=&#34;pull-right&#34;&gt;
-        
-            &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
-        
-        &lt;/span&gt;
-    &lt;/li&gt;
-    
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/coq_day3/&#34;&gt;
+      Darkest Proof: Day 3
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/coq&#34; class=&#34;label label-default&#34;&gt;coq&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/self-organizing-balance/&#34;&gt;
+      What Keeps a Self-Organizing Team From Falling Apart
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/coq-day2/&#34;&gt;
+      Darkest Proof: Day 2
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/coq&#34; class=&#34;label label-default&#34;&gt;coq&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/coq-frustrations/&#34;&gt;
+      Darkest Proof: Day 1
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/coq&#34; class=&#34;label label-default&#34;&gt;coq&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/anemic-domain-model/&#34;&gt;
+      OO-Design Part 2: Anemic Domain Models Are Healthy
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/java&#34; class=&#34;label label-default&#34;&gt;java&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/oo-design&#34; class=&#34;label label-default&#34;&gt;oo-design&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/better-oo-design/&#34;&gt;
+      OO-Design Part 1: Increasing Reuse With Noun Interfaces
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/java&#34; class=&#34;label label-default&#34;&gt;java&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/oo-design&#34; class=&#34;label label-default&#34;&gt;oo-design&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;
+      Ten Years of Pair Programming
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit-testing&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/vim-refactoring-patterns/&#34;&gt;
+      Vim Refactoring Patterns
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/vim&#34; class=&#34;label label-default&#34;&gt;vim&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/refactoring&#34; class=&#34;label label-default&#34;&gt;refactoring&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/modern-di/&#34;&gt;
+      Modern Dependency Injection
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit-testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/editor-abstractions/&#34;&gt;
+      Editor Abstractions
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/vim&#34; class=&#34;label label-default&#34;&gt;vim&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/haskell-state/&#34;&gt;
+      Wrangling State In Haskell
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/figwheel-angular2/&#34;&gt;
+      Hot Loading Angular2 With State
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/cljs-angular2/&#34;&gt;
+      Using Angular2 in ClojureScript
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojurescript&#34; class=&#34;label label-default&#34;&gt;clojurescript&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/angular&#34; class=&#34;label label-default&#34;&gt;angular&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;
+      Wrangling State In Clojure
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;technical skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;
+      When Self-Organizing Teams Are Effective
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/self-organization&#34; class=&#34;label label-default&#34;&gt;self-organization&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/pop-culture-architecture/&#34;&gt;
+      Avoid Pop Culture Architecture
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/&#34;&gt;
+      Haskell is the Dark Souls of Programming
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/development-disappointment-disorder/&#34;&gt;
+      Development Disappointment Disorder
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/compassionate-interviewing/&#34;&gt;
+      Designing A Compassionate Interview For A High Performing Individual
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/&#34;&gt;
+      Daily Meditation Improves Technical Leadership
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/teaching-clojure/&#34;&gt;
+      Conj Talk: Teaching Clojure at IBM
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/on-defeat/&#34;&gt;
+      Interview Humiliation
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/interviews&#34; class=&#34;label label-default&#34;&gt;interviews&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/f-number-unit-testing/&#34;&gt;
+      F# Unit Testing With SimpleMock
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;
+      SimpleMock: Language Agnostic Unit Test Mocking
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/safety-rank-part-2/&#34;&gt;
+      Programming Language Safety Score Mark 2
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/haskell&#34; class=&#34;label label-default&#34;&gt;haskell&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/language-versions/&#34;&gt;
+      Language Versions
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/learning-lisp-was-hard/&#34;&gt;
+      Learning Lisp Was Hard
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/superiority-fatigue/&#34;&gt;
+      Superiority Fatigue
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/pattern-matching-case-study/&#34;&gt;
+      Case Study: Superior Domain Modeling in F#
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/programming-language-safety-algorithm/&#34;&gt;
+      Programming Language Safety Ranking
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/csharp&#34; class=&#34;label label-default&#34;&gt;csharp&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/&#34;&gt;
+      Six Unusual Reasons why Clojure is a Delight
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;Unit Testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/christmas-f-number-polymorphism/&#34;&gt;
+      Christmas F# Polymorphism
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/architecture&#34; class=&#34;label label-default&#34;&gt;architecture&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/emacs-project-tip/&#34;&gt;
+      Emacs Project Tip
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/skill-continuum/&#34;&gt;
+      Suggested Skill Progression
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/next-book/&#34;&gt;
+      What Book Should I Read Next?
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/inversed-polymorphism/&#34;&gt;
+      Inverted Polymorphism
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/function-pattern-matching/&#34;&gt;
+      Pattern Matching - Making the Compiler Work For You
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/fsharp&#34; class=&#34;label label-default&#34;&gt;fsharp&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/learn-to-database/&#34;&gt;
+      Learn To Database
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/501-developer/&#34;&gt;
+      You Should Go Home at 5:01
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/intro-to-macros/&#34;&gt;
+      Intro To Macros
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/clojure-debugger/&#34;&gt;
+      Clojure Debugger
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/refactoring-not-free/&#34;&gt;
+      Sorry, but Refactorings Are Not Free (Technical Debt Interest)
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/how-to-escape-from-programming_language/&#34;&gt;
+      How To Escape From {programming_language}
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/new-job-todo-list/&#34;&gt;
+      How to Suck Less at Your New Job
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/ego-driven-development/&#34;&gt;
+      Ego Driven Development
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/management&#34; class=&#34;label label-default&#34;&gt;management&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/end-to-end-web-service-testing/&#34;&gt;
+      End To End Web Service Testing
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/learn-that-new-programming-language-the-start/&#34;&gt;
+      Learn That New Programming Language The Start-Up Way
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/on-developer-certifications/&#34;&gt;
+      On Developer Certifications
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/interviews&#34; class=&#34;label label-default&#34;&gt;interviews&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/quality-is-future-speed/&#34;&gt;
+      Quality Is Future Speed
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;meta game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/new-years-triumph/&#34;&gt;
+      New Years Android Triumph
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/&#34;&gt;
+      Why I Can&amp;#39;t Pick A Language
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/&#34;&gt;
+      Testing Is To Programming What Math Is To Engineering
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/the-endless-debate/&#34;&gt;
+      Emacs/VIm The Endless Debate
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/meta-game&#34; class=&#34;label label-default&#34;&gt;Meta Game&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/emacs&#34; class=&#34;label label-default&#34;&gt;emacs&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/lisp-repl/&#34;&gt;
+      Lisp REPL
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/clojure&#34; class=&#34;label label-default&#34;&gt;Clojure&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/dont-mock-concrete-classes/&#34;&gt;
+      Dont Mock Concrete Classes
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;Unit Testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/on-lisp-part-1/&#34;&gt;
+      Why Lisp
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/using-named-parameters/&#34;&gt;
+      Using Named Parameters
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/actionscript-unit-testing/&#34;&gt;
+      Actionscript Unit Testing
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/unit-testing&#34; class=&#34;label label-default&#34;&gt;unit testing&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
+  &lt;li class=&#34;sidebar_li&#34;&gt;
+    &lt;a style=&#34;&#34;
+       href=&#34;http://deliberate-software.com/active-record-pattern-testing/&#34;&gt;
+      Active Record Pattern Testing
+    &lt;/a&gt;
+    &lt;span class=&#34;pull-right&#34; &gt;
+      
+      &lt;a href=&#34;http://deliberate-software.com/categories/technical-skills&#34; class=&#34;label label-default&#34;&gt;Technical Skills&lt;/a&gt;
+      
+    &lt;/span&gt;
+  &lt;/li&gt;
+  
 &lt;/ul&gt;
 
 &lt;/div&gt;

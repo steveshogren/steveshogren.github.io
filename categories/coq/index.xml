@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coq on Deliberate Software</title>
+    <title>Coq on deliberate software</title>
     <link>http://deliberate-software.com/categories/coq/</link>
-    <description>Recent content in Coq on Deliberate Software</description>
+    <description>Recent content in Coq on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/categories/coq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Darkest Proof: Day 3</title>
+      <link>http://deliberate-software.com/coq_day3/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq_day3/</guid>
+      <description>
+
+&lt;p&gt;Day three working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
+with Coq. Since I like to rant, and I love
+&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.
+&lt;span class=&#34;subscript&#34;&gt;(Please don&amp;rsquo;t sue me!)&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;I am trying to prove a helper proof to use to rewrite another helper proof to
+use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t
+make this stuff up.&lt;/p&gt;
+
+&lt;p&gt;I just need to prove this where &lt;code&gt;S n&lt;/code&gt; is &lt;code&gt;n + 1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;m * S n = m + m * n.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Should be simple&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Theorem mult_comm_lemma : forall n m, m * S n = m + m * n.
+Proof.
+  intros m n.
+  induction m as [| p].
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Gives me:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2 subgoals, subgoal 1 (ID 291)
+  n * 1 = n + n * 0
+
+subgoal 2 (ID 295) is:
+ n * S (S p) = n + n * S p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;wat:0761033acf71ac087f921676f7357f1f&#34;&gt;Wat.&lt;/h1&gt;
+
+&lt;p&gt;I expected performing an induction on &lt;code&gt;m&lt;/code&gt; to produce something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;2 subgoals, subgoal 1 (ID 291)
+   0 * S n = 0 + 0 * n
+
+subgoal 2 (ID 294) is:
+ S p * S n = S p + S p * n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instead it is inducting &lt;code&gt;n&lt;/code&gt;?!&lt;/p&gt;
+
+&lt;h1 id=&#34;wait:0761033acf71ac087f921676f7357f1f&#34;&gt;Wait.&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;no:0761033acf71ac087f921676f7357f1f&#34;&gt;No.&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;why:0761033acf71ac087f921676f7357f1f&#34;&gt;WHY?!&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;intros-overwrites-the-names-if-put-in-the-wrong-order:0761033acf71ac087f921676f7357f1f&#34;&gt;INTROS OVERWRITES THE NAMES IF PUT IN THE WRONG ORDER?!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/poor_caretaker.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-poor-caretaker-i-fear-his-long-standing-duties-here-have-affected-him:0761033acf71ac087f921676f7357f1f&#34;&gt;The poor caretaker, I fear his long-standing duties here have&amp;hellip; &lt;em&gt;affected him&lt;/em&gt;&lt;/h3&gt;
+</description>
+    </item>
     
     <item>
       <title>Darkest Proof: Day 2</title>

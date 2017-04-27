@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://deliberate-software.com/</loc>
-    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/coq_day3/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>

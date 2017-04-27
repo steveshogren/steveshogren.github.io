@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Emacs on Deliberate Software</title>
+    <title>Emacs on deliberate software</title>
     <link>http://deliberate-software.com/categories/emacs/</link>
-    <description>Recent content in Emacs on Deliberate Software</description>
+    <description>Recent content in Emacs on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 May 2016 00:00:00 +0000</lastBuildDate>

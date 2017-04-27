@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Haskell on Deliberate Software</title>
+    <title>Haskell on deliberate software</title>
     <link>http://deliberate-software.com/categories/haskell/</link>
-    <description>Recent content in Haskell on Deliberate Software</description>
+    <description>Recent content in Haskell on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
@@ -493,8 +493,6 @@ query lang = do
 &lt;p&gt;MUCH better. This includes reading my token from file called &amp;ldquo;token&amp;rdquo; so I don&amp;rsquo;t
 accidentally commit it. Also includes building up the different query options
 based on inputs, which was the next step. Thanks y&amp;rsquo;all.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/solaire_idle.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Pixel gifs sourced from

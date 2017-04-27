@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Deliberate Software</title>
+    <title>deliberate software</title>
     <link>http://deliberate-software.com/</link>
-    <description>Recent content on Deliberate Software</description>
+    <description>Recent content on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Darkest Proof: Day 3</title>
+      <link>http://deliberate-software.com/coq_day3/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq_day3/</guid>
+      <description>
+
+&lt;p&gt;Day three working through
+&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
+with Coq. Since I like to rant, and I love
+&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.
+&lt;span class=&#34;subscript&#34;&gt;(Please don&amp;rsquo;t sue me!)&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;I am trying to prove a helper proof to use to rewrite another helper proof to
+use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t
+make this stuff up.&lt;/p&gt;
+
+&lt;p&gt;I just need to prove this where &lt;code&gt;S n&lt;/code&gt; is &lt;code&gt;n + 1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;m * S n = m + m * n.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Should be simple&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Theorem mult_comm_lemma : forall n m, m * S n = m + m * n.
+Proof.
+  intros m n.
+  induction m as [| p].
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Gives me:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2 subgoals, subgoal 1 (ID 291)
+  n * 1 = n + n * 0
+
+subgoal 2 (ID 295) is:
+ n * S (S p) = n + n * S p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;wat:0761033acf71ac087f921676f7357f1f&#34;&gt;Wat.&lt;/h1&gt;
+
+&lt;p&gt;I expected performing an induction on &lt;code&gt;m&lt;/code&gt; to produce something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;2 subgoals, subgoal 1 (ID 291)
+   0 * S n = 0 + 0 * n
+
+subgoal 2 (ID 294) is:
+ S p * S n = S p + S p * n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instead it is inducting &lt;code&gt;n&lt;/code&gt;?!&lt;/p&gt;
+
+&lt;h1 id=&#34;wait:0761033acf71ac087f921676f7357f1f&#34;&gt;Wait.&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;no:0761033acf71ac087f921676f7357f1f&#34;&gt;No.&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;why:0761033acf71ac087f921676f7357f1f&#34;&gt;WHY?!&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;intros-overwrites-the-names-if-put-in-the-wrong-order:0761033acf71ac087f921676f7357f1f&#34;&gt;INTROS OVERWRITES THE NAMES IF PUT IN THE WRONG ORDER?!&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/poor_caretaker.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-poor-caretaker-i-fear-his-long-standing-duties-here-have-affected-him:0761033acf71ac087f921676f7357f1f&#34;&gt;The poor caretaker, I fear his long-standing duties here have&amp;hellip; &lt;em&gt;affected him&lt;/em&gt;&lt;/h3&gt;
+</description>
+    </item>
     
     <item>
       <title>What Keeps a Self-Organizing Team From Falling Apart</title>
@@ -1751,64 +1826,6 @@ grade of all the group projects”. Suddenly, you won’t see those teams separa
 by skill. Instead students will organize with a team mix as even as possible,
 with cross-communication (and likely rotation) happening to ensure high quality
 across all the projects. Bam, now you’ve got my office ;)&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Avoid Pop Culture Architecture</title>
-      <link>http://deliberate-software.com/pop-culture-architecture/</link>
-      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
-      <description>
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be
-microservices, business capabilities, CQRS, service-oriented architecture,
-Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each
-of these have been fashionable at some point.&lt;/p&gt;
-
-&lt;p&gt;Fashion is ultimately a signaling mechanism for status. We are attracted to
-fashionable architectures because they signal we have worked on elite teams. The
-more difficult or costly the trade-offs of the architecture, the more elite and
-special our team must have been to implement it successfully.&lt;/p&gt;
-
-&lt;h2 id=&#34;example-microservices:5f95d372c851097c31e5c149858c384a&#34;&gt;Example: Microservices&lt;/h2&gt;
-
-&lt;p&gt;Microservices is a current fashionable design. Microservices have very clear
-pros and cons. They come with the ability to have a huge team or a fragmented
-deployment that potentially allows for horizontal scaling. For that ability, you
-will pay the immense costs: loss of strong consistency and transactions, a
-labyrinthine operational footprint and deployment, increased communication
-effort, expensive integration testing, and a code base that takes longer to
-program. &lt;a href=&#34;http://martinfowler.com/articles/microservice-trade-offs.html&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you have a small team or system that does not need horizontal scaling on
-every single component, a microservice architecture is unlikely to solve your
-communication or trust issues. You will spend dollars on deployment, consistency
-issues, distributed debugging, and basic programming just to save a penny on
-communication and teamwork.
-&lt;a href=&#34;http://www.stackbuilders.com/news/the-hidden-costs-of-microservices&#34;&gt;(2)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;For most teams, the logical conclusion probably will be: a microservice
-architecture solves problems we don&amp;rsquo;t have.&lt;/p&gt;
-
-&lt;p&gt;Microservices remain fashionable because they indicate work at the size and
-scale of a handful of elite companies. You would only likely encounter a couple
-hundred companies in the world that have a development staff so large or loads
-so high as to truly require such a system. Because of the rarity of actual need,
-it is a perfect signaling mechanism for status.&lt;/p&gt;
-
-&lt;p&gt;Saying that you implemented a microservice architecture implies &amp;ldquo;my team was so
-large or my product so popular, my team could afford to pay almost any cost to
-meet the demand.&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;Carefully consider your architecture decisions. Do not allow fashion to dictate
-your choices. Take pride in selecting the appropriate architecture for the
-project, no matter how unpopular.&lt;/p&gt;
 </description>
     </item>
     

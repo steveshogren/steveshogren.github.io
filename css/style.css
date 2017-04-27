@@ -13,7 +13,8 @@
 /* } */
 .jumbotron {
     position: relative;
-    background: #000 url(../images/front-logo-empty.jpeg) center center;
+    /* background: #000 url(../images/front-logo-empty.jpeg) center center; */
+    background: #132020;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -23,16 +24,45 @@
     margin-bottom: 0px;
     padding-bottom: 25px !important;
 }
+
+.sidepic {
+    height:150px;
+    width:100%;
+    background:url(/images/solaire_idle.gif) center center no-repeat;
+    background-size:contain;
+}
 .homecontainer {
     padding-top: 0px !important;
 }
 
+.homepagetopbookbar {
+    padding:0px 0px 1px 0px !important;
+}
+
 .pagetopbookbar {
+    font-size: 20px;
+    background-color: #102f52;
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#102f52+0,1d68a1+51,102f52+100 */
+/* background: #102f52; /\* Old browsers *\/ */
+/* background: -moz-linear-gradient(left,  #102f52 0%, #1d68a1 51%, #102f52 100%); /\* FF3.6-15 *\/ */
+/* background: -webkit-linear-gradient(left,  #102f52 0%,#1d68a1 51%,#102f52 100%); /\* Chrome10-25,Safari5.1-6 *\/ */
+/* background: linear-gradient(to right,  #102f52 0%,#1d68a1 51%,#102f52 100%); /\* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *\/ */
+/* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#102f52', endColorstr='#102f52',GradientType=1 ); /\* IE6-9 *\/ */
+
+
+    /* /\* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+54,1e5799+100 *\/ */
+    /* background: #1e5799; /\* Old browsers *\/ */
+    /* background: -moz-linear-gradient(left,  #1e5799 0%, #2989d8 54%, #1e5799 100%); /\* FF3.6-15 *\/ */
+    /* background: -webkit-linear-gradient(left,  #1e5799 0%,#2989d8 54%,#1e5799 100%); /\* Chrome10-25,Safari5.1-6 *\/ */
+    /* background: linear-gradient(to right,  #1e5799 0%,#2989d8 54%,#1e5799 100%); /\* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *\/ */
+    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#1e5799',GradientType=1 ); /\* IE6-9 *\/ */
+
     padding:46px 0px 1px 0px;
 }
 
 .homebookbar {
-    padding: 1px 0px 1px 0px;
+    padding: 50px 50px 1px 50px;
 }
 
 .border {
@@ -59,11 +89,23 @@
 .sidebar_ul {
     margin-left: 0px;
     padding: 0;
+
 }
+
+.plainlink {
+    color: black;
+}
+.link {
+    color: #222;
+    text-decoration: underline;
+}
+
 .sidebar_li a {
     color: #222;
     text-decoration: underline;
 }
+/* a:visited {  color:red; } */
+
 .sidebar_li {
     padding: .5em 0;
     border-bottom: 1px solid #ededed;
