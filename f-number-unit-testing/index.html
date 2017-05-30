@@ -42,10 +42,9 @@
     },
     "datePublished": "2015-10-21",
     "description": "",
-    "wordCount":  832 
+    "wordCount": 832
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/f-number-unit-testing/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -190,7 +189,7 @@ real dependency with a test-only replacement.</p>
 dependencies called the <a href="/simplemock-unit-test-mocking/">SimpleMock pattern</a>. The SimpleMock pattern can also be
 used in F#, even if you are only using modules.</p>
 
-<h2 id="simplemock-in-f-modules:43b10499a7e4c1aeb47d57d551a820fe">SimpleMock in F# Modules</h2>
+<h2 id="simplemock-in-f-modules">SimpleMock in F# Modules</h2>
 
 <p>We will assume you are mocking inside a module and not a class. Mocking inside
 an F# class would look much the same as it does in C#, which we showed in the
@@ -227,7 +226,7 @@ called later. Currying is what allows this ability. The new <code>addAndSave</co
 function only needs the <code>x</code> and <code>y</code> parameters. At test time, we called <code>addAndSave'</code>, passing in the needed dependency, but using a lambda as the
 &ldquo;fake&rdquo;. The injection is as close to the dependency use as possible!</p>
 
-<h2 id="bonus-simplemock-fake-helper:43b10499a7e4c1aeb47d57d551a820fe">Bonus: SimpleMock Fake Helper</h2>
+<h2 id="bonus-simplemock-fake-helper">Bonus: SimpleMock Fake Helper</h2>
 
 <p>The earlier replacement for DBModule.saveSum is a bit complex, and it does not
 show us how many times the fake was called. We can easily make a helper that
@@ -270,7 +269,7 @@ expressiveness, we could also use a mocking library like RhinoMocks or Moq. The
 TestFakeResults and its constructor are not essential to the pattern. The most
 important part is learning to unit test in F# with confidence.</p>
 
-<h1 id="double-bonus-when-to-use-a-class-instead-of-a-record:43b10499a7e4c1aeb47d57d551a820fe">Double Bonus: When to Use a Class Instead of a Record</h1>
+<h1 id="double-bonus-when-to-use-a-class-instead-of-a-record">Double Bonus: When to Use a Class Instead of a Record</h1>
 
 <p>When I first wrote this post, I used a record instead of a class for the <code>TestFakeResults</code> type. If you have been bitten by the functional programming bug,
 you might have wondered at my usage of a mutable class. Here are two alternates
@@ -467,6 +466,13 @@ classes for mutability.</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

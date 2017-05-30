@@ -42,10 +42,9 @@
     },
     "datePublished": "2017-02-07",
     "description": "",
-    "wordCount":  308 
+    "wordCount": 308
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/coq-day2/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -186,7 +185,7 @@ with Coq. Since I like to rant, and I love
 
 <p><img src="/images/ruinhascome.png"></img></p>
 
-<h2 id="naming:d16f8abdbdc51dc271acf8e6a41121b7">Naming</h2>
+<h2 id="naming">Naming</h2>
 
 <p>While trying to understand how <code>rewrite</code> works, I come across an obvious use-case:</p>
 
@@ -212,7 +211,7 @@ with Coq. Since I like to rant, and I love
 
 <p>Looks obvious enough. I <em>should</em> be able to substitute the <code>n + S m</code> with <code>S (n + m)</code> in my goal using <code>rewrite &lt;- IHn</code>.</p>
 
-<h1 id="nope:d16f8abdbdc51dc271acf8e6a41121b7">NOPE</h1>
+<h1 id="nope">NOPE</h1>
 
 <pre><code class="language-coq">Error: Found no subterm matching &quot;n + S ?252&quot; in the current goal.
 </code></pre>
@@ -248,7 +247,7 @@ isn&rsquo;t <code>forall</code>, perhaps <code>intros</code>?</p>
 
 <p><img src="/images/critforward.jpg"></img></p>
 
-<h1 id="success:d16f8abdbdc51dc271acf8e6a41121b7">SUCCESS</h1>
+<h1 id="success">SUCCESS</h1>
 
 <p>I&hellip;. I &hellip;. don&rsquo;t know what is happening.</p>
 
@@ -412,6 +411,13 @@ isn&rsquo;t <code>forall</code>, perhaps <code>intros</code>?</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

@@ -42,10 +42,9 @@
     },
     "datePublished": "2015-07-24",
     "description": "",
-    "wordCount":  771 
+    "wordCount": 771
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/safety-rank-part-2/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -193,7 +192,7 @@
 <a href="/programming-language-safety-algorithm">Programming Language Safety Score</a>,
 but it was extremely time consuming to score new languages or make modifications.</p>
 
-<h2 id="simplify-simplify:97a282fd1f3c6848927d72787ebd3b6e">Simplify, Simplify</h2>
+<h2 id="simplify-simplify">Simplify, Simplify</h2>
 
 <p>After being told I was <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>
 the data, I&rsquo;ve attempted to clean up by simply checking if each category is
@@ -209,7 +208,7 @@ matter.</p>
 <p>The code I used to generate the plot and normalize the scores can be found here:
 <a href="https://github.com/steveshogren/datasciencecoursera/blob/817dec79e36b6e9a6c5a8fd5700aff7cc394b9d4/scoreplot.R">scorePlot.R</a></p>
 
-<h2 id="safety-definitions:97a282fd1f3c6848927d72787ebd3b6e">Safety Definitions</h2>
+<h2 id="safety-definitions">Safety Definitions</h2>
 
 <p>A definition of the safety checks is as follows:</p>
 
@@ -265,7 +264,7 @@ The new scores are shown here, with a lot more languages added in:
 {{ getName(lang) }}: {{ allLangTotals[$index] }},
 </select></p>
 
-<h2 id="so-what-s-the-point:97a282fd1f3c6848927d72787ebd3b6e">So, What&rsquo;s the Point?</h2>
+<h2 id="so-what-s-the-point">So, What&rsquo;s the Point?</h2>
 
 <p>To see how this model corresponds with data in the real world, I used the GitHub
 API to query for the number of bugs created in repositories with more than 15
@@ -315,7 +314,7 @@ down in bugs. Taking the correlation gives a
 <a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">correlation coefficient</a>
 of .55</p>
 
-<h2 id="what-about-unit-tests:97a282fd1f3c6848927d72787ebd3b6e">What About Unit Tests?</h2>
+<h2 id="what-about-unit-tests">What About Unit Tests?</h2>
 
 <p>Thinking that Ruby, Clojure, PHP, and Python might not correlate well due to some
 other factor, I collected data on how many tests each repository had. I counted
@@ -341,14 +340,14 @@ sorted by tests per commit:</p>
 Clojure does not. Additionally, Go, Scala, and Java all also have a higher than
 average number of tests, yet they score relatively average in bugs/commit.</p>
 
-<h2 id="conclusion:97a282fd1f3c6848927d72787ebd3b6e">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>In conclusion, the current safety model I have proposed seems to account for a
 moderate reduction in bugs per commit across the sampled languages, but is not
 the only factor. It currently is unable to account for a significantly lower
 than expected bug count in Ruby and Clojure.</p>
 
-<h2 id="special-thanks:97a282fd1f3c6848927d72787ebd3b6e">Special Thanks</h2>
+<h2 id="special-thanks">Special Thanks</h2>
 
 <p>Special thanks to (in alphabetical order):
 <a href="https://twitter.com/traffichazard/">Patrick Boe</a> (Haskell, Sniff Test),
@@ -366,7 +365,7 @@ including <a href="https://www.reddit.com/user/notriddle">/u/notriddle</a>,
 <a href="https://www.reddit.com/user/killercup">/u/killercup</a>, and
 <a href="https://www.reddit.com/user/diegobernardes">/u/diegobernardes</a> who put together the Rust score.</p>
 
-<h2 id="complaints-department:97a282fd1f3c6848927d72787ebd3b6e">Complaints Department</h2>
+<h2 id="complaints-department">Complaints Department</h2>
 
 <p>Did I mess up something about a language here, or am I missing a safety check? I&rsquo;ll happily take pull
 requests for new languages:
@@ -555,6 +554,13 @@ it along with a thanks on the page.</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

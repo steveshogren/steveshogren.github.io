@@ -42,10 +42,9 @@
     },
     "datePublished": "2016-10-31",
     "description": "",
-    "wordCount":  986 
+    "wordCount": 986
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/better-oo-design/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -198,7 +197,7 @@ far larger than they need to be.</p>
 <p>Appropriate application of these concepts will reduce code and allow for easier unit testing</p>
 </blockquote>
 
-<h2 id="terms:0dfbdcea5000bc0e2a150299cf5611d6">Terms</h2>
+<h2 id="terms">Terms</h2>
 
 <p>For this post, let&rsquo;s distinguish between <em>verb classes</em> and <em>noun classes</em>. Unit
 testing often drives us to separate classes into data structures (the nouns) or
@@ -239,7 +238,7 @@ charging: one that generates invoices, one that charges credit cards, etc.</li>
 </ul></li>
 </ul>
 
-<h2 id="two-changes:0dfbdcea5000bc0e2a150299cf5611d6">Two Changes</h2>
+<h2 id="two-changes">Two Changes</h2>
 
 <p>Two suggestions will guide your codebase to be easier to reuse and test.</p>
 
@@ -309,7 +308,7 @@ what sort of interface is required to make them into a SalesLead that can be
 converted. By relying on the interface, we are able to restrict
 SalesRepresentative to only have access to the data necessary to convert.</p>
 
-<h1 id="case-study:0dfbdcea5000bc0e2a150299cf5611d6">Case Study</h1>
+<h1 id="case-study">Case Study</h1>
 
 <p>We recently examined a 1.3 million line codebase used to collect and track
 interest rates and payments from a user. We found only four uses of verb
@@ -334,7 +333,7 @@ noun class that fits the noun interface works automatically! If we had tried to
 put interfaces on those verbs, we&rsquo;d have a lot of classes with no behavior other
 than just delegating to another class.</p>
 
-<h1 id="conclusion:0dfbdcea5000bc0e2a150299cf5611d6">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>These patterns enable significant reuse of functionality. By defaulting to noun
 interfaces, you will find most of your verb classes can be re-used without any
@@ -503,6 +502,13 @@ keep your codebase clean and best model the domain.</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

@@ -42,10 +42,9 @@
     },
     "datePublished": "2015-08-13",
     "description": "",
-    "wordCount":  1546 
+    "wordCount": 1546
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/simplemock-unit-test-mocking/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -189,7 +188,7 @@ organize your testing code without mocking or complicated dependency injection.<
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
 Python. I&rsquo;m sure you can think of others.</p>
 
-<h2 id="example:442bb35a3947650665613cec7b90f820">Example:</h2>
+<h2 id="example">Example:</h2>
 
 <p>Here is a brief (if a bit silly) example of the final pattern:</p>
 
@@ -214,7 +213,7 @@ public void TestLineCounter () {
 }
 </code></pre>
 
-<h2 id="benefits:442bb35a3947650665613cec7b90f820">Benefits</h2>
+<h2 id="benefits">Benefits</h2>
 
 <ul>
 <li>Reduced boilerplate</li>
@@ -234,7 +233,7 @@ code with testing concerns.</p>
 interfaces, dependency injection, and mock libraries, scroll down to &ldquo;The
 Non-SimpleMock Way&rdquo; at the end of the post.</p>
 
-<h2 id="simplemock-pattern:442bb35a3947650665613cec7b90f820">SimpleMock Pattern</h2>
+<h2 id="simplemock-pattern">SimpleMock Pattern</h2>
 
 <p>The SimpleMock pattern is aptly named.</p>
 
@@ -244,7 +243,7 @@ Non-SimpleMock Way&rdquo; at the end of the post.</p>
 <li>Write Better Abstractions</li>
 </ol>
 
-<h2 id="step-one-replace-test-only-interfaces-with-functions:442bb35a3947650665613cec7b90f820">Step One: Replace Test-Only Interfaces With Functions</h2>
+<h2 id="step-one-replace-test-only-interfaces-with-functions">Step One: Replace Test-Only Interfaces With Functions</h2>
 
 <p>My examples are in C# because that is what I got paid to write today - it is
 freshest in memory. C# has an incredible ability to create and pass around
@@ -289,7 +288,7 @@ party mocking libraries, or the relatively complicated setup logic. Instead we
 can simply inject the lambda at runtime, replacing that pointer. We didn&rsquo;t need
 the whole interface, really we just needed the simple signature of the function.</p>
 
-<h2 id="step-2-define-dependencies-inline:442bb35a3947650665613cec7b90f820">Step 2: Define Dependencies Inline</h2>
+<h2 id="step-2-define-dependencies-inline">Step 2: Define Dependencies Inline</h2>
 
 <p>We can take it even a step further. Why use constructor injection at all? Since
 all we really want is a single mutable dispatch table row, why not just make it
@@ -327,7 +326,7 @@ need it, simply go back to injecting the interface in the constructor or by
 passing it into the function itself. In practice, I have found this is needed
 very rarely, making the SimpleMock pattern a better tool to reach for first.</p>
 
-<h2 id="step-3-write-better-abstractions:442bb35a3947650665613cec7b90f820">Step 3: Write Better Abstractions</h2>
+<h2 id="step-3-write-better-abstractions">Step 3: Write Better Abstractions</h2>
 
 <p>Lastly, SimpleMock actually promotes better designs. For example, a coworker was
 writing some tests today and ran into a complicated situation. Take the
@@ -439,7 +438,7 @@ then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
 for the job, and that is fine. But for most work around the yard, you can leave
 the chainsaw in the shed.</p>
 
-<h2 id="conclusion:442bb35a3947650665613cec7b90f820">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>I’ve shown how you can really simplify your code with SimpleMock. The dispatch
 row is clear and easy to read. We have removed some third party mocking
@@ -449,7 +448,7 @@ breeze. The result: much simpler code, just as easy to test.</p>
 
 <p>Thanks to Shuwei Chen for helping me put this together!</p>
 
-<h2 id="the-non-simplemock-way:442bb35a3947650665613cec7b90f820">The Non-SimpleMock Way</h2>
+<h2 id="the-non-simplemock-way">The Non-SimpleMock Way</h2>
 
 <p>If you are familiar with unit test mocking with interfaces, this part is
 probably boring. Feel free to skip.</p>
@@ -508,7 +507,7 @@ want to test. To test it, we mock the interface, creating a different concrete
 class at test runtime which implements that interface. We can setup that mock to
 respond with anything, which we use for assertions.</p>
 
-<h2 id="what-s-wrong-with-the-non-simplemock-way:442bb35a3947650665613cec7b90f820">What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
+<h2 id="what-s-wrong-with-the-non-simplemock-way">What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
 
 <p>The first problem is we have created a whole interface just for testing.
 Interfaces are for polymorphism, but we don&rsquo;t really need polymorphism for this
@@ -678,6 +677,13 @@ wish to test. That&rsquo;s a lot of boilerplate!</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

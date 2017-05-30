@@ -6,8 +6,11 @@
     <description>Recent content in Posts on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Deliberate Software 2016</copyright>
     <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Darkest Proof: Day 3</title>
@@ -15,75 +18,10 @@
       <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/coq_day3/</guid>
-      <description>
+      <description>Day three working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
-&lt;p&gt;Day three working through
-&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
-with Coq. Since I like to rant, and I love
-&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.
-&lt;span class=&#34;subscript&#34;&gt;(Please don&amp;rsquo;t sue me!)&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;I am trying to prove a helper proof to use to rewrite another helper proof to
-use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t
-make this stuff up.&lt;/p&gt;
-
-&lt;p&gt;I just need to prove this where &lt;code&gt;S n&lt;/code&gt; is &lt;code&gt;n + 1&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;m * S n = m + m * n.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Should be simple&amp;hellip;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Theorem mult_comm_lemma : forall n m, m * S n = m + m * n.
-Proof.
-  intros m n.
-  induction m as [| p].
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Gives me:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;2 subgoals, subgoal 1 (ID 291)
-  n * 1 = n + n * 0
-
-subgoal 2 (ID 295) is:
- n * S (S p) = n + n * S p
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&#34;wat:0761033acf71ac087f921676f7357f1f&#34;&gt;Wat.&lt;/h1&gt;
-
-&lt;p&gt;I expected performing an induction on &lt;code&gt;m&lt;/code&gt; to produce something like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;2 subgoals, subgoal 1 (ID 291)
-   0 * S n = 0 + 0 * n
-
-subgoal 2 (ID 294) is:
- S p * S n = S p + S p * n
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Instead it is inducting &lt;code&gt;n&lt;/code&gt;?!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;wait:0761033acf71ac087f921676f7357f1f&#34;&gt;Wait.&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;no:0761033acf71ac087f921676f7357f1f&#34;&gt;No.&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;why:0761033acf71ac087f921676f7357f1f&#34;&gt;WHY?!&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/mult_comm_lemma3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;intros-overwrites-the-names-if-put-in-the-wrong-order:0761033acf71ac087f921676f7357f1f&#34;&gt;INTROS OVERWRITES THE NAMES IF PUT IN THE WRONG ORDER?!&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/poor_caretaker.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;the-poor-caretaker-i-fear-his-long-standing-duties-here-have-affected-him:0761033acf71ac087f921676f7357f1f&#34;&gt;The poor caretaker, I fear his long-standing duties here have&amp;hellip; &lt;em&gt;affected him&lt;/em&gt;&lt;/h3&gt;
-</description>
+I am trying to prove a helper proof to use to rewrite another helper proof to use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t make this stuff up.
+I just need to prove this where S n is n + 1:</description>
     </item>
     
     <item>
@@ -92,142 +30,9 @@ subgoal 2 (ID 294) is:
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/self-organizing-balance/</guid>
-      <description>
-
-&lt;p&gt;My team has a decade of experience applying
-&lt;a href=&#34;http://deliberate-software.com/self-organizing-teams/&#34;&gt;self-organizing teams&lt;/a&gt; and
-&lt;a href=&#34;http://deliberate-software.com/pairprogramming/&#34;&gt;pair-programming&lt;/a&gt; to reduce wasted productivity in an
-enterprise banking application.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-benefits:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;The Benefits&lt;/h2&gt;
-
-&lt;h3 id=&#34;no-technical-lead:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;No Technical Lead&lt;/h3&gt;
-
-&lt;p&gt;Our self-organizing practices eliminate the need for a technical lead who
-assigns and follows up on work. No work is assigned to any individual.&lt;/p&gt;
-
-&lt;h3 id=&#34;individual-empowerment:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Individual Empowerment&lt;/h3&gt;
-
-&lt;p&gt;Developers are free to remove pain points as needed, so most have a strong sense
-of ownership. Team members feel empowered to champion for broad changes to the
-codebase.&lt;/p&gt;
-
-&lt;h3 id=&#34;few-meetings:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Few Meetings&lt;/h3&gt;
-
-&lt;p&gt;Without the need for significant process or oversight, the team has very few
-meetings a week. In a survey of the last several months, the average team member
-had less than &lt;strong&gt;three hours of meetings a week.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;how-does-this-work:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;How does this work?&lt;/h2&gt;
-
-&lt;p&gt;As amazing as it all sounds, what prevents this process from falling into
-anarchy? How has this been working for us for over ten years with very little
-oversight? The team has completely changed three times (roughly a 3.6 year
-average turnaround) so it can&amp;rsquo;t only be about &amp;ldquo;the right people&amp;rdquo;.&lt;/p&gt;
-
-&lt;h3 id=&#34;self-correction-while-maintaining-trust:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Self-Correction While Maintaining Trust&lt;/h3&gt;
-
-&lt;p&gt;The author of
-&lt;a href=&#34;http://www.reinventingorganizations.com/&#34;&gt;Reinventing Organizations&lt;/a&gt; talks
-about the concept of &amp;ldquo;self-correction&amp;rdquo; that allows self-organizing teams to
-adapt without writing a thick rule-book of policies. Healthy, self-organizing
-teams build a &lt;strong&gt;simple system that self-corrects&lt;/strong&gt; instead of adding new
-policies when trust is abused. Rather than trying to design the perfect
-rule-book, they let individuals grow into trusted, intelligent agents who are
-expected to learn and improve.&lt;/p&gt;
-
-&lt;p&gt;The author suggests that three things are needed for self-correcting teams:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;A shared understanding of what’s healthy&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Information&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;A forum for conversation to trigger self-corrective action&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;our-process:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Our Process&lt;/h2&gt;
-
-&lt;p&gt;Our process has several examples of self-correction, and several places we are
-still sorting out how to best self-correct. We currently apply these
-democratically-elected practices:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Full-time pair-programming on all production code&lt;/li&gt;
-&lt;li&gt;No work is assigned to any individual or pair&lt;/li&gt;
-&lt;li&gt;Any pair can make any technical decision&lt;/li&gt;
-&lt;li&gt;Pairs are shuffled randomly twice a day&lt;/li&gt;
-&lt;li&gt;Everyone participates in a five-minute status update twice a day&lt;/li&gt;
-&lt;li&gt;Weekly &amp;ldquo;retrospective&amp;rdquo; is held to reflect and make changes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;example-any-pair-can-make-any-technical-decision:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Any pair can make any technical decision&lt;/h3&gt;
-
-&lt;p&gt;Consider the practice that &amp;ldquo;any pair can make any technical decision.&amp;rdquo; The
-&lt;strong&gt;information&lt;/strong&gt; comes when the pairs switch every half-day. Bob and Sally might
-think designing the module one way is a good idea in the morning, but Sally and
-Jane might see things with a fresh perspective in the afternoon. The information
-spreads organically every four hours as a fresh set of eyes gets to see the
-work. The &lt;strong&gt;forum for self-corrective action&lt;/strong&gt; happens when the new pair
-discusses the previous session&amp;rsquo;s decisions.&lt;/p&gt;
-
-&lt;p&gt;If a pair makes a technical decision that isn&amp;rsquo;t ideal, the next pair will have
-the opportunity to choose to continue down that path or adjust the code to a
-better solution. To prevent significant rework, we meet once a week for under an
-hour to chat about the upcoming week&amp;rsquo;s features and get a rough idea of the
-direction the team wants to go.&lt;/p&gt;
-
-&lt;p&gt;In practice, rework happens only occasionally as everyone strives to produce the
-best designs they can. No one wants to see their work undone because of a missed
-requirement or poor design, which prompts a healthy desire to do one&amp;rsquo;s best.&lt;/p&gt;
-
-&lt;h3 id=&#34;example-work-isn-t-assigned:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Example: Work Isn&amp;rsquo;t Assigned&lt;/h3&gt;
-
-&lt;p&gt;Work isn&amp;rsquo;t assigned to pairs or individuals. The &lt;strong&gt;shared understanding&lt;/strong&gt; is
-that the most valuable thing for the business is for pairs to work through the
-priority queue of enhancements and technical debt. We promote &lt;strong&gt;information&lt;/strong&gt;
-with a twice daily status update of what each pair accomplished. We have a
-retrospective &lt;strong&gt;forum&lt;/strong&gt; once a week to discuss what is healthy and prompt
-self-corrective action.&lt;/p&gt;
-
-&lt;p&gt;In practice, pairs rarely &amp;ldquo;go rogue&amp;rdquo;. Only occasionally in the last few years
-has it happened, and the issues have been resolved through the weekly
-retrospective. A recent example comes from a pair who semi-secretly stayed on an
-interesting feature for over a week instead of rotating as agreed. Several other
-team-members felt like they&amp;rsquo;d missed out on getting to build it and brought up
-their feelings in the weekly forum. It turned out there was a legitimate benefit
-to the pair&amp;rsquo;s decision to stay on the feature for so long. The conclusion was
-the pair would&amp;rsquo;ve gotten a lot more support if they&amp;rsquo;d been upfront with the team
-with what they saw and their decision to stay on the project for longer than
-usual.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Some simple communication would&amp;rsquo;ve saved everyone some hassle&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Rather than adding a new policy to the rule-book, the whole team got a reminder
-on two great lessons. First, nothing is as simple as it seems. Second, a pinch
-of communication prevents a pound of hassle.&lt;/p&gt;
-
-&lt;h3 id=&#34;application-no-you-don-t-need-to-do-pair-programming-fulltime:e13b7cc1815b02599f68c3eaaf953c0f&#34;&gt;Application (No, you don&amp;rsquo;t need to do pair-programming fulltime!)&lt;/h3&gt;
-
-&lt;p&gt;Self-correction and self-organization is on a continuum. The more your team
-grows to self-correct, the more benefits you gain.&lt;/p&gt;
-
-&lt;p&gt;Not every team should have the same practices for self-correction. Our specific
-practices of pair-programming, rotating, and pair-empowerment are not magic:
-they are just good examples of applied self-correction. We have found
-pair-programming and pair switching to work well for us, but there are infinite
-ways to grow a system that self-corrects.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Trust, but verify.&amp;rdquo; - Russian proverb&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Self-correcting practices allow individuals to perform at their best with fewer
-rule books, fewer meetings, fewer bottlenecks, and less oversight. Individuals
-are trusted to perform their best, and the team is provided with a way to
-discuss improvements. A self-correcting team will find individuals empowered to
-improve the business in incredible ways.&lt;/p&gt;
-</description>
+      <description>My team has a decade of experience applying self-organizing teams and pair-programming to reduce wasted productivity in an enterprise banking application.
+The Benefits No Technical Lead Our self-organizing practices eliminate the need for a technical lead who assigns and follows up on work. No work is assigned to any individual.
+Individual Empowerment Developers are free to remove pain points as needed, so most have a strong sense of ownership. Team members feel empowered to champion for broad changes to the codebase.</description>
     </item>
     
     <item>
@@ -236,84 +41,10 @@ improve the business in incredible ways.&lt;/p&gt;
       <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/coq-day2/</guid>
-      <description>
+      <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
-&lt;p&gt;Day two working through
-&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
-with Coq. Since I like to rant, and I love
-&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.
-&lt;span class=&#34;subscript&#34;&gt;(Please don&amp;rsquo;t sue me!)&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;naming:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;Naming&lt;/h2&gt;
-
-&lt;p&gt;While trying to understand how &lt;code&gt;rewrite&lt;/code&gt; works, I come across an obvious use-case:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adding_n_Sm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; 
-  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
-  &lt;span class=&#34;k&#34;&gt;induction&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;rewrite&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;At this point, in current scope I have:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subgoals&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;subgoal&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ID&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;90&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;
-  &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;---------------&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Looks obvious enough. I &lt;em&gt;should&lt;/em&gt; be able to substitute the &lt;code&gt;n + S m&lt;/code&gt; with &lt;code&gt;S (n + m)&lt;/code&gt; in my goal using &lt;code&gt;rewrite &amp;lt;- IHn&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&#34;nope:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;NOPE&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-coq&#34;&gt;Error: Found no subterm matching &amp;quot;n + S ?252&amp;quot; in the current goal.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hopeless.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Why is it: &lt;code&gt;n + S ?252&lt;/code&gt; the hypothesis clearly has &lt;code&gt;n + S m&lt;/code&gt;! Where did
-&lt;code&gt;m&lt;/code&gt; go? Am I losing my marbles?&lt;/p&gt;
-
-&lt;p&gt;After searching around, I come across an old thread with someone getting the
-same error. The reply post says&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The strange-looking &amp;ldquo;?738&amp;rdquo; means any term to be instantiated&amp;hellip; Besides,
-rewrite cannot rewrite under a &amp;ldquo;forall&amp;rdquo;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Is &lt;code&gt;m&lt;/code&gt; not defined? But it was up there in scope, right? Well my current scope
-&lt;em&gt;did&lt;/em&gt; look like: &lt;code&gt;IHn : forall m : nat, n + S m = S (n + m)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Oh, that &lt;em&gt;does&lt;/em&gt; say &lt;code&gt;forall m&lt;/code&gt;, how to make it just for that one &lt;code&gt;m&lt;/code&gt;? Well &lt;code&gt;n&lt;/code&gt;
-isn&amp;rsquo;t &lt;code&gt;forall&lt;/code&gt;, perhaps &lt;code&gt;intros&lt;/code&gt;?&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adding_n_Sm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;nat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; 
-  &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;hll&#34;&gt;  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;induction&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;simpl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;rewrite&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IHn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/critforward.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;success:d16f8abdbdc51dc271acf8e6a41121b7&#34;&gt;SUCCESS&lt;/h1&gt;
-
-&lt;p&gt;I&amp;hellip;. I &amp;hellip;. don&amp;rsquo;t know what is happening.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-</description>
+Naming While trying to understand how rewrite works, I come across an obvious use-case:
+Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite &amp;lt;- IHn.  At this point, in current scope I have:</description>
     </item>
     
     <item>
@@ -322,84 +53,10 @@ isn&amp;rsquo;t &lt;code&gt;forall&lt;/code&gt;, perhaps &lt;code&gt;intros&lt;/
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/coq-frustrations/</guid>
-      <description>
+      <description>Day one working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
-&lt;p&gt;Day one working through
-&lt;a href=&#34;https://www.cis.upenn.edu/~bcpierce/sf/current/index.html&#34;&gt;Software Foundations&lt;/a&gt;
-with Coq. Since I like to rant, and I love
-&lt;a href=&#34;http://www.darkestdungeon.com/&#34;&gt;Darkest Dungeon&lt;/a&gt;, ENTER THE DARKEST PROOF.
-&lt;span class=&#34;subscript&#34;&gt;(Please don&amp;rsquo;t sue me!)&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/ruinhascome.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;precise-syntax:d783984b511a831eab41153f3c57c2bb&#34;&gt;Precise Syntax&lt;/h2&gt;
-
-&lt;p&gt;I copied a sample from the book by hand, but it always caused Company-Coq to go
-into an &lt;strong&gt;infinite loop&lt;/strong&gt;. I copied it again. Same deal.&lt;/p&gt;
-
-&lt;p&gt;This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But
-alas, it still fails.&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb_commutative&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt;
-    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt;
-    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;Qed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/upset.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Where the heck is it? I am losing my mind for 20 minutes looking back and forth
-trying to figure out what I am missing. I seek the advice of a friend, he
-suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;it-fails-on-one-line:d783984b511a831eab41153f3c57c2bb&#34;&gt;It fails on one line.&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;wait:d783984b511a831eab41153f3c57c2bb&#34;&gt;Wait.&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;thats:d783984b511a831eab41153f3c57c2bb&#34;&gt;Thats&amp;hellip;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;but:d783984b511a831eab41153f3c57c2bb&#34;&gt;But&amp;hellip;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;no:d783984b511a831eab41153f3c57c2bb&#34;&gt;NO!!!!!&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/coq-space5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;coq-is-white-space-sensitive:d783984b511a831eab41153f3c57c2bb&#34;&gt;Coq is WHITE-SPACE SENSITIVE?!&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/angry.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;YEP! I add that space in, and it works fine!&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-coq&#34; data-lang=&#34;coq&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Theorem&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb_commutative&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;forall&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;andb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;kn&#34;&gt;Proof&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;intros&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;destruct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;kp&#34;&gt;reflexivity&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;kn&#34;&gt;Qed&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/facepalm.jpg&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-</description>
+Precise Syntax I copied a sample from the book by hand, but it always caused Company-Coq to go into an infinite loop. I copied it again. Same deal.
+This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But alas, it still fails.</description>
     </item>
     
     <item>
@@ -408,75 +65,9 @@ suggests stepping line-by-line with &lt;code&gt;C-cC-n&lt;/code&gt;.&lt;/p&gt;
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/anemic-domain-model/</guid>
-      <description>
-
-&lt;p&gt;Part 2 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven
-Design. Martin Fowler goes so far as to term the alternative a
-&lt;a href=&#34;http://www.martinfowler.com/bliki/AnemicDomainModel.html&#34;&gt;&amp;ldquo;rich domain model&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A rich domain model makes perfect sense until you attempt to write your first
-unit test. You discover that rich domain models are very hard to test. Not only
-that, but most examples of unit-testing use Anemic Domain Models! Do you really
-have to pick between good testing and good design?&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-talk-about-purity:2fa9b95203cb46cce1debbec40ac0550&#34;&gt;Let&amp;rsquo;s Talk About Purity&lt;/h2&gt;
-
-&lt;p&gt;Functions are considered &lt;strong&gt;pure&lt;/strong&gt; if they produce the same output when given the
-same input. Addition is a pure function. We expect &lt;code&gt;add(1,1)&lt;/code&gt; will always
-produce &lt;code&gt;2&lt;/code&gt;. Pure functions are the easiest to test. The more logic you have
-in pure functions, the easier your code is to test.&lt;/p&gt;
-
-&lt;p&gt;Consider which of the following is easier to test. A &lt;strong&gt;pure function&lt;/strong&gt; with the
-signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;GameState movePlayerNorth(GameState g)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or an &lt;strong&gt;impure function&lt;/strong&gt; with the signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;void movePlayerNorth()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The first function has explicit inputs and outputs. The second function has
-implicit, hidden state. While the &lt;code&gt;void&lt;/code&gt; function is easier to &lt;em&gt;call&lt;/em&gt;, it
-impurity makes it much harder to &lt;em&gt;test&lt;/em&gt;. Testing a impure function requires
-implicit state to be setup before each test. Since GameState is encapsulated,
-you would need to either expose it (breaking encapsulation) or call dozens of
-methods to get it into the correct state for your test!&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Encapsulation is &lt;del&gt;a rich domain model&lt;/del&gt; &lt;strong&gt;impure&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The point of encapsulation is to hide state from the caller; it is impure by
-definition. Impure functions require global or class-level state to operate.&lt;/p&gt;
-
-&lt;p&gt;Pure functions have been maligned as a bad design. Purity has been given nasty
-sounding names like &amp;ldquo;anemic domain model&amp;rdquo; or &amp;ldquo;exposed state&amp;rdquo;. In reality, there
-is nothing wrong with pure programming, it produces good designs that are easy
-to understand and test.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Purity is a good design!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We should strive for purity as much as possible. In most languages, purity is an
-ideal to strive for, not a goal that can ever be fully achieved. Language
-features like exceptions and null will always prevent complete purity.&lt;/p&gt;
-
-&lt;p&gt;Purity in object-oriented languages is always on a continuum. Most codebases
-have a variety of functions: some pure, some impure. On the one side you have
-rich domain models with completely encapsulated state and void methods. On the
-other side you have easily-tested code with pure functions and separate data
-structures.&lt;/p&gt;
-
-&lt;p&gt;If you need or desire testability, strive to put as much logic as possible
-inside pure functions. Avoid encapsulated state: put all state in data
-structures with all public fields. Strive to make your codebase as pure as
-possible.&lt;/p&gt;
-</description>
+      <description>Part 2 of the series OO-Design
+The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
+A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Not only that, but most examples of unit-testing use Anemic Domain Models!</description>
     </item>
     
     <item>
@@ -485,171 +76,9 @@ possible.&lt;/p&gt;
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/better-oo-design/</guid>
-      <description>
-
-&lt;p&gt;Part 1 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The SOLID patterns are not enough to design a reusable and testable code base.
-Two concrete additions can significantly improve your codebase, while
-maintaining the SOLID principals.&lt;/p&gt;
-
-&lt;p&gt;The suggestions here do not run counter to traditional SOLID designs, they
-enhance them. SOLID is a fine place to start, but it lacks a critical half of
-good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common
-than polymorphic behavior, so programs designed without that concept often are
-far larger than they need to be.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Appropriate application of these concepts will reduce code and allow for easier unit testing&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;terms:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Terms&lt;/h2&gt;
-
-&lt;p&gt;For this post, let&amp;rsquo;s distinguish between &lt;em&gt;verb classes&lt;/em&gt; and &lt;em&gt;noun classes&lt;/em&gt;. Unit
-testing often drives us to separate classes into data structures (the nouns) or
-behavior classes, (the verbs).&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Noun class&lt;/strong&gt; - has fields and properties filled with data, perhaps from an ORM.
-
-&lt;ul&gt;
-&lt;li&gt;Example: A &lt;code&gt;Contact&lt;/code&gt; class with a name, billing and shipping addresses,
-a birthday, and a credit card.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Verb class&lt;/strong&gt; - has functions and methods. Verb classes might have fields or
-properties, but usually those only contain other verb classes that are
-needed to compose work.
-
-&lt;ul&gt;
-&lt;li&gt;Example: A &lt;code&gt;CustomerBiller&lt;/code&gt; class that creates an invoice and sends it
-to an address. Only needs a billing and shipping address and an amount.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Noun interface&lt;/strong&gt; - an interface put on a noun class. Used to allow multiple
-nouns to be passed to a single verb. A very common use-case in business
-applications.
-
-&lt;ul&gt;
-&lt;li&gt;Example: &lt;code&gt;ICustomer&lt;/code&gt; interface with a billing and shipping address
-only. Can be used by &lt;code&gt;Contact&lt;/code&gt;, &lt;code&gt;Company&lt;/code&gt;, &lt;code&gt;Government&lt;/code&gt;,
-or any other entity that might like to buy something.&lt;/li&gt;
-&lt;li&gt;Allows a verb to operate on many types of data&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Verb interface&lt;/strong&gt; - an interface put on a verb class. Allows polymorphic
-behavior. Less common than noun interfaces.
-
-&lt;ul&gt;
-&lt;li&gt;Example: &lt;code&gt;IChargeCustomer&lt;/code&gt; interface that allows different kinds of
-charging: one that generates invoices, one that charges credit cards, etc.&lt;/li&gt;
-&lt;li&gt;Allows several types of verbs to be grouped together&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;two-changes:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Two Changes&lt;/h2&gt;
-
-&lt;p&gt;Two suggestions will guide your codebase to be easier to reuse and test.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Extract Noun Interfaces&lt;/strong&gt; - Work to determine any missing noun interfaces.
-This inversion allows for easier reuse. Any data structure that &amp;ldquo;fits&amp;rdquo; can
-re-use that behavior.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rely on Verb Functions Not Verb Interfaces&lt;/strong&gt; - Replace Dependency
-Injected verb interfaces with function signatures, explained in the
-&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt;
-guide. By relying on the function signature as the default unit of
-abstraction, we remove test-only interfaces. This allows the dependent code to
-have only the functions it needs, rather than everything from the interface.
-When you really need polymorphic behavior, use a verb interface. Only use
-verb interfaces for polymorphic behavior, not for unit test mocking.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is an example of the patterns in C#, but it also works in Java:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;// Verb Class
-public class Notifier {
-    public void Broadcast(string type, Type from, int id) { /* Broadcast code here ...*/ }
-}
-
-// Noun Interface
-public interface SalesLead {
-    boolean IsCustomer {get; set;}
-    DateTime ConversionDate {set;}
-    int Id {get;}
-    Type From {get;}
-}
-
-public class User : SalesLead { /* User code here ... */ }
-public class Company : SalesLead { /* Contact code here ... */ }
-public class Government : SalesLead { /* Government code here ... */ }
-
-// Verb Class
-public class SalesRepresentative {
-    // Rely on Verb Functions Not Verb Interfaces
-    internal Action&amp;lt;string, Type, int&amp;gt; broadcast = new Notifier().Broadcast;
-
-    // Extract Noun Interfaces
-    public void ConvertToCustomer(SalesLead lead) {
-      if(lead.IsCustomer) {
-          return;
-      }
-      lead.IsCustomer = true;
-      lead.ConversionDate = DateTime.Now;
-      broadcast(&amp;quot;CustomerConverted&amp;quot;, lead.From, lead.Id);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;While this inversion of nouns and verbs seems counter to traditional OOP advice,
-it is actually a very object-oriented design. Noun Interfaces allow for
-polymorphic nouns. Polymorphic nouns allow are better suited to model a domain.&lt;/p&gt;
-
-&lt;p&gt;In our example, a &lt;code&gt;User&lt;/code&gt; should not know how to convert itself to a
-&lt;code&gt;Customer&lt;/code&gt;. A &lt;code&gt;User&lt;/code&gt; would not know they had to broadcast their updated
-status, or that the date is important to record. To prove it models the domain
-more effectively, notice how it even follows a more English pattern: &amp;ldquo;tell the
-Sales Representative to convert this User&amp;rdquo;. This is much closer than the
-typical: &amp;ldquo;User convert yourself To Customer&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Later, when we want to convert an Employee, a Company, or a Government, we know
-what sort of interface is required to make them into a SalesLead that can be
-converted. By relying on the interface, we are able to restrict
-SalesRepresentative to only have access to the data necessary to convert.&lt;/p&gt;
-
-&lt;h1 id=&#34;case-study:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Case Study&lt;/h1&gt;
-
-&lt;p&gt;We recently examined a 1.3 million line codebase used to collect and track
-interest rates and payments from a user. We found only four uses of verb
-interfaces for polymorphic behavior. On the other hand, there were hundreds of
-noun interfaces used to allow multiple shapes of data to be acted on by the
-same function.&lt;/p&gt;
-
-&lt;p&gt;An obvious example is &lt;code&gt;IHaveIdentity&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface IHaveIdentity {
-    Guid Id {get;}
-    string Name {get;}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This tiny, simple noun interface enables incredible re-use. We found the
-&lt;code&gt;IHaveIdentity&lt;/code&gt; noun interface on many of our noun classes. It is used by
-hundreds of verb classes throughout the codebase. Verbs like
-&lt;code&gt;MakeDropDownList&lt;/code&gt;, &lt;code&gt;QueryById&lt;/code&gt;, &lt;code&gt;QueryNamesMatching&lt;/code&gt;, and
-&lt;code&gt;CreateAuditTrail&lt;/code&gt;. Those verb classes were easily reused, because any new
-noun class that fits the noun interface works automatically! If we had tried to
-put interfaces on those verbs, we&amp;rsquo;d have a lot of classes with no behavior other
-than just delegating to another class.&lt;/p&gt;
-
-&lt;h1 id=&#34;conclusion:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;These patterns enable significant reuse of functionality. By defaulting to noun
-interfaces, you will find most of your verb classes can be re-used without any
-change. When you need actual polymorphic behavior, use a verb interface. For the
-more common case of unit test behavior replacement, the
-&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt; pattern makes for an easy way to
-keep your codebase clean and best model the domain.&lt;/p&gt;
-
-&lt;p&gt;Next in the series: &lt;a href=&#34;http://deliberate-software.com/anemic-domain-model/&#34;&gt;OO-Design Part 2: Anemic Domain Models Are Healthy&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Part 1 of the series OO-Design
+The SOLID patterns are not enough to design a reusable and testable code base. Two concrete additions can significantly improve your codebase, while maintaining the SOLID principals.
+The suggestions here do not run counter to traditional SOLID designs, they enhance them. SOLID is a fine place to start, but it lacks a critical half of good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common than polymorphic behavior, so programs designed without that concept often are far larger than they need to be.</description>
     </item>
     
     <item>
@@ -658,164 +87,8 @@ keep your codebase clean and best model the domain.&lt;/p&gt;
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/pairprogramming/</guid>
-      <description>
-
-&lt;p&gt;My current team has pair-programmed and followed strict TDD on a single codebase
-for over ten years. The practices started from reading the literature on Extreme
-Programming, which resonated with both the developers and leadership. As the
-team changed, we continued to follow the practices.&lt;/p&gt;
-
-&lt;p&gt;In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;&amp;ldquo;Promiscuous Pairing&amp;rdquo;&lt;/a&gt;. We
-switch pairs in short intervals: 180 minutes is our current preference.&lt;/p&gt;
-
-&lt;p&gt;The pairing sessions start at 8:45AM and 1:00PM with the typical five-minute
-stand-up. People report on any data that the rest of the team needs to hear,
-including noteworthy technical details. Afterwards, the developers crowd around
-a board with the current tasks in progress. We randomize the pairs, then each
-pair decides what to work on from the current tasks.&lt;/p&gt;
-
-&lt;p&gt;If a developer wants to not pair for a session, they go &amp;ldquo;odd&amp;rdquo;. We have a working
-agreement that no production code can be written while odd. The odd person works
-on automated testing, answering questions, researching technical debt,
-investigating root causes of bugs, and authoring throwaway &amp;ldquo;spikes&amp;rdquo; for major
-refactorings.&lt;/p&gt;
-
-&lt;h2 id=&#34;pros:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Pros&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;No siloed information or &amp;ldquo;I don&amp;rsquo;t touch that section&amp;rdquo; areas&lt;/li&gt;
-&lt;li&gt;The team must adopt a consistent set of styles, tools, shortcuts, workflow&lt;/li&gt;
-&lt;li&gt;Developers can take vacation whenever they please&lt;/li&gt;
-&lt;li&gt;Training is built in to the process from day one&lt;/li&gt;
-&lt;li&gt;Developers quitting doesn&amp;rsquo;t throw the team into disarray&lt;/li&gt;
-&lt;li&gt;Productivity is fairly stable across decades&lt;/li&gt;
-&lt;li&gt;Protected time every day for research, refactoring, and technical debt&lt;/li&gt;
-&lt;li&gt;Frequent rotation gives a natural cadence for fixing broken CI builds&lt;/li&gt;
-&lt;li&gt;I personally spend a lot less time puttering around on Reddit, HN, etc (I&amp;rsquo;m
-sure that is true for others)&lt;/li&gt;
-&lt;li&gt;Pairs have much more courage and stamina to aggressively pay down technical
-debt. Even the most mind-numbing technical debt isn&amp;rsquo;t so bad if you know you
-are rotating off in two hours.&lt;/li&gt;
-&lt;li&gt;Interruptions are much less disruptive, typically only one or two minutes to
-get back into &amp;ldquo;flow&amp;rdquo;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;cons:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Cons&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Huge system &amp;ldquo;owned by everyone&amp;rdquo; is a lot for new developers to handle - training takes a long time&lt;/li&gt;
-&lt;li&gt;Juggling tasks can be complex (e.g. what gets put on hold when not at full capacity)&lt;/li&gt;
-&lt;li&gt;Support issues get passed around from pair to pair&lt;/li&gt;
-&lt;li&gt;General feeling you are &amp;ldquo;not important&amp;rdquo; to the team&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;partly-good-partly-bad:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Partly Good, Partly Bad&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Pairing is polarizing
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Hiring is slow: many developers hate pairing
-
-&lt;ul&gt;
-&lt;li&gt;Some developers we&amp;rsquo;ve interviewed unfortunately feel pairing is demeaning, disrespectful, or beneath them&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Poor new hire retention
-
-&lt;ul&gt;
-&lt;li&gt;Some developers love the &lt;em&gt;idea&lt;/em&gt; of pairing, not the &lt;em&gt;practice&lt;/em&gt; of pairing; they often leave when they discover that distinction&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Low employee churn: those that love pairing stick around far longer than industry average&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;No task ownership
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Less emotional reward when completing a task&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Less in-fighting about typical &amp;lsquo;code-ownership&amp;rsquo; bike-shed issues&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; No one cares if a task is rejected by QA&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Rapid pair-switching can cause design churn on a task
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;-&lt;/strong&gt; Tasks can take longer to complete&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;+&lt;/strong&gt; Tough tasks get prototyped several times and seen by whole team&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We&amp;rsquo;ve found this set of trade-offs works very well with our team. The ten of us
-are all doing active development on a 3.4 million-line enterprise banking
-application. Quality and the ability to quickly conform to new regulations are
-of paramount importance. The team regularly has a discussion as to whether we
-should keep or abandon the policy of enforced pairing, and the consensus thus
-far remains to keep it.&lt;/p&gt;
-
-&lt;p&gt;We plan to be around for at least the next decade. Our team requires a workflow
-that allows for the rapid development of high-quality features while keeping the
-team stress-free and happy with their work. Since we plan on a decade scale, our
-development process must take into account the importance of long-term
-happiness, training, and the courage to aggressively pay down technical debt.&lt;/p&gt;
-
-&lt;h2 id=&#34;how-to-get-started:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;How To Get Started&lt;/h2&gt;
-
-&lt;p&gt;This system works best with a given a set of preconditions.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The whole team has to love pairing and want to adopt it&lt;/p&gt;
-
-&lt;p&gt;If even a minority of developers hates pairing, it will be tortuous to force
-them to do it. In our experience, &amp;gt;80% of developers hate pairing. If some
-members are not interested, it would be better to split the team and
-codebase. Forcing even a single developer to pair can be disastrous for
-morale and productivity. No one wants to pair with someone who is sullen and
-bitter. When pairing, misery cannot be hidden.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Management has to accept not having assigned tasks&lt;/p&gt;
-
-&lt;p&gt;Assigning tasks reduces the beneficial effects of pair switching. The
-assigned developer ends up &amp;ldquo;doing all the work with an observer&amp;rdquo;. This is
-much less effective. The &amp;ldquo;observer&amp;rdquo; ends up tuning out, since the assignee
-&amp;ldquo;probably already has it figured out&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Proficiency at pairing is a discrete skill&lt;/p&gt;
-
-&lt;p&gt;Many seasoned developers find themselves awkward and uncomfortable when
-pairing for the first few months. Pairing cannot be assessed in any
-meaningful way by just &amp;ldquo;trying it for a week&amp;rdquo; anymore than typing can be
-assessed over hand-writing in just a week. Feelings of discomfort and
-awkwardness in the first few months are completely normal and should not be
-the criteria used to decide to continue the practice.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Let any pair make any decision&lt;/p&gt;
-
-&lt;p&gt;Any pair should be authorized to make any decision to implement their
-current task. They must however be ready to have that decision undone or
-changed if the next pair finds it was too large, a poor design, out of
-scope, etc.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Accept that others are better than you&lt;/p&gt;
-
-&lt;p&gt;When trying out pairing, productivity doesn&amp;rsquo;t have to drop! Many developers
-at first are uncomfortable by the rapid speed. The law of averages says half
-the developers on the team will find their pair going much faster than they
-are used to! These feelings of inadequacy often lead to developers wanting
-to discontinue the practice. Over time, everyone realizes that it is okay to
-not be the fastest, and instead take self-worth in what skills they do
-bring. Maybe they are not the fastest, but they are good at catching little
-details, etc.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;As a development system, this absolutely cannot be handed down from management.
-It has to be implemented &amp;ldquo;by the people and for the people&amp;rdquo;.&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusion:bd97cfb3b628f77ac97d1d5cdf96fc97&#34;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;We have seen promiscuous pairing completely change our organization. As a team,
-we accomplish far more than we would otherwise. We are able to tackle new
-systems, languages, and tools with ease. When someone learns a new valuable
-technique, it spreads organically through the team.&lt;/p&gt;
-
-&lt;p&gt;Feel free to tweet at me if you have any questions or clarifications!&lt;/p&gt;
-</description>
+      <description>My current team has pair-programmed and followed strict TDD on a single codebase for over ten years. The practices started from reading the literature on Extreme Programming, which resonated with both the developers and leadership. As the team changed, we continued to follow the practices.
+In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &amp;ldquo;Promiscuous Pairing&amp;rdquo;. We switch pairs in short intervals: 180 minutes is our current preference.</description>
     </item>
     
     <item>
@@ -824,196 +97,9 @@ technique, it spreads organically through the team.&lt;/p&gt;
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
-      <description>
-
-&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Editor macros are a secret weapon for editing text. While they are hard to
-learn, no other tool offers such broad speed and power for automating changes. A
-skilled macro wielder can make huge changes to a codebase with ease.&lt;/p&gt;
-
-&lt;p&gt;Here are some inspirational patterns to demonstrate major structural
-refactorings using Vim macros and search/replace commands.&lt;/p&gt;
-
-&lt;!-- # Macro Saving --&gt;
-
-&lt;!-- When you build a complex macro and want to save it for later, just save it off --&gt;
-
-&lt;!-- to a file. Since a macro is just a list of commands to execute, you can copy and --&gt;
-
-&lt;!-- paste macros into registers just like text: --&gt;
-
-&lt;!-- * ```&#34;qp``` - Paste the &#39;q&#39; register contents --&gt;
-
-&lt;!-- * ```&#34;qy``` - Insert selected text into the &#39;q&#39; register --&gt;
-
-&lt;h1 id=&#34;reorder-a-list-of-numbers:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Reorder A List Of Numbers&lt;/h1&gt;
-
-&lt;p&gt;A change left me with a file with unordered numbers. The numbers needed to be
-increasing, without changing the actual order of the lines. Macros are my first
-choice to accomplish a repeated action.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/proto-macro-small.gif&#34;&gt;&lt;/img&gt;
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;The commands:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;/;&lt;/code&gt; - Search for &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &amp;lsquo;q&amp;rsquo; register&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;db&lt;/code&gt; - Delete backwards&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;N&lt;/code&gt;  - Search for previous &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yb&lt;/code&gt; - Yank backwards&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Search for next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;P&lt;/code&gt;  - Paste backwards&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Ctrl+a&lt;/code&gt; - Increment number&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt;  - Go to next &amp;lsquo;;&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;q&lt;/code&gt;  - Stop Recording macro&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;33@q&lt;/code&gt; - Replay 33 times the &amp;lsquo;q&amp;rsquo; macro&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This only took me a few seconds to type! I was able to run this across the whole
-file by replaying it the number of lines minus one. Because I saved it in the
-&amp;lsquo;q&amp;rsquo; register, I was able to keep it saved for the whole session, which involved
-refactoring several dozen similar files. I got to re-use the saved macro at
-least 20 more times in that three hour session!&lt;/p&gt;
-
-&lt;p&gt;I don&amp;rsquo;t think this macro is very complex. I would only leave it in the register
-for a single session, and remake it in the future if needed. But if I wanted to
-save it, running &lt;code&gt;&amp;quot;qp&lt;/code&gt; spits out: &lt;code&gt;dbNybnP^ann&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&#34;extract-interface-from-class:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Extract Interface From Class&lt;/h1&gt;
-
-&lt;p&gt;Let&amp;rsquo;s extract an interface from a class. A region-based search and replace is a
-great fit for this task. Since we are not matching or reordering several blocks
-of text, several search/replace steps work well. First, duplicate the whole
-class body to the top of the file. Delete all lines that are not the function
-signature lines. Remove all public keywords and add in semicolons on each line
-ending. Finish up with adding the interface name and adding it to the class.&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&#34;pull-left&#34; src=&#34;http://deliberate-software.com/images/interface-small.gif&#34;&gt;&lt;/img&gt;
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;11,37t8&lt;/code&gt; - Copy the class body to line 8&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;10,35g!/public/d&lt;/code&gt; - Delete every line not containing the word public from
-line 10 to 35&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;10,12s/public//g&lt;/code&gt; - Delete all the public keywords in lines 10-12&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;10,12s/$/;/g&lt;/code&gt; - End each line with a semi-colon&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:8&lt;/code&gt; - Jump to line 8 (and add interface and name)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:14&lt;/code&gt; - Jump to line 14 (and add interface name)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&#34;change-a-function-signature:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Change a Function Signature&lt;/h1&gt;
-
-&lt;p&gt;Let&amp;rsquo;s change a function signature to move a parameter into a generic and not
-have to cast. I want to change a line like this&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;m.Name = (NameType)getEnum(typeof(NameType), req.Name);&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;into this:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;m.Name = getEnum&amp;lt;NameType&amp;gt;(req.Name);&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Normally, this is a very manual task, requiring many edits.&lt;/p&gt;
-
-&lt;p&gt;In this case, a search/replace is possible, but probably a lot more complex.
-We&amp;rsquo;d have to identify and remove the &lt;code&gt;(NameType)&lt;/code&gt;, locate the opening
-&lt;code&gt;(&lt;/code&gt; of the parameter list, put in the &lt;code&gt;NameType&lt;/code&gt; inside a pair of
-&lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;, then remove the first parameter and comma. A macro record/playback
-fits this task easily.&lt;/p&gt;
-
-&lt;p&gt;We perform those steps above, but use the f/F commands to find markers in the
-line. This allows the playback to work on any line with the same markers.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/generic2.gif&#34;&gt;&lt;/img&gt;
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;/getEnum&lt;/code&gt; - Search for &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;F(&lt;/code&gt;&lt;code&gt;- Backwards find&lt;/code&gt;&lt;code&gt;(&lt;/code&gt;``&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;da(&lt;/code&gt;&lt;code&gt;- Delete whole block in&lt;/code&gt;&lt;code&gt;()&lt;/code&gt;``&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;P&lt;/code&gt; - Paste backwards one character&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;r&amp;gt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;F(&lt;/code&gt; - Backwards find &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;r&amp;lt;&lt;/code&gt; - Replace character with &lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;f(&lt;/code&gt; - Find next &lt;code&gt;(&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Left one character&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;df&lt;/code&gt; - Delete up to and including next space&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt; - Search next &lt;code&gt;getEnum&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - Stop macro recording&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;5@q&lt;/code&gt; - Replay macro 5 times&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&#34;update-sql-query-fields:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Update SQL Query Fields&lt;/h1&gt;
-
-&lt;p&gt;I needed to replace the names in a set of sql queries to sanitize some data to
-hand off to a customer. I grabbed a set of
-&lt;a href=&#34;http://www.dimfuture.net/starwars/random/generate.php&#34;&gt;Star Wars names&lt;/a&gt; and
-copied it to my sql file. They were tab AND newline separated.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/rename.gif&#34;&gt;&lt;/img&gt;
-&lt;div class=&#34;container-fluid&#34;&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;:1,26s/\t//g&lt;/code&gt; - Replace tabs with newlines&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:1,100s/^\W*//g&lt;/code&gt; - Delete leading whitespace&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:1,100s/\W*$//g&lt;/code&gt; - Delete trailing whitespace&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:101&lt;/code&gt; - Jump to line 101&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;qq&lt;/code&gt; - Start macro in &lt;code&gt;q&lt;/code&gt; register&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:-100&lt;/code&gt; - Jump 100 lines up&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;2yw&lt;/code&gt; - Yank (copy) two words&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:+100&lt;/code&gt; - Jump down 100 lines&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;f)&lt;/code&gt; - Jump to next &lt;code&gt;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;f&#39;&lt;/code&gt; - Jump to next &lt;code&gt;&#39;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;l&lt;/code&gt; - Move right&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;vi&#39;&lt;/code&gt; - Select text in quotes&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;p&lt;/code&gt; - Paste clipboard&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;:+1&lt;/code&gt; - Jump down one line&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - End macro&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;99@q&lt;/code&gt; - Replay macro 99 times&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;conclusion:1368fb58571a0f824354ae8f514a14fb&#34;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;I typically use a macro when a search/replace would require using several
-groups. I use relative line jumps (&lt;code&gt;:+1&lt;/code&gt;) and liberal uses of the search
-(&lt;code&gt;/?&lt;/code&gt; and &lt;code&gt;nN&lt;/code&gt;) and find (&lt;code&gt;fF&lt;/code&gt;) commands for navigating. The search
-and find commands let my macro work the same on many different shapes of lines.
-I also end each macro with a step for finding the &amp;ldquo;next&amp;rdquo; line to operate on. By
-ensuring each iteration finishes by going to the &amp;ldquo;next&amp;rdquo; line, I can repeat the
-command with the built-in command repeat without manually executing each one.&lt;/p&gt;
-
-&lt;p&gt;Learning how to record and playback macros is a complex skill. With practice, it
-becomes second-nature. My muscle memory grows stronger with each new macro.
-Several of these I wrote without a mistake, almost as fast as I can type.&lt;/p&gt;
-
-&lt;p&gt;Like any other skill, the first few dozen times you write a macro it won&amp;rsquo;t work
-right, or will mangle the text. That is okay! If you are setting out to learn
-macros, allow yourself to be slow while you master the skill. Touch-typing can
-be many times faster than hand-writing or hunt-and-peck, but learning takes a
-long time. Macros can save you huge amounts of time, but you have to allow
-yourself to be slow while you master the skill.&lt;/p&gt;
-
-&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
-</description>
+      <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
+Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
+Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.</description>
     </item>
     
     <item>
@@ -1022,96 +108,10 @@ yourself to be slow while you master the skill.&lt;/p&gt;
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/modern-di/</guid>
-      <description>
-
-&lt;p&gt;Dependency Injection can be greatly simplified while retaining all of its power.&lt;/p&gt;
-
-&lt;h3 id=&#34;the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a&#34;&gt;The Unnecessary Boilerplate&lt;/h3&gt;
-
-&lt;p&gt;Injection of an interface through the constructor is a common way to replace a
-dependency for unit-test mocking. Unfortunately, it is an extremely verbose
-pattern.&lt;/p&gt;
-
-&lt;p&gt;Look how much boilerplate is needed just to mock out a call to
-&lt;code&gt;DateTime.Now&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;CurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;readonly&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;14 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;15 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;16 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ICurrentTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;17 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;18 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;19 &lt;/span&gt;&lt;span class=&#34;hll&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;20 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;21 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetCurrentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;22 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;23 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;We learned to mock this way because Java did not have lambdas at the time the
-pattern was invented! Now that both Java and C# have lambdas, the existing DI
-pattern can be improved.&lt;/p&gt;
-
-&lt;h3 id=&#34;for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Unit Test Mocking&lt;/h3&gt;
-
-&lt;p&gt;Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
-removed!&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt;1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;3 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;5 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;6 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;7 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Much better! The code is easier to read, understand, and &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;mock in a unit test&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;for-polymorphism:c289f8e530077f15501b76fa92fff59a&#34;&gt;For Polymorphism&lt;/h3&gt;
-
-&lt;p&gt;If you still need to replace the function with another for polymorphic dispatch,
-use constructor injection of just the lambda. Be forewarned, you probably need
-this much less than you think!&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;lineno&#34;&gt; 1 &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Formatter&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 2 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;internal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 3 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 4 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 5 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 6 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Formatter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 7 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 8 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt; 9 &lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;10 &lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;11 &lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;{0}: {1}&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;currentTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;12 &lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;lineno&#34;&gt;13 &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;If you are heavily invested in unit-testing, you might find you need very little
-actual interface polymorphism. To see where you really use interface
-polymorphism, find the interfaces in your codebase only have a single concrete
-class in production. Each interface with a single concrete class is test-only
-boilerplate that can safely replaced with a lambda!&lt;/p&gt;
-
-&lt;p&gt;For more examples, &lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;check out SimpleMock!&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Dependency Injection can be greatly simplified while retaining all of its power.
+The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
+Look how much boilerplate is needed just to mock out a call to DateTime.Now:
+1 public interface ICurrentTime { 2 DateTime GetCurrentTime(); 3 } 4 5 public class CurrentTime : ICurrentTime { 6 public DateTime GetCurrentTime() { 7  return DateTime.</description>
     </item>
     
     <item>
@@ -1120,57 +120,10 @@ boilerplate that can safely replaced with a lambda!&lt;/p&gt;
       <pubDate>Mon, 23 May 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/editor-abstractions/</guid>
-      <description>&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;I was recently inspired by a comment from a respected coworker:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring
-suite like ReSharper.&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I have pair-programmed with him for hundreds of hours of C# development. He is
-equally productive with both, that much I know. On some tasks he is less
-efficient than with ReSharper, on others he is more. To clarify, we use the
-superb VsVim inside Visual Studio, so he still relies on the built-in tools for
-&amp;ldquo;Auto-complete&amp;rdquo; and &amp;ldquo;Go to Definition&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;The greatest benefit comes when we work in JavaScript, Haskell, or Clojure. His
-productivity doesn&amp;rsquo;t drop! &lt;strong&gt;His Vim and grep skills work just as effectively on
-any text.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;The tools in our editors and IDE&amp;rsquo;s are concrete abstractions. If you have a good
-set of abstractions, you can use them to solve any problem. A well-designed
-abstraction composes well, and can be combined with others for new utility.&lt;/p&gt;
-
-&lt;p&gt;Consider the sequence abstractions. With only: &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, and
-&lt;code&gt;fold&lt;/code&gt;, you can transform any sequence of data into another shape. Mastering
-the three sequence abstractions empowers you to transform any data. The power comes
-from how easily they can be combined.&lt;/p&gt;
-
-&lt;p&gt;Editor abstractions are most powerful when they can be composed. You can
-replicate most of the functionality of a refactoring suite using basic,
-composable text-editing commands. Well-designed editor abstractions can be
-recorded, edited, and replayed to transform text in any way you need. While no
-replacement for semantic tools like &amp;ldquo;Language Errors&amp;rdquo;, &amp;ldquo;Go to Definition&amp;rdquo;, and
-&amp;ldquo;Auto-complete&amp;rdquo;, they are an easy replacement for most other refactorings.&lt;/p&gt;
-
-&lt;p&gt;If you work in multiple languages, composable text-editing commands are a much
-better abstraction than those provided by a refactoring suite. Refactoring
-suites often have dozens of bespoke commands that only work in certain contexts.
-Even the best of these suites are often constrained to a single language. &lt;strong&gt;If
-you ever work in more than one language, you will get the most value learning to
-rely on abstractions that are constant across all environments.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I find I get the most value with a Vim plugin inside whatever environment
-provides the best semantic tools for the language. When building an Android app,
-I use IDEAVim inside Android Studio. For C#: VsVim inside Visual Studio. For all
-other languages: Evil mode inside Emacs. Instead of hundreds of specialized
-commands and contexts, I rely on a few basic abstractions to achieve any text
-transformation I can imagine.&lt;/p&gt;
-
-&lt;p&gt;(Want to become a Vim expert? Check out my new book: &lt;a href=&#34;https://leanpub.com/deliberatevim&#34;&gt;10 Minute Vim&lt;/a&gt;)&lt;/p&gt;
-</description>
+      <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
+I was recently inspired by a comment from a respected coworker:
+ &amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring suite like ReSharper.&amp;rdquo;
+ I have pair-programmed with him for hundreds of hours of C# development. He is equally productive with both, that much I know. On some tasks he is less efficient than with ReSharper, on others he is more.</description>
     </item>
     
     <item>
@@ -1179,184 +132,11 @@ transformation I can imagine.&lt;/p&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/haskell-state/</guid>
-      <description>&lt;p&gt;Part 2 of my series &amp;ldquo;Wrangling State&amp;rdquo;. Part 1
-&lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Wrangling State In Clojure&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Haskell is a pure language, so you can only deal with application state by
-passing parameters to functions. It is possible to pass parameters more
-conveniently, but ultimately, every parameter needs to be passed.&lt;/p&gt;
-
-&lt;p&gt;Here is a simple application for logging a timestamp to a file.&lt;/p&gt;
-
-&lt;p&gt;First, &lt;strong&gt;Pass As Parameter&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: Filename -&amp;gt; IO String
-loadFile fileName =
-  BS.unpack &amp;lt;$&amp;gt; Str.readFile fileName
-
-saveFile :: Filename -&amp;gt; String -&amp;gt; IO ()
-saveFile fileName contents = 
-  Str.writeFile fileName (BS.pack contents)
-
-clearFile :: Filename -&amp;gt; IO ()
-clearFile fileName = saveFile fileName &amp;quot;&amp;quot;
-
-appendToFile :: Filename -&amp;gt; String -&amp;gt; IO ()
-appendToFile fileName stuff = do
-    contents &amp;lt;- loadFile fileName
-    saveFile fileName (contents++stuff)
-
-main fileName &amp;quot;-c&amp;quot; = clearFile fileName
-main fileName &amp;quot;-log&amp;quot; = do
-  now &amp;lt;- getCurrentTime
-  appendToFile fileName ((show now)++ &amp;quot;\n&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We take in the file name and the command to perform, either to clear the file or
-to append a new timestamp. While simple, this gets cumbersome in a large
-application. Imagine passing a database connection through every single function
-that eventually calls the database.&lt;/p&gt;
-
-&lt;p&gt;Haskell can have unnamed parameters that are not defined in the argument list.
-Sometimes this can improve legibility, other times it can worsen it. To use this
-feature, the function signature must contain the value missing. The parameter(s)
-must be the &amp;ldquo;last&amp;rdquo; parameter(s) to the function for this to work.&lt;/p&gt;
-
-&lt;p&gt;Here is the same code with &lt;strong&gt;Unnamed Parameters&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: Filename -&amp;gt; IO String
-loadFile = (liftM BS.unpack) . Str.readFile
-
-saveFile :: String -&amp;gt; Filename -&amp;gt; IO ()
-saveFile contents fileName =
-  Str.writeFile fileName (BS.pack contents)
-
-clearFile :: Filename -&amp;gt; IO ()
-clearFile = saveFile &amp;quot;&amp;quot;
-
-appendToFile :: String -&amp;gt; Filename -&amp;gt; IO ()
-appendToFile stuff = (&amp;gt;&amp;gt;=) &amp;lt;$&amp;gt; loadFile &amp;lt;*&amp;gt; ((. (++stuff)) . (flip saveFile))
-
-main fileName &amp;quot;-c&amp;quot; = clearFile fileName
-main fileName &amp;quot;-log&amp;quot; = do
-  now &amp;lt;- getCurrentTime
-  appendToFile ((show now)++ &amp;quot;\n&amp;quot;) fileName
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Not all usages of &lt;code&gt;Filename&lt;/code&gt; can be easily unnamed. We did use it in
-&lt;code&gt;loadFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt;. It does allow the &amp;ldquo;differences&amp;rdquo; to stand out
-more. For example, &lt;code&gt;clearFile&lt;/code&gt; is just a &lt;code&gt;saveFile&lt;/code&gt; with an empty string
-for the first parameter. We can see the differences clearly without the extra
-parameter adding noise.&lt;/p&gt;
-
-&lt;p&gt;We added it to &lt;code&gt;appendToFile&lt;/code&gt;, using point-free style. I find that it makes
-it much harder to scan and read.&lt;/p&gt;
-
-&lt;p&gt;Lastly, it is possible to encode such values into the type. The type of the
-function itself can imply a value that can be retrieved. For example, the Reader
-type can be combined with the IO type using ReaderT.&lt;/p&gt;
-
-&lt;p&gt;Here is the code using the &lt;strong&gt;Reader Type&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;loadFile :: ReaderT Filename IO String
-loadFile = do
-  fileName &amp;lt;- ask
-  liftIO $ BS.unpack &amp;lt;$&amp;gt; Str.readFile fileName
-
-saveFile :: String -&amp;gt; ReaderT Filename IO ()
-saveFile contents = do
-  fileName &amp;lt;- ask
-  liftIO $ Str.writeFile fileName (BS.pack contents)
-
-clearFile :: ReaderT Filename IO ()
-clearFile = saveFile &amp;quot;&amp;quot;
-
-appendToFile :: String -&amp;gt; ReaderT Filename IO ()
-appendToFile stuff = do
-    contents &amp;lt;- loadFile
-    saveFile (contents++stuff)
-
-main fileName &amp;quot;-c&amp;quot; = runReaderT clearFile fileName
-main fileName &amp;quot;-log&amp;quot; = do
-  now &amp;lt;- getCurrentTime
-  runReaderT (appendToFile ((show now)++ &amp;quot;\n&amp;quot;)) fileName
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Notice now how &lt;code&gt;appendToFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt; have the signature:
-&lt;code&gt;ReaderT Filename IO ()&lt;/code&gt;, indicating that anything below them can &lt;code&gt;ask&lt;/code&gt;
-for the Filename, while still performing an &lt;code&gt;IO&lt;/code&gt; action. The &amp;ldquo;entry-point&amp;rdquo;
-calls in &lt;code&gt;main&lt;/code&gt; need to be initialized with the &lt;code&gt;runReaderT&lt;/code&gt; and the
-&lt;code&gt;Filename&lt;/code&gt; we want to pass.&lt;/p&gt;
-
-&lt;p&gt;For this case, the &lt;code&gt;ReaderT&lt;/code&gt; is substantially more readable. The &amp;ldquo;business
-value&amp;rdquo; functions &lt;code&gt;appendToFile&lt;/code&gt; and &lt;code&gt;clearFile&lt;/code&gt; do not have to define
-and pass the parameters needed for the lower level functions &lt;code&gt;saveFile&lt;/code&gt; and
-&lt;code&gt;loadFile&lt;/code&gt;. &lt;strong&gt;Reader Type&lt;/strong&gt; gives us the value of the &lt;strong&gt;Unnamed
-Parameters&lt;/strong&gt; for legibility!&lt;/p&gt;
-
-&lt;p&gt;For something like a database connection that might be used pervasively, the
-&lt;strong&gt;Reader Type&lt;/strong&gt; is essential for legible code. The low level functions that need
-the &lt;code&gt;Filename&lt;/code&gt; are able to call &lt;code&gt;ask&lt;/code&gt; to retrieve it.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Dependencies&lt;/th&gt;
-&lt;th&gt;Complexity&lt;/th&gt;
-&lt;th&gt;Adding New State&lt;/th&gt;
-&lt;th&gt;Best When&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Pass As Parameter&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Explicit&lt;/td&gt;
-&lt;td&gt;Less Complex&lt;/td&gt;
-&lt;td&gt;Harder&lt;/td&gt;
-&lt;td&gt;State only needed in a few functions&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Unnamed Parameter&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Explicit&lt;/td&gt;
-&lt;td&gt;Less Complex&lt;/td&gt;
-&lt;td&gt;Harder&lt;/td&gt;
-&lt;td&gt;Functions can be made more readable&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Reader Type&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Explicit&lt;/td&gt;
-&lt;td&gt;More Complex&lt;/td&gt;
-&lt;td&gt;Easier&lt;/td&gt;
-&lt;td&gt;State needed throughout the application&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Compared to &lt;a href=&#34;http://deliberate-software.com/clojure-state/&#34;&gt;Clojure&lt;/a&gt;, Haskell has no way to
-call a function &amp;ldquo;incorrectly&amp;rdquo;. All in-memory state is passed explicitly.&lt;/p&gt;
-
-&lt;p&gt;Haskell&amp;rsquo;s type system prevents the programmer from forgetting state.
-Unfortunately, it is still possible to pass as any parameter a value that is
-invalid. The explicit nature of Haskell parameters does not prevent passing a
-database connection string that does not exist, or a pointer to an incorrectly
-setup data structure.&lt;/p&gt;
-
-&lt;p&gt;Haskell is opinionated, and forces you to consider all the state up front before
-calling a function. While this makes it harder to forget about state, it also
-makes abstractions more leaky. Instead of relying on a function which may or may
-not use a database, you must know and pass the database connection.&lt;/p&gt;
-
-&lt;p&gt;Even though I believe the Haskell type system makes abstractions more leaky, I
-prefer having to think up front about all my state. I find it makes the code
-more clear, and helps me control what functions have access to state.&lt;/p&gt;
-
-&lt;p&gt;Edit: Thanks to &lt;a href=&#34;https://www.reddit.com/r/haskell/comments/4go5dr/wrangling_state_in_haskell/d2j9aqz&#34;&gt;/u/kccqzy&lt;/a&gt; on reddit for offering a way to make
-&lt;code&gt;appendToFile&lt;/code&gt; use point-free style.&lt;/p&gt;
-</description>
+      <description>Part 2 of my series &amp;ldquo;Wrangling State&amp;rdquo;. Part 1 Wrangling State In Clojure
+Haskell is a pure language, so you can only deal with application state by passing parameters to functions. It is possible to pass parameters more conveniently, but ultimately, every parameter needs to be passed.
+Here is a simple application for logging a timestamp to a file.
+First, Pass As Parameter:
+loadFile :: Filename -&amp;gt; IO String loadFile fileName = BS.</description>
     </item>
     
     <item>
@@ -1365,76 +145,10 @@ more clear, and helps me control what functions have access to state.&lt;/p&gt;
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/figwheel-angular2/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;http://deliberate-software.com/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt;
-I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping
-worked, but state was lost on each load. Tweaking the original demo allows for
-figwheel to swap in the template without losing client state.&lt;/p&gt;
+      <description>In &amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo; I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping worked, but state was lost on each load. Tweaking the original demo allows for figwheel to swap in the template without losing client state.
+Here is a demo of hotswapping with state preservation:
 
-&lt;p&gt;Here is a demo of hotswapping with state preservation:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://deliberate-software.com/images/hotswap.gif&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;In this demo, we add three things to a list, then change the template that draws
-the list. The client state stays in the browser, while the template changes
-around it! Amazing!&lt;/p&gt;
-
-&lt;p&gt;To get this working, follow the steps in the
-&lt;a href=&#34;http://deliberate-software.com/cljs-angular2/&#34;&gt;&amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo;&lt;/a&gt; first post.&lt;/p&gt;
-
-&lt;p&gt;Replace the env/dev/cljs/dev.cljs contents with this simpler reloader:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn mount-component []
-  ((.. js/ng -platform -browser -bootstrap)
-   (.-AppComponent (.-app js/window))))
-
-(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
-                           :on-jsload mount-component)
-
-(defonce only-attach-listener-once
-  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot; mount-component))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We now only re-mount the component on figwheel notification. The state is moved
-to an atom in the core namespace like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn get-app []
-   (or (.-app js/window)
-       (set! (.-app js/window) #js {})))
-
-;; keep state of the component in a defonce atom
-(defonce heroes (atom []))
-
-(let [app (get-app)
-      c (.Component (.-core js/ng)
-                    #js {:selector &amp;quot;my-app&amp;quot;
-                         :template (html [:div
-                                          [:h1 &amp;quot; Demo&amp;quot;]
-                                          [:div [:h2 &amp;quot;Hero List:&amp;quot;]]
-                                          &amp;quot;
-&amp;lt;input #newHero (keyup.enter)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot; &amp;gt;
-&amp;lt;button (click)=\&amp;quot;addHero(newHero.value); newHero.value=&#39;&#39; \&amp;quot;&amp;gt;Add&amp;lt;/button&amp;gt;
-&amp;lt;ul&amp;gt;&amp;lt;li *ngFor=\&amp;quot;#hero of heroes()\&amp;quot;&amp;gt;{{hero}}&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;
-&amp;quot;
-                                          ])})
-      c (.Class c #js {:constructor (fn [])
-                       :addHero (fn [hero]
-                                  (swap! heroes #(conj % hero)))
-                       :heroes (fn [] @heroes)
-                       })]
-  (set! (.-AppComponent app) c))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The site now will recompile and reload while preserving the state of the
-component. This pattern can be extended to allow certain state to be preserved
-while other state is reloaded. In this demo, the state in the &lt;code&gt;#newHero&lt;/code&gt;
-field is not preserved, while the &lt;code&gt;heroes&lt;/code&gt; list is.&lt;/p&gt;
-
-&lt;p&gt;I don&amp;rsquo;t have a great story for using hiccups to generate the special angular
-tags like &lt;code&gt;*ngFor&lt;/code&gt;, &lt;code&gt;(click)&lt;/code&gt;, or &lt;code&gt;(keyup.enter)&lt;/code&gt;. For this demo, I
-left that html as just a raw string.&lt;/p&gt;
-
-&lt;p&gt;Check out the full working example on GitHub &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/5025e2983ab054c88717c89528b85c7f9aaea851&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
+In this demo, we add three things to a list, then change the template that draws the list. The client state stays in the browser, while the template changes around it!</description>
     </item>
     
     <item>
@@ -1443,149 +157,9 @@ left that html as just a raw string.&lt;/p&gt;
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/cljs-angular2/</guid>
-      <description>
-
-&lt;p&gt;Getting ClojureScript to run Angular2 is not very difficult. Here is a sample
-project demonstrating a working Angular2 site using Figwheel for hot-reloading
-&lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/ae1a1abfe91a84cb5146931ff731885a2b1d5486&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;1-install-luminus-cljs:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;1. Install Luminus +cljs&lt;/h3&gt;
-
-&lt;p&gt;First, setup a basic ClojureScript site using Luminus starter template from
-&lt;a href=&#34;http://www.luminusweb.net/docs&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lein new luminus cljs-angular2 +cljs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This builds a great basic starter project with ClojureScript and figwheel
-already running. The template uses Reagent and React, which are excellent, but
-we want Angular2!&lt;/p&gt;
-
-&lt;h3 id=&#34;2-replace-figwheel-site-loader:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;2. Replace Figwheel Site Loader&lt;/h3&gt;
-
-&lt;p&gt;Open the env/dev/cljs/dev.cljs file, which starts the site when running from
-development.&lt;/p&gt;
-
-&lt;p&gt;Replace the call to start a figwheel watcher with this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojurescript&#34;&gt;(defn reload []
-  (core/init!)
-  ((.. js/ng -platform -browser -bootstrap)
-   (.-AppComponent (.-app js/window))))
-
-(figwheel/watch-and-reload :websocket-url &amp;quot;ws://localhost:3449/figwheel-ws&amp;quot;
-                           :on-jsload reload)
-
-(core/init!)
-(defonce only-attach-listener-once
-  (.addEventListener js/document &amp;quot;DOMContentLoaded&amp;quot;
-                     (fn []
-                       ((.. js/ng -platform -browser -bootstrap)
-                        (.-AppComponent (core/get-app))))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The defonce will make sure I accidentally don&amp;rsquo;t attach the same event listener
-twice when re-evaluating files at the repl.&lt;/p&gt;
-
-&lt;h3 id=&#34;3-make-angular2-component:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;3. Make Angular2 Component&lt;/h3&gt;
-
-&lt;p&gt;Replace the src-cljs/cljs-angular2/core.cljs file with this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojurescript&#34;&gt;(ns cljs-angular2.core
-  (:require-macros [hiccups.core :as hiccups :refer [html]]))
-
-(defn get-app []
-   (or (.-app js/window)
-       (set! (.-app js/window) #js {})))
-
-(defn init! []
-  (let [app (get-app)
-        c (.Component (.-core js/ng)
-                      #js {:selector &amp;quot;my-app&amp;quot;
-                           :template (html [:div
-                                            [:h1 &amp;quot;My first Angular 2 app&amp;quot;]
-                                            [:div [:h2 &amp;quot;test&amp;quot;]]
-                                            [:div [:h3 &amp;quot;test2&amp;quot;]]])})
-        c (.Class c #js {:constructor (fn [])})]
-    (set! (.-AppComponent app) c)))
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-add-angular2-dependencies:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;4. Add Angular2 Dependencies&lt;/h3&gt;
-
-&lt;p&gt;Add a package.json file into resources/public/ and fill it with this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;name&amp;quot;: &amp;quot;angular2-quickstart&amp;quot;,
-  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
-  &amp;quot;scripts&amp;quot;: {
-    &amp;quot;start&amp;quot;: &amp;quot;npm run lite&amp;quot;,
-    &amp;quot;lite&amp;quot;: &amp;quot;lite-server&amp;quot;
-  },
-  &amp;quot;license&amp;quot;: &amp;quot;ISC&amp;quot;,
-  &amp;quot;dependencies&amp;quot;: {
-    &amp;quot;angular2&amp;quot;: &amp;quot;2.0.0-beta.14&amp;quot;,
-    &amp;quot;es6-shim&amp;quot;: &amp;quot;^0.35.0&amp;quot;,
-    &amp;quot;reflect-metadata&amp;quot;: &amp;quot;0.1.2&amp;quot;,
-    &amp;quot;rxjs&amp;quot;: &amp;quot;5.0.0-beta.2&amp;quot;,
-    &amp;quot;zone.js&amp;quot;: &amp;quot;0.6.6&amp;quot;
-  },
-  &amp;quot;devDependencies&amp;quot;: {
-    &amp;quot;concurrently&amp;quot;: &amp;quot;^2.0.0&amp;quot;,
-    &amp;quot;lite-server&amp;quot;: &amp;quot;^2.2.0&amp;quot;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now run &lt;code&gt;npm install&lt;/code&gt; from inside the resources/public directory.&lt;/p&gt;
-
-&lt;h3 id=&#34;5-add-hiccups:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;5. Add Hiccups&lt;/h3&gt;
-
-&lt;p&gt;Modify the project.clj in the root directory to include the &lt;code&gt;hiccups&lt;/code&gt;
-dependency so we don&amp;rsquo;t have to write nasty html strings:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;:dependencies [[hiccups &amp;quot;0.3.0&amp;quot;]
-               ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6-add-dependencies-to-home-html:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;6. Add Dependencies To Home HTML&lt;/h3&gt;
-
-&lt;p&gt;Add the following to resources/templates/home.html before the line including
-&lt;code&gt;{% script &amp;quot;/js/app.js&amp;quot; %}&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;my-app&amp;gt;Loading...&amp;lt;/my-app&amp;gt;
-&amp;lt;script src=&amp;quot;node_modules/es6-shim/es6-shim.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;node_modules/angular2/es6/dev/src/testing/shims_for_IE.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-&amp;lt;script src=&amp;quot;node_modules/angular2/bundles/angular2-polyfills.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;node_modules/rxjs/bundles/Rx.umd.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script src=&amp;quot;node_modules/angular2/bundles/angular2-all.umd.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;7-start-site:468cef4ba8bc346f91f6a6d4062843b7&#34;&gt;7. Start Site!&lt;/h3&gt;
-
-&lt;p&gt;Start the site with three tabs open running:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lein run
-lein cljsbuild auto
-lein figwheel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;lein run&lt;/code&gt; command should emit a line showing the port number like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[2016-04-10 16:16:51,326][INFO][cljs-angular2.core] server started on port: 3000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Just open your browser to &lt;code&gt;localhost:3000&lt;/code&gt; where 3000 is the port number
-from the &lt;code&gt;lein run&lt;/code&gt; command. Try to modify the core.cljs file to have a new
-template, and the site should automatically refresh with the new changes! If
-that doesn&amp;rsquo;t work, make sure you are running both the cljsbuild on auto and
-figwheel processes.&lt;/p&gt;
-
-&lt;p&gt;Easy as that!&lt;/p&gt;
-
-&lt;p&gt;If you get stuck, I checked in a working version &lt;a href=&#34;https://github.com/steveshogren/angular2-cljs/tree/ae1a1abfe91a84cb5146931ff731885a2b1d5486&#34;&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
+1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
+lein new luminus cljs-angular2 +cljs  This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
     </item>
     
     <item>
@@ -1594,108 +168,10 @@ figwheel processes.&lt;/p&gt;
       <pubDate>Tue, 29 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/clojure-state/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Immutable languages make application state an interesting concept.&lt;/p&gt;
-
-&lt;p&gt;In Clojure, you can deal with application state in two main ways. The first way
-is to pass the state around as parameters to your functions. An example of
-&lt;strong&gt;Pass As Parameter&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(defn delete! [db-con table id]
-  (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id]))
-
-;; valid-for-delete omitted
-
-(defn delete-user [db-con user-id]
-  (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id)
-    (delete! db-con &amp;quot;user&amp;quot; user-id)))
-
-(defn -main [&amp;amp; [connection-string user-id]]
-  (let [db-con (make-connection connection-string)]
-    (delete-user db-con user-id)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This requires every function that eventually accesses a database to also have
-the database connection. The trade-off is one of simplicity: it is easier to
-test and interact with code that takes all of its dependencies as parameters.&lt;/p&gt;
-
-&lt;p&gt;The alternative is to set a thread-safe value somewhere and give the underlying
-code access to it. In Clojure, the &lt;code&gt;atom&lt;/code&gt; primitive is the first choice for
-this. A common misconception is that Clojure prevents all mutation. The
-&lt;code&gt;atom&lt;/code&gt; primitive can be mutated, it just has to be done with a special
-&lt;code&gt;swap!&lt;/code&gt; function. Let&amp;rsquo;s call this: &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def db-con (atom nil))
-
-(defn delete! [table id]
-  (jdbc/delete! @db-con table [&amp;quot;id=?&amp;quot; id]))
-
-;; valid-for-delete omitted
-
-(defn delete-user [user-id]
-  (if (valid-for-delete &amp;quot;user&amp;quot; user-id)
-    (delete! &amp;quot;user&amp;quot; user-id)))
-
-(defn -main [&amp;amp; [connection-string user-id]]
-  (swap! db-con (fn [old] (make-connection connection-string)))
-  (delete-user user-id))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;atom&lt;/code&gt; allows us to not have to pass around the state. We mutate
-&lt;code&gt;db-con&lt;/code&gt; with the connection parameters before calling any database accessing
-functions. Unfortunately, this sets up an implicit dependency: &lt;code&gt;delete!&lt;/code&gt;
-will only work if the &lt;code&gt;db-con&lt;/code&gt; atom was setup beforehand.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Dependencies&lt;/th&gt;
-&lt;th&gt;Correctly Call Function&lt;/th&gt;
-&lt;th&gt;Adding New State&lt;/th&gt;
-&lt;th&gt;Best When&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Pass As Parameter&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Explicit&lt;/td&gt;
-&lt;td&gt;Easier&lt;/td&gt;
-&lt;td&gt;Harder&lt;/td&gt;
-&lt;td&gt;State Values Change Frequently&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Implicit&lt;/td&gt;
-&lt;td&gt;Harder&lt;/td&gt;
-&lt;td&gt;Easier&lt;/td&gt;
-&lt;td&gt;State Values Change Rarely&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;Mutate Shared Location&lt;/strong&gt; might look familiar, in a lot of other languages it
-is implemented with the Singleton Design Pattern. Often a Singleton class will
-act as the mutable shared location for storing state.&lt;/p&gt;
-
-&lt;p&gt;When adding new application state, I typically default to &lt;strong&gt;Pass As Parameter&lt;/strong&gt;
-as my first choice. When &lt;strong&gt;Pass As Parameter&lt;/strong&gt; grows costly, I fall back to
-&lt;strong&gt;Mutate Shared Location&lt;/strong&gt;. &lt;strong&gt;Pass As Parameter&lt;/strong&gt; works best when the value
-changes regularly.&lt;/p&gt;
-
-&lt;p&gt;An exception would be something as ubiquitous as a database connection in a CRUD
-application. A CRUD application will typically need a database connection at
-every leaf node, and it rarely changes, so I will use &lt;strong&gt;Mutate Shared Location&lt;/strong&gt;
-from the start.&lt;/p&gt;
-
-&lt;p&gt;With these two ways of passing application state, we are offered the flexibility
-to choose the best tool for the job.&lt;/p&gt;
-</description>
+      <description>&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;
+ Immutable languages make application state an interesting concept.
+In Clojure, you can deal with application state in two main ways. The first way is to pass the state around as parameters to your functions. An example of Pass As Parameter:
+(defn delete! [db-con table id] (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id])) ;; valid-for-delete omitted (defn delete-user [db-con user-id] (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id) (delete!</description>
     </item>
     
     <item>
@@ -1704,131 +180,448 @@ to choose the best tool for the job.&lt;/p&gt;
       <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/self-organizing-teams/</guid>
-      <description>
-
-&lt;p&gt;A self-organizing team can be one of the most effective ways to build a team of
-high-quality professionals.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-is-a-self-organizing-team:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;What Is A Self-Organizing Team?&lt;/h2&gt;
-
-&lt;p&gt;I have managed several self-organizing teams over the last few years. They are
-expected to follow these tenets:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The whole team organizes themselves to best meet the business needs&lt;/li&gt;
-&lt;li&gt;Each team chooses their practices and working agreements&lt;/li&gt;
-&lt;li&gt;All technical and organizational decisions are driven through consensus&lt;/li&gt;
-&lt;li&gt;Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;All staff participates in a culture of high-quality development&lt;/li&gt;
-&lt;li&gt;Systems and practices are designed to maintain the greatest productivity across
-the next decade&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;when-it-works-well:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;When It Works Well&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Small teams&lt;/li&gt;
-&lt;li&gt;Highly skilled workers&lt;/li&gt;
-&lt;li&gt;Need for high-quality software&lt;/li&gt;
-&lt;li&gt;Business need for continuous and stable productivity for 5+ years&lt;/li&gt;
-&lt;li&gt;Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Self-organizing teams work best when most people on your team are eager to do
-more, be more, and learn more. A team of such developers will find a single
-leader to be a bottleneck. Running every idea past a single decision maker will
-impair their abilities to grow and gain critical thinking skills.&lt;/p&gt;
-
-&lt;h2 id=&#34;case-study:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Case Study&lt;/h2&gt;
-
-&lt;p&gt;I currently lead a self-organizing team of ten developers. We alone actively
-develop in a 4.6 million line codebase. The codebase is over 10 years old, and
-the entire team has turned over twice since the project started. This is no
-maintenance project, this quarter we converted the main calculation engine
-(~600KLOC) to allow calculations to be parallelized across dozens of nodes for a
-substantial increase in throughput.&lt;/p&gt;
-
-&lt;p&gt;Our team has recently been recognized as producing the most business value with
-the highest quality across our +700 person software company. Our CEO and SVP of
-Product have highlighted our recent accolades. I am certain this was only
-possible because of the intrinsic motivation of our staff caused by
-self-organization.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;We actively develop in a 10 year old codebase sized at ~460KLOC per developer&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;When deciding on working agreements, the original team voted on strict
-pair-programming, frequent pair switches
-(&lt;a href=&#34;http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf&#34;&gt;promiscuous pairing&lt;/a&gt;),
-and test-driven development. Each subsequent iteration of the team has continued
-to vote for these agreements. We believe that it is one of the easiest ways to
-keep a team capable in such an enormous codebase. Randomized pairing and 2-8
-hour switching prevents siloing of knowledge.&lt;/p&gt;
-
-&lt;p&gt;In any other company, our least experienced developers would be team leads and
-architects; and our most experienced developers would be CTO&amp;rsquo;s. They&amp;rsquo;ve gotten
-this experience by living it. In case you think we&amp;rsquo;ve hired a team of seasoned
-graybeards, our average developer only has six years of experience.&lt;/p&gt;
-
-&lt;p&gt;Each member of our team is responsible for &amp;ldquo;being the lead&amp;rdquo; in certain ways. The
-individual&amp;rsquo;s own interests guide them to develop expertise in subjects. By being
-an expert, others listen to them, so they often have an attentive audience when
-speaking on their specialties. This positive feedback loop encourages additional
-research.&lt;/p&gt;
-
-&lt;h2 id=&#34;how-to-start:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;How to Start&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; The most important way to build such a team is to allow them to fail&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The team must be allowed to face the consequences of their actions in a safe
-space. If a refactoring project goes badly, the team should have the individual
-clean up their mess. When someone is spending time on a project that doesn&amp;rsquo;t
-align with the goals of the business, the team should speak with them. When a
-developer successfully campaigns for a change that increases productivity, it
-should be celebrated. In all cases, strive to have your office be a safe place
-to fail.&lt;/p&gt;
-
-&lt;p&gt;Every time someone in authority demands the team do something different, it
-reduces the intrinsic motivation of the team. Each demand teaches the team
-members that they don&amp;rsquo;t have to be responsible, someone else will take care of
-the &amp;ldquo;important&amp;rdquo; things for them. Treat such demands with the utmost care, only
-making demands extremely infrequently.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Fewer demands allows for greater intrinsic motivation&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A self-organizing team is very much like a democracy. The team is expected and
-entrusted to organize around the needs of the business. Decisions should be made
-by consensus. Very rarely should an &amp;ldquo;override&amp;rdquo; be needed from management.&lt;/p&gt;
-
-&lt;h1 id=&#34;conclusion:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;Self-organizing teams are one of the most effective ways to manage a
-high-performing group. The team benefits from the best aspects of each member.
-Team members &amp;ldquo;grow up&amp;rdquo; quickly, as they are exposed to others around them who
-behave like trusted professionals. Each developer becomes intrinsically
-motivated, outperforming their peers in similar command and control teams.&lt;/p&gt;
-
-&lt;h1 id=&#34;replies:c36738b5d4cff136bd50ed28a796f49d&#34;&gt;Replies&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://lobste.rs/u/petergao&#34;&gt;PeterGao&lt;/a&gt; on lobste.rs
-&lt;a href=&#34;https://lobste.rs/s/1fhkxo/when_self-organizing_teams_are_effective/comments/e3niex#c_e3niex&#34;&gt;pointed out&lt;/a&gt;
-that undergrad school projects often see everyone grouping by skill, with all
-the best in a group together. I too have had bad luck with undergrad CS school
-projects, especially since at the time I was a C-performer. School projects mix
-a fairly homogeneous group of immature students with a subtly different goal:
-“pick a few other people, your work will be compared to everyone else’s”.
-Self-selected grouping by skill makes sense, it’s effectively a competition. One
-of the recommended alterations for group projects is “your grade is the average
-grade of all the group projects”. Suddenly, you won’t see those teams separating
-by skill. Instead students will organize with a team mix as even as possible,
-with cross-communication (and likely rotation) happening to ensure high quality
-across all the projects. Bam, now you’ve got my office ;)&lt;/p&gt;
-</description>
+      <description>A self-organizing team can be one of the most effective ways to build a team of high-quality professionals.
+What Is A Self-Organizing Team? I have managed several self-organizing teams over the last few years. They are expected to follow these tenets:
+ The whole team organizes themselves to best meet the business needs Each team chooses their practices and working agreements All technical and organizational decisions are driven through consensus Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo; All staff participates in a culture of high-quality development Systems and practices are designed to maintain the greatest productivity across the next decade  When It Works Well  Small teams Highly skilled workers Need for high-quality software Business need for continuous and stable productivity for 5+ years Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;  Self-organizing teams work best when most people on your team are eager to do more, be more, and learn more.</description>
+    </item>
+    
+    <item>
+      <title>Avoid Pop Culture Architecture</title>
+      <link>http://deliberate-software.com/pop-culture-architecture/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
+      <description>&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006
+ Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be microservices, business capabilities, CQRS, service-oriented architecture, Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each of these have been fashionable at some point.
+Fashion is ultimately a signaling mechanism for status. We are attracted to fashionable architectures because they signal we have worked on elite teams.</description>
+    </item>
+    
+    <item>
+      <title>Haskell is the Dark Souls of Programming</title>
+      <link>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
+      <pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
+      <description>Please don&amp;rsquo;t hit me, Haskell does a great job of that already.
+I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable lore, a great combat type system, a cliff-wall difficulty curve, and unending punishment.
+I want to collect some statistics from the GitHub API.
+Step One - Stack I download stack and start a project:
+&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ .</description>
+    </item>
+    
+    <item>
+      <title>Development Disappointment Disorder</title>
+      <link>http://deliberate-software.com/development-disappointment-disorder/</link>
+      <pubDate>Thu, 04 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/development-disappointment-disorder/</guid>
+      <description>&amp;ldquo;We&amp;rsquo;ve never had a successful release&amp;rdquo;
+ You just finished this really hard feature. The whole thing was worse than anyone realized. Not only that, but the feature wasn&amp;rsquo;t clearly explained, so you lost time churning on the actual requirements. Despite all the confusion, iteration, and technical challenges, you managed to get it working! You look back, savoring how much you have learned and grown.
+You show it off to the product owner.</description>
+    </item>
+    
+    <item>
+      <title>Designing A Compassionate Interview For A High Performing Individual</title>
+      <link>http://deliberate-software.com/compassionate-interviewing/</link>
+      <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/compassionate-interviewing/</guid>
+      <description>After my post Interview Humiliation, a number of people have asked me how I interview compassionately. I strive to make my interviews as stress-free and respectful as possible while still rendering a yes/no at the end.
+Any good interview process needs to start with goals:
+ Respect the candidate&amp;rsquo;s time Make the candidate comfortable Under-skilled candidates should feel no shame Both passing and failing candidates should want to tell their friends to apply We should render the same decision if the interview is repeated multiple times (with different exercises each time) The candidate should know the process in advance and not be able to earn a pass through short term &amp;ldquo;cramming&amp;rdquo; The candidate should feel we are all working collaboratively, instead of us against them  The Ideal Candidate</description>
+    </item>
+    
+    <item>
+      <title>Daily Meditation Improves Technical Leadership</title>
+      <link>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
+      <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
+      <description>A couple years ago, a coworker told me a success story about mindful meditation. He explained how his wife took a class that required an hour of daily meditation for a whole month. He reported that she found it uncomfortable, but the effects were astounding. She claimed to feel more relaxed, more focused, and more &amp;ldquo;herself&amp;rdquo;. She found new reserves of motivation. She dropped the book she&amp;rsquo;d been trying to write for years, and started a business.</description>
+    </item>
+    
+    <item>
+      <title>Conj Talk: Teaching Clojure at IBM</title>
+      <link>http://deliberate-software.com/teaching-clojure/</link>
+      <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/teaching-clojure/</guid>
+      <description>My talk at Conj 2015, enjoy! Teaching Clojure</description>
+    </item>
+    
+    <item>
+      <title>Interview Humiliation</title>
+      <link>http://deliberate-software.com/on-defeat/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <description>(All these great ideas, but no one is listening? Check out my book: Convincing Coworkers)
+One day, I went into an interview, and I was humiliated.
+The Setup I used to think very highly of myself. This was early on in the Test Driven Development (TDD) craze, and I was one of the best I knew at it. I knew interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all the tricks from some very smart people, and my confidence was high.</description>
+    </item>
+    
+    <item>
+      <title>F# Unit Testing With SimpleMock</title>
+      <link>http://deliberate-software.com/f-number-unit-testing/</link>
+      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
+      <description>If you are considering using F#, you might be curious how to handle unit test mocking, especially if you want to use both modules and classes. In a language like C# or Java, the common method is to a DI container or handmade constructor injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a real dependency with a test-only replacement.
+I previously posted an example that shows a much simpler way to inject dependencies called the SimpleMock pattern.</description>
+    </item>
+    
+    <item>
+      <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
+      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <description>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to organize your testing code without mocking or complicated dependency injection.
+SimpleMock works in any language with closures that can be passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and Python. I&amp;rsquo;m sure you can think of others.
+Example: Here is a brief (if a bit silly) example of the final pattern:</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Score Mark 2</title>
+      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <description>I want to make a model that predicts bugs.
+I previously wrote a table for scoring language safety: Programming Language Safety Score, but it was extremely time consuming to score new languages or make modifications.
+Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is enforced, possible, or impossible. I score each as either 1 (language enforced), 0 (possible, but you have to remember to do it), or -1 (impossible).</description>
+    </item>
+    
+    <item>
+      <title>Language Versions</title>
+      <link>http://deliberate-software.com/language-versions/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/language-versions/</guid>
+      <description>Let&amp;rsquo;s play a thought exercise. Imagine your development toolchain is like a semantic version number. Small features that incrementally improve your situation are like minor updates. They don&amp;rsquo;t cause any large shifts in thinking or process. Major updates are big, new concepts, quantum jumps in theory or practice.
+I am not talking about the political, social, or financial aspects of a toolchain. For example, hiring is a complex beast entirely in its own category.</description>
+    </item>
+    
+    <item>
+      <title>Learning Lisp Was Hard</title>
+      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
+      <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
+      <description>Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience learning a Lisp.
+When I set out to learn a Lisp, I expected it would be easy.
+I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl, Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on how Lisp is his secret weapon, and figured I needed to get into this secret weapon stuff.</description>
+    </item>
+    
+    <item>
+      <title>Superiority Fatigue</title>
+      <link>http://deliberate-software.com/superiority-fatigue/</link>
+      <pubDate>Thu, 14 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/superiority-fatigue/</guid>
+      <description>Learning new tools, technologies, and methodologies is hard. Counter-intuitively, the most exhausting part is after you&amp;rsquo;ve gained a good comprehension of the tool, and now, filled with excitement, you try to explain it to someone else.
+They almost always react with hostility.
+What is going on? You just took time to learn this exciting tool that could save everyone a lot of time, and not only do they not care, but they resent you for it!</description>
+    </item>
+    
+    <item>
+      <title>Case Study: Superior Domain Modeling in F#</title>
+      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
+      <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
+      <description>Domain modeling in F# is significantly easier and safer than with the traditional .NET languages. This is because of the increased safety of pattern matching and the expressiveness of discriminated unions. These concepts are not in C# or VB.NET, and therefore bring a new tool to the table.
+To illustrate this, I found some old code I&amp;rsquo;d written to interact with a legacy system. The system uses many single enums on a record to keep track of statuses.</description>
+    </item>
+    
+    <item>
+      <title>Programming Language Safety Ranking</title>
+      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <description>I think the time has come for a standard programming language safety score. I want to use this model to help show that the concept of safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static types&amp;rdquo;.
+When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes thoughts of unit tests, long build times, and red squiggles in an IDE. But, in day-to-day development, there are so many times when we are bitten by things that somehow just slip through the cracks.</description>
+    </item>
+    
+    <item>
+      <title>Six Unusual Reasons why Clojure is a Delight</title>
+      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
+      <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
+      <description>Clojure is a delightful language, and here are six uncommonly discussed reasons why.
+1 - Dead Simple Unit Test Mocking Clojure is the easiest language to unit test I have ever seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple replacement of the function definition. No extraneous interfaces, no dependency injection, no mocking framework. The built-in function with-redefs will replace any function in any library or namespace with a new definition.</description>
+    </item>
+    
+    <item>
+      <title>Christmas F# Polymorphism</title>
+      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
+      <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
+In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
+Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;rsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Emacs Project Tip</title>
+      <link>http://deliberate-software.com/emacs-project-tip/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/emacs-project-tip/</guid>
+      <description>I recently have been working in a Clojure project which is made up of several microservices. While trying to build in a secure method for each service to be able to call the others, I&amp;rsquo;ve been in several different projects at the same time.
+At least once I accidentally opened the wrong &amp;ldquo;handler.clj&amp;rdquo; buffer, and spent a few minutes adding a function that never worked. Since I hate doing things like this, I wanted a simple way to see what project I was currently viewing.</description>
+    </item>
+    
+    <item>
+      <title>Suggested Skill Progression</title>
+      <link>http://deliberate-software.com/skill-continuum/</link>
+      <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/skill-continuum/</guid>
+      <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
+&amp;gt; Learning Vim is a waste of time; I can prove it! - Anonymous  I recently had a gentle discussion with a new teammate about whether or not they should learn to use Vim. My team uses a Vim emulator inside Visual Studio and Emacs, and so we recommended he learn at least the basics so to reduce friction when pair-programming (which we do almost all the time).</description>
+    </item>
+    
+    <item>
+      <title>What Book Should I Read Next?</title>
+      <link>http://deliberate-software.com/next-book/</link>
+      <pubDate>Sat, 26 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/next-book/</guid>
+      <description>Edit: As a supplement to this: check out my favorite books.
+&amp;ldquo;It&amp;rsquo;s my first job, what book should I read first?&amp;rdquo;
+Recently, a few developers I am mentoring were curious about what book to read first. Even mid and senior level developers I&amp;rsquo;ve known sometimes struggle with this question.
+If you want to be truly great, you have to read technical books and white papers, and you have to learn new programming languages.</description>
+    </item>
+    
+    <item>
+      <title>Inverted Polymorphism</title>
+      <link>http://deliberate-software.com/inversed-polymorphism/</link>
+      <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/inversed-polymorphism/</guid>
+      <description>In my last post on the power of pattern matching, we saw how powerful the match statement is in F#. Using match allows the compiler to give us warnings for missing cases, no matter what the type.
+Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an inversion of the usual OO way of polymorphism. Here is an example that is probably familiar to everyone: getting a database connection.</description>
+    </item>
+    
+    <item>
+      <title>Pattern Matching - Making the Compiler Work For You</title>
+      <link>http://deliberate-software.com/function-pattern-matching/</link>
+      <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/function-pattern-matching/</guid>
+      <description>Pattern matching is a simple tool that will make your code safer and easier to read.
+Consider the following code that converts an Int to a string.
+public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;quot;&amp;quot;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;quot;zero&amp;quot;; break; case 1: ret = &amp;quot;one&amp;quot;; break; default: ret = &amp;quot;...&amp;quot;; break; } } else if (lang == Language.</description>
+    </item>
+    
+    <item>
+      <title>Learn To Database</title>
+      <link>http://deliberate-software.com/learn-to-database/</link>
+      <pubDate>Wed, 16 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/learn-to-database/</guid>
+      <description>&#34;... and it has to return 45,000 records a minute, or we are all screwed.&#34;  Monday morning, we inherited a legacy codebase. Tuesday, the word came down on stone tablets. Forty-five thousand records a minute, and no amount of political maneuvering or incremental gains were going to do. Too many broken promises. The last team mass quit over three months, leaving us the two most junior developers. Someone high up promised big, and the buck stopped with us.</description>
+    </item>
+    
+    <item>
+      <title>You Should Go Home at 5:01</title>
+      <link>http://deliberate-software.com/501-developer/</link>
+      <pubDate>Sat, 14 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/501-developer/</guid>
+      <description>Can we agree for this post that money, energy, time, and effort are all forms of power? Like literally, if I wanted to build a building, I am going to need tools, skills, materials, labor. I can use the most liquid form of power I have (cash) to acquire all these things, or I can use a much less liquid form of power (my time) to harvest, extract, refine, learn, and build my building myself.</description>
+    </item>
+    
+    <item>
+      <title>Intro To Macros</title>
+      <link>http://deliberate-software.com/intro-to-macros/</link>
+      <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/intro-to-macros/</guid>
+      <description>Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function. def doCalc () return 1 + 2 end def doAwesome (x) return doCalc() + x end #before substitution.</description>
+    </item>
+    
+    <item>
+      <title>Clojure Debugger</title>
+      <link>http://deliberate-software.com/clojure-debugger/</link>
+      <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/clojure-debugger/</guid>
+      <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;quot;Trace all the forms in the given body.</description>
+    </item>
+    
+    <item>
+      <title>Sorry, but Refactorings Are Not Free (Technical Debt Interest)</title>
+      <link>http://deliberate-software.com/refactoring-not-free/</link>
+      <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/refactoring-not-free/</guid>
+      <description>Sometimes, it’s far more efficient to leave certain technical debts unpaid.
+I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#39;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.
+Not all technical debts are created equal: they consist of varying amounts of interest as well as principal.</description>
+    </item>
+    
+    <item>
+      <title>How To Escape From {programming_language}</title>
+      <link>http://deliberate-software.com/how-to-escape-from-programming_language/</link>
+      <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/how-to-escape-from-programming_language/</guid>
+      <description>As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of javascript libraries alone is increasing at a furious pace: Angular, Backbone, Node, Ember, Knockout, Knockback, Meteor, etc, etc, etc. Who has a chance at keeping up? While having so many options is also beneficial, it makes it more and more challenging for a single developer to stay relevant.</description>
+    </item>
+    
+    <item>
+      <title>How to Suck Less at Your New Job</title>
+      <link>http://deliberate-software.com/new-job-todo-list/</link>
+      <pubDate>Sat, 19 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/new-job-todo-list/</guid>
+      <description>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.
+For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.
+Notice I said differently, not better.
+All of us have certain irrational attachments to the various things we are used to doing: things we do not because it’s the best way to do them, but because it’s become comfortable to do them that way.</description>
+    </item>
+    
+    <item>
+      <title>Ego Driven Development</title>
+      <link>http://deliberate-software.com/ego-driven-development/</link>
+      <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/ego-driven-development/</guid>
+      <description>Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.
+EDD plagues many organizations; here just some of the symptoms you might encounter:
+ &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house. E.</description>
+    </item>
+    
+    <item>
+      <title>End To End Web Service Testing</title>
+      <link>http://deliberate-software.com/end-to-end-web-service-testing/</link>
+      <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/end-to-end-web-service-testing/</guid>
+      <description>At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and to see if I could fix a few tricky bugs. The code is divided into two sections, a client application and a web server. Both the client application and the server have their own persistence, and they communicate through a soap web service.</description>
+    </item>
+    
+    <item>
+      <title>Learn That New Programming Language The Start-Up Way</title>
+      <link>http://deliberate-software.com/learn-that-new-programming-language-the-start/</link>
+      <pubDate>Tue, 07 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/learn-that-new-programming-language-the-start/</guid>
+      <description>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don&#39;t, you have got to give it a shot at least once. You&#39;ll never be the same.</description>
+    </item>
+    
+    <item>
+      <title>On Developer Certifications</title>
+      <link>http://deliberate-software.com/on-developer-certifications/</link>
+      <pubDate>Tue, 28 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-developer-certifications/</guid>
+      <description>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months.</description>
+    </item>
+    
+    <item>
+      <title>Quality Is Future Speed</title>
+      <link>http://deliberate-software.com/quality-is-future-speed/</link>
+      <pubDate>Thu, 23 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/quality-is-future-speed/</guid>
+      <description>Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#39;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider all time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#39;s post Done, and Get&#39;s Things Smart, and I think I agree with Yegge on this point, that it is possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek.</description>
+    </item>
+    
+    <item>
+      <title>New Years Android Triumph</title>
+      <link>http://deliberate-software.com/new-years-triumph/</link>
+      <pubDate>Sun, 01 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/new-years-triumph/</guid>
+      <description>December 1st, I made myself a New Year&#39;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours.</description>
+    </item>
+    
+    <item>
+      <title>Why I Can&#39;t Pick A Language</title>
+      <link>http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</link>
+      <pubDate>Wed, 14 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</guid>
+      <description>I can&#39;t get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts out so I can get back to work.I got a call from a recruiter the other day trying to get me to come interview at this job. Right now I am working in VB.NET and Actionscript. Until this job, I was always working in open-source languages: Perl, PHP, and some Java.</description>
+    </item>
+    
+    <item>
+      <title>Testing Is To Programming What Math Is To Engineering</title>
+      <link>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</link>
+      <pubDate>Mon, 26 Sep 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</guid>
+      <description>In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math-doing counterparts. I am certain that when builders first started using math to prove that buildings would stand up safely, they were mocked by their math-less counterparts. I can hear them now, &#34;Oh, Stephos, it takes you 5 times longer to prove your building will stand up, real men can just see that it will work&#34;</description>
+    </item>
+    
+    <item>
+      <title>Emacs/VIm The Endless Debate</title>
+      <link>http://deliberate-software.com/the-endless-debate/</link>
+      <pubDate>Fri, 22 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/the-endless-debate/</guid>
+      <description>The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#34;best&#34; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently.</description>
+    </item>
+    
+    <item>
+      <title>Lisp REPL</title>
+      <link>http://deliberate-software.com/lisp-repl/</link>
+      <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/lisp-repl/</guid>
+      <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))   WHAAAAAAAAAAAAAAA?</description>
+    </item>
+    
+    <item>
+      <title>Dont Mock Concrete Classes</title>
+      <link>http://deliberate-software.com/dont-mock-concrete-classes/</link>
+      <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/dont-mock-concrete-classes/</guid>
+      <description>(They have thin skin)
+I have been reading G.O.O.S. and honestly, much of it has been just a reiteration. Until chapter 20, that is. I get to the section Don&#39;t Mock Concrete Classes, and it clicks.  Mocking concrete classes used to be my bread and butter. Almost every unit test I wrote for the last year had several mocked concrete implementations, to pass in as dependencies of the system under test.</description>
+    </item>
+    
+    <item>
+      <title>Why Lisp</title>
+      <link>http://deliberate-software.com/on-lisp-part-1/</link>
+      <pubDate>Fri, 20 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/on-lisp-part-1/</guid>
+      <description>I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering PhpStorm from JetBrains. When I heard about Land of Lisp, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.</description>
+    </item>
+    
+    <item>
+      <title>Using Named Parameters</title>
+      <link>http://deliberate-software.com/using-named-parameters/</link>
+      <pubDate>Thu, 05 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/using-named-parameters/</guid>
+      <description>Up until recently, most of my programming was in php, which does not support named parameters (this doesn&#39;t count, and it will get you lynched) so while switching to VB.NET and python, I have come to really appreciate this handy feature.  Named parameters is one of those handy little things that can make your life a little easier. Say, in python, you have a function that takes a boolean value.</description>
+    </item>
+    
+    <item>
+      <title>Actionscript Unit Testing</title>
+      <link>http://deliberate-software.com/actionscript-unit-testing/</link>
+      <pubDate>Wed, 04 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/actionscript-unit-testing/</guid>
+      <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&amp;#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
+    </item>
+    
+    <item>
+      <title>Active Record Pattern Testing</title>
+      <link>http://deliberate-software.com/active-record-pattern-testing/</link>
+      <pubDate>Tue, 12 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/active-record-pattern-testing/</guid>
+      <description>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods.</description>
     </item>
     
   </channel>

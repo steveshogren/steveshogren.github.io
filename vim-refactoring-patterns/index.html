@@ -42,10 +42,9 @@
     },
     "datePublished": "2016-06-22",
     "description": "",
-    "wordCount":  1018 
+    "wordCount": 1018
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/vim-refactoring-patterns/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -206,7 +205,7 @@ refactorings using Vim macros and search/replace commands.</p>
 
 <!-- * ```"qy``` - Insert selected text into the 'q' register -->
 
-<h1 id="reorder-a-list-of-numbers:1368fb58571a0f824354ae8f514a14fb">Reorder A List Of Numbers</h1>
+<h1 id="reorder-a-list-of-numbers">Reorder A List Of Numbers</h1>
 
 <p>A change left me with a file with unordered numbers. The numbers needed to be
 increasing, without changing the actual order of the lines. Macros are my first
@@ -247,7 +246,7 @@ save it, running <code>&quot;qp</code> spits out: <code>dbNybnP^ann</code>.</p>
 <div class="container-fluid">
 </div>
 
-<h1 id="extract-interface-from-class:1368fb58571a0f824354ae8f514a14fb">Extract Interface From Class</h1>
+<h1 id="extract-interface-from-class">Extract Interface From Class</h1>
 
 <p>Let&rsquo;s extract an interface from a class. A region-based search and replace is a
 great fit for this task. Since we are not matching or reordering several blocks
@@ -273,7 +272,7 @@ line 10 to 35</li>
 <div class="container-fluid">
 </div>
 
-<h1 id="change-a-function-signature:1368fb58571a0f824354ae8f514a14fb">Change a Function Signature</h1>
+<h1 id="change-a-function-signature">Change a Function Signature</h1>
 
 <p>Let&rsquo;s change a function signature to move a parameter into a generic and not
 have to cast. I want to change a line like this</p>
@@ -320,7 +319,7 @@ line. This allows the playback to work on any line with the same markers.</p>
 <div class="container-fluid">
 </div>
 
-<h1 id="update-sql-query-fields:1368fb58571a0f824354ae8f514a14fb">Update SQL Query Fields</h1>
+<h1 id="update-sql-query-fields">Update SQL Query Fields</h1>
 
 <p>I needed to replace the names in a set of sql queries to sanitize some data to
 hand off to a customer. I grabbed a set of
@@ -350,7 +349,7 @@ copied it to my sql file. They were tab AND newline separated.</p>
 <li><code>99@q</code> - Replay macro 99 times</li>
 </ul>
 
-<h1 id="conclusion:1368fb58571a0f824354ae8f514a14fb">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>I typically use a macro when a search/replace would require using several
 groups. I use relative line jumps (<code>:+1</code>) and liberal uses of the search
@@ -531,6 +530,13 @@ yourself to be slow while you master the skill.</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

@@ -6,8 +6,11 @@
     <description>Recent content in Java on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Deliberate Software 2016</copyright>
     <lastBuildDate>Wed, 16 Nov 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://deliberate-software.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://deliberate-software.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
@@ -15,75 +18,9 @@
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/anemic-domain-model/</guid>
-      <description>
-
-&lt;p&gt;Part 2 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven
-Design. Martin Fowler goes so far as to term the alternative a
-&lt;a href=&#34;http://www.martinfowler.com/bliki/AnemicDomainModel.html&#34;&gt;&amp;ldquo;rich domain model&amp;rdquo;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A rich domain model makes perfect sense until you attempt to write your first
-unit test. You discover that rich domain models are very hard to test. Not only
-that, but most examples of unit-testing use Anemic Domain Models! Do you really
-have to pick between good testing and good design?&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-talk-about-purity:2fa9b95203cb46cce1debbec40ac0550&#34;&gt;Let&amp;rsquo;s Talk About Purity&lt;/h2&gt;
-
-&lt;p&gt;Functions are considered &lt;strong&gt;pure&lt;/strong&gt; if they produce the same output when given the
-same input. Addition is a pure function. We expect &lt;code&gt;add(1,1)&lt;/code&gt; will always
-produce &lt;code&gt;2&lt;/code&gt;. Pure functions are the easiest to test. The more logic you have
-in pure functions, the easier your code is to test.&lt;/p&gt;
-
-&lt;p&gt;Consider which of the following is easier to test. A &lt;strong&gt;pure function&lt;/strong&gt; with the
-signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;GameState movePlayerNorth(GameState g)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;or an &lt;strong&gt;impure function&lt;/strong&gt; with the signature:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;void movePlayerNorth()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The first function has explicit inputs and outputs. The second function has
-implicit, hidden state. While the &lt;code&gt;void&lt;/code&gt; function is easier to &lt;em&gt;call&lt;/em&gt;, it
-impurity makes it much harder to &lt;em&gt;test&lt;/em&gt;. Testing a impure function requires
-implicit state to be setup before each test. Since GameState is encapsulated,
-you would need to either expose it (breaking encapsulation) or call dozens of
-methods to get it into the correct state for your test!&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Encapsulation is &lt;del&gt;a rich domain model&lt;/del&gt; &lt;strong&gt;impure&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The point of encapsulation is to hide state from the caller; it is impure by
-definition. Impure functions require global or class-level state to operate.&lt;/p&gt;
-
-&lt;p&gt;Pure functions have been maligned as a bad design. Purity has been given nasty
-sounding names like &amp;ldquo;anemic domain model&amp;rdquo; or &amp;ldquo;exposed state&amp;rdquo;. In reality, there
-is nothing wrong with pure programming, it produces good designs that are easy
-to understand and test.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Purity is a good design!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We should strive for purity as much as possible. In most languages, purity is an
-ideal to strive for, not a goal that can ever be fully achieved. Language
-features like exceptions and null will always prevent complete purity.&lt;/p&gt;
-
-&lt;p&gt;Purity in object-oriented languages is always on a continuum. Most codebases
-have a variety of functions: some pure, some impure. On the one side you have
-rich domain models with completely encapsulated state and void methods. On the
-other side you have easily-tested code with pure functions and separate data
-structures.&lt;/p&gt;
-
-&lt;p&gt;If you need or desire testability, strive to put as much logic as possible
-inside pure functions. Avoid encapsulated state: put all state in data
-structures with all public fields. Strive to make your codebase as pure as
-possible.&lt;/p&gt;
-</description>
+      <description>Part 2 of the series OO-Design
+The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
+A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Not only that, but most examples of unit-testing use Anemic Domain Models!</description>
     </item>
     
     <item>
@@ -92,171 +29,9 @@ possible.&lt;/p&gt;
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/better-oo-design/</guid>
-      <description>
-
-&lt;p&gt;Part 1 of the series &lt;a href=&#34;http://deliberate-software.com/categories/oo-design/&#34;&gt;OO-Design&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The SOLID patterns are not enough to design a reusable and testable code base.
-Two concrete additions can significantly improve your codebase, while
-maintaining the SOLID principals.&lt;/p&gt;
-
-&lt;p&gt;The suggestions here do not run counter to traditional SOLID designs, they
-enhance them. SOLID is a fine place to start, but it lacks a critical half of
-good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common
-than polymorphic behavior, so programs designed without that concept often are
-far larger than they need to be.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Appropriate application of these concepts will reduce code and allow for easier unit testing&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;terms:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Terms&lt;/h2&gt;
-
-&lt;p&gt;For this post, let&amp;rsquo;s distinguish between &lt;em&gt;verb classes&lt;/em&gt; and &lt;em&gt;noun classes&lt;/em&gt;. Unit
-testing often drives us to separate classes into data structures (the nouns) or
-behavior classes, (the verbs).&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Noun class&lt;/strong&gt; - has fields and properties filled with data, perhaps from an ORM.
-
-&lt;ul&gt;
-&lt;li&gt;Example: A &lt;code&gt;Contact&lt;/code&gt; class with a name, billing and shipping addresses,
-a birthday, and a credit card.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Verb class&lt;/strong&gt; - has functions and methods. Verb classes might have fields or
-properties, but usually those only contain other verb classes that are
-needed to compose work.
-
-&lt;ul&gt;
-&lt;li&gt;Example: A &lt;code&gt;CustomerBiller&lt;/code&gt; class that creates an invoice and sends it
-to an address. Only needs a billing and shipping address and an amount.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Noun interface&lt;/strong&gt; - an interface put on a noun class. Used to allow multiple
-nouns to be passed to a single verb. A very common use-case in business
-applications.
-
-&lt;ul&gt;
-&lt;li&gt;Example: &lt;code&gt;ICustomer&lt;/code&gt; interface with a billing and shipping address
-only. Can be used by &lt;code&gt;Contact&lt;/code&gt;, &lt;code&gt;Company&lt;/code&gt;, &lt;code&gt;Government&lt;/code&gt;,
-or any other entity that might like to buy something.&lt;/li&gt;
-&lt;li&gt;Allows a verb to operate on many types of data&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Verb interface&lt;/strong&gt; - an interface put on a verb class. Allows polymorphic
-behavior. Less common than noun interfaces.
-
-&lt;ul&gt;
-&lt;li&gt;Example: &lt;code&gt;IChargeCustomer&lt;/code&gt; interface that allows different kinds of
-charging: one that generates invoices, one that charges credit cards, etc.&lt;/li&gt;
-&lt;li&gt;Allows several types of verbs to be grouped together&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;two-changes:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Two Changes&lt;/h2&gt;
-
-&lt;p&gt;Two suggestions will guide your codebase to be easier to reuse and test.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Extract Noun Interfaces&lt;/strong&gt; - Work to determine any missing noun interfaces.
-This inversion allows for easier reuse. Any data structure that &amp;ldquo;fits&amp;rdquo; can
-re-use that behavior.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rely on Verb Functions Not Verb Interfaces&lt;/strong&gt; - Replace Dependency
-Injected verb interfaces with function signatures, explained in the
-&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt;
-guide. By relying on the function signature as the default unit of
-abstraction, we remove test-only interfaces. This allows the dependent code to
-have only the functions it needs, rather than everything from the interface.
-When you really need polymorphic behavior, use a verb interface. Only use
-verb interfaces for polymorphic behavior, not for unit test mocking.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is an example of the patterns in C#, but it also works in Java:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;// Verb Class
-public class Notifier {
-    public void Broadcast(string type, Type from, int id) { /* Broadcast code here ...*/ }
-}
-
-// Noun Interface
-public interface SalesLead {
-    boolean IsCustomer {get; set;}
-    DateTime ConversionDate {set;}
-    int Id {get;}
-    Type From {get;}
-}
-
-public class User : SalesLead { /* User code here ... */ }
-public class Company : SalesLead { /* Contact code here ... */ }
-public class Government : SalesLead { /* Government code here ... */ }
-
-// Verb Class
-public class SalesRepresentative {
-    // Rely on Verb Functions Not Verb Interfaces
-    internal Action&amp;lt;string, Type, int&amp;gt; broadcast = new Notifier().Broadcast;
-
-    // Extract Noun Interfaces
-    public void ConvertToCustomer(SalesLead lead) {
-      if(lead.IsCustomer) {
-          return;
-      }
-      lead.IsCustomer = true;
-      lead.ConversionDate = DateTime.Now;
-      broadcast(&amp;quot;CustomerConverted&amp;quot;, lead.From, lead.Id);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;While this inversion of nouns and verbs seems counter to traditional OOP advice,
-it is actually a very object-oriented design. Noun Interfaces allow for
-polymorphic nouns. Polymorphic nouns allow are better suited to model a domain.&lt;/p&gt;
-
-&lt;p&gt;In our example, a &lt;code&gt;User&lt;/code&gt; should not know how to convert itself to a
-&lt;code&gt;Customer&lt;/code&gt;. A &lt;code&gt;User&lt;/code&gt; would not know they had to broadcast their updated
-status, or that the date is important to record. To prove it models the domain
-more effectively, notice how it even follows a more English pattern: &amp;ldquo;tell the
-Sales Representative to convert this User&amp;rdquo;. This is much closer than the
-typical: &amp;ldquo;User convert yourself To Customer&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Later, when we want to convert an Employee, a Company, or a Government, we know
-what sort of interface is required to make them into a SalesLead that can be
-converted. By relying on the interface, we are able to restrict
-SalesRepresentative to only have access to the data necessary to convert.&lt;/p&gt;
-
-&lt;h1 id=&#34;case-study:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Case Study&lt;/h1&gt;
-
-&lt;p&gt;We recently examined a 1.3 million line codebase used to collect and track
-interest rates and payments from a user. We found only four uses of verb
-interfaces for polymorphic behavior. On the other hand, there were hundreds of
-noun interfaces used to allow multiple shapes of data to be acted on by the
-same function.&lt;/p&gt;
-
-&lt;p&gt;An obvious example is &lt;code&gt;IHaveIdentity&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-csharp&#34;&gt;public interface IHaveIdentity {
-    Guid Id {get;}
-    string Name {get;}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This tiny, simple noun interface enables incredible re-use. We found the
-&lt;code&gt;IHaveIdentity&lt;/code&gt; noun interface on many of our noun classes. It is used by
-hundreds of verb classes throughout the codebase. Verbs like
-&lt;code&gt;MakeDropDownList&lt;/code&gt;, &lt;code&gt;QueryById&lt;/code&gt;, &lt;code&gt;QueryNamesMatching&lt;/code&gt;, and
-&lt;code&gt;CreateAuditTrail&lt;/code&gt;. Those verb classes were easily reused, because any new
-noun class that fits the noun interface works automatically! If we had tried to
-put interfaces on those verbs, we&amp;rsquo;d have a lot of classes with no behavior other
-than just delegating to another class.&lt;/p&gt;
-
-&lt;h1 id=&#34;conclusion:0dfbdcea5000bc0e2a150299cf5611d6&#34;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;These patterns enable significant reuse of functionality. By defaulting to noun
-interfaces, you will find most of your verb classes can be re-used without any
-change. When you need actual polymorphic behavior, use a verb interface. For the
-more common case of unit test behavior replacement, the
-&lt;a href=&#34;http://deliberate-software.com/simplemock-unit-test-mocking/&#34;&gt;SimpleMock&lt;/a&gt; pattern makes for an easy way to
-keep your codebase clean and best model the domain.&lt;/p&gt;
-
-&lt;p&gt;Next in the series: &lt;a href=&#34;http://deliberate-software.com/anemic-domain-model/&#34;&gt;OO-Design Part 2: Anemic Domain Models Are Healthy&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Part 1 of the series OO-Design
+The SOLID patterns are not enough to design a reusable and testable code base. Two concrete additions can significantly improve your codebase, while maintaining the SOLID principals.
+The suggestions here do not run counter to traditional SOLID designs, they enhance them. SOLID is a fine place to start, but it lacks a critical half of good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common than polymorphic behavior, so programs designed without that concept often are far larger than they need to be.</description>
     </item>
     
   </channel>

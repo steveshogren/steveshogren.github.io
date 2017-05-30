@@ -42,10 +42,9 @@
     },
     "datePublished": "2016-06-11",
     "description": "Dependency Injection can be greatly simplified while retaining all of its power. Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.",
-    "wordCount":  371 
+    "wordCount": 371
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/modern-di/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -189,7 +188,7 @@
 
 <p>Dependency Injection can be greatly simplified while retaining all of its power.</p>
 
-<h3 id="the-unnecessary-boilerplate:c289f8e530077f15501b76fa92fff59a">The Unnecessary Boilerplate</h3>
+<h3 id="the-unnecessary-boilerplate">The Unnecessary Boilerplate</h3>
 
 <p>Injection of an interface through the constructor is a common way to replace a
 dependency for unit-test mocking. Unfortunately, it is an extremely verbose
@@ -228,7 +227,7 @@ pattern.</p>
 pattern was invented! Now that both Java and C# have lambdas, the existing DI
 pattern can be improved.</p>
 
-<h3 id="for-unit-test-mocking:c289f8e530077f15501b76fa92fff59a">For Unit Test Mocking</h3>
+<h3 id="for-unit-test-mocking">For Unit Test Mocking</h3>
 
 <p>Thanks to the power of lambdas, the previously highlighted lines (1-19) can be
 removed!</p>
@@ -245,13 +244,13 @@ removed!</p>
 
 <p>Much better! The code is easier to read, understand, and <a href="/simplemock-unit-test-mocking/">mock in a unit test</a>.</p>
 
-<h3 id="for-polymorphism:c289f8e530077f15501b76fa92fff59a">For Polymorphism</h3>
+<h3 id="for-polymorphism">For Polymorphism</h3>
 
 <p>If you still need to replace the function with another for polymorphic dispatch,
 use constructor injection of just the lambda. Be forewarned, you probably need
 this much less than you think!</p>
 
-<p><div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="lineno"> 1 </span><span class="k">public</span> <span class="k">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
 <span class="lineno"> 2 </span>    <span class="k">internal</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">DateTime</span><span class="p">&gt;</span> <span class="n">currentTime</span><span class="p">;</span>
 <span class="lineno"> 3 </span>
 <span class="lineno"> 4 </span>    <span class="k">public</span> <span class="nf">Formatter</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">)</span> <span class="p">{}</span>
@@ -265,7 +264,7 @@ this much less than you think!</p>
 <span class="lineno">12 </span>    <span class="p">}</span>
 <span class="lineno">13 </span><span class="p">}</span>
 </code></pre></div>
-</p>
+
 
 <p>If you are heavily invested in unit-testing, you might find you need very little
 actual interface polymorphism. To see where you really use interface
@@ -433,6 +432,13 @@ boilerplate that can safely replaced with a lambda!</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>

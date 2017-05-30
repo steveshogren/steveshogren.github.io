@@ -2,12 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://deliberate-software.com/</loc>
-    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://deliberate-software.com/coq_day3/</loc>
     <lastmod>2017-04-27T00:00:00+00:00</lastmod>
   </url>
@@ -303,7 +297,67 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/angular/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/architecture/</loc>
+    <lastmod>2016-06-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/page/books/</loc>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/clojure/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/clojurescript/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/coq/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/csharp/</loc>
+    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/emacs/</loc>
+    <lastmod>2016-05-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/fsharp/</loc>
+    <lastmod>2015-10-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/haskell/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -311,7 +365,83 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/interviews/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/java/</loc>
+    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/management/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/meta-game/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/page/philosophy/</loc>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/oo-design/</loc>
+    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/post/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/refactoring/</loc>
+    <lastmod>2016-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/self-organization/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/technical-skills/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/unit-testing/</loc>
+    <lastmod>2016-09-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/vim/</loc>
+    <lastmod>2016-06-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -320,6 +450,12 @@
   
   <url>
     <loc>http://deliberate-software.com/page/post/</loc>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

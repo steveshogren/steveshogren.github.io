@@ -42,10 +42,9 @@
     },
     "datePublished": "2016-04-11",
     "description": "",
-    "wordCount":  446 
+    "wordCount": 446
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/cljs-angular2/" />
@@ -53,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -186,7 +185,7 @@
 project demonstrating a working Angular2 site using Figwheel for hot-reloading
 <a href="https://github.com/steveshogren/angular2-cljs/tree/ae1a1abfe91a84cb5146931ff731885a2b1d5486">on GitHub</a></p>
 
-<h3 id="1-install-luminus-cljs:468cef4ba8bc346f91f6a6d4062843b7">1. Install Luminus +cljs</h3>
+<h3 id="1-install-luminus-cljs">1. Install Luminus +cljs</h3>
 
 <p>First, setup a basic ClojureScript site using Luminus starter template from
 <a href="http://www.luminusweb.net/docs">here</a></p>
@@ -198,7 +197,7 @@ project demonstrating a working Angular2 site using Figwheel for hot-reloading
 already running. The template uses Reagent and React, which are excellent, but
 we want Angular2!</p>
 
-<h3 id="2-replace-figwheel-site-loader:468cef4ba8bc346f91f6a6d4062843b7">2. Replace Figwheel Site Loader</h3>
+<h3 id="2-replace-figwheel-site-loader">2. Replace Figwheel Site Loader</h3>
 
 <p>Open the env/dev/cljs/dev.cljs file, which starts the site when running from
 development.</p>
@@ -224,7 +223,7 @@ development.</p>
 <p>The defonce will make sure I accidentally don&rsquo;t attach the same event listener
 twice when re-evaluating files at the repl.</p>
 
-<h3 id="3-make-angular2-component:468cef4ba8bc346f91f6a6d4062843b7">3. Make Angular2 Component</h3>
+<h3 id="3-make-angular2-component">3. Make Angular2 Component</h3>
 
 <p>Replace the src-cljs/cljs-angular2/core.cljs file with this:</p>
 
@@ -248,7 +247,7 @@ twice when re-evaluating files at the repl.</p>
 
 </code></pre>
 
-<h3 id="4-add-angular2-dependencies:468cef4ba8bc346f91f6a6d4062843b7">4. Add Angular2 Dependencies</h3>
+<h3 id="4-add-angular2-dependencies">4. Add Angular2 Dependencies</h3>
 
 <p>Add a package.json file into resources/public/ and fill it with this:</p>
 
@@ -276,7 +275,7 @@ twice when re-evaluating files at the repl.</p>
 
 <p>Now run <code>npm install</code> from inside the resources/public directory.</p>
 
-<h3 id="5-add-hiccups:468cef4ba8bc346f91f6a6d4062843b7">5. Add Hiccups</h3>
+<h3 id="5-add-hiccups">5. Add Hiccups</h3>
 
 <p>Modify the project.clj in the root directory to include the <code>hiccups</code>
 dependency so we don&rsquo;t have to write nasty html strings:</p>
@@ -285,7 +284,7 @@ dependency so we don&rsquo;t have to write nasty html strings:</p>
                ...
 </code></pre>
 
-<h3 id="6-add-dependencies-to-home-html:468cef4ba8bc346f91f6a6d4062843b7">6. Add Dependencies To Home HTML</h3>
+<h3 id="6-add-dependencies-to-home-html">6. Add Dependencies To Home HTML</h3>
 
 <p>Add the following to resources/templates/home.html before the line including
 <code>{% script &quot;/js/app.js&quot; %}</code></p>
@@ -299,7 +298,7 @@ dependency so we don&rsquo;t have to write nasty html strings:</p>
 &lt;script src=&quot;node_modules/angular2/bundles/angular2-all.umd.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 
-<h3 id="7-start-site:468cef4ba8bc346f91f6a6d4062843b7">7. Start Site!</h3>
+<h3 id="7-start-site">7. Start Site!</h3>
 
 <p>Start the site with three tabs open running:</p>
 
@@ -481,6 +480,13 @@ figwheel processes.</p>
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>
