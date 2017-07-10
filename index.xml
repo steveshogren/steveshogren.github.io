@@ -97,9 +97,9 @@ In the last five years, the developers choose to implement Arlo Belshee&amp;rsqu
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
-      <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
-Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
-Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.</description>
+      <description>Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
+Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.
+Reorder A List Of Numbers A change left me with a file with unordered numbers.</description>
     </item>
     
     <item>
@@ -393,8 +393,8 @@ At least once I accidentally opened the wrong &amp;ldquo;handler.clj&amp;rdquo; 
       <guid>http://deliberate-software.com/next-book/</guid>
       <description>Edit: As a supplement to this: check out my favorite books.
 &amp;ldquo;It&amp;rsquo;s my first job, what book should I read first?&amp;rdquo;
-Recently, a few developers I am mentoring were curious about what book to read first. Even mid and senior level developers I&amp;rsquo;ve known sometimes struggle with this question.
-If you want to be truly great, you have to read technical books and white papers, and you have to learn new programming languages.</description>
+I&amp;rsquo;ve been asked this question many times. Even mid and senior level developers I&amp;rsquo;ve known sometimes struggle with this question.
+If you want to be truly great, you have to read technical books and white papers, and you have to learn new programming languages. You could figure the content out yourself from first principles, but you will be about 50 years behind those who just read the books.</description>
     </item>
     
     <item>
@@ -631,7 +631,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       
       <guid>http://deliberate-software.com/page/training/</guid>
       <description>A path to full-time software development  &#34;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&#34;
-  Breaking into a new career can be intimidating! Many people get stuck after finishing an online course like CodeAcademy. We want to provide free guidance necessary to get that dream job. Success Stories  We have used this course with several people to help them break into full-time software developer jobs. Rachel B. Rachel was working as a baker when we started together.</description>
+  Breaking into a new career can be intimidating! Many people get stuck after finishing an online course like CodeAcademy. We want to provide free guidance necessary to get that dream job. Success Stories  We have used this program with several people to help them break into full-time software developer jobs: Rachel B. Rachel was working as a baker when we started together.</description>
     </item>
     
     <item>
@@ -642,7 +642,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <guid>http://deliberate-software.com/page/books/</guid>
       <description>Books That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;ldquo;What Book Should I Read Next?&amp;rdquo;.
 Bold are my highest recommendations.
-Programming Languages  Structure and Interpretation of Computer Programs Let Over Lambda Programming Languages - Application And Interpretation Clojure Programming Haskell And Yesod Algorithm Design Manual Learn You a Haskell The Art of SQL F# 3.0 Javascript the Good Parts   People Management  Peopleware Reinventing Organizations Emotional Intelligence 2.</description>
+Programming Languages  Structure and Interpretation of Computer Programs (Scheme) Programming Languages - Application And Interpretation (Typed Racket) Haskell Programming From First Principles Let Over Lambda (Common Lisp) Clojure Programming Haskell And Yesod Software Foundations Learn You a Haskell The Art of SQL F# 3.</description>
     </item>
     
     <item>
@@ -651,7 +651,7 @@ Programming Languages  Structure and Interpretation of Computer Programs Let Ove
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/philosophy/</guid>
-      <description>Hi, I am Steve Shogren! I am a developer and manager who has met needs in the financial, education, and publishing industries. I grow self-organizing teams and empower them to achieve tremendous business value.  My Philosophy Strategic  Small, Self-Organizing Teams   When carefully mentored, a self-organizing team accomplishes the most business value.   Servant Leadership   Empowering and trusting your team increases intrinsic motivation, engagement, and productivity.</description>
+      <description>Hi, I am Steve Shogren! I am a developer and manager who has met needs in the financial, education, and publishing industries. I grow self-organizing teams and empower them to achieve tremendous business value.  My Philosophy Strategic  Self-Organizing Teams   When carefully mentored, a self-organizing team accomplishes the most business value.   Servant Leadership   Empowering and trusting your team increases intrinsic motivation, engagement, and productivity.</description>
     </item>
     
     <item>

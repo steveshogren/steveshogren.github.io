@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-06-22",
     "description": "",
-    "wordCount": 1018
+    "wordCount": 990
   }
 </script>
 
@@ -158,7 +158,7 @@
 
   <small>
   &middot; Read in about 5 min
-  &middot; (1018 Words)
+  &middot; (990 Words)
 </small>
 
 
@@ -184,26 +184,12 @@
   <div class="content">
     
 
-<p>(Want to become a Vim expert? Check out my new book: <a href="https://leanpub.com/deliberatevim">10 Minute Vim</a>)</p>
-
 <p>Editor macros are a secret weapon for editing text. While they are hard to
 learn, no other tool offers such broad speed and power for automating changes. A
 skilled macro wielder can make huge changes to a codebase with ease.</p>
 
 <p>Here are some inspirational patterns to demonstrate major structural
 refactorings using Vim macros and search/replace commands.</p>
-
-<!-- # Macro Saving -->
-
-<!-- When you build a complex macro and want to save it for later, just save it off -->
-
-<!-- to a file. Since a macro is just a list of commands to execute, you can copy and -->
-
-<!-- paste macros into registers just like text: -->
-
-<!-- * ```"qp``` - Paste the 'q' register contents -->
-
-<!-- * ```"qy``` - Insert selected text into the 'q' register -->
 
 <h1 id="reorder-a-list-of-numbers">Reorder A List Of Numbers</h1>
 
@@ -260,11 +246,11 @@ ending. Finish up with adding the interface name and adding it to the class.</p>
 </div></p>
 
 <ul>
-<li><code>11,37t8</code> - Copy the class body to line 8</li>
-<li><code>10,35g!/public/d</code> - Delete every line not containing the word public from
+<li><code>:11,37t8</code> - Copy the class body to line 8</li>
+<li><code>:10,35g!/public/d</code> - Delete every line not containing the word public from
 line 10 to 35</li>
-<li><code>10,12s/public//g</code> - Delete all the public keywords in lines 10-12</li>
-<li><code>10,12s/$/;/g</code> - End each line with a semi-colon</li>
+<li><code>:10,12s/public//g</code> - Delete all the public keywords in lines 10-12</li>
+<li><code>:10,12s/$/;/g</code> - End each line with a semi-colon</li>
 <li><code>:8</code> - Jump to line 8 (and add interface and name)</li>
 <li><code>:14</code> - Jump to line 14 (and add interface name)</li>
 </ul>
@@ -369,8 +355,6 @@ macros, allow yourself to be slow while you master the skill. Touch-typing can
 be many times faster than hand-writing or hunt-and-peck, but learning takes a
 long time. Macros can save you huge amounts of time, but you have to allow
 yourself to be slow while you master the skill.</p>
-
-<p>(Want to become a Vim expert? Check out my new book: <a href="https://leanpub.com/deliberatevim">10 Minute Vim</a>)</p>
 
   </div>
 </div>

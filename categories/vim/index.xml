@@ -18,9 +18,9 @@
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
-      <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
-Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
-Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.</description>
+      <description>Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
+Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.
+Reorder A List Of Numbers A change left me with a file with unordered numbers.</description>
     </item>
     
     <item>
