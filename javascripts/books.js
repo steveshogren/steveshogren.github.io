@@ -4,7 +4,7 @@ window.addEventListener("load", function(){
         '#pl': [
             {'name': 'Structure and Interpretation of Computer Programs (Scheme)',
              'id': 'sicp',
-             'desc': 'Covers data structures, interpreters, functional programming, abstraction design, OOP, type heirachies, immutability, collections, and lazy streams. Instead of just providing text on those, it makes you build them using 350+ exercises. One of my highest recommendations. My opinion is that all serious professional programers who want to improve their skills in any language should work through this book. <a target="_blank" href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Free download</a>'
+             'desc': 'Covers data structures, interpreters, functional programming, abstraction design, OOP, type hierarchies, immutability, collections, and lazy streams. Instead of just providing text on those, it makes you build them using 350+ exercises. One of my highest recommendations. My opinion is that all serious professional programmers who want to improve their skills in any language should work through this book. <a target="_blank" href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Free download</a>'
             },
             {'name': 'Programming Languages - Application And Interpretation (Typed Racket)',
              'id': 'pl',
@@ -35,7 +35,7 @@ window.addEventListener("load", function(){
              'desc': 'A short, humorous survey of a lot of Haskell. Afterwards, I really needed more substance and exercises to solidify my knowledge, but it helped me to get over my fear of spooky Haskell. <a target="_blank" href="http://learnyouahaskell.com/">Free download</a>'},
             {'name': 'Software Foundations (Coq)',
              'id': 'sfs',
-             'desc': 'I am in the middle this book\'s exercises, but so far it is amazing. I cannot in good faith give it a bold recommendation until I have finished it, but right now it is tied with Let Over Lambda for mind-bending concepts. Until you have represented numbers as cons cells, which you then use to prove the commutivity of multiplication IN the type system, you haven\'t really felt brain pain ;) <a target="_blank" href="https://softwarefoundations.cis.upenn.edu/current/index.html">Free download</a>'},
+             'desc': 'I am in the middle this book\'s exercises, but so far it is amazing. I cannot in good faith give it a bold recommendation until I have finished it, but right now it is tied with Let Over Lambda for mind-bending concepts. Until you have represented numbers as cons cells, which you then use to prove the commutativity of multiplication IN the type system, you haven\'t really felt brain pain ;) <a target="_blank" href="https://softwarefoundations.cis.upenn.edu/current/index.html">Free download</a>'},
             {'name': 'The Art of SQL',
              'id': 'taos',
              'desc': ''}
@@ -44,17 +44,17 @@ window.addEventListener("load", function(){
         '#peep': [
             {'name': 'Reinventing Organizations',
              'id': 'reinvorg',
-             'desc': 'Twelve case studies of companies who "self-correct" and how they do it. These companies have fewer meetings, fewer managers, and report higher job satisfaction than their peer companies. The book finds trends in all tweleve and offers some suggestions for how to implement those trends. Ultimately a simple conclusion, but hard to put into practice. I found it indispensible for maintaining and improving a self-organizing team. <a target="_blank" href="http://www.reinventingorganizations.com/pay-what-feels-right.html">Free download</a>'
+             'desc': 'Twelve case studies of companies who "self-correct" and how they do it. These companies have fewer meetings, fewer managers, and report higher job satisfaction than their peer companies. The book finds trends in all twelve and offers some suggestions for how to implement those trends. Ultimately a simple conclusion, but hard to put into practice. I found it indispensable for maintaining and improving a self-organizing team. <a target="_blank" href="http://www.reinventingorganizations.com/pay-what-feels-right.html">Free download</a>'
             },
 
             {'name': 'Peopleware',
              'id': 'peopleware',
-             'desc': 'A collection of many different bodies of research all composed into a straighforward and easy read. While the book doesn\'t dive too deep in any one topic, it offers a lot of practical wisdom. Manditory reading for managers, and highly recommended for all developers.'
+             'desc': 'A collection of many different bodies of research all composed into a straighforward and easy read. While the book doesn\'t dive too deep in any one topic, it offers a lot of practical wisdom. Mandatory reading for managers, and highly recommended for all developers.'
             },
 
             {'name': 'Good To Great',
              'id': 'goodtogreat',
-             'desc': 'A set of case studies around companies that out-performed their competition and what trends made them different. In all cases, servant leadership was the defining factor. Has influenced my leadership styles immesurably.'
+             'desc': 'A set of case studies around companies that out-performed their competition and what trends made them different. In all cases, servant leadership was the defining factor. Has influenced my leadership styles immeasurably.'
             },
 
             {'name': 'Becoming A Technical Leader',
