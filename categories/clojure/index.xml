@@ -6,7 +6,6 @@
     <description>Recent content in Clojure on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Deliberate Software 2016</copyright>
     <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/clojure/index.xml" rel="self" type="application/rss+xml" />

@@ -92,6 +92,22 @@
 
 }
 
+.bookList {
+    list-style-type:none;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.bookDesc {
+    margin-left: 10px;
+}
+
+.onHover {
+    cursor: pointer;
+}
+
 .plainlink {
     color: black;
 }

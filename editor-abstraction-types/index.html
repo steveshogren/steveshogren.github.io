@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Editor Abstractions: Why Examine Them  &middot; Deliberate Software</title>
+  <title>Analysis of Editor Abstractions  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,43 +17,34 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Editor Abstractions: Why Examine Them  &middot; Deliberate Software ">
-<meta property="og:site_name" content="Deliberate Software"/>
+<meta property="og:title" content="Analysis of Editor Abstractions  &middot; deliberate software ">
+<meta property="og:site_name" content="deliberate software"/>
 <meta property="og:url" content="http://deliberate-software.com/editor-abstraction-types/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-05-09T00:00:00Z" />
-<meta property="og:article:modified_time" content="2016-05-09T00:00:00Z" />
+<meta property="og:article:published_time" content="2017-06-13T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-06-13T00:00:00Z" />
 
   
 
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@steveshogren" />
-<meta name="twitter:creator" content="@steveshogren" />
-<meta name="twitter:title" content="Editor Abstractions: Why Examine Them" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="http://deliberate-software.com/editor-abstraction-types/" />
-<meta name="twitter:domain" content="http://deliberate-software.com/">
   
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Editor Abstractions: Why Examine Them",
+    "headline": "Analysis of Editor Abstractions",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2016-05-09",
+    "datePublished": "2017-06-13",
     "description": "",
-    "wordCount":  685 
+    "wordCount": 834
   }
 </script>
-
 
 
 <link rel="canonical" href="http://deliberate-software.com/editor-abstraction-types/" />
@@ -61,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.20.7" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -95,7 +86,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://deliberate-software.com/">Deliberate Software</a>
+        <a class="navbar-brand" href="http://deliberate-software.com/">deliberate software</a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -106,7 +97,7 @@
             <a href="http://deliberate-software.com/page/books"
              title="Show list of my favorite books">
             
-            Favorite Books
+            favorite books
             </a>
           </li>
           
@@ -114,7 +105,7 @@
             <a href="http://deliberate-software.com/page/philosophy"
              title="About me">
             
-            About Me
+            about me
             </a>
           </li>
           
@@ -122,7 +113,7 @@
             <a href="http://deliberate-software.com/page/post"
              title="Show list of posts">
             
-            All Posts
+            all posts
             </a>
           </li>
           
@@ -136,7 +127,7 @@
 
 
 
-<div class="centereded btn-primary btn-lg pagetopbookbar">
+<div class="centereded pagetopbookbar">
   <a href="https://leanpub.com/deliberatevim"
      style="color:white"
      role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
@@ -146,7 +137,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
 <div class="text-center">
-  <h1 class="centereded">DRAFT :: Editor Abstractions: Why Examine Them
+  <h1 class="centereded">DRAFT :: Analysis of Editor Abstractions
 </h1>
 
 
@@ -154,13 +145,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2016-05-09">9 May, 2016</time>
+  <time datetime="2017-06-13">13 Jun, 2017</time>
 </small>
 
 
   <small>
   &middot; Read in about 4 min
-  &middot; (685 Words)
+  &middot; (834 Words)
 </small>
 
 
@@ -196,163 +187,108 @@ little that attempts to categorize <em>what they actually do</em>. Likewise, eve
 pays homage to the concept of using the &ldquo;best tool for the job&rdquo;, but most have
 no idea what tools are provided or when each tool would be best.</p>
 
-<!-- If every concrete sequence had its own bespoke functions, we would find them -->
-
-<!-- much more difficult to use. Imagine if only Lists could be used in a -->
-
-<!-- ```foreach```, and Dictionaries needed to be ```for-every``` while Array needed -->
-
-<!-- a ```for``` loop. We would find them much harder to use. Moving code from one -->
-
-<!-- data structure to another would be a massive undertaking. _This is what IDE's do -->
-
-<!-- The three major sequence abstractions are far superior to dozens of specialized -->
-
-<!-- functions. They are also superior to the overly generic function ```foreach```. -->
-
-<!-- The ```foreach``` function is weak because it is too generic. The a they -->
-
-<!-- abstract away the details needed to make ```foreach``` work. The three are easy -->
-
-<!-- to learn, simple to combine, and allow for endless reuse. -->
-
-<p>Our editors also provide abstractions. I classify them into two main categories:</p>
+<p>Our editors provide abstractions classified into two main categories:</p>
 
 <ol>
 <li>Semantic Tools</li>
-<li>Syntactic Tools</li>
+<li>Text-based Tools</li>
 </ol>
 
 <hr />
 
-<!-- Every additional editor abstraction is a new mental tax. -->
+<h2 id="semantic-tools">Semantic Tools</h2>
 
-<h2 id="semantic-tools:546df42f19e73dc1aaa873cd03d82625">Semantic Tools</h2>
-
-<p>Five abstractions make up the &ldquo;Holy Grail&rdquo; of Semantic Tools. If we had nothing
-else but these, we would be at the pinnacle of power. The Big Five make a huge
-program much more manageable.</p>
+<p>Five abstractions are the core of Semantic Tools. If we had nothing else but
+these, we would be at the pinnacle of power. The Big Five make a huge program
+much more manageable.</p>
 
 <ul>
-<li><strong>Extract Interface</strong> -</li>
-<li><strong>Extract Class</strong> -</li>
-<li><strong>Implement Interface</strong> -</li>
-<li><strong>In-line Method</strong> -</li>
-<li><strong>Extract Method</strong> -</li>
-<li><strong>In-line Variable</strong> -</li>
-<li><strong>Extract Variable</strong> -</li>
-<li><strong>Operate On Every Calling Line</strong> -</li>
-<li><strong>Cut/Copy/Paste Expression</strong> -</li>
-
-<li><p><strong>Remove Outer Wrapping</strong> -</p></li>
-
-<li><p><strong>Language Errors</strong> - Highlight code that violates the rules of the language</p></li>
-
-<li><p><strong>Find All References</strong> - See a list of all usages of a field, function, or class</p></li>
-
-<li><p><strong>Rename Symbol</strong> - Rename the current field, function, or class</p></li>
-
-<li><p><strong>Auto-complete</strong> - Show a list of possible symbols to complete section</p></li>
-
-<li><p><strong>Go To Definition</strong> - Move editor to the symbol&rsquo;s defined location</p></li>
+<li><strong>Language Errors</strong> - Highlight code that violates the rules of the language</li>
+<li><strong>Find All References</strong> - See a list of all usages of a field, function, or class</li>
+<li><strong>Rename Symbol</strong> - Rename the current field, function, or class</li>
+<li><strong>Auto-complete</strong> - Show a list of possible symbols to complete section</li>
+<li><strong>Go To Definition</strong> - Move editor to the symbol&rsquo;s defined location</li>
 </ul>
 
-<p>The Big Five are just different ways of interacting with the AST of the
-codebase. Unfortunately, building a correct AST before run-time is only possible
-in certain languages. Building an always-accurate AST is impossible in
-weakly-typed, dynamic languages (or those with unhygienic macros).</p>
+<p>The Big Five are just different ways of interacting with the
+<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> (AST)
+of the codebase. Unfortunately, building a correct AST before run-time is only
+possible in certain languages. Building an always-accurate AST is impossible in
+weakly-typed, dynamic languages (or those with syntactic macros).</p>
 
+<blockquote>
 <p>How impossible? Time for a fun story. My first encounter with the AST problem
-came when my boss asked me to rename all uses of <code>Contact.Id</code> to
+came when a manager asked me to rename all uses of <code>Contact.Id</code> to
 <code>Contact.ContactId</code> in a big PHP project. I renamed all I could find using
-sed and grep. I went to run the program, and encountered hundreds of run-time
-errors. What did I miss? Someone had stored a string in the database containing
-&ldquo;Id&rdquo;, which was read out and combined with PHP magic to access the <code>Id</code>
-field on my class! No refactoring tool could have possibly detected that. That
-sort of flexibility makes it impossible to build a correct AST.</p>
+sed and grep. I ran the program and encountered hundreds of run-time errors.
+What did I miss? Someone had stored the string &ldquo;Id&rdquo; in the database which was
+read out and combined with PHP magic to access the <code>Id</code> field on my class!
+No refactoring tool could have possibly detected that. That sort of
+flexibility makes it impossible to build a correct AST.</p>
+</blockquote>
 
-<p>Even the flagship refactoring languages like Java and C# still have a version of
-this problem. Sharing dlls or jars breaks semantic tools. A <strong>Rename Symbol</strong>
-will only detect and modify usages in the current open project, not every
-consumer. Reflection similarly breaks semantic tools. Depending on your
-practices, this ranges from a minor nuisance to a major problem.</p>
+<p>Even flagship IDE languages like Java and C# still have a version of this
+problem. Sharing dlls or jars breaks semantic tools. A <strong>Rename Symbol</strong> will
+only detect and modify usages in the current open project, not every consumer of
+the produced jar. Reflection and explicit casting also breaks semantic tools.
+Depending on your environment, this ranges from a minor nuisance to a major
+problem.</p>
 
-<p><!-- In the last decade, several IDE's have added plugins that can build an AST from -->
-  <!-- PHP, Python, Ruby, JavaScript, Clojure, etc. While incomplete by nature, these -->
-  <!-- at least provide some modest functionality. -->
-<!-- While I would never want to take over a huge codebase without the Big Four, I have lately come to rely on them less and less. --></p>
+<p>In the last decade, several IDE&rsquo;s have added plugins that can build an AST from
+PHP, Python, Ruby, JavaScript, Clojure, etc by using raw text parsing or through
+a modification to the interpreter. While incomplete by nature, these at least
+provide some modest functionality.</p>
 
-<p>IDE&rsquo;s have a lot of refactorings they provide other than the Big Four. However
-most of these refactorings are syntactic, not semantic.</p>
+<p>IDE&rsquo;s also provide a lot of refactorings they provide other than the Big Five.
+However most of these refactorings are just variations on themes of the Big
+Five, or rely on parsing the syntax of of the language.</p>
 
-<h2 id="syntactic-tools:546df42f19e73dc1aaa873cd03d82625">Syntactic Tools</h2>
+<p>While I would never want to take over a huge codebase without the Big Five,
+these weaknesses have caused me to rely on them less and less.</p>
 
-<p>A syntactic tool does not require an AST to work. Consider <strong>Extract
+<h2 id="text-based-tools">Text-Based Tools</h2>
+
+<p>A text-based tool does not require an AST to work. Consider <strong>Extract
 Interface</strong>. It takes a class and generates an interface next to the class
 containing all the public functions from the class. The refactoring does not
 require an AST to work, it can be easily achieved by combining several text
 commands.</p>
 
-<p>Any syntactic refactoring can be replaced with a text macro or regular
-expression. Here is where we see the power of good abstractions. Where a
-refactoring suite may provide dozens or hundreds of specialized commands that
-only work in a single language, a few good text abstractions compose endlessly.</p>
+<p>Any refactoring can be replaced with a text macro or regular expression. Here is
+where we see the power of good abstractions. Where an IDE refactoring suite may
+provide dozens or hundreds of specialized commands that only work in a single
+language, a few good text abstractions compose endlessly.</p>
 
-<h2 id="text-abstractions:546df42f19e73dc1aaa873cd03d82625">Text Abstractions</h2>
+<p>For example, as demonstrated in Vim, extracting an interface in C# can be just:</p>
 
-<ul>
-<li><strong>Edit</strong>
-
-<ul>
-<li><strong>Change</strong> - Change a piece of text with another</li>
-<li><strong>Replace</strong> - Replace a character</li>
-<li><strong>Insert</strong> - Insert text</li>
-<li><strong>Delete</strong> - Delete text</li>
-<li><strong>Copy</strong> - Copy text</li>
-</ul></li>
-<li><strong>Motion</strong>
+<p><img class="pull-left" src="/images/interface-small.gif"></img>
+<div class="container-fluid">
+</div></p>
 
 <ul>
-<li><strong>(Forward|Back) By (Letter|Word|Line|Sentence|Paragraph)</strong> - Move cursor by
-specified delimiter</li>
-<li><strong>Range</strong> - Operate on a range of lines or search criteria</li>
-</ul></li>
-<li><strong>Repeat</strong> - Repeat last command</li>
-<li><strong>Search</strong> - Find instances of text
-
-<ul>
-<li><strong>Replace</strong> - Replace with alternate text</li>
-<li><strong>Operate</strong> - Perform action on line containing text</li>
-<li><strong>Delete</strong> - Delete line containing text</li>
-</ul></li>
-<li><strong>Record|Playback</strong> - Record and save actions, replaying them when needed</li>
+<li><code>:11,37t8</code> - Copy the class body to line 8</li>
+<li><code>:10,35g!/public/d</code> - Delete every line not containing the word public from
+line 10 to 35</li>
+<li><code>:10,12s/public//g</code> - Delete all the public keywords in lines 10-12</li>
+<li><code>:10,12s/$/;/g</code> - End each line with a semi-colon</li>
 </ul>
 
-<p>A skilled user of these basic abstractions can solve any syntactic refactoring
+<p>A skilled user of these basic abstractions can solve any text-based refactoring
 in only a few steps. They can invent new refactorings, solving any text
 manipulation they need.</p>
 
-<!-- | |  | Correctly Call Function | Adding New State | Best When | -->
+<p>If you are skilled with good set of abstractions for editing code, you can be
+very productive across lots of languages and frameworks. The real power comes
+when you can combine Semantic and text-based tools. If you have an accurate <strong>Go
+To Definition</strong> AND the ability to <strong>playback</strong> a macro, your options are
+limitless!</p>
 
-<!-- |------------- |-------------- | ------------ | ------------- | ------------- | -->
-
-<!-- |**Semantic Tools** | Explicit |  Easier  | Harder | State Values Change Frequently -->
-
-<!-- |**Syntactic Tools** | Implicit |  Harder  |  Easier | State Values Change Rarely -->
-
-<!-- |**Text Abstractions** | Implicit |  Harder  |  Easier | State Values Change Rarely -->
-
-<!-- The more I watch Patrick work, the more I realize how much mental and muscle -->
-
-<!-- memory I have built up around "Visual Studio"-only abstractions. -->
-
-<!-- Our editing tools are also abstractions. We memorize commands to perform -->
-
-<!-- actions, disregarding the underlying implementation. -->
-
-<!-- I have found that if you have a good set of abstractions for editing code, you -->
-
-<!-- can be very productive across lots of languages and frameworks. -->
+<p>For this reason, if you have the ability, you should learn one from each
+category of tools available to you. If you have access to a set of Semantic
+tools for your languages, learn them well, but know their limits! If you have
+access to a set of text-based tools like those found in a Vim plugin, install
+the Vim plugin and learn it well. You will have all the power of both at your
+disposal!</p>
 
   </div>
 </div>
@@ -370,18 +306,12 @@ manipulation they need.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/why-emacs/" title="Why Emacs">
+          <a href="http://deliberate-software.com/coq_day3/" title="Darkest Proof: Day 3">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/patterns/" title="Design Pattern Dangers">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   
@@ -398,28 +328,33 @@ manipulation they need.</p>
 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-      <h3 class="serif col-sm-12" id="name">STEVE SHOGREN</h3>
-
-
-
-<span class="col-xs-12 col-sm-12 col-md-12">
-<a href="https://twitter.com/steveshogren" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @steveshogren</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</span>
-<span class="col-xs-12 col-sm-12">
+      <a href= "/page/philosophy" class="plainlink">
+  <div class="sidepic centereded">
+    
+  </div>
+  <h3 class=" col-sm-12 centereded" id="name">steve shogren</h3>
+  
+  
+  
+  <span class="col-xs-12 col-sm-12 col-md-12">
+    
+    
+  </span>
+  <span class="col-xs-12 col-sm-12 centereded">
     software developer, manager, author, speaker
-</span>
-<h3 class="serif col-xs-12 col-sm-12" id="name">BOOKS:</h3>
+  </span>
+</a>
+<h3 class="col-xs-12 col-sm-12" id="name">books:</h3>
 
 
 <a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
-    <img class="book" src="/images/vim.jpg"></img>
+  <img class="book" src="/images/vim.jpg"></img>
 </a>
 
 
 
 <a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
-    <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+  <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
@@ -439,113 +374,37 @@ manipulation they need.</p>
 
 
 
-<h3 class="serif col-xs-12 col-sm-12" id="name">POSTS FOR:</h3>
+
+<h3 class=" col-xs-12 col-sm-12" id="name">posts for:</h3>
 <div class="col-xs-12 col-sm-12">
-    <ul class="sidebar_ul">
-        <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
-        <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
-        <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
-        <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
-    </ul>
-</div>
-<h3 class="serif col-xs-12 col-sm-12" id="name">CATEGORIES</h3>
-<div class="col-xs-12 col-sm-12">
-    <ul class="sidebar_ul">
-        
-        <li class="sidebar_li">
-            <a href="/categories/angular">angular</a> <span class="badge">2</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/architecture">architecture</a> <span class="badge">5</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/clojure">clojure</a> <span class="badge">13</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/clojurescript">clojurescript</a> <span class="badge">4</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/coq">coq</a> <span class="badge">3</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/csharp">csharp</a> <span class="badge">9</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/emacs">emacs</a> <span class="badge">4</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/fsharp">fsharp</a> <span class="badge">7</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/haskell">haskell</a> <span class="badge">3</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/interviews">interviews</a> <span class="badge">2</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/java">java</a> <span class="badge">3</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/management">management</a> <span class="badge">10</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/meta-game">meta-game</a> <span class="badge">27</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/oo-design">oo-design</a> <span class="badge">3</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/refactoring">refactoring</a> <span class="badge">1</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/technical-skills">technical-skills</a> <span class="badge">42</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/unit-testing">unit-testing</a> <span class="badge">11</span>
-        </li>
-        
-        <li class="sidebar_li">
-            <a href="/categories/vim">vim</a> <span class="badge">3</span>
-        </li>
-        
-    </ul>
+  <ul class="sidebar_ul">
+    <li class="sidebar_li"><a href="/page/training">Learn To Program For Free</a></li>
+    <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+    <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
+  </ul>
 </div>
 
 <script type="text/javascript">
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
+ function shuffle(array) {
+     var currentIndex = array.length, temporaryValue, randomIndex ;
 
-  
-  while (0 !== currentIndex) {
+     
+     while (0 !== currentIndex) {
 
-    
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+         
+         randomIndex = Math.floor(Math.random() * currentIndex);
+         currentIndex -= 1;
 
-    
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+         
+         temporaryValue = array[currentIndex];
+         array[currentIndex] = array[randomIndex];
+         array[randomIndex] = temporaryValue;
+     }
 
-  return array;
-}
+     return array;
+ }
 
  var linkTexts = [
      "Want to practice your skills? Check out",
@@ -553,12 +412,13 @@ function shuffle(array) {
      "Master macros with",
      "50+ exercises included in",
      "Master RegEx with",
-     "Start a daily practice with"
+     "Start a daily practice with",
+     "Over 50 daily exercises in"
  ];
-x=document.getElementsByClassName('thevimlink');
-for(var i = 0; i < x.length; i++){
-  x[i].innerText = shuffle(linkTexts)[0];
-}
+ x=document.getElementsByClassName('thevimlink');
+ for(var i = 0; i < x.length; i++){
+     x[i].innerText = shuffle(linkTexts)[0];
+ }
 </script>
 
     </div>
@@ -569,7 +429,7 @@ for(var i = 0; i < x.length; i++){
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
            <div class="pull-left">
-  <a class="toplink" href="#">back to top</a>
+  
 </div>
 <div class="pull-right">
 
@@ -582,6 +442,13 @@ for(var i = 0; i < x.length; i++){
     
 
     
+<div class="container copyright">
+  
+  Deliberate Software 2016
+
+
+</div>
+
 
 
           </small>
