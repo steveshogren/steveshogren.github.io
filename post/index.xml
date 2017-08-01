@@ -6,10 +6,20 @@
     <description>Recent content in Posts on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Design Pattern Dangers</title>
+      <link>http://deliberate-software.com/patterns/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/patterns/</guid>
+      <description>Design Patterns and Domain Driven Design are two of the most dangerous books a new developer can read.
+ The books themselves are not bad. They offer standardized names for common programming practices, which has made communication a lot easier for everyone. Sometimes you will see that a pattern is merely a new name for something you may have already invented. Perhaps what you were calling a &amp;ldquo;builder&amp;rdquo; they call a &amp;ldquo;factory&amp;rdquo;.</description>
+    </item>
     
     <item>
       <title>Darkest Proof: Day 3</title>
