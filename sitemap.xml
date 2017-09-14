@@ -415,6 +415,12 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/proofs/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/categories/refactoring/</loc>
     <lastmod>2016-06-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
