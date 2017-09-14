@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Papers We Love: The Byzantine Generals Problem  &middot; deliberate software</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Papers We Love: The Byzantine Generals Problem  &middot; deliberate software ">
+<meta property="og:site_name" content="deliberate software"/>
+<meta property="og:url" content="http://deliberate-software.com/papers-we-love-1/" />
+<meta property="og:locale" content="en-us">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2017-08-04T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-08-04T00:00:00Z" />
+
+  
+
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Papers We Love: The Byzantine Generals Problem",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-08-04",
+    "description": "",
+    "wordCount": 992
+  }
+</script>
+
+
+<link rel="canonical" href="http://deliberate-software.com/papers-we-love-1/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
+<link href="http://deliberate-software.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.20.7" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
+
+
+
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/theme/yeti.css">
+
+
+<link rel="stylesheet" href="http://deliberate-software.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/style.css">
+<link rel="stylesheet" href="http://deliberate-software.com/css/github-calendar.css">
+
+
+  <link rel="stylesheet" href="http://deliberate-software.com/css/highlight/default.css">
+
+
+</head>
+<body class="map[name:yeti]">
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header ">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://deliberate-software.com/">deliberate software</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.github.com/steveshogren"><span class="fa fa-github-square"></span> GitHub</a></li>
+            <li><a href="/index.xml" rel="alternate" type="application/rss+xml"> <span class="fa fa-rss-square"></span> RSS</a></li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/books"
+             title="Show list of my favorite books">
+            
+            favorite books
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/philosophy"
+             title="About me">
+            
+            about me
+            </a>
+          </li>
+          
+          <li>
+            <a href="http://deliberate-software.com/page/post"
+             title="Show list of posts">
+            
+            all posts
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+</header>
+
+
+
+<div class="centereded pagetopbookbar">
+  <a href="https://leanpub.com/deliberatevim"
+     style="color:white"
+     role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
+<div class="text-center">
+  <h1 class="centereded">Papers We Love: The Byzantine Generals Problem
+</h1>
+
+
+  
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2017-08-04">4 Aug, 2017</time>
+</small>
+
+
+  <small>
+  &middot; Read in about 5 min
+  &middot; (992 Words)
+</small>
+
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/academic-papers" class="label label-default">academic papers</a>
+  
+  <a href="http://deliberate-software.com/categories/proofs" class="label label-default">proofs</a>
+  
+
+ </div>
+<br>
+</div>
+
+</div>
+
+      <div class="">
+    
+  <div class="content">
+    
+
+<p><em>In this series I practice reading computer science papers by following a modified set of
+steps outlined in the guide:
+<a href="https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/">How to read and understand a scientific paper: a guide for non-scientists</a>.
+If your reaction to this post is &lsquo;eh, just read the paper&rsquo;, then this post isn&rsquo;t
+for you ;)</em></p>
+
+<h3 id="why-should-i-read-the-byzantine-generals-problem">Why Should I Read The Byzantine Generals Problem?</h3>
+
+<p>The research in this paper allows blockchain technology, ensures military radar
+installation reliability, and enables the design of distributed, fault-tolerant
+CPU processors. Not only is the research widely used in many interesting ways,
+but the paper uses the amusing military analogy of a group of separated generals
+trying to agree on a battle plan. The paper is a fun intro into academic papers.</p>
+
+<p><a href="http://www.andrew.cmu.edu/course/15-749/READINGS/required/resilience/lamport82.pdf">The Byzantine Generals Problem pdf</a></p>
+
+<h3 id="my-breakdown">My Breakdown:</h3>
+
+<h4 id="begin-by-reading-the-introduction-not-the-abstract">Begin by reading the introduction, not the abstract</h4>
+
+<p>The broad problem is: how to create a network of components that can come to
+consensus when some nodes in the network may be sending conflicting and
+false information to the other nodes. We desire a solution where the &ldquo;loyal&rdquo;
+nodes perform the correct action.</p>
+
+<h4 id="identify-the-big-question">Identify the BIG QUESTION</h4>
+
+<p>The BIG QUESTION is: <strong>how to create a network of nodes that decides on a
+common plan of action when some nodes are sending false information.</strong></p>
+
+<p>The big question is posed abstractly as: how can many generals decide on a
+plan when some generals are traitors sending false information and all
+generals can only communicate via messages to each other.</p>
+
+<h4 id="identify-the-specific-question-s">Identify the SPECIFIC QUESTION(S)</h4>
+
+<p>The SPECIFIC QUESTIONS are more simple:
+- <strong>IC1: Ensure a single &ldquo;general node&rdquo; is able to send an order for all
+loyal &ldquo;lieutenant nodes&rdquo; to follow</strong>
+- <strong>IC2: All loyal lieutenant nodes follow the order if the general is loyal</strong></p>
+
+<p>These two conditions are called the <em>interactive consistency</em> conditions.</p>
+
+<p>Solving this specific question will unlock the solution to the more
+complicated scenario with multiple nodes all communicating with each other.</p>
+
+<h4 id="determine-outline">Determine Outline</h4>
+
+<ol>
+<li>Abstract</li>
+<li>Introduction</li>
+<li>Problem definition with forgeable (unsigned) messages</li>
+<li>Proof with forgeable (unsigned) messages</li>
+<li>Proof with unforgeable (signed) messages</li>
+<li>Proof for an incomplete graph with forgeable (unsigned) messages</li>
+<li>Proof for an incomplete graph with unforgeable (signed) messages</li>
+<li>The application of the previous proofs to build reliable systems that
+calculate solutions across multiple processors</li>
+<li>Conclusion</li>
+</ol>
+
+<h4 id="identify-the-approach">Identify the approach</h4>
+
+<p>The approach is a set of logical, inductive proofs.</p>
+
+<h4 id="explain-any-diagrams-charts">Explain any diagrams/charts</h4>
+
+<p><img src="/images/generalsfig1fig2.png"></img></p>
+
+<p>Fig 1 and Fig 2 illustrate how it is impossible for one commander and two
+lieutenants to come to consensus with unsigned messages when one of the
+three is a traitor.</p>
+
+<p><img src="/images/generalsfig3fig4.png"></img></p>
+
+<p>Fig 3 and Fig 4 show the oral (unsigned) communication paths of one
+commander and three lieutenants, represented by OM(1). Fig 3 shows the paths
+of a traitorous lieutenant, and how the other lieutenants can simply do
+whatever the majority of inputs recommend. Fig 4 shows the traitorous
+commander, and how all three lieutenants need to fall back to their default
+behavior, as there is no clear winning majority.</p>
+
+<p><img src="/images/generalsfig5.png"></img></p>
+
+<p>Fig 5 illustrates passing signed messages with one commander and two
+lieutenants, represented by SM(1). Each message gets appended to the end, so
+a traitorous commander is revealed by sending different messages to each
+lieutenant.</p>
+
+<p><img src="/images/generalsfig6fig7.png"></img></p>
+
+<p>Fig 7 is not 3-regular because the central node has more than 3 connecting
+paths.</p>
+
+<h4 id="explain-the-recommended-solution-algorithm-theory-proofs">Explain the recommended solution/algorithm/theory/proofs</h4>
+
+<ul>
+<li><p>The original problem, stated as two interactivity conditions:</p>
+
+<ul>
+<li><strong>IC1: All loyal lieutenants obey the same order</strong></li>
+<li><strong>IC2: All lieutenant nodes follow the order if the general is loyal</strong></li>
+</ul></li>
+
+<li><p>They refer the reader to a previous proof that 3 nodes cannot be solved.
+They claim a proof by contradiction that therefore no solution exists for
+fewer than <em>3m+1</em> nodes where <em>m</em> is the traitor node count.</p></li>
+
+<li><p>Inductive proof with forgeable (unsigned) messages - requires <em>3m+1</em> nodes
+where <em>m</em> is the traitor node count.</p>
+
+<ul>
+<li>Assumptions:
+
+<ul>
+<li>A1. Every message is sent correctly</li>
+<li>A2. The receiver of a message knows who sent it</li>
+<li>A3. The absence of a message can be detected</li>
+</ul></li>
+</ul></li>
+
+<li><p>Inductive proof with unforgeable (signed) messages - requires only <em>m+2</em>
+generals where <em>m</em> is the traitor general count</p>
+
+<ul>
+<li>Assumptions:
+
+<ul>
+<li>A4(a). No message can be forged by another node</li>
+<li>A4(b). Any node can verify the signature chain</li>
+</ul></li>
+</ul></li>
+
+<li><p>Proof for an incomplete graph with forgeable (unsigned) messages -
+requires at least <em>3m+1</em> generals where <em>m</em> is the count of traitors and
+each node on the graph has <em>3m</em> connections. (aka
+<a href="https://en.wikipedia.org/wiki/Regular_graph">3m-regular</a>). Therefore a
+<em>3m+1</em> network must be completely connected.</p></li>
+
+<li><p>Proof for an incomplete graph with unforgeable (signed) messages -
+requires at least <em>m+d-1</em> generals where <em>m</em> is the count of traitors and
+<em>d</em> is the
+<a href="https://en.wikipedia.org/wiki/Distance_(graph_theory)">graph diameter</a>
+(longest shortest distance between two generals)</p></li>
+</ul>
+
+<h4 id="read-the-conclusion-discussion-interpretation-section">Read the conclusion/discussion/interpretation section</h4>
+
+<p>The authors conclude that all known solutions to the Byzantine Generals problem
+are inherently expensive in time and number of messages sent between nodes. They
+do suspect that nodes could combine messages for reduced total message transfer,
+but they leave that as an unanswered question.</p>
+
+<h4 id="now-go-back-to-the-beginning-and-read-the-abstract">Now, go back to the beginning and read the abstract</h4>
+
+<p>The abstract summarizes the results: with unsigned messages, fewer than
+one-third of the nodes can be traitors. For signed messages, any number of nodes
+can be traitorous.</p>
+
+<h4 id="what-do-other-researchers-say-about-this-paper">What do other researchers say about this paper?</h4>
+
+<p>This paper seems to have become a canonical source of proofs for the problem.</p>
+
+<h4 id="my-notes">My Notes</h4>
+
+<p>While originally written for radar defense installations, blockchain
+technologies appear to be based off the research in this paper. They operate
+with signed messages being semi-unforgeable because of the difficulty to
+recreate the history, so it is a combination of the signed and unsigned.
+Messages <em>are</em> forgeable, but it is so computationally expensive to do so that
+it is effectively impossible.</p>
+
+<p>The proofs in this paper are fun because they are an applied version of what I
+have been studying in
+<a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>.
+Before I read this paper, the exercises in Software Foundations seemed dry and
+isolated from reality. The skill of proof writing has come alive as the
+fundamental underpinning for world-changing technologies like blockchain! Very
+fun stuff.</p>
+
+  </div>
+</div>
+
+
+      <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/patterns/" title="Design Pattern Dangers">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+    </ul> </nav>
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <a href= "/page/philosophy" class="plainlink">
+  <div class="sidepic centereded">
+    
+  </div>
+  <h3 class=" col-sm-12 centereded" id="name">steve shogren</h3>
+  
+  
+  
+  <span class="col-xs-12 col-sm-12 col-md-12">
+    
+    
+  </span>
+  <span class="col-xs-12 col-sm-12 centereded">
+    software developer, manager, author, speaker
+  </span>
+</a>
+<h3 class="col-xs-12 col-sm-12" id="name">books:</h3>
+
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
+  <img class="book" src="/images/vim.jpg"></img>
+</a>
+
+
+
+<a class="col-xs-6 col-sm-4 col-md-6" href="https://www.amazon.com/dp/B01JD0H7XU">
+  <img class="book" src="/images/convincingcoworkerscover.jpg"></img>
+</a>
+
+<h3 class="col-xs-12 col-sm-12" id="name"></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 class=" col-xs-12 col-sm-12" id="name">posts for:</h3>
+<div class="col-xs-12 col-sm-12">
+  <ul class="sidebar_ul">
+    <li class="sidebar_li"><a href="/page/training">Learn To Program For Free</a></li>
+    <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+    <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
+  </ul>
+</div>
+
+<script type="text/javascript">
+ function shuffle(array) {
+     var currentIndex = array.length, temporaryValue, randomIndex ;
+
+     
+     while (0 !== currentIndex) {
+
+         
+         randomIndex = Math.floor(Math.random() * currentIndex);
+         currentIndex -= 1;
+
+         
+         temporaryValue = array[currentIndex];
+         array[currentIndex] = array[randomIndex];
+         array[randomIndex] = temporaryValue;
+     }
+
+     return array;
+ }
+
+ var linkTexts = [
+     "Want to practice your skills? Check out",
+     "Practice advanced skills with",
+     "Master macros with",
+     "50+ exercises included in",
+     "Master RegEx with",
+     "Start a daily practice with",
+     "Over 50 daily exercises in"
+ ];
+ x=document.getElementsByClassName('thevimlink');
+ for(var i = 0; i < x.length; i++){
+     x[i].innerText = shuffle(linkTexts)[0];
+ }
+</script>
+
+    </div>
+  </div>
+</div>
+      <footer class="footer">
+    <div class="container hidden-print">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+  
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+          <small>
+              
+    
+
+    
+
+
+          </small>
+        </div>
+     </div>
+    </div>
+</footer>
+
+    <script src="http://deliberate-software.com/js/jquery.min-2.1.4.js"></script>
+<script src="http://deliberate-software.com/js/bootstrap.min-3.3.5.js"></script>
+<script src="http://deliberate-software.com/js/github-calendar.js"></script>
+
+
+
+
+<script src="http://deliberate-software.com/js/highlight.pack.js"></script>
+<script src="http://deliberate-software.com/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+if (document.location.hostname.search("deliberate-software.com") !== -1) {
+  var _gaq=[['_setAccount','UA-46040901-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+}
+</script>
+
+
+
+
+  </body>
+</html>
+
+

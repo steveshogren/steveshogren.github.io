@@ -6,10 +6,20 @@
     <description>Recent content in Proofs on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/proofs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Papers We Love: The Byzantine Generals Problem</title>
+      <link>http://deliberate-software.com/papers-we-love-1/</link>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/papers-we-love-1/</guid>
+      <description>In this series I practice reading computer science papers by following a modified set of steps outlined in the guide: How to read and understand a scientific paper: a guide for non-scientists. If your reaction to this post is &amp;lsquo;eh, just read the paper&amp;rsquo;, then this post isn&amp;rsquo;t for you ;)
+Why Should I Read The Byzantine Generals Problem? The research in this paper allows blockchain technology, ensures military radar installation reliability, and enables the design of distributed, fault-tolerant CPU processors.</description>
+    </item>
     
     <item>
       <title>Darkest Proof: Day 3</title>

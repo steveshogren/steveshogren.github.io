@@ -6,10 +6,19 @@
     <description>Recent content in Categories on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Academic Papers</title>
+      <link>http://deliberate-software.com/categories/academic-papers/</link>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/categories/academic-papers/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Angular</title>
@@ -140,7 +149,7 @@
     <item>
       <title>Proofs</title>
       <link>http://deliberate-software.com/categories/proofs/</link>
-      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/categories/proofs/</guid>
       <description></description>
@@ -167,7 +176,7 @@
     <item>
       <title>Technical Skills</title>
       <link>http://deliberate-software.com/categories/technical-skills/</link>
-      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/categories/technical-skills/</guid>
       <description></description>

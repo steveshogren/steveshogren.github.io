@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://deliberate-software.com/papers-we-love-1/</loc>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/patterns/</loc>
     <lastmod>2017-08-01T00:00:00+00:00</lastmod>
   </url>
@@ -306,6 +311,12 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/academic-papers/</loc>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/categories/angular/</loc>
     <lastmod>2016-04-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -323,7 +334,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/</loc>
-    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -410,13 +421,13 @@
   
   <url>
     <loc>http://deliberate-software.com/post/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://deliberate-software.com/categories/proofs/</loc>
-    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -439,7 +450,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/technical-skills/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -465,7 +476,7 @@
   
   <url>
     <loc>http://deliberate-software.com/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
