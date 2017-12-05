@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>OO-Design Part 2: Anemic Domain Models Are Healthy  &middot; deliberate software</title>
+  <title>MOBA Item Optimization In Haskell  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,16 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="OO-Design Part 2: Anemic Domain Models Are Healthy  &middot; deliberate software ">
+<meta property="og:title" content="MOBA Item Optimization In Haskell  &middot; deliberate software ">
 <meta property="og:site_name" content="deliberate software"/>
-<meta property="og:url" content="http://deliberate-software.com/anemic-domain-model/" />
+<meta property="og:url" content="http://deliberate-software.com/optimization/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-11-16T00:00:00Z" />
-<meta property="og:article:modified_time" content="2016-11-16T00:00:00Z" />
+<meta property="og:article:published_time" content="2017-12-05T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-12-05T00:00:00Z" />
 
   
 
@@ -35,19 +35,19 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "OO-Design Part 2: Anemic Domain Models Are Healthy",
+    "headline": "MOBA Item Optimization In Haskell",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2016-11-16",
+    "datePublished": "2017-12-05",
     "description": "",
-    "wordCount": 502
+    "wordCount": 937
   }
 </script>
 
 
-<link rel="canonical" href="http://deliberate-software.com/anemic-domain-model/" />
+<link rel="canonical" href="http://deliberate-software.com/optimization/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -139,7 +139,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
 <div class="text-center">
-  <h1 class="centereded">OO-Design Part 2: Anemic Domain Models Are Healthy
+  <h1 class="centereded">MOBA Item Optimization In Haskell
 </h1>
 
 
@@ -147,13 +147,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2016-11-16">16 Nov, 2016</time>
+  <time datetime="2017-12-05">5 Dec, 2017</time>
 </small>
 
 
   <small>
-  &middot; Read in about 3 min
-  &middot; (502 Words)
+  &middot; Read in about 5 min
+  &middot; (937 Words)
 </small>
 
 
@@ -162,12 +162,6 @@
   <i class="fa fa-tags"></i>
   
   <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
-  
-  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
-  
-  <a href="http://deliberate-software.com/categories/java" class="label label-default">java</a>
-  
-  <a href="http://deliberate-software.com/categories/oo-design" class="label label-default">oo-design</a>
   
 
  </div>
@@ -179,79 +173,163 @@
       <div class="">
     
   <div class="content">
-    
+    <p>TL;DR: Made a website for optimizing Paragon cards for DPS,
+<a href="https://github.com/steveshogren/haskell-optimization/tree/a298b264e0d84ded3883b0948a12768a490d57eb">code available here.</a></p>
 
-<p>Part 2 of the series <a href="/categories/oo-design/">OO-Design</a></p>
+<p>I love MOBA&rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my
+current go-to game, I wanted to determine the cards to buy to maximize my Damage
+Per Second (DPS).</p>
 
-<p>The Anemic Domain Model is often quoted as an anti-pattern in the terminology of
-Domain-Driven Design. Martin Fowler goes so far as to term the alternative a
-<a href="http://www.martinfowler.com/bliki/AnemicDomainModel.html">&ldquo;rich domain model&rdquo;</a>.</p>
+<p>First things first, I found a spreadsheet of all the cards, colors, costs, and
+stats. Using some Vim magic, I made them into a list of tuples:</p>
 
-<p>A rich domain model makes perfect sense until you attempt to write your first
-unit test. You discover that rich domain models are very hard to test. Most
-examples of unit-testing use Anemic Domain Models! Do you really have to pick
-between good testing and good design?</p>
-
-<h2 id="let-s-talk-about-purity">Let&rsquo;s Talk About Purity</h2>
-
-<p>Functions are considered <strong>pure</strong> if they produce the same output when given the
-same input. Addition is a pure function. We expect <code>add(1,1)</code> will always
-produce <code>2</code>. Pure functions are the easiest to test. As a rule, the more
-logic you have in pure functions, the easier your code is to test.</p>
-
-<p>Consider which of the following is easier to test. A <strong>pure function</strong> with the
-signature:</p>
-
-<pre><code class="language-java">GameState movePlayerNorth(GameState g)
+<pre><code class="language-haskell">(&quot;Wellspring Staff&quot;,3,Universal,&quot;6 Power|30 Mana|Fully Upgraded Bonus:30 Mana|0.3 Mana Regen&quot;),
+(&quot;Whirling Wand&quot;,3,Universal,&quot;6 Power|5.5 Attack Speed|Fully Upgraded Bonus:11 Attack Speed&quot;),
 </code></pre>
 
-<p>or an <strong>impure function</strong> with the signature:</p>
+<p>Which I parse into a data structure:</p>
 
-<pre><code class="language-java">void movePlayerNorth()
+<pre><code class="language-haskell">data Card = Card
+    { _cost :: Integer
+    , _power :: Integer
+    , _speed :: Integer
+    , _crit :: Integer
+    , _pen :: Integer
+    , _lifesteal :: Integer
+    , _crit_bonus :: Integer
+    , _ward :: Integer
+    , _blink :: Integer
+    , _name :: String
+    , _firstType :: String
+    , _secondType :: String
+    , _afinity :: Afinity
+    } deriving (Show)
+makeLenses ''Card
 </code></pre>
 
-<p>The first function has explicit inputs and outputs. The second function has
-implicit, hidden state. While the <code>void</code> function is easier to <em>call</em>, it
-impurity makes it much harder to <em>test</em>. Testing a impure function requires
-implicit state to be setup before each test. Since GameState is encapsulated,
-you would need to either expose it (breaking encapsulation) or call other
-methods to get it into the correct state for your test!</p>
+<p>The equation to maximize DPS combines the stats of: power, speed, crit chance,
+armor pen, crit bonus, and the enemy&rsquo;s armor.</p>
 
-<blockquote>
-<p>Encapsulation is <del>a rich domain model</del> <strong>impure</strong>.</p>
-</blockquote>
+<pre><code>dmgReduction :: Double -&gt; Double -&gt; Double
+dmgReduction enemyArmor penetrationPoints =
+  let effectiveArmor = enemyArmor - (penetrationPoints * 4.0)
+      realArmor = if (effectiveArmor &lt; 0) then 0 else effectiveArmor
+      reduction = (100/(100 + effectiveArmor))
+  in if reduction &gt; 1 then 1 else reduction
 
-<p>The point of encapsulation is to hide state from the caller; it is impure by
-definition. Impure functions require global or class-level state to operate.</p>
+dps :: Hero -&gt; Double -&gt; Double -&gt; Double -&gt; Double -&gt; Double -&gt; Double -&gt; Double
+dps hero powerPoints attackSpeedPoints critPoints penetrationPoints critDamage enemyArmor = do
+  let reduction = dmgReduction enemyArmor penetrationPoints
+      baseDmg = ((hero^.base_damage)+(6*powerPoints*(hero^.scaling)))
+      hitsSecond = 1/((hero^.base_attack_time)/(((5.5*attackSpeedPoints) + (hero^.attack_speed))/100))
+      critBonus = (1+((0.04*critPoints)*(critDamage-1)))
+  baseDmg * hitsSecond * critBonus  * reduction
+</code></pre>
 
-<p>Pure functions have been maligned as a bad design. Purity has been given nasty
-sounding names like &ldquo;anemic domain model&rdquo; or &ldquo;exposed state&rdquo;. In reality, there
-is nothing wrong with pure programming, it produces good designs that are easy
-to understand and test.</p>
+<p>To speed up the optimization problem, I broke it down into two calculations.
+First I run the DPS algorithm against all the possible combinations of values
+with a max total cost of sixty points and six total cards. Since each card gets
+a bonus when completed with all three upgrades, those counted for extra:</p>
 
-<p>Misapplied encapsulation is why most developers do not venture very far into
-unit testing. Their first production unit test slams into a function with a lot
-of impure state. They see how much work it is to test an impure function and
-give up, thinking that all unit testing is that hard.</p>
+<pre><code class="language-haskell">maxDps :: Bool -&gt; Bool -&gt; Bool -&gt; Integer -&gt; String -&gt; Integer -&gt; Double -&gt; Build
+maxDps     w       b     cheapCrit lifeSteal hero_name reduce_by en_armor =
+  let totalPoints = 66 -- counts the bonus +1 of the 6 cards when completed
+      ward = if w then 1 else 0
+      blink = if b then 1 else 0
+      maxPen = if hero_name == &quot;sparrow&quot; then 0 else 30
+      points = totalPoints - lifeSteal - (3 * ward) - (6 * blink) - reduce_by
+      totals = [ (calcIfUnder hero_name dmg speed crit pen critbonus points ward blink lifeSteal en_armor) |
+                 dmg &lt;- [0..30],
+                 speed &lt;- [0..30],
+                 crit &lt;- [0..30],
+                 pen &lt;- [0..maxPen],
+                 critbonus &lt;- [0..1]]
+      build = head $ sortBy (flip compare `on` _bdps) totals
+  in bcheapCrit .~ cheapCrit $ build
+</code></pre>
 
-<blockquote>
-<p>Purity is a good design!</p>
-</blockquote>
+<p>The function <code>calcIfUnder</code> returns a completed <code>Build</code> if the total
+card point equaled 60, otherwise an empty <code>Build</code>.</p>
 
-<p>We should strive for purity as much as possible. In most languages, purity is an
-ideal to strive for, not a goal that can ever be fully achieved. For example:
-language features like exceptions and null will always prevent complete purity.</p>
+<p>From this, we can quickly calculate the highest possible DPS for any given
+character, as a <code>Build</code> of the exact power, speed, crit chance, armor pen,
+enemy armor, and crit bonus points needed.</p>
 
-<p>Purity in object-oriented languages is always on a continuum. Most codebases
-have a variety of functions: some pure, some impure. On one side of the spectrum
-you have rich domain models with completely encapsulated state and void methods.
-On the other side you have easily-tested code with pure functions and separate
-data structures.</p>
+<p>Now that we know the best possible <code>Build</code>, the hard part is figuring out
+what cards and upgrades to buy. Using
+<a href="https://hackage.haskell.org/package/glpk-hs">glpk-hs</a>, I make a tuple of each card with
+the possible upgrades for a given stat:</p>
 
-<p>If you need or desire testability, strive to put as much logic as possible
-inside pure functions. Avoid encapsulated state: put all state in data
-structures with all public fields. Strive to make your codebase as pure as
-possible.</p>
+<pre><code>-- For cost (e.g. base cost is 3)
+[(&quot;Whirling Wand - speed:1,power:5&quot;,9),
+ (&quot;Whirling Wand - speed:2,power:4&quot;,9),
+ (&quot;Whirling Wand - speed:3,power:3&quot;,9), ...]
+-- For power (e.g. base power is 1)
+[(&quot;Whirling Wand - speed:1,power:5&quot;,6),
+ (&quot;Whirling Wand - speed:2,power:4&quot;,5),
+ (&quot;Whirling Wand - speed:3,power:3&quot;,4), ...]
+-- For speed (e.g. base speed is 3)
+[(&quot;Whirling Wand - speed:1,power:5&quot;,4),
+ (&quot;Whirling Wand - speed:2,power:4&quot;,5),
+ (&quot;Whirling Wand - speed:3,power:3&quot;,6), ...]
+</code></pre>
+
+<p>This turns out to be roughly a few thousand cards+upgrades per stat. Since we
+only care about matching a stat exactly, we can use <code>equalTo</code> from glpk-hs:</p>
+
+<pre><code class="language-haskell">lpCards :: Build -&gt; LP String Integer
+lpCards build = execLPM $ do
+  let hero = heroFromName $ build^.bhero
+  let useCheapCrit = (build^.bcheapCrit)
+  equalTo (linCombination (collectCostAndNameTuples hero _cost useCheapCrit)) totalCXP
+  equalTo (linCombination (collectCostAndNameTuples hero _power useCheapCrit)) (build^.bpower)
+  equalTo (linCombination (collectCostAndNameTuples hero _speed useCheapCrit)) (build^.bspeed)
+  equalTo (linCombination (collectCostAndNameTuples hero _crit useCheapCrit)) (build^.bcrit)
+  equalTo (linCombination (collectCostAndNameTuples hero _pen useCheapCrit)) (build^.bpen)
+  equalTo (linCombination (collectCostAndNameTuples hero _lifesteal useCheapCrit)) (build^.blifesteal)
+  equalTo (linCombination (collectCostAndNameTuples hero _crit_bonus useCheapCrit)) (build^.bcrit_bonus)
+  equalTo (linCombination (collectCostAndNameTuples hero _ward useCheapCrit)) (build^.bward)
+  equalTo (linCombination (collectCostAndNameTuples hero _blink useCheapCrit)) (build^.bblink)
+  equalTo (linCombination (map (\(_,name) -&gt; (1, name)) $ collectCostAndNameTuples hero _power useCheapCrit)) totalCards
+  mapM (\(_,name) -&gt; varBds name 0 1) $ collectCostAndNameTuples hero _power useCheapCrit
+  mapM (\(_,name) -&gt; setVarKind name IntVar) $ collectCostAndNameTuples hero _power useCheapCrit
+
+optimize :: Build -&gt; IO [HandCard]
+optimize b = do
+  x &lt;- glpSolveVars mipDefaults (lpCards b)
+  putStrLn $ &quot;Build&quot; ++ (show b)
+  case x of (Success, Just (obj, vars)) -&gt;
+              let cards = (map toHandCard) $ filter (\(name, count) -&gt; count /= 0) $ Map.toList vars
+              in if null cards then solverFailed
+                 else return cards
+            (failure, result) -&gt; solverFailed
+</code></pre>
+
+<p>Running <code>optimize</code> from a <code>scotty</code> site gathers a solution for six
+card+upgrade tuples that match the desired ratio, and it is fast enough to run
+in under a second!</p>
+
+<pre><code class="language-haskell">main :: IO ()
+main = do
+  scotty 3000 $ do
+    middleware $ staticPolicy (noDots &gt;-&gt; addBase &quot;static/html&quot;)
+    middleware $ staticPolicy (noDots &gt;-&gt; addBase &quot;static/dist&quot;)
+
+    post &quot;/dps&quot; $ do
+      s &lt;- jsonData :: ActionM UISetting
+      json $ DP.maxDps (has_ward s) (has_blink s) (cheap_crit s) (desired_lifesteal s) (hero_name s) 0 (enemy_armor s) 
+    post &quot;/optimize&quot; $ do
+      build &lt;- jsonData :: ActionM OP.Build
+      r &lt;- liftIO $ OP.optimize build
+      json r
+</code></pre>
+
+<p>Sample output:</p>
+
+<p><img src="/images/optimizer.png"></img></p>
+
+<p>And there you have it, a solver for the best DPS cards to build for Paragon for
+any hero! <a href="https://github.com/steveshogren/haskell-optimization/tree/a298b264e0d84ded3883b0948a12768a490d57eb">Code available here.</a></p>
 
   </div>
 </div>
@@ -269,18 +347,12 @@ possible.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/better-oo-design/" title="OO-Design Part 1: Increasing Reuse With Noun Interfaces">
+          <a href="http://deliberate-software.com/papers-we-love-1/" title="Papers We Love: The Byzantine Generals Problem">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/coq-frustrations/" title="Darkest Proof: Day 1">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   

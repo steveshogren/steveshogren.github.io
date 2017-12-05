@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://deliberate-software.com/optimization/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/papers-we-love-1/</loc>
     <lastmod>2017-08-04T00:00:00+00:00</lastmod>
   </url>
@@ -421,7 +426,7 @@
   
   <url>
     <loc>http://deliberate-software.com/post/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -450,7 +455,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/technical-skills/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -476,7 +481,7 @@
   
   <url>
     <loc>http://deliberate-software.com/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

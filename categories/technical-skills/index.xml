@@ -6,10 +6,21 @@
     <description>Recent content in Technical Skills on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MOBA Item Optimization In Haskell</title>
+      <link>http://deliberate-software.com/optimization/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/optimization/</guid>
+      <description>TL;DR: Made a website for optimizing Paragon cards for DPS, code available here.
+I love MOBA&amp;rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my current go-to game, I wanted to determine the cards to buy to maximize my Damage Per Second (DPS).
+First things first, I found a spreadsheet of all the cards, colors, costs, and stats. Using some Vim magic, I made them into a list of tuples:</description>
+    </item>
     
     <item>
       <title>Papers We Love: The Byzantine Generals Problem</title>
@@ -74,8 +85,8 @@ This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rul
       
       <guid>http://deliberate-software.com/anemic-domain-model/</guid>
       <description>Part 2 of the series OO-Design
-The Anemic Domain Model is often quoted as an anti-pattern in Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
-A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Not only that, but most examples of unit-testing use Anemic Domain Models!</description>
+The Anemic Domain Model is often quoted as an anti-pattern in the terminology of Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
+A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Most examples of unit-testing use Anemic Domain Models!</description>
     </item>
     
     <item>
