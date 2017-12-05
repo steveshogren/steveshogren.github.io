@@ -17,7 +17,7 @@
       <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/optimization/</guid>
-      <description>TL;DR: Made a website for optimizing Paragon cards for DPS, code available here.
+      <description>TL;DR: Made a website for optimizing Paragon cards using the GNU Linear Programming Kit and Haskell. Code available here.
 I love MOBA&amp;rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my current go-to game, I wanted to determine the cards to buy to maximize my Damage Per Second (DPS).
 First things first, I found a spreadsheet of all the cards, colors, costs, and stats. Using some Vim magic, I made them into a list of tuples:</description>
     </item>
