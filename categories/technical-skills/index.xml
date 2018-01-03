@@ -6,10 +6,22 @@
     <description>Recent content in Technical Skills on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OO-Design Part 3: When to Apply Encapsulation</title>
+      <link>http://deliberate-software.com/when-encapsulation/</link>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/when-encapsulation/</guid>
+      <description>Part 3 of the series OO-Design
+As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
+Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
+Encapsulation is the design of trust boundaries between programmers. A well-encapsulated API ensures that other programmers cannot put your library or service into an invalid state.</description>
+    </item>
     
     <item>
       <title>MOBA Item Optimization In Haskell</title>
@@ -20,18 +32,6 @@
       <description>TL;DR: Made a website for optimizing Paragon cards using the GNU Linear Programming Kit and Haskell. Code available here.
 I love MOBA&amp;rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my current go-to game, I wanted to determine the cards to buy to maximize my Damage Per Second (DPS).
 First things first, I found a spreadsheet of all the cards, colors, costs, and stats. Using some Vim magic, I made them into a list of tuples:</description>
-    </item>
-    
-    <item>
-      <title>OO-Design Part 3: When to Apply Encapsulation</title>
-      <link>http://deliberate-software.com/when-encapsulation/</link>
-      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/when-encapsulation/</guid>
-      <description>Part 3 of the series OO-Design
-As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
-Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
-Encapsulation is the design of trust boundaries between programmers. A well-encapsulated API ensures that other programmers cannot put your library or service into an invalid state.</description>
     </item>
     
     <item>
