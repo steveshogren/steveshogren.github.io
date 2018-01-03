@@ -7,6 +7,11 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/when-encapsulation/</loc>
+    <lastmod>2017-11-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/papers-we-love-1/</loc>
     <lastmod>2017-08-04T00:00:00+00:00</lastmod>
   </url>
@@ -363,7 +368,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/csharp/</loc>
-    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -393,7 +398,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/java/</loc>
-    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -415,7 +420,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/oo-design/</loc>
-    <lastmod>2016-11-16T00:00:00+00:00</lastmod>
+    <lastmod>2017-11-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

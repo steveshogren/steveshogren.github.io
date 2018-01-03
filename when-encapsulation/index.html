@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>deliberate software </title>
+  <title>OO-Design Part 3: When to Apply Encapsulation  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,37 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="deliberate software ">
+<meta property="og:title" content="OO-Design Part 3: When to Apply Encapsulation  &middot; deliberate software ">
 <meta property="og:site_name" content="deliberate software"/>
-<meta property="og:url" content="http://deliberate-software.com/" />
+<meta property="og:url" content="http://deliberate-software.com/when-encapsulation/" />
 <meta property="og:locale" content="en-us">
 
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2017-11-30T00:00:00Z" />
+<meta property="og:article:modified_time" content="2017-11-30T00:00:00Z" />
+
+  
+
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "OO-Design Part 3: When to Apply Encapsulation",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-11-30",
+    "description": "",
+    "wordCount": 263
+  }
+</script>
 
 
-<link rel="canonical" href="http://deliberate-software.com/" />
+<link rel="canonical" href="http://deliberate-software.com/when-encapsulation/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -108,170 +129,142 @@
 
 
 
-
-
-
-
-
-<div class="centereded pagetopbookbar" >
+<div class="centereded pagetopbookbar">
   <a href="https://leanpub.com/deliberatevim"
      style="color:white"
      role="button"><span class="thevimlink"></span> <span style="text-decoration:underline">10 Minute Vim</span>!</a>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      
+<div class="text-center">
+  <h1 class="centereded">OO-Design Part 3: When to Apply Encapsulation
+</h1>
 
-<div class="container homecontainer">
-  <div class="col-xs-12 col-sm-12 col-md-9">
 
-    
-    
+  
+<div class="metas col-md-12">
+<small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2017-11-30">30 Nov, 2017</time>
+</small>
 
-    
-    
-    
-    
-    <h1 class="centereded herotext">welcome to deliberate software</h1>
-    <h3 class="centereded herotext">(a bunch of stuff I've learned while solving problems)</h3>
 
-    <div class="col-sm-6 col-md-6">
-      <h3 class="">top</h3>
-      <ul class="sidebar_ul">
-        <li class="sidebar_li"><a href="/page/books">Books That Shape My Thinking</a></li>
-        <li class="sidebar_li"><a href="/page/training">Learn To Program For Free</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/">Six Unusual Reasons why Clojure is a Delight</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
-        
-      </ul>
-    </div>
-    <div class="col-sm-6 col-md-6">
-      <h3 class="">recent</h3>
-      <ul class="sidebar_ul">
-        
-        
-        <li class="sidebar_li">
-          <a href="http://deliberate-software.com/optimization/">MOBA Item Optimization In Haskell</a>
-          
-          
-          
-          
-          
-        </li>
-        
-        
-        <li class="sidebar_li">
-          <a href="http://deliberate-software.com/when-encapsulation/">OO-Design Part 3: When to Apply Encapsulation</a>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-        </li>
-        
-        
-        <li class="sidebar_li">
-          <a href="http://deliberate-software.com/papers-we-love-1/">Papers We Love: The Byzantine Generals Problem</a>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-        </li>
-        
-        
-        <li class="sidebar_li">
-          <a href="http://deliberate-software.com/patterns/">Design Pattern Dangers</a>
-          
-          
-          
-          
-          
-        </li>
-        
-        
-        <li class="sidebar_li">
-          <a href="http://deliberate-software.com/coq_day3/">Darkest Proof: Day 3</a>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-        </li>
-        
-      </ul>
-    </div>
+  <small>
+  &middot; Read in about 2 min
+  &middot; (263 Words)
+</small>
 
-<div class="col-sm-6 col-md-6">
-    <h3>development</h3>
-    <ul class="sidebar_ul">
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/pop-culture-architecture/">Avoid Pop Culture Architecture</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/">Haskell is the Dark Souls of Programming</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/simplemock-unit-test-mocking/">SimpleMock: Language Agnostic Unit Test Mocking</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/safety-rank-part-2/">Programming Language Safety Score Mark 2</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/function-pattern-matching/">Pattern Matching - Making the Compiler Work For You</a></li>
-        
-    </ul>
-</div>
-<div class="col-sm-6 col-md-6">
-    <h3>management</h3>
-    <ul class="sidebar_ul">
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/self-organizing-teams/">When Self-Organizing Teams Are Effective</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/compassionate-interviewing/">Designing A Compassionate Interview For A High Performing Individual</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/">Daily Meditation Improves Technical Leadership</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/on-defeat/">Interview Humiliation</a></li>
-        
-        <li class="sidebar_li"><a href="http://deliberate-software.com/ego-driven-development/">Ego Driven Development</a></li>
-        
-    </ul>
+
+
+<div class="margin-12">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
+  
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
+  
+  <a href="http://deliberate-software.com/categories/java" class="label label-default">java</a>
+  
+  <a href="http://deliberate-software.com/categories/oo-design" class="label label-default">oo-design</a>
+  
+
+ </div>
+<br>
 </div>
 
+</div>
 
+      <div class="">
     
+  <div class="content">
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="centereded">
-      <a href= "/page/post" class="btn btn-primary btn-lg" role="button">All Posts</a>
-    </div>
+
+<p>Part 3 of the series <a href="/categories/oo-design/">OO-Design</a></p>
+
+<p>As discussed in the previous post
+<a href="/anemic-domain-model/">Anemic Domain Models Are Healthy</a>, encapsulation makes
+code harder to test. We should make important actions easy to do, and testing is
+important.</p>
+
+<p>Encapsulation and domain modeling are separate concepts. A good domain model is
+possible with or without encapsulation.</p>
+
+<p>Encapsulation is the design of trust boundaries between programmers. A
+well-encapsulated API ensures that other programmers cannot put your library or
+service into an invalid state. For example, a builder-pattern API can be
+helpful, self-documenting, and prevent invalid states.</p>
+
+<blockquote>
+<p>Encapsulation makes good sense between different teams</p>
+</blockquote>
+
+<p>Code ownership boundaries are a good place to apply the rules of encapsulation.
+Each team of programmers can work against an encapsulated API without having to
+read the internals of someone else&rsquo;s codebase.</p>
+
+<h3 id="encapsulation-costs-more">Encapsulation Costs More</h3>
+
+<p>Good encapsulation is often a lot of extra work for a single team in a single
+codebase. APIs easily devolve into
+<a href="https://en.wikipedia.org/wiki/Leaky_abstraction">leaky abstractions</a>, so extra
+care and thought must be spent to offer full utility without allowing invalid
+states. That extra time and thought should only be spent when necessary.</p>
+
+<p>While appropriate for libraries and API boundaries, encapsulation is often
+misapplied to <em>internal code</em> with <em>shared ownership</em>. We pretend that we cannot
+trust ourselves to correctly use our own domain models. Simply putting logic
+inside a class does not protect it. That is &ldquo;encapsulation theater&rdquo;. You and
+your coworkers all have access to the code, they can do <em>anything they want</em>.
+&ldquo;Hiding&rdquo; logic inside a class instead of putting in a pure function only makes
+it harder to test!</p>
+
   </div>
-  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-    <a href= "/page/philosophy" class="plainlink">
+</div>
+
+
+      <footer>
+  <div class="centereded">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="steveshogren" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      
+  
+    <nav><ul class="pager">
+    
+        <li class="previous">
+          <a href="http://deliberate-software.com/papers-we-love-1/" title="Papers We Love: The Byzantine Generals Problem">
+            <span aria-hidden="true">&larr;</span>Previous
+          </a>
+        </li>
+    
+
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/optimization/" title="MOBA Item Optimization In Haskell">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    
+    </ul> </nav>
+  
+
+
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  
+
+</div>
+
+</footer>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <a href= "/page/philosophy" class="plainlink">
   <div class="sidepic centereded">
     
   </div>
@@ -360,9 +353,9 @@
  }
 </script>
 
+    </div>
   </div>
 </div>
-
       <footer class="footer">
     <div class="container hidden-print">
     <div class="row">
@@ -415,4 +408,5 @@ if (document.location.hostname.search("deliberate-software.com") !== -1) {
 
   </body>
 </html>
+
 

@@ -23,6 +23,18 @@ First things first, I found a spreadsheet of all the cards, colors, costs, and s
     </item>
     
     <item>
+      <title>OO-Design Part 3: When to Apply Encapsulation</title>
+      <link>http://deliberate-software.com/when-encapsulation/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/when-encapsulation/</guid>
+      <description>Part 3 of the series OO-Design
+As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
+Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
+Encapsulation is the design of trust boundaries between programmers. A well-encapsulated API ensures that other programmers cannot put your library or service into an invalid state.</description>
+    </item>
+    
+    <item>
       <title>Papers We Love: The Byzantine Generals Problem</title>
       <link>http://deliberate-software.com/papers-we-love-1/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
