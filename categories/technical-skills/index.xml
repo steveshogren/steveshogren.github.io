@@ -6,10 +6,20 @@
     <description>Recent content in Technical Skills on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/technical-skills/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scientific Software Design: Human Working Memory</title>
+      <link>http://deliberate-software.com/healthy-design-patterns/</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/healthy-design-patterns/</guid>
+      <description>Good design must be measurable Good software design should be scientific, universal, and measurable. Saying &amp;ldquo;this code is good&amp;rdquo;, or &amp;ldquo;this code is crap&amp;rdquo; is useless if we cannot even agree on what is good design.
+Design philosophies like &amp;ldquo;Single Responsibility Principle&amp;rdquo; can&amp;rsquo;t be objectively measured. The programmer must interpret if the code they are reading actually adheres to the pattern. Such an interpretation is subject to biases and confusion.</description>
+    </item>
     
     <item>
       <title>OO-Design Part 3: When to Apply Encapsulation</title>
