@@ -6,10 +6,21 @@
     <description>Recent content in Posts on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Simple Haskell Automation in Emacs</title>
+      <link>http://deliberate-software.com/emacs-customization/</link>
+      <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/emacs-customization/</guid>
+      <description>I am working through the amazing Data 61 Functional Programming Course (seriously, put it on your list!) and I found myself doing a repeated set of actions. Repeated sets of actions are perfect for automation!
+The course has some sections with comments indicating the expected behavior:
+-- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :. Nil)) &amp;quot;ABC&amp;quot; -- Result &amp;gt;BC&amp;lt; &#39;A&#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :.</description>
+    </item>
     
     <item>
       <title>Scientific Software Design: Human Working Memory</title>
