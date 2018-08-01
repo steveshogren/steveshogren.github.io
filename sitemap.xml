@@ -349,10 +349,6 @@
   </url>
   
   <url>
-    <loc>http://deliberate-software.com/page/books/</loc>
-  </url>
-  
-  <url>
     <loc>http://deliberate-software.com/categories/</loc>
     <lastmod>2017-08-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -498,6 +494,10 @@
   
   <url>
     <loc>http://deliberate-software.com/page/post/</loc>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/page/books/</loc>
   </url>
   
   <url>

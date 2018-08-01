@@ -698,17 +698,6 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
     </item>
     
     <item>
-      <title>Books That Shape My Thinking</title>
-      <link>http://deliberate-software.com/page/books/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://deliberate-software.com/page/books/</guid>
-      <description>Books That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;ldquo;What Book Should I Read Next?&amp;rdquo;.
-Bold are my highest recommendations. The indicates a link with a summary.
-Programming Languages Structure and Interpretation of Computer Programs (Scheme) * Programming Languages - Application And Interpretation (Typed Racket) * Haskell Programming From First Principles Let Over Lambda (Common Lisp, Forth) * Clojure Programming F# 3.0 Haskell And Yesod Javascript the Good Parts Learn You a Haskell For Great Good!</description>
-    </item>
-    
-    <item>
       <title>My Philosophy</title>
       <link>http://deliberate-software.com/page/philosophy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -723,7 +712,7 @@ Programming Languages Structure and Interpretation of Computer Programs (Scheme)
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/focused/</guid>
-      <description>Targeted Posts top Interview Humiliation Six Unusual Reasons why Clojure is a Delight Ego Driven Development   new developers Learning Lisp Was Hard Suggested Skill Progression What Book Should I Read Next? You Should Go Home at 5:01 How to Suck Less at Your New Job   seasoned developers Avoid Pop Culture Architecture Haskell is the Dark Souls of Programming SimpleMock: Language Agnostic Unit Test Mocking Programming Language Safety Score Mark 2 Pattern Matching - Making the Compiler Work For You   managers When Self-Organizing Teams Are Effective Designing A Compassionate Interview For A High Performing Individual Daily Meditation Improves Technical Leadership Interview Humiliation Ego Driven Development    </description>
+      <description>Targeted Posts top Books That Shape My Thinking Learn To Program For Free Interview Humiliation Six Unusual Reasons why Clojure is a Delight Ego Driven Development   new developers Learning Lisp Was Hard Suggested Skill Progression What Book Should I Read Next? You Should Go Home at 5:01 How to Suck Less at Your New Job   seasoned developers Avoid Pop Culture Architecture Haskell is the Dark Souls of Programming SimpleMock: Language Agnostic Unit Test Mocking Programming Language Safety Score Mark 2 Pattern Matching - Making the Compiler Work For You   managers When Self-Organizing Teams Are Effective Designing A Compassionate Interview For A High Performing Individual Daily Meditation Improves Technical Leadership Interview Humiliation Ego Driven Development    </description>
     </item>
     
     <item>
@@ -733,6 +722,17 @@ Programming Languages Structure and Interpretation of Computer Programs (Scheme)
       
       <guid>http://deliberate-software.com/page/post/</guid>
       <description>All Posts Simple Haskell Automation in Emacs  technical skills emacs fp-course   Scientific Software Design: Human Working Memory  technical skills oo-design   OO-Design Part 3: When to Apply Encapsulation  technical skills csharp java oo-design   MOBA Item Optimization In Haskell  technical skills   Papers We Love: The Byzantine Generals Problem  technical skills academic papers proofs   Design Pattern Dangers  technical skills   Darkest Proof: Day 3  technical skills coq proofs   What Keeps a Self-Organizing Team From Falling Apart  management meta game self-organization   Darkest Proof: Day 2  technical skills coq proofs   Darkest Proof: Day 1  technical skills coq proofs   OO-Design Part 2: Anemic Domain Models Are Healthy  technical skills csharp java oo-design   OO-Design Part 1: Increasing Reuse With Noun Interfaces  technical skills csharp java oo-design   Ten Years of Pair Programming  management unit-testing self-organization   Vim Refactoring Patterns  technical skills vim refactoring   Modern Dependency Injection  technical skills architecture csharp unit-testing   Editor Abstractions  technical skills emacs vim   Wrangling State In Haskell  technical skills haskell   Hot Loading Angular2 With State  technical skills clojure clojurescript angular   Using Angular2 in ClojureScript  technical skills clojure clojurescript angular   Wrangling State In Clojure  technical skills clojure   When Self-Organizing Teams Are Effective  management meta game self-organization   Avoid Pop Culture Architecture  architecture Technical Skills Meta game   Haskell is the Dark Souls of Programming  haskell Technical Skills   Development Disappointment Disorder  Meta Game management   Designing A Compassionate Interview For A High Performing Individual  Meta Game management   Daily Meditation Improves Technical Leadership  Meta Game management   Conj Talk: Teaching Clojure at IBM  Meta Game clojure   Interview Humiliation  meta game interviews management   F# Unit Testing With SimpleMock  fsharp unit testing Technical Skills   SimpleMock: Language Agnostic Unit Test Mocking  unit testing csharp Technical Skills architecture   Programming Language Safety Score Mark 2  haskell clojure fsharp csharp Technical Skills   Language Versions    Learning Lisp Was Hard  clojure Meta Game   Superiority Fatigue  Meta Game   Case Study: Superior Domain Modeling in F#  Technical Skills fsharp csharp   Programming Language Safety Ranking  Technical Skills clojure fsharp csharp   Six Unusual Reasons why Clojure is a Delight  clojure Technical Skills Unit Testing   Christmas F# Polymorphism  Technical Skills fsharp architecture   Emacs Project Tip  Technical Skills emacs   Suggested Skill Progression  Technical Skills Meta Game management   What Book Should I Read Next?</description>
+    </item>
+    
+    <item>
+      <title>Writings That Shape My Thinking</title>
+      <link>http://deliberate-software.com/page/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/page/books/</guid>
+      <description>Writings That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;ldquo;What Book Should I Read Next?&amp;rdquo;.
+Bold are my highest recommendations. The indicates a link with a summary.
+Programming Languages Structure and Interpretation of Computer Programs (Scheme) * Programming Languages - Application And Interpretation (Typed Racket) * Haskell Programming From First Principles Let Over Lambda (Common Lisp, Forth) * Clojure Programming F# 3.0 Haskell And Yesod Javascript the Good Parts Learn You a Haskell For Great Good!</description>
     </item>
     
   </channel>
