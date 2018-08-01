@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Active Record Pattern Testing  &middot; deliberate software</title>
+  <title>  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,19 +17,17 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Active Record Pattern Testing  &middot; deliberate software ">
+<meta property="og:title" content="  &middot; deliberate software ">
 <meta property="og:site_name" content="deliberate software"/>
-<meta property="og:url" content="http://deliberate-software.com/active-record-pattern-testing/" />
+<meta property="og:url" content="http://deliberate-software.com/papers_we_love_page2/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2011-04-12T00:00:00Z" />
-<meta property="og:article:modified_time" content="2011-04-12T00:00:00Z" />
+<meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+<meta property="og:article:modified_time" content="0001-01-01T00:00:00Z" />
 
-  
-    
   
 
   
@@ -37,19 +35,19 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Active Record Pattern Testing",
+    "headline": "",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2011-04-12",
+    "datePublished": "0001-01-01",
     "description": "",
-    "wordCount": 461
+    "wordCount": 4
   }
 </script>
 
 
-<link rel="canonical" href="http://deliberate-software.com/active-record-pattern-testing/" />
+<link rel="canonical" href="http://deliberate-software.com/papers_we_love_page2/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -141,7 +139,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
 <div class="text-center">
-  <h1 class="centereded">Active Record Pattern Testing
+  <h1 class="centereded">
 </h1>
 
 
@@ -149,23 +147,18 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2011-04-12">12 Apr, 2011</time>
+  <time datetime="0001-01-01">1 Jan, 0001</time>
 </small>
 
 
   <small>
-  &middot; Read in about 3 min
-  &middot; (461 Words)
+  &middot; Read in about 1 min
+  &middot; (4 Words)
 </small>
 
 
 
 <div class="margin-12">
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
-  
-
  </div>
 <br>
 </div>
@@ -175,7 +168,10 @@
       <div class="">
     
   <div class="content">
-    <p>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods. This meant that each class would retrieve references to its dependencies by simply calling the appropriate static methods on the class in question, sometimes even calling these static methods for references to other instances of itself.<p /> Under this format, unit testing became impossible, because really the only way to test anything was to write an end-to-end database test, covering every class and method and their eventual changes to the database. And of course, these took sometimes over a second each to run, because they had to setup and tear down the database from scratch every time.<p /> Obviously, no unit testing, slow tests, and the incredible inter-dependencies meant that potentially any change could cause dozens to hundreds of tests to fail, making re-factoring an impossibly burdensome task, because the whole test base took hours to run.<p /> So: what was my solution? Well, it was several-fold. <p />First, I realized that these Active Record classes with a ton of business logic have really two responsibilities, one that maintains the state, and one that changes behavior on that state. Conveniently, that is exactly where I needed a seam for testing. Since we could not separate these classes from the database in tests, I created a new class that would only be business rules and behavior, and it would wrap the persistence class by holding it and making its changes to that internal classes' state. I then moved all the methods into this outer class. Through some php magic, I redirected the magic __get and __set on the outer class to point to the wrapped persistence class, so the outer methods would all work as before.<p /> Suddenly, testing the business logic on that outer class that would normally update and query our databases could be tested by injecting a fake persistence class, in this case an empty class with the same interface and fields.<p /> And testing the persistence class was now a simple affair of putting a few integration tests around the crud of the records and fields.<p />This solution only solved part of the issue, but it started to break apart the dependencies and separate concerns within the class.<p /> The next part of the solution involved breaking apart dependencies to the other classes, and I will write that up next time.</p>
+    <p><a href="https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf">https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf</a>
+<a href="http://cidrdb.org/cidr2005/papers/P12.pdf">http://cidrdb.org/cidr2005/papers/P12.pdf</a>
+<a href="https://amturing.acm.org/p558-lamport.pdf">https://amturing.acm.org/p558-lamport.pdf</a>
+<a href="https://bitcoin.org/bitcoin.pdf">https://bitcoin.org/bitcoin.pdf</a></p>
 
   </div>
 </div>
@@ -192,16 +188,10 @@
   
     <nav><ul class="pager">
     
-        <li class="previous">
-          <a href="http://deliberate-software.com/papers_we_love_page2/" title="">
-            <span aria-hidden="true">&larr;</span>Previous
-          </a>
-        </li>
-    
 
     
       <li class="next">
-        <a href="http://deliberate-software.com/actionscript-unit-testing/" title="Actionscript Unit Testing">
+        <a href="http://deliberate-software.com/active-record-pattern-testing/" title="Active Record Pattern Testing">
             Next <span aria-hidden="true">&rarr;</span>
         </a>
       </li>

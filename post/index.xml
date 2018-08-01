@@ -687,5 +687,14 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <description>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>http://deliberate-software.com/papers_we_love_page2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/papers_we_love_page2/</guid>
+      <description>https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf http://cidrdb.org/cidr2005/papers/P12.pdf https://amturing.acm.org/p558-lamport.pdf https://bitcoin.org/bitcoin.pdf</description>
+    </item>
+    
   </channel>
 </rss>
