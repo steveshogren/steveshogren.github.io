@@ -25,8 +25,8 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2017-04-26T00:00:00Z" />
-<meta property="og:article:modified_time" content="2017-04-26T00:00:00Z" />
+<meta property="og:article:published_time" content="2018-08-02T00:00:00Z" />
+<meta property="og:article:modified_time" content="2018-08-02T00:00:00Z" />
 
   
 
@@ -40,9 +40,9 @@
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2017-04-26",
+    "datePublished": "2018-08-02",
     "description": "",
-    "wordCount": 413
+    "wordCount": 504
   }
 </script>
 
@@ -59,6 +59,8 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
 
 
 
@@ -142,7 +144,7 @@
    
 
 <div class="text-center">
-  <h1 class="centereded">DRAFT :: DSLs Are Terrible
+  <h1 class="centereded">DSLs Are Terrible
 </h1>
 
 
@@ -150,13 +152,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2017-04-26">26 Apr, 2017</time>
+  <time datetime="2018-08-02">2 Aug, 2018</time>
 </small>
 
 
   <small>
-  &middot; Read in about 2 min
-  &middot; (413 Words)
+  &middot; Read in about 3 min
+  &middot; (504 Words)
 </small>
 
 
@@ -182,24 +184,31 @@
   <div class="content">
     
 
+<p><strong>Trigger warning:</strong> this is a silly rant I wrote a few years ago after raging at
+the Hugo blog engine for a couple hours. I think its funny and still relevant,
+so hyperbolic nonsense incoming!</p>
+
 <p>DSL&rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special
-snowflake, delicately floating from the heavens straight into in your eye. Only
-then you realize the snowflake is actually a metal throwing star.</p>
+snowflake, delicately floating from the heavens straight into in your eye.</p>
 
-<p>The problem with a DSL is that it always starts so simple: &ldquo;can we just do this
-one edge case real quick?&rdquo; Over time, it grows into a whole <a href="https://en.wikipedia.org/wiki/Inner-platform_effect">inner
-platform</a> often re-creating
-the outer platform it was intended to simplify. The DSL becomes a buggy version
-of the underlying system, but often it has less clear semantics and
-documentation.</p>
+<p>The problem with a DSL is that it always starts so simple. You take a complex
+problem and represent it simply with some nice pretty syntax. Everything is
+great until: &ldquo;can we just do this one edge case real quick?&rdquo; Over time, it grows
+into a whole
+<a href="https://en.wikipedia.org/wiki/Inner-platform_effect">inner platform</a> often
+re-creating the whole outer platform it was intended to simplify. The DSL
+becomes a buggy version of the outer system, but often it has less clear
+semantics and documentation. Because many DSL&rsquo;s are designed to be &ldquo;not a
+programming language&rdquo;, eventually they become far worse: a programming language
+written in psuedo-English. And we all know how regular and clear English is!</p>
 
-<h3 id="any-examples">Any Examples?</h3>
+<h3 id="any-examples-you-betcha">Any Examples? You betcha</h3>
 
 <p>For example: the DSL for filtering posts in the Hugo blog engine. (I otherwise
 love Hugo. Whooo, go Hugo!) But time to lay out some tough love. The built-in
 templating DSL is the worst. Straight Go would be fine. The docs for Go are
-great and Go is easy. But unfortunately a special DSL is here to poop in your
-soup.</p>
+great, and Go is so magically easy. But unfortunately a special DSL is here to
+poop in your soup.</p>
 
 <p>How do I filter for the top pages that are posts and not drafts? Let&rsquo;s see what
 <em>doesn&rsquo;t</em> work:</p>
@@ -212,13 +221,15 @@ soup.</p>
 <p>Maybe the parens mess it up?</p>
 
 <pre><code>{{ range first 5 (where .Site.Pages &quot;Type&quot; &quot;post&quot; and .Draft)  }}
-    &lt;and&gt;: wrong number of args for and: want at least 1 got 0 in theme/partials/homepage.html
+
+&gt; ERROR: &lt;and&gt;: wrong number of args for and: want at least 1 got 0 in theme/partials/homepage.html
 </code></pre>
 
 <p>Perhaps parens again?</p>
 
 <pre><code>{{ range first 5 (where (and (.Site.Pages &quot;Type&quot; &quot;post&quot;) .Draft))  }}
-    &lt;where&gt;: wrong number of args for where: want at least 2 got 1 in theme/partials/homepage.html
+
+&gt; ERROR: &lt;where&gt;: wrong number of args for where: want at least 2 got 1 in theme/partials/homepage.html
 </code></pre>
 
 <p>Ah, so <code>where</code> is a special DSL function TOO! No simple <code>bool</code> argument for
@@ -228,15 +239,19 @@ soup.</p>
 
 <p>Perhaps a quick search for this exact issue will help? Look, someone on the
 forum has a question about this! Click the link, &ldquo;You must be signed in to see
-this thread&rdquo;. Rage face.</p>
+this thread&rdquo;.</p>
+
+<p><img src="/images/upset.jpg"></img></p>
 
 <p>Google cache still has the text! Someone reported this as a bug with <code>where</code>!
 Fixed Dec 2015! What build of Hugo am I using? Nov 2015!</p>
 
-<p>Annnnd after upgrading Hugo, now I just an unexplained &ldquo;panic: index out of range&rdquo; when
+<p>Annnnd after upgrading Hugo, now I just an unexplained <code>panic: index out of range</code> when
 building the site.</p>
 
-<p>FML.</p>
+<p><img src="/images/angry.jpg"></img></p>
+
+<p>FML. I&rsquo;ll just put in the URL&rsquo;s by hand, like a savage.</p>
 
   </div>
 </div>
@@ -254,18 +269,12 @@ building the site.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/self-organizing-balance/" title="What Keeps a Self-Organizing Team From Falling Apart">
+          <a href="http://deliberate-software.com/emacs-customization/" title="Simple Haskell Automation in Emacs">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/coq_day3/" title="Darkest Proof: Day 3">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   
@@ -298,7 +307,7 @@ building the site.</p>
     software developer, manager, author, speaker
   </span>
 </a>
-<h3 class="col-xs-12 col-sm-12" id="name">books:</h3>
+<h3 class="col-xs-12 col-sm-12" id="name">my books:</h3>
 
 
 <a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
@@ -325,17 +334,11 @@ building the site.</p>
 
 
 
-
-
-
-
 <h3 class=" col-xs-12 col-sm-12" id="name">posts for:</h3>
 <div class="col-xs-12 col-sm-12">
   <ul class="sidebar_ul">
     <li class="sidebar_li"><a href="/page/training">Learn To Program For Free</a></li>
-    <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
-    <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
-    <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Developers and managers</a></li>
     <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
   </ul>
 </div>
@@ -396,13 +399,6 @@ building the site.</p>
     
 
     
-<div class="container copyright">
-  
-  Deliberate Software 2016
-
-
-</div>
-
 
 
           </small>
