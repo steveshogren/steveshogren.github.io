@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Silly on deliberate software</title>
+    <link>http://deliberate-software.com/categories/silly/</link>
+    <description>Recent content in Silly on deliberate software</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://deliberate-software.com/categories/silly/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DSLs Are Terrible</title>
+      <link>http://deliberate-software.com/poor-dsls/</link>
+      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/poor-dsls/</guid>
+      <description>Trigger warning: this is a silly rant I wrote a few years ago after raging at the Hugo blog engine for a couple hours. I think its funny and still relevant, so hyperbolic nonsense incoming!
+DSL&amp;rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special snowflake, delicately floating from the heavens straight into in your eye.
+The problem with a DSL is that it always starts so simple.</description>
+    </item>
+    
+    <item>
+      <title>Darkest Proof: Day 3</title>
+      <link>http://deliberate-software.com/coq_day3/</link>
+      <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq_day3/</guid>
+      <description>Day three working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
+
+I am trying to prove a helper proof to use to rewrite another helper proof to use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t make this stuff up.
+I just need to prove this where S n is n + 1:</description>
+    </item>
+    
+    <item>
+      <title>Darkest Proof: Day 2</title>
+      <link>http://deliberate-software.com/coq-day2/</link>
+      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-day2/</guid>
+      <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
+
+Naming While trying to understand how rewrite works, I come across an obvious use-case:
+Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite &amp;lt;- IHn.  At this point, in current scope I have:</description>
+    </item>
+    
+    <item>
+      <title>Darkest Proof: Day 1</title>
+      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <description>Day one working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
+
+Precise Syntax I copied a sample from the book by hand, but it always caused Company-Coq to go into an infinite loop. I copied it again. Same deal.
+This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rules and such. But alas, it still fails.</description>
+    </item>
+    
+    <item>
+      <title>Haskell is the Dark Souls of Programming</title>
+      <link>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
+      <pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
+      <description>Please don&amp;rsquo;t hit me, Haskell does a great job of that already.
+I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable lore, a great combat type system, a cliff-wall difficulty curve, and unending punishment.
+I want to collect some statistics from the GitHub API.
+Step One - Stack I download stack and start a project:
+&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ .</description>
+    </item>
+    
+  </channel>
+</rss>

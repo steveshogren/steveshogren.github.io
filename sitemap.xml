@@ -487,6 +487,12 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/silly/</loc>
+    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/tags/</loc>
     <priority>0</priority>
   </url>
