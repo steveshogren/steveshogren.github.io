@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>DSLs Are Terrible  &middot; deliberate software</title>
+  <title>F# Domain Design: Interdependent Enums and Booleans  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,16 +17,16 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="DSLs Are Terrible  &middot; deliberate software ">
+<meta property="og:title" content="F# Domain Design: Interdependent Enums and Booleans  &middot; deliberate software ">
 <meta property="og:site_name" content="deliberate software"/>
-<meta property="og:url" content="http://deliberate-software.com/poor-dsls/" />
+<meta property="og:url" content="http://deliberate-software.com/fsharp-design-enums/" />
 <meta property="og:locale" content="en-us">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2018-08-02T00:00:00Z" />
-<meta property="og:article:modified_time" content="2018-08-02T00:00:00Z" />
+<meta property="og:article:published_time" content="2018-12-02T00:00:00Z" />
+<meta property="og:article:modified_time" content="2018-12-02T00:00:00Z" />
 
   
 
@@ -35,19 +35,19 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "DSLs Are Terrible",
+    "headline": "F# Domain Design: Interdependent Enums and Booleans",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2018-08-02",
+    "datePublished": "2018-12-02",
     "description": "",
-    "wordCount": 504
+    "wordCount": 483
   }
 </script>
 
 
-<link rel="canonical" href="http://deliberate-software.com/poor-dsls/" />
+<link rel="canonical" href="http://deliberate-software.com/fsharp-design-enums/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
@@ -138,13 +138,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
-   
-     
-     
-   
-
 <div class="text-center">
-  <h1 class="centereded">DSLs Are Terrible
+  <h1 class="centereded">F# Domain Design: Interdependent Enums and Booleans
 </h1>
 
 
@@ -152,13 +147,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2018-08-02">2 Aug, 2018</time>
+  <time datetime="2018-12-02">2 Dec, 2018</time>
 </small>
 
 
   <small>
   &middot; Read in about 3 min
-  &middot; (504 Words)
+  &middot; (483 Words)
 </small>
 
 
@@ -166,13 +161,11 @@
 <div class="margin-12">
   <i class="fa fa-tags"></i>
   
-  <a href="http://deliberate-software.com/categories/hugo" class="label label-default">hugo</a>
-  
-  <a href="http://deliberate-software.com/categories/dsl" class="label label-default">dsl</a>
-  
   <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">Technical Skills</a>
   
-  <a href="http://deliberate-software.com/categories/silly" class="label label-default">silly</a>
+  <a href="http://deliberate-software.com/categories/fsharp" class="label label-default">fsharp</a>
+  
+  <a href="http://deliberate-software.com/categories/csharp" class="label label-default">csharp</a>
   
 
  </div>
@@ -186,74 +179,143 @@
   <div class="content">
     
 
-<p><strong>Trigger warning:</strong> this is a silly rant I wrote a few years ago after raging at
-the Hugo blog engine for a couple hours. I think its funny and still relevant,
-so hyperbolic nonsense incoming!</p>
+<p>F# provides a clear way to simplify invalid states with discriminated unions.</p>
 
-<p>DSL&rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special
-snowflake, delicately floating from the heavens straight into in your eye.</p>
+<p>Interdependent enums and booleans are a symptom of a design that could be
+simplified. Many domain records and classes contain enums and booleans that
+change in a &ldquo;single transaction&rdquo;. These are interdependent and often allow many
+states that are not valid for the business.</p>
 
-<p>The problem with a DSL is that it always starts so simple. You take a complex
-problem and represent it simply with some nice pretty syntax. Everything is
-great until: &ldquo;can we just do this one edge case real quick?&rdquo; Over time, it grows
-into a whole
-<a href="https://en.wikipedia.org/wiki/Inner-platform_effect">inner platform</a> often
-re-creating the whole outer platform it was intended to simplify. The DSL
-becomes a buggy version of the outer system, but often it has less clear
-semantics and documentation. Because many DSL&rsquo;s are designed to be &ldquo;not a
-programming language&rdquo;, eventually they become far worse: a programming language
-written in psuedo-English. And we all know how regular and clear English is!</p>
+<p>Often they are designed this way because of the database. Consider a model I
+found last week that is stored in the database:</p>
 
-<h3 id="any-examples-you-betcha">Any Examples? You betcha</h3>
+<pre><code class="language-fsharp">type CalculationType = 
+    ISDASecurity
+    | ISDAUnsecured
+    | RepoNet
+    | RepoStandard
 
-<p>For example: the DSL for filtering posts in the Hugo blog engine. (I otherwise
-love Hugo. Whooo, go Hugo!) But time to lay out some tough love. The built-in
-templating DSL is the worst. Straight Go would be fine. The docs for Go are
-great, and Go is so magically easy. But unfortunately a special DSL is here to
-poop in your soup.</p>
+type LockupCalculationType = 
+    LockupOnlyCalculation
+    | NettedAgainstVariation
+    | NotNettedAgainstVariation
+    | NotValidForCalculation
 
-<p>How do I filter for the top pages that are posts and not drafts? Let&rsquo;s see what
-<em>doesn&rsquo;t</em> work:</p>
+type MarginTermType = 
+    Agreement
+    | Principal
+    | Internal
+    | Counterparty
 
-<pre><code>{{ range first 5 (where .Site.Pages (and (&quot;Type&quot; &quot;post&quot;) (not .Draft)))  }}
-{{ range first 5 (where and (.Site.Pages &quot;Type&quot; &quot;post&quot;) (not .Draft))  }}
-{{ range first 5 (where (and (.Site.Pages &quot;Type&quot; &quot;post&quot;) (not .Draft)))  }}
+type Details = {
+    CalculationType:CalculationType;
+    LockupCalculationType:LockupCalculationType;
+    MarginTermType:MarginTermType;
+}
 </code></pre>
 
-<p>Maybe the parens mess it up?</p>
+<p>While the domain is foreign, surely the pattern is not: several enums together
+on a record.</p>
 
-<pre><code>{{ range first 5 (where .Site.Pages &quot;Type&quot; &quot;post&quot; and .Draft)  }}
+<p>At first glance, there are 4^3 (or 64) combinations of those enums. In practice,
+there are far fewer valid business combinations. Designing records based on
+database rows makes it hard to see how the data is actually being used.</p>
 
-&gt; ERROR: &lt;and&gt;: wrong number of args for and: want at least 1 got 0 in theme/partials/homepage.html
+<p>Discriminated unions offers two ways to store such a record:</p>
+
+<h2 id="1-small-number-of-valid-states">1. Small Number of Valid States</h2>
+
+<p>If the data has only a few valid states, just store it as one single flattened
+type. For example, here is an example how the records are actually used in
+practice:</p>
+
+<pre><code class="language-fsharp">type CalculationType = 
+    ISDASecurity_NotNettedAgainstVariation
+    | ISDASecurity_NettedAgainstVariation
+    | ISDASecurity_NotValidForCalculation
+
+    | ISDAUnsecured
+    | ISDAUnsecured_LockupOnlyCalculation
+
+    | RepoNet_Principal
+    | RepoNet_Counterparty
+    | RepoNet_Agreement
+    | RepoNet_Internal
+
+    | RepoStandard_Principal
+    | RepoStandard_Counterparty
+    | RepoStandard_Agreement
+    | RepoStandard_Internal
 </code></pre>
 
-<p>Perhaps parens again?</p>
+<p>Most of the enums aren&rsquo;t even used, and can be grouped into a combination type.
+These can be &ldquo;expanded&rdquo; to get out any of the needed data.</p>
 
-<pre><code>{{ range first 5 (where (and (.Site.Pages &quot;Type&quot; &quot;post&quot;) .Draft))  }}
+<pre><code class="language-fsharp">let BuildCalculator = function 
+    | ISDASecurity_NotNettedAgainstVariation
+    | ISDASecurity_NettedAgainstVariation
+    | ISDASecurity_NotValidForCalculation
+    | ISDAUnsecured
+    | ISDAUnsecured_LockupOnlyCalculation -&gt; LockupCalculator()
+    | RepoNet_Principal
+    | RepoStandard_Principal -&gt; RepoPrinCalculator()
+    | RepoNet_Counterparty
+    | RepoStandard_Counterparty -&gt; RepoCptyCalculator()
+    | RepoNet_Agreement
+    | RepoStandard_Agreement -&gt; RepoAgreementCalculator()
+    | RepoNet_Internal
+    | RepoStandard_Internal -&gt; RepoInternalCalculator()
 
-&gt; ERROR: &lt;where&gt;: wrong number of args for where: want at least 2 got 1 in theme/partials/homepage.html
+let IsLockup = function 
+    | ISDASecurity_NotNettedAgainstVariation
+    | ISDASecurity_NettedAgainstVariation
+    | ISDASecurity_NotValidForCalculation
+    | ISDAUnsecured
+    | ISDAUnsecured_LockupOnlyCalculation -&gt; true
+    | RepoNet_Principal
+    | RepoStandard_Principal
+    | RepoNet_Counterparty
+    | RepoStandard_Counterparty
+    | RepoNet_Agreement
+    | RepoStandard_Agreement
+    | RepoNet_Internal
+    | RepoStandard_Internal -&gt; false
 </code></pre>
 
-<p>Ah, so <code>where</code> is a special DSL function TOO! No simple <code>bool</code> argument for
-<code>where</code>, nah, it: <code>Filters an array to only elements containing a matching value for a given field.</code> which I can only assume means the arguments are <code>where(list field value)</code>. Obviously.</p>
+<p>This storage type doesn&rsquo;t grow well, so is better for types that aren&rsquo;t likely
+to change or grow much.</p>
 
-<p>Maybe I could <code>intersect</code> the results of two <code>where</code> expressions? Nope, only supports ints and floats.</p>
+<h2 id="2-large-number-of-valid-states">2. Large Number of Valid States</h2>
 
-<p>Perhaps a quick search for this exact issue will help? Look, someone on the
-forum has a question about this! Click the link, &ldquo;You must be signed in to see
-this thread&rdquo;.</p>
+<p>Perhaps the previous example had actually provided 20+ valid states. As soon as
+we would go to add a 3rd type, that number could expand dramatically.</p>
 
-<p><img src="/images/upset.jpg"></img></p>
+<p>This is where discriminated unions can allow better nesting:</p>
 
-<p>Google cache still has the text! Someone reported this as a bug with <code>where</code>!
-Fixed Dec 2015! What build of Hugo am I using? Nov 2015!</p>
+<pre><code class="language-fsharp">type LockupCalculationType = 
+    NettedAgainstVariation
+    | NotNettedAgainstVariation
+    | NotValidForCalculation
 
-<p>Annnnd after upgrading Hugo, now I just an unexplained <code>panic: index out of range</code> when
-building the site.</p>
+type MarginTermType = 
+    Agreement
+    | Principal
+    | Internal
+    | Counterparty
 
-<p><img src="/images/angry.jpg"></img></p>
+type CalculationType = 
+    ISDASecurity of LockupCalculationType
+    | ISDAUnsecured of boolean
+    | RepoNet of MarginTermType
+    | RepoStandard of MarginTermType
 
-<p>FML. I&rsquo;ll just put in the URL&rsquo;s by hand, like a savage.</p>
+</code></pre>
+
+<p>This view of the data is a little more complicated, but makes it easier to
+expand when new types or combinations arise.</p>
+
+<p>In both cases, F# presents ways to store your data so that invalid states are
+not possible!</p>
 
   </div>
 </div>
@@ -271,18 +333,12 @@ building the site.</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/emacs-customization/" title="Simple Haskell Automation in Emacs">
+          <a href="http://deliberate-software.com/poor-dsls/" title="DSLs Are Terrible">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://deliberate-software.com/fsharp-design-enums/" title="F# Domain Design: Interdependent Enums and Booleans">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   

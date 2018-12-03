@@ -6,10 +6,21 @@
     <description>Recent content in Csharp on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>F# Domain Design: Interdependent Enums and Booleans</title>
+      <link>http://deliberate-software.com/fsharp-design-enums/</link>
+      <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/fsharp-design-enums/</guid>
+      <description>F# provides a clear way to simplify invalid states with discriminated unions.
+Interdependent enums and booleans are a symptom of a design that could be simplified. Many domain records and classes contain enums and booleans that change in a &amp;ldquo;single transaction&amp;rdquo;. These are interdependent and often allow many states that are not valid for the business.
+Often they are designed this way because of the database. Consider a model I found last week that is stored in the database:</description>
+    </item>
     
     <item>
       <title>OO-Design Part 3: When to Apply Encapsulation</title>

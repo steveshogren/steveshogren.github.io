@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://deliberate-software.com/fsharp-design-enums/</loc>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/poor-dsls/</loc>
     <lastmod>2018-08-02T00:00:00+00:00</lastmod>
   </url>
@@ -383,7 +388,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/csharp/</loc>
-    <lastmod>2018-01-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -407,7 +412,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/fsharp/</loc>
-    <lastmod>2015-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -464,7 +469,7 @@
   
   <url>
     <loc>http://deliberate-software.com/post/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -499,7 +504,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/technical-skills/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -529,7 +534,7 @@
   
   <url>
     <loc>http://deliberate-software.com/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
