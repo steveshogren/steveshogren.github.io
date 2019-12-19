@@ -42,7 +42,7 @@ I just need to prove this where S n is n + 1:</description>
       <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Naming While trying to understand how rewrite works, I come across an obvious use-case:
-Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite &amp;lt;- IHn.  At this point, in current scope I have:</description>
+Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite At this point, in current scope I have:</description>
     </item>
     
     <item>

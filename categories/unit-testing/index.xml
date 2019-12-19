@@ -30,7 +30,7 @@ In the last five years, the developers choose to implement Arlo Belshee&amp;rsqu
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
-1 public interface ICurrentTime { 2 DateTime GetCurrentTime(); 3 } 4 5 public class CurrentTime : ICurrentTime { 6 public DateTime GetCurrentTime() { 7  return DateTime.</description>
+public interface ICurrentTime { DateTime GetCurrentTime(); } public class CurrentTime : ICurrentTime { public DateTime GetCurrentTime() { return DateTime.</description>
     </item>
     
     <item>

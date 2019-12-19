@@ -197,17 +197,17 @@ into an <strong>infinite loop</strong>. I copied it again. Same deal.</p>
 <p>This isn&rsquo;t my first rodeo, I&rsquo;ve seen all sorts of syntax rules and such. But
 alas, it still fails.</p>
 
-<div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
-<span class="kn">Proof</span><span class="o">.</span>
-  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
-    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
-<span class="kn">Qed</span><span class="o">.</span>
-</code></pre></div>
+
+Theorem andb_commutative' : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+  { destruct c.
+    { reflexivity.}
+    { reflexivity.} }
+Qed.
 
 
 <p><img src="/images/upset.jpg"></img></p>
@@ -242,18 +242,18 @@ suggests stepping line-by-line with <code>C-cC-n</code>.</p>
 
 <p>YEP! I add that space in, and it works fine!</p>
 
-<p><div class="highlight"><pre><code class="language-coq" data-lang="coq"><span></span><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
-<span class="kn">Proof</span><span class="o">.</span>
-  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
-  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-<span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
-</span><span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
-</span>  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
-<span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
-</span><span class="hll">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
-</span><span class="kn">Qed</span><span class="o">.</span>
-</code></pre></div>
-</p>
+
+Theorem andb_commutative' : forall b c, andb b c = andb c b.
+Proof.
+  intros b c. destruct b.
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+  { destruct c.
+    { reflexivity. }
+    { reflexivity. } }
+Qed.
+
 
 <p><img src="/images/facepalm.jpg"></img></p>
 
@@ -331,6 +331,8 @@ suggests stepping line-by-line with <code>C-cC-n</code>.</p>
 </a>
 
 <h3 class="col-xs-12 col-sm-12" id="name"></h3>
+
+
 
 
 

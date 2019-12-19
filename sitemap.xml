@@ -7,11 +7,6 @@
   </url>
   
   <url>
-    <loc>http://deliberate-software.com/poor-dsls/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://deliberate-software.com/emacs-customization/</loc>
     <lastmod>2018-06-05T00:00:00+00:00</lastmod>
   </url>
@@ -34,6 +29,11 @@
   <url>
     <loc>http://deliberate-software.com/papers-we-love-1/</loc>
     <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/poor-dsls/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -394,7 +394,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/dsl/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -424,7 +424,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/hugo/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -493,7 +493,7 @@
   
   <url>
     <loc>http://deliberate-software.com/categories/silly/</loc>
-    <lastmod>2018-08-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
