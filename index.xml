@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>deliberate software</title>
@@ -6,10 +6,21 @@
     <description>Recent content on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Powerful Editor Abstractions</title>
+      <link>http://deliberate-software.com/editor-abstraction-types/</link>
+      <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/editor-abstraction-types/</guid>
+      <description>Not all editing tools are created equal.
+ Combining several simple ideas into one compound one, and thus all complex ideas are made - John Locke, An Essay Concerning Human Understanding (1690)
+ While many words have been spent on the Holy Editor Flame Wars, I&amp;rsquo;ve read very little that attempts to categorize what they actually do. Likewise, everyone pays homage to the concept of using the &amp;ldquo;best tool for the job&amp;rdquo;, but few talk about when each tool would be best.</description>
+    </item>
     
     <item>
       <title>F# Domain Design: Interdependent Enums and Booleans</title>
@@ -30,7 +41,7 @@ Often they are designed this way because of the database. Consider a model I fou
       <guid>http://deliberate-software.com/emacs-customization/</guid>
       <description>I am working through the amazing Data 61 Functional Programming Course (seriously, put it on your list!) and I found myself doing a repeated set of actions. Repeated sets of actions are perfect for automation!
 The course has some sections with comments indicating the expected behavior:
--- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :. Nil)) &amp;quot;ABC&amp;quot; -- Result &amp;gt;BC&amp;lt; &#39;A&#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :.</description>
+-- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :. Nil)) &amp;#34;ABC&amp;#34; -- Result &amp;gt;BC&amp;lt; &amp;#39;A&amp;#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :.</description>
     </item>
     
     <item>
@@ -84,7 +95,7 @@ Why Should I Read The Byzantine Generals Problem? The research in this paper all
       <guid>http://deliberate-software.com/poor-dsls/</guid>
       <description>Trigger warning: this is a silly rant I wrote a few years ago after raging at the Hugo blog engine for a couple hours. I think its funny and still relevant, so hyperbolic nonsense incoming!
 DSL&amp;rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special snowflake, delicately floating from the heavens straight into in your eye.
-The problem with a DSL is that it always starts so simple.</description>
+The problem with a DSL is that it always starts so simple. You take a complex problem and represent it simply with some nice pretty syntax.</description>
     </item>
     
     <item>
@@ -94,7 +105,7 @@ The problem with a DSL is that it always starts so simple.</description>
       
       <guid>http://deliberate-software.com/patterns/</guid>
       <description>Design Patterns and Domain Driven Design are two of the most dangerous books a new developer can read.
- The books themselves are not bad. They offer standardized names for common programming practices, which has made communication a lot easier for everyone. Sometimes you will see that a pattern is merely a new name for something you may have already invented. Perhaps what you were calling a &amp;ldquo;builder&amp;rdquo; they call a &amp;ldquo;factory&amp;rdquo;.</description>
+ The books themselves are not bad. They offer standardized names for common programming practices, which has made communication a lot easier for everyone. Sometimes you will see that a pattern is merely a new name for something you may have already invented. Perhaps what you were calling a &amp;ldquo;builder&amp;rdquo; they call a &amp;ldquo;factory&amp;quot;.</description>
     </item>
     
     <item>
@@ -129,7 +140,7 @@ Individual Empowerment Developers are free to remove pain points as needed, so m
       <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Naming While trying to understand how rewrite works, I come across an obvious use-case:
-Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite At this point, in current scope I have:</description>
+Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. induction n. simpl. reflexivity. simpl. rewrite &amp;lt;- IHn.  At this point, in current scope I have:</description>
     </item>
     
     <item>
@@ -196,7 +207,7 @@ Reorder A List Of Numbers A change left me with a file with unordered numbers.</
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
-public interface ICurrentTime { DateTime GetCurrentTime(); } public class CurrentTime : ICurrentTime { public DateTime GetCurrentTime() { return DateTime.</description>
+1public interface ICurrentTime { 2 DateTime GetCurrentTime(); 3} 4 5public class CurrentTime : ICurrentTime { 6 public DateTime GetCurrentTime() { 7 return DateTime.</description>
     </item>
     
     <item>
@@ -244,7 +255,7 @@ In this demo, we add three things to a list, then change the template that draws
       <guid>http://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
-lein new luminus cljs-angular2 +cljs  This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
+lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
     </item>
     
     <item>
@@ -256,7 +267,7 @@ lein new luminus cljs-angular2 +cljs  This builds a great basic starter project 
       <description>&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;
  Immutable languages make application state an interesting concept.
 In Clojure, you can deal with application state in two main ways. The first way is to pass the state around as parameters to your functions. An example of Pass As Parameter:
-(defn delete! [db-con table id] (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id])) ;; valid-for-delete omitted (defn delete-user [db-con user-id] (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id) (delete!</description>
+(defn delete! [db-con table id] (jdbc/delete! db-con table [&amp;#34;id=?&amp;#34; id])) ;; valid-for-delete omitted (defn delete-user [db-con user-id] (if (valid-for-delete db-con &amp;#34;user&amp;#34; user-id) (delete!</description>
     </item>
     
     <item>
@@ -291,7 +302,7 @@ Fashion is ultimately a signaling mechanism for status. We are attracted to fash
 I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable lore, a great combat type system, a cliff-wall difficulty curve, and unending punishment.
 I want to collect some statistics from the GitHub API.
 Step One - Stack I download stack and start a project:
-&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ .</description>
+&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;#34;new-template&amp;#34; to create project &amp;#34;github-stats&amp;#34; in github-stats/ .</description>
     </item>
     
     <item>
@@ -447,7 +458,7 @@ When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typicall
       <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
       <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
 In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
-Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;rsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;rdquo;.</description>
+Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;lsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;quot;.</description>
     </item>
     
     <item>
@@ -500,7 +511,7 @@ Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an
       <guid>http://deliberate-software.com/function-pattern-matching/</guid>
       <description>Pattern matching is a simple tool that will make your code safer and easier to read.
 Consider the following code that converts an Int to a string.
-public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;quot;&amp;quot;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;quot;zero&amp;quot;; break; case 1: ret = &amp;quot;one&amp;quot;; break; default: ret = &amp;quot;...&amp;quot;; break; } } else if (lang == Language.</description>
+public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;#34;&amp;#34;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;#34;zero&amp;#34;; break; case 1: ret = &amp;#34;one&amp;#34;; break; default: ret = &amp;#34;...&amp;#34;; break; } } else if (lang == Language.</description>
     </item>
     
     <item>
@@ -536,7 +547,7 @@ public enum Language { Spanish, English } public static string convert(int numbe
       <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/clojure-debugger/</guid>
-      <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;quot;Trace all the forms in the given body.</description>
+      <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;#34;Trace all the forms in the given body.</description>
     </item>
     
     <item>
@@ -579,7 +590,7 @@ All of us have certain irrational attachments to the various things we are used 
       <guid>http://deliberate-software.com/ego-driven-development/</guid>
       <description>Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.
 EDD plagues many organizations; here just some of the symptoms you might encounter:
- &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house. E.</description>
+  &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house.</description>
     </item>
     
     <item>
@@ -660,7 +671,7 @@ EDD plagues many organizations; here just some of the symptoms you might encount
       <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/lisp-repl/</guid>
-      <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))   WHAAAAAAAAAAAAAAA?</description>
+      <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))  WHAAAAAAAAAAAAAAA?</description>
     </item>
     
     <item>
@@ -697,7 +708,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <pubDate>Wed, 04 May 2011 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/actionscript-unit-testing/</guid>
-      <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&amp;#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
+      <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd�d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
     </item>
     
     <item>
@@ -752,7 +763,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/post/</guid>
-      <description>All Posts F# Domain Design: Interdependent Enums and Booleans  Technical Skills fsharp csharp   Simple Haskell Automation in Emacs  technical skills emacs fp-course   Scientific Software Design: Human Working Memory  technical skills oo-design   OO-Design Part 3: When to Apply Encapsulation  technical skills csharp java oo-design   MOBA Item Optimization In Haskell  technical skills   Papers We Love: The Byzantine Generals Problem  technical skills academic papers proofs   DSLs Are Terrible  hugo dsl Technical Skills silly   Design Pattern Dangers  technical skills   Darkest Proof: Day 3  technical skills coq proofs silly   What Keeps a Self-Organizing Team From Falling Apart  management meta game self-organization   Darkest Proof: Day 2  technical skills coq proofs silly   Darkest Proof: Day 1  technical skills coq proofs silly   OO-Design Part 2: Anemic Domain Models Are Healthy  technical skills csharp java oo-design   OO-Design Part 1: Increasing Reuse With Noun Interfaces  technical skills csharp java oo-design   Ten Years of Pair Programming  management unit-testing self-organization   Vim Refactoring Patterns  technical skills vim refactoring   Modern Dependency Injection  technical skills architecture csharp unit-testing   Editor Abstractions  technical skills emacs vim   Wrangling State In Haskell  technical skills haskell   Hot Loading Angular2 With State  technical skills clojure clojurescript angular   Using Angular2 in ClojureScript  technical skills clojure clojurescript angular   Wrangling State In Clojure  technical skills clojure   When Self-Organizing Teams Are Effective  management meta game self-organization   Avoid Pop Culture Architecture  architecture Technical Skills Meta game   Haskell is the Dark Souls of Programming  haskell Technical Skills silly   Development Disappointment Disorder  Meta Game management   Designing A Compassionate Interview For A High Performing Individual  Meta Game management   Daily Meditation Improves Technical Leadership  Meta Game management   Conj Talk: Teaching Clojure at IBM  Meta Game clojure   Better Interviews  meta game interviews management   F# Unit Testing With SimpleMock  fsharp unit testing Technical Skills   SimpleMock: Language Agnostic Unit Test Mocking  unit testing csharp Technical Skills architecture   Programming Language Safety Score Mark 2  haskell clojure fsharp csharp Technical Skills   Language Versions    Learning Lisp Was Hard  clojure Meta Game   Superiority Fatigue  Meta Game   Case Study: Superior Domain Modeling in F#  Technical Skills fsharp csharp   Programming Language Safety Ranking  Technical Skills clojure fsharp csharp   Six Unusual Reasons why Clojure is a Delight  clojure Technical Skills Unit Testing   Christmas F# Polymorphism  Technical Skills fsharp architecture   Emacs Project Tip  Technical Skills emacs   Suggested Skill Progression  Technical Skills Meta Game management   What Book Should I Read Next?</description>
+      <description>All Posts Posts    Powerful Editor Abstractions  technical skills vim   F# Domain Design: Interdependent Enums and Booleans  Technical Skills fsharp csharp   Simple Haskell Automation in Emacs  technical skills emacs fp-course   Scientific Software Design: Human Working Memory  technical skills oo-design   OO-Design Part 3: When to Apply Encapsulation  technical skills csharp java oo-design   MOBA Item Optimization In Haskell  technical skills   Papers We Love: The Byzantine Generals Problem  technical skills academic papers proofs   DSLs Are Terrible  hugo dsl Technical Skills silly   Design Pattern Dangers  technical skills   Darkest Proof: Day 3  technical skills coq proofs silly   What Keeps a Self-Organizing Team From Falling Apart  management meta game self-organization   Darkest Proof: Day 2  technical skills coq proofs silly   Darkest Proof: Day 1  technical skills coq proofs silly   OO-Design Part 2: Anemic Domain Models Are Healthy  technical skills csharp java oo-design   OO-Design Part 1: Increasing Reuse With Noun Interfaces  technical skills csharp java oo-design   Ten Years of Pair Programming  management unit-testing self-organization   Vim Refactoring Patterns  technical skills vim refactoring   Modern Dependency Injection  technical skills architecture csharp unit-testing   Editor Abstractions  technical skills emacs vim   Wrangling State In Haskell  technical skills haskell   Hot Loading Angular2 With State  technical skills clojure clojurescript angular   Using Angular2 in ClojureScript  technical skills clojure clojurescript angular   Wrangling State In Clojure  technical skills clojure   When Self-Organizing Teams Are Effective  management meta game self-organization   Avoid Pop Culture Architecture  architecture Technical Skills Meta game   Haskell is the Dark Souls of Programming  haskell Technical Skills silly   Development Disappointment Disorder  Meta Game management   Designing A Compassionate Interview For A High Performing Individual  Meta Game management   Daily Meditation Improves Technical Leadership  Meta Game management   Conj Talk: Teaching Clojure at IBM  Meta Game clojure   Better Interviews  meta game interviews management   F# Unit Testing With SimpleMock  fsharp unit testing Technical Skills   SimpleMock: Language Agnostic Unit Test Mocking  unit testing csharp Technical Skills architecture   Programming Language Safety Score Mark 2  haskell clojure fsharp csharp Technical Skills   Language Versions    Learning Lisp Was Hard  clojure Meta Game   Superiority Fatigue  Meta Game   Case Study: Superior Domain Modeling in F#  Technical Skills fsharp csharp   Programming Language Safety Ranking  Technical Skills clojure fsharp csharp   Six Unusual Reasons why Clojure is a Delight  clojure Technical Skills Unit Testing   Christmas F# Polymorphism  Technical Skills fsharp architecture   Emacs Project Tip  Technical Skills emacs   Suggested Skill Progression  Technical Skills Meta Game management   What Book Should I Read Next?</description>
     </item>
     
     <item>
@@ -761,7 +772,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/page/books/</guid>
-      <description>Writings That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;ldquo;What Book Should I Read Next?&amp;rdquo;.
+      <description>Writings That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;quot;What Book Should I Read Next?&amp;ldquo;.
 Bold are my highest recommendations. The indicates a link with a summary.
 Programming Languages Structure and Interpretation of Computer Programs (Scheme) * Programming Languages - Application And Interpretation (Typed Racket) * Haskell Programming From First Principles Let Over Lambda (Common Lisp, Forth) * Clojure Programming F# 3.0 Haskell And Yesod Javascript the Good Parts Learn You a Haskell For Great Good!</description>
     </item>

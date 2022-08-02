@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-04-27",
     "description": "",
-    "wordCount": 883
+    "wordCount":  883 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -182,123 +182,103 @@
   <div class="content">
     <p>Part 2 of my series &ldquo;Wrangling State&rdquo;. Part 1
 <a href="/clojure-state/">Wrangling State In Clojure</a></p>
-
 <p>Haskell is a pure language, so you can only deal with application state by
 passing parameters to functions. It is possible to pass parameters more
 conveniently, but ultimately, every parameter needs to be passed.</p>
-
 <p>Here is a simple application for logging a timestamp to a file.</p>
-
 <p>First, <strong>Pass As Parameter</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">loadFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">loadFile</span> fileName <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>unpack <span style="color:#f92672">&lt;$&gt;</span> <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>readFile fileName
 
-<pre><code class="language-haskell">loadFile :: Filename -&gt; IO String
-loadFile fileName =
-  BS.unpack &lt;$&gt; Str.readFile fileName
+<span style="color:#a6e22e">saveFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">saveFile</span> fileName contents <span style="color:#f92672">=</span> 
+  <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>writeFile fileName (<span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>pack contents)
 
-saveFile :: Filename -&gt; String -&gt; IO ()
-saveFile fileName contents = 
-  Str.writeFile fileName (BS.pack contents)
+<span style="color:#a6e22e">clearFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">clearFile</span> fileName <span style="color:#f92672">=</span> saveFile fileName <span style="color:#e6db74">&#34;&#34;</span>
 
-clearFile :: Filename -&gt; IO ()
-clearFile fileName = saveFile fileName &quot;&quot;
+<span style="color:#a6e22e">appendToFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">appendToFile</span> fileName stuff <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    contents <span style="color:#f92672">&lt;-</span> loadFile fileName
+    saveFile fileName (contents<span style="color:#f92672">++</span>stuff)
 
-appendToFile :: Filename -&gt; String -&gt; IO ()
-appendToFile fileName stuff = do
-    contents &lt;- loadFile fileName
-    saveFile fileName (contents++stuff)
-
-main fileName &quot;-c&quot; = clearFile fileName
-main fileName &quot;-log&quot; = do
-  now &lt;- getCurrentTime
-  appendToFile fileName ((show now)++ &quot;\n&quot;)
-</code></pre>
-
-<p>We take in the file name and the command to perform, either to clear the file or
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-c&#34;</span> <span style="color:#f92672">=</span> clearFile fileName
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-log&#34;</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  now <span style="color:#f92672">&lt;-</span> getCurrentTime
+  appendToFile fileName ((show now)<span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><p>We take in the file name and the command to perform, either to clear the file or
 to append a new timestamp. While simple, this gets cumbersome in a large
 application. Imagine passing a database connection through every single function
 that eventually calls the database.</p>
-
 <p>Haskell can have unnamed parameters that are not defined in the argument list.
 Sometimes this can improve legibility, other times it can worsen it. To use this
 feature, the function signature must contain the value missing. The parameter(s)
 must be the &ldquo;last&rdquo; parameter(s) to the function for this to work.</p>
-
 <p>Here is the same code with <strong>Unnamed Parameters</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">loadFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">loadFile</span> <span style="color:#f92672">=</span> (liftM <span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>unpack) <span style="color:#f92672">.</span> <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>readFile
 
-<pre><code class="language-haskell">loadFile :: Filename -&gt; IO String
-loadFile = (liftM BS.unpack) . Str.readFile
+<span style="color:#a6e22e">saveFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">saveFile</span> contents fileName <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>writeFile fileName (<span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>pack contents)
 
-saveFile :: String -&gt; Filename -&gt; IO ()
-saveFile contents fileName =
-  Str.writeFile fileName (BS.pack contents)
+<span style="color:#a6e22e">clearFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">clearFile</span> <span style="color:#f92672">=</span> saveFile <span style="color:#e6db74">&#34;&#34;</span>
 
-clearFile :: Filename -&gt; IO ()
-clearFile = saveFile &quot;&quot;
+<span style="color:#a6e22e">appendToFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Filename</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">appendToFile</span> stuff <span style="color:#f92672">=</span> (<span style="color:#f92672">&gt;&gt;=</span>) <span style="color:#f92672">&lt;$&gt;</span> loadFile <span style="color:#f92672">&lt;*&gt;</span> ((<span style="color:#f92672">.</span> (<span style="color:#f92672">++</span>stuff)) <span style="color:#f92672">.</span> (flip saveFile))
 
-appendToFile :: String -&gt; Filename -&gt; IO ()
-appendToFile stuff = (&gt;&gt;=) &lt;$&gt; loadFile &lt;*&gt; ((. (++stuff)) . (flip saveFile))
-
-main fileName &quot;-c&quot; = clearFile fileName
-main fileName &quot;-log&quot; = do
-  now &lt;- getCurrentTime
-  appendToFile ((show now)++ &quot;\n&quot;) fileName
-</code></pre>
-
-<p>Not all usages of <code>Filename</code> can be easily unnamed. We did use it in
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-c&#34;</span> <span style="color:#f92672">=</span> clearFile fileName
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-log&#34;</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  now <span style="color:#f92672">&lt;-</span> getCurrentTime
+  appendToFile ((show now)<span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>) fileName
+</code></pre></div><p>Not all usages of <code>Filename</code> can be easily unnamed. We did use it in
 <code>loadFile</code> and <code>clearFile</code>. It does allow the &ldquo;differences&rdquo; to stand out
 more. For example, <code>clearFile</code> is just a <code>saveFile</code> with an empty string
 for the first parameter. We can see the differences clearly without the extra
 parameter adding noise.</p>
-
 <p>We added it to <code>appendToFile</code>, using point-free style. I find that it makes
 it much harder to scan and read.</p>
-
 <p>Lastly, it is possible to encode such values into the type. The type of the
 function itself can imply a value that can be retrieved. For example, the Reader
 type can be combined with the IO type using ReaderT.</p>
-
 <p>Here is the code using the <strong>Reader Type</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">loadFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">ReaderT</span> <span style="color:#66d9ef">Filename</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">loadFile</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  fileName <span style="color:#f92672">&lt;-</span> ask
+  liftIO <span style="color:#f92672">$</span> <span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>unpack <span style="color:#f92672">&lt;$&gt;</span> <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>readFile fileName
 
-<pre><code class="language-haskell">loadFile :: ReaderT Filename IO String
-loadFile = do
-  fileName &lt;- ask
-  liftIO $ BS.unpack &lt;$&gt; Str.readFile fileName
+<span style="color:#a6e22e">saveFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">ReaderT</span> <span style="color:#66d9ef">Filename</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">saveFile</span> contents <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  fileName <span style="color:#f92672">&lt;-</span> ask
+  liftIO <span style="color:#f92672">$</span> <span style="color:#66d9ef">Str</span><span style="color:#f92672">.</span>writeFile fileName (<span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>pack contents)
 
-saveFile :: String -&gt; ReaderT Filename IO ()
-saveFile contents = do
-  fileName &lt;- ask
-  liftIO $ Str.writeFile fileName (BS.pack contents)
+<span style="color:#a6e22e">clearFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">ReaderT</span> <span style="color:#66d9ef">Filename</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">clearFile</span> <span style="color:#f92672">=</span> saveFile <span style="color:#e6db74">&#34;&#34;</span>
 
-clearFile :: ReaderT Filename IO ()
-clearFile = saveFile &quot;&quot;
+<span style="color:#a6e22e">appendToFile</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">ReaderT</span> <span style="color:#66d9ef">Filename</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">appendToFile</span> stuff <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    contents <span style="color:#f92672">&lt;-</span> loadFile
+    saveFile (contents<span style="color:#f92672">++</span>stuff)
 
-appendToFile :: String -&gt; ReaderT Filename IO ()
-appendToFile stuff = do
-    contents &lt;- loadFile
-    saveFile (contents++stuff)
-
-main fileName &quot;-c&quot; = runReaderT clearFile fileName
-main fileName &quot;-log&quot; = do
-  now &lt;- getCurrentTime
-  runReaderT (appendToFile ((show now)++ &quot;\n&quot;)) fileName
-</code></pre>
-
-<p>Notice now how <code>appendToFile</code> and <code>clearFile</code> have the signature:
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-c&#34;</span> <span style="color:#f92672">=</span> runReaderT clearFile fileName
+<span style="color:#a6e22e">main</span> fileName <span style="color:#e6db74">&#34;-log&#34;</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  now <span style="color:#f92672">&lt;-</span> getCurrentTime
+  runReaderT (appendToFile ((show now)<span style="color:#f92672">++</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)) fileName
+</code></pre></div><p>Notice now how <code>appendToFile</code> and <code>clearFile</code> have the signature:
 <code>ReaderT Filename IO ()</code>, indicating that anything below them can <code>ask</code>
 for the Filename, while still performing an <code>IO</code> action. The &ldquo;entry-point&rdquo;
 calls in <code>main</code> need to be initialized with the <code>runReaderT</code> and the
 <code>Filename</code> we want to pass.</p>
-
 <p>For this case, the <code>ReaderT</code> is substantially more readable. The &ldquo;business
 value&rdquo; functions <code>appendToFile</code> and <code>clearFile</code> do not have to define
 and pass the parameters needed for the lower level functions <code>saveFile</code> and
 <code>loadFile</code>. <strong>Reader Type</strong> gives us the value of the <strong>Unnamed
 Parameters</strong> for legibility!</p>
-
 <p>For something like a database connection that might be used pervasively, the
 <strong>Reader Type</strong> is essential for legible code. The low level functions that need
 the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
-
 <table>
 <thead>
 <tr>
@@ -309,7 +289,6 @@ the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
 <th>Best When</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><strong>Pass As Parameter</strong></td>
@@ -318,7 +297,6 @@ the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
 <td>Harder</td>
 <td>State only needed in a few functions</td>
 </tr>
-
 <tr>
 <td><strong>Unnamed Parameter</strong></td>
 <td>Explicit</td>
@@ -326,7 +304,6 @@ the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
 <td>Harder</td>
 <td>Functions can be made more readable</td>
 </tr>
-
 <tr>
 <td><strong>Reader Type</strong></td>
 <td>Explicit</td>
@@ -336,25 +313,20 @@ the <code>Filename</code> are able to call <code>ask</code> to retrieve it.</p>
 </tr>
 </tbody>
 </table>
-
 <p>Compared to <a href="/clojure-state/">Clojure</a>, Haskell has no way to
 call a function &ldquo;incorrectly&rdquo;. All in-memory state is passed explicitly.</p>
-
 <p>Haskell&rsquo;s type system prevents the programmer from forgetting state.
 Unfortunately, it is still possible to pass as any parameter a value that is
 invalid. The explicit nature of Haskell parameters does not prevent passing a
 database connection string that does not exist, or a pointer to an incorrectly
 setup data structure.</p>
-
 <p>Haskell is opinionated, and forces you to consider all the state up front before
 calling a function. While this makes it harder to forget about state, it also
 makes abstractions more leaky. Instead of relying on a function which may or may
 not use a database, you must know and pass the database connection.</p>
-
 <p>Even though I believe the Haskell type system makes abstractions more leaky, I
 prefer having to think up front about all my state. I find it makes the code
 more clear, and helps me control what functions have access to state.</p>
-
 <p>Edit: Thanks to <a href="https://www.reddit.com/r/haskell/comments/4go5dr/wrangling_state_in_haskell/d2j9aqz">/u/kccqzy</a> on reddit for offering a way to make
 <code>appendToFile</code> use point-free style.</p>
 

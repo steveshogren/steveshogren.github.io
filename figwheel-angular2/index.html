@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-04-13",
     "description": "",
-    "wordCount": 325
+    "wordCount":  325 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -183,70 +183,57 @@
 I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping
 worked, but state was lost on each load. Tweaking the original demo allows for
 figwheel to swap in the template without losing client state.</p>
-
 <p>Here is a demo of hotswapping with state preservation:</p>
-
 <p><img src="/images/hotswap.gif"></img></p>
-
 <p>In this demo, we add three things to a list, then change the template that draws
 the list. The client state stays in the browser, while the template changes
 around it! Amazing!</p>
-
 <p>To get this working, follow the steps in the
 <a href="/cljs-angular2/">&ldquo;Using Angular2 in Clojurescript&rdquo;</a> first post.</p>
-
 <p>Replace the env/dev/cljs/dev.cljs contents with this simpler reloader:</p>
-
-<pre><code class="language-clojure">(defn mount-component []
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>mount-component []
   ((.. js/ng -platform -browser -bootstrap)
-   (.-AppComponent (.-app js/window))))
+   (<span style="color:#a6e22e">.-AppComponent</span> (<span style="color:#a6e22e">.-app</span> js/window))))
 
-(figwheel/watch-and-reload :websocket-url &quot;ws://localhost:3449/figwheel-ws&quot;
-                           :on-jsload mount-component)
+(<span style="color:#a6e22e">figwheel/watch-and-reload</span> <span style="color:#e6db74">:websocket-url</span> <span style="color:#e6db74">&#34;ws://localhost:3449/figwheel-ws&#34;</span>
+                           <span style="color:#e6db74">:on-jsload</span> mount-component)
 
-(defonce only-attach-listener-once
-  (.addEventListener js/document &quot;DOMContentLoaded&quot; mount-component))
-</code></pre>
-
-<p>We now only re-mount the component on figwheel notification. The state is moved
+(<span style="color:#66d9ef">defonce </span>only-attach-listener-once
+  (<span style="color:#a6e22e">.addEventListener</span> js/document <span style="color:#e6db74">&#34;DOMContentLoaded&#34;</span> mount-component))
+</code></pre></div><p>We now only re-mount the component on figwheel notification. The state is moved
 to an atom in the core namespace like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>get-app []
+   (or (<span style="color:#a6e22e">.-app</span> js/window)
+       (<span style="color:#a6e22e">set!</span> (<span style="color:#a6e22e">.-app</span> js/window) <span style="color:#f92672">#</span>js {})))
 
-<pre><code class="language-clojure">(defn get-app []
-   (or (.-app js/window)
-       (set! (.-app js/window) #js {})))
+<span style="color:#75715e">;; keep state of the component in a defonce atom</span>
+(<span style="color:#66d9ef">defonce </span>heroes (<span style="color:#a6e22e">atom</span> []))
 
-;; keep state of the component in a defonce atom
-(defonce heroes (atom []))
-
-(let [app (get-app)
-      c (.Component (.-core js/ng)
-                    #js {:selector &quot;my-app&quot;
-                         :template (html [:div
-                                          [:h1 &quot; Demo&quot;]
-                                          [:div [:h2 &quot;Hero List:&quot;]]
-                                          &quot;
-&lt;input #newHero (keyup.enter)=\&quot;addHero(newHero.value); newHero.value='' \&quot; &gt;
-&lt;button (click)=\&quot;addHero(newHero.value); newHero.value='' \&quot;&gt;Add&lt;/button&gt;
-&lt;ul&gt;&lt;li *ngFor=\&quot;#hero of heroes()\&quot;&gt;{{hero}}&lt;/li&gt;&lt;/ul&gt;
-&quot;
+(<span style="color:#66d9ef">let </span>[app (<span style="color:#a6e22e">get-app</span>)
+      c (<span style="color:#a6e22e">.Component</span> (<span style="color:#a6e22e">.-core</span> js/ng)
+                    <span style="color:#f92672">#</span>js {<span style="color:#e6db74">:selector</span> <span style="color:#e6db74">&#34;my-app&#34;</span>
+                         <span style="color:#e6db74">:template</span> (<span style="color:#a6e22e">html</span> [<span style="color:#e6db74">:div</span>
+                                          [<span style="color:#e6db74">:h1</span> <span style="color:#e6db74">&#34; Demo&#34;</span>]
+                                          [<span style="color:#e6db74">:div</span> [<span style="color:#e6db74">:h2</span> <span style="color:#e6db74">&#34;Hero List:&#34;</span>]]
+                                          <span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">&lt;input #newHero (keyup.enter)=\&#34;addHero(newHero.value); newHero.value=&#39;&#39; \&#34; &gt;
+</span><span style="color:#e6db74">&lt;button (click)=\&#34;addHero(newHero.value); newHero.value=&#39;&#39; \&#34;&gt;Add&lt;/button&gt;
+</span><span style="color:#e6db74">&lt;ul&gt;&lt;li *ngFor=\&#34;#hero of heroes()\&#34;&gt;{{hero}}&lt;/li&gt;&lt;/ul&gt;
+</span><span style="color:#e6db74">&#34;</span>
                                           ])})
-      c (.Class c #js {:constructor (fn [])
-                       :addHero (fn [hero]
-                                  (swap! heroes #(conj % hero)))
-                       :heroes (fn [] @heroes)
+      c (<span style="color:#a6e22e">.Class</span> c <span style="color:#f92672">#</span>js {<span style="color:#e6db74">:constructor</span> (<span style="color:#66d9ef">fn </span>[])
+                       <span style="color:#e6db74">:addHero</span> (<span style="color:#66d9ef">fn </span>[hero]
+                                  (<span style="color:#a6e22e">swap!</span> heroes <span style="color:#f92672">#</span>(conj % hero)))
+                       <span style="color:#e6db74">:heroes</span> (<span style="color:#66d9ef">fn </span>[] <span style="color:#f92672">@</span>heroes)
                        })]
-  (set! (.-AppComponent app) c))
-</code></pre>
-
-<p>The site now will recompile and reload while preserving the state of the
+  (<span style="color:#a6e22e">set!</span> (<span style="color:#a6e22e">.-AppComponent</span> app) c))
+</code></pre></div><p>The site now will recompile and reload while preserving the state of the
 component. This pattern can be extended to allow certain state to be preserved
 while other state is reloaded. In this demo, the state in the <code>#newHero</code>
 field is not preserved, while the <code>heroes</code> list is.</p>
-
 <p>I don&rsquo;t have a great story for using hiccups to generate the special angular
 tags like <code>*ngFor</code>, <code>(click)</code>, or <code>(keyup.enter)</code>. For this demo, I
 left that html as just a raw string.</p>
-
 <p>Check out the full working example on GitHub <a href="https://github.com/steveshogren/angular2-cljs/tree/5025e2983ab054c88717c89528b85c7f9aaea851">here</a></p>
 
   </div>

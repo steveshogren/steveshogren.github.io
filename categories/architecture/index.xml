@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Architecture on deliberate software</title>
+    <title>architecture on deliberate software</title>
     <link>http://deliberate-software.com/categories/architecture/</link>
-    <description>Recent content in Architecture on deliberate software</description>
+    <description>Recent content in architecture on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
@@ -20,7 +20,7 @@
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
-public interface ICurrentTime { DateTime GetCurrentTime(); } public class CurrentTime : ICurrentTime { public DateTime GetCurrentTime() { return DateTime.</description>
+1public interface ICurrentTime { 2 DateTime GetCurrentTime(); 3} 4 5public class CurrentTime : ICurrentTime { 6 public DateTime GetCurrentTime() { 7 return DateTime.</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@ Example: Here is a brief (if a bit silly) example of the final pattern:</descrip
       <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
       <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
 In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
-Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;rsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;rdquo;.</description>
+Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;lsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;quot;.</description>
     </item>
     
   </channel>

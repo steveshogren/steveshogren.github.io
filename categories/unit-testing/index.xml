@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Unit Testing on deliberate software</title>
+    <title>unit testing on deliberate software</title>
     <link>http://deliberate-software.com/categories/unit-testing/</link>
-    <description>Recent content in Unit Testing on deliberate software</description>
+    <description>Recent content in unit testing on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Sep 2016 00:00:00 +0000</lastBuildDate>
@@ -30,7 +30,7 @@ In the last five years, the developers choose to implement Arlo Belshee&amp;rsqu
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
-public interface ICurrentTime { DateTime GetCurrentTime(); } public class CurrentTime : ICurrentTime { public DateTime GetCurrentTime() { return DateTime.</description>
+1public interface ICurrentTime { 2 DateTime GetCurrentTime(); 3} 4 5public class CurrentTime : ICurrentTime { 6 public DateTime GetCurrentTime() { 7 return DateTime.</description>
     </item>
     
     <item>
@@ -98,7 +98,7 @@ I have been reading G.O.O.S. and honestly, much of it has been just a reiteratio
       <pubDate>Wed, 04 May 2011 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/actionscript-unit-testing/</guid>
-      <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd&amp;#039;d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
+      <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd�d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
     </item>
     
   </channel>

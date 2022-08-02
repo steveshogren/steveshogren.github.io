@@ -42,7 +42,7 @@
     },
     "datePublished": "2014-12-06",
     "description": "",
-    "wordCount": 438
+    "wordCount":  438 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,93 +179,70 @@
 several microservices. While trying to build in a secure method for
 each service to be able to call the others, I&rsquo;ve been in several
 different projects at the same time.</p>
-
 <p>At least once I accidentally opened the wrong &ldquo;handler.clj&rdquo; buffer,
 and spent a few minutes adding a function that never worked. Since I
 hate doing things like this, I wanted a simple way to see what project
 I was currently viewing.</p>
-
 <p>I started with a changing the title of the frame to show the whole
 path of the current buffer, like this:</p>
-
 <p><img src="/images/title.png"></img></p>
-
 <p>The code to change the title is simple, and the default in some of the
 pre-packaged emacs bundles:</p>
-
-<pre><code class="language-common-lisp">(setq frame-title-format
-      '((:eval (if (buffer-file-name)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">(<span style="color:#66d9ef">setq</span> frame-title-format
+      <span style="color:#f92672">&#39;</span>((<span style="color:#e6db74">:eval</span> (<span style="color:#66d9ef">if</span> (buffer-file-name)
                    (abbreviate-file-name (buffer-file-name))
-                 &quot;%b&quot;))))
-</code></pre>
-
-<p>This is fine, but still not great. The font is tiny and the important
+                 <span style="color:#e6db74">&#34;%b&#34;</span>))))
+</code></pre></div><p>This is fine, but still not great. The font is tiny and the important
 part: &ldquo;octopress&rdquo; is buried. I wanted something a little more fluid,
 so I could easily tell the different projects apart instantly. I came
 up with the idea to color the background faintly different based on
 the path of the file. Files with a path containing &ldquo;octopress&rdquo; might
 be different from those containing &ldquo;.emacs&rdquo;.</p>
-
 <p>Thankfully, <code>buffer-face-mode</code> makes it easy to change a single
 property of a single buffer&rsquo;s face without changing any other
 buffer. So long as you disable buffer-face-mode when closing emacs,
 your files will open with the correct coloring scheme, then have the
 new background overlaid.</p>
-
 <p>While not perfect, this was the result.</p>
-
 <p><img src="/images/colors.png"></img></p>
-
 <p>The colors I choose are only faintly different, but just enough for me
 to tell instantly which is which.</p>
-
 <p>The buffer colors are applied when opening a file, using these
 functions:</p>
-
-<pre><code class="language-common-lisp">(defun my-buffer-face-mode-variable (color)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">(defun my-buffer-face-mode-variable (color)
   (interactive)
-  (setq buffer-face-mode-face (list :background color))
-  (buffer-face-mode 1))
+  (<span style="color:#66d9ef">setq</span> buffer-face-mode-face (<span style="color:#a6e22e">list</span> <span style="color:#e6db74">:background</span> color))
+  (buffer-face-mode <span style="color:#ae81ff">1</span>))
 
 (defun my-set-theme-on-mode ()
   (interactive)
-  (let ((file-name (buffer-file-name)))
+  (<span style="color:#66d9ef">let</span> ((file-name (buffer-file-name)))
     (cond
-    ;; add your own project/color mappings here
-     ((string-match &quot;halcyon&quot; file-name) (my-buffer-face-mode-variable &quot;#00001A&quot;))
-     ((string-match &quot;dwarf&quot; file-name) (my-buffer-face-mode-variable &quot;#001A1A&quot;))
-     ((string-match &quot;nimbus&quot; file-name) (my-buffer-face-mode-variable &quot;black&quot;))
-     (t &quot;&quot;))))
-</code></pre>
-
-<p>To force them to run when opening a file, since I use helm, I set it
+    <span style="color:#75715e">;; add your own project/color mappings here</span>
+     ((string-match <span style="color:#e6db74">&#34;halcyon&#34;</span> file-name) (my-buffer-face-mode-variable <span style="color:#e6db74">&#34;#00001A&#34;</span>))
+     ((string-match <span style="color:#e6db74">&#34;dwarf&#34;</span> file-name) (my-buffer-face-mode-variable <span style="color:#e6db74">&#34;#001A1A&#34;</span>))
+     ((string-match <span style="color:#e6db74">&#34;nimbus&#34;</span> file-name) (my-buffer-face-mode-variable <span style="color:#e6db74">&#34;black&#34;</span>))
+     (<span style="color:#66d9ef">t</span> <span style="color:#e6db74">&#34;&#34;</span>))))
+</code></pre></div><p>To force them to run when opening a file, since I use helm, I set it
 to execute on exiting helm for any reason:</p>
-
-<pre><code class="language-common-lisp">(add-hook 'helm-after-action-hook 'my-set-theme-on-mode)
-;; uncomment if not using helm
-;; (add-hook 'find-file-hook 'my-set-theme-on-mode)
-</code></pre>
-
-<p>Lastly, to make sure emacs applies my normal theme and settings to a
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">(add-hook <span style="color:#e6db74">&#39;helm-after-action-hook</span> <span style="color:#e6db74">&#39;my-set-theme-on-mode</span>)
+<span style="color:#75715e">;; uncomment if not using helm</span>
+<span style="color:#75715e">;; (add-hook &#39;find-file-hook &#39;my-set-theme-on-mode)</span>
+</code></pre></div><p>Lastly, to make sure emacs applies my normal theme and settings to a
 buffer when starting, I disable buffer-face-mode on all buffers before
 exiting.</p>
-
-<pre><code class="language-common-lisp">(defun disable-all-buffer-face-mode ()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-common-lisp" data-lang="common-lisp">(defun disable-all-buffer-face-mode ()
   (interactive)
-  (let ((current (get-buffer (current-buffer))))
-    (-map (lambda (x) (progn (switch-to-buffer x)
-                             (buffer-face-mode 0))) (buffer-list))
-    (switch-to-buffer current 1)))
+  (<span style="color:#66d9ef">let</span> ((current (get-buffer (current-buffer))))
+    (-map (lambda (x) (<span style="color:#66d9ef">progn</span> (switch-to-buffer x)
+                             (buffer-face-mode <span style="color:#ae81ff">0</span>))) (buffer-list))
+    (switch-to-buffer current <span style="color:#ae81ff">1</span>)))
 
-(add-hook 'kill-emacs-hook 'disable-all-buffer-face-mode)
-</code></pre>
-
-<p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
+(add-hook <span style="color:#e6db74">&#39;kill-emacs-hook</span> <span style="color:#e6db74">&#39;disable-all-buffer-face-mode</span>)
+</code></pre></div><p>This block needs <a href="https://github.com/magnars/dash.el">dash.el</a> to get
 the -map function.</p>
-
 <p>While not the only solution, this seemed a simple and elegant way to
 quickly be reminded of your current project.</p>
-
 <p>Enjoy!</p>
 
   </div>

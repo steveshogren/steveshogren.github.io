@@ -1,15 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vim on deliberate software</title>
+    <title>vim on deliberate software</title>
     <link>http://deliberate-software.com/categories/vim/</link>
-    <description>Recent content in Vim on deliberate software</description>
+    <description>Recent content in vim on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://deliberate-software.com/categories/vim/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Powerful Editor Abstractions</title>
+      <link>http://deliberate-software.com/editor-abstraction-types/</link>
+      <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://deliberate-software.com/editor-abstraction-types/</guid>
+      <description>Not all editing tools are created equal.
+ Combining several simple ideas into one compound one, and thus all complex ideas are made - John Locke, An Essay Concerning Human Understanding (1690)
+ While many words have been spent on the Holy Editor Flame Wars, I&amp;rsquo;ve read very little that attempts to categorize what they actually do. Likewise, everyone pays homage to the concept of using the &amp;ldquo;best tool for the job&amp;rdquo;, but few talk about when each tool would be best.</description>
+    </item>
     
     <item>
       <title>Vim Refactoring Patterns</title>

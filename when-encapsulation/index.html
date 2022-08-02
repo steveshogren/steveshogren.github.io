@@ -42,7 +42,7 @@
     },
     "datePublished": "2018-01-03",
     "description": "",
-    "wordCount": 263
+    "wordCount":  263 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,39 +179,29 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Part 3 of the series <a href="/categories/oo-design/">OO-Design</a></p>
-
+    <p>Part 3 of the series <a href="/categories/oo-design/">OO-Design</a></p>
 <p>As discussed in the previous post
 <a href="/anemic-domain-model/">Anemic Domain Models Are Healthy</a>, encapsulation makes
 code harder to test. We should make important actions easy to do, and testing is
 important.</p>
-
 <p>Encapsulation and domain modeling are separate concepts. A good domain model is
 possible with or without encapsulation.</p>
-
 <p>Encapsulation is the design of trust boundaries between programmers. A
 well-encapsulated API ensures that other programmers cannot put your library or
 service into an invalid state. For example, a builder-pattern API can be
 helpful, self-documenting, and prevent invalid states.</p>
-
 <blockquote>
 <p>Encapsulation makes good sense between different teams</p>
 </blockquote>
-
 <p>Code ownership boundaries are a good place to apply the rules of encapsulation.
 Each team of programmers can work against an encapsulated API without having to
 read the internals of someone else&rsquo;s codebase.</p>
-
 <h3 id="encapsulation-costs-more">Encapsulation Costs More</h3>
-
 <p>Good encapsulation is often a lot of extra work for a single team in a single
 codebase. APIs easily devolve into
 <a href="https://en.wikipedia.org/wiki/Leaky_abstraction">leaky abstractions</a>, so extra
 care and thought must be spent to offer full utility without allowing invalid
 states. That extra time and thought should only be spent when necessary.</p>
-
 <p>While appropriate for libraries and API boundaries, encapsulation is often
 misapplied to <em>internal code</em> with <em>shared ownership</em>. We pretend that we cannot
 trust ourselves to correctly use our own domain models. Simply putting logic

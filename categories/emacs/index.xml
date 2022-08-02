@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Emacs on deliberate software</title>
+    <title>emacs on deliberate software</title>
     <link>http://deliberate-software.com/categories/emacs/</link>
-    <description>Recent content in Emacs on deliberate software</description>
+    <description>Recent content in emacs on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
@@ -19,7 +19,7 @@
       <guid>http://deliberate-software.com/emacs-customization/</guid>
       <description>I am working through the amazing Data 61 Functional Programming Course (seriously, put it on your list!) and I found myself doing a repeated set of actions. Repeated sets of actions are perfect for automation!
 The course has some sections with comments indicating the expected behavior:
--- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :. Nil)) &amp;quot;ABC&amp;quot; -- Result &amp;gt;BC&amp;lt; &#39;A&#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :.</description>
+-- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :. Nil)) &amp;#34;ABC&amp;#34; -- Result &amp;gt;BC&amp;lt; &amp;#39;A&amp;#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :.</description>
     </item>
     
     <item>

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Analysis of Editor Abstractions  &middot; deliberate software</title>
+  <title>Powerful Editor Abstractions  &middot; deliberate software</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,7 +17,7 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Analysis of Editor Abstractions  &middot; deliberate software ">
+<meta property="og:title" content="Powerful Editor Abstractions  &middot; deliberate software ">
 <meta property="og:site_name" content="deliberate software"/>
 <meta property="og:url" content="http://deliberate-software.com/editor-abstraction-types/" />
 <meta property="og:locale" content="en-us">
@@ -25,8 +25,8 @@
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2017-06-13T00:00:00Z" />
-<meta property="og:article:modified_time" content="2017-06-13T00:00:00Z" />
+<meta property="og:article:published_time" content="2022-08-02T00:00:00Z" />
+<meta property="og:article:modified_time" content="2022-08-02T00:00:00Z" />
 
   
 
@@ -35,14 +35,14 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "Analysis of Editor Abstractions",
+    "headline": "Powerful Editor Abstractions",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2017-06-13",
+    "datePublished": "2022-08-02",
     "description": "",
-    "wordCount": 834
+    "wordCount":  1226 
   }
 </script>
 
@@ -52,13 +52,15 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+    <link rel="stylesheet" href="http://deliberate-software.com/css/fontimport.css">
 
 
 
@@ -137,7 +139,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
       
 <div class="text-center">
-  <h1 class="centereded">DRAFT :: Analysis of Editor Abstractions
+  <h1 class="centereded">Powerful Editor Abstractions
 </h1>
 
 
@@ -145,13 +147,13 @@
 <div class="metas col-md-12">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2017-06-13">13 Jun, 2017</time>
+  <time datetime="2022-08-02">2 Aug, 2022</time>
 </small>
 
 
   <small>
-  &middot; Read in about 4 min
-  &middot; (834 Words)
+  &middot; Read in about 6 min
+  &middot; (1226 Words)
 </small>
 
 
@@ -161,7 +163,7 @@
   
   <a href="http://deliberate-software.com/categories/technical-skills" class="label label-default">technical skills</a>
   
-  <a href="http://deliberate-software.com/categories/emacs" class="label label-default">emacs</a>
+  <a href="http://deliberate-software.com/categories/vim" class="label label-default">vim</a>
   
 
  </div>
@@ -173,122 +175,189 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Not all editing tools are created equal.</p>
-
+    <p>Not all editing tools are created equal.</p>
 <blockquote>
 <p>Combining several simple ideas into one compound one, and thus all complex
 ideas are made - John Locke, An Essay Concerning Human Understanding (1690)</p>
 </blockquote>
-
 <p>While many words have been spent on the Holy Editor Flame Wars, I&rsquo;ve read very
 little that attempts to categorize <em>what they actually do</em>. Likewise, everyone
-pays homage to the concept of using the &ldquo;best tool for the job&rdquo;, but most have
-no idea what tools are provided or when each tool would be best.</p>
-
-<p>Our editors provide abstractions classified into two main categories:</p>
-
+pays homage to the concept of using the &ldquo;best tool for the job&rdquo;, but few talk
+about when each tool would be best.</p>
+<p>Our editors provide abstractions classified into three main categories:</p>
 <ol>
 <li>Semantic Tools</li>
+<li>Run-time Inspection Tools</li>
 <li>Text-based Tools</li>
 </ol>
-
-<hr />
-
+<hr>
 <h2 id="semantic-tools">Semantic Tools</h2>
-
 <p>Five abstractions are the core of Semantic Tools. If we had nothing else but
-these, we would be at the pinnacle of power. The Big Five make a huge program
-much more manageable.</p>
-
+these, we would have quite a bit indeed! These make a huge program much more
+manageable.</p>
 <ul>
-<li><strong>Language Errors</strong> - Highlight code that violates the rules of the language</li>
+<li><strong>Language Errors</strong> - Indicate code that violates the rules of the language</li>
 <li><strong>Find All References</strong> - See a list of all usages of a field, function, or class</li>
 <li><strong>Rename Symbol</strong> - Rename the current field, function, or class</li>
-<li><strong>Auto-complete</strong> - Show a list of possible symbols to complete section</li>
+<li><strong>Auto-complete</strong> - Show a list of possible symbols to complete section,
+ideally with documentation</li>
 <li><strong>Go To Definition</strong> - Move editor to the symbol&rsquo;s defined location</li>
 </ul>
-
-<p>The Big Five are just different ways of interacting with the
-<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> (AST)
-of the codebase. Unfortunately, building a correct AST before run-time is only
-possible in certain languages. Building an always-accurate AST is impossible in
-weakly-typed, dynamic languages (or those with syntactic macros).</p>
-
+<p>These actions allow us to interact with the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax
+Tree</a> (AST) of the codebase.
+Unfortunately, building a correct AST before run-time is not always possible.
+Building an always-accurate AST is impossible in any language with reflection,
+or weak types, or dynamic types, or those with syntactic macros.</p>
 <blockquote>
-<p>How impossible? Time for a fun story. My first encounter with the AST problem
-came when a manager asked me to rename all uses of <code>Contact.Id</code> to
-<code>Contact.ContactId</code> in a big PHP project. I renamed all I could find using
-sed and grep. I ran the program and encountered hundreds of run-time errors.
-What did I miss? Someone had stored the string &ldquo;Id&rdquo; in the database which was
-read out and combined with PHP magic to access the <code>Id</code> field on my class!
-No refactoring tool could have possibly detected that. That sort of
-flexibility makes it impossible to build a correct AST.</p>
+<p>My first encounter with the AST problem came when a manager asked me to rename
+all uses of <code>Contact.Id</code> to <code>Contact.ContactId</code> in a big PHP project.
+I renamed all I could find using sed and grep. I ran the program and
+encountered hundreds of run-time errors. What did I miss? Someone had stored
+the string &ldquo;Id&rdquo; in the database which was read out and combined with PHP magic
+to access the <code>Id</code> field on my class! No refactoring tool could have
+possibly detected that. That sort of reflection makes it impossible for any
+tool to build a completely correct AST.</p>
 </blockquote>
-
 <p>Even flagship IDE languages like Java and C# still have a version of this
-problem. Sharing dlls or jars breaks semantic tools. A <strong>Rename Symbol</strong> will
-only detect and modify usages in the current open project, not every consumer of
-the produced jar. Reflection and explicit casting also breaks semantic tools.
-Depending on your environment, this ranges from a minor nuisance to a major
-problem.</p>
-
+problem. Sharing dlls or jars to another project breaks semantic AST tools. A
+<strong>Rename Symbol</strong> will only detect and modify usages in the current open
+project, not every consumer of the produced binary. Reflection and explicit
+casting also breaks semantic tools. Depending on your environment and what you
+do with binaries, this ranges from a minor nuisance to a major inconvenience.</p>
 <p>In the last decade, several IDE&rsquo;s have added plugins that can build an AST from
 PHP, Python, Ruby, JavaScript, Clojure, etc by using raw text parsing or through
 a modification to the interpreter. While incomplete by nature, these at least
-provide some modest functionality.</p>
-
-<p>IDE&rsquo;s also provide a lot of refactorings they provide other than the Big Five.
-However most of these refactorings are just variations on themes of the Big
-Five, or rely on parsing the syntax of of the language.</p>
-
-<p>While I would never want to take over a huge codebase without the Big Five,
-these weaknesses have caused me to rely on them less and less.</p>
-
+provide some modest functionality as long as the programmer is aware of their
+limitations.</p>
+<h2 id="run-time-inspection-tools-debuggers-repls">Run-time Inspection Tools (Debuggers, REPLs)</h2>
+<p>These tools allow the programmer to execute the code, and inspect what is
+happening. They are typically integrated with the language itself, either
+provided directly or through a library.</p>
+<ul>
+<li><strong>Stop at Breakpoint</strong> - Run code to a point and stop execution there</li>
+<li><strong>Inspect Call Stack</strong> - See the function calls that led to a breakpoint</li>
+<li><strong>Inspect scope</strong> - See all variables in scope at a breakpoint</li>
+<li><strong>Execute statement at point</strong> - Run any arbitrary code in the scope of the current breakpoint</li>
+<li><strong>Modify the executing code</strong> - Modify variables and functions dynamically in the running code</li>
+</ul>
+<p>Run-time inspection tools are excellent for seeing how a program is executing.
+They allow the programmer direct insight into a running program. There have been
+many times when I&rsquo;ve been completed stumped with a program, only to run it with
+a debugger and suddenly realize what was happening. If you have access to these
+tools, they are worth learning well.</p>
+<p>Debuggers are most useful if you can recreate the scenario you need to inspect.
+Debuggers will not help for debugging an issue unless you cannot completely
+recreate the exact scenario you need. For this reason, unit tests combined with
+a debugger are a powerful combo.</p>
+<p>Many REPLs (Read Eval Print Loop) allow you to modify the code live while
+connected to the running process. Languages like Common Lisp, Smalltalk, and
+Clojure are famous for allowing the programmer to replace blocks of code on a
+running server: sometimes even in production! Integrated REPLs are an extremely
+powerful tool, and powerful tools can be quite dangerous. Knowing how to use a
+tool well is the first step in knowing how to use it wisely.</p>
 <h2 id="text-based-tools">Text-Based Tools</h2>
-
-<p>A text-based tool does not require an AST to work. Consider <strong>Extract
-Interface</strong>. It takes a class and generates an interface next to the class
-containing all the public functions from the class. The refactoring does not
-require an AST to work, it can be easily achieved by combining several text
-commands.</p>
-
+<p>A text-based tool operates on raw text only. It can be limited to a single file,
+or many files. Text tools do not know anything about the AST or structure, they
+only operate on raw text.</p>
+<ul>
+<li><strong>Find/Replace</strong> - Search for text and replace it</li>
+<li><strong>Regular Expressions</strong> - Transform text based on pattern matching rules</li>
+<li><strong>Record/Playback Macro</strong> - Record and playback a series of operations</li>
+<li><strong>Balance parenthesis/brackets/quotes</strong> - Transform balanced sections</li>
+<li><strong>Linting/Style enforcement</strong> - Show places code doesn&rsquo;t match a preferred
+style, optionally fix style warnings</li>
+</ul>
+<p>Consider the common Semantic transformation <strong>Extract Interface</strong>. It takes a
+class and generates an interface next to the class containing all the public
+functions from the class. The refactoring does not require an AST to work, it
+can be easily achieved by combining several text commands. See example in my
+post <a href="/vim-refactoring-patterns">Vim Refactoring
+Patterns</a></p>
 <p>Any refactoring can be replaced with a text macro or regular expression. Here is
 where we see the power of good abstractions. Where an IDE refactoring suite may
 provide dozens or hundreds of specialized commands that only work in a single
-language, a few good text abstractions compose endlessly.</p>
-
-<p>For example, as demonstrated in Vim, extracting an interface in C# can be just:</p>
-
-<p><img class="pull-left" src="/images/interface-small.gif"></img>
-<div class="container-fluid">
-</div></p>
-
-<ul>
-<li><code>:11,37t8</code> - Copy the class body to line 8</li>
-<li><code>:10,35g!/public/d</code> - Delete every line not containing the word public from
-line 10 to 35</li>
-<li><code>:10,12s/public//g</code> - Delete all the public keywords in lines 10-12</li>
-<li><code>:10,12s/$/;/g</code> - End each line with a semi-colon</li>
-</ul>
-
+language, a few good text abstractions compose endlessly in any text files.</p>
 <p>A skilled user of these basic abstractions can solve any text-based refactoring
 in only a few steps. They can invent new refactorings, solving any text
 manipulation they need.</p>
 
-<p>If you are skilled with good set of abstractions for editing code, you can be
-very productive across lots of languages and frameworks. The real power comes
-when you can combine Semantic and text-based tools. If you have an accurate <strong>Go
-To Definition</strong> AND the ability to <strong>playback</strong> a macro, your options are
-limitless!</p>
 
+  <p class=" bookAdBanner col-xs-12 col-sm-12 col-md-12">
+    <span class="col-xs-10 col-sm-10 col-md-10">
+      Become a master of <strong>Regular Expressions</strong> or
+  <strong>Macros</strong> with practice exercises to teach you how to <i>think</i> using these tools, and identify places
+      where they are best used: 
+      <a href="https://leanpub.com/deliberatevim">
+        10 Minute Vim
+      </a>
+    </span>
+    <a class=" col-xs-2 col-sm-2 col-md-2" href="https://leanpub.com/deliberatevim">
+      <img style="padding:1rem" src="/images/vim.jpg"></img>
+    </a>
+  </p>
+
+
+<h3 id="balance-parenthesis">Balance Parenthesis</h3>
+<p>This set of tools is not very well known, despite being very useful in the right
+context. The best example of it is:
+<a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">ParEdit</a></p>
+<p>The tool by default prevents the programmer from entering unbalanced characters,
+but then offers a suite of commands for transforming them.</p>
+<p>ParEdit is less useful in languages with relatively fewer balanced characters,
+and most useful in languages where balanced characters contain an entire
+expression:</p>
+<table>
+<thead>
+<tr>
+<th>Balanced Characters</th>
+<th>Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fewer</strong></td>
+<td>Python, Ruby, OCaml/F#, Haskell</td>
+</tr>
+<tr>
+<td><strong>More</strong></td>
+<td>C#, Java, Javascript, C++</td>
+</tr>
+<tr>
+<td><strong>Surround Entire Expressions</strong></td>
+<td>Clojure, Scheme, Racket</td>
+</tr>
+</tbody>
+</table>
+<p>If you regularly use a language in the bottom two rows, you might want to check
+out if your editor has an implementation of ParEdit!</p>
+<h2 id="conclusion---have-all-tools-at-your-disposal">Conclusion - Have all tools at your disposal</h2>
+<p>The real power comes when you can combine Semantic, run-time, and text-based
+tools to solve different problems.</p>
 <p>For this reason, if you have the ability, you should learn one from each
-category of tools available to you. If you have access to a set of Semantic
-tools for your languages, learn them well, but know their limits! If you have
-access to a set of text-based tools like those found in a Vim plugin, install
-the Vim plugin and learn it well. You will have all the power of both at your
-disposal!</p>
+category of tools available to you.</p>
+<ol>
+<li>Semantic Tools
+<ul>
+<li>Intelij IDEA, PyCharm, VS Code, Visual Studio, Eclipse</li>
+</ul>
+</li>
+<li>Run-time Inspection Tools
+<ul>
+<li>Debuggers in Intelij IDEA, PyCharm, VS Code, Visual Studio, Eclipse</li>
+<li>REPL (Python, Ruby, Clojure, Haskell, Javascript, Smalltalk)</li>
+</ul>
+</li>
+<li>Text-based Tools
+<ul>
+<li>Vim / Emacs (even available an IDE plugin!)</li>
+<li>ParEdit</li>
+<li>Grep</li>
+<li>AWK</li>
+</ul>
+</li>
+</ol>
+<p>Mastering each category of tools will go a long way to increasing your ability
+to write and transform code efficiently.</p>
 
   </div>
 </div>
@@ -306,7 +375,7 @@ disposal!</p>
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://deliberate-software.com/coq_day3/" title="Darkest Proof: Day 3">
+          <a href="http://deliberate-software.com/fsharp-design-enums/" title="F# Domain Design: Interdependent Enums and Booleans">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
@@ -344,7 +413,7 @@ disposal!</p>
     software developer, manager, author, speaker
   </span>
 </a>
-<h3 class="col-xs-12 col-sm-12" id="name">books:</h3>
+<h3 class="col-xs-12 col-sm-12" id="name">my books:</h3>
 
 
 <a class="col-xs-6 col-sm-4 col-md-6" href="https://leanpub.com/deliberatevim">
@@ -373,15 +442,11 @@ disposal!</p>
 
 
 
-
-
 <h3 class=" col-xs-12 col-sm-12" id="name">posts for:</h3>
 <div class="col-xs-12 col-sm-12">
   <ul class="sidebar_ul">
     <li class="sidebar_li"><a href="/page/training">Learn To Program For Free</a></li>
-    <li class="sidebar_li"><a href="/page/focused">New Developers</a></li>
-    <li class="sidebar_li"><a href="/page/focused">Seasoned Developers</a></li>
-    <li class="sidebar_li"><a href="/page/focused">Managers</a></li>
+    <li class="sidebar_li"><a href="/page/focused">Developers and managers</a></li>
     <li class="sidebar_li"><a href="/page/post">See All Posts</a></li>
   </ul>
 </div>
@@ -442,13 +507,6 @@ disposal!</p>
     
 
     
-<div class="container copyright">
-  
-  Deliberate Software 2016
-
-
-</div>
-
 
 
           </small>

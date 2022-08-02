@@ -42,7 +42,7 @@
     },
     "datePublished": "2015-08-13",
     "description": "",
-    "wordCount": 1546
+    "wordCount":  1546 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,42 +179,33 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
+    <p>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to
 organize your testing code without mocking or complicated dependency injection.</p>
-
 <p>SimpleMock works in any language with closures that can be passed around by
 reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and
 Python. I&rsquo;m sure you can think of others.</p>
-
 <h2 id="example">Example:</h2>
-
 <p>Here is a brief (if a bit silly) example of the final pattern:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LineCounter</span> {
+    <span style="color:#66d9ef">internal</span> Func&lt;<span style="color:#66d9ef">string</span>, IEnumerable&lt;<span style="color:#66d9ef">string</span>&gt;&gt; _readLines = File.ReadLines;
 
-<pre><code class="language-csharp">public class LineCounter {
-    internal Func&lt;string, IEnumerable&lt;string&gt;&gt; _readLines = File.ReadLines;
-
-    public string CountLines(string filename) {
-        return _readLines(filename).Count();
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> CountLines(<span style="color:#66d9ef">string</span> filename) {
+        <span style="color:#66d9ef">return</span> _readLines(filename).Count();
     }
 }
 
-/// Test Code
-[TestCase]
-public void TestLineCounter () {
-    var sut = new LineCounter();
-    // &quot;SimpleMock&quot; of File.ReadLines
-    sut._readLines = (string x) =&gt; new List&lt;string&gt;{&quot;test&quot;, &quot;that&quot;};
+<span style="color:#75715e">/// Test Code
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestLineCounter () {
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> LineCounter();
+    <span style="color:#75715e">// &#34;SimpleMock&#34; of File.ReadLines
+</span><span style="color:#75715e"></span>    sut._readLines = (<span style="color:#66d9ef">string</span> x) =&gt; <span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt;{<span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;that&#34;</span>};
 
-    var result = sut.CountLines(&quot;test&quot;);
+    <span style="color:#66d9ef">var</span> result = sut.CountLines(<span style="color:#e6db74">&#34;test&#34;</span>);
 
-    Assert.AreEqual(2, result);
+    Assert.AreEqual(<span style="color:#ae81ff">2</span>, result);
 }
-</code></pre>
-
-<h2 id="benefits">Benefits</h2>
-
+</code></pre></div><h2 id="benefits">Benefits</h2>
 <ul>
 <li>Reduced boilerplate</li>
 <li>Saves interfaces for real polymorphism</li>
@@ -224,119 +215,100 @@ public void TestLineCounter () {
 <li>Encourages better abstraction design</li>
 <li>Can convert one class at a time!</li>
 </ul>
-
 <p>The SimpleMock pattern promotes a better design of your abstractions and simpler
 tests. The pattern also reduces boilerplate and the pollution of your production
 code with testing concerns.</p>
-
 <p>If you aren&rsquo;t familiar with the normal pattern of unit test mocking using
 interfaces, dependency injection, and mock libraries, scroll down to &ldquo;The
 Non-SimpleMock Way&rdquo; at the end of the post.</p>
-
 <h2 id="simplemock-pattern">SimpleMock Pattern</h2>
-
 <p>The SimpleMock pattern is aptly named.</p>
-
 <ol>
 <li>Replace Test-Only Interfaces With Functions</li>
 <li>Define Dependencies Inline</li>
 <li>Write Better Abstractions</li>
 </ol>
-
 <h2 id="step-one-replace-test-only-interfaces-with-functions">Step One: Replace Test-Only Interfaces With Functions</h2>
-
 <p>My examples are in C# because that is what I got paid to write today - it is
 freshest in memory. C# has an incredible ability to create and pass around
 lambdas and function references. Here is an example of using functions instead
 of interfaces.</p>
-
-<pre><code class="language-csharp">public class CurrentTime : ICurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CurrentTime</span> : ICurrentTime {
+    <span style="color:#66d9ef">public</span> DateTime GetCurrentTime() {
+        <span style="color:#66d9ef">return</span> DateTime.Now();
     }
 }
-public class Translator {
-    private Func&lt;DateTime&gt; _getCurrentTime;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Translator</span> {
+    <span style="color:#66d9ef">private</span> Func&lt;DateTime&gt; _getCurrentTime;
 
-    public Translator() : this(new CurrentTime().GetCurrentTime) {}
+    <span style="color:#66d9ef">public</span> Translator() : <span style="color:#66d9ef">this</span>(<span style="color:#66d9ef">new</span> CurrentTime().GetCurrentTime) {}
 
-    public Translator(Func&lt;DateTime&gt; getCurrentTime) {
-        this._getCurrentTime = getCurrentTime;
+    <span style="color:#66d9ef">public</span> Translator(Func&lt;DateTime&gt; getCurrentTime) {
+        <span style="color:#66d9ef">this</span>._getCurrentTime = getCurrentTime;
     }
 
-    public string Translate(string input) {
-        return string.Format(&quot;{0}: {1}&quot;, _getCurrentTime().ToString(), input);
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Translate(<span style="color:#66d9ef">string</span> input) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">&#34;{0}: {1}&#34;</span>, _getCurrentTime().ToString(), input);
     }
 }
 
-/// Test Code
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var now = DateTime.Now;
+<span style="color:#75715e">/// Test Code
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestCurrentTimeTranslator () {
+    <span style="color:#66d9ef">var</span> now = DateTime.Now;
 
-    var sut = new Translator(() =&gt; now);
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> Translator(() =&gt; now);
 
-    var result = sut.Translate(&quot;test&quot;);
+    <span style="color:#66d9ef">var</span> result = sut.Translate(<span style="color:#e6db74">&#34;test&#34;</span>);
 
-    Assert.AreEqual(now.ToString() + &quot;: test&quot;, result);
+    Assert.AreEqual(now.ToString() + <span style="color:#e6db74">&#34;: test&#34;</span>, result);
 }
 
-</code></pre>
-
-<p>The test code is quite simple! No longer do we need the dependency on third
+</code></pre></div><p>The test code is quite simple! No longer do we need the dependency on third
 party mocking libraries, or the relatively complicated setup logic. Instead we
 can simply inject the lambda at runtime, replacing that pointer. We didn&rsquo;t need
 the whole interface, really we just needed the simple signature of the function.</p>
-
 <h2 id="step-2-define-dependencies-inline">Step 2: Define Dependencies Inline</h2>
-
 <p>We can take it even a step further. Why use constructor injection at all? Since
 all we really want is a single mutable dispatch table row, why not just make it
 that way?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Translator</span> {
+    <span style="color:#66d9ef">internal</span> Func&lt;DateTime&gt; _getCurrentTime = <span style="color:#66d9ef">new</span> CurrentTime().GetCurrentTime;
 
-<pre><code class="language-csharp">public class Translator {
-    internal Func&lt;DateTime&gt; _getCurrentTime = new CurrentTime().GetCurrentTime;
-
-    public string Translate(string input) {
-        return string.Format(&quot;{0}: {1}&quot;, _getCurrentTime().ToString(), input);
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Translate(<span style="color:#66d9ef">string</span> input) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">&#34;{0}: {1}&#34;</span>, _getCurrentTime().ToString(), input);
     }
 }
 
-/// Test Code
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var now = DateTime.Now;
-    var sut = new Translator();
+<span style="color:#75715e">/// Test Code
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestCurrentTimeTranslator () {
+    <span style="color:#66d9ef">var</span> now = DateTime.Now;
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> Translator();
     sut._getCurrentTime = () =&gt; now;
 
-    var result = sut.Translate(&quot;test&quot;);
+    <span style="color:#66d9ef">var</span> result = sut.Translate(<span style="color:#e6db74">&#34;test&#34;</span>);
 
-    Assert.AreEqual(now.ToString() + &quot;: test&quot;, result);
+    Assert.AreEqual(now.ToString() + <span style="color:#e6db74">&#34;: test&#34;</span>, result);
 }
-</code></pre>
-
-<p>We&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
+</code></pre></div><p>We&rsquo;ve cleaned up our nasty multi-line indirection into a single dispatch line.
 &ldquo;Go to definition&rdquo; now takes me to the actual line with the actual called
 function. We&rsquo;ve replaced a dependency on a class based interface with a function
 signature. The function signature <em>is</em> the interface!</p>
-
 <p>You probably noticed we have lost something with this final version. We have
 lost the ability to inject polymorphic behavior through the constructor. If you
 need it, simply go back to injecting the interface in the constructor or by
 passing it into the function itself. In practice, I have found this is needed
 very rarely, making the SimpleMock pattern a better tool to reach for first.</p>
-
 <h2 id="step-3-write-better-abstractions">Step 3: Write Better Abstractions</h2>
-
 <p>Lastly, SimpleMock actually promotes better designs. For example, a coworker was
 writing some tests today and ran into a complicated situation. Take the
 following sanitized code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WorkDoer</span> {
+    <span style="color:#66d9ef">internal</span> Action&lt;Thing&gt; ignoreElements = <span style="color:#66d9ef">new</span> ThingIgnorer().IgnoreElements;
+    <span style="color:#66d9ef">internal</span> Action&lt;Thing&gt; removeIgnoredElements = <span style="color:#66d9ef">new</span> ThingRemover().RemoveElements;
 
-<pre><code class="language-csharp">public class WorkDoer {
-    internal Action&lt;Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
-    internal Action&lt;Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
-
-    public void IgnoreAndRemoveThings(Thing t1, Thing t2) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> IgnoreAndRemoveThings(Thing t1, Thing t2) {
         ignoreElements(t1);
         ignoreElements(t2);
         removeIgnoredElements(t1);
@@ -344,176 +316,152 @@ following sanitized code:</p>
     }
 }
 
-</code></pre>
-
-<p>How would you check that each section was called? Our naive solution was a
+</code></pre></div><p>How would you check that each section was called? Our naive solution was a
 complicated lambda with a &ldquo;timesCalled&rdquo; counter and an if statement to assert
 against each argument, but it turns nasty quickly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#75715e">/// Nasty test code
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestWorkDoer () {
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> WorkDoer();
 
-<pre><code class="language-csharp">/// Nasty test code
-[TestCase]
-public void TestWorkDoer () {
-    var sut = new WorkDoer();
-
-    var ignoredCalledTimes = 0;
+    <span style="color:#66d9ef">var</span> ignoredCalledTimes = <span style="color:#ae81ff">0</span>;
     sut.ignoreElements = (t) =&gt; {
         ignoredCalledTimes++;
-        if (ignoredCalledTimes == 1) {
+        <span style="color:#66d9ef">if</span> (ignoredCalledTimes == <span style="color:#ae81ff">1</span>) {
             Assert.AreEqual(t1, t);
-        } else {
+        } <span style="color:#66d9ef">else</span> {
             Assert.AreEqual(t2, t);
         }
     };
-    var removedCalledTimes = 0;
+    <span style="color:#66d9ef">var</span> removedCalledTimes = <span style="color:#ae81ff">0</span>;
     sut.removeIgnoredElements = (t) =&gt; {
         removedCalledTimes++;
-        if (removedCalledTimes == 1) {
+        <span style="color:#66d9ef">if</span> (removedCalledTimes == <span style="color:#ae81ff">1</span>) {
             Assert.AreEqual(t1, t);
-        } else {
+        } <span style="color:#66d9ef">else</span> {
             Assert.AreEqual(t2, t);
         }
     };
 
-    var t1 = new Thing();
-    var t2 = new Thing();
+    <span style="color:#66d9ef">var</span> t1 = <span style="color:#66d9ef">new</span> Thing();
+    <span style="color:#66d9ef">var</span> t2 = <span style="color:#66d9ef">new</span> Thing();
 
-    var result = sut.IgnoreAndRemoveThings(t1, t2);
-    Assert.AreEqual(2, removedCalledTimes);
-    Assert.AreEqual(2, ignoredCalledTimes);
+    <span style="color:#66d9ef">var</span> result = sut.IgnoreAndRemoveThings(t1, t2);
+    Assert.AreEqual(<span style="color:#ae81ff">2</span>, removedCalledTimes);
+    Assert.AreEqual(<span style="color:#ae81ff">2</span>, ignoredCalledTimes);
 }
-</code></pre>
-
-<p>Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
+</code></pre></div><p>Yuck! The test is an absolute catastrophe. I see a mess of mixed concerns.
 Conditionals?! In a test?! Unconscionable.</p>
-
 <p>In situations like this, we have two easy options. Option one is to just use
 a third party mocking library, replacing the functions from inside the test
 code. This gives us access to all the sophisticated mocking tools available.</p>
-
 <p>My preferred option is seeking to decomplect the production code by using better
 abstractions.</p>
-
 <p>I have found that strong reliance of mocking libraries enables worse designs.
 Consider the code, what makes it so hard to test? Not knowing which element is
 called when, doing the same work on two parameters, and reference mutation all
 make this a poor abstraction. Why not simplify?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WorkDoer</span> {
+    <span style="color:#66d9ef">internal</span> Func&lt;Thing, Thing&gt; ignoreElements = <span style="color:#66d9ef">new</span> ThingIgnorer().IgnoreElements;
+    <span style="color:#66d9ef">internal</span> Func&lt;Thing, Thing&gt; removeIgnoredElements = <span style="color:#66d9ef">new</span> ThingRemover().RemoveElements;
 
-<pre><code class="language-csharp">public class WorkDoer {
-    internal Func&lt;Thing, Thing&gt; ignoreElements = new ThingIgnorer().IgnoreElements;
-    internal Func&lt;Thing, Thing&gt; removeIgnoredElements = new ThingRemover().RemoveElements;
-
-    public List&lt;Thing&gt; IgnoreAndRemoveThings(List&lt;Thing&gt; ts) {
-        return ts.Select(t =&gt; removeIgnoredElements(ignoreElements(t)));
+    <span style="color:#66d9ef">public</span> List&lt;Thing&gt; IgnoreAndRemoveThings(List&lt;Thing&gt; ts) {
+        <span style="color:#66d9ef">return</span> ts.Select(t =&gt; removeIgnoredElements(ignoreElements(t)));
     }
 }
 
-/// Simpler test
-[TestCase]
-public void TestWorkDoer () {
-    var sut = new WorkDoer();
-    var expected = new Thing();
-    var ts = new List&lt;Thing&gt;{new Thing()};
+<span style="color:#75715e">/// Simpler test
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestWorkDoer () {
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> WorkDoer();
+    <span style="color:#66d9ef">var</span> expected = <span style="color:#66d9ef">new</span> Thing();
+    <span style="color:#66d9ef">var</span> ts = <span style="color:#66d9ef">new</span> List&lt;Thing&gt;{<span style="color:#66d9ef">new</span> Thing()};
 
-    sut.ignoreElements = (t) =&gt; new Thing();
+    sut.ignoreElements = (t) =&gt; <span style="color:#66d9ef">new</span> Thing();
 
     sut.removeIgnoredElements = (t) =&gt; {
         Assert.AreEqual(t, sut.ignoreElements(t));
-        return expected;
+        <span style="color:#66d9ef">return</span> expected;
     };
 
-    var result = sut.IgnoreAndRemoveThings(ts);
+    <span style="color:#66d9ef">var</span> result = sut.IgnoreAndRemoveThings(ts);
 
     Assert.AreEqual(expected, result.First())
 }
-</code></pre>
-
-<p>Much better! Yes, we had to change a few signatures. We get the same work done,
+</code></pre></div><p>Much better! Yes, we had to change a few signatures. We get the same work done,
 but now the code is actually a lot more useful. Our test code is comparable with
 anything you&rsquo;d find using a mocking library. I am absolutely okay with using a
 mocking library when needed, but I always carefully consider my abstractions and
 design first.</p>
-
 <p>If mocking libraries and IoC containers are the chainsaws of the testing world,
 then SimpleMock is the garden shears. Sometimes the chainsaw is the only tool
 for the job, and that is fine. But for most work around the yard, you can leave
 the chainsaw in the shed.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>I’ve shown how you can really simplify your code with SimpleMock. The dispatch
 row is clear and easy to read. We have removed some third party mocking
 dependencies. You can remove a lot of the boilerplate &ldquo;for making it more
 testable&rdquo; from your code. The test code is greatly simplified, and injection a
 breeze. The result: much simpler code, just as easy to test.</p>
-
 <p>Thanks to Shuwei Chen for helping me put this together!</p>
-
 <h2 id="the-non-simplemock-way">The Non-SimpleMock Way</h2>
-
 <p>If you are familiar with unit test mocking with interfaces, this part is
 probably boring. Feel free to skip.</p>
-
 <p>The traditional way of performing C# unit test mocking involves dependency
 injection and interface mocking using a mocking library. For dependency
 injection, it is common to use a tool like Ninject or hand-rolled constructor
 injection. For mocking, a library like Moq or Rhino Mocks is standard. Here is
 an example of a class and its testing code without any business logic.</p>
-
-<pre><code class="language-csharp">public interface ICurrentTime {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> ICurrentTime {
     DateTime GetCurrentTime();
 }
 
-public class CurrentTime : ICurrentTime {
-    public DateTime GetCurrentTime() {
-        return DateTime.Now();
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CurrentTime</span> : ICurrentTime {
+    <span style="color:#66d9ef">public</span> DateTime GetCurrentTime() {
+        <span style="color:#66d9ef">return</span> DateTime.Now();
     }
 }
 
-public class Translator {
-    private readonly ICurrentTime ct;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Translator</span> {
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> ICurrentTime ct;
 
-    public Translator() : this(new CurrentTime()) {}
+    <span style="color:#66d9ef">public</span> Translator() : <span style="color:#66d9ef">this</span>(<span style="color:#66d9ef">new</span> CurrentTime()) {}
 
-    public Translator(ICurrentTime currentTime) {
-        this.ct = currentTime;
+    <span style="color:#66d9ef">public</span> Translator(ICurrentTime currentTime) {
+        <span style="color:#66d9ef">this</span>.ct = currentTime;
     }
 
-    public string Translate(string input) {
-        return string.Format(&quot;{0}: {1}&quot;, ct.GetCurrentTime().ToString(), input);
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Translate(<span style="color:#66d9ef">string</span> input) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">&#34;{0}: {1}&#34;</span>, ct.GetCurrentTime().ToString(), input);
     }
 }
 
-/// Test Code with Moq
-[TestCase]
-public void TestCurrentTimeTranslator () {
-    var rightNow = DateTime.Now;
-    var mock = new Mock&lt;ICurrentTime&gt;();
+<span style="color:#75715e">/// Test Code with Moq
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">[TestCase]</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> TestCurrentTimeTranslator () {
+    <span style="color:#66d9ef">var</span> rightNow = DateTime.Now;
+    <span style="color:#66d9ef">var</span> mock = <span style="color:#66d9ef">new</span> Mock&lt;ICurrentTime&gt;();
 
     mock.Setup(a=&gt;a.GetCurrentTime()).Returns(rightNow);
 
-    var sut = new Translator(mock.Object);
+    <span style="color:#66d9ef">var</span> sut = <span style="color:#66d9ef">new</span> Translator(mock.Object);
 
-    var result = sut.Translate(&quot;test&quot;);
+    <span style="color:#66d9ef">var</span> result = sut.Translate(<span style="color:#e6db74">&#34;test&#34;</span>);
 
-    Assert.AreEqual(rightNow.ToString() + &quot;: test&quot;, result);
+    Assert.AreEqual(rightNow.ToString() + <span style="color:#e6db74">&#34;: test&#34;</span>, result);
 }
 
-</code></pre>
-
-<p>If you&rsquo;ve done much C# unit testing, this should look familiar. We want to
+</code></pre></div><p>If you&rsquo;ve done much C# unit testing, this should look familiar. We want to
 inject some code that is potentially long-running or dynamic. We put that code
 into a class, add an interface, then inject that interface into the class we
 want to test. To test it, we mock the interface, creating a different concrete
 class at test runtime which implements that interface. We can setup that mock to
 respond with anything, which we use for assertions.</p>
-
-<h2 id="what-s-wrong-with-the-non-simplemock-way">What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
-
+<h2 id="whats-wrong-with-the-non-simplemock-way">What&rsquo;s Wrong with the Non-SimpleMock Way?</h2>
 <p>The first problem is we have created a whole interface just for testing.
 Interfaces are for polymorphism, but we don&rsquo;t really need polymorphism for this
 class. We simply want to mock it. The constructor injection is also test code
 polluting our business logic.</p>
-
 <p>What we have done is create a very small and primitive dispatch table. The
 table has one row: something that has a function with the signature of <code>() -&gt; DateTime</code> or, as it is known in C#: <code>Func&lt;DateTime&gt;</code>.  We will need to make
 this primitive dispatch table for every single mock in every single class we

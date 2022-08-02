@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-04-11",
     "description": "",
-    "wordCount": 446
+    "wordCount":  446 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,32 +179,21 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample
+    <p>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample
 project demonstrating a working Angular2 site using Figwheel for hot-reloading
 <a href="https://github.com/steveshogren/angular2-cljs/tree/ae1a1abfe91a84cb5146931ff731885a2b1d5486">on GitHub</a></p>
-
 <h3 id="1-install-luminus-cljs">1. Install Luminus +cljs</h3>
-
 <p>First, setup a basic ClojureScript site using Luminus starter template from
 <a href="http://www.luminusweb.net/docs">here</a></p>
-
-<pre><code class="language-bash">lein new luminus cljs-angular2 +cljs
-</code></pre>
-
-<p>This builds a great basic starter project with ClojureScript and figwheel
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lein new luminus cljs-angular2 +cljs
+</code></pre></div><p>This builds a great basic starter project with ClojureScript and figwheel
 already running. The template uses Reagent and React, which are excellent, but
 we want Angular2!</p>
-
 <h3 id="2-replace-figwheel-site-loader">2. Replace Figwheel Site Loader</h3>
-
 <p>Open the env/dev/cljs/dev.cljs file, which starts the site when running from
 development.</p>
-
 <p>Replace the call to start a figwheel watcher with this:</p>
-
-<pre><code class="language-clojurescript">(defn reload []
+<pre><code class="language-clojurescript" data-lang="clojurescript">(defn reload []
   (core/init!)
   ((.. js/ng -platform -browser -bootstrap)
    (.-AppComponent (.-app js/window))))
@@ -218,16 +207,11 @@ development.</p>
                      (fn []
                        ((.. js/ng -platform -browser -bootstrap)
                         (.-AppComponent (core/get-app))))))
-</code></pre>
-
-<p>The defonce will make sure I accidentally don&rsquo;t attach the same event listener
+</code></pre><p>The defonce will make sure I accidentally don&rsquo;t attach the same event listener
 twice when re-evaluating files at the repl.</p>
-
 <h3 id="3-make-angular2-component">3. Make Angular2 Component</h3>
-
 <p>Replace the src-cljs/cljs-angular2/core.cljs file with this:</p>
-
-<pre><code class="language-clojurescript">(ns cljs-angular2.core
+<pre><code class="language-clojurescript" data-lang="clojurescript">(ns cljs-angular2.core
   (:require-macros [hiccups.core :as hiccups :refer [html]]))
 
 (defn get-app []
@@ -245,50 +229,37 @@ twice when re-evaluating files at the repl.</p>
         c (.Class c #js {:constructor (fn [])})]
     (set! (.-AppComponent app) c)))
 
-</code></pre>
-
-<h3 id="4-add-angular2-dependencies">4. Add Angular2 Dependencies</h3>
-
+</code></pre><h3 id="4-add-angular2-dependencies">4. Add Angular2 Dependencies</h3>
 <p>Add a package.json file into resources/public/ and fill it with this:</p>
-
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;angular2-quickstart&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;npm run lite&quot;,
-    &quot;lite&quot;: &quot;lite-server&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;angular2-quickstart&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;start&#34;</span>: <span style="color:#e6db74">&#34;npm run lite&#34;</span>,
+    <span style="color:#f92672">&#34;lite&#34;</span>: <span style="color:#e6db74">&#34;lite-server&#34;</span>
   },
-  &quot;license&quot;: &quot;ISC&quot;,
-  &quot;dependencies&quot;: {
-    &quot;angular2&quot;: &quot;2.0.0-beta.14&quot;,
-    &quot;es6-shim&quot;: &quot;^0.35.0&quot;,
-    &quot;reflect-metadata&quot;: &quot;0.1.2&quot;,
-    &quot;rxjs&quot;: &quot;5.0.0-beta.2&quot;,
-    &quot;zone.js&quot;: &quot;0.6.6&quot;
+  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;angular2&#34;</span>: <span style="color:#e6db74">&#34;2.0.0-beta.14&#34;</span>,
+    <span style="color:#f92672">&#34;es6-shim&#34;</span>: <span style="color:#e6db74">&#34;^0.35.0&#34;</span>,
+    <span style="color:#f92672">&#34;reflect-metadata&#34;</span>: <span style="color:#e6db74">&#34;0.1.2&#34;</span>,
+    <span style="color:#f92672">&#34;rxjs&#34;</span>: <span style="color:#e6db74">&#34;5.0.0-beta.2&#34;</span>,
+    <span style="color:#f92672">&#34;zone.js&#34;</span>: <span style="color:#e6db74">&#34;0.6.6&#34;</span>
   },
-  &quot;devDependencies&quot;: {
-    &quot;concurrently&quot;: &quot;^2.0.0&quot;,
-    &quot;lite-server&quot;: &quot;^2.2.0&quot;
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;concurrently&#34;</span>: <span style="color:#e6db74">&#34;^2.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;lite-server&#34;</span>: <span style="color:#e6db74">&#34;^2.2.0&#34;</span>
   }
 }
-</code></pre>
-
-<p>Now run <code>npm install</code> from inside the resources/public directory.</p>
-
+</code></pre></div><p>Now run <code>npm install</code> from inside the resources/public directory.</p>
 <h3 id="5-add-hiccups">5. Add Hiccups</h3>
-
 <p>Modify the project.clj in the root directory to include the <code>hiccups</code>
 dependency so we don&rsquo;t have to write nasty html strings:</p>
-
-<pre><code class="language-clojure">:dependencies [[hiccups &quot;0.3.0&quot;]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#e6db74">:dependencies</span> [[hiccups <span style="color:#e6db74">&#34;0.3.0&#34;</span>]
                ...
-</code></pre>
-
-<h3 id="6-add-dependencies-to-home-html">6. Add Dependencies To Home HTML</h3>
-
+</code></pre></div><h3 id="6-add-dependencies-to-home-html">6. Add Dependencies To Home HTML</h3>
 <p>Add the following to resources/templates/home.html before the line including
 <code>{% script &quot;/js/app.js&quot; %}</code></p>
-
 <pre><code>&lt;my-app&gt;Loading...&lt;/my-app&gt;
 &lt;script src=&quot;node_modules/es6-shim/es6-shim.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;node_modules/angular2/es6/dev/src/testing/shims_for_IE.js&quot;&gt;&lt;/script&gt;
@@ -296,30 +267,19 @@ dependency so we don&rsquo;t have to write nasty html strings:</p>
 &lt;script src=&quot;node_modules/angular2/bundles/angular2-polyfills.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;node_modules/rxjs/bundles/Rx.umd.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;node_modules/angular2/bundles/angular2-all.umd.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-
-<h3 id="7-start-site">7. Start Site!</h3>
-
+</code></pre><h3 id="7-start-site">7. Start Site!</h3>
 <p>Start the site with three tabs open running:</p>
-
-<pre><code class="language-bash">lein run
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lein run
 lein cljsbuild auto
 lein figwheel
-</code></pre>
-
-<p>The <code>lein run</code> command should emit a line showing the port number like:</p>
-
+</code></pre></div><p>The <code>lein run</code> command should emit a line showing the port number like:</p>
 <pre><code>[2016-04-10 16:16:51,326][INFO][cljs-angular2.core] server started on port: 3000
-</code></pre>
-
-<p>Just open your browser to <code>localhost:3000</code> where 3000 is the port number
+</code></pre><p>Just open your browser to <code>localhost:3000</code> where 3000 is the port number
 from the <code>lein run</code> command. Try to modify the core.cljs file to have a new
 template, and the site should automatically refresh with the new changes! If
 that doesn&rsquo;t work, make sure you are running both the cljsbuild on auto and
 figwheel processes.</p>
-
 <p>Easy as that!</p>
-
 <p>If you get stuck, I checked in a working version <a href="https://github.com/steveshogren/angular2-cljs/tree/ae1a1abfe91a84cb5146931ff731885a2b1d5486">on GitHub</a></p>
 
   </div>

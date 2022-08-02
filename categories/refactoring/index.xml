@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Refactoring on deliberate software</title>
+    <title>refactoring on deliberate software</title>
     <link>http://deliberate-software.com/categories/refactoring/</link>
-    <description>Recent content in Refactoring on deliberate software</description>
+    <description>Recent content in refactoring on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>

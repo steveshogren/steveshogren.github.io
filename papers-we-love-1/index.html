@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-08-04",
     "description": "",
-    "wordCount": 992
+    "wordCount":  994 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -153,7 +153,7 @@
 
   <small>
   &middot; Read in about 5 min
-  &middot; (992 Words)
+  &middot; (994 Words)
 </small>
 
 
@@ -177,56 +177,41 @@
       <div class="">
     
   <div class="content">
-    
-
-<p><em>In this series I practice reading computer science papers by following a modified set of
+    <p><em>In this series I practice reading computer science papers by following a modified set of
 steps outlined in the guide:
 <a href="https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/">How to read and understand a scientific paper: a guide for non-scientists</a>.
 If your reaction to this post is &lsquo;eh, just read the paper&rsquo;, then this post isn&rsquo;t
 for you ;)</em></p>
-
 <h3 id="why-should-i-read-the-byzantine-generals-problem">Why Should I Read The Byzantine Generals Problem?</h3>
-
 <p>The research in this paper allows blockchain technology, ensures military radar
 installation reliability, and enables the design of distributed, fault-tolerant
 CPU processors. Not only is the research widely used in many interesting ways,
 but the paper uses the amusing military analogy of a group of separated generals
 trying to agree on a battle plan. The paper is a fun intro into academic papers.</p>
-
 <p><a href="http://www.andrew.cmu.edu/course/15-749/READINGS/required/resilience/lamport82.pdf">The Byzantine Generals Problem pdf</a></p>
-
 <h3 id="my-breakdown">My Breakdown:</h3>
-
 <h4 id="begin-by-reading-the-introduction-not-the-abstract">Begin by reading the introduction, not the abstract</h4>
-
 <p>The broad problem is: how to create a network of components that can come to
 consensus when some nodes in the network may be sending conflicting and
 false information to the other nodes. We desire a solution where the &ldquo;loyal&rdquo;
 nodes perform the correct action.</p>
-
 <h4 id="identify-the-big-question">Identify the BIG QUESTION</h4>
-
 <p>The BIG QUESTION is: <strong>how to create a network of nodes that decides on a
 common plan of action when some nodes are sending false information.</strong></p>
-
 <p>The big question is posed abstractly as: how can many generals decide on a
 plan when some generals are traitors sending false information and all
 generals can only communicate via messages to each other.</p>
-
-<h4 id="identify-the-specific-question-s">Identify the SPECIFIC QUESTION(S)</h4>
-
-<p>The SPECIFIC QUESTIONS are more simple:
-- <strong>IC1: Ensure a single &ldquo;general node&rdquo; is able to send an order for all
-loyal &ldquo;lieutenant nodes&rdquo; to follow</strong>
-- <strong>IC2: All loyal lieutenant nodes follow the order if the general is loyal</strong></p>
-
+<h4 id="identify-the-specific-questions">Identify the SPECIFIC QUESTION(S)</h4>
+<p>The SPECIFIC QUESTIONS are more simple:</p>
+<ul>
+<li><strong>IC1: Ensure a single &ldquo;general node&rdquo; is able to send an order for all
+loyal &ldquo;lieutenant nodes&rdquo; to follow</strong></li>
+<li><strong>IC2: All loyal lieutenant nodes follow the order if the general is loyal</strong></li>
+</ul>
 <p>These two conditions are called the <em>interactive consistency</em> conditions.</p>
-
 <p>Solving this specific question will unlock the solution to the more
 complicated scenario with multiple nodes all communicating with each other.</p>
-
 <h4 id="determine-outline">Determine Outline</h4>
-
 <ol>
 <li>Abstract</li>
 <li>Introduction</li>
@@ -239,118 +224,95 @@ complicated scenario with multiple nodes all communicating with each other.</p>
 calculate solutions across multiple processors</li>
 <li>Conclusion</li>
 </ol>
-
 <h4 id="identify-the-approach">Identify the approach</h4>
-
 <p>The approach is a set of logical, inductive proofs.</p>
-
-<h4 id="explain-any-diagrams-charts">Explain any diagrams/charts</h4>
-
+<h4 id="explain-any-diagramscharts">Explain any diagrams/charts</h4>
 <p><img src="/images/generalsfig1fig2.png"></img></p>
-
 <p>Fig 1 and Fig 2 illustrate how it is impossible for one commander and two
 lieutenants to come to consensus with unsigned messages when one of the
 three is a traitor.</p>
-
 <p><img src="/images/generalsfig3fig4.png"></img></p>
-
 <p>Fig 3 and Fig 4 show the oral (unsigned) communication paths of one
 commander and three lieutenants, represented by OM(1). Fig 3 shows the paths
 of a traitorous lieutenant, and how the other lieutenants can simply do
 whatever the majority of inputs recommend. Fig 4 shows the traitorous
 commander, and how all three lieutenants need to fall back to their default
 behavior, as there is no clear winning majority.</p>
-
 <p><img src="/images/generalsfig5.png"></img></p>
-
 <p>Fig 5 illustrates passing signed messages with one commander and two
 lieutenants, represented by SM(1). Each message gets appended to the end, so
 a traitorous commander is revealed by sending different messages to each
 lieutenant.</p>
-
 <p><img src="/images/generalsfig6fig7.png"></img></p>
-
 <p>Fig 7 is not 3-regular because the central node has more than 3 connecting
 paths.</p>
-
-<h4 id="explain-the-recommended-solution-algorithm-theory-proofs">Explain the recommended solution/algorithm/theory/proofs</h4>
-
+<h4 id="explain-the-recommended-solutionalgorithmtheoryproofs">Explain the recommended solution/algorithm/theory/proofs</h4>
 <ul>
-<li><p>The original problem, stated as two interactivity conditions:</p>
-
+<li>
+<p>The original problem, stated as two interactivity conditions:</p>
 <ul>
 <li><strong>IC1: All loyal lieutenants obey the same order</strong></li>
 <li><strong>IC2: All lieutenant nodes follow the order if the general is loyal</strong></li>
-</ul></li>
-
-<li><p>They refer the reader to a previous proof that 3 nodes cannot be solved.
+</ul>
+</li>
+<li>
+<p>They refer the reader to a previous proof that 3 nodes cannot be solved.
 They claim a proof by contradiction that therefore no solution exists for
-fewer than <em>3m+1</em> nodes where <em>m</em> is the traitor node count.</p></li>
-
-<li><p>Inductive proof with forgeable (unsigned) messages - requires <em>3m+1</em> nodes
-where <em>m</em> is the traitor node count.</p>
-
-<ul>
-<li>Assumptions:
-
-<ul>
-<li>A1. Every message is sent correctly</li>
-<li>A2. The receiver of a message knows who sent it</li>
-<li>A3. The absence of a message can be detected</li>
-</ul></li>
-</ul></li>
-
-<li><p>Inductive proof with unforgeable (signed) messages - requires only <em>m+2</em>
+fewer than <em>3m+1</em> nodes where <em>m</em> is the traitor node count.</p>
+</li>
+<li>
+<p>Inductive proof with forgeable (unsigned) messages - requires <em>3m+1</em> nodes
+where <em>m</em> is the traitor node count.
+* Assumptions:
+- A1. Every message is sent correctly
+- A2. The receiver of a message knows who sent it
+- A3. The absence of a message can be detected</p>
+</li>
+<li>
+<p>Inductive proof with unforgeable (signed) messages - requires only <em>m+2</em>
 generals where <em>m</em> is the traitor general count</p>
-
 <ul>
 <li>Assumptions:
-
 <ul>
 <li>A4(a). No message can be forged by another node</li>
 <li>A4(b). Any node can verify the signature chain</li>
-</ul></li>
-</ul></li>
-
-<li><p>Proof for an incomplete graph with forgeable (unsigned) messages -
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Proof for an incomplete graph with forgeable (unsigned) messages -
 requires at least <em>3m+1</em> generals where <em>m</em> is the count of traitors and
 each node on the graph has <em>3m</em> connections. (aka
 <a href="https://en.wikipedia.org/wiki/Regular_graph">3m-regular</a>). Therefore a
-<em>3m+1</em> network must be completely connected.</p></li>
-
-<li><p>Proof for an incomplete graph with unforgeable (signed) messages -
+<em>3m+1</em> network must be completely connected.</p>
+</li>
+<li>
+<p>Proof for an incomplete graph with unforgeable (signed) messages -
 requires at least <em>m+d-1</em> generals where <em>m</em> is the count of traitors and
 <em>d</em> is the
 <a href="https://en.wikipedia.org/wiki/Distance_(graph_theory)">graph diameter</a>
-(longest shortest distance between two generals)</p></li>
+(longest shortest distance between two generals)</p>
+</li>
 </ul>
-
-<h4 id="read-the-conclusion-discussion-interpretation-section">Read the conclusion/discussion/interpretation section</h4>
-
+<h4 id="read-the-conclusiondiscussioninterpretation-section">Read the conclusion/discussion/interpretation section</h4>
 <p>The authors conclude that all known solutions to the Byzantine Generals problem
 are inherently expensive in time and number of messages sent between nodes. They
 do suspect that nodes could combine messages for reduced total message transfer,
 but they leave that as an unanswered question.</p>
-
 <h4 id="now-go-back-to-the-beginning-and-read-the-abstract">Now, go back to the beginning and read the abstract</h4>
-
 <p>The abstract summarizes the results: with unsigned messages, fewer than
 one-third of the nodes can be traitors. For signed messages, any number of nodes
 can be traitorous.</p>
-
 <h4 id="what-do-other-researchers-say-about-this-paper">What do other researchers say about this paper?</h4>
-
 <p>This paper seems to have become a canonical source of proofs for the problem.</p>
-
 <h4 id="my-notes">My Notes</h4>
-
 <p>While originally written for radar defense installations, blockchain
 technologies appear to be based off the research in this paper. They operate
 with signed messages being semi-unforgeable because of the difficulty to
 recreate the history, so it is a combination of the signed and unsigned.
 Messages <em>are</em> forgeable, but it is so computationally expensive to do so that
 it is effectively impossible.</p>
-
 <p>The proofs in this paper are fun because they are an applied version of what I
 have been studying in
 <a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>.

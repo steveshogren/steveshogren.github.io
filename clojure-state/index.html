@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-03-29",
     "description": "",
-    "wordCount": 433
+    "wordCount":  433 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -183,58 +183,48 @@
     <blockquote>
 <p>&ldquo;Clojure is immutable, so you can&rsquo;t change anything, how useless!&rdquo;</p>
 </blockquote>
-
 <p>Immutable languages make application state an interesting concept.</p>
-
 <p>In Clojure, you can deal with application state in two main ways. The first way
 is to pass the state around as parameters to your functions. An example of
 <strong>Pass As Parameter</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>delete! [db-con table id]
+  (<span style="color:#a6e22e">jdbc/delete!</span> db-con table [<span style="color:#e6db74">&#34;id=?&#34;</span> id]))
 
-<pre><code class="language-clojure">(defn delete! [db-con table id]
-  (jdbc/delete! db-con table [&quot;id=?&quot; id]))
+<span style="color:#75715e">;; valid-for-delete omitted</span>
 
-;; valid-for-delete omitted
+(<span style="color:#66d9ef">defn </span>delete-user [db-con user-id]
+  (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">valid-for-delete</span> db-con <span style="color:#e6db74">&#34;user&#34;</span> user-id)
+    (<span style="color:#a6e22e">delete!</span> db-con <span style="color:#e6db74">&#34;user&#34;</span> user-id)))
 
-(defn delete-user [db-con user-id]
-  (if (valid-for-delete db-con &quot;user&quot; user-id)
-    (delete! db-con &quot;user&quot; user-id)))
-
-(defn -main [&amp; [connection-string user-id]]
-  (let [db-con (make-connection connection-string)]
-    (delete-user db-con user-id)))
-</code></pre>
-
-<p>This requires every function that eventually accesses a database to also have
+(<span style="color:#66d9ef">defn </span>-main [<span style="color:#f92672">&amp;</span> [connection-string user-id]]
+  (<span style="color:#66d9ef">let </span>[db-con (<span style="color:#a6e22e">make-connection</span> connection-string)]
+    (<span style="color:#a6e22e">delete-user</span> db-con user-id)))
+</code></pre></div><p>This requires every function that eventually accesses a database to also have
 the database connection. The trade-off is one of simplicity: it is easier to
 test and interact with code that takes all of its dependencies as parameters.</p>
-
 <p>The alternative is to set a thread-safe value somewhere and give the underlying
 code access to it. In Clojure, the <code>atom</code> primitive is the first choice for
 this. A common misconception is that Clojure prevents all mutation. The
 <code>atom</code> primitive can be mutated, it just has to be done with a special
 <code>swap!</code> function. Let&rsquo;s call this: <strong>Mutate Shared Location</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span>db-con (<span style="color:#a6e22e">atom</span> nil))
 
-<pre><code class="language-clojure">(def db-con (atom nil))
+(<span style="color:#66d9ef">defn </span>delete! [table id]
+  (<span style="color:#a6e22e">jdbc/delete!</span> <span style="color:#f92672">@</span>db-con table [<span style="color:#e6db74">&#34;id=?&#34;</span> id]))
 
-(defn delete! [table id]
-  (jdbc/delete! @db-con table [&quot;id=?&quot; id]))
+<span style="color:#75715e">;; valid-for-delete omitted</span>
 
-;; valid-for-delete omitted
+(<span style="color:#66d9ef">defn </span>delete-user [user-id]
+  (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">valid-for-delete</span> <span style="color:#e6db74">&#34;user&#34;</span> user-id)
+    (<span style="color:#a6e22e">delete!</span> <span style="color:#e6db74">&#34;user&#34;</span> user-id)))
 
-(defn delete-user [user-id]
-  (if (valid-for-delete &quot;user&quot; user-id)
-    (delete! &quot;user&quot; user-id)))
-
-(defn -main [&amp; [connection-string user-id]]
-  (swap! db-con (fn [old] (make-connection connection-string)))
-  (delete-user user-id))
-</code></pre>
-
-<p>The <code>atom</code> allows us to not have to pass around the state. We mutate
+(<span style="color:#66d9ef">defn </span>-main [<span style="color:#f92672">&amp;</span> [connection-string user-id]]
+  (<span style="color:#a6e22e">swap!</span> db-con (<span style="color:#66d9ef">fn </span>[old] (<span style="color:#a6e22e">make-connection</span> connection-string)))
+  (<span style="color:#a6e22e">delete-user</span> user-id))
+</code></pre></div><p>The <code>atom</code> allows us to not have to pass around the state. We mutate
 <code>db-con</code> with the connection parameters before calling any database accessing
 functions. Unfortunately, this sets up an implicit dependency: <code>delete!</code>
 will only work if the <code>db-con</code> atom was setup beforehand.</p>
-
 <table>
 <thead>
 <tr>
@@ -245,7 +235,6 @@ will only work if the <code>db-con</code> atom was setup beforehand.</p>
 <th>Best When</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><strong>Pass As Parameter</strong></td>
@@ -254,7 +243,6 @@ will only work if the <code>db-con</code> atom was setup beforehand.</p>
 <td>Harder</td>
 <td>State Values Change Frequently</td>
 </tr>
-
 <tr>
 <td><strong>Mutate Shared Location</strong></td>
 <td>Implicit</td>
@@ -264,21 +252,17 @@ will only work if the <code>db-con</code> atom was setup beforehand.</p>
 </tr>
 </tbody>
 </table>
-
 <p><strong>Mutate Shared Location</strong> might look familiar, in a lot of other languages it
 is implemented with the Singleton Design Pattern. Often a Singleton class will
 act as the mutable shared location for storing state.</p>
-
 <p>When adding new application state, I typically default to <strong>Pass As Parameter</strong>
 as my first choice. When <strong>Pass As Parameter</strong> grows costly, I fall back to
 <strong>Mutate Shared Location</strong>. <strong>Pass As Parameter</strong> works best when the value
 changes regularly.</p>
-
 <p>An exception would be something as ubiquitous as a database connection in a CRUD
 application. A CRUD application will typically need a database connection at
 every leaf node, and it rarely changes, so I will use <strong>Mutate Shared Location</strong>
 from the start.</p>
-
 <p>With these two ways of passing application state, we are offered the flexibility
 to choose the best tool for the job.</p>
 

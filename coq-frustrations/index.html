@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-02-01",
     "description": "",
-    "wordCount": 210
+    "wordCount":  210 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,82 +179,54 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Day one working through
+    <p>Day one working through
 <a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>
 with Coq. Since I like to rant, and I love
 <a href="http://www.darkestdungeon.com/">Darkest Dungeon</a>, ENTER THE DARKEST PROOF.
 <span class="subscript">(Please don&rsquo;t sue me!)</span></p>
-
 <p><img src="/images/ruinhascome.png"></img></p>
-
 <h2 id="precise-syntax">Precise Syntax</h2>
-
 <p>I copied a sample from the book by hand, but it always caused Company-Coq to go
 into an <strong>infinite loop</strong>. I copied it again. Same deal.</p>
-
 <p>This isn&rsquo;t my first rodeo, I&rsquo;ve seen all sorts of syntax rules and such. But
 alas, it still fails.</p>
-
-
-Theorem andb_commutative' : forall b c, andb b c = andb c b.
-Proof.
-  intros b c. destruct b.
-  { destruct c.
-    { reflexivity.}
-    { reflexivity.} }
-  { destruct c.
-    { reflexivity.}
-    { reflexivity.} }
-Qed.
-
-
+<div class="highlight"><pre class="chroma"><code class="language-coq" data-lang="coq"><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span>
+  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
+  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
+    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
+    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
+  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
+    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span>
+    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.}</span> <span class="o">}</span>
+<span class="kn">Qed</span><span class="o">.</span></code></pre></div>
 <p><img src="/images/upset.jpg"></img></p>
-
 <p>Where the heck is it? I am losing my mind for 20 minutes looking back and forth
 trying to figure out what I am missing. I seek the advice of a friend, he
 suggests stepping line-by-line with <code>C-cC-n</code>.</p>
-
 <h2 id="it-fails-on-one-line">It fails on one line.</h2>
-
 <p><img src="/images/coq-space1.png"></img></p>
-
 <h2 id="wait">Wait.</h2>
-
 <p><img src="/images/coq-space2.png"></img></p>
-
 <h2 id="thats">Thats&hellip;</h2>
-
 <p><img src="/images/coq-space3.png"></img></p>
-
 <h2 id="but">But&hellip;</h2>
-
 <p><img src="/images/coq-space4.png"></img></p>
-
 <h2 id="no">NO!!!!!</h2>
-
 <p><img src="/images/coq-space5.png"></img></p>
-
 <h2 id="coq-is-white-space-sensitive">Coq is WHITE-SPACE SENSITIVE?!</h2>
-
 <p><img src="/images/angry.jpg"></img></p>
-
 <p>YEP! I add that space in, and it works fine!</p>
-
-
-Theorem andb_commutative' : forall b c, andb b c = andb c b.
-Proof.
-  intros b c. destruct b.
-  { destruct c.
-    { reflexivity. }
-    { reflexivity. } }
-  { destruct c.
-    { reflexivity. }
-    { reflexivity. } }
-Qed.
-
-
+<div class="highlight"><pre class="chroma"><code class="language-coq" data-lang="coq"><span class="kn">Theorem</span> <span class="n">andb_commutative&#39;</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">andb</span> <span class="n">b</span> <span class="n">c</span> <span class="o">=</span> <span class="n">andb</span> <span class="n">c</span> <span class="n">b</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span>
+  <span class="k">intros</span> <span class="n">b</span> <span class="n">c</span><span class="o">.</span> <span class="k">destruct</span> <span class="n">b</span><span class="o">.</span>
+  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
+<span class="hl">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
+</span><span class="hl">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
+</span>  <span class="o">{</span> <span class="k">destruct</span> <span class="n">c</span><span class="o">.</span>
+<span class="hl">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span>
+</span><span class="hl">    <span class="o">{</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="o">}</span> <span class="o">}</span>
+</span><span class="kn">Qed</span><span class="o">.</span></code></pre></div>
 <p><img src="/images/facepalm.jpg"></img></p>
 
   </div>

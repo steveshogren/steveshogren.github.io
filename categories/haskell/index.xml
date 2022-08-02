@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Haskell on deliberate software</title>
+    <title>haskell on deliberate software</title>
     <link>http://deliberate-software.com/categories/haskell/</link>
-    <description>Recent content in Haskell on deliberate software</description>
+    <description>Recent content in haskell on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
@@ -34,7 +34,7 @@ loadFile :: Filename -&amp;gt; IO String loadFile fileName = BS.</description>
 I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable lore, a great combat type system, a cliff-wall difficulty curve, and unending punishment.
 I want to collect some statistics from the GitHub API.
 Step One - Stack I download stack and start a project:
-&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;quot;new-template&amp;quot; to create project &amp;quot;github-stats&amp;quot; in github-stats/ .</description>
+&amp;gt; cd /home/jack/programming &amp;amp;&amp;amp; stack new github-stats &amp;amp;&amp;amp; cd github-stats Downloading template &amp;#34;new-template&amp;#34; to create project &amp;#34;github-stats&amp;#34; in github-stats/ .</description>
     </item>
     
     <item>

@@ -44,7 +44,7 @@
     },
     "datePublished": "2015-02-09",
     "description": "",
-    "wordCount": 1245
+    "wordCount":  1245 
   }
 </script>
 
@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,59 +179,44 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Clojure is a delightful language, and here are six uncommonly
+    <p>Clojure is a delightful language, and here are six uncommonly
 discussed reasons why.</p>
-
-<h2 id="1-dead-simple-unit-test-mocking">1 - Dead Simple Unit Test Mocking</h2>
-
+<h2 id="1---dead-simple-unit-test-mocking">1 - Dead Simple Unit Test Mocking</h2>
 <p>Clojure is the easiest language to unit test I have ever
 seen. &ldquo;Mocking&rdquo; a function in a test only requires a simple
 replacement of the function definition. No extraneous interfaces, no
 dependency injection, no mocking framework.  The built-in function <code>with-redefs</code>
 will replace any function in any library or
 namespace with a new definition.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defn </span>next-id [connection]
+  (+ <span style="color:#ae81ff">1</span> (<span style="color:#a6e22e">get-current-id</span> connection)))
 
-<pre><code class="language-clojure">(defn next-id [connection]
-  (+ 1 (get-current-id connection)))
-
-(testing &quot;next-id&quot;
-  ;; bind get-current-id to a lambda that always returns 4 
-  (with-redefs [get-current-id (fn [_] 4)]
-    (is (= 5 (next-id nil)))))
-</code></pre>
-
-<p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
+(<span style="color:#a6e22e">testing</span> <span style="color:#e6db74">&#34;next-id&#34;</span>
+  <span style="color:#75715e">;; bind get-current-id to a lambda that always returns 4 </span>
+  (<span style="color:#a6e22e">with-redefs</span> [get-current-id (<span style="color:#66d9ef">fn </span>[_] <span style="color:#ae81ff">4</span>)]
+    (<span style="color:#a6e22e">is</span> (= <span style="color:#ae81ff">5</span> (<span style="color:#a6e22e">next-id</span> nil)))))
+</code></pre></div><p>We &ldquo;mock&rdquo; the <code>get-current-id</code> function to always return 4 inside
 the scope of <code>with-redefs</code>. Couldn&rsquo;t be more simple! The binding
 only is in scope for code inside and called by the s-expression of the
 with-redefs, so no need to unbind it after the test.</p>
-
-<h2 id="2-amazing-editing">2 - Amazing Editing</h2>
-
+<h2 id="2---amazing-editing">2 - Amazing Editing</h2>
 <p>Many arguments have been made over those contentious
 parentheses. While the most powerful use of s-expressions is to easily
 allow macros, for the day to day, s-expressions have a very important
 use: amazing editing!</p>
-
 <p><img src="http://danmidwood.com/assets/animated-paredit/paredit-slurp-barf.gif"></img></p>
-
 <p>With ParEdit (available in most editors), it is trivial to select,
 move, replace, grow, or shrink any s-expression, string, map, or
 list. <a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">This animated guide</a>
 shows excellent examples of ParEdit that are too
 complex to explain here.</p>
-
 <p>Languages that don&rsquo;t have a surrounding delimiter for expressions
 leave you jumping around with the mouse and arrow keys a whole lot more.
 Because it is so much easier to write a parser to select <code>(add 1 2)</code>
 than it is for <code>add(1, 2)</code>, the tooling can be so much better.</p>
-
 <p>No local editing tool I have seen comes close to Vim with ParEdit for
 effective editing.</p>
-
-<h2 id="3-live-attached-repl">3 - Live Attached Repl</h2>
-
+<h2 id="3---live-attached-repl">3 - Live Attached Repl</h2>
 <p>Developing in Clojure against a running version of the program is a
 huge bonus for development speed. While possible to get similar
 behavior with an attached debugger in other languages, the fluidity of
@@ -241,13 +226,10 @@ results. More than once, I have seen an exception caused by calling a
 certain function. I trace that function to see the exact inputs that
 cause the exception, and am able to quickly run every line of the
 offending function to see the source.</p>
-
 <p>If a debugger sheds light on a single line at a time when running an
 application, a live attached repl sheds light on the entire
 application.</p>
-
-<h2 id="4-no-fuss-polymorphism">4 - No-fuss Polymorphism</h2>
-
+<h2 id="4---no-fuss-polymorphism">4 - No-fuss Polymorphism</h2>
 <p>One of the best claims about &ldquo;traditional&rdquo; Java OO is
 polymorphism. The ability to make an interface with concrete classes
 gives the powerful ability to replace behavior dynamically. The
@@ -257,139 +239,114 @@ type of the callee. If this was the only type of dynamic dispatch you
 ever knew of, it might be hard for you to consciously realize it was
 ever a limitation, especially if you&rsquo;ve never seen examples of
 multiple dispatch.</p>
-
 <p>While most of the time, in any language with first class functions, it
 is possible to achieve a similar effect by passing functions, it is
 also possible to get a similar value with something called multimethods.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defmulti </span>speak <span style="color:#e6db74">:animal</span>)
+(<span style="color:#66d9ef">defmethod </span>speak <span style="color:#e6db74">:dog</span> [this] (str <span style="color:#e6db74">&#34;woof says &#34;</span> (<span style="color:#e6db74">:name</span> this)))
+(<span style="color:#66d9ef">defmethod </span>speak <span style="color:#e6db74">:cat</span> [this] (str <span style="color:#e6db74">&#34;mow says &#34;</span> (<span style="color:#e6db74">:name</span> this)))
 
-<pre><code class="language-clojure">(defmulti speak :animal)
-(defmethod speak :dog [this] (str &quot;woof says &quot; (:name this)))
-(defmethod speak :cat [this] (str &quot;mow says &quot; (:name this)))
-
-(speak {:animal :dog :id 1 :name &quot;Spike&quot;})
-;; =&gt; &quot;woof says Spike&quot;
-(speak {:animal :cat :id 2 :name &quot;Mr Cat&quot;})
-;; =&gt; &quot;mow says Mr Cat&quot;
-</code></pre>
-
-<p>In this example, we use the <code>:animal</code> keyword to be the &ldquo;route&rdquo; function,
+(<span style="color:#a6e22e">speak</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">:dog</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Spike&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;woof says Spike&#34;</span>
+(<span style="color:#a6e22e">speak</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">:cat</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">2</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Mr Cat&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;mow says Mr Cat&#34;</span>
+</code></pre></div><p>In this example, we use the <code>:animal</code> keyword to be the &ldquo;route&rdquo; function,
 and the two methods fill in two of the possible concrete types. We are
 not limited to just a keyword, we can dispatch on anything on the
 passed map, for example, the oddness of the id:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defmulti </span>odds? (comp odd? <span style="color:#e6db74">:id</span>))
+(<span style="color:#66d9ef">defmethod </span>odds? true [d] <span style="color:#e6db74">&#34;odd id&#34;</span>)
+(<span style="color:#66d9ef">defmethod </span>odds? false [c] <span style="color:#e6db74">&#34;even id&#34;</span>)
 
-<pre><code class="language-clojure">(defmulti odds? (comp odd? :id))
-(defmethod odds? true [d] &quot;odd id&quot;)
-(defmethod odds? false [c] &quot;even id&quot;)
-
-(odds? {:animal :dog :id 1 :name &quot;Spike&quot;})
-;; =&gt; &quot;odd id&quot;
-(odds? {:animal :cat :id 2 :name &quot;Mr Cat&quot;})
-;; =&gt; &quot;even id&quot;
-</code></pre>
-
-<p>While both examples are a bit silly, they should demonstrate the power
+(<span style="color:#a6e22e">odds?</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">:dog</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Spike&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;odd id&#34;</span>
+(<span style="color:#a6e22e">odds?</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">:cat</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">2</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Mr Cat&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;even id&#34;</span>
+</code></pre></div><p>While both examples are a bit silly, they should demonstrate the power
 of simple polymorphism. But you might think, what about inheritance?
 Multimethods allow that too!</p>
-
-<h2 id="5-simple-multiple-inheritance">5 - Simple Multiple Inheritance</h2>
-
+<h2 id="5---simple-multiple-inheritance">5 - Simple Multiple Inheritance</h2>
 <p>We don&rsquo;t build inheritance on a single type, but on a hierarchy of
 keywords. Those can be dispatched on just like any other
 keyword. First, an example hierarchy of keywords using the built-in
 functions <code>derive</code> and <code>isa?</code>. These <code>::</code> keywords are
 namespaced, which prevents collisions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">derive</span> <span style="color:#e6db74">::cat</span> <span style="color:#e6db74">::mammal</span>)
+(<span style="color:#a6e22e">derive</span> <span style="color:#e6db74">::dog</span> <span style="color:#e6db74">::mammal</span>)
+(<span style="color:#a6e22e">derive</span> <span style="color:#e6db74">::dog</span> <span style="color:#e6db74">::hairy</span>)
+(<span style="color:#a6e22e">derive</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">::dog</span>)
 
-<pre><code class="language-clojure">(derive ::cat ::mammal)
-(derive ::dog ::mammal)
-(derive ::dog ::hairy)
-(derive ::poodle ::dog)
-
-(isa? ::poodle ::dog)
-;; =&gt; true
-(isa? ::poodle ::mammal)
-;; =&gt; true
-(isa? ::poodle ::hairy)
-;; =&gt; true
-(isa? ::poodle ::cat)
-;; =&gt; false
-(isa? ::mammal ::hairy)
-;; =&gt; false
-</code></pre>
-
-<p>A <code>::dog</code> is-a <code>::mammal</code> and is-a <code>::hairy</code>, the
+(<span style="color:#a6e22e">isa?</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">::dog</span>)
+<span style="color:#75715e">;; =&gt; true</span>
+(<span style="color:#a6e22e">isa?</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">::mammal</span>)
+<span style="color:#75715e">;; =&gt; true</span>
+(<span style="color:#a6e22e">isa?</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">::hairy</span>)
+<span style="color:#75715e">;; =&gt; true</span>
+(<span style="color:#a6e22e">isa?</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">::cat</span>)
+<span style="color:#75715e">;; =&gt; false</span>
+(<span style="color:#a6e22e">isa?</span> <span style="color:#e6db74">::mammal</span> <span style="color:#e6db74">::hairy</span>)
+<span style="color:#75715e">;; =&gt; false</span>
+</code></pre></div><p>A <code>::dog</code> is-a <code>::mammal</code> and is-a <code>::hairy</code>, the
 classical diamond problem (without the common ancestor, which is
 possible, but unneeded for the example).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">defmulti </span>speak <span style="color:#e6db74">:animal</span>)
+(<span style="color:#66d9ef">defmethod </span>speak <span style="color:#e6db74">::poodle</span> [d] <span style="color:#e6db74">&#34;chirps&#34;</span>)
+(<span style="color:#66d9ef">defmethod </span>speak <span style="color:#e6db74">::mammal</span> [c] <span style="color:#e6db74">&#34;breathes&#34;</span>)
 
-<pre><code class="language-clojure">(defmulti speak :animal)
-(defmethod speak ::poodle [d] &quot;chirps&quot;)
-(defmethod speak ::mammal [c] &quot;breathes&quot;)
+(<span style="color:#a6e22e">speak</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Spike&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;chirps&#34;</span>
+(<span style="color:#a6e22e">speak</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">::dog</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">2</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Mr Dog&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;breathes&#34;</span>
 
-(speak {:animal ::poodle :id 1 :name &quot;Spike&quot;})
-;; =&gt; &quot;chirps&quot;
-(speak {:animal ::dog :id 2 :name &quot;Mr Dog&quot;})
-;; =&gt; &quot;breathes&quot;
+(<span style="color:#66d9ef">defmulti </span>shave <span style="color:#e6db74">:animal</span>)
+(<span style="color:#66d9ef">defmethod </span>shave <span style="color:#e6db74">::poodle</span> [d] <span style="color:#e6db74">&#34;shivers&#34;</span>)
+(<span style="color:#66d9ef">defmethod </span>shave <span style="color:#e6db74">::hairy</span> [c] <span style="color:#e6db74">&#34;stuggles&#34;</span>)
+(<span style="color:#66d9ef">defmethod </span>shave <span style="color:#e6db74">::mammal</span> [c] <span style="color:#e6db74">&#34;maybe cant be shaved!&#34;</span>)
+(<span style="color:#a6e22e">prefer-method</span> shave <span style="color:#e6db74">::hairy</span> <span style="color:#e6db74">::mammal</span>)
 
-(defmulti shave :animal)
-(defmethod shave ::poodle [d] &quot;shivers&quot;)
-(defmethod shave ::hairy [c] &quot;stuggles&quot;)
-(defmethod shave ::mammal [c] &quot;maybe cant be shaved!&quot;)
-(prefer-method shave ::hairy ::mammal)
-
-(shave {:animal ::poodle :id 1 :name &quot;Spike&quot;})
-;; =&gt; &quot;shivers&quot;
-(shave {:animal ::dog :id 2 :name &quot;Rufs&quot;})
-;; =&gt; &quot;stuggles&quot;
-</code></pre>
-
-<p>We can see the <code>::dog</code> keyword doesn&rsquo;t have an explicit speak or shave
+(<span style="color:#a6e22e">shave</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">::poodle</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Spike&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;shivers&#34;</span>
+(<span style="color:#a6e22e">shave</span> {<span style="color:#e6db74">:animal</span> <span style="color:#e6db74">::dog</span> <span style="color:#e6db74">:id</span> <span style="color:#ae81ff">2</span> <span style="color:#e6db74">:name</span> <span style="color:#e6db74">&#34;Rufs&#34;</span>})
+<span style="color:#75715e">;; =&gt; &#34;stuggles&#34;</span>
+</code></pre></div><p>We can see the <code>::dog</code> keyword doesn&rsquo;t have an explicit speak or shave
 implementation, which is fine, because it will then use the &ldquo;preferred&rdquo;
 parent implementation, which returns &ldquo;breathes&rdquo; for speak or
 &ldquo;struggles&rdquo; for shave. Since we can have a keyword be the child of
 multiple parents, we get a multiple inherited behavior, where the
 preferred match is the one returned.</p>
-
 <p>This is possible because the default equality check of multimethod is
 the <code>isa?</code> function. Because of this, uses of multimethod
 hierarchies can have inherited behavior for complex structures.</p>
-
-<h2 id="6-mostly-monadic">6 - Mostly Monadic</h2>
-
+<h2 id="6---mostly-monadic">6 - Mostly Monadic</h2>
 <p>Languages like Haskell and F# have tools like the maybe monad that add
 safety to operations. For example, using the maybe monad can
 completely prevent null reference exceptions by making you ensure you
 &ldquo;unpack&rdquo; the value every time.</p>
-
 <p>How does Clojure address this? In a typical Clojure way, which gives
 80% of the value for 20% of the effort, Clojure has a great
 relationship with empty lists and nil. Rather than wrapping every
 value that is nullable in a type, Clojure&rsquo;s default functions all
 <em>mostly</em> deal with nil and empty without throwing exceptions. For
 example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(get {<span style="color:#e6db74">:id</span> <span style="color:#ae81ff">5</span>} <span style="color:#e6db74">:id</span>)
+<span style="color:#75715e">;; =&gt; 5</span>
+(get nil <span style="color:#e6db74">:id</span>)
+<span style="color:#75715e">;; =&gt; nil</span>
 
-<pre><code class="language-clojure">(get {:id 5} :id)
-;; =&gt; 5
-(get nil :id)
-;; =&gt; nil
-
-(first [3 2 1])
-;; =&gt; 3
+(first [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span>])
+<span style="color:#75715e">;; =&gt; 3</span>
 (first nil)
-;; =&gt; nil
+<span style="color:#75715e">;; =&gt; nil</span>
 (count nil)
-;; =&gt; 0
-</code></pre>
-
-<p>This allows functions to be chained without fear that along the way a
+<span style="color:#75715e">;; =&gt; 0</span>
+</code></pre></div><p>This allows functions to be chained without fear that along the way a
 nil will get returned.</p>
-
 <p>Since most of the core functions are &ldquo;smart&rdquo; about nil, you gain much
 of the value and safety of monads without most of the
 hassle. Ultimately, a more rich type system would allow for custom
 types which can be domain specific, but in day-to-day working,
 primitive safety is still a huge win.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>These are a few simple features that keep me coming back to Clojure,
 even from languages like F# and Haskell. While Clojure is a bit more
 wordy than the ML family, and not as type safe, the simplicity of

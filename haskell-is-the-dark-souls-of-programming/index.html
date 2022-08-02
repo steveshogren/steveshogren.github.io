@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-02-06",
     "description": "",
-    "wordCount": 1130
+    "wordCount":  1130 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -182,263 +182,199 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Please don&rsquo;t hit me, Haskell does a great job of that already.</p>
-
+    <p>Please don&rsquo;t hit me, Haskell does a great job of that already.</p>
 <p>I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable
 lore, a great <del>combat</del> type system, a cliff-wall difficulty curve, and
 unending punishment.</p>
-
 <p>I want to collect some statistics from the GitHub API.</p>
-
-<h3 id="step-one-stack">Step One - Stack</h3>
-
+<h3 id="step-one---stack">Step One - Stack</h3>
 <p>I download stack and start a project:</p>
-
-<pre><code class="language-bash">&gt; cd /home/jack/programming &amp;&amp; stack new github-stats &amp;&amp; cd github-stats
-Downloading template &quot;new-template&quot; to create project &quot;github-stats&quot; in github-stats/ ... 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; cd /home/jack/programming <span style="color:#f92672">&amp;&amp;</span> stack new github-stats <span style="color:#f92672">&amp;&amp;</span> cd github-stats
+Downloading template <span style="color:#e6db74">&#34;new-template&#34;</span> to create project <span style="color:#e6db74">&#34;github-stats&#34;</span> in github-stats/ ... 
  ......
-All done.
-</code></pre>
-
-<p>So far so good. Does it work?</p>
-
-<pre><code class="language-bash">  &gt; stack build &amp;&amp; stack exec -- github-stats-exe 
+All <span style="color:#66d9ef">done</span>.
+</code></pre></div><p>So far so good. Does it work?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  &gt; stack build <span style="color:#f92672">&amp;&amp;</span> stack exec -- github-stats-exe 
    github-stats-0.1.0.0: configure
    ..... 
    Registering github-stats-0.1.0.0...
    someFunc
-</code></pre>
-
-<p>Awww yisss. This is going to be so easy!</p>
-
-<h3 id="step-two-https-get-request">Step Two - HTTPS GET Request</h3>
-
+</code></pre></div><p>Awww yisss. This is going to be so easy!</p>
+<h3 id="step-two---https-get-request">Step Two - HTTPS GET Request</h3>
 <p><img src="/images/tomb_of_the_giants.gif"></img></p>
-
 <p>Now I need to query the GitHub API. Not my first time to the rodeo, I generate a
 personal access token from GitHub and copy it to a local file. What query should
 I run first? How about the count for all ASM tetris repositories? Poking around
 the <a href="https://developer.github.com/v3/search/#search-repositories">docs</a> comes up
 with:</p>
-
 <pre><code>GET https://api.github.com/search/repositories?q=tetris+language:assembly&amp;sort=stars&amp;order=desc
 User-Agent: steveshogren
 Authorization: token PUT_TOKEN_HERE
-</code></pre>
-
-<blockquote>
+</code></pre><blockquote>
 <p>{.. &ldquo;total_count&rdquo;: 354}</p>
 </blockquote>
-
 <p>Easy life. Now how do you GET a resource in Haskell? Ah,
 <a href="https://hackage.haskell.org/package/HTTP-4000.3.2/docs/Network-HTTP.html">Network.HTTP</a>!
 I copy the front page sample into <code>src/Lib.hs</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">module</span> Lib
+    ( <span style="color:#a6e22e">someFunc</span>
+    ) <span style="color:#66d9ef">where</span>
 
-<pre><code class="language-haskell">module Lib
-    ( someFunc
-    ) where
+<span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> simpleHTTP (getRequest <span style="color:#e6db74">&#34;https://www.github.com/&#34;</span>) <span style="color:#f92672">&gt;&gt;=</span> fmap (take <span style="color:#ae81ff">100</span>) <span style="color:#f92672">.</span> getResponseBody
 
-x = simpleHTTP (getRequest &quot;https://www.github.com/&quot;) &gt;&gt;= fmap (take 100) . getResponseBody
-
-someFunc :: IO ()
-someFunc = 
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">=</span> 
    print x
-</code></pre>
-
-<p>So simple! This is why laugh at my NodeJS loving friends!</p>
-
-<pre><code class="language-bash">&gt; stack build
+</code></pre></div><p>So simple! This is why laugh at my NodeJS loving friends!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; stack build
 src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
 src/Lib.hs:5:17: Not in scope: ‘getRequest’
 src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
 Compilation failed.
-</code></pre>
-
-<p>Doesn&rsquo;t compile. Durp, hackage is a package library, I need to add this to my
+</code></pre></div><p>Doesn&rsquo;t compile. Durp, hackage is a package library, I need to add this to my
 cabal. What is the name of the package? HTTP-4000? HTTP-4000.3.2? Nothing in
 hackage seems to indicate what goes into the cabal file. I discover it is just
 HTTP through trial and error. I update my cabal file&hellip; in all three
 build-depends&hellip;?</p>
-
-<pre><code class="language-haskell">  build-depends:       base &gt;= 4.7 &amp;&amp; &lt; 5
-                       , HTTP
-</code></pre>
-
-<p>Hrm, same error.</p>
-
-<pre><code class="language-bash">&gt; stack build
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">  build<span style="color:#f92672">-</span>depends<span style="color:#66d9ef">:</span>       base <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4.7</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>
+                       , <span style="color:#66d9ef">HTTP</span>
+</code></pre></div><p>Hrm, same error.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; stack build
 src/Lib.hs:5:5: Not in scope: ‘simpleHTTP’
 src/Lib.hs:5:17: Not in scope: ‘getRequest’
 src/Lib.hs:5:77: Not in scope: ‘getResponseBody’
 Compilation failed.
-</code></pre>
-
-<p>Oh, durp, I&rsquo;d need an import. (WHY ISN&rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
+</code></pre></div><p>Oh, durp, I&rsquo;d need an import. (WHY ISN&rsquo;T THIS IN THE CODE SAMPLE?!) Also, print
 doesn&rsquo;t work, I need <code>putStrLn</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">import</span> Network.HTTP
 
-<pre><code class="language-haskell">import Network.HTTP
+<span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> simpleHTTP (getRequest <span style="color:#e6db74">&#34;https://www.github.com/&#34;</span>) <span style="color:#f92672">&gt;&gt;=</span> fmap (take <span style="color:#ae81ff">100</span>) <span style="color:#f92672">.</span> getResponseBody
 
-x = simpleHTTP (getRequest &quot;https://www.github.com/&quot;) &gt;&gt;= fmap (take 100) . getResponseBody
-
-someFunc :: IO ()
-someFunc = x &gt;&gt;= putStrLn
-</code></pre>
-
-<p>Here goes!!!</p>
-
-<pre><code class="language-bash"> &gt; stack build &amp;&amp; stack exec -- github-stats-exe
-github-stats-exe: user error (https not supported)
-</code></pre>
-
-<p>Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.</p>
-
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">=</span> x <span style="color:#f92672">&gt;&gt;=</span> putStrLn
+</code></pre></div><p>Here goes!!!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> &gt; stack build <span style="color:#f92672">&amp;&amp;</span> stack exec -- github-stats-exe
+github-stats-exe: user error <span style="color:#f92672">(</span>https not supported<span style="color:#f92672">)</span>
+</code></pre></div><p>Wat. Further inspection of the docs shows a line WAAY DOWN in paragraph 5.</p>
 <blockquote>
 <p>NOTE: This package only supports HTTP;</p>
 </blockquote>
-
 <p><img src="/images/nope_better.gif"></img></p>
-
 <p>When <del>playing Dark Souls</del>programming Haskell, sometimes the best move
 is to run away. I search again. <code>haskell https request</code> returns
 &ldquo;http-conduit&rdquo; as the best choice. After adding http-conduit to my cabal, I come
 up with this beast without any surprises:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">query</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> <span style="color:#66d9ef">String</span>
+<span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    initReq <span style="color:#f92672">&lt;-</span> parseUrl <span style="color:#e6db74">&#34;https://api.github.com/search/repositories&#34;</span>
+    <span style="color:#66d9ef">let</span> r <span style="color:#f92672">=</span> initReq
+                   { method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GET&#34;</span>
+                    , requestHeaders <span style="color:#f92672">=</span> [(hUserAgent, <span style="color:#e6db74">&#34;steveshogren&#34;</span>)
+                                      , (hAuthorization, <span style="color:#e6db74">&#34;token PUT_TOKEN_HERE&#34;</span>)]}
+    <span style="color:#66d9ef">let</span> request <span style="color:#f92672">=</span> setQueryString [(<span style="color:#e6db74">&#34;q&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;tetris+language:assembly&#34;</span>)
+                                 ,(<span style="color:#e6db74">&#34;order&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;desc&#34;</span>)
+                                 ,(<span style="color:#e6db74">&#34;sort&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;stars&#34;</span>)] r
+    manager <span style="color:#f92672">&lt;-</span> newManager tlsManagerSettings
+    res <span style="color:#f92672">&lt;-</span> httpLbs request manager
+    return <span style="color:#f92672">.</span> show <span style="color:#f92672">.</span> responseBody <span style="color:#f92672">$</span> res
 
-<pre><code class="language-haskell">query :: IO String
-query = do
-    initReq &lt;- parseUrl &quot;https://api.github.com/search/repositories&quot;
-    let r = initReq
-                   { method = &quot;GET&quot;
-                    , requestHeaders = [(hUserAgent, &quot;steveshogren&quot;)
-                                      , (hAuthorization, &quot;token PUT_TOKEN_HERE&quot;)]}
-    let request = setQueryString [(&quot;q&quot;, Just &quot;tetris+language:assembly&quot;)
-                                 ,(&quot;order&quot;, Just &quot;desc&quot;)
-                                 ,(&quot;sort&quot;, Just &quot;stars&quot;)] r
-    manager &lt;- newManager tlsManagerSettings
-    res &lt;- httpLbs request manager
-    return . show . responseBody $ res
-
-someFunc :: IO ()
-someFunc = do
-   query &gt;&gt;= putStrLn
-</code></pre>
-
-<p>Huzzah! Results! I&rsquo;m getting back a monster string of json data.</p>
-
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+   query <span style="color:#f92672">&gt;&gt;=</span> putStrLn
+</code></pre></div><p>Huzzah! Results! I&rsquo;m getting back a monster string of json data.</p>
 <blockquote>
-<p>&ldquo;\&ldquo;{\\&ldquo;total_count\\&rdquo;:66, &hellip;.}\&rdquo;</p>
+<p>&ldquo;&quot;{\&quot;total_count\&quot;:66, &hellip;.}&quot;</p>
 </blockquote>
-
 <p><img src="/images/praisethesun.gif"></img></p>
-
-<h3 id="step-three-parsing-json">Step Three - Parsing JSON</h3>
-
+<h3 id="step-three---parsing-json">Step Three - Parsing JSON</h3>
 <p>Time to parse this mega JSON string. Aeson seems to be the biggest contender. To
 use Aeson and get the total_count value from the return, I needed the following
 additions:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">{-# LANGUAGE OverloadedStrings #-}</span>
+<span style="color:#75715e">{-# LANGUAGE DeriveGeneric #-}</span>
 
-<pre><code class="language-haskell">{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
+<span style="color:#66d9ef">import</span> GHC.Generics
+<span style="color:#66d9ef">import</span> Data.Aeson
 
-import GHC.Generics
-import Data.Aeson
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">ResultCount</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">ResultCount</span> {
+  total_count <span style="color:#f92672">::</span> <span style="color:#66d9ef">Int</span> }
+  <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Generic</span>, <span style="color:#66d9ef">Show</span>)
 
-data ResultCount = ResultCount {
-  total_count :: Int }
-  deriving (Generic, Show)
-
-instance ToJSON ResultCount
-instance FromJSON ResultCount
-</code></pre>
-
-<p>ResultCount allows me to use <code>decode</code> from aeson instead of <code>show</code> to
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">ToJSON</span> <span style="color:#66d9ef">ResultCount</span>
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">FromJSON</span> <span style="color:#66d9ef">ResultCount</span>
+</code></pre></div><p>ResultCount allows me to use <code>decode</code> from aeson instead of <code>show</code> to
 parse the &ldquo;total_count&rdquo; from the JSON response into an Int. Sure enough, it
 does!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">{-# LANGUAGE OverloadedStrings #-}</span>
+<span style="color:#75715e">{-# LANGUAGE DeriveGeneric #-}</span>
+<span style="color:#66d9ef">module</span> Lib
+    ( <span style="color:#a6e22e">someFunc</span>
+    ) <span style="color:#66d9ef">where</span>
 
-<pre><code class="language-haskell">{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
-module Lib
-    ( someFunc
-    ) where
+<span style="color:#66d9ef">import</span> Control.Monad
+<span style="color:#66d9ef">import</span> Network
+<span style="color:#66d9ef">import</span> Network.HTTP.Conduit
+<span style="color:#66d9ef">import</span> Network.HTTP.Types.Header
+<span style="color:#66d9ef">import</span> GHC.Generics
+<span style="color:#66d9ef">import</span> Data.Aeson
 
-import Control.Monad
-import Network
-import Network.HTTP.Conduit
-import Network.HTTP.Types.Header
-import GHC.Generics
-import Data.Aeson
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">ResultCount</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">ResultCount</span> {
+  total_count <span style="color:#f92672">::</span> <span style="color:#66d9ef">Int</span> }
+  <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Generic</span>, <span style="color:#66d9ef">Show</span>)
 
-data ResultCount = ResultCount {
-  total_count :: Int }
-  deriving (Generic, Show)
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">ToJSON</span> <span style="color:#66d9ef">ResultCount</span>
+<span style="color:#66d9ef">instance</span> <span style="color:#66d9ef">FromJSON</span> <span style="color:#66d9ef">ResultCount</span>
 
-instance ToJSON ResultCount
-instance FromJSON ResultCount
+<span style="color:#a6e22e">query</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> (<span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">Int</span>)
+<span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    initReq <span style="color:#f92672">&lt;-</span> parseUrl <span style="color:#e6db74">&#34;https://api.github.com/search/repositories&#34;</span>
+    <span style="color:#66d9ef">let</span> r <span style="color:#f92672">=</span> initReq
+                   { method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GET&#34;</span>
+                    , requestHeaders <span style="color:#f92672">=</span> [(hUserAgent, <span style="color:#e6db74">&#34;steveshogren&#34;</span>)
+                                      , (hAuthorization, <span style="color:#e6db74">&#34;token PUT_TOKEN_HERE&#34;</span>)]}
+    <span style="color:#66d9ef">let</span> request <span style="color:#f92672">=</span> setQueryString [(<span style="color:#e6db74">&#34;q&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;tetris+language:assembly&#34;</span>)
+                                 ,(<span style="color:#e6db74">&#34;order&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;desc&#34;</span>)
+                                 ,(<span style="color:#e6db74">&#34;sort&#34;</span>, <span style="color:#66d9ef">Just</span> <span style="color:#e6db74">&#34;stars&#34;</span>)] r
+    manager <span style="color:#f92672">&lt;-</span> newManager tlsManagerSettings
+    res <span style="color:#f92672">&lt;-</span> httpLbs request manager
+    return <span style="color:#f92672">.</span> liftM total_count <span style="color:#f92672">.</span> decode <span style="color:#f92672">.</span> responseBody <span style="color:#f92672">$</span> res
 
-query :: IO (Maybe Int)
-query = do
-    initReq &lt;- parseUrl &quot;https://api.github.com/search/repositories&quot;
-    let r = initReq
-                   { method = &quot;GET&quot;
-                    , requestHeaders = [(hUserAgent, &quot;steveshogren&quot;)
-                                      , (hAuthorization, &quot;token PUT_TOKEN_HERE&quot;)]}
-    let request = setQueryString [(&quot;q&quot;, Just &quot;tetris+language:assembly&quot;)
-                                 ,(&quot;order&quot;, Just &quot;desc&quot;)
-                                 ,(&quot;sort&quot;, Just &quot;stars&quot;)] r
-    manager &lt;- newManager tlsManagerSettings
-    res &lt;- httpLbs request manager
-    return . liftM total_count . decode . responseBody $ res
-
-someFunc :: IO ()
-someFunc = query &gt;&gt;= print
-</code></pre>
-
-<p>Puts out: <code>Just 66</code>. Success! Wait. 66 isn&rsquo;t the same count I got when
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">someFunc</span> <span style="color:#f92672">=</span> query <span style="color:#f92672">&gt;&gt;=</span> print
+</code></pre></div><p>Puts out: <code> Just 66</code>. Success! Wait. 66 isn&rsquo;t the same count I got when
 running from the browser. Check again. Sure enough, browser comes up with a
 totally different count.</p>
-
 <p><img src="/images/come_at_me_bro.gif"></img></p>
-
 <p>Maybe the query request isn&rsquo;t correct? Adding a <code>print request</code> on line 31
 after building the request shows:</p>
-
-<pre><code class="language-haskell">Request {
-  host                 = &quot;api.github.com&quot;
-  port                 = 443
-  secure               = True
-  requestHeaders       = [(&quot;User-Agent&quot;,&quot;steveshogren&quot;),(&quot;Authorization&quot;,&quot;token PUT_TOKEN_HERE&quot;)]
-  path                 = &quot;/search/repositories&quot;
-  queryString          = &quot;?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars&quot;
-  method               = &quot;GET&quot;
-  proxy                = Nothing
-  rawBody              = False
-  redirectCount        = 10
-  responseTimeout      = Just (-3425)
-  requestVersion       = HTTP/1.1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">Request</span> {
+  host                 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;api.github.com&#34;</span>
+  port                 <span style="color:#f92672">=</span> <span style="color:#ae81ff">443</span>
+  secure               <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+  requestHeaders       <span style="color:#f92672">=</span> [(<span style="color:#e6db74">&#34;User-Agent&#34;</span>,<span style="color:#e6db74">&#34;steveshogren&#34;</span>),(<span style="color:#e6db74">&#34;Authorization&#34;</span>,<span style="color:#e6db74">&#34;token PUT_TOKEN_HERE&#34;</span>)]
+  path                 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/search/repositories&#34;</span>
+  queryString          <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;?q=tetris%2Blanguage%3Aassembly&amp;order=desc&amp;sort=stars&#34;</span>
+  method               <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GET&#34;</span>
+  proxy                <span style="color:#f92672">=</span> <span style="color:#66d9ef">Nothing</span>
+  rawBody              <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+  redirectCount        <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+  responseTimeout      <span style="color:#f92672">=</span> <span style="color:#66d9ef">Just</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">3425</span>)
+  requestVersion       <span style="color:#f92672">=</span> <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
 }
-</code></pre>
-
-<p>The queryString isn&rsquo;t right! It encoded my <code>+</code> and <code>:</code>! After an hour of
+</code></pre></div><p>The queryString isn&rsquo;t right! It encoded my <code>+</code> and <code>:</code>! After an hour of
 reading through docs and researching URL encoding specs, it dawns on me. <code>+</code>
 is an encoded whitespace.</p>
-
 <blockquote>
 <p>No face-palm gif could ever represent the shear magnitude of my current
 emotions&hellip; You&rsquo;ll have to use your imagination</p>
 </blockquote>
-
 <p>I change my query to <code>&quot;tetris language:assembly&quot;</code> and the right
 count comes back! <code>Just 354</code></p>
-
 <p>I finally have something that correctly fetches a count of repositories from
 GitHub and parses it into an Int. After over four hours of <del>Dark
 Souls</del>Haskell punishment, we deserve to enjoy a bonfire!</p>
-
 <p><img src="/images/solaire_sitting.gif"></img></p>
-
 <h2 id="edit-bonus-round">Edit: Bonus Round!</h2>
-
 <p>Thanks to
 <a href="http://bitemyapp.com/posts/2016-02-06-haskell-is-not-trivial-not-unfair.html">Chris Allen</a>
 and
@@ -447,34 +383,28 @@ for pointing me towards <a href="http://www.serpentine.com/wreq/">wreq</a>, whic
 didn&rsquo;t come up when I looked around for libs yesterday. Yep, it was 6th on the
 Google when searching for <code>haskell https get</code>. <code>Network.HTTP</code> is the
 top three results, and that doesn&rsquo;t even <em>do</em> https.</p>
-
 <p>¯\<em>(ツ)</em>/¯</p>
-
 <p>Armed with their helpful suggestions, I knocked this out this morning.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">import</span> Network.Wreq
+<span style="color:#66d9ef">import</span> Control.Lens
+<span style="color:#66d9ef">import</span> Data.Aeson
+<span style="color:#66d9ef">import</span> Data.Aeson.Lens
+<span style="color:#66d9ef">import</span> <span style="color:#66d9ef">qualified</span> Data.Text <span style="color:#66d9ef">as</span> T
+<span style="color:#66d9ef">import</span> <span style="color:#66d9ef">qualified</span> Data.ByteString.Char8 <span style="color:#66d9ef">as</span> BS
 
-<pre><code class="language-haskell">import Network.Wreq
-import Control.Lens
-import Data.Aeson
-import Data.Aeson.Lens
-import qualified Data.Text as T
-import qualified Data.ByteString.Char8 as BS
+<span style="color:#a6e22e">opts</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Options</span>
+<span style="color:#a6e22e">opts</span> lang token <span style="color:#f92672">=</span> defaults <span style="color:#f92672">&amp;</span> param <span style="color:#e6db74">&#34;q&#34;</span> <span style="color:#f92672">.~</span> [<span style="color:#66d9ef">T</span><span style="color:#f92672">.</span>pack <span style="color:#f92672">$</span> <span style="color:#e6db74">&#34;tetris language:&#34;</span> <span style="color:#f92672">++</span> lang]
+                        <span style="color:#f92672">&amp;</span> param <span style="color:#e6db74">&#34;order&#34;</span> <span style="color:#f92672">.~</span> [<span style="color:#e6db74">&#34;desc&#34;</span>]
+                        <span style="color:#f92672">&amp;</span> param <span style="color:#e6db74">&#34;sort&#34;</span> <span style="color:#f92672">.~</span> [<span style="color:#e6db74">&#34;stars&#34;</span>]
+                        <span style="color:#f92672">&amp;</span> header <span style="color:#e6db74">&#34;Authorization&#34;</span> <span style="color:#f92672">.~</span> [<span style="color:#66d9ef">BS</span><span style="color:#f92672">.</span>pack <span style="color:#f92672">$</span> <span style="color:#e6db74">&#34;token &#34;</span> <span style="color:#f92672">++</span> token]
 
-opts :: String -&gt; String -&gt; Options
-opts lang token = defaults &amp; param &quot;q&quot; .~ [T.pack $ &quot;tetris language:&quot; ++ lang]
-                        &amp; param &quot;order&quot; .~ [&quot;desc&quot;]
-                        &amp; param &quot;sort&quot; .~ [&quot;stars&quot;]
-                        &amp; header &quot;Authorization&quot; .~ [BS.pack $ &quot;token &quot; ++ token]
-
-query lang = do
-    token &lt;- readFile &quot;token&quot;
-    r &lt;- getWith (opts lang token) &quot;https://api.github.com/search/repositories&quot;
-    return $ r ^? responseBody . key &quot;total_count&quot; . _Number
-</code></pre>
-
-<p>MUCH better. This includes reading my token from file called &ldquo;token&rdquo; so I don&rsquo;t
+<span style="color:#a6e22e">query</span> lang <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    token <span style="color:#f92672">&lt;-</span> readFile <span style="color:#e6db74">&#34;token&#34;</span>
+    r <span style="color:#f92672">&lt;-</span> getWith (opts lang token) <span style="color:#e6db74">&#34;https://api.github.com/search/repositories&#34;</span>
+    return <span style="color:#f92672">$</span> r <span style="color:#f92672">^?</span> responseBody <span style="color:#f92672">.</span> key <span style="color:#e6db74">&#34;total_count&#34;</span> <span style="color:#f92672">.</span> _Number
+</code></pre></div><p>MUCH better. This includes reading my token from file called &ldquo;token&rdquo; so I don&rsquo;t
 accidentally commit it. Also includes building up the different query options
 based on inputs, which was the next step. Thanks y&rsquo;all.</p>
-
 <blockquote>
 <p>Pixel gifs sourced from
 <a href="http://zedotagger.deviantart.com/gallery/54317550/Dark-Souls">zedotagger</a> on

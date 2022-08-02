@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Clojurescript on deliberate software</title>
+    <title>clojurescript on deliberate software</title>
     <link>http://deliberate-software.com/categories/clojurescript/</link>
-    <description>Recent content in Clojurescript on deliberate software</description>
+    <description>Recent content in clojurescript on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
@@ -31,7 +31,7 @@ In this demo, we add three things to a list, then change the template that draws
       <guid>http://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
-lein new luminus cljs-angular2 +cljs  This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
+lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
     </item>
     
   </channel>

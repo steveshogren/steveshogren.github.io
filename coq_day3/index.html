@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-04-27",
     "description": "",
-    "wordCount": 220
+    "wordCount":  220 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,74 +179,46 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Day three working through
+    <p>Day three working through
 <a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>
 with Coq. Since I like to rant, and I love
 <a href="http://www.darkestdungeon.com/">Darkest Dungeon</a>, ENTER THE DARKEST PROOF.
 <span class="subscript">(Please don&rsquo;t sue me!)</span></p>
-
 <p><img src="/images/ruinhascome.png"></img></p>
-
 <p>I am trying to prove a helper proof to use to rewrite another helper proof to
 use to rewrite another proof for the commutativity of multiplication. You can&rsquo;t
 make this stuff up.</p>
-
 <p>I just need to prove this where <code>S n</code> is <code>n + 1</code>:</p>
-
 <pre><code>m * S n = m + m * n.
-</code></pre>
-
-<p>Should be simple&hellip;</p>
-
+</code></pre><p>Should be simple&hellip;</p>
 <pre><code>Theorem mult_comm_lemma : forall n m, m * S n = m + m * n.
 Proof.
   intros m n.
   induction m as [| p].
-</code></pre>
-
-<p>Gives me:</p>
-
+</code></pre><p>Gives me:</p>
 <pre><code>2 subgoals, subgoal 1 (ID 291)
   n * 1 = n + n * 0
 
 subgoal 2 (ID 295) is:
  n * S (S p) = n + n * S p
-</code></pre>
-
-<h1 id="wat">Wat.</h1>
-
+</code></pre><h1 id="wat">Wat.</h1>
 <p>I expected performing an induction on <code>m</code> to produce something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coq" data-lang="coq">2 subgoals<span style="color:#f92672">,</span> subgoal 1 <span style="color:#f92672">(</span>ID 291<span style="color:#f92672">)</span>
+   0 <span style="color:#f92672">*</span> S n <span style="color:#f92672">=</span> 0 <span style="color:#f92672">+</span> 0 <span style="color:#f92672">*</span> n
 
-<pre><code class="language-coq">2 subgoals, subgoal 1 (ID 291)
-   0 * S n = 0 + 0 * n
-
-subgoal 2 (ID 294) is:
- S p * S n = S p + S p * n
-</code></pre>
-
-<p>Instead it is inducting <code>n</code>?!</p>
-
+subgoal 2 <span style="color:#f92672">(</span>ID 294<span style="color:#f92672">)</span> <span style="color:#66d9ef">is</span><span style="color:#f92672">:</span>
+ S p <span style="color:#f92672">*</span> S n <span style="color:#f92672">=</span> S p <span style="color:#f92672">+</span> S p <span style="color:#f92672">*</span> n
+</code></pre></div><p>Instead it is inducting <code>n</code>?!</p>
 <p><img src="/images/upset.jpg"></img></p>
-
 <h1 id="wait">Wait.</h1>
-
 <p><img src="/images/mult_comm_lemma.png"></img></p>
-
 <h1 id="no">No.</h1>
-
 <p><img src="/images/mult_comm_lemma2.png"></img></p>
-
 <h1 id="why">WHY?!</h1>
-
 <p><img src="/images/mult_comm_lemma3.png"></img></p>
-
 <h2 id="intros-overwrites-the-names-if-put-in-the-wrong-order">INTROS OVERWRITES THE NAMES IF PUT IN THE WRONG ORDER?!</h2>
-
 <p><img src="/images/poor_caretaker.jpg"></img></p>
-
-<h3 id="the-poor-caretaker-i-fear-his-long-standing-duties-here-have-affected-him">The poor caretaker, I fear his long-standing duties here have&hellip; <em>affected him</em></h3>
+<h3 id="the-poor-caretaker-i-fear-his-long-standing-duties-here-have-_affected-him_">The poor caretaker, I fear his long-standing duties here have&hellip; <em>affected him</em></h3>
 
   </div>
 </div>

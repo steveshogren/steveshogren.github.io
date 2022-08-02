@@ -44,7 +44,7 @@
     },
     "datePublished": "2013-08-07",
     "description": "",
-    "wordCount": 812
+    "wordCount":  812 
   }
 </script>
 
@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -183,58 +183,52 @@
 One call from the library in particular really stood out, a call for finding out what form threw an exception out of many.
 <br />
 <br /></p>
-
-<pre><code class="language-clojure">;; trace-forms &quot;Trace all the forms in the given body. Returns any
-;; underlying uncaught exceptions that may make the forms fail.&quot;
-(trace-forms
- (let [a (+ 1 1)
-       b (* 2 2)
-       c (* a b (/ 4 0))]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#75715e">;; trace-forms &#34;Trace all the forms in the given body. Returns any</span>
+<span style="color:#75715e">;; underlying uncaught exceptions that may make the forms fail.&#34;</span>
+(<span style="color:#a6e22e">trace-forms</span>
+ (<span style="color:#66d9ef">let </span>[a (+ <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>)
+       b (* <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">2</span>)
+       c (* a b (/ <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>))]
    c))
-;; =&gt; ArithmeticException Divide by zero
-;;      Form failed: (/ 4 0)
-;;      Form failed: (* a b (/ 4 0))
-;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)
-;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)
-;;      clojure.lang.Numbers.divide (Numbers.java:156)
-</code></pre>
-
-<p><br />
+<span style="color:#75715e">;; =&gt; ArithmeticException Divide by zero</span>
+<span style="color:#75715e">;;      Form failed: (/ 4 0)</span>
+<span style="color:#75715e">;;      Form failed: (* a b (/ 4 0))</span>
+<span style="color:#75715e">;;      Form failed: (let* [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+<span style="color:#75715e">;;      Form failed: (let [a (+ 1 1) b (* 2 2) c (* a b (/ 4 0))] c)</span>
+<span style="color:#75715e">;;      clojure.lang.Numbers.divide (Numbers.java:156)</span>
+</code></pre></div><p><br />
 <br />
 Which is incredibly cool. At the time, I could see using that all the time for helpful benefits. In the last few days though, I realized a more obvious function has been far more helpful to my daily development: deftrace. Deftrace just replaces a defn, and does the same, but it also prints out the ins and outs of the function.
 <br />
 <br /></p>
-
-<pre><code class="language-clojure">;; example up from clouredocs.org:
-  ;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace
-  (deftrace fib [n]
-    (if (or (= n 0) (= n 1))
-      1
-      (+ (fib (- n 1)) (fib (- n 2)))))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#75715e">;; example up from clouredocs.org:</span>
+  <span style="color:#75715e">;; http://clojuredocs.org/clojure_contrib/clojure.contrib.trace/deftrace</span>
+  (<span style="color:#a6e22e">deftrace</span> fib [n]
+    (<span style="color:#66d9ef">if </span>(or (= n <span style="color:#ae81ff">0</span>) (= n <span style="color:#ae81ff">1</span>))
+      <span style="color:#ae81ff">1</span>
+      (+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>)) (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>)))))
  
-  (fib 4)
-  ;; =&gt; 5
-  ;; 1&gt; TRACE t2742: (fib 4)
-  ;;    TRACE t2743: | (fib 3)
-  ;;    TRACE t2744: | | (fib 2)
-  ;;    TRACE t2745: | | | (fib 1)
-  ;;    TRACE t2745: | | | =&gt; 1
-  ;;    TRACE t2746: | | | (fib 0)
-  ;;    TRACE t2746: | | | =&gt; 1
-  ;;    TRACE t2744: | | =&gt; 2
-  ;;    TRACE t2747: | | (fib 1)
-  ;;    TRACE t2747: | | =&gt; 1
-  ;;    TRACE t2743: | =&gt; 3
-  ;;    TRACE t2748: | (fib 2)
-  ;;    TRACE t2749: | | (fib 1)
-  ;;    TRACE t2749: | | =&gt; 1
-  ;;    TRACE t2750: | | (fib 0)
-  ;;    TRACE t2750: | | =&gt; 1
-  ;;    TRACE t2748: | =&gt; 2
-  ;;    TRACE t2742: =&gt; 5
-</code></pre>
-
-<p><br />
+  (<span style="color:#a6e22e">fib</span> <span style="color:#ae81ff">4</span>)
+  <span style="color:#75715e">;; =&gt; 5</span>
+  <span style="color:#75715e">;; 1&gt; TRACE t2742: (fib 4)</span>
+  <span style="color:#75715e">;;    TRACE t2743: | (fib 3)</span>
+  <span style="color:#75715e">;;    TRACE t2744: | | (fib 2)</span>
+  <span style="color:#75715e">;;    TRACE t2745: | | | (fib 1)</span>
+  <span style="color:#75715e">;;    TRACE t2745: | | | =&gt; 1</span>
+  <span style="color:#75715e">;;    TRACE t2746: | | | (fib 0)</span>
+  <span style="color:#75715e">;;    TRACE t2746: | | | =&gt; 1</span>
+  <span style="color:#75715e">;;    TRACE t2744: | | =&gt; 2</span>
+  <span style="color:#75715e">;;    TRACE t2747: | | (fib 1)</span>
+  <span style="color:#75715e">;;    TRACE t2747: | | =&gt; 1</span>
+  <span style="color:#75715e">;;    TRACE t2743: | =&gt; 3</span>
+  <span style="color:#75715e">;;    TRACE t2748: | (fib 2)</span>
+  <span style="color:#75715e">;;    TRACE t2749: | | (fib 1)</span>
+  <span style="color:#75715e">;;    TRACE t2749: | | =&gt; 1</span>
+  <span style="color:#75715e">;;    TRACE t2750: | | (fib 0)</span>
+  <span style="color:#75715e">;;    TRACE t2750: | | =&gt; 1</span>
+  <span style="color:#75715e">;;    TRACE t2748: | =&gt; 2</span>
+  <span style="color:#75715e">;;    TRACE t2742: =&gt; 5</span>
+</code></pre></div><p><br />
 <br />
 At this point in the demo, the room was leaping out of their chairs laughing in sheer delight at how awesome this is. It is ultimately such a simple idea, and yet it&rsquo;s execution is brilliant and inconceivably handy.
 <br />

@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-11-16",
     "description": "",
-    "wordCount": 502
+    "wordCount":  502 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,75 +179,54 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Part 2 of the series <a href="/categories/oo-design/">OO-Design</a></p>
-
+    <p>Part 2 of the series <a href="/categories/oo-design/">OO-Design</a></p>
 <p>The Anemic Domain Model is often quoted as an anti-pattern in the terminology of
 Domain-Driven Design. Martin Fowler goes so far as to term the alternative a
 <a href="http://www.martinfowler.com/bliki/AnemicDomainModel.html">&ldquo;rich domain model&rdquo;</a>.</p>
-
 <p>A rich domain model makes perfect sense until you attempt to write your first
 unit test. You discover that rich domain models are very hard to test. Most
 examples of unit-testing use Anemic Domain Models! Do you really have to pick
 between good testing and good design?</p>
-
-<h2 id="let-s-talk-about-purity">Let&rsquo;s Talk About Purity</h2>
-
+<h2 id="lets-talk-about-purity">Let&rsquo;s Talk About Purity</h2>
 <p>Functions are considered <strong>pure</strong> if they produce the same output when given the
 same input. Addition is a pure function. We expect <code>add(1,1)</code> will always
 produce <code>2</code>. Pure functions are the easiest to test. As a rule, the more
 logic you have in pure functions, the easier your code is to test.</p>
-
 <p>Consider which of the following is easier to test. A <strong>pure function</strong> with the
 signature:</p>
-
-<pre><code class="language-java">GameState movePlayerNorth(GameState g)
-</code></pre>
-
-<p>or an <strong>impure function</strong> with the signature:</p>
-
-<pre><code class="language-java">void movePlayerNorth()
-</code></pre>
-
-<p>The first function has explicit inputs and outputs. The second function has
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">GameState <span style="color:#a6e22e">movePlayerNorth</span><span style="color:#f92672">(</span>GameState g<span style="color:#f92672">)</span>
+</code></pre></div><p>or an <strong>impure function</strong> with the signature:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">movePlayerNorth</span><span style="color:#f92672">()</span>
+</code></pre></div><p>The first function has explicit inputs and outputs. The second function has
 implicit, hidden state. While the <code>void</code> function is easier to <em>call</em>, it
 impurity makes it much harder to <em>test</em>. Testing a impure function requires
 implicit state to be setup before each test. Since GameState is encapsulated,
 you would need to either expose it (breaking encapsulation) or call other
 methods to get it into the correct state for your test!</p>
-
 <blockquote>
 <p>Encapsulation is <del>a rich domain model</del> <strong>impure</strong>.</p>
 </blockquote>
-
 <p>The point of encapsulation is to hide state from the caller; it is impure by
 definition. Impure functions require global or class-level state to operate.</p>
-
 <p>Pure functions have been maligned as a bad design. Purity has been given nasty
 sounding names like &ldquo;anemic domain model&rdquo; or &ldquo;exposed state&rdquo;. In reality, there
 is nothing wrong with pure programming, it produces good designs that are easy
 to understand and test.</p>
-
 <p>Misapplied encapsulation is why most developers do not venture very far into
 unit testing. Their first production unit test slams into a function with a lot
 of impure state. They see how much work it is to test an impure function and
 give up, thinking that all unit testing is that hard.</p>
-
 <blockquote>
 <p>Purity is a good design!</p>
 </blockquote>
-
 <p>We should strive for purity as much as possible. In most languages, purity is an
 ideal to strive for, not a goal that can ever be fully achieved. For example:
 language features like exceptions and null will always prevent complete purity.</p>
-
 <p>Purity in object-oriented languages is always on a continuum. Most codebases
 have a variety of functions: some pure, some impure. On one side of the spectrum
 you have rich domain models with completely encapsulated state and void methods.
 On the other side you have easily-tested code with pure functions and separate
 data structures.</p>
-
 <p>If you need or desire testability, strive to put as much logic as possible
 inside pure functions. Avoid encapsulated state: put all state in data
 structures with all public fields. Strive to make your codebase as pure as

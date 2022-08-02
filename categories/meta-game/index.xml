@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Meta Game on deliberate software</title>
@@ -197,7 +197,7 @@ All of us have certain irrational attachments to the various things we are used 
       <guid>http://deliberate-software.com/ego-driven-development/</guid>
       <description>Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.
 EDD plagues many organizations; here just some of the symptoms you might encounter:
- &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house. E.</description>
+  &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house.</description>
     </item>
     
     <item>

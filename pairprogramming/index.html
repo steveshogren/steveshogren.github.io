@@ -42,7 +42,7 @@
     },
     "datePublished": "2016-09-12",
     "description": "",
-    "wordCount": 1095
+    "wordCount":  1095 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -182,30 +182,23 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>My current team has pair-programmed and followed strict TDD on a single codebase
+    <p>My current team has pair-programmed and followed strict TDD on a single codebase
 for over ten years. The practices started from reading the literature on Extreme
 Programming, which resonated with both the developers and leadership. As the
 team changed, we continued to follow the practices.</p>
-
 <p>In the last five years, the developers choose to implement Arlo Belshee&rsquo;s <a href="http://csis.pace.edu/~grossman/dcs/XR4-PromiscuousPairing.pdf">&ldquo;Promiscuous Pairing&rdquo;</a>. We
 switch pairs in short intervals: 180 minutes is our current preference.</p>
-
 <p>The pairing sessions start at 8:45AM and 1:00PM with the typical five-minute
 stand-up. People report on any data that the rest of the team needs to hear,
 including noteworthy technical details. Afterwards, the developers crowd around
 a board with the current tasks in progress. We randomize the pairs, then each
 pair decides what to work on from the current tasks.</p>
-
 <p>If a developer wants to not pair for a session, they go &ldquo;odd&rdquo;. We have a working
 agreement that no production code can be written while odd. The odd person works
 on automated testing, answering questions, researching technical debt,
 investigating root causes of bugs, and authoring throwaway &ldquo;spikes&rdquo; for major
 refactorings.</p>
-
 <h2 id="pros">Pros</h2>
-
 <ul>
 <li>No siloed information or &ldquo;I don&rsquo;t touch that section&rdquo; areas</li>
 <li>The team must adopt a consistent set of styles, tools, shortcuts, workflow</li>
@@ -223,101 +216,92 @@ are rotating off in two hours.</li>
 <li>Interruptions are much less disruptive, typically only one or two minutes to
 get back into &ldquo;flow&rdquo;</li>
 </ul>
-
 <h2 id="cons">Cons</h2>
-
 <ul>
 <li>Huge system &ldquo;owned by everyone&rdquo; is a lot for new developers to handle - training takes a long time</li>
 <li>Juggling tasks can be complex (e.g. what gets put on hold when not at full capacity)</li>
 <li>Support issues get passed around from pair to pair</li>
 <li>General feeling you are &ldquo;not important&rdquo; to the team</li>
 </ul>
-
 <h2 id="partly-good-partly-bad">Partly Good, Partly Bad</h2>
-
 <ul>
 <li>Pairing is polarizing
-
 <ul>
 <li><strong>-</strong> Hiring is slow: many developers hate pairing
-
 <ul>
 <li>Some developers we&rsquo;ve interviewed unfortunately feel pairing is demeaning, disrespectful, or beneath them</li>
-</ul></li>
+</ul>
+</li>
 <li><strong>-</strong> Poor new hire retention
-
 <ul>
 <li>Some developers love the <em>idea</em> of pairing, not the <em>practice</em> of pairing; they often leave when they discover that distinction</li>
-</ul></li>
+</ul>
+</li>
 <li><strong>+</strong> Low employee churn: those that love pairing stick around far longer than industry average</li>
-</ul></li>
+</ul>
+</li>
 <li>No task ownership
-
 <ul>
 <li><strong>-</strong> Less emotional reward when completing a task</li>
 <li><strong>+</strong> Less in-fighting about typical &lsquo;code-ownership&rsquo; bike-shed issues</li>
 <li><strong>+</strong> No one cares if a task is rejected by QA</li>
-</ul></li>
+</ul>
+</li>
 <li>Rapid pair-switching can cause design churn on a task
-
 <ul>
 <li><strong>-</strong> Tasks can take longer to complete</li>
 <li><strong>+</strong> Tough tasks get prototyped several times and seen by whole team</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>We&rsquo;ve found this set of trade-offs works very well with our team. The ten of us
 are all doing active development on a 3.4 million-line enterprise banking
 application. Quality and the ability to quickly conform to new regulations are
 of paramount importance. The team regularly has a discussion as to whether we
 should keep or abandon the policy of enforced pairing, and the consensus thus
 far remains to keep it.</p>
-
 <p>We plan to be around for at least the next decade. Our team requires a workflow
 that allows for the rapid development of high-quality features while keeping the
 team stress-free and happy with their work. Since we plan on a decade scale, our
 development process must take into account the importance of long-term
 happiness, training, and the courage to aggressively pay down technical debt.</p>
-
 <h2 id="how-to-get-started">How To Get Started</h2>
-
 <p>This system works best with a given a set of preconditions.</p>
-
 <ul>
-<li><p>The whole team has to love pairing and want to adopt it</p>
-
+<li>
+<p>The whole team has to love pairing and want to adopt it</p>
 <p>If even a minority of developers hates pairing, it will be tortuous to force
 them to do it. In our experience, &gt;80% of developers hate pairing. If some
 members are not interested, it would be better to split the team and
 codebase. Forcing even a single developer to pair can be disastrous for
 morale and productivity. No one wants to pair with someone who is sullen and
-bitter. When pairing, misery cannot be hidden.</p></li>
-
-<li><p>Management has to accept not having assigned tasks</p>
-
+bitter. When pairing, misery cannot be hidden.</p>
+</li>
+<li>
+<p>Management has to accept not having assigned tasks</p>
 <p>Assigning tasks reduces the beneficial effects of pair switching. The
 assigned developer ends up &ldquo;doing all the work with an observer&rdquo;. This is
 much less effective. The &ldquo;observer&rdquo; ends up tuning out, since the assignee
-&ldquo;probably already has it figured out&rdquo;.</p></li>
-
-<li><p>Proficiency at pairing is a discrete skill</p>
-
+&ldquo;probably already has it figured out&rdquo;.</p>
+</li>
+<li>
+<p>Proficiency at pairing is a discrete skill</p>
 <p>Many seasoned developers find themselves awkward and uncomfortable when
 pairing for the first few months. Pairing cannot be assessed in any
 meaningful way by just &ldquo;trying it for a week&rdquo; anymore than typing can be
 assessed over hand-writing in just a week. Feelings of discomfort and
 awkwardness in the first few months are completely normal and should not be
-the criteria used to decide to continue the practice.</p></li>
-
-<li><p>Let any pair make any decision</p>
-
+the criteria used to decide to continue the practice.</p>
+</li>
+<li>
+<p>Let any pair make any decision</p>
 <p>Any pair should be authorized to make any decision to implement their
 current task. They must however be ready to have that decision undone or
 changed if the next pair finds it was too large, a poor design, out of
-scope, etc.</p></li>
-
-<li><p>Accept that others are better than you</p>
-
+scope, etc.</p>
+</li>
+<li>
+<p>Accept that others are better than you</p>
 <p>When trying out pairing, productivity doesn&rsquo;t have to drop! Many developers
 at first are uncomfortable by the rapid speed. The law of averages says half
 the developers on the team will find their pair going much faster than they
@@ -325,19 +309,16 @@ are used to! These feelings of inadequacy often lead to developers wanting
 to discontinue the practice. Over time, everyone realizes that it is okay to
 not be the fastest, and instead take self-worth in what skills they do
 bring. Maybe they are not the fastest, but they are good at catching little
-details, etc.</p></li>
+details, etc.</p>
+</li>
 </ul>
-
 <p>As a development system, this absolutely cannot be handed down from management.
 It has to be implemented &ldquo;by the people and for the people&rdquo;.</p>
-
 <h2 id="conclusion">Conclusion</h2>
-
 <p>We have seen promiscuous pairing completely change our organization. As a team,
 we accomplish far more than we would otherwise. We are able to tackle new
 systems, languages, and tools with ease. When someone learns a new valuable
 technique, it spreads organically through the team.</p>
-
 <p>Feel free to tweet at me if you have any questions or clarifications!</p>
 
   </div>

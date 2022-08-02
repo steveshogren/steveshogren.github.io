@@ -42,7 +42,7 @@
     },
     "datePublished": "2015-02-17",
     "description": "",
-    "wordCount": 907
+    "wordCount":  907 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -181,17 +181,14 @@
   <div class="content">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 <script src="/javascripts/sliders.js"></script>
-
 <p>I think the time has come for a standard programming language safety
 score. I want to use this model to help show that the concept of
 safety is much more nuanced than a binary bit of &ldquo;has strong-static
 types&rdquo;.</p>
-
 <p>When someone says &ldquo;programming language safety&rdquo;, it typically invokes
 thoughts of unit tests, long build times, and red squiggles in an
 IDE. But, in day-to-day development, there are so many times when we
 are bitten by things that somehow just slip through the cracks.</p>
-
 <p>I put together this scoring model to get a sense of how safe a
 language is at the primitive level, and if it isn&rsquo;t safe by default,
 how much it costs to manually make it safe. Since all abstractions
@@ -204,7 +201,6 @@ own primitive abstractions for integration. Due to the impossibility of
 measuring the quality of abstractions in all libraries for a language,
 I left that entirely out of scope of this model, unless it is designed
 as a primitive check.</p>
-
 <p>By focusing on only primitive operations: making and calling
 functions, naming data, working with sequences, and dealing with
 language primitive data types, I slimmed down the large range of
@@ -214,10 +210,8 @@ primitives, those classes are still doing the same primitive work,
 just hidden behind a user-created abstraction. The more ways it is
 possible to make a &ldquo;mistake&rdquo; with a primitive, the more difficult it
 is to build such good abstractions.</p>
-
 <pre><code>This model is not about language &quot;power&quot;.
 </code></pre>
-
 <p>This model is not about ranking the &ldquo;power&rdquo;, &ldquo;expressiveness&rdquo;, or
 &ldquo;abstract-ability&rdquo; of a language. In any language that supports
 abstractions (functions, classes, modules, naming data), I am
@@ -225,49 +219,40 @@ convinced, given enough code, all Turing complete langauges can do the
 same work. This model is only about the costs to prevent unexpected
 &ldquo;confusion&rdquo; between the programmer and the machine at the primitive
 level.</p>
-
 <p>Rather than focus on what is <em>possible</em> with a language, I will
 instead focus on what is typically idiomatic to that community. For
 example, if it is possible to achieve a level of safety in a language
 but by doing something uncommon, that should not be counted.</p>
-
 <p>To score a language, simply figure out how many characters it costs to
 &ldquo;prevent&rdquo; a certain type of error, and add that to the
 total. Newlines, spaces, and tabs do not count, but all other
-punctuation does. If a specific check is language enforced, like F#&rsquo;s
-Option or C#&rsquo;s parameter type enforcement, that is given a -30 (by
+punctuation does. If a specific check is language enforced, like F#&lsquo;s
+Option or C#&lsquo;s parameter type enforcement, that is given a -30 (by
 default) to make up for the lack of unit tests and code exercising
 needed to run that &ldquo;path&rdquo;. Do not count import lines for libraries, as
 importing the module will have a negligible effect on the code size
 and complexity.</p>
-
 <p>If there is a safety feature that is not possible to achieve
 programmatically, we will add +30 (by default) for a &ldquo;every change run
 and debug to fix&rdquo; cost, such as Java not having a way to prevent stack
 overflow exceptions caused by recursion.</p>
-
 <pre><code>A lower score is &quot;safer&quot;, needing less (or no) code to achieve the same level of safety.
 </code></pre>
-
 <p>Rather than tell you my thoughts (or survey for) hard-coded
 weightings, all checks are weighted the same by default. Feel free to
 apply your own weightings, to better match to your or your team&rsquo;s
 specific needs and preferences. The languages are masked by default to
 protect the innocent. You can unmask the names and see the code used
 below the table.</p>
-
 <div ng-app="TableApp">
 <div ng-controller="TableCtrl">
-
-Language Enforced Bonus:
-{{ enforcedScore }} 
-<input ng-model="enforcedScore" type="range" min="0" max="50" />
-
-Language Inability Penalty:
-{{ inabilityPenalty }} 
-<input ng-model="inabilityPenalty" type="range" min="0" max="50" />
-
-Show Weights <input type="checkbox" ng-model="showWeights" />
+<p>Language Enforced Bonus:
+{{ enforcedScore }}
+<input ng-model="enforcedScore" type="range" min="0" max="50" /></p>
+<p>Language Inability Penalty:
+{{ inabilityPenalty }}
+<input ng-model="inabilityPenalty" type="range" min="0" max="50" /></p>
+<p>Show Weights <input type="checkbox" ng-model="showWeights" /></p>
 <p class="lead">
 <div style="overflow-x:scroll">
 <table class="langtable">
@@ -302,42 +287,34 @@ Show Weights <input type="checkbox" ng-model="showWeights" />
 </tr>
 </table>
 </div>
-
 <h3><input ng-model="showRealName" type="checkbox" /><span
 ng-click="showRealName = !!!showRealName">Click to see backing code and unmask names</span></h3>
-
 <p>Current Languages:
 <span ng-repeat="lang in allLanguages">
 {{ getName(lang) }}: {{ allLangTotals[$index] }},
 </select></p>
-
 <p>I want to see your language represented here! I&rsquo;ll happily take pull
 requests for new languages: <a href="https://github.com/steveshogren/blog-source/blob/master/source/javascripts/sliders.js">blog source</a>. Just
 use the &ldquo;edit language&rdquo; and &ldquo;copy to clipboard&rdquo; to build your own
 language data structure.</p>
-
 <p>I would love to see every major language represented, including major
 language &ldquo;idiom communities&rdquo;. For example, Clojure and Typed Clojure
 are vastly different in abilities. Similarly &ldquo;Scala - The Better Java&rdquo;
 and &ldquo;Scala - The JVM Haskell&rdquo; have vastly different idioms with
 apparently very separate communities.</p>
-
 <p>Hope this is a helpful way to think about language safety!</p>
-
 <p>Special thanks to (in alphabetical order):
 Patrick Boe <a href="https://twitter.com/traffichazard/">(twitter)</a>,
 Kyle Burton <a href="http://asymmetrical-view.com/">(blog)</a>,
 Daniel Miladinov <a href="https://github.com/danielmiladinov">(github)</a>,
 Chris Salch <a href="https://github.com/arlaneenalra">(github)</a>, and
 Tim Visher <a href="https://github.com/timvisher">(github)</a></p>
-
 <div ng-show="showRealName"> Feel free to put in your own examples by playing
 with the samples below. Code surrounded with <! !> is ignored from the tally,
 since it would vary heavily based on the language and desired result. Variable
 and type names are kept at single characters, which are counted. Feel free to
 add in your own language below, and use the copy feature to extract the data
 structure to use in a pull request.
-
 <div>Select Language:
 <select ng-options="lang.name for lang in allLanguages" ng-model="selectedLang"></select>
 </div>
@@ -358,7 +335,6 @@ Code: <select ng-options="enforcedNice(e) for e in enforcedTypes" ng-model="sele
 </p>
 </div>
 </div>
-
 <div ng-show="!showEdit">
 <span>{{ selectedLang.name }} </span>
 <div ng-repeat="check in langChecks">
@@ -374,10 +350,9 @@ Code: {{ enforcedNice(selectedLang[check.key].enforced)  }}
 </p>
 </div>
 </div>
-
-<p></div>
 </div>
-</div></p>
+</div>
+</div>
 
   </div>
 </div>

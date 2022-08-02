@@ -44,7 +44,7 @@
     },
     "datePublished": "2018-06-05",
     "description": "",
-    "wordCount": 353
+    "wordCount":  353 
   }
 </script>
 
@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -183,58 +183,45 @@
 <a href="https://github.com/data61/fp-course">Data 61 Functional Programming Course</a>
 (seriously, put it on your list!) and I found myself doing a repeated set of
 actions. Repeated sets of actions are perfect for automation!</p>
-
 <p>The course has some sections with comments indicating the expected behavior:</p>
-
-<pre><code class="language-haskell">-- &gt;&gt;&gt; parse (satisfyAll (isUpper :. (/= 'X') :. Nil)) &quot;ABC&quot;
--- Result &gt;BC&lt; 'A'
---
--- &gt;&gt;&gt; isErrorResult (parse (satisfyAll (isUpper :. (/= 'X') :. Nil)) &quot;XBc&quot;)
--- True
-satisfyAll :: List (Char -&gt; Bool) -&gt; Parser Char
-satisfyAll = error &quot;fill this in&quot;
-</code></pre>
-
-<p>After about the hundredth time copying a comment to my REPL and running it, I
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- &gt;&gt;&gt; parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :. Nil)) &#34;ABC&#34;</span>
+<span style="color:#75715e">-- Result &gt;BC&lt; &#39;A&#39;</span>
+<span style="color:#75715e">--</span>
+<span style="color:#75715e">-- &gt;&gt;&gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &#39;X&#39;) :. Nil)) &#34;XBc&#34;)</span>
+<span style="color:#75715e">-- True</span>
+<span style="color:#a6e22e">satisfyAll</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Char</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Bool</span>) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">Char</span>
+<span style="color:#a6e22e">satisfyAll</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">error</span> <span style="color:#e6db74">&#34;fill this in&#34;</span>
+</code></pre></div><p>After about the hundredth time copying a comment to my REPL and running it, I
 decided to make a keyboard shortcut to do it.</p>
-
 <p>In my emacs init file, I start a new binding:</p>
-
-<pre><code class="language-lisp">(define-key haskell-mode-map (kbd &quot;&lt;f5&gt;&quot;) 'copy-haskell-comment)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(define-key haskell-mode-map (kbd <span style="color:#e6db74">&#34;&lt;f5&gt;&#34;</span>) <span style="color:#e6db74">&#39;copy-haskell-comment</span>)
 
 (defun copy-haskell-comment ()
   (interactive)
-  (message &quot;test&quot;)
+  (message <span style="color:#e6db74">&#34;test&#34;</span>)
   )
-</code></pre>
-
-<p>I use <code>eval-last-sexp</code> to add the binding and the function into my running
+</code></pre></div><p>I use <code>eval-last-sexp</code> to add the binding and the function into my running
 emacs instance without needing to restart. Now, going to the haskell file, I can
 hit F5 and see &ldquo;test&rdquo; printed!</p>
-
 <p>From here on out, I just need to figure out exactly what commands I ran to copy
 the line over, delete the comment parts, and run it. Using <code>C-h k</code> I can
 find out the names of the commands, and I came up with this:</p>
-
-<pre><code class="language-lisp">(defun copy-haskell-comment ()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(defun copy-haskell-comment ()
   (interactive)
 
-  (haskell-interactive-copy-to-prompt) ;; copy line to REPL
-  (haskell-interactive-switch)         ;; move to REPL buffer
-  (evil-goto-line)                     ;; move to last line in REPL buffer
-  (replace-string &quot;-- &gt;&gt;&gt;&quot; &quot;&quot; )        ;; remove the comment and chevrons
-  (evil-end-of-line)                   ;; move cursor to end of line
-  (haskell-interactive-mode-return)    ;; submit the line of code
-  (haskell-interactive-switch-back)    ;; return to the original buffer
+  (haskell-interactive-copy-to-prompt) <span style="color:#75715e">;; copy line to REPL</span>
+  (haskell-interactive-switch)         <span style="color:#75715e">;; move to REPL buffer</span>
+  (evil-goto-line)                     <span style="color:#75715e">;; move to last line in REPL buffer</span>
+  (replace-string <span style="color:#e6db74">&#34;-- &gt;&gt;&gt;&#34;</span> <span style="color:#e6db74">&#34;&#34;</span> )        <span style="color:#75715e">;; remove the comment and chevrons</span>
+  (evil-end-of-line)                   <span style="color:#75715e">;; move cursor to end of line</span>
+  (haskell-interactive-mode-return)    <span style="color:#75715e">;; submit the line of code</span>
+  (haskell-interactive-switch-back)    <span style="color:#75715e">;; return to the original buffer</span>
   )
-</code></pre>
-
-<p>Venerable emacs users will see some odd commands in there: those are just
+</code></pre></div><p>Venerable emacs users will see some odd commands in there: those are just
 imported from Evil and Spacemacs. All it took was using <code>C-h k</code> to find the
 names of the commands, and then putting the commands into the function! After
 each new line, I used <code>eval-last-sexp</code> to reevaulate the function so I could
 ensure it performed as expected.</p>
-
 <p>Now I have a single keystroke to do what took me many before! This is why I keep
 using emacs!</p>
 

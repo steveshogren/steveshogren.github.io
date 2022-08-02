@@ -44,7 +44,7 @@
     },
     "datePublished": "2011-05-05",
     "description": "",
-    "wordCount": 293
+    "wordCount":  293 
   }
 </script>
 
@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -202,19 +202,13 @@ def do_stuff():
   you have to look up the function <em>like a barbarian</em> to see
   what is going on. Sure, you can make it more clear with:
 </p>
-
-<pre><code class="language-python">def do_stuff():
-    collapse = true
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_stuff</span>():
+    collapse <span style="color:#f92672">=</span> true
     window(collapse)
-</code></pre>
-
-<p>Better then nothing, but still lame.</p>
-
-<pre><code class="language-python">def do_stuff():
-    window(collapse=true)
-</code></pre>
-
-<p>
+</code></pre></div><p>Better then nothing, but still lame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">do_stuff</span>():
+    window(collapse<span style="color:#f92672">=</span>true)
+</code></pre></div><p>
   Boom! Way easier to read, no extra variables hanging around making
   trouble. Many times I have made function parameters, called them one
   thing, then made a variable with a slightly different name to pass
@@ -222,17 +216,13 @@ def do_stuff():
   inclination to make a variable just to clarify something, I just
   name the parameter and pass in the value right there, like a
   civilized gentleman should.
-
 </p>
 <p>
  Additionally, VB.NET has this too, with the slightly goofier
   syntax of the ":="
 </p>
-
-<pre><code class="language-vb.net">Authenticate(pAllowBackupPassword:=True)
-</code></pre>
-
-<p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vb.net" data-lang="vb.net">Authenticate(pAllowBackupPassword:<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</code></pre></div><p>
   My cohort Daniel Miladinov pointed out that this is calling the
   assignment operator directly, since calling it with just the equals
   would perform

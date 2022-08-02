@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-02-07",
     "description": "",
-    "wordCount": 304
+    "wordCount":  308 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -153,7 +153,7 @@
 
   <small>
   &middot; Read in about 2 min
-  &middot; (304 Words)
+  &middot; (308 Words)
 </small>
 
 
@@ -179,82 +179,53 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>Day two working through
+    <p>Day two working through
 <a href="https://www.cis.upenn.edu/~bcpierce/sf/current/index.html">Software Foundations</a>
 with Coq. Since I like to rant, and I love
 <a href="http://www.darkestdungeon.com/">Darkest Dungeon</a>, ENTER THE DARKEST PROOF.
 <span class="subscript">(Please don&rsquo;t sue me!)</span></p>
-
 <p><img src="/images/ruinhascome.png"></img></p>
-
 <h2 id="naming">Naming</h2>
-
 <p>While trying to understand how <code>rewrite</code> works, I come across an obvious use-case:</p>
-
-
-Theorem adding_n_Sm : forall n m : nat, 
-  n + S m = S n + m.
-Proof.
-  intros n. 
-  induction n.
-  simpl. reflexivity.
-  simpl. rewrite <- IHn. 
-
-
+<div class="highlight"><pre class="chroma"><code class="language-coq" data-lang="coq"><span class="kn">Theorem</span> <span class="n">adding_n_Sm</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> 
+  <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span>
+  <span class="k">intros</span> <span class="n">n</span><span class="o">.</span> 
+  <span class="k">induction</span> <span class="n">n</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="k">rewrite</span> <span class="o">&lt;-</span> <span class="n">IHn</span><span class="o">.</span> </code></pre></div>
 <p>At this point, in current scope I have:</p>
-
-
-1 subgoals, subgoal 1 (ID 90)
-  n : nat
-  IHn : forall m : nat, n + S m = S (n + m)
----------------
-  forall m : nat, S (n + S m) = S (S (n + m))
-
-
+<div class="highlight"><pre class="chroma"><code class="language-coq" data-lang="coq"><span class="n">1</span> <span class="n">subgoals</span><span class="o">,</span> <span class="n">subgoal</span> <span class="n">1</span> <span class="o">(</span><span class="n">ID</span> <span class="n">90</span><span class="o">)</span>
+  <span class="n">n</span> <span class="o">:</span> <span class="kt">nat</span>
+  <span class="n">IHn</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">---------------</span>
+  <span class="k">forall</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> <span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span><span class="o">)</span> <span class="o">=</span> <span class="n">S</span> <span class="o">(</span><span class="n">S</span> <span class="o">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">))</span></code></pre></div>
 <p>Looks obvious enough. I <em>should</em> be able to substitute the <code>n + S m</code> with <code>S (n + m)</code> in my goal using <code>rewrite &lt;- IHn</code>.</p>
-
 <h1 id="nope">NOPE</h1>
-
-<pre><code class="language-coq">Error: Found no subterm matching &quot;n + S ?252&quot; in the current goal.
-</code></pre>
-
-<p><img src="/images/hopeless.jpg"></img></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coq" data-lang="coq">Error<span style="color:#f92672">:</span> Found no subterm matching <span style="color:#e6db74">&#34;n + S ?252&#34;</span> <span style="color:#66d9ef">in</span> the current goal<span style="color:#f92672">.</span>
+</code></pre></div><p><img src="/images/hopeless.jpg"></img></p>
 <p>Why is it: <code>n + S ?252</code> the hypothesis clearly has <code>n + S m</code>! Where did
 <code>m</code> go? Am I losing my marbles?</p>
-
 <p>After searching around, I come across an old thread with someone getting the
 same error. The reply post says</p>
-
 <blockquote>
 <p>The strange-looking &ldquo;?738&rdquo; means any term to be instantiated&hellip; Besides,
 rewrite cannot rewrite under a &ldquo;forall&rdquo;.</p>
 </blockquote>
-
 <p>Is <code>m</code> not defined? But it was up there in scope, right? Well my current scope
 <em>did</em> look like: <code>IHn : forall m : nat, n + S m = S (n + m)</code></p>
-
 <p>Oh, that <em>does</em> say <code>forall m</code>, how to make it just for that one <code>m</code>? Well <code>n</code>
 isn&rsquo;t <code>forall</code>, perhaps <code>intros</code>?</p>
-
-
-Theorem adding_n_Sm : forall n m : nat, 
-  n + S m = S n + m.
-Proof.
-  intros n m.
-  induction n.
-  simpl. reflexivity.
-  simpl. rewrite <- IHn. 
-
-
+<div class="highlight"><pre class="chroma"><code class="language-coq" data-lang="coq"><span class="kn">Theorem</span> <span class="n">adding_n_Sm</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> 
+  <span class="n">n</span> <span class="o">+</span> <span class="n">S</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span>
+<span class="hl">  <span class="k">intros</span> <span class="n">n</span> <span class="n">m</span><span class="o">.</span>
+</span>  <span class="k">induction</span> <span class="n">n</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span>
+  <span class="k">simpl</span><span class="o">.</span> <span class="k">rewrite</span> <span class="o">&lt;-</span> <span class="n">IHn</span><span class="o">.</span> </code></pre></div>
 <p><img src="/images/critforward.jpg"></img></p>
-
 <h1 id="success">SUCCESS</h1>
-
 <p>I&hellip;. I &hellip;. don&rsquo;t know what is happening.</p>
-
 <p><img src="/images/facepalm.jpg"></img></p>
 
   </div>

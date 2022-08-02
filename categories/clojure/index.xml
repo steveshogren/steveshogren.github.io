@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Clojure on deliberate software</title>
+    <title>clojure on deliberate software</title>
     <link>http://deliberate-software.com/categories/clojure/</link>
-    <description>Recent content in Clojure on deliberate software</description>
+    <description>Recent content in clojure on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
@@ -31,7 +31,7 @@ In this demo, we add three things to a list, then change the template that draws
       <guid>http://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
-lein new luminus cljs-angular2 +cljs  This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
+lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
     </item>
     
     <item>
@@ -43,7 +43,7 @@ lein new luminus cljs-angular2 +cljs  This builds a great basic starter project 
       <description>&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;
  Immutable languages make application state an interesting concept.
 In Clojure, you can deal with application state in two main ways. The first way is to pass the state around as parameters to your functions. An example of Pass As Parameter:
-(defn delete! [db-con table id] (jdbc/delete! db-con table [&amp;quot;id=?&amp;quot; id])) ;; valid-for-delete omitted (defn delete-user [db-con user-id] (if (valid-for-delete db-con &amp;quot;user&amp;quot; user-id) (delete!</description>
+(defn delete! [db-con table id] (jdbc/delete! db-con table [&amp;#34;id=?&amp;#34; id])) ;; valid-for-delete omitted (defn delete-user [db-con user-id] (if (valid-for-delete db-con &amp;#34;user&amp;#34; user-id) (delete!</description>
     </item>
     
     <item>
@@ -112,7 +112,7 @@ When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typicall
       <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/clojure-debugger/</guid>
-      <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;quot;Trace all the forms in the given body.</description>
+      <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;#34;Trace all the forms in the given body.</description>
     </item>
     
     <item>
@@ -121,7 +121,7 @@ When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typicall
       <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
       
       <guid>http://deliberate-software.com/lisp-repl/</guid>
-      <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))   WHAAAAAAAAAAAAAAA?</description>
+      <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))  WHAAAAAAAAAAAAAAA?</description>
     </item>
     
   </channel>

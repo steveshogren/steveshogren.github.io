@@ -44,7 +44,7 @@
     },
     "datePublished": "2014-04-28",
     "description": "",
-    "wordCount": 1310
+    "wordCount":  1310 
   }
 </script>
 
@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,92 +179,81 @@
   <div class="content">
     <p>Pattern matching is a simple tool that will make your code safer and
 easier to read.</p>
-
 <p>Consider the following code that converts an Int to a string.</p>
-
-<pre><code class="language-csharp">public enum Language {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Language {
     Spanish,
     English
 }
-public static string convert(int number, Language lang) {
-    string ret = &quot;&quot;;
-    if (lang == Language.English) {
-        switch(number) {
-            case 0: ret = &quot;zero&quot;; break;
-            case 1: ret = &quot;one&quot;; break;
-            default: ret = &quot;...&quot;; break;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">string</span> convert(<span style="color:#66d9ef">int</span> number, Language lang) {
+    <span style="color:#66d9ef">string</span> ret = <span style="color:#e6db74">&#34;&#34;</span>;
+    <span style="color:#66d9ef">if</span> (lang == Language.English) {
+        <span style="color:#66d9ef">switch</span>(number) {
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span>: ret = <span style="color:#e6db74">&#34;zero&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span>: ret = <span style="color:#e6db74">&#34;one&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">default</span>: ret = <span style="color:#e6db74">&#34;...&#34;</span>; <span style="color:#66d9ef">break</span>;
         }
-    } else if (lang == Language.Spanish) {
-        switch(number) {
-            case 0: ret = &quot;zero&quot;; break;
-            case 1: ret = &quot;uno&quot;; break;
-            default: ret = &quot;~~~&quot;; break;
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (lang == Language.Spanish) {
+        <span style="color:#66d9ef">switch</span>(number) {
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span>: ret = <span style="color:#e6db74">&#34;zero&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span>: ret = <span style="color:#e6db74">&#34;uno&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">default</span>: ret = <span style="color:#e6db74">&#34;~~~&#34;</span>; <span style="color:#66d9ef">break</span>;
         }
     }
-    return ret;
+    <span style="color:#66d9ef">return</span> ret;
 }
-</code></pre>
-
-<p>What happens when we make this simple change?</p>
-
-<pre><code class="language-csharp">public enum Language {
+</code></pre></div><p>What happens when we make this simple change?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Language {
     Spanish,
     English,
     German
 }
-</code></pre>
-
-<p>Does the code still compile? Sure does! Does the compiler/IDE offer us
+</code></pre></div><p>Does the code still compile? Sure does! Does the compiler/IDE offer us
 any indication that something is missing? Nope! Our code has a
 potential bug that is only exposed at run-time, and nothing will tell
 us that. We made it fail gracefully by ensuring our code always
 returns at least an empty string, but we have created a bug that can
 only really be caught by something external: either automated tests or
 manual checking.</p>
-
 <p>The OO purists and &ldquo;Anti-If&rdquo; guys are probably leaping out of their
 seats. &ldquo;Use classes and an interface!&rdquo; they yell. Ok, sure. I assert
 that it just makes things even worse.</p>
-
-<pre><code class="language-csharp">public interface ILanguage {
-    String convert(int num);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> ILanguage {
+    String convert(<span style="color:#66d9ef">int</span> num);
 }
-public class Spanish : ILanguage {
-    public String convert (int num) {
-        var ret = &quot;&quot;;
-        switch (num) {
-            case 0: ret = &quot;zero&quot;; break;
-            case 1: ret = &quot;uno&quot;; break;
-            default: ret = &quot;~~~&quot;; break;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Spanish</span> : ILanguage {
+    <span style="color:#66d9ef">public</span> String convert (<span style="color:#66d9ef">int</span> num) {
+        <span style="color:#66d9ef">var</span> ret = <span style="color:#e6db74">&#34;&#34;</span>;
+        <span style="color:#66d9ef">switch</span> (num) {
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span>: ret = <span style="color:#e6db74">&#34;zero&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span>: ret = <span style="color:#e6db74">&#34;uno&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">default</span>: ret = <span style="color:#e6db74">&#34;~~~&#34;</span>; <span style="color:#66d9ef">break</span>;
         }
-        return ret;
+        <span style="color:#66d9ef">return</span> ret;
     }
 }
-public class English : ILanguage {
-    public String convert (int num) {
-        var ret = &quot;&quot;;
-        switch (num) {
-            case 0: ret = &quot;zero&quot;; break;
-            case 1: ret = &quot;one&quot;; break;
-            default: ret = &quot;...&quot;; break;
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">English</span> : ILanguage {
+    <span style="color:#66d9ef">public</span> String convert (<span style="color:#66d9ef">int</span> num) {
+        <span style="color:#66d9ef">var</span> ret = <span style="color:#e6db74">&#34;&#34;</span>;
+        <span style="color:#66d9ef">switch</span> (num) {
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span>: ret = <span style="color:#e6db74">&#34;zero&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span>: ret = <span style="color:#e6db74">&#34;one&#34;</span>; <span style="color:#66d9ef">break</span>;
+            <span style="color:#66d9ef">default</span>: ret = <span style="color:#e6db74">&#34;...&#34;</span>; <span style="color:#66d9ef">break</span>;
         }
-        return ret;
+        <span style="color:#66d9ef">return</span> ret;
     }
 }
-// somewhere else...
-public static string convert(int x, Language lang) {
-    return getLanguage(lang).convert(x);
+<span style="color:#75715e">// somewhere else...
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">string</span> convert(<span style="color:#66d9ef">int</span> x, Language lang) {
+    <span style="color:#66d9ef">return</span> getLanguage(lang).convert(x);
 }
-public static ILanguage getLanguage(Language lang) {
-    switch (lang) {
-        case Language.English: return new English() ; break;
-        case Language.Spanish: return new Spanish() ; break;
-        default: throw new Exception();
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> ILanguage getLanguage(Language lang) {
+    <span style="color:#66d9ef">switch</span> (lang) {
+        <span style="color:#66d9ef">case</span> Language.English: <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> English() ; <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">case</span> Language.Spanish: <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Spanish() ; <span style="color:#66d9ef">break</span>;
+        <span style="color:#66d9ef">default</span>: <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Exception();
     }
 }
-</code></pre>
-
-<p>We have turned 21 lines in one file into 36 in three files (not
+</code></pre></div><p>We have turned 21 lines in one file into 36 in three files (not
 counting namespaces and imports). Does this new structure give us any
 additional safety when we add a new concrete implementation? How about
 when we add a new enum value? This code is even more likely to cause
@@ -272,13 +261,10 @@ bugs than the first, because now we have an implicit coupling between
 the enum and the concrete class. We could get rid of the enum, and
 &ldquo;pass in concrete class&rdquo; but <em>something</em> still has to say which
 concrete class to instantiate.</p>
-
 <p>Imagine if the compiler could warn us when either the enum or the
 class changed. Imagine if instead of having to hunt down the possible
 uses, we could just compile and fix the errors.</p>
-
 <p>Good news, we can!</p>
-
 <p>Check out this F# code. If you have never seen F# before, I know, it
 looks completely crazy! It <em>still</em> looks a little weird to me, but
 just try to read it. I think you will surprise yourself. This is a
@@ -288,120 +274,84 @@ parameter in C# would be <code>int number</code>; in F# it is written
 <code>number:Int</code>. Don&rsquo;t ask me why. The <code>match number with</code> is just how
 you do the equivalent to a <code>switch/case</code> in C#, but you will see in a
 second it is a lot more powerful!</p>
-
-<pre><code class="language-fsharp">let convert(number:Int, lang:Language) :string =
-    match lang with
-        | Language.English -&gt; 
-            match number with
-               | 1 -&gt; &quot;one&quot; 
-               | 2 -&gt; &quot;two&quot; 
-               | _ -&gt; &quot;...&quot;
-</code></pre>
-
-<p>We are using the same enum from the C# file, but it is missing
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> convert<span style="color:#f92672">(</span>number<span style="color:#f92672">:</span>Int<span style="color:#f92672">,</span> lang<span style="color:#f92672">:</span>Language<span style="color:#f92672">)</span> <span style="color:#f92672">:</span><span style="color:#66d9ef">string</span> <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">match</span> lang <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> Language.English <span style="color:#f92672">-&gt;</span> 
+            <span style="color:#66d9ef">match</span> number <span style="color:#66d9ef">with</span>
+               <span style="color:#f92672">|</span> 1 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;one&#34;</span> 
+               <span style="color:#f92672">|</span> 2 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;two&#34;</span> 
+               <span style="color:#f92672">|</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;...&#34;</span>
+</code></pre></div><p>We are using the same enum from the C# file, but it is missing
 something, right? Where are the Spanish and German parts? I try to
 compile this and what do I see?</p>
-
-<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern
-matches on this expression. For example, the value 'enum&lt;Language&gt;
-(0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
-
+<p><code>~/Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this expression. For example, the value 'enum&lt;Language&gt; (0)' may indicate a case not covered by the pattern(s). (FS0025)</code></p>
 <p>Spittake mushroom soup, the compiler just caught a potential bug for
 us! A C# run-time bug no less! Not only is this very powerful, but it
 is so simple. I can code the way I normally do, only now I get
 additional safety for free! And no unit or integration test would ever
 catch this class of errors.</p>
-
 <p>Heck, if you really want to keep your classes and interfaces in C#,
 you can have some &ldquo;glue code&rdquo; in F#, and still get all the benefit!</p>
-
-<pre><code class="language-fsharp">let convert(number, lang) =
-    match lang with
-        | Language.English -&gt; English().convert(number)
-</code></pre>
-
-<p>This still calls the C# class above, and now the compiler gives us a
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> convert<span style="color:#f92672">(</span>number<span style="color:#f92672">,</span> lang<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">match</span> lang <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> Language.English <span style="color:#f92672">-&gt;</span> English()<span style="color:#f92672">.</span>convert<span style="color:#f92672">(</span>number<span style="color:#f92672">)</span>
+</code></pre></div><p>This still calls the C# class above, and now the compiler gives us a
 warning when we add a new enum value!</p>
-
 <p>In this way, pattern matching is able to clearly remove edge cases. We
 converted an unsafe <code>if</code> and <code>switch</code> statement into a type safe
 <code>match</code>.</p>
-
 <p>BONUS ROUND!</p>
-
 <p>What we have already seen of pattern matching makes it a better
 <code>switch/case</code> but what about the <code>if</code> statement? Thankfully the
 <code>match/with</code> statement allows for patterns matched to have a <code>when</code>
 clause which only matches when the condition is true:</p>
-
-<pre><code class="language-fsharp">let convert(number, lang) =
-    match lang with
-        | Language.English -&gt; 
-            match number with 
-                | x when x &gt; 5 -&gt; &quot;Large!&quot;
-                | 0 -&gt; &quot;zero&quot;
-        | Language.Spanish -&gt; 
-            match number with 
-                | x when x &gt; 5 -&gt; &quot;Grande!&quot;
-                | 0 -&gt; &quot;zero&quot;
-</code></pre>
-
-<p>Running the compiler again give us:</p>
-
-<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19):
-Warning FS0025: Incomplete pattern matches on this expression. For
-example, the value '1' may indicate a case not covered by the
-pattern(s). However, a pattern rule with a 'when' clause might
-successfully match this value. (FS0025) (monads-fsharp)</code></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> convert<span style="color:#f92672">(</span>number<span style="color:#f92672">,</span> lang<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">match</span> lang <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> Language.English <span style="color:#f92672">-&gt;</span> 
+            <span style="color:#66d9ef">match</span> number <span style="color:#66d9ef">with</span> 
+                <span style="color:#f92672">|</span> x <span style="color:#66d9ef">when</span> x <span style="color:#f92672">&gt;</span> 5 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Large!&#34;</span>
+                <span style="color:#f92672">|</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span>
+        <span style="color:#f92672">|</span> Language.Spanish <span style="color:#f92672">-&gt;</span> 
+            <span style="color:#66d9ef">match</span> number <span style="color:#66d9ef">with</span> 
+                <span style="color:#f92672">|</span> x <span style="color:#66d9ef">when</span> x <span style="color:#f92672">&gt;</span> 5 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Grande!&#34;</span>
+                <span style="color:#f92672">|</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span>
+</code></pre></div><p>Running the compiler again give us:</p>
+<p><code>/home/jack/programming/monads-fsharp/monads-fsharp/Program.fs(19,19): Warning FS0025: Incomplete pattern matches on this expression. For example, the value '1' may indicate a case not covered by the pattern(s). However, a pattern rule with a 'when' clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
 <p>That&rsquo;s right, it checks numbers too.</p>
-
 <p>Lastly, it is possible to match on a combination of values, all at
 once. We can convert our more complex structure to something simpler
 using this trick, and the compiler is still intelligent enough to
 check for missing cases.</p>
-
-<pre><code class="language-fsharp">let convert(number, lang) =
-    match lang, number with
-        | Language.English, 0 -&gt; &quot;zero&quot; 
-        | Language.English, 1 -&gt; &quot;one&quot;
-        | Language.English, x when x &gt; 1 -&gt; &quot;Larger than one!&quot;
-        | Language.English, _ -&gt; &quot;dunno&quot;
-        | Language.Spanish, 0 -&gt; &quot;zero&quot; 
-        | Language.Spanish, x when x &gt; 5 -&gt; &quot;Grande!&quot;
-</code></pre>
-
-<p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> convert<span style="color:#f92672">(</span>number<span style="color:#f92672">,</span> lang<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">match</span> lang<span style="color:#f92672">,</span> number <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span> 
+        <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> 1 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;one&#34;</span>
+        <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> x <span style="color:#66d9ef">when</span> x <span style="color:#f92672">&gt;</span> 1 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Larger than one!&#34;</span>
+        <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;dunno&#34;</span>
+        <span style="color:#f92672">|</span> Language.Spanish<span style="color:#f92672">,</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span> 
+        <span style="color:#f92672">|</span> Language.Spanish<span style="color:#f92672">,</span> x <span style="color:#66d9ef">when</span> x <span style="color:#f92672">&gt;</span> 5 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Grande!&#34;</span>
+</code></pre></div><p>Here we introduce the <code>_</code> which is equivalent to a <code>default</code> in a C#
 <code>switch/case</code> statement. The pattern <code>Language.English, _ -&gt;</code> sets a
 default for any number in <code>Language.English</code> not already matched. The
 bug in the code here is the missing <code>Language.Spanish</code> with numbers
 1-5. What does the compiler say?</p>
-
-<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this
-expression. For example, the value '(_,1)' may indicate a case not
-covered by the pattern(s). However, a pattern rule with a 'when'
-clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
-
+<p><code>Program.fs(11,11): Warning FS0025: Incomplete pattern matches on this expression. For example, the value '(_,1)' may indicate a case not covered by the pattern(s). However, a pattern rule with a 'when' clause might successfully match this value. (FS0025) (monads-fsharp)</code></p>
 <p>Lastly, let&rsquo;s show the final result of converting our original
 function to F#. If your entire function is just a single pattern
 match, you can remove the <code>match/with</code> line and use the <code>function</code>
 keyword, and simply match against the parameters (which I reversed for
 clarity, but do not need to be written).</p>
-
-<pre><code class="language-fsharp">let convert = function
-    | Language.English, 0 -&gt; &quot;zero&quot; 
-    | Language.English, 1 -&gt; &quot;one&quot;
-    | Language.English, _ -&gt; &quot;...&quot;
-    | Language.Spanish, 0 -&gt; &quot;zero&quot; 
-    | Language.Spanish, 1 -&gt; &quot;uno&quot; 
-    | Language.Spanish, _ -&gt; &quot;~~~&quot;
-</code></pre>
-
-<p>Our original 17 line convert function, converted into a <em>safer</em> 7
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> convert <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>
+    <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span> 
+    <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> 1 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;one&#34;</span>
+    <span style="color:#f92672">|</span> Language.English<span style="color:#f92672">,</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;...&#34;</span>
+    <span style="color:#f92672">|</span> Language.Spanish<span style="color:#f92672">,</span> 0 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;zero&#34;</span> 
+    <span style="color:#f92672">|</span> Language.Spanish<span style="color:#f92672">,</span> 1 <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;uno&#34;</span> 
+    <span style="color:#f92672">|</span> Language.Spanish<span style="color:#f92672">,</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;~~~&#34;</span>
+</code></pre></div><p>Our original 17 line convert function, converted into a <em>safer</em> 7
 lines! I never had to specify what the types of lang, number and the
 return type are, because the compiler is able to figure that out from
 the code I wrote.</p>
-
 <p>If you are not convinced at this point that pattern matching is a big
 step forward in the safety and ease of development, I am not sure what
 else would convince you. More safety means less time spent tracking

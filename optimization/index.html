@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-12-05",
     "description": "",
-    "wordCount": 943
+    "wordCount":  943 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -175,41 +175,32 @@
   <div class="content">
     <p>TL;DR: Made a website for optimizing Paragon cards using the <a href="https://www.gnu.org/software/glpk/">GNU Linear Programming Kit</a> and Haskell.
 <a href="https://github.com/steveshogren/haskell-optimization/tree/a298b264e0d84ded3883b0948a12768a490d57eb">Code available here.</a></p>
-
 <p>I love MOBA&rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my
 current go-to game, I wanted to determine the cards to buy to maximize my Damage
 Per Second (DPS).</p>
-
 <p>First things first, I found a spreadsheet of all the cards, colors, costs, and
 stats. Using some Vim magic, I made them into a list of tuples:</p>
-
-<pre><code class="language-haskell">(&quot;Wellspring Staff&quot;,3,Universal,&quot;6 Power|30 Mana|Fully Upgraded Bonus:30 Mana|0.3 Mana Regen&quot;),
-(&quot;Whirling Wand&quot;,3,Universal,&quot;6 Power|5.5 Attack Speed|Fully Upgraded Bonus:11 Attack Speed&quot;),
-</code></pre>
-
-<p>Which I parse into a data structure:</p>
-
-<pre><code class="language-haskell">data Card = Card
-    { _cost :: Integer
-    , _power :: Integer
-    , _speed :: Integer
-    , _crit :: Integer
-    , _pen :: Integer
-    , _lifesteal :: Integer
-    , _crit_bonus :: Integer
-    , _ward :: Integer
-    , _blink :: Integer
-    , _name :: String
-    , _firstType :: String
-    , _secondType :: String
-    , _afinity :: Afinity
-    } deriving (Show)
-makeLenses ''Card
-</code></pre>
-
-<p>The equation to maximize DPS combines the stats of: power, speed, crit chance,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">(<span style="color:#e6db74">&#34;Wellspring Staff&#34;</span>,<span style="color:#ae81ff">3</span>,<span style="color:#66d9ef">Universal</span>,<span style="color:#e6db74">&#34;6 Power|30 Mana|Fully Upgraded Bonus:30 Mana|0.3 Mana Regen&#34;</span>),
+(<span style="color:#e6db74">&#34;Whirling Wand&#34;</span>,<span style="color:#ae81ff">3</span>,<span style="color:#66d9ef">Universal</span>,<span style="color:#e6db74">&#34;6 Power|5.5 Attack Speed|Fully Upgraded Bonus:11 Attack Speed&#34;</span>),
+</code></pre></div><p>Which I parse into a data structure:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#66d9ef">data</span> <span style="color:#66d9ef">Card</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">Card</span>
+    { _cost <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _power <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _speed <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _crit <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _pen <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _lifesteal <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _crit_bonus <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _ward <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _blink <span style="color:#f92672">::</span> <span style="color:#66d9ef">Integer</span>
+    , _name <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span>
+    , _firstType <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span>
+    , _secondType <span style="color:#f92672">::</span> <span style="color:#66d9ef">String</span>
+    , _afinity <span style="color:#f92672">::</span> <span style="color:#66d9ef">Afinity</span>
+    } <span style="color:#66d9ef">deriving</span> (<span style="color:#66d9ef">Show</span>)
+<span style="color:#a6e22e">makeLenses</span> <span style="color:#66d9ef">&#39;&#39;Card</span>
+</code></pre></div><p>The equation to maximize DPS combines the stats of: power, speed, crit chance,
 armor pen, crit bonus, and the enemy&rsquo;s armor.</p>
-
 <pre><code>dmgReduction :: Double -&gt; Double -&gt; Double
 dmgReduction enemyArmor penetrationPoints =
   let effectiveArmor = enemyArmor - (penetrationPoints * 4.0)
@@ -224,42 +215,34 @@ dps hero powerPoints attackSpeedPoints critPoints penetrationPoints critDamage e
       hitsSecond = 1/((hero^.base_attack_time)/(((5.5*attackSpeedPoints) + (hero^.attack_speed))/100))
       critBonus = (1+((0.04*critPoints)*(critDamage-1)))
   baseDmg * hitsSecond * critBonus  * reduction
-</code></pre>
-
-<p>To speed up the optimization problem, I broke it down into two calculations.
+</code></pre><p>To speed up the optimization problem, I broke it down into two calculations.
 First I run the DPS algorithm against all the possible combinations of values
 with a max total cost of sixty points and six total cards. Since each card gets
 a bonus when completed with all three upgrades, those counted for extra:</p>
-
-<pre><code class="language-haskell">maxDps :: Bool -&gt; Bool -&gt; Bool -&gt; Integer -&gt; String -&gt; Integer -&gt; Double -&gt; Build
-maxDps     w       b     cheapCrit lifeSteal hero_name reduce_by en_armor =
-  let totalPoints = 66 -- counts the bonus +1 of the 6 cards when completed
-      ward = if w then 1 else 0
-      blink = if b then 1 else 0
-      maxPen = if hero_name == &quot;sparrow&quot; then 0 else 30
-      points = totalPoints - lifeSteal - (3 * ward) - (6 * blink) - reduce_by
-      totals = [ (calcIfUnder hero_name dmg speed crit pen critbonus points ward blink lifeSteal en_armor) |
-                 dmg &lt;- [0..30],
-                 speed &lt;- [0..30],
-                 crit &lt;- [0..30],
-                 pen &lt;- [0..maxPen],
-                 critbonus &lt;- [0..1]]
-      build = head $ sortBy (flip compare `on` _bdps) totals
-  in bcheapCrit .~ cheapCrit $ build
-</code></pre>
-
-<p>The function <code>calcIfUnder</code> returns a completed <code>Build</code> if the total
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">maxDps</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Integer</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Integer</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Double</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Build</span>
+<span style="color:#a6e22e">maxDps</span>     w       b     cheapCrit lifeSteal hero_name reduce_by en_armor <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">let</span> totalPoints <span style="color:#f92672">=</span> <span style="color:#ae81ff">66</span> <span style="color:#75715e">-- counts the bonus +1 of the 6 cards when completed</span>
+      ward <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> w <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+      blink <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> b <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+      maxPen <span style="color:#f92672">=</span> <span style="color:#66d9ef">if</span> hero_name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;sparrow&#34;</span> <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">30</span>
+      points <span style="color:#f92672">=</span> totalPoints <span style="color:#f92672">-</span> lifeSteal <span style="color:#f92672">-</span> (<span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> ward) <span style="color:#f92672">-</span> (<span style="color:#ae81ff">6</span> <span style="color:#f92672">*</span> blink) <span style="color:#f92672">-</span> reduce_by
+      totals <span style="color:#f92672">=</span> [ (calcIfUnder hero_name dmg speed crit pen critbonus points ward blink lifeSteal en_armor) <span style="color:#f92672">|</span>
+                 dmg <span style="color:#f92672">&lt;-</span> [<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">30</span>],
+                 speed <span style="color:#f92672">&lt;-</span> [<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">30</span>],
+                 crit <span style="color:#f92672">&lt;-</span> [<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">30</span>],
+                 pen <span style="color:#f92672">&lt;-</span> [<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span>maxPen],
+                 critbonus <span style="color:#f92672">&lt;-</span> [<span style="color:#ae81ff">0</span><span style="color:#f92672">..</span><span style="color:#ae81ff">1</span>]]
+      build <span style="color:#f92672">=</span> head <span style="color:#f92672">$</span> sortBy (flip compare `on` _bdps) totals
+  <span style="color:#66d9ef">in</span> bcheapCrit <span style="color:#f92672">.~</span> cheapCrit <span style="color:#f92672">$</span> build
+</code></pre></div><p>The function <code>calcIfUnder</code> returns a completed <code>Build</code> if the total
 card point equaled 60, otherwise an empty <code>Build</code>.</p>
-
 <p>From this, we can quickly calculate the highest possible DPS for any given
 character, as a <code>Build</code> of the exact power, speed, crit chance, armor pen,
 enemy armor, and crit bonus points needed.</p>
-
 <p>Now that we know the best possible <code>Build</code>, the hard part is figuring out
 what cards and upgrades to buy. Using
 <a href="https://hackage.haskell.org/package/glpk-hs">glpk-hs</a>, I make a tuple of each card with
 the possible upgrades for a given stat:</p>
-
 <pre><code>-- For cost (e.g. base cost is 3)
 [(&quot;Whirling Wand - speed:1,power:5&quot;,9),
  (&quot;Whirling Wand - speed:2,power:4&quot;,9),
@@ -272,62 +255,52 @@ the possible upgrades for a given stat:</p>
 [(&quot;Whirling Wand - speed:1,power:5&quot;,4),
  (&quot;Whirling Wand - speed:2,power:4&quot;,5),
  (&quot;Whirling Wand - speed:3,power:3&quot;,6), ...]
-</code></pre>
-
-<p>This turns out to be roughly a few thousand cards+upgrades per stat. Since we
+</code></pre><p>This turns out to be roughly a few thousand cards+upgrades per stat. Since we
 only care about matching a stat exactly, we can use <code>equalTo</code> from glpk-hs:</p>
-
-<pre><code class="language-haskell">lpCards :: Build -&gt; LP String Integer
-lpCards build = execLPM $ do
-  let hero = heroFromName $ build^.bhero
-  let useCheapCrit = (build^.bcheapCrit)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">lpCards</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Build</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">LP</span> <span style="color:#66d9ef">String</span> <span style="color:#66d9ef">Integer</span>
+<span style="color:#a6e22e">lpCards</span> build <span style="color:#f92672">=</span> execLPM <span style="color:#f92672">$</span> <span style="color:#66d9ef">do</span>
+  <span style="color:#66d9ef">let</span> hero <span style="color:#f92672">=</span> heroFromName <span style="color:#f92672">$</span> build<span style="color:#f92672">^.</span>bhero
+  <span style="color:#66d9ef">let</span> useCheapCrit <span style="color:#f92672">=</span> (build<span style="color:#f92672">^.</span>bcheapCrit)
   equalTo (linCombination (collectCostAndNameTuples hero _cost useCheapCrit)) totalCXP
-  equalTo (linCombination (collectCostAndNameTuples hero _power useCheapCrit)) (build^.bpower)
-  equalTo (linCombination (collectCostAndNameTuples hero _speed useCheapCrit)) (build^.bspeed)
-  equalTo (linCombination (collectCostAndNameTuples hero _crit useCheapCrit)) (build^.bcrit)
-  equalTo (linCombination (collectCostAndNameTuples hero _pen useCheapCrit)) (build^.bpen)
-  equalTo (linCombination (collectCostAndNameTuples hero _lifesteal useCheapCrit)) (build^.blifesteal)
-  equalTo (linCombination (collectCostAndNameTuples hero _crit_bonus useCheapCrit)) (build^.bcrit_bonus)
-  equalTo (linCombination (collectCostAndNameTuples hero _ward useCheapCrit)) (build^.bward)
-  equalTo (linCombination (collectCostAndNameTuples hero _blink useCheapCrit)) (build^.bblink)
-  equalTo (linCombination (map (\(_,name) -&gt; (1, name)) $ collectCostAndNameTuples hero _power useCheapCrit)) totalCards
-  mapM (\(_,name) -&gt; varBds name 0 1) $ collectCostAndNameTuples hero _power useCheapCrit
-  mapM (\(_,name) -&gt; setVarKind name IntVar) $ collectCostAndNameTuples hero _power useCheapCrit
+  equalTo (linCombination (collectCostAndNameTuples hero _power useCheapCrit)) (build<span style="color:#f92672">^.</span>bpower)
+  equalTo (linCombination (collectCostAndNameTuples hero _speed useCheapCrit)) (build<span style="color:#f92672">^.</span>bspeed)
+  equalTo (linCombination (collectCostAndNameTuples hero _crit useCheapCrit)) (build<span style="color:#f92672">^.</span>bcrit)
+  equalTo (linCombination (collectCostAndNameTuples hero _pen useCheapCrit)) (build<span style="color:#f92672">^.</span>bpen)
+  equalTo (linCombination (collectCostAndNameTuples hero _lifesteal useCheapCrit)) (build<span style="color:#f92672">^.</span>blifesteal)
+  equalTo (linCombination (collectCostAndNameTuples hero _crit_bonus useCheapCrit)) (build<span style="color:#f92672">^.</span>bcrit_bonus)
+  equalTo (linCombination (collectCostAndNameTuples hero _ward useCheapCrit)) (build<span style="color:#f92672">^.</span>bward)
+  equalTo (linCombination (collectCostAndNameTuples hero _blink useCheapCrit)) (build<span style="color:#f92672">^.</span>bblink)
+  equalTo (linCombination (map (<span style="color:#a6e22e">\</span>(<span style="color:#66d9ef">_</span>,name) <span style="color:#f92672">-&gt;</span> (<span style="color:#ae81ff">1</span>, name)) <span style="color:#f92672">$</span> collectCostAndNameTuples hero _power useCheapCrit)) totalCards
+  mapM (<span style="color:#a6e22e">\</span>(<span style="color:#66d9ef">_</span>,name) <span style="color:#f92672">-&gt;</span> varBds name <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">$</span> collectCostAndNameTuples hero _power useCheapCrit
+  mapM (<span style="color:#a6e22e">\</span>(<span style="color:#66d9ef">_</span>,name) <span style="color:#f92672">-&gt;</span> setVarKind name <span style="color:#66d9ef">IntVar</span>) <span style="color:#f92672">$</span> collectCostAndNameTuples hero _power useCheapCrit
 
-optimize :: Build -&gt; IO [HandCard]
-optimize b = do
-  x &lt;- glpSolveVars mipDefaults (lpCards b)
-  putStrLn $ &quot;Build&quot; ++ (show b)
-  case x of (Success, Just (obj, vars)) -&gt;
-              let cards = (map toHandCard) $ filter (\(name, count) -&gt; count /= 0) $ Map.toList vars
-              in if null cards then solverFailed
-                 else return cards
-            (failure, result) -&gt; solverFailed
-</code></pre>
-
-<p>Running <code>optimize</code> from a <code>scotty</code> site gathers a solution for six
+<span style="color:#a6e22e">optimize</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Build</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IO</span> [<span style="color:#66d9ef">HandCard</span>]
+<span style="color:#a6e22e">optimize</span> b <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  x <span style="color:#f92672">&lt;-</span> glpSolveVars mipDefaults (lpCards b)
+  putStrLn <span style="color:#f92672">$</span> <span style="color:#e6db74">&#34;Build&#34;</span> <span style="color:#f92672">++</span> (show b)
+  <span style="color:#66d9ef">case</span> x <span style="color:#66d9ef">of</span> (<span style="color:#66d9ef">Success</span>, <span style="color:#66d9ef">Just</span> (obj, vars)) <span style="color:#f92672">-&gt;</span>
+              <span style="color:#66d9ef">let</span> cards <span style="color:#f92672">=</span> (map toHandCard) <span style="color:#f92672">$</span> filter (<span style="color:#a6e22e">\</span>(name, count) <span style="color:#f92672">-&gt;</span> count <span style="color:#f92672">/=</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">$</span> <span style="color:#66d9ef">Map</span><span style="color:#f92672">.</span>toList vars
+              <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">if</span> null cards <span style="color:#66d9ef">then</span> solverFailed
+                 <span style="color:#66d9ef">else</span> return cards
+            (failure, result) <span style="color:#f92672">-&gt;</span> solverFailed
+</code></pre></div><p>Running <code>optimize</code> from a <code>scotty</code> site gathers a solution for six
 card+upgrade tuples that match the desired ratio, and it is fast enough to run
 in under a second!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">main</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">IO</span> ()
+<span style="color:#a6e22e">main</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+  scotty <span style="color:#ae81ff">3000</span> <span style="color:#f92672">$</span> <span style="color:#66d9ef">do</span>
+    middleware <span style="color:#f92672">$</span> staticPolicy (noDots <span style="color:#f92672">&gt;-&gt;</span> addBase <span style="color:#e6db74">&#34;static/html&#34;</span>)
+    middleware <span style="color:#f92672">$</span> staticPolicy (noDots <span style="color:#f92672">&gt;-&gt;</span> addBase <span style="color:#e6db74">&#34;static/dist&#34;</span>)
 
-<pre><code class="language-haskell">main :: IO ()
-main = do
-  scotty 3000 $ do
-    middleware $ staticPolicy (noDots &gt;-&gt; addBase &quot;static/html&quot;)
-    middleware $ staticPolicy (noDots &gt;-&gt; addBase &quot;static/dist&quot;)
-
-    post &quot;/dps&quot; $ do
-      s &lt;- jsonData :: ActionM UISetting
-      json $ DP.maxDps (has_ward s) (has_blink s) (cheap_crit s) (desired_lifesteal s) (hero_name s) 0 (enemy_armor s) 
-    post &quot;/optimize&quot; $ do
-      build &lt;- jsonData :: ActionM OP.Build
-      r &lt;- liftIO $ OP.optimize build
+    post <span style="color:#e6db74">&#34;/dps&#34;</span> <span style="color:#f92672">$</span> <span style="color:#66d9ef">do</span>
+      s <span style="color:#f92672">&lt;-</span> jsonData <span style="color:#f92672">::</span> <span style="color:#66d9ef">ActionM</span> <span style="color:#66d9ef">UISetting</span>
+      json <span style="color:#f92672">$</span> <span style="color:#66d9ef">DP</span><span style="color:#f92672">.</span>maxDps (has_ward s) (has_blink s) (cheap_crit s) (desired_lifesteal s) (hero_name s) <span style="color:#ae81ff">0</span> (enemy_armor s) 
+    post <span style="color:#e6db74">&#34;/optimize&#34;</span> <span style="color:#f92672">$</span> <span style="color:#66d9ef">do</span>
+      build <span style="color:#f92672">&lt;-</span> jsonData <span style="color:#f92672">::</span> <span style="color:#66d9ef">ActionM</span> <span style="color:#66d9ef">OP</span><span style="color:#f92672">.</span><span style="color:#66d9ef">Build</span>
+      r <span style="color:#f92672">&lt;-</span> liftIO <span style="color:#f92672">$</span> <span style="color:#66d9ef">OP</span><span style="color:#f92672">.</span>optimize build
       json r
-</code></pre>
-
-<p>Sample output:</p>
-
+</code></pre></div><p>Sample output:</p>
 <p><img src="/images/optimizer.png"></img></p>
-
 <p>And there you have it, a solver for the best DPS cards to build for Paragon for
 any hero! <a href="https://github.com/steveshogren/haskell-optimization/tree/a298b264e0d84ded3883b0948a12768a490d57eb">Code available here.</a></p>
 

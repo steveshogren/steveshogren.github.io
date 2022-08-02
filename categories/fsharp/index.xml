@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fsharp on deliberate software</title>
+    <title>fsharp on deliberate software</title>
     <link>http://deliberate-software.com/categories/fsharp/</link>
-    <description>Recent content in Fsharp on deliberate software</description>
+    <description>Recent content in fsharp on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 02 Dec 2018 00:00:00 +0000</lastBuildDate>
@@ -71,7 +71,7 @@ When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typicall
       <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
       <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
 In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
-Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;rsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;rdquo;.</description>
+Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;lsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;quot;.</description>
     </item>
     
     <item>
@@ -92,7 +92,7 @@ Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an
       <guid>http://deliberate-software.com/function-pattern-matching/</guid>
       <description>Pattern matching is a simple tool that will make your code safer and easier to read.
 Consider the following code that converts an Int to a string.
-public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;quot;&amp;quot;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;quot;zero&amp;quot;; break; case 1: ret = &amp;quot;one&amp;quot;; break; default: ret = &amp;quot;...&amp;quot;; break; } } else if (lang == Language.</description>
+public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;#34;&amp;#34;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;#34;zero&amp;#34;; break; case 1: ret = &amp;#34;one&amp;#34;; break; default: ret = &amp;#34;...&amp;#34;; break; } } else if (lang == Language.</description>
     </item>
     
   </channel>

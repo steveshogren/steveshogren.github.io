@@ -1,9 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/post/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/editor-abstraction-types/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/technical-skills/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/vim/</loc>
+    <lastmod>2022-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/csharp/</loc>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
+  </url>
   
   <url>
     <loc>http://deliberate-software.com/fsharp-design-enums/</loc>
     <lastmod>2018-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/fsharp/</loc>
+    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/emacs/</loc>
+    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/fp-course/</loc>
+    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -12,8 +63,18 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/oo-design/</loc>
+    <lastmod>2018-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/healthy-design-patterns/</loc>
     <lastmod>2018-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/java/</loc>
+    <lastmod>2018-01-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -27,12 +88,37 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/academic-papers/</loc>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/papers-we-love-1/</loc>
     <lastmod>2017-08-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/proofs/</loc>
+    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/dsl/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/poor-dsls/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/hugo/</loc>
+    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/silly/</loc>
     <lastmod>2017-08-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -42,8 +128,28 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/coq/</loc>
+    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/coq_day3/</loc>
     <lastmod>2017-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/management/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/meta-game/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/self-organization/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -77,8 +183,23 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/unit-testing/</loc>
+    <lastmod>2016-09-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/refactoring/</loc>
+    <lastmod>2016-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/vim-refactoring-patterns/</loc>
     <lastmod>2016-06-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/architecture/</loc>
+    <lastmod>2016-06-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -92,8 +213,28 @@
   </url>
   
   <url>
+    <loc>http://deliberate-software.com/categories/haskell/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://deliberate-software.com/haskell-state/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/angular/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/clojure/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/clojurescript/</loc>
+    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -148,6 +289,11 @@
   
   <url>
     <loc>http://deliberate-software.com/on-defeat/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://deliberate-software.com/categories/interviews/</loc>
     <lastmod>2015-10-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -345,179 +491,15 @@
   </url>
   
   <url>
-    <loc>http://deliberate-software.com/categories/academic-papers/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/angular/</loc>
-    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/architecture/</loc>
-    <lastmod>2016-06-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/clojure/</loc>
-    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/clojurescript/</loc>
-    <lastmod>2016-04-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/coq/</loc>
-    <lastmod>2017-04-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/csharp/</loc>
-    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/dsl/</loc>
-    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/emacs/</loc>
-    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/fp-course/</loc>
-    <lastmod>2018-06-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/fsharp/</loc>
-    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/haskell/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/hugo/</loc>
-    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/interviews/</loc>
-    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/java/</loc>
-    <lastmod>2018-01-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/management/</loc>
-    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/meta-game/</loc>
-    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://deliberate-software.com/page/philosophy/</loc>
   </url>
   
   <url>
-    <loc>http://deliberate-software.com/categories/oo-design/</loc>
-    <lastmod>2018-02-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://deliberate-software.com/page/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/post/</loc>
-    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/proofs/</loc>
-    <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/refactoring/</loc>
-    <lastmod>2016-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/self-organization/</loc>
-    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/silly/</loc>
-    <lastmod>2017-08-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>http://deliberate-software.com/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/technical-skills/</loc>
-    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/unit-testing/</loc>
-    <lastmod>2016-09-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/categories/vim/</loc>
-    <lastmod>2016-06-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -530,12 +512,6 @@
   
   <url>
     <loc>http://deliberate-software.com/page/books/</loc>
-  </url>
-  
-  <url>
-    <loc>http://deliberate-software.com/</loc>
-    <lastmod>2018-12-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

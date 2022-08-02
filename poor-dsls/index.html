@@ -42,7 +42,7 @@
     },
     "datePublished": "2017-08-02",
     "description": "",
-    "wordCount": 504
+    "wordCount":  504 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -184,15 +184,11 @@
       <div class="">
     
   <div class="content">
-    
-
-<p><strong>Trigger warning:</strong> this is a silly rant I wrote a few years ago after raging at
+    <p><strong>Trigger warning:</strong> this is a silly rant I wrote a few years ago after raging at
 the Hugo blog engine for a couple hours. I think its funny and still relevant,
 so hyperbolic nonsense incoming!</p>
-
 <p>DSL&rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special
 snowflake, delicately floating from the heavens straight into in your eye.</p>
-
 <p>The problem with a DSL is that it always starts so simple. You take a complex
 problem and represent it simply with some nice pretty syntax. Everything is
 great until: &ldquo;can we just do this one edge case real quick?&rdquo; Over time, it grows
@@ -203,56 +199,37 @@ becomes a buggy version of the outer system, but often it has less clear
 semantics and documentation. Because many DSL&rsquo;s are designed to be &ldquo;not a
 programming language&rdquo;, eventually they become far worse: a programming language
 written in psuedo-English. And we all know how regular and clear English is!</p>
-
 <h3 id="any-examples-you-betcha">Any Examples? You betcha</h3>
-
 <p>For example: the DSL for filtering posts in the Hugo blog engine. (I otherwise
 love Hugo. Whooo, go Hugo!) But time to lay out some tough love. The built-in
 templating DSL is the worst. Straight Go would be fine. The docs for Go are
 great, and Go is so magically easy. But unfortunately a special DSL is here to
 poop in your soup.</p>
-
 <p>How do I filter for the top pages that are posts and not drafts? Let&rsquo;s see what
 <em>doesn&rsquo;t</em> work:</p>
-
 <pre><code>{{ range first 5 (where .Site.Pages (and (&quot;Type&quot; &quot;post&quot;) (not .Draft)))  }}
 {{ range first 5 (where and (.Site.Pages &quot;Type&quot; &quot;post&quot;) (not .Draft))  }}
 {{ range first 5 (where (and (.Site.Pages &quot;Type&quot; &quot;post&quot;) (not .Draft)))  }}
-</code></pre>
-
-<p>Maybe the parens mess it up?</p>
-
+</code></pre><p>Maybe the parens mess it up?</p>
 <pre><code>{{ range first 5 (where .Site.Pages &quot;Type&quot; &quot;post&quot; and .Draft)  }}
 
 &gt; ERROR: &lt;and&gt;: wrong number of args for and: want at least 1 got 0 in theme/partials/homepage.html
-</code></pre>
-
-<p>Perhaps parens again?</p>
-
+</code></pre><p>Perhaps parens again?</p>
 <pre><code>{{ range first 5 (where (and (.Site.Pages &quot;Type&quot; &quot;post&quot;) .Draft))  }}
 
 &gt; ERROR: &lt;where&gt;: wrong number of args for where: want at least 2 got 1 in theme/partials/homepage.html
-</code></pre>
-
-<p>Ah, so <code>where</code> is a special DSL function TOO! No simple <code>bool</code> argument for
+</code></pre><p>Ah, so <code>where</code> is a special DSL function TOO! No simple <code>bool</code> argument for
 <code>where</code>, nah, it: <code>Filters an array to only elements containing a matching value for a given field.</code> which I can only assume means the arguments are <code>where(list field value)</code>. Obviously.</p>
-
 <p>Maybe I could <code>intersect</code> the results of two <code>where</code> expressions? Nope, only supports ints and floats.</p>
-
 <p>Perhaps a quick search for this exact issue will help? Look, someone on the
 forum has a question about this! Click the link, &ldquo;You must be signed in to see
 this thread&rdquo;.</p>
-
 <p><img src="/images/upset.jpg"></img></p>
-
 <p>Google cache still has the text! Someone reported this as a bug with <code>where</code>!
 Fixed Dec 2015! What build of Hugo am I using? Nov 2015!</p>
-
 <p>Annnnd after upgrading Hugo, now I just an unexplained <code>panic: index out of range</code> when
 building the site.</p>
-
 <p><img src="/images/angry.jpg"></img></p>
-
 <p>FML. I&rsquo;ll just put in the URL&rsquo;s by hand, like a savage.</p>
 
   </div>

@@ -42,7 +42,7 @@
     },
     "datePublished": "2014-12-06",
     "description": "",
-    "wordCount": 449
+    "wordCount":  449 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -179,7 +179,6 @@
   <div class="content">
     <p>One of my favorite things about F# is how it lets you choose how you want
 to align your data.</p>
-
 <p>In the previous posts highlighting on
 <a href="/function-pattern-matching/">pattern matching</a>
 and
@@ -188,85 +187,66 @@ we covered how pattern matching in F# is safer than <code>if</code>
 statements and can replace classes and interfaces for polymorphism. If
 you are unfamiliar with these concepts, you might want to skim those
 first.</p>
-
 <p>Today, for the 6th day of the
 <a href="https://sergeytihon.wordpress.com/2014/11/24/f-advent-calendar-in-english-2014/">F# Advent Calendar</a>
-I wanted to highlight F#&rsquo;s flexibility in solving the
-&ldquo;<a href="http://c2.com/cgi/wiki?ExpressionProblem">expression problem</a>&rdquo;.</p>
-
+I wanted to highlight F#&lsquo;s flexibility in solving the
+&ldquo;<a href="http://c2.com/cgi/wiki?ExpressionProblem">expression problem</a>&quot;.</p>
 <p>Let&rsquo;s show the two alternatives, first here is one with interfaces:</p>
-
-<pre><code class="language-fsharp">type IChristmasTrees = 
-    abstract member Cost : int -&gt; int
-    abstract member Colors : unit -&gt; string list
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IChristmasTrees</span> <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">member</span> Cost <span style="color:#f92672">:</span> int <span style="color:#f92672">-&gt;</span> int
+    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">member</span> Colors <span style="color:#f92672">:</span> <span style="color:#66d9ef">unit</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">list</span>
     
-type PlasticTree() =
-    interface IChristmasTrees with
-        member this.Cost(jolly_factor) = (100 * jolly_factor) / 2
-        member this.Colors() = [&quot;green&quot;;&quot;silver&quot;]
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PlasticTree</span>() <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">interface</span> IChristmasTrees <span style="color:#66d9ef">with</span>
+        <span style="color:#66d9ef">member</span> this.<span style="color:#a6e22e">Cost</span><span style="color:#f92672">(</span>jolly_factor<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>100 <span style="color:#f92672">*</span> jolly_factor<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2
+        <span style="color:#66d9ef">member</span> this.<span style="color:#a6e22e">Colors</span>() <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#f92672">;</span><span style="color:#e6db74">&#34;silver&#34;</span><span style="color:#f92672">]</span>
         
-type LiveTree() =
-    let HEAD_ACHE = 15
-    interface IChristmasTrees with
-        member this.Cost(jolly_factor) = (jolly_factor + 10) * HEAD_ACHE
-        member this.Colors() = [&quot;green&quot;;&quot;brown&quot;]
-</code></pre>
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LiveTree</span>() <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">let</span> HEAD_ACHE <span style="color:#f92672">=</span> 15
+    <span style="color:#66d9ef">interface</span> IChristmasTrees <span style="color:#66d9ef">with</span>
+        <span style="color:#66d9ef">member</span> this.<span style="color:#a6e22e">Cost</span><span style="color:#f92672">(</span>jolly_factor<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>jolly_factor <span style="color:#f92672">+</span> 10<span style="color:#f92672">)</span> <span style="color:#f92672">*</span> HEAD_ACHE
+        <span style="color:#66d9ef">member</span> this.<span style="color:#a6e22e">Colors</span>() <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#f92672">;</span><span style="color:#e6db74">&#34;brown&#34;</span><span style="color:#f92672">]</span>
+</code></pre></div><p>Now the same functionality using pattern matching and discriminated unions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">IChristmasTrees2</span> <span style="color:#f92672">=</span>
+  <span style="color:#f92672">|</span> PlasticTree
+  <span style="color:#f92672">|</span> LiveTree
 
-<p>Now the same functionality using pattern matching and discriminated unions.</p>
+<span style="color:#66d9ef">let</span> colors <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>
+  <span style="color:#f92672">|</span> PlasticTree <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#f92672">;</span><span style="color:#e6db74">&#34;silver&#34;</span><span style="color:#f92672">]</span>
+  <span style="color:#f92672">|</span> LiveTree <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;green&#34;</span><span style="color:#f92672">;</span><span style="color:#e6db74">&#34;brown&#34;</span><span style="color:#f92672">]</span>
 
-<pre><code class="language-fsharp">type IChristmasTrees2 =
-  | PlasticTree
-  | LiveTree
-
-let colors = function
-  | PlasticTree -&gt; [&quot;green&quot;;&quot;silver&quot;]
-  | LiveTree -&gt; [&quot;green&quot;;&quot;brown&quot;]
-
-let cost tree jolly_factor =
-  match tree with
-    | PlasticTree -&gt; (100 * jolly_factor) / 2
-    | LiveTree -&gt;
-      let HEAD_ACHE = 15
-      (jolly_factor + 10) * HEAD_ACHE
-</code></pre>
-
-<p>What changes if we want to add a new type of tree? In the class-based
+<span style="color:#66d9ef">let</span> cost tree jolly_factor <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">match</span> tree <span style="color:#66d9ef">with</span>
+    <span style="color:#f92672">|</span> PlasticTree <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">(</span>100 <span style="color:#f92672">*</span> jolly_factor<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2
+    <span style="color:#f92672">|</span> LiveTree <span style="color:#f92672">-&gt;</span>
+      <span style="color:#66d9ef">let</span> HEAD_ACHE <span style="color:#f92672">=</span> 15
+      <span style="color:#f92672">(</span>jolly_factor <span style="color:#f92672">+</span> 10<span style="color:#f92672">)</span> <span style="color:#f92672">*</span> HEAD_ACHE
+</code></pre></div><p>What changes if we want to add a new type of tree? In the class-based
 example, adding a new type is quite simple, you only need to edit one
 place to find all the definitions regarding the new type.</p>
-
 <p><img src="/images/new-interfaces.png"></img></p>
-
 <p>In the pattern matching example, adding a new type requires editing
 every single place you created a function that matches on the
 type.</p>
-
 <p><img src="/images/new-pattern-matching.png"></img></p>
-
 <p>Thankfully, in both cases the compiler gives warnings about missing
 functions or matches, so both are equally &ldquo;safe&rdquo;.</p>
-
 <p>What about changing an existing function or adding a new function? We
 now see the opposite behavior. Classes become harder to edit, because
 the functions are spread across multiple classes.</p>
-
 <p><img src="/images/change-interfaces.png"></img></p>
-
 <p>A pattern matching system is now the easier to modify, each function
 only lives in one place.</p>
-
 <p><img src="/images/change-pattern-matching.png"></img></p>
-
 <p>And that is the expression problem! The best thing about F# is that
 you get to pick which one is better for each type of data! If you know
 a certain type will need new behavior often, but rarely need new
 types, use pattern matching. If you know there is a static set of
 functions for a set of types, but the type list changes often, maybe
 the traditional interfaces and classes makes the most sense.</p>
-
 <p>There is no reason not to mix and match the two ways to handle
 polymorphism, so you are free to choose the best representation for
 each type of data you have!</p>
-
 <p>Happy F#-filled Festivities!</p>
 
   </div>

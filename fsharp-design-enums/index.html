@@ -42,7 +42,7 @@
     },
     "datePublished": "2018-12-02",
     "description": "",
-    "wordCount": 483
+    "wordCount":  483 
   }
 </script>
 
@@ -52,7 +52,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://deliberate-software.com/touch-icon-144-precomposed.png">
 <link href="http://deliberate-software.com/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.20.7" />
+<meta name="generator" content="Hugo 0.68.3" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -177,143 +177,119 @@
       <div class="">
     
   <div class="content">
-    
-
-<p>F# provides a clear way to simplify invalid states with discriminated unions.</p>
-
+    <p>F# provides a clear way to simplify invalid states with discriminated unions.</p>
 <p>Interdependent enums and booleans are a symptom of a design that could be
 simplified. Many domain records and classes contain enums and booleans that
 change in a &ldquo;single transaction&rdquo;. These are interdependent and often allow many
 states that are not valid for the business.</p>
-
 <p>Often they are designed this way because of the database. Consider a model I
 found last week that is stored in the database:</p>
-
-<pre><code class="language-fsharp">type CalculationType = 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CalculationType</span> <span style="color:#f92672">=</span> 
     ISDASecurity
-    | ISDAUnsecured
-    | RepoNet
-    | RepoStandard
+    <span style="color:#f92672">|</span> ISDAUnsecured
+    <span style="color:#f92672">|</span> RepoNet
+    <span style="color:#f92672">|</span> RepoStandard
 
-type LockupCalculationType = 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LockupCalculationType</span> <span style="color:#f92672">=</span> 
     LockupOnlyCalculation
-    | NettedAgainstVariation
-    | NotNettedAgainstVariation
-    | NotValidForCalculation
+    <span style="color:#f92672">|</span> NettedAgainstVariation
+    <span style="color:#f92672">|</span> NotNettedAgainstVariation
+    <span style="color:#f92672">|</span> NotValidForCalculation
 
-type MarginTermType = 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MarginTermType</span> <span style="color:#f92672">=</span> 
     Agreement
-    | Principal
-    | Internal
-    | Counterparty
+    <span style="color:#f92672">|</span> Principal
+    <span style="color:#f92672">|</span> Internal
+    <span style="color:#f92672">|</span> Counterparty
 
-type Details = {
-    CalculationType:CalculationType;
-    LockupCalculationType:LockupCalculationType;
-    MarginTermType:MarginTermType;
-}
-</code></pre>
-
-<p>While the domain is foreign, surely the pattern is not: several enums together
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Details</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+    CalculationType<span style="color:#f92672">:</span>CalculationType<span style="color:#f92672">;</span>
+    LockupCalculationType<span style="color:#f92672">:</span>LockupCalculationType<span style="color:#f92672">;</span>
+    MarginTermType<span style="color:#f92672">:</span>MarginTermType<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>While the domain is foreign, surely the pattern is not: several enums together
 on a record.</p>
-
 <p>At first glance, there are 4^3 (or 64) combinations of those enums. In practice,
 there are far fewer valid business combinations. Designing records based on
 database rows makes it hard to see how the data is actually being used.</p>
-
 <p>Discriminated unions offers two ways to store such a record:</p>
-
 <h2 id="1-small-number-of-valid-states">1. Small Number of Valid States</h2>
-
 <p>If the data has only a few valid states, just store it as one single flattened
 type. For example, here is an example how the records are actually used in
 practice:</p>
-
-<pre><code class="language-fsharp">type CalculationType = 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CalculationType</span> <span style="color:#f92672">=</span> 
     ISDASecurity_NotNettedAgainstVariation
-    | ISDASecurity_NettedAgainstVariation
-    | ISDASecurity_NotValidForCalculation
+    <span style="color:#f92672">|</span> ISDASecurity_NettedAgainstVariation
+    <span style="color:#f92672">|</span> ISDASecurity_NotValidForCalculation
 
-    | ISDAUnsecured
-    | ISDAUnsecured_LockupOnlyCalculation
+    <span style="color:#f92672">|</span> ISDAUnsecured
+    <span style="color:#f92672">|</span> ISDAUnsecured_LockupOnlyCalculation
 
-    | RepoNet_Principal
-    | RepoNet_Counterparty
-    | RepoNet_Agreement
-    | RepoNet_Internal
+    <span style="color:#f92672">|</span> RepoNet_Principal
+    <span style="color:#f92672">|</span> RepoNet_Counterparty
+    <span style="color:#f92672">|</span> RepoNet_Agreement
+    <span style="color:#f92672">|</span> RepoNet_Internal
 
-    | RepoStandard_Principal
-    | RepoStandard_Counterparty
-    | RepoStandard_Agreement
-    | RepoStandard_Internal
-</code></pre>
-
-<p>Most of the enums aren&rsquo;t even used, and can be grouped into a combination type.
+    <span style="color:#f92672">|</span> RepoStandard_Principal
+    <span style="color:#f92672">|</span> RepoStandard_Counterparty
+    <span style="color:#f92672">|</span> RepoStandard_Agreement
+    <span style="color:#f92672">|</span> RepoStandard_Internal
+</code></pre></div><p>Most of the enums aren&rsquo;t even used, and can be grouped into a combination type.
 These can be &ldquo;expanded&rdquo; to get out any of the needed data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> BuildCalculator <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> 
+    <span style="color:#f92672">|</span> ISDASecurity_NotNettedAgainstVariation
+    <span style="color:#f92672">|</span> ISDASecurity_NettedAgainstVariation
+    <span style="color:#f92672">|</span> ISDASecurity_NotValidForCalculation
+    <span style="color:#f92672">|</span> ISDAUnsecured
+    <span style="color:#f92672">|</span> ISDAUnsecured_LockupOnlyCalculation <span style="color:#f92672">-&gt;</span> LockupCalculator()
+    <span style="color:#f92672">|</span> RepoNet_Principal
+    <span style="color:#f92672">|</span> RepoStandard_Principal <span style="color:#f92672">-&gt;</span> RepoPrinCalculator()
+    <span style="color:#f92672">|</span> RepoNet_Counterparty
+    <span style="color:#f92672">|</span> RepoStandard_Counterparty <span style="color:#f92672">-&gt;</span> RepoCptyCalculator()
+    <span style="color:#f92672">|</span> RepoNet_Agreement
+    <span style="color:#f92672">|</span> RepoStandard_Agreement <span style="color:#f92672">-&gt;</span> RepoAgreementCalculator()
+    <span style="color:#f92672">|</span> RepoNet_Internal
+    <span style="color:#f92672">|</span> RepoStandard_Internal <span style="color:#f92672">-&gt;</span> RepoInternalCalculator()
 
-<pre><code class="language-fsharp">let BuildCalculator = function 
-    | ISDASecurity_NotNettedAgainstVariation
-    | ISDASecurity_NettedAgainstVariation
-    | ISDASecurity_NotValidForCalculation
-    | ISDAUnsecured
-    | ISDAUnsecured_LockupOnlyCalculation -&gt; LockupCalculator()
-    | RepoNet_Principal
-    | RepoStandard_Principal -&gt; RepoPrinCalculator()
-    | RepoNet_Counterparty
-    | RepoStandard_Counterparty -&gt; RepoCptyCalculator()
-    | RepoNet_Agreement
-    | RepoStandard_Agreement -&gt; RepoAgreementCalculator()
-    | RepoNet_Internal
-    | RepoStandard_Internal -&gt; RepoInternalCalculator()
-
-let IsLockup = function 
-    | ISDASecurity_NotNettedAgainstVariation
-    | ISDASecurity_NettedAgainstVariation
-    | ISDASecurity_NotValidForCalculation
-    | ISDAUnsecured
-    | ISDAUnsecured_LockupOnlyCalculation -&gt; true
-    | RepoNet_Principal
-    | RepoStandard_Principal
-    | RepoNet_Counterparty
-    | RepoStandard_Counterparty
-    | RepoNet_Agreement
-    | RepoStandard_Agreement
-    | RepoNet_Internal
-    | RepoStandard_Internal -&gt; false
-</code></pre>
-
-<p>This storage type doesn&rsquo;t grow well, so is better for types that aren&rsquo;t likely
+<span style="color:#66d9ef">let</span> IsLockup <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> 
+    <span style="color:#f92672">|</span> ISDASecurity_NotNettedAgainstVariation
+    <span style="color:#f92672">|</span> ISDASecurity_NettedAgainstVariation
+    <span style="color:#f92672">|</span> ISDASecurity_NotValidForCalculation
+    <span style="color:#f92672">|</span> ISDAUnsecured
+    <span style="color:#f92672">|</span> ISDAUnsecured_LockupOnlyCalculation <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">|</span> RepoNet_Principal
+    <span style="color:#f92672">|</span> RepoStandard_Principal
+    <span style="color:#f92672">|</span> RepoNet_Counterparty
+    <span style="color:#f92672">|</span> RepoStandard_Counterparty
+    <span style="color:#f92672">|</span> RepoNet_Agreement
+    <span style="color:#f92672">|</span> RepoStandard_Agreement
+    <span style="color:#f92672">|</span> RepoNet_Internal
+    <span style="color:#f92672">|</span> RepoStandard_Internal <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">false</span>
+</code></pre></div><p>This storage type doesn&rsquo;t grow well, so is better for types that aren&rsquo;t likely
 to change or grow much.</p>
-
 <h2 id="2-large-number-of-valid-states">2. Large Number of Valid States</h2>
-
 <p>Perhaps the previous example had actually provided 20+ valid states. As soon as
 we would go to add a 3rd type, that number could expand dramatically.</p>
-
 <p>This is where discriminated unions can allow better nesting:</p>
-
-<pre><code class="language-fsharp">type LockupCalculationType = 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">LockupCalculationType</span> <span style="color:#f92672">=</span> 
     NettedAgainstVariation
-    | NotNettedAgainstVariation
-    | NotValidForCalculation
+    <span style="color:#f92672">|</span> NotNettedAgainstVariation
+    <span style="color:#f92672">|</span> NotValidForCalculation
 
-type MarginTermType = 
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MarginTermType</span> <span style="color:#f92672">=</span> 
     Agreement
-    | Principal
-    | Internal
-    | Counterparty
+    <span style="color:#f92672">|</span> Principal
+    <span style="color:#f92672">|</span> Internal
+    <span style="color:#f92672">|</span> Counterparty
 
-type CalculationType = 
-    ISDASecurity of LockupCalculationType
-    | ISDAUnsecured of boolean
-    | RepoNet of MarginTermType
-    | RepoStandard of MarginTermType
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CalculationType</span> <span style="color:#f92672">=</span> 
+    ISDASecurity <span style="color:#66d9ef">of</span> LockupCalculationType
+    <span style="color:#f92672">|</span> ISDAUnsecured <span style="color:#66d9ef">of</span> boolean
+    <span style="color:#f92672">|</span> RepoNet <span style="color:#66d9ef">of</span> MarginTermType
+    <span style="color:#f92672">|</span> RepoStandard <span style="color:#66d9ef">of</span> MarginTermType
 
-</code></pre>
-
-<p>This view of the data is a little more complicated, but makes it easier to
+</code></pre></div><p>This view of the data is a little more complicated, but makes it easier to
 expand when new types or combinations arise.</p>
-
 <p>In both cases, F# presents ways to store your data so that invalid states are
 not possible!</p>
 
@@ -339,6 +315,12 @@ not possible!</p>
         </li>
     
 
+    
+      <li class="next">
+        <a href="http://deliberate-software.com/editor-abstraction-types/" title="Powerful Editor Abstractions">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
     
     </ul> </nav>
   
