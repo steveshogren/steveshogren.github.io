@@ -1,13 +1,27 @@
 window.addEventListener("load", function(){
 
-    var books = {
-        '#pl': [
+    var books = [
+
+        {'name': 'Righting Software',
+         'id': 'righting',
+         'desc': 'A dangerously over-prescriptive marketing pamphlet to sell the reader on the author\'s $20k courses',
+        },
+            {'name': 'Tangled Web',
+             'id': 'tangled',
+             'desc': 'Great book on browser security. Surveys the landscape, and offers practical recommendations',
+            },
             {'name': 'Structure and Interpretation of Computer Programs (Scheme)',
              'id': 'sicp',
+             'free': true,
              'desc': 'Covers data structures, interpreters, functional programming, abstraction design, OOP, type hierarchies, immutability, collections, and lazy streams. Instead of just providing text on those, it makes you build them using 350+ exercises. One of my highest recommendations. My opinion is that all serious professional programmers who want to improve their skills in any language should work through this book. <a target="_blank" href="https://mitpress.mit.edu/sicp/full-text/book/book.html">Free download</a>'
             },
+        {'name': 'C Programming Language',
+         'id': 'cprog',
+         'desc': 'The timeless classic. An inspiration for great technical writing.'
+        },
             {'name': 'Programming Languages - Application And Interpretation (Typed Racket)',
              'id': 'pl',
+             'free': true,
              'desc': 'A deep dive on interpreters and language building. While reading the book, the exercises were converted from Racket to Typed Racket, which gave me a fascinating view on the value of a good type system for keeping a complex domain easy to understand. <a target="_blank" href="http://cs.brown.edu/~sk/Publications/Books/ProgLangs/">Free download</a>'
             },
             {'name': 'Haskell Programming From First Principles',
@@ -16,6 +30,7 @@ window.addEventListener("load", function(){
             },
             {'name': 'Let Over Lambda (Common Lisp, Forth)',
              'id': 'lol',
+             'free': true,
              'desc': 'No book has made me sit back and hold my pounding head more than Let Over Lambda. A deep dive into lisp macros, both reader and anaphoric. The final project is remaking Forth inside Common Lisp using macros. Yep, you read that right. <a target="_blank" href="https://letoverlambda.com/index.cl/toc">Free download</a>'
             },
             {'name': 'Clojure Programming',
@@ -26,24 +41,24 @@ window.addEventListener("load", function(){
              'desc': ''},
             {'name': 'Haskell And Yesod',
              'id': 'hay',
-             'desc': 'Taught me a lot about the different ways the Haskell type system could be used to represent complex domains. The book explains how CSS, JS, and HTML can all designed in the type system in ways to prevent bugs.'},
+             'desc': 'Taught me a lot about the different ways the Haskell type system combined with template macros could be used to represent complex domains. The book demonstrates how CSS, JS, and HTML can all be represented as a Haskell DSL to prevent bugs.'},
             {'name': 'Javascript the Good Parts',
              'id': 'jstgp',
              'desc': ''},
             {'name': 'Learn You a Haskell',
              'id': 'lyah',
+             'free': true,
              'desc': 'A short, humorous survey of a lot of Haskell. Afterwards, I really needed more substance and exercises to solidify my knowledge, but it helped me to get over my fear of spooky Haskell. <a target="_blank" href="http://learnyouahaskell.com/">Free download</a>'},
             {'name': 'Software Foundations (Coq)',
              'id': 'sfs',
+             'free': true,
              'desc': 'I am in the middle this book\'s exercises, but so far it is amazing. I cannot in good faith give it a bold recommendation until I have finished it, but right now it is tied with Let Over Lambda for mind-bending concepts. Until you have represented numbers as cons cells, which you then use to prove the commutativity of multiplication IN the type system, you haven\'t really felt brain pain ;) <a target="_blank" href="https://softwarefoundations.cis.upenn.edu/current/index.html">Free download</a>'},
             {'name': 'The Art of SQL',
              'id': 'taos',
-             'desc': ''}
-        ],
-
-        '#peep': [
+             'desc': ''},
             {'name': 'Reinventing Organizations',
              'id': 'reinvorg',
+             'free': true,
              'desc': 'Twelve case studies of companies who "self-correct" and how they do it. These companies have fewer meetings, fewer managers, and report higher job satisfaction than their peer companies. The book finds trends in all twelve and offers some suggestions for how to implement those trends. Ultimately a simple conclusion, but hard to put into practice. I found it indispensable for maintaining and improving a self-organizing team. <a target="_blank" href="http://www.reinventingorganizations.com/pay-what-feels-right.html">Free download</a>'
             },
 
@@ -76,9 +91,6 @@ window.addEventListener("load", function(){
              'id': 'manhum',
              'desc': ''
             },
-        ],
-
-        '#proj':[
             {'name': 'Art of Agile Development',
              'id': 'artagile',
              'desc': ''
@@ -108,12 +120,9 @@ window.addEventListener("load", function(){
              'id': 'planxp',
              'desc': ''
             },
-        ],
-
-        '#product':[
             {'name': 'Code Complete',
              'id': 'codecomp',
-             'desc': ''
+             'desc': 'A well-researched tome of what does and doesn\'t work in software development. Great read.'
             },
 
             {'name': 'Productive Programmer',
@@ -126,9 +135,10 @@ window.addEventListener("load", function(){
              'desc': ''
             },
 
-            {'name': 'Harry Potter and the Methods of Rationality&#8224;',
+            {'name': 'Harry Potter and the Methods of Rationality',
              'id': 'hpmor',
-             'desc': 'An entertaining book that illustrates how to apply the scientific method to day-to-day life. After reading and internalizing this book, my abilities as a developer improved greatly. <a target="_blank" href="http://www.hpmor.com/">Free download</a>'
+             'free': true,
+             'desc': 'A beloved fan-fiction where Harry applies the scientific method to overcoming evil. After reading and internalizing this book, my abilities as a developer improved greatly. Also has a community-acted free audiodrama, over 67 hours long! <a target="_blank" href="http://www.hpmor.com/">Free download</a>'
             },
 
             {'name': 'How to Read a Book &#8224;',
@@ -150,9 +160,7 @@ window.addEventListener("load", function(){
              'id': 'wfwlc',
              'desc': ''
             },
-        ],
 
-        '#patterns':[
             {'name': 'Clean Code',
              'id': 'clean',
              'desc': 'A short, useful book of common patterns to make code easier to read. Much of the content of this book has seeped into the public consciousness of the developer community, but still worth reading.'
@@ -165,6 +173,7 @@ window.addEventListener("load", function(){
 
             {'name': 'Propagation Networks: A Flexible and Expressive Substrate for Computation',
              'id': 'propnet',
+             'free': true,
              'desc': 'Fascinating thesis about designing high-performance constraint solvers using electric circuits as an underlying model. <a target="_blank" href="https://dspace.mit.edu/handle/1721.1/54635">Free download</a>'
             },
 
@@ -190,10 +199,18 @@ window.addEventListener("load", function(){
 
             {'name': 'Refactoring',
              'id': 'refa',
-             'desc': ''
+             'desc': 'A bit dated, and heavily focussed on Java, but still an interesting look back in time.'
+            },
+
+           {'name': 'Designing Data-Intensive Applications',
+            'id': 'ddia',
+            'desc': 'Survey of the data storage world. An amazing book, filled with details for how to get the most out of your data storage.'
+           },
+            {'name': 'Design Of Everyday Things',
+            'id': 'doet',
+            'desc': 'A great book for thinking about UI/UX.'
             }
-        ],
-    };
+    ];
 
     var bookIconAndDescList = [];
 
@@ -212,35 +229,34 @@ window.addEventListener("load", function(){
         $("#" + bookDescId).hide();
     };
 
-    $.map(Object.keys(books), function(plId) {
-        var pl = $(plId);
-        $.map(books[plId], function(book) {
-            var description = book['desc'];
-            var bookId = "#c-" + book['id'];
-            var $book = $(bookId);
-            $book.addClass("bookList");
-            if( description) {
-                var bookDescId = "d-" + book['id'];
-                var bookIconId = "i-" + book['id'];
-                $book.prepend($('<span id="' + bookIconId + '" class="icon fa fa-plus-circle">'));
-                var desc = $('<p class="bookDesc" hidden="true" id="' + bookDescId + '">').append(description);
-                $book.append(desc);
-                $book.addClass("onHover");
+    $.map(books, function(book) {
+        var description = book.desc;
+        var $book = $("#c-" + book.id);
+        $book.addClass("bookList");
+        if (book.free) {
+            $book.append(' <sup>(free)</sup>')
+        }
+        if( description) {
+            var bookDescId = "d-" + book.id;
+            var bookIconId = "i-" + book.id;
+            $book.addClass('expandIcon');
+            $book.addClass("onHover");
+            var desc = $('<p class="bookDesc" hidden="true" id="' + bookDescId + '">').append(description);
+            $book.append(desc);
 
-                bookIconAndDescList.push({'bookIconId':bookIconId, 'bookDescId':bookDescId});
+            bookIconAndDescList.push({'bookIconId':bookIconId, 'bookDescId':bookDescId});
 
-                $book.click(function() {
-                    var $bookDesc = $("#" + bookDescId);
-                    if($bookDesc.is(":visible")) {
-                        hideBookDesc(bookIconId, bookDescId);
-                    } else {
-                        showBookDesc(bookIconId, bookDescId);
-                    }
-                });
-            } else {
-                $book.prepend($('<span class="icon fa fa-circle">'));
-            }
-        });
+            $book.click(function() {
+                var $bookDesc = $("#" + bookDescId);
+                if($bookDesc.is(":visible")) {
+                    hideBookDesc(bookIconId, bookDescId);
+                } else {
+                    showBookDesc(bookIconId, bookDescId);
+                }
+            });
+        } else {
+            $book.addClass('normalIcon');
+        }
     });
 
 

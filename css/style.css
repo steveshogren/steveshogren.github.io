@@ -142,6 +142,16 @@
     margin: 0 auto;
     margin-left: 0;
 }
+.expandIcon:before {
+    font-family: 'FontAwesome';
+    content: '\f055';
+    margin:0 5px 0 -15px;
+}
+.normalIcon:before {
+    font-family: 'FontAwesome';
+    content: '\f111';
+    margin:0 5px 0 -15px;
+}
 .centereded {
     text-align: center;
 }
