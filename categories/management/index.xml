@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>management on deliberate software</title>
-    <link>http://deliberate-software.com/categories/management/</link>
+    <link>https://deliberate-software.com/categories/management/</link>
     <description>Recent content in management on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Apr 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/management/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/management/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>What Keeps a Self-Organizing Team From Falling Apart</title>
-      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <link>https://deliberate-software.com/self-organizing-balance/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <guid>https://deliberate-software.com/self-organizing-balance/</guid>
       <description>My team has a decade of experience applying self-organizing teams and pair-programming to reduce wasted productivity in an enterprise banking application.
 The Benefits No Technical Lead Our self-organizing practices eliminate the need for a technical lead who assigns and follows up on work. No work is assigned to any individual.
 Individual Empowerment Developers are free to remove pain points as needed, so most have a strong sense of ownership. Team members feel empowered to champion for broad changes to the codebase.</description>
@@ -24,20 +24,20 @@ Individual Empowerment Developers are free to remove pain points as needed, so m
     
     <item>
       <title>Ten Years of Pair Programming</title>
-      <link>http://deliberate-software.com/pairprogramming/</link>
+      <link>https://deliberate-software.com/pairprogramming/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <guid>https://deliberate-software.com/pairprogramming/</guid>
       <description>My current team has pair-programmed and followed strict TDD on a single codebase for over ten years. The practices started from reading the literature on Extreme Programming, which resonated with both the developers and leadership. As the team changed, we continued to follow the practices.
 In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &amp;ldquo;Promiscuous Pairing&amp;rdquo;. We switch pairs in short intervals: 180 minutes is our current preference.</description>
     </item>
     
     <item>
       <title>When Self-Organizing Teams Are Effective</title>
-      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <link>https://deliberate-software.com/self-organizing-teams/</link>
       <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <guid>https://deliberate-software.com/self-organizing-teams/</guid>
       <description>A self-organizing team can be one of the most effective ways to build a team of high-quality professionals.
 What Is A Self-Organizing Team? I have managed several self-organizing teams over the last few years. They are expected to follow these tenets:
  The whole team organizes themselves to best meet the business needs Each team chooses their practices and working agreements All technical and organizational decisions are driven through consensus Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo; All staff participates in a culture of high-quality development Systems and practices are designed to maintain the greatest productivity across the next decade  When It Works Well  Small teams Highly skilled workers Need for high-quality software Business need for continuous and stable productivity for 5+ years Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;  Self-organizing teams work best when most people on your team are eager to do more, be more, and learn more.</description>
@@ -45,10 +45,10 @@ What Is A Self-Organizing Team? I have managed several self-organizing teams ove
     
     <item>
       <title>Development Disappointment Disorder</title>
-      <link>http://deliberate-software.com/development-disappointment-disorder/</link>
+      <link>https://deliberate-software.com/development-disappointment-disorder/</link>
       <pubDate>Thu, 04 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/development-disappointment-disorder/</guid>
+      <guid>https://deliberate-software.com/development-disappointment-disorder/</guid>
       <description>&amp;ldquo;We&amp;rsquo;ve never had a successful release&amp;rdquo;
  You just finished this really hard feature. The whole thing was worse than anyone realized. Not only that, but the feature wasn&amp;rsquo;t clearly explained, so you lost time churning on the actual requirements. Despite all the confusion, iteration, and technical challenges, you managed to get it working! You look back, savoring how much you have learned and grown.
 You show it off to the product owner.</description>
@@ -56,10 +56,10 @@ You show it off to the product owner.</description>
     
     <item>
       <title>Designing A Compassionate Interview For A High Performing Individual</title>
-      <link>http://deliberate-software.com/compassionate-interviewing/</link>
+      <link>https://deliberate-software.com/compassionate-interviewing/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/compassionate-interviewing/</guid>
+      <guid>https://deliberate-software.com/compassionate-interviewing/</guid>
       <description>After my post Interview Humiliation, a number of people have asked me how I interview compassionately. I strive to make my interviews as stress-free and respectful as possible while still rendering a yes/no at the end.
 Any good interview process needs to start with goals:
  Respect the candidate&amp;rsquo;s time Make the candidate comfortable Under-skilled candidates should feel no shame Both passing and failing candidates should want to tell their friends to apply We should render the same decision if the interview is repeated multiple times (with different exercises each time) The candidate should know the process in advance and not be able to earn a pass through short term &amp;ldquo;cramming&amp;rdquo; The candidate should feel we are all working collaboratively, instead of us against them  The Ideal Candidate</description>
@@ -67,19 +67,19 @@ Any good interview process needs to start with goals:
     
     <item>
       <title>Daily Meditation Improves Technical Leadership</title>
-      <link>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
+      <link>https://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
       <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
+      <guid>https://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
       <description>A couple years ago, a coworker told me a success story about mindful meditation. He explained how his wife took a class that required an hour of daily meditation for a whole month. He reported that she found it uncomfortable, but the effects were astounding. She claimed to feel more relaxed, more focused, and more &amp;ldquo;herself&amp;rdquo;. She found new reserves of motivation. She dropped the book she&amp;rsquo;d been trying to write for years, and started a business.</description>
     </item>
     
     <item>
       <title>Better Interviews</title>
-      <link>http://deliberate-software.com/on-defeat/</link>
+      <link>https://deliberate-software.com/on-defeat/</link>
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <guid>https://deliberate-software.com/on-defeat/</guid>
       <description>(All these great ideas, but no one is listening? Check out my book: Convincing Coworkers)
 One day, I went into an interview, and I was humiliated.
 The Setup I used to think very highly of myself. This was early on in the Test Driven Development (TDD) craze, and I was one of the best I knew at it. I knew interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all the tricks from some very smart people, and my confidence was high.</description>
@@ -87,20 +87,20 @@ The Setup I used to think very highly of myself. This was early on in the Test D
     
     <item>
       <title>Suggested Skill Progression</title>
-      <link>http://deliberate-software.com/skill-continuum/</link>
+      <link>https://deliberate-software.com/skill-continuum/</link>
       <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/skill-continuum/</guid>
+      <guid>https://deliberate-software.com/skill-continuum/</guid>
       <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
 &amp;gt; Learning Vim is a waste of time; I can prove it! - Anonymous  I recently had a gentle discussion with a new teammate about whether or not they should learn to use Vim. My team uses a Vim emulator inside Visual Studio and Emacs, and so we recommended he learn at least the basics so to reduce friction when pair-programming (which we do almost all the time).</description>
     </item>
     
     <item>
       <title>What Book Should I Read Next?</title>
-      <link>http://deliberate-software.com/next-book/</link>
+      <link>https://deliberate-software.com/next-book/</link>
       <pubDate>Sat, 26 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/next-book/</guid>
+      <guid>https://deliberate-software.com/next-book/</guid>
       <description>Edit: As a supplement to this: check out my favorite books.
 &amp;ldquo;It&amp;rsquo;s my first job, what book should I read first?&amp;rdquo;
 I&amp;rsquo;ve been asked this question many times. Even mid and senior level developers I&amp;rsquo;ve known sometimes struggle with this question.
@@ -109,19 +109,19 @@ If you want to be truly great, you have to read technical books and white papers
     
     <item>
       <title>You Should Go Home at 5:01</title>
-      <link>http://deliberate-software.com/501-developer/</link>
+      <link>https://deliberate-software.com/501-developer/</link>
       <pubDate>Sat, 14 Dec 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/501-developer/</guid>
+      <guid>https://deliberate-software.com/501-developer/</guid>
       <description>Can we agree for this post that money, energy, time, and effort are all forms of power? Like literally, if I wanted to build a building, I am going to need tools, skills, materials, labor. I can use the most liquid form of power I have (cash) to acquire all these things, or I can use a much less liquid form of power (my time) to harvest, extract, refine, learn, and build my building myself.</description>
     </item>
     
     <item>
       <title>Ego Driven Development</title>
-      <link>http://deliberate-software.com/ego-driven-development/</link>
+      <link>https://deliberate-software.com/ego-driven-development/</link>
       <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/ego-driven-development/</guid>
+      <guid>https://deliberate-software.com/ego-driven-development/</guid>
       <description>Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.
 EDD plagues many organizations; here just some of the symptoms you might encounter:
   &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house.</description>

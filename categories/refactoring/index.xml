@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>refactoring on deliberate software</title>
-    <link>http://deliberate-software.com/categories/refactoring/</link>
+    <link>https://deliberate-software.com/categories/refactoring/</link>
     <description>Recent content in refactoring on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Jun 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/refactoring/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/refactoring/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vim Refactoring Patterns</title>
-      <link>http://deliberate-software.com/vim-refactoring-patterns/</link>
+      <link>https://deliberate-software.com/vim-refactoring-patterns/</link>
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
+      <guid>https://deliberate-software.com/vim-refactoring-patterns/</guid>
       <description>Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
 Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.
 Reorder A List Of Numbers A change left me with a file with unordered numbers.</description>

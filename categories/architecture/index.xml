@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>architecture on deliberate software</title>
-    <link>http://deliberate-software.com/categories/architecture/</link>
+    <link>https://deliberate-software.com/categories/architecture/</link>
     <description>Recent content in architecture on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jun 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/architecture/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/architecture/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Modern Dependency Injection</title>
-      <link>http://deliberate-software.com/modern-di/</link>
+      <link>https://deliberate-software.com/modern-di/</link>
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/modern-di/</guid>
+      <guid>https://deliberate-software.com/modern-di/</guid>
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
@@ -25,10 +25,10 @@ Look how much boilerplate is needed just to mock out a call to DateTime.Now:
     
     <item>
       <title>Avoid Pop Culture Architecture</title>
-      <link>http://deliberate-software.com/pop-culture-architecture/</link>
+      <link>https://deliberate-software.com/pop-culture-architecture/</link>
       <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
+      <guid>https://deliberate-software.com/pop-culture-architecture/</guid>
       <description>&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006
  Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be microservices, business capabilities, CQRS, service-oriented architecture, Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each of these have been fashionable at some point.
 Fashion is ultimately a signaling mechanism for status. We are attracted to fashionable architectures because they signal we have worked on elite teams.</description>
@@ -36,10 +36,10 @@ Fashion is ultimately a signaling mechanism for status. We are attracted to fash
     
     <item>
       <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
-      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <link>https://deliberate-software.com/simplemock-unit-test-mocking/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <guid>https://deliberate-software.com/simplemock-unit-test-mocking/</guid>
       <description>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to organize your testing code without mocking or complicated dependency injection.
 SimpleMock works in any language with closures that can be passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and Python. I&amp;rsquo;m sure you can think of others.
 Example: Here is a brief (if a bit silly) example of the final pattern:</description>
@@ -47,10 +47,10 @@ Example: Here is a brief (if a bit silly) example of the final pattern:</descrip
     
     <item>
       <title>Christmas F# Polymorphism</title>
-      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
+      <link>https://deliberate-software.com/christmas-f-number-polymorphism/</link>
       <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
+      <guid>https://deliberate-software.com/christmas-f-number-polymorphism/</guid>
       <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
 In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
 Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;lsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;quot;.</description>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>csharp on deliberate software</title>
-    <link>http://deliberate-software.com/categories/csharp/</link>
+    <link>https://deliberate-software.com/categories/csharp/</link>
     <description>Recent content in csharp on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 02 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>F# Domain Design: Interdependent Enums and Booleans</title>
-      <link>http://deliberate-software.com/fsharp-design-enums/</link>
+      <link>https://deliberate-software.com/fsharp-design-enums/</link>
       <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/fsharp-design-enums/</guid>
+      <guid>https://deliberate-software.com/fsharp-design-enums/</guid>
       <description>F# provides a clear way to simplify invalid states with discriminated unions.
 Interdependent enums and booleans are a symptom of a design that could be simplified. Many domain records and classes contain enums and booleans that change in a &amp;ldquo;single transaction&amp;rdquo;. These are interdependent and often allow many states that are not valid for the business.
 Often they are designed this way because of the database. Consider a model I found last week that is stored in the database:</description>
@@ -24,10 +24,10 @@ Often they are designed this way because of the database. Consider a model I fou
     
     <item>
       <title>OO-Design Part 3: When to Apply Encapsulation</title>
-      <link>http://deliberate-software.com/when-encapsulation/</link>
+      <link>https://deliberate-software.com/when-encapsulation/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/when-encapsulation/</guid>
+      <guid>https://deliberate-software.com/when-encapsulation/</guid>
       <description>Part 3 of the series OO-Design
 As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
 Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
@@ -36,10 +36,10 @@ Encapsulation is the design of trust boundaries between programmers. A well-enca
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
-      <link>http://deliberate-software.com/anemic-domain-model/</link>
+      <link>https://deliberate-software.com/anemic-domain-model/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/anemic-domain-model/</guid>
+      <guid>https://deliberate-software.com/anemic-domain-model/</guid>
       <description>Part 2 of the series OO-Design
 The Anemic Domain Model is often quoted as an anti-pattern in the terminology of Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
 A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Most examples of unit-testing use Anemic Domain Models!</description>
@@ -47,10 +47,10 @@ A rich domain model makes perfect sense until you attempt to write your first un
     
     <item>
       <title>OO-Design Part 1: Increasing Reuse With Noun Interfaces</title>
-      <link>http://deliberate-software.com/better-oo-design/</link>
+      <link>https://deliberate-software.com/better-oo-design/</link>
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/better-oo-design/</guid>
+      <guid>https://deliberate-software.com/better-oo-design/</guid>
       <description>Part 1 of the series OO-Design
 The SOLID patterns are not enough to design a reusable and testable code base. Two concrete additions can significantly improve your codebase, while maintaining the SOLID principals.
 The suggestions here do not run counter to traditional SOLID designs, they enhance them. SOLID is a fine place to start, but it lacks a critical half of good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common than polymorphic behavior, so programs designed without that concept often are far larger than they need to be.</description>
@@ -58,10 +58,10 @@ The suggestions here do not run counter to traditional SOLID designs, they enhan
     
     <item>
       <title>Modern Dependency Injection</title>
-      <link>http://deliberate-software.com/modern-di/</link>
+      <link>https://deliberate-software.com/modern-di/</link>
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/modern-di/</guid>
+      <guid>https://deliberate-software.com/modern-di/</guid>
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
@@ -70,10 +70,10 @@ Look how much boilerplate is needed just to mock out a call to DateTime.Now:
     
     <item>
       <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
-      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <link>https://deliberate-software.com/simplemock-unit-test-mocking/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <guid>https://deliberate-software.com/simplemock-unit-test-mocking/</guid>
       <description>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to organize your testing code without mocking or complicated dependency injection.
 SimpleMock works in any language with closures that can be passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and Python. I&amp;rsquo;m sure you can think of others.
 Example: Here is a brief (if a bit silly) example of the final pattern:</description>
@@ -81,10 +81,10 @@ Example: Here is a brief (if a bit silly) example of the final pattern:</descrip
     
     <item>
       <title>Programming Language Safety Score Mark 2</title>
-      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <link>https://deliberate-software.com/safety-rank-part-2/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <guid>https://deliberate-software.com/safety-rank-part-2/</guid>
       <description>I want to make a model that predicts bugs.
 I previously wrote a table for scoring language safety: Programming Language Safety Score, but it was extremely time consuming to score new languages or make modifications.
 Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is enforced, possible, or impossible. I score each as either 1 (language enforced), 0 (possible, but you have to remember to do it), or -1 (impossible).</description>
@@ -92,20 +92,20 @@ Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve a
     
     <item>
       <title>Case Study: Superior Domain Modeling in F#</title>
-      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
+      <link>https://deliberate-software.com/pattern-matching-case-study/</link>
       <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
+      <guid>https://deliberate-software.com/pattern-matching-case-study/</guid>
       <description>Domain modeling in F# is significantly easier and safer than with the traditional .NET languages. This is because of the increased safety of pattern matching and the expressiveness of discriminated unions. These concepts are not in C# or VB.NET, and therefore bring a new tool to the table.
 To illustrate this, I found some old code I&amp;rsquo;d written to interact with a legacy system. The system uses many single enums on a record to keep track of statuses.</description>
     </item>
     
     <item>
       <title>Programming Language Safety Ranking</title>
-      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <link>https://deliberate-software.com/programming-language-safety-algorithm/</link>
       <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <guid>https://deliberate-software.com/programming-language-safety-algorithm/</guid>
       <description>I think the time has come for a standard programming language safety score. I want to use this model to help show that the concept of safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static types&amp;rdquo;.
 When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes thoughts of unit tests, long build times, and red squiggles in an IDE. But, in day-to-day development, there are so many times when we are bitten by things that somehow just slip through the cracks.</description>
     </item>

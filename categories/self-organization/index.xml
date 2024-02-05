@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>self-organization on deliberate software</title>
-    <link>http://deliberate-software.com/categories/self-organization/</link>
+    <link>https://deliberate-software.com/categories/self-organization/</link>
     <description>Recent content in self-organization on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Apr 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/self-organization/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/self-organization/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>What Keeps a Self-Organizing Team From Falling Apart</title>
-      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <link>https://deliberate-software.com/self-organizing-balance/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <guid>https://deliberate-software.com/self-organizing-balance/</guid>
       <description>My team has a decade of experience applying self-organizing teams and pair-programming to reduce wasted productivity in an enterprise banking application.
 The Benefits No Technical Lead Our self-organizing practices eliminate the need for a technical lead who assigns and follows up on work. No work is assigned to any individual.
 Individual Empowerment Developers are free to remove pain points as needed, so most have a strong sense of ownership. Team members feel empowered to champion for broad changes to the codebase.</description>
@@ -24,20 +24,20 @@ Individual Empowerment Developers are free to remove pain points as needed, so m
     
     <item>
       <title>Ten Years of Pair Programming</title>
-      <link>http://deliberate-software.com/pairprogramming/</link>
+      <link>https://deliberate-software.com/pairprogramming/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <guid>https://deliberate-software.com/pairprogramming/</guid>
       <description>My current team has pair-programmed and followed strict TDD on a single codebase for over ten years. The practices started from reading the literature on Extreme Programming, which resonated with both the developers and leadership. As the team changed, we continued to follow the practices.
 In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &amp;ldquo;Promiscuous Pairing&amp;rdquo;. We switch pairs in short intervals: 180 minutes is our current preference.</description>
     </item>
     
     <item>
       <title>When Self-Organizing Teams Are Effective</title>
-      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <link>https://deliberate-software.com/self-organizing-teams/</link>
       <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <guid>https://deliberate-software.com/self-organizing-teams/</guid>
       <description>A self-organizing team can be one of the most effective ways to build a team of high-quality professionals.
 What Is A Self-Organizing Team? I have managed several self-organizing teams over the last few years. They are expected to follow these tenets:
  The whole team organizes themselves to best meet the business needs Each team chooses their practices and working agreements All technical and organizational decisions are driven through consensus Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo; All staff participates in a culture of high-quality development Systems and practices are designed to maintain the greatest productivity across the next decade  When It Works Well  Small teams Highly skilled workers Need for high-quality software Business need for continuous and stable productivity for 5+ years Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;  Self-organizing teams work best when most people on your team are eager to do more, be more, and learn more.</description>

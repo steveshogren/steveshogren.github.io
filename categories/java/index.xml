@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>java on deliberate software</title>
-    <link>http://deliberate-software.com/categories/java/</link>
+    <link>https://deliberate-software.com/categories/java/</link>
     <description>Recent content in java on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 03 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>OO-Design Part 3: When to Apply Encapsulation</title>
-      <link>http://deliberate-software.com/when-encapsulation/</link>
+      <link>https://deliberate-software.com/when-encapsulation/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/when-encapsulation/</guid>
+      <guid>https://deliberate-software.com/when-encapsulation/</guid>
       <description>Part 3 of the series OO-Design
 As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
 Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
@@ -25,10 +25,10 @@ Encapsulation is the design of trust boundaries between programmers. A well-enca
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
-      <link>http://deliberate-software.com/anemic-domain-model/</link>
+      <link>https://deliberate-software.com/anemic-domain-model/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/anemic-domain-model/</guid>
+      <guid>https://deliberate-software.com/anemic-domain-model/</guid>
       <description>Part 2 of the series OO-Design
 The Anemic Domain Model is often quoted as an anti-pattern in the terminology of Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
 A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Most examples of unit-testing use Anemic Domain Models!</description>
@@ -36,10 +36,10 @@ A rich domain model makes perfect sense until you attempt to write your first un
     
     <item>
       <title>OO-Design Part 1: Increasing Reuse With Noun Interfaces</title>
-      <link>http://deliberate-software.com/better-oo-design/</link>
+      <link>https://deliberate-software.com/better-oo-design/</link>
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/better-oo-design/</guid>
+      <guid>https://deliberate-software.com/better-oo-design/</guid>
       <description>Part 1 of the series OO-Design
 The SOLID patterns are not enough to design a reusable and testable code base. Two concrete additions can significantly improve your codebase, while maintaining the SOLID principals.
 The suggestions here do not run counter to traditional SOLID designs, they enhance them. SOLID is a fine place to start, but it lacks a critical half of good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common than polymorphic behavior, so programs designed without that concept often are far larger than they need to be.</description>

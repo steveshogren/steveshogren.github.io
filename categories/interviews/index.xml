@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>interviews on deliberate software</title>
-    <link>http://deliberate-software.com/categories/interviews/</link>
+    <link>https://deliberate-software.com/categories/interviews/</link>
     <description>Recent content in interviews on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Oct 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/interviews/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/interviews/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Better Interviews</title>
-      <link>http://deliberate-software.com/on-defeat/</link>
+      <link>https://deliberate-software.com/on-defeat/</link>
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <guid>https://deliberate-software.com/on-defeat/</guid>
       <description>(All these great ideas, but no one is listening? Check out my book: Convincing Coworkers)
 One day, I went into an interview, and I was humiliated.
 The Setup I used to think very highly of myself. This was early on in the Test Driven Development (TDD) craze, and I was one of the best I knew at it. I knew interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all the tricks from some very smart people, and my confidence was high.</description>
@@ -24,10 +24,10 @@ The Setup I used to think very highly of myself. This was early on in the Test D
     
     <item>
       <title>On Developer Certifications</title>
-      <link>http://deliberate-software.com/on-developer-certifications/</link>
+      <link>https://deliberate-software.com/on-developer-certifications/</link>
       <pubDate>Tue, 28 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-developer-certifications/</guid>
+      <guid>https://deliberate-software.com/on-developer-certifications/</guid>
       <description>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months.</description>
     </item>
     

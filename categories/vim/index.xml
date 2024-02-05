@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vim on deliberate software</title>
-    <link>http://deliberate-software.com/categories/vim/</link>
+    <link>https://deliberate-software.com/categories/vim/</link>
     <description>Recent content in vim on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/vim/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Powerful Editor Abstractions</title>
-      <link>http://deliberate-software.com/editor-abstraction-types/</link>
+      <link>https://deliberate-software.com/editor-abstraction-types/</link>
       <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/editor-abstraction-types/</guid>
+      <guid>https://deliberate-software.com/editor-abstraction-types/</guid>
       <description>Not all editing tools are created equal.
  Combining several simple ideas into one compound one, and thus all complex ideas are made - John Locke, An Essay Concerning Human Understanding (1690)
  While many words have been spent on the Holy Editor Flame Wars, I&amp;rsquo;ve read very little that attempts to categorize what they actually do. Likewise, everyone pays homage to the concept of using the &amp;ldquo;best tool for the job&amp;rdquo;, but few talk about when each tool would be best.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Vim Refactoring Patterns</title>
-      <link>http://deliberate-software.com/vim-refactoring-patterns/</link>
+      <link>https://deliberate-software.com/vim-refactoring-patterns/</link>
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
+      <guid>https://deliberate-software.com/vim-refactoring-patterns/</guid>
       <description>Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
 Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.
 Reorder A List Of Numbers A change left me with a file with unordered numbers.</description>
@@ -35,10 +35,10 @@ Reorder A List Of Numbers A change left me with a file with unordered numbers.</
     
     <item>
       <title>Editor Abstractions</title>
-      <link>http://deliberate-software.com/editor-abstractions/</link>
+      <link>https://deliberate-software.com/editor-abstractions/</link>
       <pubDate>Mon, 23 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/editor-abstractions/</guid>
+      <guid>https://deliberate-software.com/editor-abstractions/</guid>
       <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
 I was recently inspired by a comment from a respected coworker:
  &amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring suite like ReSharper.&amp;rdquo;

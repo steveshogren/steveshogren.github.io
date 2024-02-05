@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>fp-course on deliberate software</title>
-    <link>http://deliberate-software.com/categories/fp-course/</link>
+    <link>https://deliberate-software.com/categories/fp-course/</link>
     <description>Recent content in fp-course on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/fp-course/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/fp-course/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Simple Haskell Automation in Emacs</title>
-      <link>http://deliberate-software.com/emacs-customization/</link>
+      <link>https://deliberate-software.com/emacs-customization/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/emacs-customization/</guid>
+      <guid>https://deliberate-software.com/emacs-customization/</guid>
       <description>I am working through the amazing Data 61 Functional Programming Course (seriously, put it on your list!) and I found myself doing a repeated set of actions. Repeated sets of actions are perfect for automation!
 The course has some sections with comments indicating the expected behavior:
 -- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :. Nil)) &amp;#34;ABC&amp;#34; -- Result &amp;gt;BC&amp;lt; &amp;#39;A&amp;#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :.</description>

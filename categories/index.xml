@@ -2,237 +2,237 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on deliberate software</title>
-    <link>http://deliberate-software.com/categories/</link>
+    <link>https://deliberate-software.com/categories/</link>
     <description>Recent content in Categories on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Technical Skills</title>
-      <link>http://deliberate-software.com/categories/technical-skills/</link>
+      <link>https://deliberate-software.com/categories/technical-skills/</link>
       <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/technical-skills/</guid>
+      <guid>https://deliberate-software.com/categories/technical-skills/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vim</title>
-      <link>http://deliberate-software.com/categories/vim/</link>
+      <link>https://deliberate-software.com/categories/vim/</link>
       <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/vim/</guid>
+      <guid>https://deliberate-software.com/categories/vim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>csharp</title>
-      <link>http://deliberate-software.com/categories/csharp/</link>
+      <link>https://deliberate-software.com/categories/csharp/</link>
       <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/csharp/</guid>
+      <guid>https://deliberate-software.com/categories/csharp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fsharp</title>
-      <link>http://deliberate-software.com/categories/fsharp/</link>
+      <link>https://deliberate-software.com/categories/fsharp/</link>
       <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/fsharp/</guid>
+      <guid>https://deliberate-software.com/categories/fsharp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>emacs</title>
-      <link>http://deliberate-software.com/categories/emacs/</link>
+      <link>https://deliberate-software.com/categories/emacs/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/emacs/</guid>
+      <guid>https://deliberate-software.com/categories/emacs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fp-course</title>
-      <link>http://deliberate-software.com/categories/fp-course/</link>
+      <link>https://deliberate-software.com/categories/fp-course/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/fp-course/</guid>
+      <guid>https://deliberate-software.com/categories/fp-course/</guid>
       <description></description>
     </item>
     
     <item>
       <title>oo-design</title>
-      <link>http://deliberate-software.com/categories/oo-design/</link>
+      <link>https://deliberate-software.com/categories/oo-design/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/oo-design/</guid>
+      <guid>https://deliberate-software.com/categories/oo-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>java</title>
-      <link>http://deliberate-software.com/categories/java/</link>
+      <link>https://deliberate-software.com/categories/java/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/java/</guid>
+      <guid>https://deliberate-software.com/categories/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>academic papers</title>
-      <link>http://deliberate-software.com/categories/academic-papers/</link>
+      <link>https://deliberate-software.com/categories/academic-papers/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/academic-papers/</guid>
+      <guid>https://deliberate-software.com/categories/academic-papers/</guid>
       <description></description>
     </item>
     
     <item>
       <title>proofs</title>
-      <link>http://deliberate-software.com/categories/proofs/</link>
+      <link>https://deliberate-software.com/categories/proofs/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/proofs/</guid>
+      <guid>https://deliberate-software.com/categories/proofs/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dsl</title>
-      <link>http://deliberate-software.com/categories/dsl/</link>
+      <link>https://deliberate-software.com/categories/dsl/</link>
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/dsl/</guid>
+      <guid>https://deliberate-software.com/categories/dsl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>http://deliberate-software.com/categories/hugo/</link>
+      <link>https://deliberate-software.com/categories/hugo/</link>
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/hugo/</guid>
+      <guid>https://deliberate-software.com/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>silly</title>
-      <link>http://deliberate-software.com/categories/silly/</link>
+      <link>https://deliberate-software.com/categories/silly/</link>
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/silly/</guid>
+      <guid>https://deliberate-software.com/categories/silly/</guid>
       <description></description>
     </item>
     
     <item>
       <title>coq</title>
-      <link>http://deliberate-software.com/categories/coq/</link>
+      <link>https://deliberate-software.com/categories/coq/</link>
       <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/coq/</guid>
+      <guid>https://deliberate-software.com/categories/coq/</guid>
       <description></description>
     </item>
     
     <item>
       <title>management</title>
-      <link>http://deliberate-software.com/categories/management/</link>
+      <link>https://deliberate-software.com/categories/management/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/management/</guid>
+      <guid>https://deliberate-software.com/categories/management/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Meta Game</title>
-      <link>http://deliberate-software.com/categories/meta-game/</link>
+      <link>https://deliberate-software.com/categories/meta-game/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/meta-game/</guid>
+      <guid>https://deliberate-software.com/categories/meta-game/</guid>
       <description></description>
     </item>
     
     <item>
       <title>self-organization</title>
-      <link>http://deliberate-software.com/categories/self-organization/</link>
+      <link>https://deliberate-software.com/categories/self-organization/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/self-organization/</guid>
+      <guid>https://deliberate-software.com/categories/self-organization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>unit testing</title>
-      <link>http://deliberate-software.com/categories/unit-testing/</link>
+      <link>https://deliberate-software.com/categories/unit-testing/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/unit-testing/</guid>
+      <guid>https://deliberate-software.com/categories/unit-testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>refactoring</title>
-      <link>http://deliberate-software.com/categories/refactoring/</link>
+      <link>https://deliberate-software.com/categories/refactoring/</link>
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/refactoring/</guid>
+      <guid>https://deliberate-software.com/categories/refactoring/</guid>
       <description></description>
     </item>
     
     <item>
       <title>architecture</title>
-      <link>http://deliberate-software.com/categories/architecture/</link>
+      <link>https://deliberate-software.com/categories/architecture/</link>
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/architecture/</guid>
+      <guid>https://deliberate-software.com/categories/architecture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>haskell</title>
-      <link>http://deliberate-software.com/categories/haskell/</link>
+      <link>https://deliberate-software.com/categories/haskell/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/haskell/</guid>
+      <guid>https://deliberate-software.com/categories/haskell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>angular</title>
-      <link>http://deliberate-software.com/categories/angular/</link>
+      <link>https://deliberate-software.com/categories/angular/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/angular/</guid>
+      <guid>https://deliberate-software.com/categories/angular/</guid>
       <description></description>
     </item>
     
     <item>
       <title>clojure</title>
-      <link>http://deliberate-software.com/categories/clojure/</link>
+      <link>https://deliberate-software.com/categories/clojure/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/clojure/</guid>
+      <guid>https://deliberate-software.com/categories/clojure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>clojurescript</title>
-      <link>http://deliberate-software.com/categories/clojurescript/</link>
+      <link>https://deliberate-software.com/categories/clojurescript/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/clojurescript/</guid>
+      <guid>https://deliberate-software.com/categories/clojurescript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>interviews</title>
-      <link>http://deliberate-software.com/categories/interviews/</link>
+      <link>https://deliberate-software.com/categories/interviews/</link>
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/categories/interviews/</guid>
+      <guid>https://deliberate-software.com/categories/interviews/</guid>
       <description></description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>clojurescript on deliberate software</title>
-    <link>http://deliberate-software.com/categories/clojurescript/</link>
+    <link>https://deliberate-software.com/categories/clojurescript/</link>
     <description>Recent content in clojurescript on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/clojurescript/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/clojurescript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hot Loading Angular2 With State</title>
-      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <link>https://deliberate-software.com/figwheel-angular2/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <guid>https://deliberate-software.com/figwheel-angular2/</guid>
       <description>In &amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo; I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping worked, but state was lost on each load. Tweaking the original demo allows for figwheel to swap in the template without losing client state.
 Here is a demo of hotswapping with state preservation:
 
@@ -25,10 +25,10 @@ In this demo, we add three things to a list, then change the template that draws
     
     <item>
       <title>Using Angular2 in ClojureScript</title>
-      <link>http://deliberate-software.com/cljs-angular2/</link>
+      <link>https://deliberate-software.com/cljs-angular2/</link>
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/cljs-angular2/</guid>
+      <guid>https://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
 lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>

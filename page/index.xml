@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on deliberate software</title>
-    <link>http://deliberate-software.com/page/</link>
+    <link>https://deliberate-software.com/page/</link>
     <description>Recent content in Pages on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://deliberate-software.com/page/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Career in Programming Without Going To School</title>
-      <link>http://deliberate-software.com/page/training/</link>
+      <link>https://deliberate-software.com/page/training/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/page/training/</guid>
+      <guid>https://deliberate-software.com/page/training/</guid>
       <description>A path to full-time software development  &#34;I Just Finished CodeAcademy/Khan Academy/etc, Now What?!&#34;
   Breaking into a new career can be intimidating! Many people get stuck after finishing an online course like CodeAcademy. We want to provide free guidance necessary to get that dream job. Success Stories  We have used this program with several people to help them break into full-time software developer jobs: Rachel B. Rachel was working as a baker when we started together.</description>
     </item>
     
     <item>
       <title>My Philosophy</title>
-      <link>http://deliberate-software.com/page/philosophy/</link>
+      <link>https://deliberate-software.com/page/philosophy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/page/philosophy/</guid>
+      <guid>https://deliberate-software.com/page/philosophy/</guid>
       <description>Hi, I am Steve Shogren! I am a developer and manager who has met needs in the financial, education, and publishing industries. I grow self-organizing teams and empower them to achieve tremendous business value.  My Philosophy Strategic  Self-Organizing Teams   When carefully mentored, a self-organizing team accomplishes the most business value.   Servant Leadership   Empowering and trusting your team increases intrinsic motivation, engagement, and productivity.</description>
     </item>
     
     <item>
       <title>Writings</title>
-      <link>http://deliberate-software.com/page/focused/</link>
+      <link>https://deliberate-software.com/page/focused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/page/focused/</guid>
+      <guid>https://deliberate-software.com/page/focused/</guid>
       <description>Targeted Posts top Books That Shape My Thinking Learn To Program For Free What Keeps a Self-Organizing Team From Falling Apart Ten Years of Pair Programming Daily Meditation Improves Technical Leadership Ego Driven Development   new developers Learning Lisp Was Hard Suggested Skill Progression What Book Should I Read Next? You Should Go Home at 5:01 How to Suck Less at Your New Job   seasoned developers Avoid Pop Culture Architecture Haskell is the Dark Souls of Programming SimpleMock: Language Agnostic Unit Test Mocking Programming Language Safety Score Mark 2 Pattern Matching - Making the Compiler Work For You   managers When Self-Organizing Teams Are Effective Designing A Compassionate Interview For A High Performing Individual Daily Meditation Improves Technical Leadership Better Interviews Ego Driven Development    </description>
     </item>
     
     <item>
       <title>Writings</title>
-      <link>http://deliberate-software.com/page/post/</link>
+      <link>https://deliberate-software.com/page/post/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/page/post/</guid>
+      <guid>https://deliberate-software.com/page/post/</guid>
       <description>All Posts Posts    Powerful Editor Abstractions  technical skills vim   F# Domain Design: Interdependent Enums and Booleans  Technical Skills fsharp csharp   Simple Haskell Automation in Emacs  technical skills emacs fp-course   Scientific Software Design: Human Working Memory  technical skills oo-design   OO-Design Part 3: When to Apply Encapsulation  technical skills csharp java oo-design   MOBA Item Optimization In Haskell  technical skills   Papers We Love: The Byzantine Generals Problem  technical skills academic papers proofs   DSLs Are Terrible  hugo dsl Technical Skills silly   Design Pattern Dangers  technical skills   Darkest Proof: Day 3  technical skills coq proofs silly   What Keeps a Self-Organizing Team From Falling Apart  management meta game self-organization   Darkest Proof: Day 2  technical skills coq proofs silly   Darkest Proof: Day 1  technical skills coq proofs silly   OO-Design Part 2: Anemic Domain Models Are Healthy  technical skills csharp java oo-design   OO-Design Part 1: Increasing Reuse With Noun Interfaces  technical skills csharp java oo-design   Ten Years of Pair Programming  management unit-testing self-organization   Vim Refactoring Patterns  technical skills vim refactoring   Modern Dependency Injection  technical skills architecture csharp unit-testing   Editor Abstractions  technical skills emacs vim   Wrangling State In Haskell  technical skills haskell   Hot Loading Angular2 With State  technical skills clojure clojurescript angular   Using Angular2 in ClojureScript  technical skills clojure clojurescript angular   Wrangling State In Clojure  technical skills clojure   When Self-Organizing Teams Are Effective  management meta game self-organization   Avoid Pop Culture Architecture  architecture Technical Skills Meta game   Haskell is the Dark Souls of Programming  haskell Technical Skills silly   Development Disappointment Disorder  Meta Game management   Designing A Compassionate Interview For A High Performing Individual  Meta Game management   Daily Meditation Improves Technical Leadership  Meta Game management   Conj Talk: Teaching Clojure at IBM  Meta Game clojure   Better Interviews  meta game interviews management   F# Unit Testing With SimpleMock  fsharp unit testing Technical Skills   SimpleMock: Language Agnostic Unit Test Mocking  unit testing csharp Technical Skills architecture   Programming Language Safety Score Mark 2  haskell clojure fsharp csharp Technical Skills   Language Versions    Learning Lisp Was Hard  clojure Meta Game   Superiority Fatigue  Meta Game   Case Study: Superior Domain Modeling in F#  Technical Skills fsharp csharp   Programming Language Safety Ranking  Technical Skills clojure fsharp csharp   Six Unusual Reasons why Clojure is a Delight  clojure Technical Skills Unit Testing   Christmas F# Polymorphism  Technical Skills fsharp architecture   Emacs Project Tip  Technical Skills emacs   Suggested Skill Progression  Technical Skills Meta Game management   What Book Should I Read Next?</description>
     </item>
     
     <item>
       <title>Writings That Shape My Thinking</title>
-      <link>http://deliberate-software.com/page/books/</link>
+      <link>https://deliberate-software.com/page/books/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/page/books/</guid>
+      <guid>https://deliberate-software.com/page/books/</guid>
       <description>Writings That Shape My Thinking For how I pick what books to prioritize, check out my post &amp;quot;What Book Should I Read Next?&amp;ldquo;.
 Bold are my highest recommendations. The indicates a link with a summary.
 System Design Designing Data-Intensive Applications Patterns of Enterprise Application Architecture The Tangled Web Design Of Everyday Things Growing Object-Oriented Software Guided by Tests Propagation Networks: A Flexible and Expressive Substrate for Computation   People Management Reinventing Organizations Peopleware Good To Great Becoming A Technical Leader Emotional Intelligence 2.</description>

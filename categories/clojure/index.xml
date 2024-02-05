@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>clojure on deliberate software</title>
-    <link>http://deliberate-software.com/categories/clojure/</link>
+    <link>https://deliberate-software.com/categories/clojure/</link>
     <description>Recent content in clojure on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Apr 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hot Loading Angular2 With State</title>
-      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <link>https://deliberate-software.com/figwheel-angular2/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <guid>https://deliberate-software.com/figwheel-angular2/</guid>
       <description>In &amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo; I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping worked, but state was lost on each load. Tweaking the original demo allows for figwheel to swap in the template without losing client state.
 Here is a demo of hotswapping with state preservation:
 
@@ -25,10 +25,10 @@ In this demo, we add three things to a list, then change the template that draws
     
     <item>
       <title>Using Angular2 in ClojureScript</title>
-      <link>http://deliberate-software.com/cljs-angular2/</link>
+      <link>https://deliberate-software.com/cljs-angular2/</link>
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/cljs-angular2/</guid>
+      <guid>https://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
 lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
@@ -36,10 +36,10 @@ lein new luminus cljs-angular2 +cljs This builds a great basic starter project w
     
     <item>
       <title>Wrangling State In Clojure</title>
-      <link>http://deliberate-software.com/clojure-state/</link>
+      <link>https://deliberate-software.com/clojure-state/</link>
       <pubDate>Tue, 29 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/clojure-state/</guid>
+      <guid>https://deliberate-software.com/clojure-state/</guid>
       <description>&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;
  Immutable languages make application state an interesting concept.
 In Clojure, you can deal with application state in two main ways. The first way is to pass the state around as parameters to your functions. An example of Pass As Parameter:
@@ -48,19 +48,19 @@ In Clojure, you can deal with application state in two main ways. The first way 
     
     <item>
       <title>Conj Talk: Teaching Clojure at IBM</title>
-      <link>http://deliberate-software.com/teaching-clojure/</link>
+      <link>https://deliberate-software.com/teaching-clojure/</link>
       <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/teaching-clojure/</guid>
+      <guid>https://deliberate-software.com/teaching-clojure/</guid>
       <description>My talk at Conj 2015, enjoy! Teaching Clojure</description>
     </item>
     
     <item>
       <title>Programming Language Safety Score Mark 2</title>
-      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <link>https://deliberate-software.com/safety-rank-part-2/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <guid>https://deliberate-software.com/safety-rank-part-2/</guid>
       <description>I want to make a model that predicts bugs.
 I previously wrote a table for scoring language safety: Programming Language Safety Score, but it was extremely time consuming to score new languages or make modifications.
 Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is enforced, possible, or impossible. I score each as either 1 (language enforced), 0 (possible, but you have to remember to do it), or -1 (impossible).</description>
@@ -68,10 +68,10 @@ Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve a
     
     <item>
       <title>Learning Lisp Was Hard</title>
-      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
+      <link>https://deliberate-software.com/learning-lisp-was-hard/</link>
       <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
+      <guid>https://deliberate-software.com/learning-lisp-was-hard/</guid>
       <description>Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience learning a Lisp.
 When I set out to learn a Lisp, I expected it would be easy.
 I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl, Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on how Lisp is his secret weapon, and figured I needed to get into this secret weapon stuff.</description>
@@ -79,48 +79,48 @@ I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally
     
     <item>
       <title>Programming Language Safety Ranking</title>
-      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <link>https://deliberate-software.com/programming-language-safety-algorithm/</link>
       <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <guid>https://deliberate-software.com/programming-language-safety-algorithm/</guid>
       <description>I think the time has come for a standard programming language safety score. I want to use this model to help show that the concept of safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static types&amp;rdquo;.
 When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes thoughts of unit tests, long build times, and red squiggles in an IDE. But, in day-to-day development, there are so many times when we are bitten by things that somehow just slip through the cracks.</description>
     </item>
     
     <item>
       <title>Six Unusual Reasons why Clojure is a Delight</title>
-      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
+      <link>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
       <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
+      <guid>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
       <description>Clojure is a delightful language, and here are six uncommonly discussed reasons why.
 1 - Dead Simple Unit Test Mocking Clojure is the easiest language to unit test I have ever seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple replacement of the function definition. No extraneous interfaces, no dependency injection, no mocking framework. The built-in function with-redefs will replace any function in any library or namespace with a new definition.</description>
     </item>
     
     <item>
       <title>Intro To Macros</title>
-      <link>http://deliberate-software.com/intro-to-macros/</link>
+      <link>https://deliberate-software.com/intro-to-macros/</link>
       <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/intro-to-macros/</guid>
+      <guid>https://deliberate-software.com/intro-to-macros/</guid>
       <description>Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function. def doCalc () return 1 + 2 end def doAwesome (x) return doCalc() + x end #before substitution.</description>
     </item>
     
     <item>
       <title>Clojure Debugger</title>
-      <link>http://deliberate-software.com/clojure-debugger/</link>
+      <link>https://deliberate-software.com/clojure-debugger/</link>
       <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/clojure-debugger/</guid>
+      <guid>https://deliberate-software.com/clojure-debugger/</guid>
       <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;#34;Trace all the forms in the given body.</description>
     </item>
     
     <item>
       <title>Lisp REPL</title>
-      <link>http://deliberate-software.com/lisp-repl/</link>
+      <link>https://deliberate-software.com/lisp-repl/</link>
       <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/lisp-repl/</guid>
+      <guid>https://deliberate-software.com/lisp-repl/</guid>
       <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))  WHAAAAAAAAAAAAAAA?</description>
     </item>
     

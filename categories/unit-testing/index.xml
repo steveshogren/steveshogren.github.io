@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>unit testing on deliberate software</title>
-    <link>http://deliberate-software.com/categories/unit-testing/</link>
+    <link>https://deliberate-software.com/categories/unit-testing/</link>
     <description>Recent content in unit testing on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 12 Sep 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/unit-testing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/unit-testing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ten Years of Pair Programming</title>
-      <link>http://deliberate-software.com/pairprogramming/</link>
+      <link>https://deliberate-software.com/pairprogramming/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <guid>https://deliberate-software.com/pairprogramming/</guid>
       <description>My current team has pair-programmed and followed strict TDD on a single codebase for over ten years. The practices started from reading the literature on Extreme Programming, which resonated with both the developers and leadership. As the team changed, we continued to follow the practices.
 In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &amp;ldquo;Promiscuous Pairing&amp;rdquo;. We switch pairs in short intervals: 180 minutes is our current preference.</description>
     </item>
     
     <item>
       <title>Modern Dependency Injection</title>
-      <link>http://deliberate-software.com/modern-di/</link>
+      <link>https://deliberate-software.com/modern-di/</link>
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/modern-di/</guid>
+      <guid>https://deliberate-software.com/modern-di/</guid>
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
@@ -35,20 +35,20 @@ Look how much boilerplate is needed just to mock out a call to DateTime.Now:
     
     <item>
       <title>F# Unit Testing With SimpleMock</title>
-      <link>http://deliberate-software.com/f-number-unit-testing/</link>
+      <link>https://deliberate-software.com/f-number-unit-testing/</link>
       <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
+      <guid>https://deliberate-software.com/f-number-unit-testing/</guid>
       <description>If you are considering using F#, you might be curious how to handle unit test mocking, especially if you want to use both modules and classes. In a language like C# or Java, the common method is to a DI container or handmade constructor injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a real dependency with a test-only replacement.
 I previously posted an example that shows a much simpler way to inject dependencies called the SimpleMock pattern.</description>
     </item>
     
     <item>
       <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
-      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <link>https://deliberate-software.com/simplemock-unit-test-mocking/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <guid>https://deliberate-software.com/simplemock-unit-test-mocking/</guid>
       <description>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to organize your testing code without mocking or complicated dependency injection.
 SimpleMock works in any language with closures that can be passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and Python. I&amp;rsquo;m sure you can think of others.
 Example: Here is a brief (if a bit silly) example of the final pattern:</description>
@@ -56,48 +56,48 @@ Example: Here is a brief (if a bit silly) example of the final pattern:</descrip
     
     <item>
       <title>Six Unusual Reasons why Clojure is a Delight</title>
-      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
+      <link>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
       <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
+      <guid>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
       <description>Clojure is a delightful language, and here are six uncommonly discussed reasons why.
 1 - Dead Simple Unit Test Mocking Clojure is the easiest language to unit test I have ever seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple replacement of the function definition. No extraneous interfaces, no dependency injection, no mocking framework. The built-in function with-redefs will replace any function in any library or namespace with a new definition.</description>
     </item>
     
     <item>
       <title>End To End Web Service Testing</title>
-      <link>http://deliberate-software.com/end-to-end-web-service-testing/</link>
+      <link>https://deliberate-software.com/end-to-end-web-service-testing/</link>
       <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/end-to-end-web-service-testing/</guid>
+      <guid>https://deliberate-software.com/end-to-end-web-service-testing/</guid>
       <description>At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and to see if I could fix a few tricky bugs. The code is divided into two sections, a client application and a web server. Both the client application and the server have their own persistence, and they communicate through a soap web service.</description>
     </item>
     
     <item>
       <title>Testing Is To Programming What Math Is To Engineering</title>
-      <link>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</link>
+      <link>https://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</link>
       <pubDate>Mon, 26 Sep 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</guid>
+      <guid>https://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</guid>
       <description>In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math-doing counterparts. I am certain that when builders first started using math to prove that buildings would stand up safely, they were mocked by their math-less counterparts. I can hear them now, &#34;Oh, Stephos, it takes you 5 times longer to prove your building will stand up, real men can just see that it will work&#34;</description>
     </item>
     
     <item>
       <title>Dont Mock Concrete Classes</title>
-      <link>http://deliberate-software.com/dont-mock-concrete-classes/</link>
+      <link>https://deliberate-software.com/dont-mock-concrete-classes/</link>
       <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/dont-mock-concrete-classes/</guid>
+      <guid>https://deliberate-software.com/dont-mock-concrete-classes/</guid>
       <description>(They have thin skin)
 I have been reading G.O.O.S. and honestly, much of it has been just a reiteration. Until chapter 20, that is. I get to the section Don&#39;t Mock Concrete Classes, and it clicks.  Mocking concrete classes used to be my bread and butter. Almost every unit test I wrote for the last year had several mocked concrete implementations, to pass in as dependencies of the system under test.</description>
     </item>
     
     <item>
       <title>Actionscript Unit Testing</title>
-      <link>http://deliberate-software.com/actionscript-unit-testing/</link>
+      <link>https://deliberate-software.com/actionscript-unit-testing/</link>
       <pubDate>Wed, 04 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/actionscript-unit-testing/</guid>
+      <guid>https://deliberate-software.com/actionscript-unit-testing/</guid>
       <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd�d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
     </item>
     

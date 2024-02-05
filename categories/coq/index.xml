@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>coq on deliberate software</title>
-    <link>http://deliberate-software.com/categories/coq/</link>
+    <link>https://deliberate-software.com/categories/coq/</link>
     <description>Recent content in coq on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Apr 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/coq/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/coq/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Darkest Proof: Day 3</title>
-      <link>http://deliberate-software.com/coq_day3/</link>
+      <link>https://deliberate-software.com/coq_day3/</link>
       <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq_day3/</guid>
+      <guid>https://deliberate-software.com/coq_day3/</guid>
       <description>Day three working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 I am trying to prove a helper proof to use to rewrite another helper proof to use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t make this stuff up.
@@ -25,10 +25,10 @@ I just need to prove this where S n is n + 1:</description>
     
     <item>
       <title>Darkest Proof: Day 2</title>
-      <link>http://deliberate-software.com/coq-day2/</link>
+      <link>https://deliberate-software.com/coq-day2/</link>
       <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq-day2/</guid>
+      <guid>https://deliberate-software.com/coq-day2/</guid>
       <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Naming While trying to understand how rewrite works, I come across an obvious use-case:
@@ -37,10 +37,10 @@ Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. indu
     
     <item>
       <title>Darkest Proof: Day 1</title>
-      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <link>https://deliberate-software.com/coq-frustrations/</link>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <guid>https://deliberate-software.com/coq-frustrations/</guid>
       <description>Day one working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Precise Syntax I copied a sample from the book by hand, but it always caused Company-Coq to go into an infinite loop. I copied it again. Same deal.

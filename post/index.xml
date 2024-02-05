@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on deliberate software</title>
-    <link>http://deliberate-software.com/post/</link>
+    <link>https://deliberate-software.com/post/</link>
     <description>Recent content in Posts on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 02 Aug 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Powerful Editor Abstractions</title>
-      <link>http://deliberate-software.com/editor-abstraction-types/</link>
+      <link>https://deliberate-software.com/editor-abstraction-types/</link>
       <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/editor-abstraction-types/</guid>
+      <guid>https://deliberate-software.com/editor-abstraction-types/</guid>
       <description>Not all editing tools are created equal.
  Combining several simple ideas into one compound one, and thus all complex ideas are made - John Locke, An Essay Concerning Human Understanding (1690)
  While many words have been spent on the Holy Editor Flame Wars, I&amp;rsquo;ve read very little that attempts to categorize what they actually do. Likewise, everyone pays homage to the concept of using the &amp;ldquo;best tool for the job&amp;rdquo;, but few talk about when each tool would be best.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>F# Domain Design: Interdependent Enums and Booleans</title>
-      <link>http://deliberate-software.com/fsharp-design-enums/</link>
+      <link>https://deliberate-software.com/fsharp-design-enums/</link>
       <pubDate>Sun, 02 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/fsharp-design-enums/</guid>
+      <guid>https://deliberate-software.com/fsharp-design-enums/</guid>
       <description>F# provides a clear way to simplify invalid states with discriminated unions.
 Interdependent enums and booleans are a symptom of a design that could be simplified. Many domain records and classes contain enums and booleans that change in a &amp;ldquo;single transaction&amp;rdquo;. These are interdependent and often allow many states that are not valid for the business.
 Often they are designed this way because of the database. Consider a model I found last week that is stored in the database:</description>
@@ -35,10 +35,10 @@ Often they are designed this way because of the database. Consider a model I fou
     
     <item>
       <title>Simple Haskell Automation in Emacs</title>
-      <link>http://deliberate-software.com/emacs-customization/</link>
+      <link>https://deliberate-software.com/emacs-customization/</link>
       <pubDate>Tue, 05 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/emacs-customization/</guid>
+      <guid>https://deliberate-software.com/emacs-customization/</guid>
       <description>I am working through the amazing Data 61 Functional Programming Course (seriously, put it on your list!) and I found myself doing a repeated set of actions. Repeated sets of actions are perfect for automation!
 The course has some sections with comments indicating the expected behavior:
 -- &amp;gt;&amp;gt;&amp;gt; parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :. Nil)) &amp;#34;ABC&amp;#34; -- Result &amp;gt;BC&amp;lt; &amp;#39;A&amp;#39; -- -- &amp;gt;&amp;gt;&amp;gt; isErrorResult (parse (satisfyAll (isUpper :. (/= &amp;#39;X&amp;#39;) :.</description>
@@ -46,20 +46,20 @@ The course has some sections with comments indicating the expected behavior:
     
     <item>
       <title>Scientific Software Design: Human Working Memory</title>
-      <link>http://deliberate-software.com/healthy-design-patterns/</link>
+      <link>https://deliberate-software.com/healthy-design-patterns/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/healthy-design-patterns/</guid>
+      <guid>https://deliberate-software.com/healthy-design-patterns/</guid>
       <description>Good design must be measurable Good software design should be scientific, universal, and measurable. Saying &amp;ldquo;this code is good&amp;rdquo;, or &amp;ldquo;this code is crap&amp;rdquo; is useless if we cannot even agree on what is good design.
 Design philosophies like &amp;ldquo;Single Responsibility Principle&amp;rdquo; can&amp;rsquo;t be objectively measured. The programmer must interpret if the code they are reading actually adheres to the pattern. Such an interpretation is subject to biases and confusion.</description>
     </item>
     
     <item>
       <title>OO-Design Part 3: When to Apply Encapsulation</title>
-      <link>http://deliberate-software.com/when-encapsulation/</link>
+      <link>https://deliberate-software.com/when-encapsulation/</link>
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/when-encapsulation/</guid>
+      <guid>https://deliberate-software.com/when-encapsulation/</guid>
       <description>Part 3 of the series OO-Design
 As discussed in the previous post Anemic Domain Models Are Healthy, encapsulation makes code harder to test. We should make important actions easy to do, and testing is important.
 Encapsulation and domain modeling are separate concepts. A good domain model is possible with or without encapsulation.
@@ -68,10 +68,10 @@ Encapsulation is the design of trust boundaries between programmers. A well-enca
     
     <item>
       <title>MOBA Item Optimization In Haskell</title>
-      <link>http://deliberate-software.com/optimization/</link>
+      <link>https://deliberate-software.com/optimization/</link>
       <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/optimization/</guid>
+      <guid>https://deliberate-software.com/optimization/</guid>
       <description>TL;DR: Made a website for optimizing Paragon cards using the GNU Linear Programming Kit and Haskell. Code available here.
 I love MOBA&amp;rsquo;s (Dota, LoL, Paragon), and I love Haskell. Since Paragon is my current go-to game, I wanted to determine the cards to buy to maximize my Damage Per Second (DPS).
 First things first, I found a spreadsheet of all the cards, colors, costs, and stats. Using some Vim magic, I made them into a list of tuples:</description>
@@ -79,20 +79,20 @@ First things first, I found a spreadsheet of all the cards, colors, costs, and s
     
     <item>
       <title>Papers We Love: The Byzantine Generals Problem</title>
-      <link>http://deliberate-software.com/papers-we-love-1/</link>
+      <link>https://deliberate-software.com/papers-we-love-1/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/papers-we-love-1/</guid>
+      <guid>https://deliberate-software.com/papers-we-love-1/</guid>
       <description>In this series I practice reading computer science papers by following a modified set of steps outlined in the guide: How to read and understand a scientific paper: a guide for non-scientists. If your reaction to this post is &amp;lsquo;eh, just read the paper&amp;rsquo;, then this post isn&amp;rsquo;t for you ;)
 Why Should I Read The Byzantine Generals Problem? The research in this paper allows blockchain technology, ensures military radar installation reliability, and enables the design of distributed, fault-tolerant CPU processors.</description>
     </item>
     
     <item>
       <title>DSLs Are Terrible</title>
-      <link>http://deliberate-software.com/poor-dsls/</link>
+      <link>https://deliberate-software.com/poor-dsls/</link>
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/poor-dsls/</guid>
+      <guid>https://deliberate-software.com/poor-dsls/</guid>
       <description>Trigger warning: this is a silly rant I wrote a few years ago after raging at the Hugo blog engine for a couple hours. I think its funny and still relevant, so hyperbolic nonsense incoming!
 DSL&amp;rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special snowflake, delicately floating from the heavens straight into in your eye.
 The problem with a DSL is that it always starts so simple. You take a complex problem and represent it simply with some nice pretty syntax.</description>
@@ -100,20 +100,20 @@ The problem with a DSL is that it always starts so simple. You take a complex pr
     
     <item>
       <title>Design Pattern Dangers</title>
-      <link>http://deliberate-software.com/patterns/</link>
+      <link>https://deliberate-software.com/patterns/</link>
       <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/patterns/</guid>
+      <guid>https://deliberate-software.com/patterns/</guid>
       <description>Design Patterns and Domain Driven Design are two of the most dangerous books a new developer can read.
  The books themselves are not bad. They offer standardized names for common programming practices, which has made communication a lot easier for everyone. Sometimes you will see that a pattern is merely a new name for something you may have already invented. Perhaps what you were calling a &amp;ldquo;builder&amp;rdquo; they call a &amp;ldquo;factory&amp;quot;.</description>
     </item>
     
     <item>
       <title>Darkest Proof: Day 3</title>
-      <link>http://deliberate-software.com/coq_day3/</link>
+      <link>https://deliberate-software.com/coq_day3/</link>
       <pubDate>Thu, 27 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq_day3/</guid>
+      <guid>https://deliberate-software.com/coq_day3/</guid>
       <description>Day three working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 I am trying to prove a helper proof to use to rewrite another helper proof to use to rewrite another proof for the commutativity of multiplication. You can&amp;rsquo;t make this stuff up.
@@ -122,10 +122,10 @@ I just need to prove this where S n is n + 1:</description>
     
     <item>
       <title>What Keeps a Self-Organizing Team From Falling Apart</title>
-      <link>http://deliberate-software.com/self-organizing-balance/</link>
+      <link>https://deliberate-software.com/self-organizing-balance/</link>
       <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-balance/</guid>
+      <guid>https://deliberate-software.com/self-organizing-balance/</guid>
       <description>My team has a decade of experience applying self-organizing teams and pair-programming to reduce wasted productivity in an enterprise banking application.
 The Benefits No Technical Lead Our self-organizing practices eliminate the need for a technical lead who assigns and follows up on work. No work is assigned to any individual.
 Individual Empowerment Developers are free to remove pain points as needed, so most have a strong sense of ownership. Team members feel empowered to champion for broad changes to the codebase.</description>
@@ -133,10 +133,10 @@ Individual Empowerment Developers are free to remove pain points as needed, so m
     
     <item>
       <title>Darkest Proof: Day 2</title>
-      <link>http://deliberate-software.com/coq-day2/</link>
+      <link>https://deliberate-software.com/coq-day2/</link>
       <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq-day2/</guid>
+      <guid>https://deliberate-software.com/coq-day2/</guid>
       <description>Day two working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Naming While trying to understand how rewrite works, I come across an obvious use-case:
@@ -145,10 +145,10 @@ Theorem adding_n_Sm : forall n m : nat, n + S m = S n + m. Proof. intros n. indu
     
     <item>
       <title>Darkest Proof: Day 1</title>
-      <link>http://deliberate-software.com/coq-frustrations/</link>
+      <link>https://deliberate-software.com/coq-frustrations/</link>
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/coq-frustrations/</guid>
+      <guid>https://deliberate-software.com/coq-frustrations/</guid>
       <description>Day one working through Software Foundations with Coq. Since I like to rant, and I love Darkest Dungeon, ENTER THE DARKEST PROOF. (Please don&amp;rsquo;t sue me!)
 
 Precise Syntax I copied a sample from the book by hand, but it always caused Company-Coq to go into an infinite loop. I copied it again. Same deal.
@@ -157,10 +157,10 @@ This isn&amp;rsquo;t my first rodeo, I&amp;rsquo;ve seen all sorts of syntax rul
     
     <item>
       <title>OO-Design Part 2: Anemic Domain Models Are Healthy</title>
-      <link>http://deliberate-software.com/anemic-domain-model/</link>
+      <link>https://deliberate-software.com/anemic-domain-model/</link>
       <pubDate>Wed, 16 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/anemic-domain-model/</guid>
+      <guid>https://deliberate-software.com/anemic-domain-model/</guid>
       <description>Part 2 of the series OO-Design
 The Anemic Domain Model is often quoted as an anti-pattern in the terminology of Domain-Driven Design. Martin Fowler goes so far as to term the alternative a &amp;ldquo;rich domain model&amp;rdquo;.
 A rich domain model makes perfect sense until you attempt to write your first unit test. You discover that rich domain models are very hard to test. Most examples of unit-testing use Anemic Domain Models!</description>
@@ -168,10 +168,10 @@ A rich domain model makes perfect sense until you attempt to write your first un
     
     <item>
       <title>OO-Design Part 1: Increasing Reuse With Noun Interfaces</title>
-      <link>http://deliberate-software.com/better-oo-design/</link>
+      <link>https://deliberate-software.com/better-oo-design/</link>
       <pubDate>Mon, 31 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/better-oo-design/</guid>
+      <guid>https://deliberate-software.com/better-oo-design/</guid>
       <description>Part 1 of the series OO-Design
 The SOLID patterns are not enough to design a reusable and testable code base. Two concrete additions can significantly improve your codebase, while maintaining the SOLID principals.
 The suggestions here do not run counter to traditional SOLID designs, they enhance them. SOLID is a fine place to start, but it lacks a critical half of good design: polymorphic data. We&amp;rsquo;ve found polymorphic data is far more common than polymorphic behavior, so programs designed without that concept often are far larger than they need to be.</description>
@@ -179,20 +179,20 @@ The suggestions here do not run counter to traditional SOLID designs, they enhan
     
     <item>
       <title>Ten Years of Pair Programming</title>
-      <link>http://deliberate-software.com/pairprogramming/</link>
+      <link>https://deliberate-software.com/pairprogramming/</link>
       <pubDate>Mon, 12 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pairprogramming/</guid>
+      <guid>https://deliberate-software.com/pairprogramming/</guid>
       <description>My current team has pair-programmed and followed strict TDD on a single codebase for over ten years. The practices started from reading the literature on Extreme Programming, which resonated with both the developers and leadership. As the team changed, we continued to follow the practices.
 In the last five years, the developers choose to implement Arlo Belshee&amp;rsquo;s &amp;ldquo;Promiscuous Pairing&amp;rdquo;. We switch pairs in short intervals: 180 minutes is our current preference.</description>
     </item>
     
     <item>
       <title>Vim Refactoring Patterns</title>
-      <link>http://deliberate-software.com/vim-refactoring-patterns/</link>
+      <link>https://deliberate-software.com/vim-refactoring-patterns/</link>
       <pubDate>Wed, 22 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/vim-refactoring-patterns/</guid>
+      <guid>https://deliberate-software.com/vim-refactoring-patterns/</guid>
       <description>Editor macros are a secret weapon for editing text. While they are hard to learn, no other tool offers such broad speed and power for automating changes. A skilled macro wielder can make huge changes to a codebase with ease.
 Here are some inspirational patterns to demonstrate major structural refactorings using Vim macros and search/replace commands.
 Reorder A List Of Numbers A change left me with a file with unordered numbers.</description>
@@ -200,10 +200,10 @@ Reorder A List Of Numbers A change left me with a file with unordered numbers.</
     
     <item>
       <title>Modern Dependency Injection</title>
-      <link>http://deliberate-software.com/modern-di/</link>
+      <link>https://deliberate-software.com/modern-di/</link>
       <pubDate>Sat, 11 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/modern-di/</guid>
+      <guid>https://deliberate-software.com/modern-di/</guid>
       <description>Dependency Injection can be greatly simplified while retaining all of its power.
 The Unnecessary Boilerplate Injection of an interface through the constructor is a common way to replace a dependency for unit-test mocking. Unfortunately, it is an extremely verbose pattern.
 Look how much boilerplate is needed just to mock out a call to DateTime.Now:
@@ -212,10 +212,10 @@ Look how much boilerplate is needed just to mock out a call to DateTime.Now:
     
     <item>
       <title>Editor Abstractions</title>
-      <link>http://deliberate-software.com/editor-abstractions/</link>
+      <link>https://deliberate-software.com/editor-abstractions/</link>
       <pubDate>Mon, 23 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/editor-abstractions/</guid>
+      <guid>https://deliberate-software.com/editor-abstractions/</guid>
       <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
 I was recently inspired by a comment from a respected coworker:
  &amp;ldquo;I am just as productive with basic Vim commands as I am with a refactoring suite like ReSharper.&amp;rdquo;
@@ -224,10 +224,10 @@ I was recently inspired by a comment from a respected coworker:
     
     <item>
       <title>Wrangling State In Haskell</title>
-      <link>http://deliberate-software.com/haskell-state/</link>
+      <link>https://deliberate-software.com/haskell-state/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/haskell-state/</guid>
+      <guid>https://deliberate-software.com/haskell-state/</guid>
       <description>Part 2 of my series &amp;ldquo;Wrangling State&amp;rdquo;. Part 1 Wrangling State In Clojure
 Haskell is a pure language, so you can only deal with application state by passing parameters to functions. It is possible to pass parameters more conveniently, but ultimately, every parameter needs to be passed.
 Here is a simple application for logging a timestamp to a file.
@@ -237,10 +237,10 @@ loadFile :: Filename -&amp;gt; IO String loadFile fileName = BS.</description>
     
     <item>
       <title>Hot Loading Angular2 With State</title>
-      <link>http://deliberate-software.com/figwheel-angular2/</link>
+      <link>https://deliberate-software.com/figwheel-angular2/</link>
       <pubDate>Wed, 13 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/figwheel-angular2/</guid>
+      <guid>https://deliberate-software.com/figwheel-angular2/</guid>
       <description>In &amp;ldquo;Using Angular2 in Clojurescript&amp;rdquo; I showed how to get ClojureScript to run an Angular2 template. Basic hotswapping worked, but state was lost on each load. Tweaking the original demo allows for figwheel to swap in the template without losing client state.
 Here is a demo of hotswapping with state preservation:
 
@@ -249,10 +249,10 @@ In this demo, we add three things to a list, then change the template that draws
     
     <item>
       <title>Using Angular2 in ClojureScript</title>
-      <link>http://deliberate-software.com/cljs-angular2/</link>
+      <link>https://deliberate-software.com/cljs-angular2/</link>
       <pubDate>Mon, 11 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/cljs-angular2/</guid>
+      <guid>https://deliberate-software.com/cljs-angular2/</guid>
       <description>Getting ClojureScript to run Angular2 is not very difficult. Here is a sample project demonstrating a working Angular2 site using Figwheel for hot-reloading on GitHub
 1. Install Luminus +cljs First, setup a basic ClojureScript site using Luminus starter template from here
 lein new luminus cljs-angular2 +cljs This builds a great basic starter project with ClojureScript and figwheel already running. The template uses Reagent and React, which are excellent, but we want Angular2!</description>
@@ -260,10 +260,10 @@ lein new luminus cljs-angular2 +cljs This builds a great basic starter project w
     
     <item>
       <title>Wrangling State In Clojure</title>
-      <link>http://deliberate-software.com/clojure-state/</link>
+      <link>https://deliberate-software.com/clojure-state/</link>
       <pubDate>Tue, 29 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/clojure-state/</guid>
+      <guid>https://deliberate-software.com/clojure-state/</guid>
       <description>&amp;ldquo;Clojure is immutable, so you can&amp;rsquo;t change anything, how useless!&amp;rdquo;
  Immutable languages make application state an interesting concept.
 In Clojure, you can deal with application state in two main ways. The first way is to pass the state around as parameters to your functions. An example of Pass As Parameter:
@@ -272,10 +272,10 @@ In Clojure, you can deal with application state in two main ways. The first way 
     
     <item>
       <title>When Self-Organizing Teams Are Effective</title>
-      <link>http://deliberate-software.com/self-organizing-teams/</link>
+      <link>https://deliberate-software.com/self-organizing-teams/</link>
       <pubDate>Wed, 16 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/self-organizing-teams/</guid>
+      <guid>https://deliberate-software.com/self-organizing-teams/</guid>
       <description>A self-organizing team can be one of the most effective ways to build a team of high-quality professionals.
 What Is A Self-Organizing Team? I have managed several self-organizing teams over the last few years. They are expected to follow these tenets:
  The whole team organizes themselves to best meet the business needs Each team chooses their practices and working agreements All technical and organizational decisions are driven through consensus Product owners determine &amp;ldquo;what&amp;rdquo; happens, the team determines &amp;ldquo;how&amp;rdquo; All staff participates in a culture of high-quality development Systems and practices are designed to maintain the greatest productivity across the next decade  When It Works Well  Small teams Highly skilled workers Need for high-quality software Business need for continuous and stable productivity for 5+ years Buy-in from management that &amp;ldquo;productivity is worth feeling out of control&amp;rdquo;  Self-organizing teams work best when most people on your team are eager to do more, be more, and learn more.</description>
@@ -283,10 +283,10 @@ What Is A Self-Organizing Team? I have managed several self-organizing teams ove
     
     <item>
       <title>Avoid Pop Culture Architecture</title>
-      <link>http://deliberate-software.com/pop-culture-architecture/</link>
+      <link>https://deliberate-software.com/pop-culture-architecture/</link>
       <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pop-culture-architecture/</guid>
+      <guid>https://deliberate-software.com/pop-culture-architecture/</guid>
       <description>&amp;ldquo;ActiveRecord is so hot right now!&amp;rdquo; - comment in 2006
  Pop Culture Architecture is the current &amp;ldquo;fad&amp;rdquo; of the day. I have seen it be microservices, business capabilities, CQRS, service-oriented architecture, Domain-Driven Design, test driven development, ORMs, ActiveRecord, and MVC. Each of these have been fashionable at some point.
 Fashion is ultimately a signaling mechanism for status. We are attracted to fashionable architectures because they signal we have worked on elite teams.</description>
@@ -294,10 +294,10 @@ Fashion is ultimately a signaling mechanism for status. We are attracted to fash
     
     <item>
       <title>Haskell is the Dark Souls of Programming</title>
-      <link>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
+      <link>https://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</link>
       <pubDate>Sat, 06 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
+      <guid>https://deliberate-software.com/haskell-is-the-dark-souls-of-programming/</guid>
       <description>Please don&amp;rsquo;t hit me, Haskell does a great job of that already.
 I love Haskell for the same reasons I love Dark Souls. Fantastic and inscrutable lore, a great combat type system, a cliff-wall difficulty curve, and unending punishment.
 I want to collect some statistics from the GitHub API.
@@ -307,10 +307,10 @@ Step One - Stack I download stack and start a project:
     
     <item>
       <title>Development Disappointment Disorder</title>
-      <link>http://deliberate-software.com/development-disappointment-disorder/</link>
+      <link>https://deliberate-software.com/development-disappointment-disorder/</link>
       <pubDate>Thu, 04 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/development-disappointment-disorder/</guid>
+      <guid>https://deliberate-software.com/development-disappointment-disorder/</guid>
       <description>&amp;ldquo;We&amp;rsquo;ve never had a successful release&amp;rdquo;
  You just finished this really hard feature. The whole thing was worse than anyone realized. Not only that, but the feature wasn&amp;rsquo;t clearly explained, so you lost time churning on the actual requirements. Despite all the confusion, iteration, and technical challenges, you managed to get it working! You look back, savoring how much you have learned and grown.
 You show it off to the product owner.</description>
@@ -318,10 +318,10 @@ You show it off to the product owner.</description>
     
     <item>
       <title>Designing A Compassionate Interview For A High Performing Individual</title>
-      <link>http://deliberate-software.com/compassionate-interviewing/</link>
+      <link>https://deliberate-software.com/compassionate-interviewing/</link>
       <pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/compassionate-interviewing/</guid>
+      <guid>https://deliberate-software.com/compassionate-interviewing/</guid>
       <description>After my post Interview Humiliation, a number of people have asked me how I interview compassionately. I strive to make my interviews as stress-free and respectful as possible while still rendering a yes/no at the end.
 Any good interview process needs to start with goals:
  Respect the candidate&amp;rsquo;s time Make the candidate comfortable Under-skilled candidates should feel no shame Both passing and failing candidates should want to tell their friends to apply We should render the same decision if the interview is repeated multiple times (with different exercises each time) The candidate should know the process in advance and not be able to earn a pass through short term &amp;ldquo;cramming&amp;rdquo; The candidate should feel we are all working collaboratively, instead of us against them  The Ideal Candidate</description>
@@ -329,28 +329,28 @@ Any good interview process needs to start with goals:
     
     <item>
       <title>Daily Meditation Improves Technical Leadership</title>
-      <link>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
+      <link>https://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</link>
       <pubDate>Mon, 14 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
+      <guid>https://deliberate-software.com/daily-meditation-greatly-improved-my-technical-leadership/</guid>
       <description>A couple years ago, a coworker told me a success story about mindful meditation. He explained how his wife took a class that required an hour of daily meditation for a whole month. He reported that she found it uncomfortable, but the effects were astounding. She claimed to feel more relaxed, more focused, and more &amp;ldquo;herself&amp;rdquo;. She found new reserves of motivation. She dropped the book she&amp;rsquo;d been trying to write for years, and started a business.</description>
     </item>
     
     <item>
       <title>Conj Talk: Teaching Clojure at IBM</title>
-      <link>http://deliberate-software.com/teaching-clojure/</link>
+      <link>https://deliberate-software.com/teaching-clojure/</link>
       <pubDate>Wed, 18 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/teaching-clojure/</guid>
+      <guid>https://deliberate-software.com/teaching-clojure/</guid>
       <description>My talk at Conj 2015, enjoy! Teaching Clojure</description>
     </item>
     
     <item>
       <title>Better Interviews</title>
-      <link>http://deliberate-software.com/on-defeat/</link>
+      <link>https://deliberate-software.com/on-defeat/</link>
       <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-defeat/</guid>
+      <guid>https://deliberate-software.com/on-defeat/</guid>
       <description>(All these great ideas, but no one is listening? Check out my book: Convincing Coworkers)
 One day, I went into an interview, and I was humiliated.
 The Setup I used to think very highly of myself. This was early on in the Test Driven Development (TDD) craze, and I was one of the best I knew at it. I knew interfaces, classes, mocking frameworks, and best practices. I&amp;rsquo;d been taught all the tricks from some very smart people, and my confidence was high.</description>
@@ -358,20 +358,20 @@ The Setup I used to think very highly of myself. This was early on in the Test D
     
     <item>
       <title>F# Unit Testing With SimpleMock</title>
-      <link>http://deliberate-software.com/f-number-unit-testing/</link>
+      <link>https://deliberate-software.com/f-number-unit-testing/</link>
       <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/f-number-unit-testing/</guid>
+      <guid>https://deliberate-software.com/f-number-unit-testing/</guid>
       <description>If you are considering using F#, you might be curious how to handle unit test mocking, especially if you want to use both modules and classes. In a language like C# or Java, the common method is to a DI container or handmade constructor injection on a class. These &amp;ldquo;entry points&amp;rdquo; allow for a unit test to replace a real dependency with a test-only replacement.
 I previously posted an example that shows a much simpler way to inject dependencies called the SimpleMock pattern.</description>
     </item>
     
     <item>
       <title>SimpleMock: Language Agnostic Unit Test Mocking</title>
-      <link>http://deliberate-software.com/simplemock-unit-test-mocking/</link>
+      <link>https://deliberate-software.com/simplemock-unit-test-mocking/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/simplemock-unit-test-mocking/</guid>
+      <guid>https://deliberate-software.com/simplemock-unit-test-mocking/</guid>
       <description>SimpleMock is a pattern for reducing TDD damage. You can use the pattern to organize your testing code without mocking or complicated dependency injection.
 SimpleMock works in any language with closures that can be passed around by reference, so off the top of my head: C#, Java, F#, Scala, PHP, C++, Ruby, and Python. I&amp;rsquo;m sure you can think of others.
 Example: Here is a brief (if a bit silly) example of the final pattern:</description>
@@ -379,10 +379,10 @@ Example: Here is a brief (if a bit silly) example of the final pattern:</descrip
     
     <item>
       <title>Programming Language Safety Score Mark 2</title>
-      <link>http://deliberate-software.com/safety-rank-part-2/</link>
+      <link>https://deliberate-software.com/safety-rank-part-2/</link>
       <pubDate>Fri, 24 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/safety-rank-part-2/</guid>
+      <guid>https://deliberate-software.com/safety-rank-part-2/</guid>
       <description>I want to make a model that predicts bugs.
 I previously wrote a table for scoring language safety: Programming Language Safety Score, but it was extremely time consuming to score new languages or make modifications.
 Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve attempted to clean up by simply checking if each category is enforced, possible, or impossible. I score each as either 1 (language enforced), 0 (possible, but you have to remember to do it), or -1 (impossible).</description>
@@ -390,20 +390,20 @@ Simplify, Simplify After being told I was overfitting the data, I&amp;rsquo;ve a
     
     <item>
       <title>Language Versions</title>
-      <link>http://deliberate-software.com/language-versions/</link>
+      <link>https://deliberate-software.com/language-versions/</link>
       <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/language-versions/</guid>
+      <guid>https://deliberate-software.com/language-versions/</guid>
       <description>Let&amp;rsquo;s play a thought exercise. Imagine your development toolchain is like a semantic version number. Small features that incrementally improve your situation are like minor updates. They don&amp;rsquo;t cause any large shifts in thinking or process. Major updates are big, new concepts, quantum jumps in theory or practice.
 I am not talking about the political, social, or financial aspects of a toolchain. For example, hiring is a complex beast entirely in its own category.</description>
     </item>
     
     <item>
       <title>Learning Lisp Was Hard</title>
-      <link>http://deliberate-software.com/learning-lisp-was-hard/</link>
+      <link>https://deliberate-software.com/learning-lisp-was-hard/</link>
       <pubDate>Wed, 17 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/learning-lisp-was-hard/</guid>
+      <guid>https://deliberate-software.com/learning-lisp-was-hard/</guid>
       <description>Several times in the last week people have lamented to me that they &amp;ldquo;just don&amp;rsquo;t get Lisp&amp;rdquo;. After hearing it for the third time, I thought back to my experience learning a Lisp.
 When I set out to learn a Lisp, I expected it would be easy.
 I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally in Perl, Python, and Java, this should be a cakewalk!&amp;rdquo; I&amp;rsquo;d read Paul Graham&amp;rsquo;s essays on how Lisp is his secret weapon, and figured I needed to get into this secret weapon stuff.</description>
@@ -411,10 +411,10 @@ I figured, &amp;ldquo;I am pretty awesome at PHP, and have worked professionally
     
     <item>
       <title>Superiority Fatigue</title>
-      <link>http://deliberate-software.com/superiority-fatigue/</link>
+      <link>https://deliberate-software.com/superiority-fatigue/</link>
       <pubDate>Thu, 14 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/superiority-fatigue/</guid>
+      <guid>https://deliberate-software.com/superiority-fatigue/</guid>
       <description>Learning new tools, technologies, and methodologies is hard. Counter-intuitively, the most exhausting part is after you&amp;rsquo;ve gained a good comprehension of the tool, and now, filled with excitement, you try to explain it to someone else.
 They almost always react with hostility.
 What is going on? You just took time to learn this exciting tool that could save everyone a lot of time, and not only do they not care, but they resent you for it!</description>
@@ -422,40 +422,40 @@ What is going on? You just took time to learn this exciting tool that could save
     
     <item>
       <title>Case Study: Superior Domain Modeling in F#</title>
-      <link>http://deliberate-software.com/pattern-matching-case-study/</link>
+      <link>https://deliberate-software.com/pattern-matching-case-study/</link>
       <pubDate>Sat, 14 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/pattern-matching-case-study/</guid>
+      <guid>https://deliberate-software.com/pattern-matching-case-study/</guid>
       <description>Domain modeling in F# is significantly easier and safer than with the traditional .NET languages. This is because of the increased safety of pattern matching and the expressiveness of discriminated unions. These concepts are not in C# or VB.NET, and therefore bring a new tool to the table.
 To illustrate this, I found some old code I&amp;rsquo;d written to interact with a legacy system. The system uses many single enums on a record to keep track of statuses.</description>
     </item>
     
     <item>
       <title>Programming Language Safety Ranking</title>
-      <link>http://deliberate-software.com/programming-language-safety-algorithm/</link>
+      <link>https://deliberate-software.com/programming-language-safety-algorithm/</link>
       <pubDate>Tue, 17 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/programming-language-safety-algorithm/</guid>
+      <guid>https://deliberate-software.com/programming-language-safety-algorithm/</guid>
       <description>I think the time has come for a standard programming language safety score. I want to use this model to help show that the concept of safety is much more nuanced than a binary bit of &amp;ldquo;has strong-static types&amp;rdquo;.
 When someone says &amp;ldquo;programming language safety&amp;rdquo;, it typically invokes thoughts of unit tests, long build times, and red squiggles in an IDE. But, in day-to-day development, there are so many times when we are bitten by things that somehow just slip through the cracks.</description>
     </item>
     
     <item>
       <title>Six Unusual Reasons why Clojure is a Delight</title>
-      <link>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
+      <link>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</link>
       <pubDate>Mon, 09 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
+      <guid>https://deliberate-software.com/unusual-reasons-why-clojure-is-a-delight/</guid>
       <description>Clojure is a delightful language, and here are six uncommonly discussed reasons why.
 1 - Dead Simple Unit Test Mocking Clojure is the easiest language to unit test I have ever seen. &amp;ldquo;Mocking&amp;rdquo; a function in a test only requires a simple replacement of the function definition. No extraneous interfaces, no dependency injection, no mocking framework. The built-in function with-redefs will replace any function in any library or namespace with a new definition.</description>
     </item>
     
     <item>
       <title>Christmas F# Polymorphism</title>
-      <link>http://deliberate-software.com/christmas-f-number-polymorphism/</link>
+      <link>https://deliberate-software.com/christmas-f-number-polymorphism/</link>
       <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/christmas-f-number-polymorphism/</guid>
+      <guid>https://deliberate-software.com/christmas-f-number-polymorphism/</guid>
       <description>One of my favorite things about F# is how it lets you choose how you want to align your data.
 In the previous posts highlighting on pattern matching and inverted polymorphism we covered how pattern matching in F# is safer than if statements and can replace classes and interfaces for polymorphism. If you are unfamiliar with these concepts, you might want to skim those first.
 Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;lsquo;s flexibility in solving the &amp;ldquo;expression problem&amp;quot;.</description>
@@ -463,30 +463,30 @@ Today, for the 6th day of the F# Advent Calendar I wanted to highlight F#&amp;ls
     
     <item>
       <title>Emacs Project Tip</title>
-      <link>http://deliberate-software.com/emacs-project-tip/</link>
+      <link>https://deliberate-software.com/emacs-project-tip/</link>
       <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/emacs-project-tip/</guid>
+      <guid>https://deliberate-software.com/emacs-project-tip/</guid>
       <description>I recently have been working in a Clojure project which is made up of several microservices. While trying to build in a secure method for each service to be able to call the others, I&amp;rsquo;ve been in several different projects at the same time.
 At least once I accidentally opened the wrong &amp;ldquo;handler.clj&amp;rdquo; buffer, and spent a few minutes adding a function that never worked. Since I hate doing things like this, I wanted a simple way to see what project I was currently viewing.</description>
     </item>
     
     <item>
       <title>Suggested Skill Progression</title>
-      <link>http://deliberate-software.com/skill-continuum/</link>
+      <link>https://deliberate-software.com/skill-continuum/</link>
       <pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/skill-continuum/</guid>
+      <guid>https://deliberate-software.com/skill-continuum/</guid>
       <description>(Want to become a Vim expert? Check out my new book: 10 Minute Vim)
 &amp;gt; Learning Vim is a waste of time; I can prove it! - Anonymous  I recently had a gentle discussion with a new teammate about whether or not they should learn to use Vim. My team uses a Vim emulator inside Visual Studio and Emacs, and so we recommended he learn at least the basics so to reduce friction when pair-programming (which we do almost all the time).</description>
     </item>
     
     <item>
       <title>What Book Should I Read Next?</title>
-      <link>http://deliberate-software.com/next-book/</link>
+      <link>https://deliberate-software.com/next-book/</link>
       <pubDate>Sat, 26 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/next-book/</guid>
+      <guid>https://deliberate-software.com/next-book/</guid>
       <description>Edit: As a supplement to this: check out my favorite books.
 &amp;ldquo;It&amp;rsquo;s my first job, what book should I read first?&amp;rdquo;
 I&amp;rsquo;ve been asked this question many times. Even mid and senior level developers I&amp;rsquo;ve known sometimes struggle with this question.
@@ -495,20 +495,20 @@ If you want to be truly great, you have to read technical books and white papers
     
     <item>
       <title>Inverted Polymorphism</title>
-      <link>http://deliberate-software.com/inversed-polymorphism/</link>
+      <link>https://deliberate-software.com/inversed-polymorphism/</link>
       <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/inversed-polymorphism/</guid>
+      <guid>https://deliberate-software.com/inversed-polymorphism/</guid>
       <description>In my last post on the power of pattern matching, we saw how powerful the match statement is in F#. Using match allows the compiler to give us warnings for missing cases, no matter what the type.
 Let&amp;rsquo;s look at how pattern matching changes our design, allowing for an inversion of the usual OO way of polymorphism. Here is an example that is probably familiar to everyone: getting a database connection.</description>
     </item>
     
     <item>
       <title>Pattern Matching - Making the Compiler Work For You</title>
-      <link>http://deliberate-software.com/function-pattern-matching/</link>
+      <link>https://deliberate-software.com/function-pattern-matching/</link>
       <pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/function-pattern-matching/</guid>
+      <guid>https://deliberate-software.com/function-pattern-matching/</guid>
       <description>Pattern matching is a simple tool that will make your code safer and easier to read.
 Consider the following code that converts an Int to a string.
 public enum Language { Spanish, English } public static string convert(int number, Language lang) { string ret = &amp;#34;&amp;#34;; if (lang == Language.English) { switch(number) { case 0: ret = &amp;#34;zero&amp;#34;; break; case 1: ret = &amp;#34;one&amp;#34;; break; default: ret = &amp;#34;...&amp;#34;; break; } } else if (lang == Language.</description>
@@ -516,46 +516,46 @@ public enum Language { Spanish, English } public static string convert(int numbe
     
     <item>
       <title>Learn To Database</title>
-      <link>http://deliberate-software.com/learn-to-database/</link>
+      <link>https://deliberate-software.com/learn-to-database/</link>
       <pubDate>Wed, 16 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/learn-to-database/</guid>
+      <guid>https://deliberate-software.com/learn-to-database/</guid>
       <description>&#34;... and it has to return 45,000 records a minute, or we are all screwed.&#34;  Monday morning, we inherited a legacy codebase. Tuesday, the word came down on stone tablets. Forty-five thousand records a minute, and no amount of political maneuvering or incremental gains were going to do. Too many broken promises. The last team mass quit over three months, leaving us the two most junior developers. Someone high up promised big, and the buck stopped with us.</description>
     </item>
     
     <item>
       <title>You Should Go Home at 5:01</title>
-      <link>http://deliberate-software.com/501-developer/</link>
+      <link>https://deliberate-software.com/501-developer/</link>
       <pubDate>Sat, 14 Dec 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/501-developer/</guid>
+      <guid>https://deliberate-software.com/501-developer/</guid>
       <description>Can we agree for this post that money, energy, time, and effort are all forms of power? Like literally, if I wanted to build a building, I am going to need tools, skills, materials, labor. I can use the most liquid form of power I have (cash) to acquire all these things, or I can use a much less liquid form of power (my time) to harvest, extract, refine, learn, and build my building myself.</description>
     </item>
     
     <item>
       <title>Intro To Macros</title>
-      <link>http://deliberate-software.com/intro-to-macros/</link>
+      <link>https://deliberate-software.com/intro-to-macros/</link>
       <pubDate>Mon, 19 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/intro-to-macros/</guid>
+      <guid>https://deliberate-software.com/intro-to-macros/</guid>
       <description>Macros are the most powerful way to manipulate the syntax of your language. Macros make it possible to completely modify your language to match your domain. To explain them, think for a minute about functions using the simple “substitution model” used to teach functions to beginner programmers. The substitution model has the reader replace a function call with the body of the called function. def doCalc () return 1 + 2 end def doAwesome (x) return doCalc() + x end #before substitution.</description>
     </item>
     
     <item>
       <title>Clojure Debugger</title>
-      <link>http://deliberate-software.com/clojure-debugger/</link>
+      <link>https://deliberate-software.com/clojure-debugger/</link>
       <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/clojure-debugger/</guid>
+      <guid>https://deliberate-software.com/clojure-debugger/</guid>
       <description>I was at the Clojadelphia meetup on Thursday, and got an excellent run through of the tools.trace library from Tim Visher. He has submitted a pull request to the original authors, with his expanded and very clear documentation found here. One call from the library in particular really stood out, a call for finding out what form threw an exception out of many. ;; trace-forms &amp;#34;Trace all the forms in the given body.</description>
     </item>
     
     <item>
       <title>Sorry, but Refactorings Are Not Free (Technical Debt Interest)</title>
-      <link>http://deliberate-software.com/refactoring-not-free/</link>
+      <link>https://deliberate-software.com/refactoring-not-free/</link>
       <pubDate>Mon, 27 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/refactoring-not-free/</guid>
+      <guid>https://deliberate-software.com/refactoring-not-free/</guid>
       <description>Sometimes, it’s far more efficient to leave certain technical debts unpaid.
 I’m not saying we should leave messes, instead I am saying that cleaning and fixing technical debt is so important we must prioritize the most important changes first, by highest value to the team. You don&#39;t just do whatever feature is next alphabetically do you? Nope, so neither should you do that with refactorings.
 Not all technical debts are created equal: they consist of varying amounts of interest as well as principal.</description>
@@ -563,19 +563,19 @@ Not all technical debts are created equal: they consist of varying amounts of in
     
     <item>
       <title>How To Escape From {programming_language}</title>
-      <link>http://deliberate-software.com/how-to-escape-from-programming_language/</link>
+      <link>https://deliberate-software.com/how-to-escape-from-programming_language/</link>
       <pubDate>Wed, 13 Mar 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/how-to-escape-from-programming_language/</guid>
+      <guid>https://deliberate-software.com/how-to-escape-from-programming_language/</guid>
       <description>As time goes on, developers will be all the harder pressed to keep up with the skyrocketing number of languages and frameworks. The number of javascript libraries alone is increasing at a furious pace: Angular, Backbone, Node, Ember, Knockout, Knockback, Meteor, etc, etc, etc. Who has a chance at keeping up? While having so many options is also beneficial, it makes it more and more challenging for a single developer to stay relevant.</description>
     </item>
     
     <item>
       <title>How to Suck Less at Your New Job</title>
-      <link>http://deliberate-software.com/new-job-todo-list/</link>
+      <link>https://deliberate-software.com/new-job-todo-list/</link>
       <pubDate>Sat, 19 Jan 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/new-job-todo-list/</guid>
+      <guid>https://deliberate-software.com/new-job-todo-list/</guid>
       <description>One thing I strongly recommend to developers when starting at a new job is to keep a list of everything that bothers you.
 For every new company you work at, there will always be a set of things that you see as pain points, because you came from a place that did those things differently.
 Notice I said differently, not better.
@@ -584,10 +584,10 @@ All of us have certain irrational attachments to the various things we are used 
     
     <item>
       <title>Ego Driven Development</title>
-      <link>http://deliberate-software.com/ego-driven-development/</link>
+      <link>https://deliberate-software.com/ego-driven-development/</link>
       <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/ego-driven-development/</guid>
+      <guid>https://deliberate-software.com/ego-driven-development/</guid>
       <description>Ego Driven Development, (EDD), is a software development anti-pattern where developers and managers repeatedly act as if established best practices do not apply to them, to the detriment of their organization. Institutional ego is most often to blame.
 EDD plagues many organizations; here just some of the symptoms you might encounter:
   &amp;ldquo;Not Invented Here&amp;rdquo; syndrome. Expressed most commonly in a desire for everything needed to be developed in house.</description>
@@ -595,137 +595,137 @@ EDD plagues many organizations; here just some of the symptoms you might encount
     
     <item>
       <title>End To End Web Service Testing</title>
-      <link>http://deliberate-software.com/end-to-end-web-service-testing/</link>
+      <link>https://deliberate-software.com/end-to-end-web-service-testing/</link>
       <pubDate>Fri, 12 Oct 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/end-to-end-web-service-testing/</guid>
+      <guid>https://deliberate-software.com/end-to-end-web-service-testing/</guid>
       <description>At work last month, I was assigned to fix some bugs in an asynchronous legacy code base. My supervisor gave me a month to see what I could do, and to see if I could fix a few tricky bugs. The code is divided into two sections, a client application and a web server. Both the client application and the server have their own persistence, and they communicate through a soap web service.</description>
     </item>
     
     <item>
       <title>Learn That New Programming Language The Start-Up Way</title>
-      <link>http://deliberate-software.com/learn-that-new-programming-language-the-start/</link>
+      <link>https://deliberate-software.com/learn-that-new-programming-language-the-start/</link>
       <pubDate>Tue, 07 Aug 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/learn-that-new-programming-language-the-start/</guid>
+      <guid>https://deliberate-software.com/learn-that-new-programming-language-the-start/</guid>
       <description>I have a method I use for rapidly learning new programming languages that I wanted to share because I have not really seen it documented anywhere else. This technique is not for the faint of heart, but it is a lot of fun. Many of you old hands and graybeards probably already do this, but for those that don&#39;t, you have got to give it a shot at least once. You&#39;ll never be the same.</description>
     </item>
     
     <item>
       <title>On Developer Certifications</title>
-      <link>http://deliberate-software.com/on-developer-certifications/</link>
+      <link>https://deliberate-software.com/on-developer-certifications/</link>
       <pubDate>Tue, 28 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-developer-certifications/</guid>
+      <guid>https://deliberate-software.com/on-developer-certifications/</guid>
       <description>I have often thought whenever I meet a programmer who is obviously grossly incompetent that there needs to be some sort of certification board for software engineering that can help enforce some minimal skills to help weed out the riff-raff.Obviously, this is completely impossible. The tools and community change so fast that individuals are barely able to stay on top; good luck getting a standards committee to completely revise every few months.</description>
     </item>
     
     <item>
       <title>Quality Is Future Speed</title>
-      <link>http://deliberate-software.com/quality-is-future-speed/</link>
+      <link>https://deliberate-software.com/quality-is-future-speed/</link>
       <pubDate>Thu, 23 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/quality-is-future-speed/</guid>
+      <guid>https://deliberate-software.com/quality-is-future-speed/</guid>
       <description>Lately, I have been deliberating on quality vs. speed. Throughout my career, I have worked with developers who basically consider quality to be a programmer&#39;s vice, an extravagance only for the navel-gazing idealists. I have also worked with developers who consider all time spent on quality to be of the utmost importance, and that programming for speed is for those lazy and slapdash realists. I recently read Yegge&#39;s post Done, and Get&#39;s Things Smart, and I think I agree with Yegge on this point, that it is possible to perform fast and with high quality, and like a wandering samurai, that is the path I seek.</description>
     </item>
     
     <item>
       <title>New Years Android Triumph</title>
-      <link>http://deliberate-software.com/new-years-triumph/</link>
+      <link>https://deliberate-software.com/new-years-triumph/</link>
       <pubDate>Sun, 01 Jan 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/new-years-triumph/</guid>
+      <guid>https://deliberate-software.com/new-years-triumph/</guid>
       <description>December 1st, I made myself a New Year&#39;s resolution to completely create an Android game that I would not be ashamed to show people from (mostly) scratch before the end of December. What made it the most fun was that I started with practically no experience with the Android platform at all, and so I got to pick it up by the seat of my pants.The biggest challenge was probably the last three days, where I was faced with some hard calls, when the deadline loomed, and my still mile-long list of wants had to be pruned down just about every few hours.</description>
     </item>
     
     <item>
       <title>Why I Can&#39;t Pick A Language</title>
-      <link>http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</link>
+      <link>https://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</link>
       <pubDate>Wed, 14 Dec 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</guid>
+      <guid>https://deliberate-software.com/why-i-cant-get-focused-its-a-double-entendre/</guid>
       <description>I can&#39;t get focused today. My mind is a torrent of activity completely unrelated to my task at hand, so I am writing this to get these thoughts out so I can get back to work.I got a call from a recruiter the other day trying to get me to come interview at this job. Right now I am working in VB.NET and Actionscript. Until this job, I was always working in open-source languages: Perl, PHP, and some Java.</description>
     </item>
     
     <item>
       <title>Testing Is To Programming What Math Is To Engineering</title>
-      <link>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</link>
+      <link>https://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</link>
       <pubDate>Mon, 26 Sep 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</guid>
+      <guid>https://deliberate-software.com/testing-is-to-programming-what-math-is-to-eng/</guid>
       <description>In ancient times, plenty of builders did their work without math, and I would guess that a good portion of them likely did it faster then their math-doing counterparts. I am certain that when builders first started using math to prove that buildings would stand up safely, they were mocked by their math-less counterparts. I can hear them now, &#34;Oh, Stephos, it takes you 5 times longer to prove your building will stand up, real men can just see that it will work&#34;</description>
     </item>
     
     <item>
       <title>Emacs/VIm The Endless Debate</title>
-      <link>http://deliberate-software.com/the-endless-debate/</link>
+      <link>https://deliberate-software.com/the-endless-debate/</link>
       <pubDate>Fri, 22 Jul 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/the-endless-debate/</guid>
+      <guid>https://deliberate-software.com/the-endless-debate/</guid>
       <description>The last three and a half years for me have been terrible. Why? Well, three and half years ago, I discovered the endless debate, Emacs vs. Vim. Being an efficiency nut, I could not fathom the horror of learning one, and by that action, not learning the other. What if the one I learned was not the &#34;best&#34; one? I could see that both were excellent and worth learning, but I wanted to learn both concurrently.</description>
     </item>
     
     <item>
       <title>Lisp REPL</title>
-      <link>http://deliberate-software.com/lisp-repl/</link>
+      <link>https://deliberate-software.com/lisp-repl/</link>
       <pubDate>Sat, 04 Jun 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/lisp-repl/</guid>
+      <guid>https://deliberate-software.com/lisp-repl/</guid>
       <description>So, working through the Land of Lisp book, getting the hang of it.  Chapter Six, the author starts off by talking a little about the Common Lisp REPL, or Read-Eval-Print-Loop that you use as sort of the &#34;command line&#34; for interacting with lisp. It is pretty cool, you type in code, and it executes. And then he opens the hood a little: (defun repl () (loop (print (eval (read)))))  WHAAAAAAAAAAAAAAA?</description>
     </item>
     
     <item>
       <title>Dont Mock Concrete Classes</title>
-      <link>http://deliberate-software.com/dont-mock-concrete-classes/</link>
+      <link>https://deliberate-software.com/dont-mock-concrete-classes/</link>
       <pubDate>Tue, 24 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/dont-mock-concrete-classes/</guid>
+      <guid>https://deliberate-software.com/dont-mock-concrete-classes/</guid>
       <description>(They have thin skin)
 I have been reading G.O.O.S. and honestly, much of it has been just a reiteration. Until chapter 20, that is. I get to the section Don&#39;t Mock Concrete Classes, and it clicks.  Mocking concrete classes used to be my bread and butter. Almost every unit test I wrote for the last year had several mocked concrete implementations, to pass in as dependencies of the system under test.</description>
     </item>
     
     <item>
       <title>Why Lisp</title>
-      <link>http://deliberate-software.com/on-lisp-part-1/</link>
+      <link>https://deliberate-software.com/on-lisp-part-1/</link>
       <pubDate>Fri, 20 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/on-lisp-part-1/</guid>
+      <guid>https://deliberate-software.com/on-lisp-part-1/</guid>
       <description>I have been playing around with lisp off and on for some time now. I started out in Emacs Lisp, making Emacs play as nice (nicer in some ways) as any available php ide, but then dropped off after discovering PhpStorm from JetBrains. When I heard about Land of Lisp, I was intrigued and picked up a copy to work through over Christmas, got a few chapters in, but as Christmas tends to go for me, I spent much of the time playing board games with the family.</description>
     </item>
     
     <item>
       <title>Using Named Parameters</title>
-      <link>http://deliberate-software.com/using-named-parameters/</link>
+      <link>https://deliberate-software.com/using-named-parameters/</link>
       <pubDate>Thu, 05 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/using-named-parameters/</guid>
+      <guid>https://deliberate-software.com/using-named-parameters/</guid>
       <description>Up until recently, most of my programming was in php, which does not support named parameters (this doesn&#39;t count, and it will get you lynched) so while switching to VB.NET and python, I have come to really appreciate this handy feature.  Named parameters is one of those handy little things that can make your life a little easier. Say, in python, you have a function that takes a boolean value.</description>
     </item>
     
     <item>
       <title>Actionscript Unit Testing</title>
-      <link>http://deliberate-software.com/actionscript-unit-testing/</link>
+      <link>https://deliberate-software.com/actionscript-unit-testing/</link>
       <pubDate>Wed, 04 May 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/actionscript-unit-testing/</guid>
+      <guid>https://deliberate-software.com/actionscript-unit-testing/</guid>
       <description>I am trying to test a project that is huge and many of the &amp;quot;classes&amp;quot; are only defined as linkages from the main monster fla. I followed ASUnit Tutorial and got it to work with their simple examples. But when I went to test a factory and child class I had just written (hey, I would have tdd�d, but then I would not have know if it was failing for the right reason), it would not compile, hanging up on some of those undefined &amp;quot;exported linkage&amp;quot; classes.</description>
     </item>
     
     <item>
       <title>Active Record Pattern Testing</title>
-      <link>http://deliberate-software.com/active-record-pattern-testing/</link>
+      <link>https://deliberate-software.com/active-record-pattern-testing/</link>
       <pubDate>Tue, 12 Apr 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/active-record-pattern-testing/</guid>
+      <guid>https://deliberate-software.com/active-record-pattern-testing/</guid>
       <description>One of the most interesting problems I have had to face recently was in testing Active Record objects representing entities in a database. In this instance, the classes were legacy, and many were hundreds of methods long. Testing these classes was a nightmare, as any modifications to class properties resulted in an automatic database update at the end of the session (and test). Additionally, the top ten largest classes all had dozens of references between each other, and their creation and retrieval was all built into the class as static methods.</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://deliberate-software.com/papers_we_love_page2/</link>
+      <link>https://deliberate-software.com/papers_we_love_page2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/papers_we_love_page2/</guid>
+      <guid>https://deliberate-software.com/papers_we_love_page2/</guid>
       <description>https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf http://cidrdb.org/cidr2005/papers/P12.pdf https://amturing.acm.org/p558-lamport.pdf https://bitcoin.org/bitcoin.pdf</description>
     </item>
     

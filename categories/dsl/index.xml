@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>dsl on deliberate software</title>
-    <link>http://deliberate-software.com/categories/dsl/</link>
+    <link>https://deliberate-software.com/categories/dsl/</link>
     <description>Recent content in dsl on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/dsl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/dsl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DSLs Are Terrible</title>
-      <link>http://deliberate-software.com/poor-dsls/</link>
+      <link>https://deliberate-software.com/poor-dsls/</link>
       <pubDate>Wed, 02 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/poor-dsls/</guid>
+      <guid>https://deliberate-software.com/poor-dsls/</guid>
       <description>Trigger warning: this is a silly rant I wrote a few years ago after raging at the Hugo blog engine for a couple hours. I think its funny and still relevant, so hyperbolic nonsense incoming!
 DSL&amp;rsquo;s (Domain Specific Languages) are often terrible. Each DSL is a special snowflake, delicately floating from the heavens straight into in your eye.
 The problem with a DSL is that it always starts so simple. You take a complex problem and represent it simply with some nice pretty syntax.</description>

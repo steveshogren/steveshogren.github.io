@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>academic papers on deliberate software</title>
-    <link>http://deliberate-software.com/categories/academic-papers/</link>
+    <link>https://deliberate-software.com/categories/academic-papers/</link>
     <description>Recent content in academic papers on deliberate software</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 04 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://deliberate-software.com/categories/academic-papers/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://deliberate-software.com/categories/academic-papers/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Papers We Love: The Byzantine Generals Problem</title>
-      <link>http://deliberate-software.com/papers-we-love-1/</link>
+      <link>https://deliberate-software.com/papers-we-love-1/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://deliberate-software.com/papers-we-love-1/</guid>
+      <guid>https://deliberate-software.com/papers-we-love-1/</guid>
       <description>In this series I practice reading computer science papers by following a modified set of steps outlined in the guide: How to read and understand a scientific paper: a guide for non-scientists. If your reaction to this post is &amp;lsquo;eh, just read the paper&amp;rsquo;, then this post isn&amp;rsquo;t for you ;)
 Why Should I Read The Byzantine Generals Problem? The research in this paper allows blockchain technology, ensures military radar installation reliability, and enables the design of distributed, fault-tolerant CPU processors.</description>
     </item>
